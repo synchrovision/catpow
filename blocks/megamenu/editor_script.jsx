@@ -8,7 +8,7 @@
 	},
 	edit({ attributes, setAttributes, className }) {
 		const { useState, useCallback, useMemo, useEffect } = wp.element;
-		const { InspectorControls } = wp.blockEditor;
+		const { InspectorControls, useBlockProps } = wp.blockEditor;
 		const { config, resolvedPropsJson = null, EditMode = false } = attributes;
 
 		useEffect(() => {
@@ -57,6 +57,7 @@
 			setAttributes({ props });
 		}, []);
 
+		const blockProps = useBlockProps({ className: attributes.classes });
 		if (!config || !resolvedProps) {
 			return <Catpow.Spinner />;
 		}
@@ -64,7 +65,7 @@
 		return (
 			<>
 				<CP.SelectModeToolbar set={setAttributes} attr={attributes} />
-				<div className={attributes.classes}>
+				<div {...blockProps}>
 					<Catpow.MegaMenu {...resolvedProps} />
 				</div>
 				{EditMode && <Catpow.JsonEditor json={attributes.props} debug={false} schema={config.schema} onChange={onChangeHandle} />}
@@ -73,6 +74,7 @@
 	},
 
 	save({ attributes, className, setAttributes }) {
-		return <div className={attributes.classes}></div>;
+		const { useBlockProps } = wp.blockEditor;
+		return <div {...useBlockProps.save({ className: attributes.classes })}></div>;
 	},
 });

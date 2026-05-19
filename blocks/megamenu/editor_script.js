@@ -10,7 +10,7 @@
     },
     edit({ attributes, setAttributes, className }) {
       const { useState, useCallback, useMemo, useEffect } = wp.element;
-      const { InspectorControls } = wp.blockEditor;
+      const { InspectorControls, useBlockProps } = wp.blockEditor;
       const { config, resolvedPropsJson = null, EditMode = false } = attributes;
       useEffect(() => {
         wp.apiFetch({
@@ -49,13 +49,15 @@
         updateResolvedPropsJson(props);
         setAttributes({ props });
       }, []);
+      const blockProps = useBlockProps({ className: attributes.classes });
       if (!config || !resolvedProps) {
         return /* @__PURE__ */ wp.element.createElement(Catpow.Spinner, null);
       }
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { set: setAttributes, attr: attributes }), /* @__PURE__ */ wp.element.createElement("div", { className: attributes.classes }, /* @__PURE__ */ wp.element.createElement(Catpow.MegaMenu, { ...resolvedProps })), EditMode && /* @__PURE__ */ wp.element.createElement(Catpow.JsonEditor, { json: attributes.props, debug: false, schema: config.schema, onChange: onChangeHandle }));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { set: setAttributes, attr: attributes }), /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(Catpow.MegaMenu, { ...resolvedProps })), EditMode && /* @__PURE__ */ wp.element.createElement(Catpow.JsonEditor, { json: attributes.props, debug: false, schema: config.schema, onChange: onChangeHandle }));
     },
     save({ attributes, className, setAttributes }) {
-      return /* @__PURE__ */ wp.element.createElement("div", { className: attributes.classes });
+      const { useBlockProps } = wp.blockEditor;
+      return /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps.save({ className: attributes.classes }) });
     }
   });
 })();
