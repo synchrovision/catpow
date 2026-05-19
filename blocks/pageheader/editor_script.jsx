@@ -41,6 +41,7 @@ wp.blocks.registerBlockType("catpow/pageheader", {
 							<RichText
 								tagName="h1"
 								className="_title"
+								placeholder={__("タイトルを入力", "catpow")}
 								onChange={(title) => {
 									setAttributes({ title });
 								}}

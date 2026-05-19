@@ -34,6 +34,7 @@
         {
           tagName: "h1",
           className: "_title",
+          placeholder: __("\u30BF\u30A4\u30C8\u30EB\u3092\u5165\u529B", "catpow"),
           onChange: (title) => {
             setAttributes({ title });
           },

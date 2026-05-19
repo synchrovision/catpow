@@ -8,16 +8,18 @@ wp.blocks.registerBlockType("catpow/pagecontent", {
 	example: CP.example,
 	edit({ attributes, setAttributes, className }) {
 		const { content_path, post_data_path, inputs, data_id, values } = attributes;
-		const { InspectorControls } = wp.blockEditor;
+		const { InspectorControls, useBlockProps } = wp.blockEditor;
 		const { PanelBody, TreeSelect, TextareaControl, TextControl } = wp.components;
 		const { serverSideRender: ServerSideRender } = wp;
 
 		return (
-			<CP.Message>
-				{__(
-					"表示中のURLに対応したコンテンツを表示します。テーマにURLに対応したコンテンツのテンプレートが定義されている場合はそのテンプレートが利用されます。定義がない場合は個別ページにおいては投稿されたコンテンツが表示されます。"
-				)}
-			</CP.Message>
+			<div {...useBlockProps()}>
+				<CP.Message>
+					{__(
+						"表示中のURLに対応したコンテンツを表示します。テーマにURLに対応したコンテンツのテンプレートが定義されている場合はそのテンプレートが利用されます。定義がない場合は個別ページにおいては投稿されたコンテンツが表示されます。",
+					)}
+				</CP.Message>
+			</div>
 		);
 	},
 
