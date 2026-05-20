@@ -29,7 +29,7 @@ class SelectPostColor extends UI{
 	}
 	public static function output($meta,$prm){
 		$val=implode(' ',(array)$meta->value);
-		if($prm=='chip'){return sprintf('<span class="colorChip fillColor %s"></span>',$val);}
+		if($prm=='chip'){return sprintf('<span class="cp-colorchip fill-color %s"></span>',$val);}
 		return $val;
 	}
 	public static function export($data_type,$data_name,$id,$meta_name,$conf){
