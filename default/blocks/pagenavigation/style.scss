@@ -1,31 +1,56 @@
 @import "admin_style_config.scss";
+@import "text-placeholders.scss";
+@import "component-placeholders.scss";
 
 .wp-block-catpow-pagenavigation{
 	$block:&;
 	$item:&__item;
-	@include txt((l:n));
-	&__item{
-		&-image{
+	$menu-item:#{$block}-menu__item;
+	@include bnd((bs:b));
+	&-title{
+		@extend %heading-block;
+		@extend %heading;
+		@include bnd((mgt:0));
+		&__link{
+			@include txt((c:t,td:n));
 		}
-		&-contents{
-			&-link{
-				@include txt((c:t,td:n));
+	}
+	&-menu{
+		@include bnd((mg:0,pd:0));
+		@include txt((l:n));
+		&__item{
+			@include bnd((bi:a));
+			&-image{
 			}
-			&-toggle{
+			&-contents{
+				&-title{
+					@extend %heading-block;
+					@extend %heading;
+					@include bnd((mgt:0));
+					&-link{
+						@include txt((c:t,td:n));
+					}
+				}
+				&-link{
+					@extend %paragraph;
+					@include txt((c:t,td:n));
+				}
+				&-toggle{
+				}
 			}
-		}
-		&.has-children{
-		}
-		&.is-active{
-		}
-		&.is-open{
+			&.has-children{
+			}
+			&.is-active{
+			}
+			&.is-open{
+			}
 		}
 	}
 	&-submenu{
 		$block:&;
-		@include bnd((pdl:1em));
 		@include txt((l:n));
 		&__item{
+			@extend %paragraph;
 			$item:&;
 			&-link{
 				@include txt((c:t,td:n));
@@ -42,10 +67,10 @@
 	}
 	&-endmenu{
 		$block:&;
-		@include bnd((pdl:1em));
 		@include txt((l:n));
 		&__item{
 			$item:&;
+			@extend %paragraph;
 			&-link{
 				@include txt((c:t,td:n));
 			}
@@ -56,22 +81,18 @@
 		}
 	}
 	&.is-style-tree{
-		@include bnd((pd:1em,w:a 240));
 		#{$block}{
 			&-title{
-				@include bnd((mgb:1em));
-				@include txt((p:24));
 				&__link{
-					@include txt((c:t,td:n));
 				}
 			}
 			&-menu{
-				@include bnd((pd:0));
+				@include bnd((pd:0,c:i,g:1.5lh));
 				@include txt((l:n));
 				&__item{
 					@include bnd((pd:.2em 0));
 					&-contents{
-						@include grd((tc:a 1fr a,g:.2em));
+						@include grd((tc:1em 1fr 1em,g:.2em));
 						&-arrow{
 							@include bnd((p:r,w:1em,h:1em,as:c));
 							&-graphic{
@@ -81,8 +102,14 @@
 								@include trn((t:.4s,r:90deg));
 							}
 						}
+						&-title{
+							@include bnd((mg:0));
+							@include txt((a:l));
+							&-link{
+							}
+						}
 						&-link{
-							@include txt((p:18,f:h,c:tx,td:n));
+							
 						}
 						&-toggle{
 							@include bnd((p:r,w:1em,h:1em,as:c));
@@ -222,16 +249,11 @@
 		}
 	}
 	&.is-style-list{
-		@include bnd((w:90% c,pd:40,mgi:a));
-		@include bdr((s:s,w:2,c:m,r:20));
-		&:not(.has-custom-margin){
-			@include bnd((mg:40 a));
-		}
+		@extend %frame-component;
 		#{$block}{
 			&-title{
-				@include bnd((mgb:1em,pdb:.25em));
+				@include bnd((pdb:.2lh));
 				@include bdr((p:b,s:s,w:1));
-				@include txt((p:24));
 				&__link{
 					@include grd((tc:1em 1fr,g:.5em,ai:c));
 					@include txt((c:t,td:n));
@@ -244,10 +266,10 @@
 				}
 			}
 			&-menu{
-				@include bnd((c:240,g:20));
+				@include bnd((c:i,g:1.5lh));
 				&__item{
 					$item:&;
-					@include bnd((bi:a,pdb:12));
+					@include bnd((bi:a));
 					&-contents{
 						&-link{
 							@include bnd((mgb:.5em));
@@ -302,7 +324,6 @@
 				$block:&;
 				@include txt((l:n));
 				&__item{
-					$item:&;
 					&-link{
 						@include txt((p:14,f:p,c:tx,td:n));
 					}
@@ -315,24 +336,28 @@
 		}
 	}
 	&.is-style-card{
-		@include bnd((pd:20));
 		#{$block}{
 			&-menu{
-				@include grd((rc:400,g:20));
+				@include grd((rc:i,g:c-c));
 				&__item{
-					@include bnd((o:h));
-					@include grd((tc:160 1fr));
-					@include bdr((r:20));
+					@extend %card-component;
+					@include bnd((pd:0,o:h));
+					@include grd((tc:1fr 2fr));
 					@include bg((c:bx));
-					@include shd((b:2));
 					&-image{
-						@include bnd((d:b,w:160,h:f,op:c,of:c));
+						@include bnd((d:b,w:f,h:f,op:c,of:c));
 					}
 					&-contents{
-						@include bnd((pd:32));
+						@include bnd((pd:c-c));
+						&-title{
+							@extend %heading;
+							&-link{
+								@include bnd((d:b));
+							}
+						}
 						&-link{
+							@extend %heading;
 							@include bnd((d:b,mgb:.5em));
-							@include txt((p:28,f:h,c:tx,td:n));
 						}
 						&-arrow,&-toggle{
 							@include bnd((d:n));
@@ -345,7 +370,7 @@
 					&.is-open{
 					}
 				}
-		}
+			}
 			&-submenu{
 				$block:&;
 				@include bnd((pdl:1em));
@@ -390,22 +415,46 @@
 	&.is-style-grid{
 		#{$block}{
 			&-menu{
-				@include grd((rc:400));
+				@include grd((rc:i));
 				&__item{
-					@include bnd((p:r,h:240 a));
+					@include bnd((p:r,h:a,a:1,o:h));
 					@include grd(());
 					&-image{
 						@include bnd((d:b,p:a,i:0,w:f,h:f,op:c,of:c,z:0));
+						@include trn((t:3s,s:1));
 					}
 					&-contents{
-						@include bnd((p:r,pd:40,z:1));
-						@include bg((c:m 1 .6));
+						@include bnd((d:g,p:a,w:f,h:f,ac:c,z:2));
+						&-title{
+							&-link{
+								@extend %heading;
+								@include bnd((d:b));
+								@include txt((a:c,c:ix));
+							}
+						}
 						&-link{
-							@include bnd((d:b,mgb:.5em));
-							@include txt((p:32,c:i,td:n));
+							@extend %heading;
+							@include bnd((d:b,p:a,i:0,w:f,h:f,ac:c));
+							@include txt((a:c,c:ix));
 						}
 						&-arrow,&-toggle{
 							@include bnd((d:n));
+						}
+					}
+					&::before{
+						content:'';
+						@include bnd((d:b,p:a,i:0,w:f,h:f,op:c,of:c,z:1));
+						@include bg((c:mx));
+						@include trn((t:1s,bm:m,o:.4));
+					}
+					&:hover{
+						&::before{
+							@include trn((o:.6));
+						}
+						#{$menu-item}{
+							&-image{
+								@include trn((s:1.2));
+							}
 						}
 					}
 					&.has-children{
@@ -418,14 +467,14 @@
 			}
 			&-submenu{
 				$block:&;
-				@include bnd((pdl:1em,c:200));
+				@include bnd((mgi:a,c:a));
 				@include txt((l:n));
 				&__item{
 					$item:&;
-					@include bnd((bi:a,mgb:.5em));
+					@include bnd((p:r,bi:a));
 					&-link{
 						@include grd((tc:.5em 1fr,g:.2em,ai:c));
-						@include txt((p:14,f:p,c:i,td:n));
+						@include txt((p:.9em,c:i,td:n));
 						&::before{
 							content:'';
 							@include bnd((d:b,w:.25em,h:.5em));
@@ -448,7 +497,7 @@
 				&__item{
 					$item:&;
 					&-link{
-						@include txt((p:12,f:p,c:i,td:n));
+						@include txt((p:.8em,f:p,c:i,td:n));
 					}
 					&.is-active{
 					}

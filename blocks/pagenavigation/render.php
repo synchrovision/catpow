@@ -50,7 +50,7 @@ HTML::render([
 	'data-wp-interactive'=>"pagenavigation",
 	'data-wp-context'=>$context,
 	[
-		'h3.title-',
+		$attr['HeadingTag'].'.title-',
 		[
 			'a._link',
 			'href'=>$root_post_id==0?home_url():get_permalink($root_post),
@@ -59,22 +59,26 @@ HTML::render([
 	],
 	[
 		'ul.menu-',
+		'class'=>$attr['menuClasses'],
 		'data-wp-init'=>'callbacks.onInitMenu',
 		'children'=>array_map(fn($item)=>[
 			'li._item',
-			'class'=>['has-children'=>!empty($item['children'])],
+			'class'=>['has-children'=>!empty($item['children']),get_post_meta($item['post']->ID,'post_class',true)],
 			'data-post-id'=>$item['post']->ID,
 			'data-wp-class--is-active'=>"callbacks.isItemActive",
 			'data-wp-class--is-open'=>"callbacks.isItemOpen",
 			$has_image?[
 				'img._image',
-				'src'=>wp_get_attachment_image_src(get_post_thumbnail_id($id_d1),'full')[0]??$dummy_image_url,
+				'src'=>wp_get_attachment_image_src(get_post_thumbnail_id($item['post']->ID),'full')[0]??$dummy_image_url,
 				'alt'=>$item['post']->title
 			]:'',
 			[
 				'._contents',
 				!empty($item['children'])?['._arrow','data-wp-on--click'=>"actions.onClickToggle",['span._graphic']]:['._spacer'],
-				['a._link','href'=>get_permalink($item['post']),$item['post']->post_title],
+				$attr['depth']>0?[
+					$attr['MenuHeadingTag'].'._title',
+					['a._link','href'=>get_permalink($item['post']),$item['post']->post_title],
+				]:['a._link','href'=>get_permalink($item['post']),$item['post']->post_title],
 				!empty($item['children'])?['._toggle','data-wp-on--click'=>"actions.onClickToggle",['span._graphic']]:['._spacer'],
 				!empty($item['children'])?[
 					'ul.submenu-',
