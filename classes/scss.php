@@ -50,6 +50,27 @@ class scss{
 		$scssc->registerFunction('get-real-type',function($args){
 			return [TYPE::T_KEYWORD,$args[0][0]];
 		});
+		$scssc->registerFunction('ksort',function($args)use($scssc){
+			if(empty($args[0]) || $args[0][0] !== 'map'){
+				return false;
+			}
+			$asNumeric=!empty($args[1][1]);
+			$keys = $args[0][1];
+			$values = $args[0][2];
+			$compiledKeys = array_map([$scssc,'compileValue'],$keys);
+			$indexOrder = array_keys($keys);
+			usort($indexOrder, function($a, $b) use ($compiledKeys,$asNumeric){
+				if($asNumeric){return (int)$compiledKeys[$a] - (int)$compiledKeys[$b];}
+				return strcmp((string)$compiledKeys[$a], (string)$compiledKeys[$b]);
+			});
+			$sortedKeys = [];
+			$sortedValues = [];
+			foreach($indexOrder as $index){
+				$sortedKeys[] = $keys[$index];
+				$sortedValues[] = $values[$index];
+			}
+			return [TYPE::T_MAP,$sortedKeys,$sortedValues];
+		});
 		$scssc->registerFunction('embed-svg',function($args)use($scssc){
 			if($f=CP::get_file_path($args[0][2][0])){
 				return sprintf('data:image/svg+xml;base64,%s',base64_encode(file_get_contents($f)));
