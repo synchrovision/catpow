@@ -12,25 +12,28 @@ wp.blocks.registerBlockType("catpow/panel", {
 	example: CP.example,
 	edit({ attributes, className, setAttributes, isSelected }) {
 		const { useState, useMemo } = wp.element;
-		const { BlockControls, InspectorControls, RichText } = wp.blockEditor;
+		const { BlockControls, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
 		const { PanelBody, TextareaControl, TextControl, ToolbarGroup } = wp.components;
-		const { classes, items = [] } = attributes;
+		const { classes, HeadingTag, vars, items = [] } = attributes;
 		const primaryClass = "wp-block-catpow-panel";
-		var classArray = _.uniq(classes.split(" "));
 
 		const { imageKeys } = CP.config.panel;
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
+				"headingTag",
+				"level",
+				"hasContentWidth",
+				"hasMargin",
 				{
 					name: "type",
 					label: "タイプ",
-					filter: "type",
-					values: { tile: "タイル", menu: "メニュー" },
+					type: "buttons",
+					values: { isTypeTile: "タイル", isTypeMenu: "メニュー" },
 					item: {
-						tile: [
+						isTypeTile: [
 							"color",
-							{ name: "brightText", label: "白文字", values: "brightText", sub: [{ name: "colorBG", label: "色付き背景", values: "colorBG" }] },
+							"colorScheme",
 							{ name: "icon", label: "アイコン", values: "hasIcon", sub: [{ input: "icon" }] },
 							{ name: "title", label: "タイトル", values: "hasTitle" },
 							{ name: "text", label: "文章", values: "hasText" },
@@ -44,43 +47,58 @@ wp.blocks.registerBlockType("catpow/panel", {
 								],
 							},
 							{ name: "link", label: "リンク", values: "hasLink", sub: [{ name: "external", label: "外部リンク", values: "linkExternal" }] },
-							{ name: "rowSpan", type: "buttons", label: "縦サイズ", values: { rspan1: "1", rspan2: "2", rspan3: "3" } },
-							{ name: "colSpan", type: "buttons", label: "横サイズ", values: { cspan1: "1", cspan2: "2", cspan3: "3" } },
+							{ name: "rowSpan", type: "buttons", label: "縦サイズ", values: { hasRspan1: "1", hasRspan2: "2", hasRspan3: "3" } },
+							{ name: "colSpan", type: "buttons", label: "横サイズ", values: { hasCspan1: "1", hasCspan2: "2", hasCspan3: "3" } },
 						],
-						menu: [
+						isTypeMenu: [
 							"color",
 							{ name: "icon", label: "アイコン", values: "hasIcon", sub: [{ input: "icon" }] },
 							{ name: "title", label: "タイトル", values: "hasTitle" },
 							{ name: "text", label: "文章", values: "hasText" },
 							{ name: "image", label: "画像", values: "hasImage", sub: [{ name: "image", label: "画像", input: "image", keys: imageKeys.image, size: "vga" }] },
 							{ name: "link", label: "リンク", values: "hasLink", sub: [{ name: "external", label: "外部リンク", values: "linkExternal" }] },
-							{ name: "rowSpan", type: "buttons", label: "縦サイズ", values: { rspan1: "1", rspan2: "2", rspan3: "3" } },
-							{ name: "colSpan", type: "buttons", label: "横サイズ", values: { cspan1: "1", cspan2: "2", cspan3: "3" } },
+							{ name: "rowSpan", type: "buttons", label: "縦サイズ", values: { hasRspan1: "1", hasRspan2: "2", hasRspan3: "3" } },
+							{ name: "colSpan", type: "buttons", label: "横サイズ", values: { hasCspan1: "1", hasCspan2: "2", hasCspan3: "3" } },
 						],
-					},
-					bind: {
-						tile: ["panel"],
-						menu: ["panel"],
 					},
 				},
 				{
 					name: "size",
-					label: "サイズ",
+					label: "グリッドサイズ",
+					type: "buttons",
 					values: {
-						column1: "1/1",
-						column2: "1/2",
-						column3: "1/3",
-						column4: "1/4",
+						hasGridSize1: "1",
+						hasGridSize2: "2",
+						hasGridSize3: "3",
+						hasGridSize4: "4",
 					},
 				},
 				{
-					name: "columnsCount",
-					label: "カラム数",
+					label: "カラム約数（2^n）",
+					type: "buttons",
 					values: {
-						grid18: "1-2-3-6-9-18",
-						grid24: "1-2-3-4-6-8-12-24",
-						grid27: "1-3-9-27",
-						grid32: "1-2-4-8-16-32",
+						hasGrid2n: "2",
+						hasGrid4n: "4",
+						hasGrid8n: "8",
+						hasGrid16n: "16",
+						hasGrid32n: "32",
+					},
+				},
+				{
+					label: "カラム約数（3^n）",
+					type: "buttons",
+					values: {
+						hasGrid3n: "3",
+						hasGrid9n: "9",
+						hasGrid27n: "27",
+					},
+				},
+				{
+					label: "カラム約数（5^n）",
+					type: "buttons",
+					values: {
+						hasGrid5n: "5",
+						hasGrid25n: "25",
 					},
 				},
 			];
@@ -88,81 +106,13 @@ wp.blocks.registerBlockType("catpow/panel", {
 			return selectiveClasses;
 		}, []);
 
-		let itemsCopy = items.map((obj) => jQuery.extend(true, {}, obj));
-
-		let rtn = [];
-
-		let totalGrid = 0;
-
-		itemsCopy.map((item, index) => {
-			if (!item.controlClasses) {
-				item.controlClasses = "control";
-			}
-			var itemStates = {
-				hasIcon: false,
-				hasTitle: false,
-				hasText: false,
-				hasImage: false,
-				hasLink: false,
-				linkExternal: false,
-			};
-			var itemClassArray = (item.classes || "").split(" ");
-			Object.keys(itemStates).forEach(function (key) {
-				this[key] = itemClassArray.indexOf(key) !== -1;
-			}, itemStates);
-
-			totalGrid += (CP.getNumberClass({ attr: item }, "rspan") || 1) * (CP.getNumberClass({ attr: item }, "cspan") || 1);
-
-			rtn.push(
-				<CP.Item tag="li" set={setAttributes} attr={attributes} items={itemsCopy} index={index} isSelected={isSelected} key={index}>
-					{itemStates.hasImage && (
-						<div className="image">
-							<CP.SelectResponsiveImage attr={attributes} set={setAttributes} keys={imageKeys.image} index={index} size="vga" />
-						</div>
-					)}
-					<div className="texts">
-						{itemStates.hasIcon && <CP.OutputIcon item={item} />}
-						{itemStates.hasTitle && (
-							<RichText
-								tagName="h3"
-								className="title"
-								onChange={(title) => {
-									itemsCopy[index].title = title;
-									setAttributes({ items: itemsCopy });
-								}}
-								value={item.title}
-							/>
-						)}
-						{itemStates.hasText && (
-							<RichText
-								tagName="p"
-								className="text"
-								onChange={(text) => {
-									itemsCopy[index].text = text;
-									setAttributes({ items: itemsCopy });
-								}}
-								value={item.text}
-							/>
-						)}
-						{itemStates.hasLink && (
-							<div className="link">
-								<TextControl
-									onChange={(linkUrl) => {
-										itemsCopy[index].linkUrl = linkUrl;
-										setAttributes({ items: itemsCopy });
-									}}
-									value={item.linkUrl}
-								/>
-							</div>
-						)}
-					</div>
-				</CP.Item>
-			);
-		});
-
-		if (attributes.EditMode === undefined) {
-			attributes.EditMode = false;
-		}
+		const totalGrid = items.reduce((total, item) => {
+			const itemStates = CP.classNamesToFlags(item.classes);
+			const rowSpan = itemStates.hasRspan2 ? 2 : itemStates.hasRspan3 ? 3 : 1;
+			const colSpan = itemStates.hasCspan2 ? 2 : itemStates.hasCspan3 ? 3 : 1;
+			return total + rowSpan * colSpan;
+		}, 0);
+		const expectedGrid = useMemo(() => classes.match(/\bhas-grid\d+n\b/g)?.reduce((p, c) => p * parseInt(c.match(/\d+/)), 1) || 1, [classes]);
 
 		return (
 			<>
@@ -178,15 +128,71 @@ wp.blocks.registerBlockType("catpow/panel", {
 						]}
 					/>
 				</BlockControls>
-				<ul className={attributes.EditMode ? primaryClass + " edit" : classes}>{rtn}</ul>
+				<CP.Bem prefix="wp-block-catpow">
+					<div {...useBlockProps({ className: attributes.EditMode ? primaryClass + " edit" : classes })}>
+						<ul className="_items">
+							{items.map((item, index) => {
+								const itemStates = CP.classNamesToFlags(item.classes);
+
+								return (
+									<CP.Item tag="li" className={item.classes} set={setAttributes} attr={attributes} items={items} index={index} isSelected={isSelected} key={index}>
+										{itemStates.hasImage && (
+											<div className="_image">
+												<CP.SelectResponsiveImage className="_img" attr={attributes} set={setAttributes} keys={imageKeys.image} index={index} size="vga" />
+											</div>
+										)}
+										<div className="_texts">
+											{itemStates.hasIcon && <CP.OutputIcon className="_icon" item={item} />}
+											{itemStates.hasTitle && (
+												<RichText
+													tagName={HeadingTag}
+													className="_title"
+													onChange={(title) => {
+														items[index].title = title;
+														setAttributes({ items: [...items] });
+													}}
+													value={item.title}
+												/>
+											)}
+											{itemStates.hasText && (
+												<RichText
+													tagName="p"
+													className="_text"
+													placeholder="Text"
+													onChange={(text) => {
+														items[index].text = text;
+														setAttributes({ items: [...items] });
+													}}
+													value={item.text}
+												/>
+											)}
+											{itemStates.hasLink && (
+												<div className="_link">
+													<TextControl
+														onChange={(linkUrl) => {
+															items[index].linkUrl = linkUrl;
+															setAttributes({ items: [...items] });
+														}}
+														value={item.linkUrl}
+													/>
+												</div>
+											)}
+										</div>
+									</CP.Item>
+								);
+							})}
+						</ul>
+					</div>
+				</CP.Bem>
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
-					<CP.SelectClassPanel title="パネル" icon="edit" set={setAttributes} attr={attributes} items={itemsCopy} index={attributes.currentItemIndex} triggerClasses={selectiveClasses[0]} />
-					<PanelBody title="info" icon="admin-generic" initialOpen={false}>
+					<PanelBody title="info" icon="admin-generic" initialOpen={true}>
 						<p>合計グリッド数：{totalGrid}</p>
+						<p>期待グリッド数：{expectedGrid}</p>
 					</PanelBody>
+					<CP.SelectClassPanel title="クラス" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title="パネル" icon="edit" set={setAttributes} attr={attributes} items={items} index={attributes.currentItemIndex} triggerClasses={selectiveClasses[4]} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-						<TextareaControl label="クラス" onChange={(clss) => setAttributes({ classes: clss })} value={classArray.join(" ")} />
+						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
 					</PanelBody>
 					<CP.ItemControlInfoPanel />
 				</InspectorControls>
@@ -195,44 +201,39 @@ wp.blocks.registerBlockType("catpow/panel", {
 	},
 	save({ attributes, className }) {
 		const { RichText } = wp.blockEditor;
-		const { classes = "", items = [] } = attributes;
-		let rtn = [];
-		items.map((item, index) => {
-			var itemStates = {
-				hasIcon: false,
-				hasTitle: false,
-				hasText: false,
-				hasImage: false,
-				hasLink: false,
-				linkExternal: false,
-			};
-			var itemClassArray = (item.classes || "").split(" ");
-			Object.keys(itemStates).forEach(function (key) {
-				this[key] = itemClassArray.indexOf(key) !== -1;
-			}, itemStates);
+		const { classes, HeadingTag = "h3", vars, items = [] } = attributes;
 
-			rtn.push(
-				<li className={item.classes} key={index}>
-					{itemStates.hasImage && (
-						<div className="image">
-							<img src={item.src} alt={item.alt} />
-						</div>
-					)}
-					<div className="texts">
-						{itemStates.hasIcon && <CP.OutputIcon item={item} />}
-						{itemStates.hasTitle && <RichText.Content tagName="h3" className="title" value={item.title} />}
-						{itemStates.hasText && <RichText.Content tagName="p" className="text" value={item.text} />}
-						{itemStates.hasLink && (
-							<div className="link">
-								<a href={item.linkUrl} target={itemStates.linkExternal ? "_brank" : false} rel={itemStates.linkExternal ? "noopener noreferrer" : "bookmark"}>
-									{" "}
-								</a>
-							</div>
-						)}
-					</div>
-				</li>
-			);
-		});
-		return <ul className={classes}>{rtn}</ul>;
+		return (
+			<CP.Bem prefix="wp-block-catpow">
+				<div className={classes} style={vars}>
+					<ul className="_items">
+						{items.map((item, index) => {
+							const itemStates = CP.classNamesToFlags(item.classes);
+							return (
+								<li className={item.classes} key={index}>
+									{itemStates.hasImage && (
+										<div className="_image">
+											<img className="_img" src={item.src} alt={item.alt} />
+										</div>
+									)}
+									<div className="_texts">
+										{itemStates.hasIcon && <CP.OutputIcon className="_icon" item={item} />}
+										{itemStates.hasTitle && <RichText.Content tagName={HeadingTag} className="_title" value={item.title} />}
+										{itemStates.hasText && <RichText.Content tagName="p" className="_text" value={item.text} />}
+										{itemStates.hasLink && (
+											<div className="_link">
+												<a href={item.linkUrl} target={itemStates.linkExternal ? "_brank" : false} rel={itemStates.linkExternal ? "noopener noreferrer" : "bookmark"}>
+													{" "}
+												</a>
+											</div>
+										)}
+									</div>
+								</li>
+							);
+						})}
+					</ul>
+				</div>
+			</CP.Bem>
+		);
 	},
 });
