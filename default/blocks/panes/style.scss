@@ -1,0 +1,65 @@
+@import "config/style_config.scss";
+@import "text-placeholders.scss";
+
+.wp-block-catpow-panes{
+	$block:&;
+	$item:#{$block}__item;
+	@include bnd((pd:0,mgi:a));
+	@include txt((l:n));
+	@include bp(640){
+		@include flx((w:w,c:3));
+	}
+	@include bp(pc){
+		@include flx((w:w,c:5));
+	}
+	&__item{
+		@include bnd((p:r));
+		@include flx((w:w));
+		&:nth-child(odd){
+			#{$item}{
+				&-image{
+					@include bnd((nth:2));
+				}
+			}
+		}
+		&-image,&-contents{
+			@include bnd((p:r,f:1 1 240));
+		}
+		&-image{
+			&::before{
+				content:'';
+				@include bnd((d:b,pdt:f));
+			}
+			img,picture,video{
+				@include bnd((p:a,t:0,b:0,l:0,r:0,w:f,h:f,op:c,of:c));
+			}
+		}
+		&-contents{
+			@include bnd((h:a,a:1,pd:c-c,ac:c,bs:b));
+			@include bg((c:mx));
+			&-text{
+				@include txt((c:bx));
+				&-symbol{
+					@extend %heading;
+					@include bnd((d:b,w:2em,mg:0 a .25em));
+					img,svg{
+						@include bnd((w:2em,h:2em,mg:0 a,op:c,of:i));
+					}
+					svg{
+						@include bnd((d:b,mgi:a,h:a));
+						@include svg((f:crr));
+					}
+				}
+				&-title{
+					@extend %heading;
+					@include bnd((mg:0));
+					@include txt((a:c));
+				}
+				&-caption{
+					@extend %caption;
+					@include bnd((mg:0));
+				}
+			}
+		}
+	}
+}
