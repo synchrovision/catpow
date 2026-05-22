@@ -1,7 +1,7 @@
 <?php
 $block_class="wp-block-catpow-showcase";
 $attributes=[
-	"classes"=>["source"=>"attribute","selector"=>".{$block_class}","attribute"=>"class","default"=>"{$block_class} is-size-medium has-title-caption has-counter has-link"],
+	"classes"=>["source"=>"attribute","selector"=>".{$block_class}","attribute"=>"class","default"=>"{$block_class} is-type-card is-level3 has-content-width has-content-width-medium has-title-caption has-counter has-link"],
 	"vars"=>["type"=>"object"],
 	
 	"HeadingTag"=>["type"=>"string","default"=>"h3"],
@@ -38,7 +38,7 @@ $attributes=[
 			];
 		},range(0,3))
 	],
-	"countPrefix"=>["source"=>"text","selector"=>".{$block_class}__item-texts-counter-prefix","default"=>""],
+	"countPrefix"=>["source"=>"text","selector"=>".{$block_class}__item-texts-counter-prefix","default"=>"No."],
 	"countSuffix"=>["source"=>"text","selector"=>".{$block_class}__item-texts-counter-suffix","default"=>""],
 	"loopParam"=>["type"=>"string","default"=>""],
 	"loopCount"=>["type"=>"number","default"=>1],

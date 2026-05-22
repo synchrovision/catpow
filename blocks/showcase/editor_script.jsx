@@ -92,41 +92,7 @@ wp.blocks.registerBlockType("catpow/showcase", {
 				"hasPadding",
 				"hasContentWidth",
 				{ name: "link", label: "リンク", values: "hasLink" },
-				{
-					name: "template",
-					label: "テンプレート",
-					values: "isTemplate",
-					sub: [
-						{
-							name: "loop",
-							input: "bool",
-							label: "ループ",
-							key: "doLoop",
-							sub: [
-								{
-									name: "contentPath",
-									label: "content path",
-									input: "text",
-									key: "content_path",
-								},
-								{
-									name: "query",
-									label: "query",
-									input: "textarea",
-									key: "query",
-								},
-								{
-									name: "loopCount",
-									label: "プレビューループ数",
-									input: "range",
-									key: "loopCount",
-									min: 1,
-									max: 16,
-								},
-							],
-						},
-					],
-				},
+				"isTemplate",
 			];
 			wp.hooks.applyFilters("catpow.blocks.showcase.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
@@ -308,39 +274,37 @@ wp.blocks.registerBlockType("catpow/showcase", {
 		const states = CP.classNamesToFlags(classes);
 		const { imageKeys, linkKeys } = CP.config.showcase;
 
-		let rtn = [];
-		items.forEach((item, index) => {
-			rtn.push(
-				<li className={item.classes} key={index}>
-					<div className="_image">
-						<CP.ResponsiveImage attr={attributes} keys={imageKeys.image} index={index} isTemplate={states.isTemplate} />
-					</div>
-					<div className="_texts">
-						{states.hasCounter && (
-							<div className="_counter">
-								{countPrefix && <span className="_prefix">{countPrefix}</span>}
-								<span className="_number">{index + 1}</span>
-								{countSuffix && <span className="_suffix">{countSuffix}</span>}
-							</div>
-						)}
-						<RichText.Content tagName={HeadingTag} className="_title" value={item.title} />
-						{states.hasTitleCaption && <RichText.Content tagName="p" className="_caption" value={item.titleCaption} />}
-						<div className="_text">
-							<RichText.Content value={item.text} />
-						</div>
-						{states.hasLink && (
-							<CP.Link className="_link" attr={attributes} keys={linkKeys.link} index={index} {...CP.extractEventDispatcherAttributes("catpow/banners", item)}>
-								<RichText.Content value={item.linkText} />
-							</CP.Link>
-						)}
-					</div>
-				</li>,
-			);
-		});
 		return (
 			<>
 				<CP.Bem prefix="wp-block-catpow">
-					<ul {...useBlockProps.save({ className: classes, style: vars })}>{rtn}</ul>
+					<ul {...useBlockProps.save({ className: classes, style: vars })}>
+						{items.map((item, index) => (
+							<li className={item.classes} key={index}>
+								<div className="_image">
+									<CP.ResponsiveImage attr={attributes} keys={imageKeys.image} index={index} isTemplate={states.isTemplate} />
+								</div>
+								<div className="_texts">
+									{states.hasCounter && (
+										<div className="_counter">
+											{countPrefix && <span className="_prefix">{countPrefix}</span>}
+											<span className="_number">{index + 1}</span>
+											{countSuffix && <span className="_suffix">{countSuffix}</span>}
+										</div>
+									)}
+									<RichText.Content tagName={HeadingTag} className="_title" value={item.title} />
+									{states.hasTitleCaption && <RichText.Content tagName="p" className="_caption" value={item.titleCaption} />}
+									<div className="_text">
+										<RichText.Content value={item.text} />
+									</div>
+									{states.hasLink && (
+										<CP.Link className="_link" attr={attributes} keys={linkKeys.link} index={index}>
+											<RichText.Content value={item.linkText} />
+										</CP.Link>
+									)}
+								</div>
+							</li>
+						))}
+					</ul>
 				</CP.Bem>
 				{doLoop && (
 					<on-empty>

@@ -184,13 +184,13 @@
                         }
                     }
                     &-title{
-                        @include bnd((mg:0,pd:0));
+                        @include bnd((mgt:0,pd:0));
                         @include txt((c:mx,b:k));
                     }
                     &-caption{
                     }
                     &-text{
-                        @include bnd((mgt:1em,f:1 1 a));
+                        @include bnd((f:1 1 a));
                         @include txt((a:j));
                     }
                     &-link{
