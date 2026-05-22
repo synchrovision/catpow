@@ -7502,7 +7502,7 @@
       return {};
     }
     var obj = {};
-    css.replace("&amp;", "&").split(";").forEach((pair) => {
+    css.replace(/&amp;/g, "&").split(";").forEach((pair) => {
       const match = pair.match(/^((\-\-)?([^:]+?)):(.+)$/);
       if (!match) {
         return;

@@ -9,7 +9,7 @@ export const parseStyleString = (css) => {
 	}
 	var obj = {};
 	css
-		.replace("&amp;", "&")
+		.replace(/&amp;/g, "&")
 		.split(";")
 		.forEach((pair) => {
 			const match = pair.match(/^((\-\-)?([^:]+?)):(.+)$/);
