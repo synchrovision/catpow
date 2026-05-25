@@ -1,0 +1,15 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"textdomain": "catpow",
+	"name": "catpow/tabs",
+	"title": "🐾 Tabs",
+	"description": "タブによる表示切り替えのブロックです。",
+	"icon": "editor-code",
+	"category": "catpow",
+	"supports": {
+		"anchor": true,
+		"className": false,
+		"color": false
+	}
+}

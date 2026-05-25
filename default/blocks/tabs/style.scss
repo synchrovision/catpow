@@ -1,0 +1,169 @@
+@import "config/style_config.scss";
+@import "text-placeholders.scss";
+@import 'component-placeholders.scss';
+
+.wp-block-catpow-tabs{
+	$block:&;
+	$tab:#{$block}__tab;
+	$contents:#{$block}__contents;
+	@include bnd((p:r,z:1));
+	&__tab{
+		@include bnd((p:r,mg:0,pd:0,z:3));
+		@include txt((a:c,l:n));
+		@include usr((c:p));
+		&-item{
+			@include bnd((p:r,z:1,f:1 1 50));
+			&-title{
+				@extend %heading;
+				@include bnd((mg:0));
+			}
+			&:last-child{
+				@include bnd((mgr:0));
+			}
+			&.is-active{
+				@include bnd((p:r,z:2));
+			}
+		}
+	}
+	&__contents{
+		@include bnd((p:r,z:2));
+		@include bg((c:bx));
+		@include bdr((p:t,s:n));
+		&::before{
+			content: ' ';
+			@include bnd((d:b,h:1,mgb:-1));
+		}
+		&-content{
+			@include bnd((d:n));
+			&.is-active{
+				@include bnd((d:b));
+			}
+		}
+	}
+	&.is-type-label{
+		@include grd((tc:1fr,g:c-f));
+		&.is-style-table{
+			#{$tab}{
+				&-item{
+					@include bdr((s:s,c:lx));
+				}
+			}
+		}
+		#{$tab}{
+			@include flx((w:w,g:c-l));
+			&-item{
+				@extend %label-component;
+				@include bnd((p:r,z:1));
+				&-title{
+					@include bnd((mg:0));
+				}
+				&.is-active{
+					#{$tab}-item{
+						&-title{
+							@include bnd((p:r,z:2));
+						}
+					}
+				}
+			}
+		}
+	}
+	&.is-type-bar{
+		@include grd((tc:1fr,g:c-f));
+		&.is-style-table{
+			#{$tab}{
+				@include flx((g:bw(c-t)));
+				@include bg((c:lx));
+				@include bdr((s:s,c:lx));
+				&-item{
+					@include bg((c:tx-bx 10));
+					&.is-active{
+						@include bg((c:bx));
+					}
+				}
+			}
+		}
+		#{$tab}{
+			@extend %table-component;
+			@include bnd((pd:0,o:h));
+			@include flx((w:n));
+			&-item{
+				@include bnd((p:r,pd:c-t,z:1));
+				&-title{
+					@include bnd((mg:0));
+				}
+				&.is-active{
+					#{$tab}-item{
+						&-title{
+							@include bnd((p:r,z:2));
+						}
+					}
+				}
+			}
+		}
+	}
+	&.is-type-panel{
+		&.is-style-table{
+			#{$tab}{
+				&-item{
+					@include bdr((s:s,c:lx));
+					@include bg((c:tx-bx 10));
+					@include txt((c:t));
+					&.is-active{
+						@include bg((c:b));
+						@include bdr((p:b,s:n));
+					}
+				}
+			}
+			#{$contents}{
+				@include bdr((s:s,w:c-t,c:lx));
+				@include bdr((p:t,s:n));
+			}
+		}
+		#{$tab}{
+			@include flx((w:n));
+			@include bnd((pd:0));
+			@include flx((w:n));
+			&-item{
+				@extend %table-component;
+				@include bnd((p:r,z:1));
+				@include bdr((br:0));
+				&-title{
+					@include bnd((mg:0));
+				}
+				&.is-active{
+					#{$tab}-item{
+						&-title{
+							@include bnd((p:r,z:2));
+						}
+					}
+				}
+			}
+		}
+		#{$contents}{
+			@include bdr((r:c-t,tr:0));
+		}
+	}
+	&.is-style-table{
+		#{$tab}{
+			&-item{
+				@include bg((c:tx-bx 10));
+				&.is-active{
+					@include bg((c:bx));
+				}
+			}
+		}
+	}
+	&.is-style-flat{
+		#{$tab}{
+			&-item{
+				@include bg((c:tx-bx 20));
+				&-title{
+					@include txt((c:ix));
+				}
+				&.is-active{
+					@include bg((c:mx));
+				}
+			}
+		}
+	}
+}
