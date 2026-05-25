@@ -1,337 +1,337 @@
 @charset "UTF-8";
 @import url("https://fonts.googleapis.com/css?family=Staatliches&subset=latin-ext");
-.has-text-role-heading {
+:root .has-text-role-heading {
   font-family: var(--cp-font-family-t-h, inherit);
   font-size: var(--cp-font-size-t-h, 2em);
   font-weight: var(--cp-font-weight-t-h, regular);
   line-height: var(--cp-line-height-t-h, 1.5);
   letter-spacing: var(--cp-letter-spacing-t-h, normal);
 }
-.has-text-role-lead {
+:root .has-text-role-lead {
   font-family: var(--cp-font-family-t-l, inherit);
   font-size: var(--cp-font-size-t-l, 2em);
   font-weight: var(--cp-font-weight-t-l, regular);
   line-height: var(--cp-line-height-t-l, 1.5);
   letter-spacing: var(--cp-letter-spacing-t-l, normal);
 }
-.has-text-role-paragraph {
+:root .has-text-role-paragraph {
   font-family: var(--cp-font-family-t-p, inherit);
   font-size: var(--cp-font-size-t-p, 2em);
   font-weight: var(--cp-font-weight-t-p, regular);
   line-height: var(--cp-line-height-t-p, 1.5);
   letter-spacing: var(--cp-letter-spacing-t-p, normal);
 }
-.has-text-role-ui {
+:root .has-text-role-ui {
   font-family: var(--cp-font-family-t-u, inherit);
   font-size: var(--cp-font-size-t-u, 2em);
   font-weight: var(--cp-font-weight-t-u, regular);
   line-height: var(--cp-line-height-t-u, 1.5);
   letter-spacing: var(--cp-letter-spacing-t-u, normal);
 }
-.has-text-role-caption {
+:root .has-text-role-caption {
   font-family: var(--cp-font-family-t-c, inherit);
   font-size: var(--cp-font-size-t-c, 2em);
   font-weight: var(--cp-font-weight-t-c, regular);
   line-height: var(--cp-line-height-t-c, 1.5);
   letter-spacing: var(--cp-letter-spacing-t-c, normal);
 }
-.has-box-shadow-inset-large {
+:root .has-box-shadow-inset-large {
   box-shadow: var(--cp-shadow-s-il) oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
-.has-box-shadow-inset-medium {
+:root .has-box-shadow-inset-medium {
   box-shadow: var(--cp-shadow-s-im) oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
-.has-box-shadow-inset-small {
+:root .has-box-shadow-inset-small {
   box-shadow: var(--cp-shadow-s-is) oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
-.has-box-shadow-small {
+:root .has-box-shadow-small {
   box-shadow: var(--cp-shadow-s-os) oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
-.has-box-shadow-medium {
+:root .has-box-shadow-medium {
   box-shadow: var(--cp-shadow-s-om) oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
-.has-box-shadow-large {
+:root .has-box-shadow-large {
   box-shadow: var(--cp-shadow-s-ol) oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
-.has-text-shadow {
+:root .has-text-shadow {
   text-shadow: var(--cp-text-shadow) oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
   --cp-text-shadow:var(--cp-text-shadow-offset-x,0) var(--cp-text-shadow-offset-y,0) var(--cp-text-shadow-blur,0) var(--cp-color-shd,rgba(0,0,0,.2));
 }
-.has-text-shadow-small {
+:root .has-text-shadow-small {
   --cp-text-shadow-offset-x-small:var(--cp-text-shadow-offset-x-small,0.1em);
   --cp-text-shadow-offset-y-small:var(--cp-text-shadow-offset-y-small,0.1em);
   --cp-text-shadow-blur-small:var(--cp-text-shadow-blur-small,0.05em);
 }
-.has-text-shadow-medium {
+:root .has-text-shadow-medium {
   --cp-text-shadow-offset-x-medium:var(--cp-text-shadow-offset-x-medium,0.2em);
   --cp-text-shadow-offset-y-medium:var(--cp-text-shadow-offset-y-medium,0.2em);
   --cp-text-shadow-blur-medium:var(--cp-text-shadow-blur-medium,0.1em);
 }
-.has-text-shadow-large {
+:root .has-text-shadow-large {
   --cp-text-shadow-offset-x-large:var(--cp-text-shadow-offset-x-large,0.4em);
   --cp-text-shadow-offset-y-large:var(--cp-text-shadow-offset-y-large,0.4em);
   --cp-text-shadow-blur-large:var(--cp-text-shadow-blur-large,0.2em);
 }
-.has-text-shadow-custom {
+:root .has-text-shadow-custom {
   --cp-text-shadow-offset-x-custom:var(--cp-text-shadow-offset-x-custom,0.2em);
   --cp-text-shadow-offset-y-custom:var(--cp-text-shadow-offset-y-custom,0.2em);
   --cp-text-shadow-blur-custom:var(--cp-text-shadow-blur-custom,0.1em);
 }
-.has-padding {
+:root .has-padding {
   --cp-padding:var(--cp-padding-top,0) var(--cp-padding-inline,0) var(--cp-padding-bottom,0);
   padding: var(--cp-padding);
 }
-.has-padding-top-x-small {
+:root .has-padding-top-x-small {
   --cp-padding-top:var(--cp-size-s-xs);
 }
-.has-padding-top-small {
+:root .has-padding-top-small {
   --cp-padding-top:var(--cp-size-s-s);
 }
-.has-padding-top-medium {
+:root .has-padding-top-medium {
   --cp-padding-top:var(--cp-size-s-m);
 }
-.has-padding-top-large {
+:root .has-padding-top-large {
   --cp-padding-top:var(--cp-size-s-l);
 }
-.has-padding-top-x-large {
+:root .has-padding-top-x-large {
   --cp-padding-top:var(--cp-size-s-xl);
 }
-.has-padding-top-custom {
+:root .has-padding-top-custom {
   --cp-padding-top:var(--cp-padding-top-custom);
 }
-.has-padding-bottom-x-small {
+:root .has-padding-bottom-x-small {
   --cp-padding-bottom:var(--cp-size-s-xs);
 }
-.has-padding-bottom-small {
+:root .has-padding-bottom-small {
   --cp-padding-bottom:var(--cp-size-s-s);
 }
-.has-padding-bottom-medium {
+:root .has-padding-bottom-medium {
   --cp-padding-bottom:var(--cp-size-s-m);
 }
-.has-padding-bottom-large {
+:root .has-padding-bottom-large {
   --cp-padding-bottom:var(--cp-size-s-l);
 }
-.has-padding-bottom-x-large {
+:root .has-padding-bottom-x-large {
   --cp-padding-bottom:var(--cp-size-s-xl);
 }
-.has-padding-bottom-custom {
+:root .has-padding-bottom-custom {
   --cp-padding-bottom:var(--cp-padding-bottom-custom);
 }
-.has-padding-inline-x-small {
+:root .has-padding-inline-x-small {
   --cp-padding-inline:var(--cp-size-s-xs);
 }
-.has-padding-inline-small {
+:root .has-padding-inline-small {
   --cp-padding-inline:var(--cp-size-s-s);
 }
-.has-padding-inline-medium {
+:root .has-padding-inline-medium {
   --cp-padding-inline:var(--cp-size-s-m);
 }
-.has-padding-inline-large {
+:root .has-padding-inline-large {
   --cp-padding-inline:var(--cp-size-s-l);
 }
-.has-padding-inline-x-large {
+:root .has-padding-inline-x-large {
   --cp-padding-inline:var(--cp-size-s-xl);
 }
-.has-padding-inline-custom {
+:root .has-padding-inline-custom {
   --cp-padding-inline:var(--cp-padding-inline-custom);
 }
-.has-margin {
+:root .has-margin {
   --cp-margin:var(--cp-margin-top,0) auto var(--cp-margin-bottom,0);
   margin: var(--cp-margin);
 }
-.has-margin-top-x-small {
+:root .has-margin-top-x-small {
   --cp-margin-top:var(--cp-size-s-xs);
 }
-.has-margin-top-small {
+:root .has-margin-top-small {
   --cp-margin-top:var(--cp-size-s-s);
 }
-.has-margin-top-medium {
+:root .has-margin-top-medium {
   --cp-margin-top:var(--cp-size-s-m);
 }
-.has-margin-top-large {
+:root .has-margin-top-large {
   --cp-margin-top:var(--cp-size-s-l);
 }
-.has-margin-top-x-large {
+:root .has-margin-top-x-large {
   --cp-margin-top:var(--cp-size-s-xl);
 }
-.has-margin-top-custom {
+:root .has-margin-top-custom {
   --cp-margin-top:var(--cp-margin-top-custom);
 }
-.has-margin-bottom-x-small {
+:root .has-margin-bottom-x-small {
   --cp-margin-bottom:var(--cp-size-s-xs);
 }
-.has-margin-bottom-small {
+:root .has-margin-bottom-small {
   --cp-margin-bottom:var(--cp-size-s-s);
 }
-.has-margin-bottom-medium {
+:root .has-margin-bottom-medium {
   --cp-margin-bottom:var(--cp-size-s-m);
 }
-.has-margin-bottom-large {
+:root .has-margin-bottom-large {
   --cp-margin-bottom:var(--cp-size-s-l);
 }
-.has-margin-bottom-x-large {
+:root .has-margin-bottom-x-large {
   --cp-margin-bottom:var(--cp-size-s-xl);
 }
-.has-margin-bottom-custom {
+:root .has-margin-bottom-custom {
   --cp-margin-bottom:var(--cp-margin-bottom-custom);
 }
-.has-content-width {
+:root .has-content-width {
   width: var(--cp-size-c, min(90vw, 60rem, 100%));
   margin-inline: auto;
 }
-.has-content-width-x-small {
+:root .has-content-width-x-small {
   --cp-size-c:var(--cp-size-c-xs);
 }
-.has-content-width-small {
+:root .has-content-width-small {
   --cp-size-c:var(--cp-size-c-s);
 }
-.has-content-width-medium {
+:root .has-content-width-medium {
   --cp-size-c:var(--cp-size-c-m);
 }
-.has-content-width-large {
+:root .has-content-width-large {
   --cp-size-c:var(--cp-size-c-l);
 }
-.has-content-width-x-large {
+:root .has-content-width-x-large {
   --cp-size-c:var(--cp-size-c-xl);
 }
-.has-content-width-fit {
+:root .has-content-width-fit {
   --cp-size-c:var(--cp-size-c-fit,min(fit-content,100%));
 }
-.has-content-width-full {
+:root .has-content-width-full {
   --cp-size-c:var(--cp-size-c-full,100%);
 }
-.has-content-width-custom {
+:root .has-content-width-custom {
   --cp-size-c:var(--cp-size-c-custom,min(90vw,60rem,100%));
 }
-.has-item-size-x-small {
+:root .has-item-size-x-small {
   --cp-size-i:var(--cp-size-i-xs);
 }
-.has-item-size-small {
+:root .has-item-size-small {
   --cp-size-i:var(--cp-size-i-s);
 }
-.has-item-size-medium {
+:root .has-item-size-medium {
   --cp-size-i:var(--cp-size-i-m);
 }
-.has-item-size-large {
+:root .has-item-size-large {
   --cp-size-i:var(--cp-size-i-l);
 }
-.has-item-size-x-large {
+:root .has-item-size-x-large {
   --cp-size-i:var(--cp-size-i-xl);
 }
-.has-item-size-custom {
+:root .has-item-size-custom {
   --cp-size-i:var(--cp-size-i-custom);
 }
-.has-clip-path {
+:root .has-clip-path {
   padding-top: calc((var(--cp-padding-top,0) + var(--cp-clip-shape-upper-height,40) * 0.0625rem));
   padding-bottom: calc((var(--cp-padding-bottom,0) + var(--cp-clip-shape-below-height,40) * 0.0625rem));
   margin-top: calc((var(--cp-margin-top,0) - var(--cp-clip-shape-upper-height,40) * 0.0625rem));
   margin-bottom: calc((var(--cp-margin-bottom,0) - var(--cp-clip-shape-below-height,40) * 0.0625rem));
 }
-.has-clip-path.has-clip-shape-ellipse {
+:root .has-clip-path.has-clip-shape-ellipse {
   clip-path: inset(0);
 }
 @supports (clip-path:shape(from 0 0,hline to 100%,vline to 100%,hline to 0%,close)) {
-  .has-clip-path.has-clip-shape-ellipse.has-clip-shape-both {
+  :root .has-clip-path.has-clip-shape-ellipse.has-clip-shape-both {
     clip-path: shape(from 0% calc(var(--cp-clip-shape-amount,50) * 0.1rem), arc by 100% 0% of 60% calc(var(--cp-clip-shape-amount,50) * 0.2rem) cw, vline to calc(100% - var(--cp-clip-shape-amount,50) * 0.1rem), arc by -100% 0% of 60% calc(var(--cp-clip-shape-amount,50) * 0.2rem) cw, close);
   }
-  .has-clip-path.has-clip-shape-ellipse.has-clip-shape-upper {
+  :root .has-clip-path.has-clip-shape-ellipse.has-clip-shape-upper {
     clip-path: shape(from 0% calc(var(--cp-clip-shape-amount,50) * 0.1rem), arc by 100% 0% of 60% calc(var(--cp-clip-shape-amount,50) * 0.2rem) cw, vline to 100%, hline to 0%, close);
   }
-  .has-clip-path.has-clip-shape-ellipse.has-clip-shape-below {
+  :root .has-clip-path.has-clip-shape-ellipse.has-clip-shape-below {
     clip-path: shape(from 0% 0%, hline to 100%, vline to calc(100% - var(--cp-clip-shape-amount,50) * 0.1rem), arc by -100% 0% of 60% calc(var(--cp-clip-shape-amount,50) * 0.2rem) cw, close);
   }
 }
-.has-clip-path.has-clip-shape-slope {
+:root .has-clip-path.has-clip-shape-slope {
   clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
 }
-.has-clip-path.has-clip-shape-slope.has-clip-shape-below-left {
+:root .has-clip-path.has-clip-shape-slope.has-clip-shape-below-left {
   clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem));
 }
-.has-clip-path.has-clip-shape-slope.has-clip-shape-below-right {
+:root .has-clip-path.has-clip-shape-slope.has-clip-shape-below-right {
   clip-path: polygon(0% 0%, 100% 0%, 100% calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem), 0% 100%);
 }
-.has-clip-path.has-clip-shape-slope.has-clip-shape-upper-left {
+:root .has-clip-path.has-clip-shape-slope.has-clip-shape-upper-left {
   clip-path: polygon(0% calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), 100% 0%, 100% 100%, 0% 100%);
 }
-.has-clip-path.has-clip-shape-slope.has-clip-shape-upper-left.has-clip-shape-below-left {
+:root .has-clip-path.has-clip-shape-slope.has-clip-shape-upper-left.has-clip-shape-below-left {
   clip-path: polygon(0% calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), 100% 0%, 100% 100%, 0% calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem));
 }
-.has-clip-path.has-clip-shape-slope.has-clip-shape-upper-left.has-clip-shape-below-right {
+:root .has-clip-path.has-clip-shape-slope.has-clip-shape-upper-left.has-clip-shape-below-right {
   clip-path: polygon(0% calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), 100% 0%, 100% calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem), 0% 100%);
 }
-.has-clip-path.has-clip-shape-slope.has-clip-shape-upper-right {
+:root .has-clip-path.has-clip-shape-slope.has-clip-shape-upper-right {
   clip-path: polygon(0% 0%, 100% calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), 100% 100%, 0% 100%);
 }
-.has-clip-path.has-clip-shape-slope.has-clip-shape-upper-right.has-clip-shape-below-left {
+:root .has-clip-path.has-clip-shape-slope.has-clip-shape-upper-right.has-clip-shape-below-left {
   clip-path: polygon(0% 0%, 100% calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), 100% 100%, 0% calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem));
 }
-.has-clip-path.has-clip-shape-slope.has-clip-shape-upper-right.has-clip-shape-below-right {
+:root .has-clip-path.has-clip-shape-slope.has-clip-shape-upper-right.has-clip-shape-below-right {
   clip-path: polygon(0% 0%, 100% calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), 100% calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem), 0% 100%);
 }
-.has-clip-path.has-clip-shape-arrow {
+:root .has-clip-path.has-clip-shape-arrow {
   clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
 }
-.has-clip-path.has-clip-shape-arrow.has-clip-shape-below-in {
+:root .has-clip-path.has-clip-shape-arrow.has-clip-shape-below-in {
   clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 100% 100%, 50% calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem), 0% 100%);
 }
-.has-clip-path.has-clip-shape-arrow.has-clip-shape-below-out {
+:root .has-clip-path.has-clip-shape-arrow.has-clip-shape-below-out {
   clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 100% calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem), 50% 100%, 0% calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem));
 }
-.has-clip-path.has-clip-shape-arrow.has-clip-shape-upper-in {
+:root .has-clip-path.has-clip-shape-arrow.has-clip-shape-upper-in {
   clip-path: polygon(0% 0%, 50% calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), 100% 0%, 100% 100%, 100% 100%, 0% 100%);
 }
-.has-clip-path.has-clip-shape-arrow.has-clip-shape-upper-in.has-clip-shape-below-in {
+:root .has-clip-path.has-clip-shape-arrow.has-clip-shape-upper-in.has-clip-shape-below-in {
   clip-path: polygon(0% 0%, 50% calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), 100% 0%, 100% 100%, 100% 100%, 50% calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem), 0% 100%);
 }
-.has-clip-path.has-clip-shape-arrow.has-clip-shape-upper-in.has-clip-shape-below-out {
+:root .has-clip-path.has-clip-shape-arrow.has-clip-shape-upper-in.has-clip-shape-below-out {
   clip-path: polygon(0% 0%, 50% calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), 100% 0%, 100% 100%, 100% calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem), 50% 100%, 0% calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem));
 }
-.has-clip-path.has-clip-shape-arrow.has-clip-shape-upper-out {
+:root .has-clip-path.has-clip-shape-arrow.has-clip-shape-upper-out {
   clip-path: polygon(0% calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), 50% 0%, 100% calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), 100% 100%, 0% 100%);
 }
-.has-clip-path.has-clip-shape-arrow.has-clip-shape-upper-out.has-clip-shape-below-in {
+:root .has-clip-path.has-clip-shape-arrow.has-clip-shape-upper-out.has-clip-shape-below-in {
   clip-path: polygon(0% calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), 50% 0%, 100% calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), 100% 100%, 50% calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem), 0% 100%);
 }
-.has-clip-path.has-clip-shape-arrow.has-clip-shape-upper-out.has-clip-shape-below-out {
+:root .has-clip-path.has-clip-shape-arrow.has-clip-shape-upper-out.has-clip-shape-below-out {
   clip-path: polygon(0% calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), 50% 0%, 100% calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), 100% calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem), 50% 100%, 0% calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem));
 }
-.has-clip-path.has-clip-shape-tail {
+:root .has-clip-path.has-clip-shape-tail {
   clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
 }
-.has-clip-path.has-clip-shape-tail.has-clip-shape-below-in {
+:root .has-clip-path.has-clip-shape-tail.has-clip-shape-below-in {
   clip-path: polygon(0% 0%, 100% 0%, 100% 100%, calc(50% + var(--cp-clip-shape-below-width,40) * 0.0625rem / 2) 100%, 50% calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem), calc(50% - var(--cp-clip-shape-below-width,40) * 0.0625rem / 2) 100%, 0% 100%);
 }
-.has-clip-path.has-clip-shape-tail.has-clip-shape-below-out {
+:root .has-clip-path.has-clip-shape-tail.has-clip-shape-below-out {
   clip-path: polygon(0% 0%, 100% 0%, 100% calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem), calc(50% + var(--cp-clip-shape-below-width,40) * 0.0625rem / 2) calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem), 50% 100%, calc(50% - var(--cp-clip-shape-below-width,40) * 0.0625rem / 2) calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem), 0% calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem));
 }
-.has-clip-path.has-clip-shape-tail.has-clip-shape-upper-in {
+:root .has-clip-path.has-clip-shape-tail.has-clip-shape-upper-in {
   clip-path: polygon(0% 0%, calc(50% - var(--cp-clip-shape-upper-width,40) * 0.0625rem / 2) 0%, 50% calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), calc(50% + var(--cp-clip-shape-upper-width,40) * 0.0625rem / 2) 0%, 100% 0%, 100% 100%, 100% 100%, 0% 100%);
 }
-.has-clip-path.has-clip-shape-tail.has-clip-shape-upper-in.has-clip-shape-below-in {
+:root .has-clip-path.has-clip-shape-tail.has-clip-shape-upper-in.has-clip-shape-below-in {
   clip-path: polygon(0% 0%, calc(50% - var(--cp-clip-shape-upper-width,40) * 0.0625rem / 2) 0%, 50% calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), calc(50% + var(--cp-clip-shape-upper-width,40) * 0.0625rem / 2) 0%, 100% 0%, 100% 100%, 100% 100%, calc(50% + var(--cp-clip-shape-below-width,40) * 0.0625rem / 2) 100%, 50% calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem), calc(50% - var(--cp-clip-shape-below-width,40) * 0.0625rem / 2) 100%, 0% 100%);
 }
-.has-clip-path.has-clip-shape-tail.has-clip-shape-upper-in.has-clip-shape-below-out {
+:root .has-clip-path.has-clip-shape-tail.has-clip-shape-upper-in.has-clip-shape-below-out {
   clip-path: polygon(0% 0%, calc(50% - var(--cp-clip-shape-upper-width,40) * 0.0625rem / 2) 0%, 50% calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), calc(50% + var(--cp-clip-shape-upper-width,40) * 0.0625rem / 2) 0%, 100% 0%, 100% 100%, 100% calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem), calc(50% + var(--cp-clip-shape-below-width,40) * 0.0625rem / 2) calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem), 50% 100%, calc(50% - var(--cp-clip-shape-below-width,40) * 0.0625rem / 2) calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem), 0% calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem));
 }
-.has-clip-path.has-clip-shape-tail.has-clip-shape-upper-out {
+:root .has-clip-path.has-clip-shape-tail.has-clip-shape-upper-out {
   clip-path: polygon(0% calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), calc(50% - var(--cp-clip-shape-upper-width,40) * 0.0625rem / 2) calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), 50% 0%, calc(50% + var(--cp-clip-shape-upper-width,40) * 0.0625rem / 2) calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), 100% calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), 100% 100%, 0% 100%);
 }
-.has-clip-path.has-clip-shape-tail.has-clip-shape-upper-out.has-clip-shape-below-in {
+:root .has-clip-path.has-clip-shape-tail.has-clip-shape-upper-out.has-clip-shape-below-in {
   clip-path: polygon(0% calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), calc(50% - var(--cp-clip-shape-upper-width,40) * 0.0625rem / 2) calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), 50% 0%, calc(50% + var(--cp-clip-shape-upper-width,40) * 0.0625rem / 2) calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), 100% calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), 100% 100%, calc(50% + var(--cp-clip-shape-below-width,40) * 0.0625rem / 2) 100%, 50% calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem), calc(50% - var(--cp-clip-shape-below-width,40) * 0.0625rem / 2) 100%, 0% 100%);
 }
-.has-clip-path.has-clip-shape-tail.has-clip-shape-upper-out.has-clip-shape-below-out {
+:root .has-clip-path.has-clip-shape-tail.has-clip-shape-upper-out.has-clip-shape-below-out {
   clip-path: polygon(0% calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), calc(50% - var(--cp-clip-shape-upper-width,40) * 0.0625rem / 2) calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), 50% 0%, calc(50% + var(--cp-clip-shape-upper-width,40) * 0.0625rem / 2) calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), 100% calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), 100% calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem), calc(50% + var(--cp-clip-shape-below-width,40) * 0.0625rem / 2) calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem), 50% 100%, calc(50% - var(--cp-clip-shape-below-width,40) * 0.0625rem / 2) calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem), 0% calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem));
 }
-.has-background-color {
+:root .has-background-color {
   background-color: oklch(var(--cp-tones-bx-l) var(--cp-tones-bx-c) var(--cp-tones-bx-h) / var(--cp-tones-bx-a,1));
 }
-.has-background-color-alt {
+:root .has-background-color-alt {
   background-color: oklch(var(--cp-tones-sx-l) var(--cp-tones-sx-c) var(--cp-tones-sx-h) / var(--cp-tones-sx-a,1));
 }
-.has-background-image {
+:root .has-background-image {
   position: relative;
 }
-.has-background-image::before {
+:root .has-background-image::before {
   content: "";
   display: block;
   position: absolute;
@@ -349,138 +349,138 @@
   mix-blend-mode: var(--cp-background-image-blendmode, normal);
   opacity: var(--cp-background-image-opacity, 1);
 }
-.has-background-image.has-background-image-fixed::before {
+:root .has-background-image.has-background-image-fixed::before {
   position: fixed;
   width: 100vw;
   height: 100vh;
 }
-.has-background-image.has-background-image-fixed:not(.has-clip-path) {
+:root .has-background-image.has-background-image-fixed:not(.has-clip-path) {
   clip-path: inset(0rem);
 }
-.has-background-pattern {
+:root .has-background-pattern {
   background-image: var(--cp-background-pattern, "./images/bg.png");
   background-repeat: var(--cp-background-pattern-repeat, repeat);
   background-position: var(--cp-background-pattern-position, repeat);
   background-size: var(--cp-background-pattern-size, contain);
   background-blend-mode: var(--cp-background-pattern-background-blendmode, normal);
 }
-.has-font-size {
+:root .has-font-size {
   font-size: var(--cp-font-size);
 }
-.has-font-size-x-small {
+:root .has-font-size-x-small {
   --cp-font-size:var(--cp-font-size-s-xs);
 }
-.has-font-size-small {
+:root .has-font-size-small {
   --cp-font-size:var(--cp-font-size-s-s);
 }
-.has-font-size-medium {
+:root .has-font-size-medium {
   --cp-font-size:var(--cp-font-size-s-m);
 }
-.has-font-size-large {
+:root .has-font-size-large {
   --cp-font-size:var(--cp-font-size-s-l);
 }
-.has-font-size-x-large {
+:root .has-font-size-x-large {
   --cp-font-size:var(--cp-font-size-s-xl);
 }
-.has-font-size-custom {
+:root .has-font-size-custom {
   --cp-font-size:var(--cp-font-size-custom);
 }
-.has-border {
+:root .has-border {
   border-style: var(--cp-border-style, solid);
   border-width: var(--cp-border-width, 0.2rem);
 }
-.has-border-width-thin {
+:root .has-border-width-thin {
   --cp-border-width:var(--cp-border-width-thin,0.1rem);
 }
-.has-border-width-medium {
+:root .has-border-width-medium {
   --cp-border-width:var(--cp-border-width-medium,0.2rem);
 }
-.has-border-width-bold {
+:root .has-border-width-bold {
   --cp-border-width:var(--cp-border-width-bold,0.4rem);
 }
-.has-border-width-custom {
+:root .has-border-width-custom {
   --cp-border-width:var(--cp-border-width-custom,0.2rem);
 }
-.has-border-style-solid {
+:root .has-border-style-solid {
   --cp-border-style:$value;
 }
-.has-border-style-dotted {
+:root .has-border-style-dotted {
   --cp-border-style:$value;
 }
-.has-border-style-dashed {
+:root .has-border-style-dashed {
   --cp-border-style:$value;
 }
-.has-border-style-double {
+:root .has-border-style-double {
   --cp-border-style:$value;
 }
-.has-border-style-ridge {
+:root .has-border-style-ridge {
   --cp-border-style:$value;
 }
-.has-border-style-groove {
+:root .has-border-style-groove {
   --cp-border-style:$value;
 }
-.has-border-radius {
+:root .has-border-radius {
   border-radius: var(--cp-border-radius, 1rem);
 }
-.has-border-radius-none {
+:root .has-border-radius-none {
   --cp-border-radius:var(--cp-border-radius-none,0);
 }
-.has-border-radius-small {
+:root .has-border-radius-small {
   --cp-border-radius:var(--cp-border-radius-small,0.5rem);
 }
-.has-border-radius-medium {
+:root .has-border-radius-medium {
   --cp-border-radius:var(--cp-border-radius-medium,1rem);
 }
-.has-border-radius-large {
+:root .has-border-radius-large {
   --cp-border-radius:var(--cp-border-radius-large,3rem);
 }
-.has-border-radius-custom {
+:root .has-border-radius-custom {
   --cp-border-radius:var(--cp-border-radius-custom,0.5rem);
 }
-.has-border-radius-custom {
+:root .has-border-radius-custom {
   --cp-border-radius:var(--cp-border-radius-custom);
 }
-.has-item-gap {
+:root .has-item-gap {
   --cp-item-gap:var(--cp-item-gap-block,0) var(--cp-item-gap-inline,0);
   gap: var(--cp-item-gap);
 }
-.has-item-gap-block-x-small {
+:root .has-item-gap-block-x-small {
   --cp-item-gap-block:var(--cp-size-s-xs);
 }
-.has-item-gap-block-small {
+:root .has-item-gap-block-small {
   --cp-item-gap-block:var(--cp-size-s-s);
 }
-.has-item-gap-block-medium {
+:root .has-item-gap-block-medium {
   --cp-item-gap-block:var(--cp-size-s-m);
 }
-.has-item-gap-block-large {
+:root .has-item-gap-block-large {
   --cp-item-gap-block:var(--cp-size-s-l);
 }
-.has-item-gap-block-x-large {
+:root .has-item-gap-block-x-large {
   --cp-item-gap-block:var(--cp-size-s-xl);
 }
-.has-item-gap-block-custom {
+:root .has-item-gap-block-custom {
   --cp-item-gap-block:var(--cp-item-gap-block-custom);
 }
-.has-item-gap-inline-x-small {
+:root .has-item-gap-inline-x-small {
   --cp-item-gap-inline:var(--cp-size-s-xs);
 }
-.has-item-gap-inline-small {
+:root .has-item-gap-inline-small {
   --cp-item-gap-inline:var(--cp-size-s-s);
 }
-.has-item-gap-inline-medium {
+:root .has-item-gap-inline-medium {
   --cp-item-gap-inline:var(--cp-size-s-m);
 }
-.has-item-gap-inline-large {
+:root .has-item-gap-inline-large {
   --cp-item-gap-inline:var(--cp-size-s-l);
 }
-.has-item-gap-inline-x-large {
+:root .has-item-gap-inline-x-large {
   --cp-item-gap-inline:var(--cp-size-s-xl);
 }
-.has-item-gap-inline-custom {
+:root .has-item-gap-inline-custom {
   --cp-item-gap-inline:var(--cp-item-gap-inline-custom);
 }
-.is-level1 {
+:root .is-level1 {
   font-size: var(--cp-font-size-t-p-1);
   --cp-padding-b:var(--cp-padding-b-1);
   --cp-margin-b:var(--cp-margin-b-1);
@@ -497,7 +497,7 @@
   --cp-margin-t-c:var(--cp-margin-t-c-1,2rem);
   --cp-font-size-t-c:var(--cp-font-size-t-c-1,2rem);
 }
-.is-level2 {
+:root .is-level2 {
   font-size: var(--cp-font-size-t-p-2);
   --cp-padding-b:var(--cp-padding-b-2);
   --cp-margin-b:var(--cp-margin-b-2);
@@ -514,7 +514,7 @@
   --cp-margin-t-c:var(--cp-margin-t-c-2,1.5rem);
   --cp-font-size-t-c:var(--cp-font-size-t-c-2,1.5rem);
 }
-.is-level3 {
+:root .is-level3 {
   font-size: var(--cp-font-size-t-p-3);
   --cp-padding-b:var(--cp-padding-b-3);
   --cp-margin-b:var(--cp-margin-b-3);
@@ -531,7 +531,7 @@
   --cp-margin-t-c:var(--cp-margin-t-c-3,1.25rem);
   --cp-font-size-t-c:var(--cp-font-size-t-c-3,1.25rem);
 }
-.is-level4 {
+:root .is-level4 {
   font-size: var(--cp-font-size-t-p-4);
   --cp-padding-b:var(--cp-padding-b-4);
   --cp-margin-b:var(--cp-margin-b-4);
@@ -548,7 +548,7 @@
   --cp-margin-t-c:var(--cp-margin-t-c-4,1rem);
   --cp-font-size-t-c:var(--cp-font-size-t-c-4,1rem);
 }
-.is-level5 {
+:root .is-level5 {
   font-size: var(--cp-font-size-t-p-5);
   --cp-padding-b:var(--cp-padding-b-5);
   --cp-margin-b:var(--cp-margin-b-5);
@@ -565,7 +565,7 @@
   --cp-margin-t-c:var(--cp-margin-t-c-5,0.875rem);
   --cp-font-size-t-c:var(--cp-font-size-t-c-5,0.875rem);
 }
-.is-level6 {
+:root .is-level6 {
   font-size: var(--cp-font-size-t-p-6);
   --cp-padding-b:var(--cp-padding-b-6);
   --cp-margin-b:var(--cp-margin-b-6);
@@ -582,81 +582,81 @@
   --cp-margin-t-c:var(--cp-margin-t-c-6,0.75rem);
   --cp-font-size-t-c:var(--cp-font-size-t-c-6,0.75rem);
 }
-.has-font-weight-thin {
+:root .has-font-weight-thin {
   font-weight: var(--cp-font-weight-t);
 }
-.has-font-weight-extra-light {
+:root .has-font-weight-extra-light {
   font-weight: 200;
 }
-.has-font-weight-light {
+:root .has-font-weight-light {
   font-weight: 300;
 }
-.has-font-weight-regular {
+:root .has-font-weight-regular {
   font-weight: 400;
 }
-.has-font-weight-medium {
+:root .has-font-weight-medium {
   font-weight: 500;
 }
-.has-font-weight-demi-bold {
+:root .has-font-weight-demi-bold {
   font-weight: 600;
 }
-.has-font-weight-bold {
+:root .has-font-weight-bold {
   font-weight: 700;
 }
-.has-font-weight-ultra-bold {
+:root .has-font-weight-ultra-bold {
   font-weight: 800;
 }
-.has-font-weight-heavy {
+:root .has-font-weight-heavy {
   font-weight: 900;
 }
-.has-text-align-left {
+:root .has-text-align-left {
   text-align: left;
 }
-.has-text-align-center {
+:root .has-text-align-center {
   text-align: center;
 }
-.has-text-align-right {
+:root .has-text-align-right {
   text-align: right;
 }
-.has-font-safe-serif {
+:root .has-font-safe-serif {
   font-family: Georgia, "Times New Roman", Times, serif;
 }
-.has-font-safe-serif.has-font-weight-safe-bold {
+:root .has-font-safe-serif.has-font-weight-safe-bold {
   font-family: Georgia, "Times New Roman", Times, serif;
   font-weight: 700;
 }
-.has-font-safe-sans-serif {
+:root .has-font-safe-sans-serif {
   font-family: Arial, Helvetica, sans-serif;
 }
-.has-font-safe-sans-serif.has-font-weight-safe-bold {
+:root .has-font-safe-sans-serif.has-font-weight-safe-bold {
   font-family: "Arial Black", Arial, Helvetica, sans-serif;
   font-weight: 700;
 }
-.has-font-safe-mono-spaced {
+:root .has-font-safe-mono-spaced {
   font-family: Courier New, Courier, monospace;
 }
-.has-font-safe-mono-spaced.has-font-weight-safe-bold {
+:root .has-font-safe-mono-spaced.has-font-weight-safe-bold {
   font-family: Courier New, Courier, monospace;
   font-weight: 700;
 }
-.has-font-safe-gohic {
+:root .has-font-safe-gohic {
   font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN W3", "Hiragino Sans", "Meiryo", "メイリオ", "MS PGothic", sans-serif;
 }
-.has-font-safe-gohic.has-font-weight-safe-bold {
+:root .has-font-safe-gohic.has-font-weight-safe-bold {
   font-family: "Yu Gothic", "Yu Gothic UI", Meiryo, "Hiragino Kaku Gothic ProN", "Hiragino Sans", sans-serif;
   font-weight: 700;
 }
-.has-font-safe-mincho {
+:root .has-font-safe-mincho {
   font-family: "Hiragino Mincho ProN", "ヒラギノ明朝 ProN W3", "MS PMincho", "ＭＳ Ｐ明朝", serif;
 }
-.has-font-safe-mincho.has-font-weight-safe-bold {
+:root .has-font-safe-mincho.has-font-weight-safe-bold {
   font-family: "Yu Mincho", "MS Mincho", "Hiragino Mincho ProN", serif;
   font-weight: 700;
 }
-.has-background-color {
+:root .has-background-color {
   background-color: oklch(var(--cp-tones-bx-l) var(--cp-tones-bx-c) var(--cp-tones-bx-h) / var(--cp-tones-bx-a,1));
 }
-.has-background-color-alt {
+:root .has-background-color-alt {
   background-color: oklch(var(--cp-tones-sx-l) var(--cp-tones-sx-c) var(--cp-tones-sx-h) / var(--cp-tones-sx-a,1));
 }
 .rtf-tag, #editor .rtf-tag {
@@ -665,35 +665,35 @@
   border-radius: var(--cp-border-radius-c-l, 0);
   box-shadow: var(--cp-shadow-c-l) oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
-.has-text-role-heading {
+:root .has-text-role-heading {
   font-family: var(--cp-font-family-t-h, inherit);
   font-size: var(--cp-font-size-t-h, 2em);
   font-weight: var(--cp-font-weight-t-h, regular);
   line-height: var(--cp-line-height-t-h, 1.5);
   letter-spacing: var(--cp-letter-spacing-t-h, normal);
 }
-.has-text-role-lead {
+:root .has-text-role-lead {
   font-family: var(--cp-font-family-t-l, inherit);
   font-size: var(--cp-font-size-t-l, 2em);
   font-weight: var(--cp-font-weight-t-l, regular);
   line-height: var(--cp-line-height-t-l, 1.5);
   letter-spacing: var(--cp-letter-spacing-t-l, normal);
 }
-.has-text-role-paragraph {
+:root .has-text-role-paragraph {
   font-family: var(--cp-font-family-t-p, inherit);
   font-size: var(--cp-font-size-t-p, 2em);
   font-weight: var(--cp-font-weight-t-p, regular);
   line-height: var(--cp-line-height-t-p, 1.5);
   letter-spacing: var(--cp-letter-spacing-t-p, normal);
 }
-.has-text-role-ui {
+:root .has-text-role-ui {
   font-family: var(--cp-font-family-t-u, inherit);
   font-size: var(--cp-font-size-t-u, 2em);
   font-weight: var(--cp-font-weight-t-u, regular);
   line-height: var(--cp-line-height-t-u, 1.5);
   letter-spacing: var(--cp-letter-spacing-t-u, normal);
 }
-.has-text-role-caption {
+:root .has-text-role-caption {
   font-family: var(--cp-font-family-t-c, inherit);
   font-size: var(--cp-font-size-t-c, 2em);
   font-weight: var(--cp-font-weight-t-c, regular);
