@@ -16,7 +16,7 @@
 
   // ../blocks/picture/editor_script.tsx
   var blockConfig = {
-    devices: ["sp", "tb"],
+    devices: ["tb", "sp"],
     imageKeys: {
       image: { sources: "sources", src: "src", alt: "alt", code: "code" }
     }
@@ -61,7 +61,7 @@
         className: clsx(classes, device, { "cp-altcontent": device }),
         style: vars
       });
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectDeviceToolbar, { attr: attributes, set: setAttributes, devices }), /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, device && /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: CP.devices[device].icon })), /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectDeviceToolbar, { attr: attributes, set: setAttributes, devices }), /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(
         CP.SelectResponsiveImage,
         {
           className: "_picture",

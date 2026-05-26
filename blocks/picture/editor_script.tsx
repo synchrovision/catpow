@@ -4,7 +4,7 @@ import { SelectiveClassConfig, CatpowBlockConfig } from "cpdev/type";
 import { clsx } from "clsx";
 
 const blockConfig: CatpowBlockConfig = {
-	devices: ["sp", "tb"],
+	devices: ["tb", "sp"],
 	imageKeys: {
 		image: { sources: "sources", src: "src", alt: "alt", code: "code" },
 	},
@@ -58,11 +58,6 @@ wp.blocks.registerBlockType("catpow/picture", {
 				<CP.SelectDeviceToolbar attr={attributes} set={setAttributes} devices={devices} />
 				<CP.Bem prefix="wp-block-catpow">
 					<div {...blockProps}>
-						{device && (
-							<div className="label">
-								<Icon icon={CP.devices[device].icon} />
-							</div>
-						)}
 						<CP.SelectResponsiveImage
 							className="_picture"
 							attr={attributes}
