@@ -6,8 +6,8 @@
 	&__contents{
 	}
 	&__copyright{
-		@extend %label-component;
 		@extend %caption;
+		@include bnd((pd:c-l));
 		@include txt((a:c,c:tx));
 	}
 }
