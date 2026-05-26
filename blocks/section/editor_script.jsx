@@ -2,7 +2,7 @@
 import { clsx } from "clsx";
 
 CP.config.section = {
-	devices: ["sp", "tb"],
+	devices: ["tb", "sp"],
 	imageKeys: {
 		navIcon: { src: "navIcon" },
 		image: { mime: "imageMime", src: "imageSrc", alt: "imageAlt", srcset: "imageSrcset" },

@@ -1,7 +1,7 @@
 ﻿import { clsx } from "clsx";
 
 CP.config.graphics = {
-	devices: ["sp", "tb"],
+	devices: ["tb", "sp"],
 	devicesForCss: ["pc", "tb", "sp"],
 	imageKeys: {
 		base: { src: "src", srcset: "srcset", sources: "sources", alt: "alt" },

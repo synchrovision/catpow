@@ -2,7 +2,7 @@
   // ../blocks/pageheader/editor_script.jsx
   var { __ } = wp.i18n;
   CP.config.pageheader = {
-    devices: ["sp", "tb"]
+    devices: ["tb", "sp"]
   };
   wp.blocks.registerBlockType("catpow/pageheader", {
     title: "\u{1F43E} PageHeader",

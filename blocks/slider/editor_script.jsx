@@ -1,7 +1,7 @@
 ﻿const { __ } = wp.i18n;
 
 CP.config.slider = {
-	devices: ["sp", "tb"],
+	devices: ["tb", "sp"],
 	imageKeys: {
 		image: { src: "src", alt: "alt", code: "imageCode", items: "items" },
 		slide: { src: "slideSrc", alt: "slideAlt", srscet: "slideSrcset", code: "slideCode", sources: "slideSources", items: "items" },
@@ -284,13 +284,13 @@ wp.blocks.registerBlockType("catpow/slider", {
 						</div>
 					)}
 					{states.hasLink && <CP.Link.Edit className="link" attr={attributes} set={setAttributes} keys={linkKeys.link} index={index} isSelected={isSelected} />}
-				</CP.Item>
+				</CP.Item>,
 			);
 			if (states.hasImage && states.hasThumbnail) {
 				thumbs.push(
 					<li className={"item " + posClass + " thumb" + p} onClick={() => gotoItem(index)} key={index}>
 						<CP.SelectResponsiveImage attr={attributes} set={setAttributes} keys={imageKeys.image} index={index} isTemplate={states.isTemplate} />
-					</li>
+					</li>,
 				);
 			}
 			if (states.hasDots) {
@@ -413,13 +413,13 @@ wp.blocks.registerBlockType("catpow/slider", {
 						</div>
 					)}
 					{states.hasLink && <CP.Link className="link" attr={attributes} keys={linkKeys.link} index={index} />}
-				</li>
+				</li>,
 			);
 			if (states.hasImage && states.hasThumbnail) {
 				thumbs.push(
 					<li className={item.classes} key={index}>
 						<CP.ResponsiveImage attr={attributes} keys={imageKeys.image} index={index} isTemplate={states.isTemplate} />
-					</li>
+					</li>,
 				);
 			}
 		});
@@ -551,13 +551,13 @@ wp.blocks.registerBlockType("catpow/slider", {
 									</p>
 								)}
 							</div>
-						</li>
+						</li>,
 					);
 					if (states.hasThumbnail) {
 						thumbs.push(
 							<li className={"item"} style={item.bg}>
 								<img src={item.src} alt={item.alt} />
-							</li>
+							</li>,
 						);
 					}
 				});
@@ -638,13 +638,13 @@ wp.blocks.registerBlockType("catpow/slider", {
 									<a href={item.linkUrl}> </a>
 								</div>
 							)}
-						</li>
+						</li>,
 					);
 					if (states.hasImage && states.hasThumbnail) {
 						thumbs.push(
 							<li className={item.classes}>
 								<CP.ResponsiveImage attr={attributes} keys={imageKeys.image} index={index} isTemplate={states.isTemplate} />
-							</li>
+							</li>,
 						);
 					}
 				});

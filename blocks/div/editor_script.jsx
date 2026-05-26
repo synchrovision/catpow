@@ -1,5 +1,5 @@
 ﻿CP.config.div = {
-	devices: ["sp", "tb"],
+	devices: ["tb", "sp"],
 	imageKeys: {
 		iconImage: { src: "iconImageSrc", alt: "iconImageAlt" },
 	},

@@ -1,7 +1,7 @@
 ﻿import { clsx } from "clsx";
 
 CP.config.banners = {
-	devices: ["sp", "tb"],
+	devices: ["tb", "sp"],
 	imageKeys: {
 		image: {
 			src: "src",

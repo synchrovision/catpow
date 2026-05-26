@@ -1,7 +1,7 @@
 ﻿import { clsx } from "clsx";
 
 CP.config.accordion = {
-	devices: ["sp", "tb"],
+	devices: ["tb", "sp"],
 	imageKeys: {
 		image: { mime: "imageMime", src: "imageSrc", alt: "imageAlt" },
 	},

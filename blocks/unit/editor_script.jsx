@@ -1,5 +1,5 @@
 ﻿CP.config.unit = {
-	devices: ["sp", "tb"],
+	devices: ["tb", "sp"],
 	imageKeys: {
 		image: { sources: "sources", src: "src", alt: "alt", code: "code" },
 	},

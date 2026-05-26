@@ -2,7 +2,7 @@
   // ../blocks/slider/editor_script.jsx
   var { __ } = wp.i18n;
   CP.config.slider = {
-    devices: ["sp", "tb"],
+    devices: ["tb", "sp"],
     imageKeys: {
       image: { src: "src", alt: "alt", code: "imageCode", items: "items" },
       slide: { src: "slideSrc", alt: "slideAlt", srscet: "slideSrcset", code: "slideCode", sources: "slideSources", items: "items" },
