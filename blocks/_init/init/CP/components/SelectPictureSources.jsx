@@ -17,25 +17,22 @@ export const SelectPictureSources = (props) => {
 
 	return (
 		<Bem>
-			<table className={clsx("cp-selectpicturesources", { "is-compact": compact })}>
-				<tbody className="_tbody">
-					<tr className="_tr">
-						<td className="_td" colSpan={devices.length}>
-							<CP.SelectResponsiveImage {...props} className="-image is-device-pc" keys={keys} devices={devices} />
-						</td>
-					</tr>
-					<tr className="_tr">
-						{devices.map((device) => (
-							<td className="_td" key={device}>
-								<div className="_label">
-									<Icon icon={CP.devices[device].icon} />
-								</div>
-								<CP.SelectResponsiveImage {...props} className={clsx("-image", `is-device-${device}`)} keys={keys} devices={devices} device={device} />
-							</td>
-						))}
-					</tr>
-				</tbody>
-			</table>
+			<div className={clsx("cp-selectpicturesources", { "is-compact": compact })}>
+				<div className="_item" style={{ gridColumn: `span ${devices.length}` }}>
+					<div className="_label">
+						<Icon icon={CP.devices.pc.icon} />
+					</div>
+					<CP.SelectResponsiveImage {...props} className="-image is-device-pc" keys={keys} devices={devices} />
+				</div>
+				{devices.map((device) => (
+					<div className="_item" key={device}>
+						<div className="_label">
+							<Icon icon={CP.devices[device].icon} />
+						</div>
+						<CP.SelectResponsiveImage {...props} className={clsx("-image", `is-device-${device}`)} keys={keys} devices={devices} device={device} />
+					</div>
+				))}
+			</div>
 		</Bem>
 	);
 };

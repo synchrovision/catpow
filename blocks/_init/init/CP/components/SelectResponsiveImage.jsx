@@ -1,6 +1,25 @@
-﻿export const SelectResponsiveImage = (props) => {
-	const { className = "cp-selectresponsiveimage", type, attr, set, keys = {}, index = 0, size, devices, device, showSelectPictureSources = false, isTemplate, ...otherProps } = props;
-	const primaryClassName = className.split(" ")[0];
+﻿import { clsx } from "clsx";
+
+const { useState, useMemo } = wp.element;
+
+export const SelectResponsiveImage = (props) => {
+	const {
+		className = "cp-selectresponsiveimage",
+		controlClassName = "cp-selectresponsiveimage-controls",
+		type,
+		attr,
+		set,
+		keys = {},
+		index = 0,
+		size,
+		devices,
+		device,
+		showSelectPictureSources = false,
+		isTemplate,
+		...otherProps
+	} = props;
+	const { Icon } = wp.components;
+	const [isOpen, setIsOpen] = useState(false);
 
 	let onClick;
 
@@ -65,9 +84,12 @@
 			{showSelectPictureSources ? (
 				<>
 					<CP.ResponsiveImageBody {...props} className={className} item={item} keys={keys} />
-					<CP.Bem element={primaryClassName}>
-						<div className="controls_">
-							<CP.SelectPictureSources attr={attr} set={set} keys={keys} index={index} size={size} devices={devices} />
+					<CP.Bem>
+						<div className={clsx(controlClassName, { "is-open": isOpen })}>
+							<Icon icon="edit" onClick={() => setIsOpen(!isOpen)} />
+							<div className="_body" {...{ inert: isOpen ? null : "" }}>
+								<CP.SelectPictureSources attr={attr} set={set} keys={keys} index={index} size={size} devices={devices} />
+							</div>
 						</div>
 					</CP.Bem>
 				</>
