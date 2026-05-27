@@ -150,9 +150,6 @@ wp.blocks.registerBlockType("catpow/pricecard", {
 									{[...Array(Math.max(items.length, loopCount)).keys()].map((i) => {
 										const index = i % items.length;
 										const item = items[index];
-										if (!item.controlClasses) {
-											item.controlClasses = "control";
-										}
 										const itemStates = CP.classNamesToFlags(item.classes);
 										return (
 											<CP.Item tag="li" className={item.classes} set={setAttributes} attr={attributes} items={items} index={index} isSelected={isSelected} key={index}>
@@ -315,7 +312,6 @@ wp.blocks.registerBlockType("catpow/pricecard", {
 				<CP.Bem prefix="wp-block-catpow">
 					<ul {...useBlockProps.save({ className: classes })}>
 						{items.map((item, index) => {
-							console.log(item);
 							const itemStates = CP.classNamesToFlags(item.classes);
 							return (
 								<li className={item.classes} key={index}>
