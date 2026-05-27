@@ -62,28 +62,7 @@ wp.blocks.registerBlockType("catpow/pricecard", {
 				{ label: "サブタイトル", values: "hasSubTitle" },
 				{ label: "テキスト", values: "hasText" },
 				{ label: "スペック", values: "hasSpec" },
-				{
-					label: "テンプレート",
-					values: "isTemplate",
-					sub: [
-						{
-							input: "bool",
-							label: "ループ",
-							key: "doLoop",
-							sub: [
-								{ label: "content path", input: "text", key: "content_path" },
-								{ label: "query", input: "textarea", key: "query" },
-								{
-									label: "プレビューループ数",
-									input: "range",
-									key: "loopCount",
-									min: 1,
-									max: 16,
-								},
-							],
-						},
-					],
-				},
+				"isTemplate",
 			];
 			wp.hooks.applyFilters("catpow.blocks.pricecard.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
@@ -193,6 +172,7 @@ wp.blocks.registerBlockType("catpow/pricecard", {
 																	save();
 																}}
 																value={item.title}
+																placeholder="Title"
 															/>
 														)}
 														{states.hasTitle && states.hasTitleCaption && (
@@ -204,6 +184,7 @@ wp.blocks.registerBlockType("catpow/pricecard", {
 																	save();
 																}}
 																value={item.titleCaption}
+																placeholder="Caption"
 															/>
 														)}
 														<div className="_price">
@@ -218,6 +199,7 @@ wp.blocks.registerBlockType("catpow/pricecard", {
 																			save();
 																		}}
 																		value={item.listPrice}
+																		placeholder="0,000"
 																	/>
 																	{states.hasUnitAfter && <span className="_unit">{priceUnit}</span>}
 																</span>
@@ -232,6 +214,7 @@ wp.blocks.registerBlockType("catpow/pricecard", {
 																		save();
 																	}}
 																	value={item.salePrice}
+																	placeholder="0,000"
 																/>
 																{states.hasUnitAfter && <span className="_unit">{priceUnit}</span>}
 															</span>
@@ -242,6 +225,7 @@ wp.blocks.registerBlockType("catpow/pricecard", {
 																	setAttributes({ priceCaption });
 																}}
 																value={priceCaption}
+																placeholder="Caption"
 															/>
 														</div>
 													</div>
@@ -269,6 +253,7 @@ wp.blocks.registerBlockType("catpow/pricecard", {
 																	save();
 																}}
 																value={item.text}
+																placeholder="Text"
 															/>
 														)}
 														{states.hasSpec && (
@@ -325,67 +310,73 @@ wp.blocks.registerBlockType("catpow/pricecard", {
 
 		const states = CP.classNamesToFlags(classes);
 
-		console.log(items);
 		return (
-			<CP.Bem prefix="wp-block-catpow">
-				<ul {...useBlockProps.save({ className: classes })}>
-					{items.map((item, index) => {
-						console.log(item);
-						const itemStates = CP.classNamesToFlags(item.classes);
-						return (
-							<li className={item.classes} key={index}>
-								{states.hasImage && (
-									<div className="_image">
-										<CP.ResponsiveImage attr={attributes} keys={imageKeys.image} index={index} size="vga" isTemplate={states.isTemplate} />
-									</div>
-								)}
-								<header className={headerClasses}>
-									<div className="_text">
-										{states.hasTitle && <RichText.Content tagName={HeadingTag} className="_title" value={item.title} />}
-										{states.hasTitle && states.hasTitleCaption && <RichText.Content tagName="p" className="_caption" value={item.titleCaption} />}
-										<div className="_price">
-											{itemStates.isDiscount && (
-												<span className="_listprice">
+			<>
+				<CP.Bem prefix="wp-block-catpow">
+					<ul {...useBlockProps.save({ className: classes })}>
+						{items.map((item, index) => {
+							console.log(item);
+							const itemStates = CP.classNamesToFlags(item.classes);
+							return (
+								<li className={item.classes} key={index}>
+									{states.hasImage && (
+										<div className="_image">
+											<CP.ResponsiveImage attr={attributes} keys={imageKeys.image} index={index} size="vga" isTemplate={states.isTemplate} />
+										</div>
+									)}
+									<header className={headerClasses}>
+										<div className="_text">
+											{states.hasTitle && <RichText.Content tagName={HeadingTag} className="_title" value={item.title} />}
+											{states.hasTitle && states.hasTitleCaption && <RichText.Content tagName="p" className="_caption" value={item.titleCaption} />}
+											<div className="_price">
+												{itemStates.isDiscount && (
+													<span className="_listprice">
+														{states.hasUnitBefore && <span className="_unit">{priceUnit}</span>}
+														<span className="_number">{item.listPrice}</span>
+														{states.hasUnitAfter && <span className="_unit">{priceUnit}</span>}
+													</span>
+												)}
+												<span className="_saleprice">
 													{states.hasUnitBefore && <span className="_unit">{priceUnit}</span>}
-													<span className="_number">{item.listPrice}</span>
+													<span className="_number">{item.salePrice}</span>
 													{states.hasUnitAfter && <span className="_unit">{priceUnit}</span>}
 												</span>
-											)}
-											<span className="_saleprice">
-												{states.hasUnitBefore && <span className="_unit">{priceUnit}</span>}
-												<span className="_number">{item.salePrice}</span>
-												{states.hasUnitAfter && <span className="_unit">{priceUnit}</span>}
-											</span>
-											<RichText.Content tagName="span" className="_caption" value={priceCaption} />
+												<RichText.Content tagName="span" className="_caption" value={priceCaption} />
+											</div>
 										</div>
-									</div>
-								</header>
-								{(states.hasSubTitle || states.hasText || states.hasSpec || states.hasLink) && (
-									<div className={contentsClasses}>
-										{states.hasSubTitle && <RichText.Content tagName={SubHeadingTag} className="_subtitle" value={item.subTitle} />}
-										{states.hasText && <RichText.Content tagName="p" className="_text" value={item.text} />}
-										{states.hasSpec && (
-											<dl className="_spec">
-												{item.specLabels.map((label, specIndex) => (
-													<Fragment key={specIndex}>
-														<RichText.Content tagName="dt" className="_label" value={items[index].specLabels[specIndex].text} />
-														<RichText.Content tagName="dd" className="_value" value={items[index].specValues[specIndex].text} />
-													</Fragment>
-												))}
-											</dl>
-										)}
-										{states.hasLink && (
-											<CP.Link className="_link" attr={attributes} keys={{ href: "linkUrl", items: "items" }} index={index}>
-												{linkText}
-											</CP.Link>
-										)}
-									</div>
-								)}
-							</li>
-						);
-					})}
-				</ul>
-			</CP.Bem>
+									</header>
+									{(states.hasSubTitle || states.hasText || states.hasSpec || states.hasLink) && (
+										<div className={contentsClasses}>
+											{states.hasSubTitle && <RichText.Content tagName={SubHeadingTag} className="_subtitle" value={item.subTitle} />}
+											{states.hasText && <RichText.Content tagName="p" className="_text" value={item.text} />}
+											{states.hasSpec && (
+												<dl className="_spec">
+													{item.specLabels.map((label, specIndex) => (
+														<Fragment key={specIndex}>
+															<RichText.Content tagName="dt" className="_label" value={items[index].specLabels[specIndex].text} />
+															<RichText.Content tagName="dd" className="_value" value={items[index].specValues[specIndex].text} />
+														</Fragment>
+													))}
+												</dl>
+											)}
+											{states.hasLink && (
+												<CP.Link className="_link" attr={attributes} keys={{ href: "linkUrl", items: "items" }} index={index}>
+													{linkText}
+												</CP.Link>
+											)}
+										</div>
+									)}
+								</li>
+							);
+						})}
+					</ul>
+				</CP.Bem>
+				{doLoop && (
+					<on-empty>
+						<InnerBlocks.Content />
+					</on-empty>
+				)}
+			</>
 		);
 	},
 });

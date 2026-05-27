@@ -1,9 +1,9 @@
 <?php
 $block_class="wp-block-catpow-pricecard";
 $attributes=[
-	"classes"=>["source"=>"attribute","selector"=>"ul","attribute"=>"class","default"=>"{$block_class} has-image has-title has-spec has-unit-before"],
+	"classes"=>["source"=>"attribute","selector"=>"ul","attribute"=>"class","default"=>"{$block_class} is-level3 has-content-width has-item-size-medium has-image has-title has-spec has-unit-before"],
 	"headerClasses"=>["source"=>"attribute","selector"=>".{$block_class}__item-header","attribute"=>"class","default"=>"{$block_class}__item-header"],
-	"contentsClasses"=>["source"=>"attribute","selector"=>".{$block_class}__item-contents","attribute"=>"class","default"=>"{$block_class}__item-contents"],
+	"contentsClasses"=>["source"=>"attribute","selector"=>".{$block_class}__item-contents","attribute"=>"class","default"=>"{$block_class}__item-contents is-level4"],
 	"HeadingTag"=>["type"=>"string","default"=>"h3"],
 	"SubHeadingTag"=>["type"=>"string","default"=>"h4"],
 	"priceUnit"=>["source"=>"text","selector"=>".{$block_class}__item-header-text-price-saleprice-unit","default"=>"¥"],
@@ -34,7 +34,7 @@ $attributes=[
 				"title"=>["Title"],
 				"titleCaption"=>["Caption"],
 				"listPrice"=>"0,000",
-				"saleprice"=>"0,000",
+				"salePrice"=>"0,000",
 				"src"=>cp::get_file_url("/images/dummy.jpg"),
 				"alt"=>"dummy",
 				"subTitle"=>["SubTitle"],
@@ -43,7 +43,7 @@ $attributes=[
 				"specValues"=>array_map(function(){return ["text"=>["value"]];},range(0,3)),
 				"linkUrl"=>home_url()
 			];
-		},range(0,3))
+		},range(0,2))
 	],
 	"loopParam"=>["type"=>"text","default"=>""],
 	"loopCount"=>["type"=>"number","default"=>1],
