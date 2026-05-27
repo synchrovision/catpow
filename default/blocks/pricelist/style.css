@@ -1,0 +1,92 @@
+.wp-block-catpow-pricelist__item.is-heading {
+  margin: var(--cp-margin-t-h, 0);
+}
+.wp-block-catpow-pricelist__item.is-heading {
+  font-family: var(--cp-font-family-t-h, inherit);
+  font-size: var(--cp-font-size-t-h, 2em);
+  font-weight: var(--cp-font-weight-t-h, regular);
+  line-height: var(--cp-line-height-t-h, 1.5);
+  letter-spacing: var(--cp-letter-spacing-t-h, normal);
+}
+.wp-block-catpow-pricelist__item {
+  margin: var(--cp-margin-t-p, 0);
+}
+.wp-block-catpow-pricelist__item {
+  font-family: var(--cp-font-family-t-p, inherit);
+  font-size: var(--cp-font-size-t-p, 2em);
+  font-weight: var(--cp-font-weight-t-p, regular);
+  line-height: var(--cp-line-height-t-p, 1.5);
+  letter-spacing: var(--cp-letter-spacing-t-p, normal);
+}
+.wp-block-catpow-pricelist__item-caption {
+  font-family: var(--cp-font-family-t-c, inherit);
+  font-size: var(--cp-font-size-t-c, 2em);
+  font-weight: var(--cp-font-weight-t-c, regular);
+  line-height: var(--cp-line-height-t-c, 1.5);
+  letter-spacing: var(--cp-letter-spacing-t-c, normal);
+}
+.wp-block-catpow-pricelist {
+  padding: 10px;
+  box-sizing: border-box;
+}
+.wp-block-catpow-pricelist__item {
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: multiple;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-align-items: center;
+  align-items: center;
+  gap: 0.25em 1em;
+  list-style: none;
+}
+.wp-block-catpow-pricelist__item-image {
+  -webkit-box-flex: 0;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 3em;
+}
+.wp-block-catpow-pricelist__item-image img {
+  width: 100%;
+  height: auto;
+}
+.wp-block-catpow-pricelist__item-title {
+  -webkit-box-flex: 0;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: fit-content;
+}
+.wp-block-catpow-pricelist__item-line {
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: auto;
+  height: 0px;
+  border-top-style: dotted;
+  border-top-width: 0.1em;
+  border-top-color: oklch(var(--cp-tones-tx-l) var(--cp-tones-tx-c) var(--cp-tones-tx-h) / var(--cp-tones-tx-a,1));
+}
+.wp-block-catpow-pricelist__item-price {
+  -webkit-box-flex: 0;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: fit-content;
+}
+.wp-block-catpow-pricelist__item-caption {
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 100%;
+}
+.wp-block-catpow-pricelist__item.has-indent1 {
+  padding-left: 16px;
+}
+.wp-block-catpow-pricelist__item.has-indent2 {
+  padding-left: 32px;
+}
+.wp-block-catpow-pricelist__item.has-indent3 {
+  padding-left: 48px;
+}
+/*# sourceMappingURL=./style.css.map */

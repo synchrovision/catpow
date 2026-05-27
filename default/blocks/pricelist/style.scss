@@ -1,0 +1,48 @@
+@import "config/style_config.scss";
+@import "text-placeholders.scss";
+@import 'component-placeholders.scss';
+
+.wp-block-catpow-pricelist{
+	@include bnd((pd:10,bs:b));
+	&__item{
+		$item:&;
+		@extend %paragraph-block;
+		@extend %paragraph;
+		@include bnd((p:r));
+		@include flx((w:w,ai:c,g:.25em 1em));
+		@include txt((l:n));
+		&-image{
+			@include bnd((f:0 0 3em));
+			img{
+				@include bnd((w:f,h:a));
+			}
+		}
+		&-title{
+			@include bnd((f:0 0 fit));
+		}
+		&-line{
+			@include bnd((f:1 1 a,h:0));
+			@include bdr((p:t,s:d,w:.1em,c:tx));
+		}
+		&-price{
+			@include bnd((f:0 0 fit));
+		}
+		&-caption{
+			@extend %caption;
+			@include bnd((f:1 1 f));
+		}
+		&.is-heading{
+			@extend %heading-block;
+			@extend %heading;
+		}
+		&.has-indent1{
+			@include bnd((pdl:16));
+		}
+		&.has-indent2{
+			@include bnd((pdl:32));
+		}
+		&.has-indent3{
+			@include bnd((pdl:48));
+		}
+	}
+}

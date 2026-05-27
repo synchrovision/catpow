@@ -6,62 +6,23 @@
 	example: CP.example,
 	edit({ attributes, className, setAttributes, isSelected }) {
 		const { useState, useMemo } = wp.element;
-		const { InnerBlocks, InspectorControls, RichText } = wp.blockEditor;
+		const { InnerBlocks, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
 		const { Icon, PanelBody, TextareaControl } = wp.components;
-		const { items = [], classes, loopParam, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
+		const { items = [], classes, HeadingTag, vars, loopParam, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
 		const primaryClass = "wp-block-catpow-pricelist";
 
 		var states = CP.classNamesToFlags(classes);
 
 		const selectiveClasses = useMemo(() => {
-			const selectiveClasses = [
-				{
-					name: "template",
-					label: "テンプレート",
-					values: "isTemplate",
-					sub: [
-						{
-							name: "loop",
-							input: "bool",
-							label: "ループ",
-							key: "doLoop",
-							sub: [
-								{
-									name: "contentPath",
-									label: "content path",
-									input: "text",
-									key: "content_path",
-								},
-								{
-									name: "query",
-									label: "query",
-									input: "textarea",
-									key: "query",
-								},
-								{
-									name: "loopCount",
-									label: "プレビューループ数",
-									input: "range",
-									key: "loopCount",
-									min: 1,
-									max: 16,
-								},
-							],
-						},
-					],
-				},
-			];
+			const selectiveClasses = ["hasContentWidth", "hasMargin", "isTemplate"];
 			wp.hooks.applyFilters("catpow.blocks.pricelist.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
 		}, []);
 		const selectiveItemClasses = useMemo(() => {
 			const selectiveItemClasses = [
 				{ name: "heading", label: "見出し", values: "isHeading" },
-				{
-					name: "level1",
-					label: "レベル",
-					values: { level1: "1", level2: "2", level3: "3" },
-				},
+				"level",
+				{ name: "indent", label: "インデント", type: "buttons", values: { hasIndent1: "1", hasIndent2: "2", hasIndent3: "3" } },
 				{ name: "image", label: "画像", values: "hasImage" },
 				{ name: "caption", label: "キャプション", values: "hasCaption" },
 			];
@@ -69,7 +30,6 @@
 			return selectiveItemClasses;
 		}, []);
 
-		let rtn = [];
 		const imageKeys = {
 			image: {
 				src: "imageSrc",
@@ -81,66 +41,7 @@
 		const save = () => {
 			setAttributes({ items: JSON.parse(JSON.stringify(items)) });
 		};
-
-		items.map((item, index) => {
-			if (!item.controlClasses) {
-				item.controlClasses = "control";
-			}
-			const itemStates = CP.classNamesToFlags(item.classes);
-			rtn.push(
-				<CP.Item tag="li" set={setAttributes} attr={attributes} items={items} index={index} isSelected={isSelected} key={index}>
-					{itemStates.hasImage && (
-						<div className="image">
-							<CP.SelectResponsiveImage attr={attributes} set={setAttributes} keys={imageKeys.image} index={index} size="vga" />
-						</div>
-					)}
-					<div className="title">
-						<RichText
-							onChange={(title) => {
-								item.title = title;
-								save();
-							}}
-							value={item.title}
-						/>
-					</div>
-					{!itemStates.isHeading && (
-						<>
-							<div className="line"></div>
-							<div className="price">
-								<RichText
-									onChange={(price) => {
-										item.price = price;
-										save();
-									}}
-									value={item.price}
-								/>
-							</div>
-						</>
-					)}
-					{itemStates.hasCaption && (
-						<div className="caption">
-							<RichText
-								onChange={(caption) => {
-									item.caption = caption;
-									save();
-								}}
-								value={item.caption}
-							/>
-						</div>
-					)}
-				</CP.Item>
-			);
-		});
-
-		if (attributes.EditMode === undefined) {
-			attributes.EditMode = false;
-		}
-		if (rtn.length < loopCount) {
-			let len = rtn.length;
-			while (rtn.length < loopCount) {
-				rtn.push(rtn[rtn.length % len]);
-			}
-		}
+		const blockProps = useBlockProps({ className: EditMode || (AltMode && doLoop) ? "cp-altcontent" : classes, style: vars });
 
 		return (
 			<>
@@ -155,10 +56,8 @@
 				</InspectorControls>
 				<>
 					{EditMode ? (
-						<div className="cp-altcontent">
-							<div className="label">
-								<Icon icon="edit" />
-							</div>
+						<div {...blockProps}>
+							<CP.Label icon="edit" />
 							<CP.EditItemsTable
 								set={setAttributes}
 								attr={attributes}
@@ -184,14 +83,66 @@
 					) : (
 						<>
 							{AltMode && doLoop ? (
-								<div className="cp-altcontent">
-									<div className="label">
-										<Icon icon="welcome-comments" />
-									</div>
+								<div {...blockProps}>
+									<CP.Label icon="welcome-comments" />
 									<InnerBlocks />
 								</div>
 							) : (
-								<ul className={classes}>{rtn}</ul>
+								<CP.Bem prefix="wp-block-catpow">
+									<ul {...blockProps}>
+										{[...Array(Math.max(items.length, loopCount)).keys()].map((i) => {
+											const index = i % items.length;
+											const item = items[index];
+											const itemStates = CP.classNamesToFlags(item.classes);
+											return (
+												<CP.Item tag="li" className={item.classes} set={setAttributes} attr={attributes} items={items} index={index} isSelected={isSelected} key={index}>
+													{itemStates.hasImage && (
+														<div className="_image">
+															<CP.SelectResponsiveImage attr={attributes} set={setAttributes} keys={imageKeys.image} index={index} size="vga" />
+														</div>
+													)}
+													<RichText
+														tagName="div"
+														className="_title"
+														onChange={(title) => {
+															item.title = title;
+															save();
+														}}
+														value={item.title}
+														placeholder="Title"
+													/>
+													{!itemStates.isHeading && (
+														<>
+															<div className="_line"></div>
+															<RichText
+																tagName="div"
+																className="_price"
+																onChange={(price) => {
+																	item.price = price;
+																	save();
+																}}
+																value={item.price}
+																placeholder="¥0,000"
+															/>
+														</>
+													)}
+													{itemStates.hasCaption && (
+														<RichText
+															tagName="div"
+															className="_caption"
+															onChange={(caption) => {
+																item.caption = caption;
+																save();
+															}}
+															value={item.caption}
+															placeholder="Caption"
+														/>
+													)}
+												</CP.Item>
+											);
+										})}
+									</ul>
+								</CP.Bem>
 							)}
 						</>
 					)}
@@ -210,38 +161,32 @@
 			image: { src: "imageSrc", alt: "imageAlt", items: "items" },
 		};
 
-		let rtn = [];
-		items.map((item, index) => {
-			const itemStates = CP.classNamesToFlags(item.classes);
-			rtn.push(
-				<li className={item.classes} key={index}>
-					{itemStates.hasImage && (
-						<div className="image">
-							<CP.ResponsiveImage attr={attributes} keys={imageKeys.image} />
-						</div>
-					)}
-					<div className="title">
-						<RichText.Content value={item.title} />
-					</div>
-					{!itemStates.isHeading && (
-						<>
-							<div className="line"></div>
-							<div className="price">
-								<RichText.Content value={item.price} />
-							</div>
-						</>
-					)}
-					{itemStates.hasCaption && (
-						<div className="caption">
-							<RichText.Content value={item.caption} />
-						</div>
-					)}
-				</li>
-			);
-		});
 		return (
 			<>
-				<ul className={classes}>{rtn}</ul>
+				<CP.Bem prefix="wp-block-catpow">
+					<ul className={classes}>
+						{items.map((item, index) => {
+							const itemStates = CP.classNamesToFlags(item.classes);
+							return (
+								<li className={item.classes} key={index}>
+									{itemStates.hasImage && (
+										<div className="_image">
+											<CP.ResponsiveImage attr={attributes} keys={imageKeys.image} />
+										</div>
+									)}
+									<RichText.Content tagName="div" className="_title" value={item.title} />
+									{!itemStates.isHeading && (
+										<>
+											<div className="_line"></div>
+											<RichText.Content tagName="div" className="_price" value={item.price} />
+										</>
+									)}
+									{itemStates.hasCaption && <RichText.Content tagName="div" className="_caption" value={item.caption} />}
+								</li>
+							);
+						})}
+					</ul>
+				</CP.Bem>
 				{doLoop && (
 					<on-empty>
 						<InnerBlocks.Content />
@@ -250,62 +195,4 @@
 			</>
 		);
 	},
-	deprecated: [
-		{
-			save({ attributes, className }) {
-				const { items = [], classes = "", loopParam, loopCount } = attributes;
-				var classArray = _.uniq(classes.split(" "));
-
-				var states = CP.classNamesToFlags(classes);
-
-				const imageKeys = {
-					image: { src: "imageSrc", alt: "imageAlt", items: "items" },
-				};
-
-				let rtn = [];
-				items.map((item, index) => {
-					const itemStates = CP.classNamesToFlags(item.classes);
-					rtn.push(
-						<li className={item.classes}>
-							{itemStates.hasImage && (
-								<div className="image">
-									<CP.ResponsiveImage attr={attributes} keys={imageKeys.image} />
-								</div>
-							)}
-							<div className="title">
-								<RichText.Content value={item.title} />
-							</div>
-							{!itemStates.isHeading && (
-								<>
-									<div className="line"></div>
-									<div className="price">
-										<RichText.Content value={item.price} />
-									</div>
-								</>
-							)}
-							{itemStates.hasCaption && (
-								<div className="caption">
-									<RichText.Content value={item.caption} />
-								</div>
-							)}
-						</li>
-					);
-				});
-				return (
-					<ul className={classes}>
-						{states.doLoop && "[loop_template " + (loopParam || "") + "]"}
-						{rtn}
-						{states.doLoop && "[/loop_template]"}
-					</ul>
-				);
-			},
-			migrate(attributes) {
-				var states = CP.classNamesToFlags(classes);
-				attributes.content_path = attributes.loopParam.split(" ")[0];
-				attributes.query = attributes.loopParam.split(" ").slice(1).join("\n");
-				attributes.doLoop = states.doLoop;
-				return attributes;
-			},
-		},
-	],
 });
