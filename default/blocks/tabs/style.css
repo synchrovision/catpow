@@ -1,9 +1,9 @@
 .wp-block-catpow-tabs__tab-item-title {
-  font-family: var(--cp-font-family-t-h, inherit);
-  font-size: var(--cp-font-size-t-h, 2em);
-  font-weight: var(--cp-font-weight-t-h, regular);
-  line-height: var(--cp-line-height-t-h, 1.5);
-  letter-spacing: var(--cp-letter-spacing-t-h, normal);
+  font-family: var(--cp-font-family-t-u, inherit);
+  font-size: var(--cp-font-size-t-u, 2em);
+  font-weight: var(--cp-font-weight-t-u, regular);
+  line-height: var(--cp-line-height-t-u, 1.5);
+  letter-spacing: var(--cp-letter-spacing-t-u, normal);
 }
 .wp-block-catpow-tabs.is-type-label .wp-block-catpow-tabs__tab-item {
   padding: var(--cp-padding-c-l);

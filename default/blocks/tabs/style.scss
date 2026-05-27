@@ -14,7 +14,7 @@
 		&-item{
 			@include bnd((p:r,z:1,f:1 1 50));
 			&-title{
-				@extend %heading;
+				@extend %ui;
 				@include bnd((mg:0));
 			}
 			&:last-child{
