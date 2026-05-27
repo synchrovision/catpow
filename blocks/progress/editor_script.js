@@ -8,19 +8,21 @@
     example: CP.example,
     edit({ attributes, className, setAttributes, isSelected }) {
       const { Fragment, useMemo, useCallback, useEffect } = wp.element;
-      const { InspectorControls, RichText } = wp.blockEditor;
+      const { InspectorControls, RichText, useBlockProps } = wp.blockEditor;
       const { Flex, FlexItem, FlexBlock, PanelBody, Button, Spinner, SelectControl, CheckboxControl, TextControl } = wp.components;
       const { post, settings, selections, activeLabel, progress, isWaiting = false } = attributes;
       const selectiveClasses = useMemo(
         () => [
-          { input: "select", key: "post", values: selections },
-          { input: "range", key: "step", min: 0, max: settings ? settings.items.length - 1 : 0 }
+          { input: "select", label: "\u30BB\u30C3\u30C8", key: "post", values: selections },
+          { input: "range", label: "\u30B9\u30C6\u30C3\u30D7", key: "step", min: 0, max: settings ? settings.items.length - 1 : 0 }
         ],
         [selections, settings]
       );
       const settingsSelectiveClasses = useMemo(
         () => [
-          { type: "buttons", label: "\u30B5\u30A4\u30BA", values: ["small", "medium", "large"] },
+          "level",
+          "hasContentWidth",
+          "hasMargin",
           {
             label: "\u756A\u53F7",
             values: "hasCounter",
@@ -32,7 +34,6 @@
         ],
         []
       );
-      const sizeSettings = useMemo(() => CP.parseSelections(["small", "medium", "large"]), []);
       const setSettings = useCallback(
         (args) => {
           const { currentItemIndex, ...otherArgs } = args;
@@ -64,29 +65,9 @@
       }, [post]);
       const Items = useCallback(
         (props) => {
-          const { countPrefix, countSuffix } = settings;
+          const { countPrefix: countPrefix2, countSuffix: countSuffix2 } = settings;
           const states2 = CP.classNamesToFlags(settings.classes);
-          return settings.items.map((item, index) => /* @__PURE__ */ wp.element.createElement(
-            "li",
-            {
-              className: "item " + (index == attributes.step ? "active" : ""),
-              onClick: (e) => {
-                setAttributes({ step: index });
-              },
-              key: index
-            },
-            states2.hasCounter && /* @__PURE__ */ wp.element.createElement("div", { className: "counter" }, countPrefix && /* @__PURE__ */ wp.element.createElement("span", { className: "prefix" }, countPrefix), /* @__PURE__ */ wp.element.createElement("span", { className: "number" }, index + 1), countSuffix && /* @__PURE__ */ wp.element.createElement("span", { className: "suffix" }, countSuffix)),
-            /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(
-              RichText,
-              {
-                onChange: (label) => {
-                  item.label = label;
-                  setSettings(settings);
-                },
-                value: item.label
-              }
-            ))
-          ));
+          return;
         },
         [setAttributes, attributes, setSettings, settings, isSelected]
       );
@@ -108,7 +89,31 @@
         setAttributes({ settings: false });
       }, [post]);
       const states = settings && settings.classes ? CP.classNamesToFlags(settings.classes) : {};
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", initialOpen: true, icon: "admin-generic", set: setAttributes, attr: attributes, selectiveClasses }), settings ? /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u8A2D\u5B9A", initialOpen: false, icon: "admin-generic", set: setSettings, attr: settings, selectiveClasses: settingsSelectiveClasses }, /* @__PURE__ */ wp.element.createElement(CP.EditItemsTable, { set: setSettings, attr: settings, columns: [{ type: "text", key: "label" }] }), !isWaiting ? /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(Flex, { justify: "center" }, /* @__PURE__ */ wp.element.createElement(FlexItem, null, /* @__PURE__ */ wp.element.createElement(Button, { isPrimary: true, onClick: updateSettings }, "\u8A2D\u5B9A\u3092\u66F4\u65B0"))), /* @__PURE__ */ wp.element.createElement(Flex, { justify: "center" }, /* @__PURE__ */ wp.element.createElement(FlexItem, null, /* @__PURE__ */ wp.element.createElement(Button, { isLink: true, onClick: registerSettings }, "\u767B\u9332"), "\uFF5C", /* @__PURE__ */ wp.element.createElement(Button, { isLink: true, isDestructive: true, onClick: deleteSettings }, "\u524A\u9664")))) : /* @__PURE__ */ wp.element.createElement(CenterSpinner, null)) : /* @__PURE__ */ wp.element.createElement(CenterSpinner, null), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, settings ? /* @__PURE__ */ wp.element.createElement("div", { className: "wp-block-catpow-progress " + settings.classes }, /* @__PURE__ */ wp.element.createElement("ul", { className: "items" }, /* @__PURE__ */ wp.element.createElement(Items, null))) : /* @__PURE__ */ wp.element.createElement(CenterSpinner, null)));
+      const { countPrefix, countSuffix } = settings ?? {};
+      const blockProps = useBlockProps({ className: "wp-block-catpow-progress " + settings?.classes });
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", initialOpen: true, icon: "admin-generic", set: setAttributes, attr: attributes, selectiveClasses }), settings ? /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30BB\u30C3\u30C8\u8A2D\u5B9A", initialOpen: false, icon: "admin-generic", set: setSettings, attr: settings, selectiveClasses: settingsSelectiveClasses }, /* @__PURE__ */ wp.element.createElement(CP.EditItemsTable, { set: setSettings, attr: settings, columns: [{ type: "text", key: "label" }] }), !isWaiting ? post === "default" ? /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(Flex, { justify: "center" }, /* @__PURE__ */ wp.element.createElement(FlexItem, null, /* @__PURE__ */ wp.element.createElement(Button, { isPrimary: true, onClick: registerSettings }, "\u65B0\u898F\u767B\u9332")))) : /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(Flex, { justify: "center" }, /* @__PURE__ */ wp.element.createElement(FlexItem, null, /* @__PURE__ */ wp.element.createElement(Button, { isPrimary: true, onClick: updateSettings }, "\u8A2D\u5B9A\u3092\u66F4\u65B0"))), /* @__PURE__ */ wp.element.createElement(Flex, { justify: "center" }, /* @__PURE__ */ wp.element.createElement(FlexItem, null, /* @__PURE__ */ wp.element.createElement(Button, { isLink: true, onClick: registerSettings }, "\u65B0\u898F\u767B\u9332"), "\uFF5C", /* @__PURE__ */ wp.element.createElement(Button, { isLink: true, isDestructive: true, onClick: deleteSettings }, "\u524A\u9664")))) : /* @__PURE__ */ wp.element.createElement(CenterSpinner, null)) : /* @__PURE__ */ wp.element.createElement(CenterSpinner, null), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, settings ? /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement("ul", { className: "_items" }, settings.items.map((item, index) => /* @__PURE__ */ wp.element.createElement(
+        "li",
+        {
+          className: "_item " + (index == attributes.step ? "is-active" : ""),
+          onClick: (e) => {
+            setAttributes({ step: index });
+          },
+          key: index
+        },
+        states.hasCounter && /* @__PURE__ */ wp.element.createElement("div", { className: "_counter" }, countPrefix && /* @__PURE__ */ wp.element.createElement("span", { className: "_prefix" }, countPrefix), /* @__PURE__ */ wp.element.createElement("span", { className: "_number" }, index + 1), countSuffix && /* @__PURE__ */ wp.element.createElement("span", { className: "_suffix" }, countSuffix)),
+        /* @__PURE__ */ wp.element.createElement(
+          RichText,
+          {
+            tagName: "div",
+            className: "_label",
+            onChange: (label) => {
+              item.label = label;
+              setSettings(settings);
+            },
+            value: item.label
+          }
+        )
+      ))))) : /* @__PURE__ */ wp.element.createElement(CenterSpinner, null)));
     },
     save({ attributes, className }) {
       return false;

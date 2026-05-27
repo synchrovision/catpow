@@ -6,20 +6,22 @@
 	example: CP.example,
 	edit({ attributes, className, setAttributes, isSelected }) {
 		const { Fragment, useMemo, useCallback, useEffect } = wp.element;
-		const { InspectorControls, RichText } = wp.blockEditor;
+		const { InspectorControls, RichText, useBlockProps } = wp.blockEditor;
 		const { Flex, FlexItem, FlexBlock, PanelBody, Button, Spinner, SelectControl, CheckboxControl, TextControl } = wp.components;
 		const { post, settings, selections, activeLabel, progress, isWaiting = false } = attributes;
 
 		const selectiveClasses = useMemo(
 			() => [
-				{ input: "select", key: "post", values: selections },
-				{ input: "range", key: "step", min: 0, max: settings ? settings.items.length - 1 : 0 },
+				{ input: "select", label: "セット", key: "post", values: selections },
+				{ input: "range", label: "ステップ", key: "step", min: 0, max: settings ? settings.items.length - 1 : 0 },
 			],
-			[selections, settings]
+			[selections, settings],
 		);
 		const settingsSelectiveClasses = useMemo(
 			() => [
-				{ type: "buttons", label: "サイズ", values: ["small", "medium", "large"] },
+				"level",
+				"hasContentWidth",
+				"hasMargin",
 				{
 					label: "番号",
 					values: "hasCounter",
@@ -29,9 +31,8 @@
 					],
 				},
 			],
-			[]
+			[],
 		);
-		const sizeSettings = useMemo(() => CP.parseSelections(["small", "medium", "large"]), []);
 
 		const setSettings = useCallback(
 			(args) => {
@@ -41,7 +42,7 @@
 				}
 				setAttributes({ settings: { ...settings, ...otherArgs } });
 			},
-			[setAttributes, attributes]
+			[setAttributes, attributes],
 		);
 		const registerSettings = useCallback(() => {
 			const post_id = wp.data.select("core/editor").getCurrentPostId();
@@ -67,34 +68,9 @@
 			(props) => {
 				const { countPrefix, countSuffix } = settings;
 				const states = CP.classNamesToFlags(settings.classes);
-				return settings.items.map((item, index) => (
-					<li
-						className={"item " + (index == attributes.step ? "active" : "")}
-						onClick={(e) => {
-							setAttributes({ step: index });
-						}}
-						key={index}
-					>
-						{states.hasCounter && (
-							<div className="counter">
-								{countPrefix && <span className="prefix">{countPrefix}</span>}
-								<span className="number">{index + 1}</span>
-								{countSuffix && <span className="suffix">{countSuffix}</span>}
-							</div>
-						)}
-						<div className="label">
-							<RichText
-								onChange={(label) => {
-									item.label = label;
-									setSettings(settings);
-								}}
-								value={item.label}
-							/>
-						</div>
-					</li>
-				));
+				return;
 			},
-			[setAttributes, attributes, setSettings, settings, isSelected]
+			[setAttributes, attributes, setSettings, settings, isSelected],
 		);
 
 		if (!settings) {
@@ -115,42 +91,57 @@
 					</FlexItem>
 				</Flex>
 			),
-			[]
+			[],
 		);
 		useEffect(() => {
 			setAttributes({ settings: false });
 		}, [post]);
 
 		const states = settings && settings.classes ? CP.classNamesToFlags(settings.classes) : {};
+		const { countPrefix, countSuffix } = settings ?? {};
+
+		const blockProps = useBlockProps({ className: "wp-block-catpow-progress " + settings?.classes });
 
 		return (
 			<>
 				<InspectorControls>
 					<CP.SelectClassPanel title="クラス" initialOpen={true} icon="admin-generic" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
 					{settings ? (
-						<CP.SelectClassPanel title="設定" initialOpen={false} icon="admin-generic" set={setSettings} attr={settings} selectiveClasses={settingsSelectiveClasses}>
+						<CP.SelectClassPanel title="セット設定" initialOpen={false} icon="admin-generic" set={setSettings} attr={settings} selectiveClasses={settingsSelectiveClasses}>
 							<CP.EditItemsTable set={setSettings} attr={settings} columns={[{ type: "text", key: "label" }]} />
 							{!isWaiting ? (
-								<>
-									<Flex justify="center">
-										<FlexItem>
-											<Button isPrimary onClick={updateSettings}>
-												設定を更新
-											</Button>
-										</FlexItem>
-									</Flex>
-									<Flex justify="center">
-										<FlexItem>
-											<Button isLink onClick={registerSettings}>
-												登録
-											</Button>
-											｜
-											<Button isLink isDestructive onClick={deleteSettings}>
-												削除
-											</Button>
-										</FlexItem>
-									</Flex>
-								</>
+								post === "default" ? (
+									<>
+										<Flex justify="center">
+											<FlexItem>
+												<Button isPrimary onClick={registerSettings}>
+													新規登録
+												</Button>
+											</FlexItem>
+										</Flex>
+									</>
+								) : (
+									<>
+										<Flex justify="center">
+											<FlexItem>
+												<Button isPrimary onClick={updateSettings}>
+													設定を更新
+												</Button>
+											</FlexItem>
+										</Flex>
+										<Flex justify="center">
+											<FlexItem>
+												<Button isLink onClick={registerSettings}>
+													新規登録
+												</Button>
+												｜
+												<Button isLink isDestructive onClick={deleteSettings}>
+													削除
+												</Button>
+											</FlexItem>
+										</Flex>
+									</>
+								)
 							) : (
 								<CenterSpinner />
 							)}
@@ -162,11 +153,38 @@
 				</InspectorControls>
 				<>
 					{settings ? (
-						<div className={"wp-block-catpow-progress " + settings.classes}>
-							<ul className="items">
-								<Items />
-							</ul>
-						</div>
+						<CP.Bem prefix="wp-block-catpow">
+							<div {...blockProps}>
+								<ul className="_items">
+									{settings.items.map((item, index) => (
+										<li
+											className={"_item " + (index == attributes.step ? "is-active" : "")}
+											onClick={(e) => {
+												setAttributes({ step: index });
+											}}
+											key={index}
+										>
+											{states.hasCounter && (
+												<div className="_counter">
+													{countPrefix && <span className="_prefix">{countPrefix}</span>}
+													<span className="_number">{index + 1}</span>
+													{countSuffix && <span className="_suffix">{countSuffix}</span>}
+												</div>
+											)}
+											<RichText
+												tagName="div"
+												className="_label"
+												onChange={(label) => {
+													item.label = label;
+													setSettings(settings);
+												}}
+												value={item.label}
+											/>
+										</li>
+									))}
+								</ul>
+							</div>
+						</CP.Bem>
 					) : (
 						<CenterSpinner />
 					)}

@@ -1,0 +1,66 @@
+@import "config/style_config.scss";
+@import "text-placeholders.scss";
+@import 'component-placeholders.scss';
+
+.wp-block-catpow-progress{
+	$block:&;
+	$item:#{$block}__items-item;
+	@extend %ui;
+	@include bnd((cnt:i));
+	@include txt((h:1em));
+	&__items{
+		@include flx((w:n));
+		@include bnd((mg:0,pd:0,o:h,h:2em));
+		@include bdr((r:.5em));
+		@include txt((l:n));
+		&-item{
+			@include bnd((p:r,pd:.5em,f:1 1 10em,o:h));
+			@include bg((c:mx));
+			@include flx((w:w,a:c,j:c));
+			&:not(:first-child){
+				@include bnd((pdl:1.5em));
+				&::before{
+					content:'';
+					@include bnd((d:b,p:a,t:0,b:0,l:-1em,w:2em,h:2em));
+					@include bg((c:mx));
+					@include bdr((p:t r,s:s,w:2,c:i));
+					@include trn((sx:.5,r:45deg));
+				}
+			}
+			&:last-child{
+				@include bnd((pdr:1em));
+			}
+			&-label{
+				@include bnd((p:r,z:1));
+				@include txt((a:c,p:1em,w:b,c:i,b:k));
+			}
+			&-counter{
+				@include bnd((p:r,z:1,mgr:10));
+				@include txt((a:c,p:.8em,w:b,c:i));
+			}
+			&.is-active{
+				&~#{$item}{
+					@include bg((c:tx 30));
+					&+#{$item}::before{
+						@include bg((c:tx 30));
+					}
+				}
+			}
+		}
+		@include cq(-640){
+			@include bnd((h:3em));
+			&-item{
+				&:not(:first-child){
+					&::before{
+						@include bnd((l:-1.8em,w:3em,h:3em));
+					}
+				}
+				&:not(.active){
+					@include bnd((f:1 1 10));
+					.counter{@include bnd((mgr:0));}
+					.counter .prefix,.counter .suffix,.label{@include bnd((d:n));}
+				}
+			}
+		}
+	}
+}

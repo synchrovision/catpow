@@ -1,15 +1,5 @@
 <?php
-$meta_name='_progress_block_settings';
-$default_settings=[
-	'classes'=>'hasCounter',
-	'countPrefix'=>'Step.',
-	'countSuffix'=>'',
-	'items'=>[
-		['label'=>'入力','classes'=>''],
-		['label'=>'確認','classes'=>''],
-		['label'=>'送信','classes'=>''],
-	]
-];
+include __DIR__.'/default-settings.php';
 if($req['param']==='register'){
 	update_post_meta($req['post_id'],$meta_name,$req['settings']);
 	$res->set_data([
@@ -31,14 +21,14 @@ if($req['param']==='delete'){
 }
 if($req['param']==='selections'){
 	$posts=get_posts([
-		'post_type'=>array_keys($GLOBALS['post_types']),
+		'post_type'=>array_keys(cp::$config['post_types']),
 		'meta_query'=>[
 			['key'=>$meta_name,'compare'=>'exists']
 		]
 	]);
 	$selections=['default'=>'──'];
 	foreach($posts as $post){
-		$post_type_label=$GLOBALS['post_types'][$post->post_type]['label']??'';
+		$post_type_label=cp::$config['post_types'][$post->post_type]['label']??'';
 		$selections[$post->post_type.'/'.get_page_uri($post)]=$post_type_label.'：'.$post->post_title;
 	}
 	$res->set_data($selections);
