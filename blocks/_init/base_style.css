@@ -533,26 +533,13 @@
   height: auto;
   object-position: center;
   object-fit: contain;
-  box-shadow: 0 2px 5px oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
   background-color: #ccc;
 }
 .editor-sidebar .cp-selectresponsiveimage.is-video, .editor-sidebar .cp-selectresponsiveimage.is-img, .editor-sidebar .cp-selectresponsiveimage.is-picture, .editor-sidebar .cp-selectresponsiveimage-img {
   width: 10rem;
   height: 5.625rem;
   margin-bottom: 1rem;
-}
-.cp-selectresponsiveimage__controls {
-  display: block;
-  position: absolute;
-  top: 0rem;
-  right: 0rem;
-  max-width: 10rem;
-  width: 60%;
-  height: auto;
-  padding: 0.25rem;
-  border-radius: 0.25rem;
-  background-color: oklch(var(--cp-tones-b-l) var(--cp-tones-b-c) var(--cp-tones-b-h) / var(--cp-tones-b-a,1));
-  box-shadow: 0 4px 9px oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
+  box-shadow: 0 2px 5px oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
 .cp-selectresponsiveimage-controls {
   display: block;

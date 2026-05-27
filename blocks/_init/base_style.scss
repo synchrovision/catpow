@@ -299,17 +299,11 @@ $colors:(
 	&-selectresponsiveimage{
 		&.is-video,&.is-img,&.is-picture,&-img{
 			@include bnd((d:b,w:f,h:a,op:c,of:i));
-			@include shd((b:2));
 			@include bg((c:#ccc));
 			.editor-sidebar &{
 				@include bnd((w:160,h:90,mgb:16));
+				@include shd((b:2));
 			}
-		}
-		&__controls{
-			@include bnd((d:b,p:a,t:0,r:0,w:60% 160,h:a,pd:4));
-			@include bdr((r:4));
-			@include bg((c:b));
-			@include shd((b:4));
 		}
 		&-controls{
 			$block:&;
