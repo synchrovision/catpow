@@ -1,0 +1,78 @@
+@import "config/style_config.scss";
+@import "text-placeholders.scss";
+@import 'component-placeholders.scss';
+
+
+.wp-block-catpow-postlink{
+	$block:&;
+	&__links{
+		@include flx((w:w,j:b,g:c-b));
+		@include txt((l:n));
+		&-prev,&-next{
+			a{
+				@extend %ui;
+				@include bnd((d:b,p:r,bs:b));
+				&::before{
+					content:'';
+					@include bnd((d:b,p:a,i:0,mg:a,w:.5em,h:a,a:.8));
+					@include bg((c:crr));
+				}
+			}
+		}
+		&-prev{
+			a::before{
+				@include bnd((mgl:1em));
+				@include clp((t:l f));
+			}
+		}
+		&-next{
+			a::before{
+				@include bnd((mgr:1em));
+				@include clp((t:r f));
+			}
+		}
+	}
+	&.is-type-text{
+		#{$block}{
+			&__links{
+				&-prev,&-next{
+					@include bnd((f:0 0 a));
+					a{
+						@include txt((c:tx));
+					}
+				}
+				&-prev{
+					a{
+						@include bnd((pdl:2em));
+						&::before{
+							@include bnd((mgl:0));
+						}
+					}
+				}
+				&-next{
+					a{
+						@include bnd((pdr:2em));
+						&::before{
+							@include bnd((mgr:0));
+						}
+					}
+				}
+			}
+		}
+	}
+	&.is-type-button{
+		#{$block}{
+			&__links{
+				&-prev,&-next{
+					@extend %button-component;
+					@include bnd((f:1 1 300));
+					@include bg((c:mx));
+					@include txt((a:c,c:ix));
+					a{
+						@include txt((c:ix));
+					}
+				}
+			}
+		}
+	}
+}
