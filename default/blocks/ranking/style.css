@@ -1,0 +1,160 @@
+@charset "UTF-8";
+.wp-block-catpow-ranking__item-header-text-title {
+  font-family: var(--cp-font-family-t-h, inherit);
+  font-size: var(--cp-font-size-t-h, 2em);
+  font-weight: var(--cp-font-weight-t-h, regular);
+  line-height: var(--cp-line-height-t-h, 1.5);
+  letter-spacing: var(--cp-letter-spacing-t-h, normal);
+}
+.wp-block-catpow-ranking__item-contents-lead {
+  margin: var(--cp-margin-t-l, 0);
+}
+.wp-block-catpow-ranking__item-header-rate-data, .wp-block-catpow-ranking__item-contents-lead {
+  font-family: var(--cp-font-family-t-l, inherit);
+  font-size: var(--cp-font-size-t-l, 2em);
+  font-weight: var(--cp-font-weight-t-l, regular);
+  line-height: var(--cp-line-height-t-l, 1.5);
+  letter-spacing: var(--cp-letter-spacing-t-l, normal);
+}
+.wp-block-catpow-ranking__item-contents-text {
+  margin: var(--cp-margin-t-p, 0);
+}
+.wp-block-catpow-ranking__item-contents-text {
+  font-family: var(--cp-font-family-t-p, inherit);
+  font-size: var(--cp-font-size-t-p, 2em);
+  font-weight: var(--cp-font-weight-t-p, regular);
+  line-height: var(--cp-line-height-t-p, 1.5);
+  letter-spacing: var(--cp-letter-spacing-t-p, normal);
+}
+.wp-block-catpow-ranking__item-contents-link {
+  margin: var(--cp-margin-t-u, 0);
+}
+.wp-block-catpow-ranking__item-header-rank, .wp-block-catpow-ranking__item-contents-link {
+  font-family: var(--cp-font-family-t-u, inherit);
+  font-size: var(--cp-font-size-t-u, 2em);
+  font-weight: var(--cp-font-weight-t-u, regular);
+  line-height: var(--cp-line-height-t-u, 1.5);
+  letter-spacing: var(--cp-letter-spacing-t-u, normal);
+}
+.wp-block-catpow-ranking__item-header-text-caption {
+  font-family: var(--cp-font-family-t-c, inherit);
+  font-size: var(--cp-font-size-t-c, 2em);
+  font-weight: var(--cp-font-weight-t-c, regular);
+  line-height: var(--cp-line-height-t-c, 1.5);
+  letter-spacing: var(--cp-letter-spacing-t-c, normal);
+}
+.wp-block-catpow-ranking.is-type-card .wp-block-catpow-ranking__item {
+  padding: var(--cp-padding-c-c);
+  border-width: var(--cp-border-width-c-c, 0);
+  border-radius: var(--cp-border-radius-c-c, 0);
+  box-shadow: var(--cp-shadow-c-c) oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
+}
+.wp-block-catpow-ranking__item-contents-link {
+  padding: var(--cp-padding-c-b);
+  border-width: var(--cp-border-width-c-b, 0);
+  border-radius: var(--cp-border-radius-c-b, 0);
+  box-shadow: var(--cp-shadow-c-b) oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
+}
+.wp-block-catpow-ranking__item-header-rank {
+  padding: var(--cp-padding-c-l);
+  border-width: var(--cp-border-width-c-l, 0);
+  border-radius: var(--cp-border-radius-c-l, 0);
+  box-shadow: var(--cp-shadow-c-l) oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
+}
+.wp-block-catpow-ranking {
+  padding: 0rem;
+  display: -webkit-grid;
+  display: -ms-grid;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(var(--cp-size-i), 100%), 1fr));
+  grid-gap: var(--cp-margin-c-c);
+  list-style: none;
+}
+.wp-block-catpow-ranking__item {
+  position: relative;
+}
+.wp-block-catpow-ranking__item-header-rank {
+  display: block;
+  position: absolute;
+  top: -0.5em;
+  left: -0.5em;
+  background-color: oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1));
+  text-align: center;
+  color: oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1));
+}
+.wp-block-catpow-ranking__item-header-rank-number {
+  display: inline-block;
+  margin: 0rem 0.1em;
+  font-size: 1.5em;
+  font-family: var(--cp-font-family-f-d);
+}
+.wp-block-catpow-ranking__item-header-rate {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: single;
+  -webkit-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  gap: 0.5em;
+  -webkit-align-items: center;
+  align-items: center;
+}
+.wp-block-catpow-ranking__item-header-rate-label::after {
+  content: ":";
+}
+.wp-block-catpow-ranking__item-header-rate-data-number {
+  font-family: var(--cp-font-family-f-d);
+}
+.wp-block-catpow-ranking__item-header-rate-data-stars {
+  position: relative;
+  width: fit-content;
+}
+.wp-block-catpow-ranking__item-header-rate-data-stars::before, .wp-block-catpow-ranking__item-header-rate-data-stars::after {
+  content: "★★★★★";
+  line-height: 1em;
+}
+.wp-block-catpow-ranking__item-header-rate-data-stars::before {
+  color: oklch(calc(1 - var(--cp-tones-t-t) * 100) var(--cp-tones-t-c) var(--cp-tones-t-h) / calc(var(--cp-tones-t-a,1) * 0.1));
+}
+.wp-block-catpow-ranking__item-header-rate-data-stars::after {
+  display: block;
+  position: absolute;
+  top: 0rem;
+  right: 0rem;
+  bottom: 0rem;
+  left: 0rem;
+  inset: 0rem;
+  color: oklch(var(--cp-tones-a-l) var(--cp-tones-a-c) var(--cp-tones-a-h) / var(--cp-tones-a-a,1));
+  clip-path: polygon(0% 0%, calc(var(--rate) * 20%) 0%, calc(var(--rate) * 20%) 100%, 0% 100%);
+}
+.wp-block-catpow-ranking__item-image-img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.wp-block-catpow-ranking__item-contents-link {
+  display: block;
+  background-color: oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1));
+  text-align: center;
+  color: oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1));
+}
+.wp-block-catpow-ranking.is-type-card .wp-block-catpow-ranking__item {
+  padding: 0rem;
+}
+.wp-block-catpow-ranking.is-type-card .wp-block-catpow-ranking__item-image {
+  overflow: hidden;
+  border-radius: var(--cp-border-radius-c-c);
+  border-bottom-left-radius: 0rem;
+  border-bottom-right-radius: 0rem;
+}
+.wp-block-catpow-ranking.is-type-card .wp-block-catpow-ranking__item-header {
+  padding: var(--cp-padding-c-c);
+  background-color: oklch(var(--cp-tones-sx-l) var(--cp-tones-sx-c) var(--cp-tones-sx-h) / var(--cp-tones-sx-a,1));
+}
+.wp-block-catpow-ranking.is-type-card .wp-block-catpow-ranking__item-contents {
+  padding: var(--cp-padding-c-c);
+}
+.wp-block-catpow-ranking.is-type-card .wp-block-catpow-ranking__item-contents-lead:first-child, .wp-block-catpow-ranking.is-type-card .wp-block-catpow-ranking__item-contents-text:first-child {
+  margin-top: 0rem;
+}
+/*# sourceMappingURL=./style.css.map */

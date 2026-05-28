@@ -1,0 +1,117 @@
+@import "admin_style_config.scss";
+@import "text-placeholders.scss";
+@import 'component-placeholders.scss';
+
+.wp-block-catpow-ranking{
+	$block:&;
+	$item:#{$block}__item;
+	@include bnd((pd:0));
+	@include grd((rc:i,g:c-c));
+	@include txt((l:n));
+	&__item{
+		@include bnd((p:r));
+		&-header{
+			&-rank{
+				@extend %label-component;
+				@extend %ui;
+				@include bnd((d:b,p:a,t:-.5em,l:-.5em));
+				@include bg((c:mx));
+				@include txt((a:c,c:ix));
+				&-prefix{
+				}
+				&-number{
+					@include bnd((d:ib,mg:0 .1em));
+					@include txt((p:1.5em,f:d));
+				}
+				&-suffix{
+				}
+			}
+			&-rate{
+				@include flx((w:n,g:.5em,a:c));
+				&-label{
+					&::after{
+						content:':';
+					}
+				}
+				&-data{
+					@extend %lead;
+					&-number{
+						@include txt((f:d));
+					}
+					&-stars{
+						@include bnd((p:r,w:fit));
+						&::before,&::after{
+							content:'★★★★★';
+							@include txt((h:1em));
+						}
+						&::before{
+							@include txt((c:t 1 .1));
+						}
+						&::after{
+							@include bnd((d:b,p:a,i:0));
+							@include txt((c:a));
+							clip-path:polygon(0% 0%,calc(var(--rate) * 20%) 0%,calc(var(--rate) * 20%) 100%, 0% 100%);
+						}
+					}
+				}
+			}
+			&-text{
+				&-title{
+					@extend %heading;
+				}
+				&-caption{
+					@extend %caption;
+				}
+			}
+		}
+		&-image{
+			&-img{
+				@include bnd((d:b,w:f,h:a));
+			}
+		}
+		&-contents{
+			&-lead{
+				@extend %lead-block;
+				@extend %lead;
+			}
+			&-text{
+				@extend %paragraph-block;
+				@extend %paragraph;
+			}
+			&-link{
+				@extend %button-component;
+				@extend %ui-block;
+				@extend %ui;
+				@include bnd((d:b));
+				@include bg((c:mx));
+				@include txt((a:c,c:ix));
+			}
+		}
+	}
+	&.is-type-flat{
+	}
+	&.is-type-card{
+		#{$item}{
+			@extend %card-component;
+			@include bnd((pd:0));
+			&-image{
+				@include bnd((o:h));
+				@include bdr((r:c-c,br:0));
+			}
+			&-header{
+				@include bnd((pd:c-c));
+				@include bg((c:sx));
+			}
+			&-contents{
+				@include bnd((pd:c-c));
+				&-lead,&-text{
+					&:first-child{
+						@include bnd((mgt:0));
+					}
+				}
+			}
+		}
+	}
+	&.is-type-frame{
+	}
+}
