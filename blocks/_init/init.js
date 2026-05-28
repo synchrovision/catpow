@@ -5417,7 +5417,7 @@
   var Link = (props) => {
     const { className, attr, keys, index, ...otherProps } = props;
     const item = keys.items ? attr[keys.items][index] : attr;
-    const href = item[keys.href] || "";
+    const href = item?.[keys?.href] || "";
     const target = href.indexOf("://") !== -1 ? "_brank" : null;
     return /* @__PURE__ */ wp.element.createElement("a", { className, href, target, rel: target && "noopener", ...otherProps }, props.children);
   };
