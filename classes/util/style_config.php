@@ -230,7 +230,6 @@ class style_config{
 			'specific'=>[
 				'label'=>'規定ウェイト',
 				'type'=>'fontWeight',
-				'primary'=>true,
 				'shorthand'=>'s',
 				'variants'=>self::$weight_variants_5,
 				'defaultValues'=>[100,200,400,600,800]
