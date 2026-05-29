@@ -27,7 +27,7 @@
 }
 .cp-spinner-circle > .graphics > .graphic1 {
   border-width: 0.1875rem;
-  border-color: oklch(calc(100% - var(--cp-tones-t-t) * 10) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
+  border-color: oklch(calc(1 - var(--cp-tones-t-t) * 10) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
 }
 .cp-spinner-circle > .graphics > .graphic2, .cp-spinner-circle > .graphics > .graphic3 {
   border-top-width: 0.1875rem;

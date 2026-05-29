@@ -105,7 +105,7 @@
   .cp-megamenu-mainmenu-items-item:not(:first-child), .cp-megamenu-primarymenu-items-item:not(:first-child) {
     border-top-style: solid;
     border-top-width: 0.0625rem;
-    border-top-color: oklch(calc(100% - var(--cp-tones-t-t) * 100) var(--cp-tones-t-c) var(--cp-tones-t-h) / calc(var(--cp-tones-t-a,1) * 0.25));
+    border-top-color: oklch(calc(1 - var(--cp-tones-t-t) * 100) var(--cp-tones-t-c) var(--cp-tones-t-h) / calc(var(--cp-tones-t-a,1) * 0.25));
   }
   .cp-megamenu-mainmenu-items-item-link, .cp-megamenu-primarymenu-items-item-link {
     display: block;
@@ -236,7 +236,7 @@
   .cp-megamenu-mainmenu-items-item:not(:first-child), .cp-megamenu-primarymenu-items-item:not(:first-child) {
     border-left-style: solid;
     border-left-width: 0.0625rem;
-    border-left-color: oklch(calc(100% - var(--cp-tones-t-t) * 100) var(--cp-tones-t-c) var(--cp-tones-t-h) / calc(var(--cp-tones-t-a,1) * 0.25));
+    border-left-color: oklch(calc(1 - var(--cp-tones-t-t) * 100) var(--cp-tones-t-c) var(--cp-tones-t-h) / calc(var(--cp-tones-t-a,1) * 0.25));
   }
   .cp-megamenu-mainmenu-items-item-link, .cp-megamenu-primarymenu-items-item-link {
     display: block;
