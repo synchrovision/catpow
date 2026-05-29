@@ -1265,14 +1265,14 @@
   }, {});
 
   // node_modules-included/catpow/src/util/rtf.js
-  var rtf = (text, pref = "rtf") => {
+  var rtf = (text, pref = "rtf", level = 3) => {
     if (typeof text !== "string") {
       if (text.toString == null) {
         return "";
       }
       text = text.toString();
     }
-    text = replaceBlockFormat(text, pref);
+    text = replaceBlockFormat(text, pref, level);
     text = joinConsecutiveLists(text, pref);
     text = replaceInlineFormat(text, pref);
     text = replaceLineBreak(text);
@@ -1302,18 +1302,19 @@
     });
     return text;
   };
-  var replaceBlockFormat = (text, pref, level = 0) => {
-    if (level > 3) return text;
-    const prefix = level > 0 ? `([ \u3000	]{${level}})` : "";
-    const classLevel = level > 0 ? ` is-level-${level}` : "";
-    const h = "^" + (level > 0 ? `([\u3000\\t]{${level}})` : "()");
-    const t = "(.+((\\n" + (level > 0 ? "\\1" : "") + "[\u3000\\t]).+)*)$";
-    const c3 = level > 0 ? ` is-level-${level}` : "";
-    const l = level + 4;
-    const p = "$2\n";
-    const p2 = "$3\n";
-    if (level > 0 && !text.match(new RegExp(h, "gum"))) {
+  var replaceBlockFormat = (text, pref, level = 3, indent = 0) => {
+    if (level > 6) return text;
+    const h = "^" + (indent > 0 ? `([\u3000\\t]{${indent}})` : "()");
+    const t = "(.+((\\n" + (indent > 0 ? "\\1" : "") + "[\u3000\\t]).+)*)$";
+    const c3 = ` is-level${level}` + (indent > 0 ? ` is-indent${indent}` : "");
+    const l = level;
+    const p = "$2";
+    const p2 = "$3";
+    if (indent > 0 && !text.match(new RegExp(h, "gum"))) {
       return text;
+    }
+    if (indent > 0) {
+      text = text.replace(new RegExp(`((\\n[\u3000\\t]{${indent}}[^\\n]*)+)`), `<div class="${pref}-indent is-level${level} is-indent${indent}">$1</div>`);
     }
     text = text.replace(
       new RegExp(h + "\\^([^\\s\u3000].{0,20}?) [:\uFF1A] " + t, "gum"),
@@ -1321,16 +1322,16 @@
       text
     );
     text = text.replace(new RegExp(h + "([^\\s\u3000].{0,20}?) [:\uFF1A] " + t, "gum"), `<dl class="${pref}-dl${c3}"><dt class="${pref}-dl__dt">$2</dt><dd class="${pref}-dl__dd">${p2}</dd></dl>`, text);
-    text = text.replace(new RegExp(h + "\u203B" + t, "gum"), `<span class="${pref}-annotation${c3}">${p}</span>`);
-    text = text.replace(new RegExp(h + "\u25A0 " + t, "gum"), `<h${l} class="${pref}-title${c3}">${p}</h${l}>`);
-    text = text.replace(new RegExp(h + "\u30FB " + t, "gum"), `<ul class="${pref}-ul${c3}"><li class="${pref}-ul__li">${p}</li></ul>`);
+    text = text.replace(new RegExp(h + "[\u203B*] " + t, "gum"), `<span class="${pref}-annotation${c3}">${p}</span>`);
+    text = text.replace(new RegExp(h + "[\u25A0#] " + t, "gum"), `<h${l} class="${pref}-title${c3}">${p}</h${l}>`);
+    text = text.replace(new RegExp(h + "[-\u30FB] " + t, "gum"), `<ul class="${pref}-ul${c3}"><li class="${pref}-ul__li">${p}</li></ul>`);
     text = text.replace(new RegExp(h + "\\d{1,2}\\. " + t, "gum"), `<ol class="${pref}-ol${c3}"><li class="${pref}-ol__li">${p}</li></ol>`);
     text = text.replace(
       new RegExp(h + "([\u2460-\u2473]|[^\\s\u3000]\\.) " + t, "gum"),
       `<dl class="${pref}-listed${c3}"><dt class="${pref}-listed__dt">$2</dt><dd class="${pref}-listed__dd">${p2}</dd></dl><!--/listed-->`
     );
-    if (level < 3) {
-      return replaceBlockFormat(text, pref, level + 1);
+    if (level < 6) {
+      return replaceBlockFormat(text, pref, level + 1, indent + 1);
     }
     return text;
   };
@@ -1340,8 +1341,9 @@
     return text;
   };
   var replaceLineBreak = (text) => {
-    text = text.replace(/\s*(<\/(h\d|dl|dt|dd|ul|ol|li)+?>)\s*/g, "$1");
-    text = text.replace(/(\n[　\t]*|\n[　\t]+)/g, "<br/>");
+    text = text.replace(/\s*(<(h\d|div|dl|dt|dd|ul|ol|li) .+?>)\s*/g, "$1");
+    text = text.replace(/\s*(<\/(h\d|div|dl|dt|dd|ul|ol|li)>)\s*/g, "$1");
+    text = text.replace(/(\n[　\t]*)/g, "<br/>");
     return text;
   };
 
@@ -5479,13 +5481,13 @@
 
   // ../blocks/_init/init/CP/components/RTF.jsx
   var RTF = (props) => {
-    const { className, pref = "rtf", attr, keys = { text: "text" }, index, ...otherProps } = props;
+    const { className, pref = "cp-rtf", level = 3, attr, keys = { text: "text" }, index, ...otherProps } = props;
     const item = keys.items ? attr[keys.items][index] : attr;
     const text = item[keys.text] ? item[keys.text] : "";
-    return /* @__PURE__ */ wp.element.createElement("div", { className, ...otherProps, dangerouslySetInnerHTML: { __html: rtf(text, pref) } });
+    return /* @__PURE__ */ wp.element.createElement("div", { className, ...otherProps, dangerouslySetInnerHTML: { __html: rtf(text, pref, level) } });
   };
   RTF.Edit = (props) => {
-    const { className, pref = "rtf", set, attr, keys = { text: "text" }, index, isSelected = true, ...otherProps } = props;
+    const { className, pref = "cp-rtf", level = 3, set, attr, keys = { text: "text" }, index, isSelected = true, ...otherProps } = props;
     const { useMemo: useMemo9, useCallback: useCallback3, useState: useState5 } = wp.element;
     const classes = useMemo9(() => bem("cp-rtf " + className), [className]);
     const item = useMemo9(() => keys.items ? attr[keys.items][index] : attr, [attr, keys.items, index]);
@@ -5523,7 +5525,7 @@
     );
     const [savedText, setSavedText] = useState5(text);
     const [isActive, setIsActive] = useState5(false);
-    return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: classes({ "is-active": isSelected && isActive }), onClick: () => setIsActive(!isActive), ...otherProps, dangerouslySetInnerHTML: { __html: rtf(item.text, pref) } }), /* @__PURE__ */ wp.element.createElement(Portal, { id: "EditRTF" }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.portal({ "is-active": isSelected && isActive }) }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.portal.preview(), dangerouslySetInnerHTML: { __html: rtf(item.text, pref) } }), /* @__PURE__ */ wp.element.createElement("div", { className: classes.portal.input() }, /* @__PURE__ */ wp.element.createElement(
+    return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: classes({ "is-active": isSelected && isActive }), onClick: () => setIsActive(!isActive), ...otherProps, dangerouslySetInnerHTML: { __html: rtf(item.text, pref) } }), /* @__PURE__ */ wp.element.createElement(Portal, { id: "EditRTF" }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.portal({ "is-active": isSelected && isActive }) }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.portal.preview(), dangerouslySetInnerHTML: { __html: rtf(item.text, pref, level) } }), /* @__PURE__ */ wp.element.createElement("div", { className: classes.portal.input() }, /* @__PURE__ */ wp.element.createElement(
       "textarea",
       {
         className: classes.portal.input.edit(),

@@ -2,13 +2,13 @@
 import { Portal } from "catpow/component";
 
 export const RTF = (props) => {
-	const { className, pref = "rtf", attr, keys = { text: "text" }, index, ...otherProps } = props;
+	const { className, pref = "cp-rtf", level = 3, attr, keys = { text: "text" }, index, ...otherProps } = props;
 	const item = keys.items ? attr[keys.items][index] : attr;
 	const text = item[keys.text] ? item[keys.text] : "";
-	return <div className={className} {...otherProps} dangerouslySetInnerHTML={{ __html: rtf(text, pref) }} />;
+	return <div className={className} {...otherProps} dangerouslySetInnerHTML={{ __html: rtf(text, pref, level) }} />;
 };
 RTF.Edit = (props) => {
-	const { className, pref = "rtf", set, attr, keys = { text: "text" }, index, isSelected = true, ...otherProps } = props;
+	const { className, pref = "cp-rtf", level = 3, set, attr, keys = { text: "text" }, index, isSelected = true, ...otherProps } = props;
 	const { useMemo, useCallback, useState } = wp.element;
 	const classes = useMemo(() => bem("cp-rtf " + className), [className]);
 
@@ -23,7 +23,7 @@ RTF.Edit = (props) => {
 				set({ [keys.text]: text });
 			}
 		},
-		[set, attr, keys]
+		[set, attr, keys],
 	);
 	const editorFunction = useCallback(
 		(e) => {
@@ -43,7 +43,7 @@ RTF.Edit = (props) => {
 				e.preventDefault();
 			}
 		},
-		[updateText]
+		[updateText],
 	);
 	const [savedText, setSavedText] = useState(text);
 	const [isActive, setIsActive] = useState(false);
@@ -53,7 +53,7 @@ RTF.Edit = (props) => {
 			<div className={classes({ "is-active": isSelected && isActive })} onClick={() => setIsActive(!isActive)} {...otherProps} dangerouslySetInnerHTML={{ __html: rtf(item.text, pref) }} />
 			<Portal id="EditRTF">
 				<div className={classes.portal({ "is-active": isSelected && isActive })}>
-					<div className={classes.portal.preview()} dangerouslySetInnerHTML={{ __html: rtf(item.text, pref) }} />
+					<div className={classes.portal.preview()} dangerouslySetInnerHTML={{ __html: rtf(item.text, pref, level) }} />
 					<div className={classes.portal.input()}>
 						<textarea
 							className={classes.portal.input.edit()}
