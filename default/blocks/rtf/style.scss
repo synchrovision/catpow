@@ -1,7 +1,4 @@
 @import "admin_style_config.scss";
 
 .wp-block-catpow-rtf{
-	&.has-custom-content-width{
-		@include bnd((w:a c,mgi:a));
-	}
 }
