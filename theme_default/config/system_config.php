@@ -1,80 +1,98 @@
 <?php
-/*カスタム投稿の設定*/
+$use_functions=[
+	'csv',
+	'ga',
+	'gauth',
+	'ytm',
+	'fbp',
+	'seo',
+	'post_sort',
+	'svg',
+	'adobe_fonts',
+	'smtp',
+	'tag_injection',
+	'embed_icon',
+	'markdown',
+	'destroyer'
+];
 $post_types=[
 	'post'=>[
 		'label'=>'お知らせ',
-		'taxonomies'=>[
-			'div'=>['label'=>'分類']
-		],
-		'meta'=>[
-			'desc'=>['type'=>'textarea','label'=>'概要'],
-			'image'=>['type'=>'media','label'=>'画像']
-		],
-		'supports'=>['title','thumbnail'],
-		'template'=>['listed','archive','single']
+		'template'=>['admin','archive','news']
 	],
-	'attachment'=>[
+	'page'=>[
 		'meta'=>[
-			'test'=>['type'=>'text'],
-			'alt_image'=>['type'=>'media_sp']
+			'color'=>['type'=>'SelectPostColor']
+		]
+	],
+	'inquiry'=>[
+		'label'=>'お問い合わせ',
+		'article_type'=>'mailform',
+		'inputs'=>[
+			'company'=>['type'=>'text','label'=>'会社名'],
+			'name'=>['type'=>'text','label'=>'担当者名*'],
+			'name_kana'=>['type'=>'hurigana','label'=>'フリガナ','placeholder'=>'例）ヤマダ','reflect'=>'name'],
+			'tel'=>['type'=>'PhoneNumber','label'=>'電話番号*','placeholder'=>'例）06-4805-8488'],
+			'email'=>['type'=>'email','label'=>'メールアドレス*','placeholder'=>'メールアドレス'],
+			'zip'=>['type'=>'ZipCode','label'=>'郵便番号*','placeholder'=>'例）532-0011'],
+			'todouhuken'=>['type'=>'todouhuken','label'=>'都道府県*'],
+			'address1'=>['type'=>'textarea','label'=>'住所1*','placeholder'=>'例）大阪市淀川区西中島4-3-5'],
+			'address2'=>['type'=>'textarea','label'=>'住所2','placeholder'=>'例）NLCセントラルビル'],
+			'purpose'=>['type'=>'radio','label'=>'お問い合わせ内容','value'=>['点検'=>'inspection','工事'=>'construction','その他'=>'etc']],
+			'detail'=>['type'=>'textarea','label'=>'内容詳細','rows'=>6],
+			'prop_name'=>['type'=>'text','label'=>'物件名'],
+			'prop_zip'=>['type'=>'ZipCode','label'=>'物件/郵便番号','placeholder'=>'例）532-0011'],
+			'prop_todouhuken'=>['type'=>'todouhuken','label'=>'物件/都道府県'],
+			'prop_address1'=>['type'=>'textarea','label'=>'物件/住所1','placeholder'=>'例）大阪市淀川区西中島4-3-5'],
+			'prop_address2'=>['type'=>'textarea','label'=>'物件/住所2','placeholder'=>'例）NLCセントラルビル'],
 		]
 	]
 ];
-
-/*固定ページの設定*/
-$static_pages=[
-	'home'=>[
-		'label'=>'ホーム',
+$nav_datas=[
+	'primary'=>['label'=>'プライマリーメニュー',
 		'meta'=>[
-			'image'=>['type'=>'media','label'=>'画像']
+			'icon'=>['type'=>'SelectIcon'],
+			'color'=>['type'=>'SelectPostColor'],
+			'catch'=>['type'=>'text']
 		]
-	]
+	],
+	'header'=>[
+		'label'=>'ヘッダーメニュー',
+		'meta'=>[
+			'icon'=>['type'=>'SelectIcon'],
+			'image'=>['type'=>'media']
+		]
+	],
+	'footer'=>['label'=>'フッター'],
+	'sitemap'=>['label'=>'サイトマップ']
+];
+$site_datas=[
 ];
 
-/*ウィジェットエリアの設定*/
 $sidebar_datas=[
 	'side'=>[]
 ];
 
-/*メニューの設定*/
-$nav_datas=[
-	'primary'=>[
-		'label'=>'プライマリー',
-		'meta'=>[
-			'icon'=>['type'=>'image','label'=>'アイコン']
-		],
-		'template'=>['admin','menu']
+$static_pages=[
+	'home'=>[
+		'label'=>'ホーム',
 	],
-	'header'=>[
-		'label'=>'ヘッダー',
-		'meta'=>[
-			'icon'=>['type'=>'image','label'=>'アイコン']
-		],
-		'template'=>['admin','menu']
+	'company'=>[
+		'label'=>'会社概要',
 	],
-	'side'=>['labe'=>'サイド'],
-	'footer'=>['labe'=>'フッター'],
-	'sitemap'=>['label'=>'サイトマップ',
-		'meta'=>[
-			'image'=>['type'=>'image','label'=>'イメージ']
-		],
-		'template'=>['admin','menu']
+	'service'=>[
+		'label'=>'事業内容'
+	],
+	'works'=>[
+		'label'=>'事例紹介'
+	],
+	'contact'=>[
+		'label'=>'お問い合わせ',
 	]
 ];
 
-
-/*ユーザ情報の設定*/
-$user_datas=[
-	'guest'=>[
-		'meta'=>[],
-		'template'=>['single','search','register']
-	]
+$page_templates=[
 ];
-/*サイト情報の設定*/
-$site_datas=[
-	'site_config'=>[
-		'meta'=>[
-			'test'=>['type'=>'text','label'=>'test']
-		],
-	]
+
+$user_data=[
 ];

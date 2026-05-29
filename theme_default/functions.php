@@ -1,8 +1,4 @@
 <?php
-//標準時間セット
-date_default_timezone_set('Asia/Tokyo');
-
-
 if(class_exists('cp')){
 	
 	/*管理バー*/
@@ -25,8 +21,12 @@ if(class_exists('cp')){
 
 
 	/*自動段落タグ無効化*/
-	remove_filter('the_content','wpautop');
-	remove_filter('the_excerpt','wpautop');
+	remove_filter('the_title', 'shortcode_unautop');
+	remove_filter('the_content', 'shortcode_unautop');
+	remove_filter('the_excerpt', 'shortcode_unautop');
+	remove_filter('the_title', 'wpautop');
+	remove_filter('the_content', 'wpautop');
+	remove_filter('the_excerpt', 'wpautop');
 
 
 	/*追加スクリプト*/
@@ -51,4 +51,9 @@ if(class_exists('cp')){
 	
 	/*デフォルトブロックパターン無効*/
 	remove_theme_support('core-block-patterns');
+	
+	add_action('init',function(){
+		wp_enqueue_style('dashicons');
+		wp_enqueue_style('font_awesome');
+	});
 }

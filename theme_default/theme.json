@@ -1,0 +1,266 @@
+{
+	"$schema": "https://raw.githubusercontent.com/WordPress/gutenberg/trunk/schemas/json/theme.json",
+	"version": 2,
+	"styles": {
+		"color": {
+			"text": "var(--cp-colors-t)",
+			"background": "var(--cp-colors-b)"
+		},
+		"typography": {
+			"lineHeight": 1.5
+		},
+		"elements": {
+			"link": {
+				"typography": {
+					"textDecoration": "none"
+				}
+			}
+		}
+	},
+	"settings": {
+		"color": {
+			"background": false,
+			"text": true,
+			"link": true,
+			"custom": true,
+			"defaultPalette": false,
+			"palette": [
+				{ "name": "Main", "slug": "main", "color": "var(--cp-colors-m)" },
+				{
+					"name": "Color1",
+					"slug": "color1",
+					"color": "hsl(calc(var(--cp-tones-m-h) + var(--cp-tones-hr) * 1 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l))"
+				},
+				{
+					"name": "Color2",
+					"slug": "color2",
+					"color": "hsl(calc(var(--cp-tones-m-h) + var(--cp-tones-hr) * 2 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l))"
+				},
+				{
+					"name": "Color3",
+					"slug": "color3",
+					"color": "hsl(calc(var(--cp-tones-m-h) + var(--cp-tones-hr) * 3 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l))"
+				},
+				{
+					"name": "Color4",
+					"slug": "color4",
+					"color": "hsl(calc(var(--cp-tones-m-h) + var(--cp-tones-hr) * 4 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l))"
+				},
+				{
+					"name": "Color5",
+					"slug": "color5",
+					"color": "hsl(calc(var(--cp-tones-m-h) + var(--cp-tones-hr) * 5 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l))"
+				},
+				{
+					"name": "Color6",
+					"slug": "color6",
+					"color": "hsl(calc(var(--cp-tones-m-h) + var(--cp-tones-hr) * 6 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l))"
+				},
+				{
+					"name": "Color7",
+					"slug": "color7",
+					"color": "hsl(calc(var(--cp-tones-m-h) + var(--cp-tones-hr) * 7 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l))"
+				},
+				{
+					"name": "Color8",
+					"slug": "color8",
+					"color": "hsl(calc(var(--cp-tones-m-h) + var(--cp-tones-hr) * 8 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l))"
+				},
+				{
+					"name": "Color9",
+					"slug": "color9",
+					"color": "hsl(calc(var(--cp-tones-m-h) + var(--cp-tones-hr) * 9 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l))"
+				},
+				{
+					"name": "Color10",
+					"slug": "color10",
+					"color": "hsl(calc(var(--cp-tones-m-h) + var(--cp-tones-hr) * 10 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l))"
+				},
+				{
+					"name": "Color11",
+					"slug": "color11",
+					"color": "hsl(calc(var(--cp-tones-m-h) + var(--cp-tones-hr) * 11 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l))"
+				},
+				{
+					"name": "Color12",
+					"slug": "color12",
+					"color": "hsl(calc(var(--cp-tones-m-h) + var(--cp-tones-hr) * 12 + var(--cp-tones-hs)),var(--cp-tones-m-s),var(--cp-tones-m-l))"
+				}
+			],
+			"customGradient": false,
+			"defaultGradients": false,
+			"gradients": [],
+			"duotone": [],
+			"customDuotone": true
+		},
+		"spacing": {
+			"blockGap": null,
+			"units": ["rem", "vh", "vw", "%"]
+		},
+		"appearanceTools": true,
+		"typography": {
+			"customFontSize": false,
+			"fontStyle": false,
+			"fontWeight": false,
+			"letterSpacing": false,
+			"textDecoration": false,
+			"textTransform": false,
+			"dropCap": false,
+			"fontSizes": [
+				{
+					"name": "見出し6",
+					"slug": "h6",
+					"size": "var(--cp-font-size-h-6)"
+				},
+				{
+					"name": "見出し5",
+					"slug": "h5",
+					"size": "var(--cp-font-size-h-5)"
+				},
+				{
+					"name": "見出し4",
+					"slug": "h4",
+					"size": "var(--cp-font-size-h-4)"
+				},
+				{
+					"name": "見出し3",
+					"slug": "h3",
+					"size": "var(--cp-font-size-h-3)"
+				},
+				{
+					"name": "見出し2",
+					"slug": "h2",
+					"size": "var(--cp-font-size-h-2)"
+				},
+				{
+					"name": "見出し1",
+					"slug": "h1",
+					"size": "var(--cp-font-size-h-1)"
+				},
+				{
+					"name": "リード文6",
+					"slug": "l6",
+					"size": "var(--cp-font-size-l-6)"
+				},
+				{
+					"name": "リード文5",
+					"slug": "l5",
+					"size": "var(--cp-font-size-l-5)"
+				},
+				{
+					"name": "リード文4",
+					"slug": "l4",
+					"size": "var(--cp-font-size-l-4)"
+				},
+				{
+					"name": "リード文3",
+					"slug": "l3",
+					"size": "var(--cp-font-size-l-3)"
+				},
+				{
+					"name": "リード文2",
+					"slug": "l2",
+					"size": "var(--cp-font-size-l-2)"
+				},
+				{
+					"name": "リード文1",
+					"slug": "l1",
+					"size": "var(--cp-font-size-l-1)"
+				},
+				{
+					"name": "本文6",
+					"slug": "p6",
+					"size": "var(--cp-font-size-p-6)"
+				},
+				{
+					"name": "本文5",
+					"slug": "p5",
+					"size": "var(--cp-font-size-p-5)"
+				},
+				{
+					"name": "本文4",
+					"slug": "p4",
+					"size": "var(--cp-font-size-p-4)"
+				},
+				{
+					"name": "本文3",
+					"slug": "p3",
+					"size": "var(--cp-font-size-p-3)"
+				},
+				{
+					"name": "本文2",
+					"slug": "p2",
+					"size": "var(--cp-font-size-p-2)"
+				},
+				{
+					"name": "本文1",
+					"slug": "p1",
+					"size": "var(--cp-font-size-p-1)"
+				},
+				{
+					"name": "注釈6",
+					"slug": "c6",
+					"size": "var(--cp-font-size-c-6)"
+				},
+				{
+					"name": "注釈5",
+					"slug": "c5",
+					"size": "var(--cp-font-size-c-5)"
+				},
+				{
+					"name": "注釈4",
+					"slug": "c4",
+					"size": "var(--cp-font-size-c-4)"
+				},
+				{
+					"name": "注釈3",
+					"slug": "c3",
+					"size": "var(--cp-font-size-c-3)"
+				},
+				{
+					"name": "注釈2",
+					"slug": "c2",
+					"size": "var(--cp-font-size-c-2)"
+				},
+				{
+					"name": "注釈1",
+					"slug": "c1",
+					"size": "var(--cp-font-size-c-1)"
+				}
+			],
+
+			"fontFamilies": [
+				{
+					"name": "見出し",
+					"slug": "heading",
+					"fontFamily": "var(--cp-font-family-h)"
+				},
+				{
+					"name": "本文",
+					"slug": "text",
+					"fontFamily": "var(--cp-font-family-t)"
+				},
+				{
+					"name": "コード",
+					"slug": "code",
+					"fontFamily": "var(--cp-font-family-c)"
+				},
+				{
+					"name": "装飾",
+					"slug": "decoration",
+					"fontFamily": "var(--cp-font-family-d)"
+				},
+				{
+					"name": "手書き",
+					"slug": "script",
+					"fontFamily": "var(--cp-font-family-s)"
+				},
+				{
+					"name": "太字",
+					"slug": "bold",
+					"fontFamily": "var(--cp-font-family-b)"
+				}
+			]
+		}
+	}
+}
