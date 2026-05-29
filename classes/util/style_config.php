@@ -62,6 +62,18 @@ class style_config{
 			'l'=>'大',
 			'xl'=>'極大'
 		],
+		$weight_variants_3=[
+			'l'=>'細',
+			'r'=>'中',
+			'b'=>'太',
+		],
+		$weight_variants_5=[
+			'xl'=>'極細',
+			'l'=>'細',
+			'r'=>'中',
+			'b'=>'太',
+			'xb'=>'極太'
+		],
 		$level_variants=[
 			'1'=>'Level1',
 			'2'=>'Level2',
@@ -215,6 +227,14 @@ class style_config{
 	public static function get_font_weight_roles(){
 		if(isset(static::$roles['font_weight'])){return static::$roles['font_weight'];}
 		return static::$roles['font_weight']=apply_filters('cp_font_weight_roles',[
+			'specific'=>[
+				'label'=>'規定ウェイト',
+				'type'=>'fontWeight',
+				'primary'=>true,
+				'shorthand'=>'s',
+				'variants'=>self::$weight_variants_5,
+				'defaultValues'=>[100,200,400,600,800]
+			],
 			'text'=>[
 				'label'=>'テキスト',
 				'type'=>'fontWeight',
