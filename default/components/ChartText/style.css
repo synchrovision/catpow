@@ -1,7 +1,6 @@
-@charset "UTF-8";
 .cp-charttext {
   font-size: 0.75rem;
-  font-family: "Helvetica Neue", "游ゴシック Medium", YuGothic, YuGothicM, "Hiragino Kaku Gothic ProN", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
+  font-family: var(--cp-font-family-f-g);
 }
 .cp-charttext .title {
   text-anchor: middle;
@@ -10,7 +9,7 @@
 .cp-charttext .val {
   text-anchor: middle;
   dominant-baseline: middle;
-  fill: hsla(var(--cp-tones-b-h),var(--cp-tones-b-s),var(--cp-tones-b-l),var(--cp-tones-b-a,1));
+  fill: oklch(var(--cp-tones-b-l) var(--cp-tones-b-c) var(--cp-tones-b-h) / var(--cp-tones-b-a,1));
 }
 .cp-charttext .val .unit {
   dominant-baseline: middle;
