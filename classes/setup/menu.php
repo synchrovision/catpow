@@ -39,7 +39,7 @@ class menu implements iSetup{
 	}
 	static function get_default_menu_items(){
 		$default_menu_items=[];
-		foreach($GLOBALS['static_pages'] as $data_name=>$conf){
+		foreach(\cp::$config['static_pages'] as $data_name=>$conf){
 			if($post=get_page_by_path($conf['page_path'])){
 				$menu_item=[
 					'menu-item-title'=>$conf['label'],

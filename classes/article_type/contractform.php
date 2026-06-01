@@ -50,11 +50,11 @@ class contractform extends article_type{
 		if(isset($conf_data['on_receive_inputs'])){
 			$conf_data['meta']['mail']['on_receive']=$conf_data['on_receive_inputs'];
 		}
-		if(!isset($GLOBALS['post_types'][$mailconf_post_type])){
-			$GLOBALS['post_types'][$mailconf_post_type]=['article_type'=>'contractconf'];
-			CP::fill_conf_data('post',$mailconf_post_type,$GLOBALS['post_types'][$mailconf_post_type]);
+		if(!isset(\cp::$config['post_types'][$mailconf_post_type])){
+			\cp::$config['post_types'][$mailconf_post_type]=['article_type'=>'contractconf'];
+			CP::fill_conf_data('post',$mailconf_post_type,\cp::$config['post_types'][$mailconf_post_type]);
 		}
-		$GLOBALS['post_types'][$mailconf_post_type]['inputs']=$conf_data['inputs']=&$conf_data['meta']['mail']['meta'];
+		\cp::$config['post_types'][$mailconf_post_type]['inputs']=$conf_data['inputs']=&$conf_data['meta']['mail']['meta'];
 	}
 	public static function get_default_post_datas($conf_data){
 		return [

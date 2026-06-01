@@ -15,7 +15,7 @@ class contractform extends template_type{
 			'post_parent'=>0
 		]);
 		if(empty($posts)){
-			$post_datas=\Catpow\article_type\contractform::get_default_post_datas($GLOBALS['post_types'][$path_data['data_name']]);
+			$post_datas=\Catpow\article_type\contractform::get_default_post_datas(\cp::$config['post_types'][$path_data['data_name']]);
 			foreach($post_datas as $path=>$post_data){
 				if(substr_count($path,'/')>1){continue;}
 				$post_data_paths[$path]=$post_data['post_title'];

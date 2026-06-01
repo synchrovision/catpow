@@ -34,7 +34,7 @@ class checksheet extends article_type{
 		
 		if(!isset(cp::$config['post_types'][$question_post_type])){
 			cp::$config['post_types'][$question_post_type]=['article_type'=>'question'];
-			\cp::fill_conf_data('post',$question_post_type,$GLOBALS['post_types'][$question_post_type]);
+			\cp::fill_conf_data('post',$question_post_type,\cp::$config['post_types'][$question_post_type]);
 		}
 	}
 }

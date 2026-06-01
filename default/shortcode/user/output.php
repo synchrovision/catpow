@@ -7,7 +7,7 @@ switch($prm[0]){
 	case 'name':echo $user->display_name;break;
 	case 'login':echo $user->user_login;break;
 	case 'email':echo $user->user_email;break;
-	case 'role':echo $GLOBALS['user_datas'][reset($user->roles)]['label'];break;
+	case 'role':echo \cp::$config['user_datas'][reset($user->roles)]['label'];break;
 	case 'lost_password_url':echo wp_lostpassword_url();break;
 	case 'reset_password_url':echo util\user::get_reset_password_url($user);break;
 	case 'loop':

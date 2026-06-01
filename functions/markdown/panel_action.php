@@ -7,7 +7,7 @@ if($_REQUEST['md_action']==='upload'){
 	else{
 		$names=(array)$_FILES['md']['name'];
 		$tmp_names=(array)$_FILES['md']['tmp_name'];
-		$post_types=array_keys($GLOBALS['post_types']);
+		$post_types=array_keys(\cp::$config['post_types']);
 		$pattern='/^(?P<post_type>'.implode('|',$post_types).')\-(?P<id>\d+)\.md/';
 		foreach($names as $i=>$fname){
 			if(preg_match($pattern,$fname,$matches)){

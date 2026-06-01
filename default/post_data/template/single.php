@@ -15,7 +15,7 @@ foreach($article_conf_data['meta']??[] as $name=>$conf){
 ob_start();
 ?>
 <!-- wp:catpow/section -->
-<section class="wp-block-catpow-section center column round thin_border check"><div class="contents"><header><div class="title"><h2><?=$GLOBALS['user_datas'][$role]['label']?>登録</h2></div></header><div class="text"><!-- wp:catpow/simpletable --><table class="wp-block-catpow-simpletable inputs"><tbody>
+<section class="wp-block-catpow-section center column round thin_border check"><div class="contents"><header><div class="title"><h2><?=\cp::$config['user_datas'][$role]['label']?>登録</h2></div></header><div class="text"><!-- wp:catpow/simpletable --><table class="wp-block-catpow-simpletable inputs"><tbody>
 <?php foreach($metas_primary as $name=>$conf):?>
 <tr class="item<?=empty($conf['required'])?'':' required'?>"><th><?=$conf['label']?></th><td>[output <?=$name?>]</td></tr>
 <?php endforeach;?>

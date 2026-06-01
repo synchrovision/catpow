@@ -10,7 +10,7 @@ $role=explode('-',$path_data[1])[1];
 ?>
 
 <!-- wp:catpow/section -->
-<section class="wp-block-catpow-section center column round thin_border check"><div class="contents"><header><div class="title"><h2><?=$GLOBALS['user_datas'][$role]['label']?>登録</h2></div></header><div class="text">
+<section class="wp-block-catpow-section center column round thin_border check"><div class="contents"><header><div class="title"><h2><?=\cp::$config['user_datas'][$role]['label']?>登録</h2></div></header><div class="text">
 
 <!-- wp:catpow/formbuttons -->
 <ul class="wp-block-catpow-formbuttons buttons"><li class="item primary mail">[button 新規登録 step1]</li></ul>

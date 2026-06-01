@@ -60,19 +60,19 @@ abstract class breadcrumb extends template_part{
 		if(is_search()){return $links;}
 		if(is_archive()){
 			if(is_post_type_archive()){
-				$links[$post_types[$wp_query->query_vars['post_type']]['label']]=get_post_type_archive_link($wp_query->query_vars['post_type']);
+				$links[\cp::$config['post_types'][$wp_query->query_vars['post_type']]['label']]=get_post_type_archive_link($wp_query->query_vars['post_type']);
 			}
 			else{
 				$post_type=$wp_query->posts[0]->post_type;
 				//deprecated: with FSE, there's no reason to use static page as post type archive page
-				if(isset($post_types[$post_type]['archive_page'])){
-					$archive_page_name=basename($post_types[$post_type]['archive_page']);
-					$archive_page_conf=$GLOBALS['static_pages'][$archive_page_name];
-					$archive_page=get_page_by_path($post_types[$post_type]['archive_page']);
+				if(isset(\cp::$config['post_types'][$post_type]['archive_page'])){
+					$archive_page_name=basename(\cp::$config['post_types'][$post_type]['archive_page']);
+					$archive_page_conf=\cp::$config['static_pages'][$archive_page_name];
+					$archive_page=get_page_by_path(\cp::$config['post_types'][$post_type]['archive_page']);
 					$links[$archive_page->post_title]=get_permalink($archive_page);
 				}
 				elseif($wp_post_types[$post_type]->has_archive){
-					$links[$post_types[$post_type]['label']]=get_post_type_archive_link($post_type);
+					$links[\cp::$config['post_types'][$post_type]['label']]=get_post_type_archive_link($post_type);
 				}
 			}
 			if(is_category()){
@@ -101,7 +101,7 @@ abstract class breadcrumb extends template_part{
 			$templates=(array)$post_types[$post_type]['template'];
 			if(isset($post_types[$post_type]['archive_page'])){
 				$archive_page_name=basename($post_types[$post_type]['archive_page']);
-				$archive_page_conf=$GLOBALS['static_pages'][$archive_page_name];
+				$archive_page_conf=\cp::$config['static_pages'][$archive_page_name];
 				$archive_page=get_page_by_path($post_types[$post_type]['archive_page']);
 				$links[$archive_page->post_title]=get_permalink($archive_page);
 			}

@@ -9,7 +9,7 @@ $post_data['meta']=[
 ob_start();
 ?>
 <!-- wp:catpow/section -->
-<section class="wp-block-catpow-section center column round thin_border check"><div class="contents"><header><div class="title"><h2><?=$GLOBALS['user_datas'][$role]['label']?>登録</h2></div></header><div class="text">
+<section class="wp-block-catpow-section center column round thin_border check"><div class="contents"><header><div class="title"><h2><?=\cp::$config['user_datas'][$role]['label']?>登録</h2></div></header><div class="text">
 <!-- wp:paragraph -->
 <p class="has-regular-font-size">確認メールを送信しました。メールに記載されているURLにアクセスしてから次のステップへ進んでください。</p>
 <!-- /wp:paragraph -->

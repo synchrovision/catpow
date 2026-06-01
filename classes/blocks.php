@@ -89,10 +89,10 @@ class blocks{
 			$post=$block_editor_context->post;
 			if(empty($post)){return $allowed_block_types;}
 			if($post->post_type==='page'){
-				$conf_data=$GLOBALS['static_pages'][$post->post_name]??null;
+				$conf_data=\cp::$config['static_pages'][$post->post_name]??null;
 			}
 			else{
-				$conf_data=$GLOBALS['post_types'][$post->post_type]??null;
+				$conf_data=\cp::$config['post_types'][$post->post_type]??null;
 			}
 			if(empty($conf_data)){return $allowed_block_types;}
 			if(isset($conf_data['allowed_block_types'])){
