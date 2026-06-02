@@ -179,7 +179,7 @@
   left: 0rem;
   inset: 0rem;
   margin: auto;
-  width: min(90vw, 60rem);
+  width: min(90vw, 75rem);
   max-height: 90vh;
   height: fit-content;
   display: -webkit-box;
@@ -221,20 +221,29 @@
   text-align: justify;
   font-size: 0.8125rem;
 }
-.cp-admin-lightbox__body dl {
-  padding: 0.3125rem;
+.cp-admin-lightbox__body > ul > li > .cp-meta-item {
+  display: block;
   width: fit-content;
+  margin: 1em auto;
+}
+.cp-admin-lightbox__body dl {
+  padding: 1rem;
   margin-inline: auto;
   display: -webkit-grid;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: auto 1fr;
-  grid-template-columns: auto 1fr;
-  grid-gap: 0.5rem;
+  -ms-grid-columns: 11.25rem 1fr;
+  grid-template-columns: 11.25rem 1fr;
+  grid-gap: 0.25rem;
+}
+.cp-admin-lightbox__body dl dt, .cp-admin-lightbox__body dl dd {
+  align-content: center;
 }
 .cp-admin-lightbox__body dl dt {
-  padding: 0.5rem 0rem;
+  margin: 0rem;
+  padding-inline: 1em;
   font-size: 0.9375rem;
+  background-color: oklch(calc(1 - var(--cp-tones-t-t) * 10) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
 }
 .cp-admin-lightbox__body dl dt i.fa, .cp-admin-lightbox__body dl dt i.fab, .cp-admin-lightbox__body dl dt i.fas {
   display: inline-block;
@@ -242,7 +251,38 @@
 }
 .cp-admin-lightbox__body dl dd {
   margin: 0rem;
-  padding: 0rem;
+  padding: 0.5em 1em;
+  background-color: oklch(calc(1 - var(--cp-tones-t-t) * 5) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
+}
+.cp-admin-lightbox__body details {
+  max-width: 37.5rem;
+  width: auto;
+  margin: 1em auto;
+  overflow: hidden;
+  border-style: solid;
+  border-width: 0.0625rem;
+  border-radius: 0.5rem;
+  border-color: gray;
+}
+.cp-admin-lightbox__body details summary {
+  padding: 0.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+}
+.cp-admin-lightbox__body details summary::marker {
+  content: "▶︎　";
+  color: var(--wp-admin-theme-color);
+}
+.cp-admin-lightbox__body details[open] summary {
+  border-bottom-style: solid;
+  border-bottom-width: 0.0625rem;
+  border-bottom-color: gray;
+}
+.cp-admin-lightbox__body label.file {
+  display: block;
+  width: fit-content;
+  margin: 1em auto;
 }
 .cp-admin-lightbox__results {
   -webkit-box-flex: 1;

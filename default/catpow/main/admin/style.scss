@@ -102,7 +102,7 @@
 		}
 	}
 	&-lightbox{
-		@include bnd((p:a,i:0,mg:a,w:min(90vw,60rem),h:fit 90vh));
+		@include bnd((p:a,i:0,mg:a,w:min(90vw,75rem),h:fit 90vh));
 		@include flx((w:w));
 		@include bg((c:white));
 		@include shd((b:10 #0004));
@@ -120,21 +120,50 @@
 						@include bnd((w:fit,mg:0 a,pd:1em));
 						@include txt((a:j,p:13));
 					}
+					>.cp-meta-item{
+						@include bnd((d:b,w:fit,mg:1em a));
+					}
 				}
 			}
 			dl{
-				@include bnd((pd:5,w:fit,mgi:a));
-				@include grd((tc:a 1fr,g:8));
+				@include bnd((pd:16,mgi:a));
+				@include grd((tc:180 1fr,g:4));
+				dt,dd{
+					@include bnd((ac:c));
+				}
 				dt{
-					@include bnd((pd:8 0));
+					@include bnd((mg:0,pdi:1em));
 					@include txt((p:15));
+					@include bg((c:t 10));
 					i.fa,i.fab,i.fas{
 						@include bnd((d:ib,mgr:.5em));
 					}
 				}
 				dd{
-					@include bnd((mg:0,pd:0));
+					@include bnd((mg:0,pd:.5em 1em));
+					@include bg((c:t 5));
 				}
+			}
+			details{
+				@include bnd((w:a 600,mg:1em a,o:h));
+				@include bdr((s:s,w:1,r:8,c:gray));
+				summary{
+					@include bnd((pd:8));
+					@include usr((c:p));
+					@include txt((p:16,w:m));
+					&::marker{
+						content:'▶︎　';
+						@include txt((c:wp));
+					}
+				}
+				&[open]{
+					summary{
+						@include bdr((p:b,s:s,w:1,c:gray));
+					}
+				}
+			}
+			label.file{
+				@include bnd((d:b,w:fit,mg:1em a));
 			}
 		}
 		&__results{
