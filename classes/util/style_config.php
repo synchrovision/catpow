@@ -113,10 +113,10 @@ class style_config{
 			'inside'=>['label'=>'抜文字','default'=>'#ffffff','shorthand'=>'i','extend'=>true,'invert'=>'t'],
 			'emphasis'=>['label'=>'抜強調文字','default'=>'#FF3300','shorthand'=>'e','extend'=>true,'invert'=>'h'],
 			'rule'=>['label'=>'抜線','default'=>'#AAAAAA','shorthand'=>'r','extend'=>true,'invert'=>'l'],
-			'light'=>['label'=>'照明','default'=>'hsla(0,0%,100%,0.6)','shorthand'=>'lt','extend'=>true,'alphaEnabled'=>true],
-			'lust'=>['label'=>'光沢','default'=>'hsla(0,0%,100%,0.9)','shorthand'=>'lst','extend'=>true,'alphaEnabled'=>true],
-			'shade'=>['label'=>'陰','default'=>'hsla(0,0%,0%,0.2)','shorthand'=>'sh','extend'=>true,'alphaEnabled'=>true],
-			'shadow'=>['label'=>'影','default'=>'hsla(0,0%,0%,0.3)','shorthand'=>'shd','extend'=>true,'alphaEnabled'=>true],
+			'light'=>['label'=>'照明','default'=>'#ffffff99','shorthand'=>'lt','extend'=>true,'alphaEnabled'=>true],
+			'lust'=>['label'=>'光沢','default'=>'#ffffffe6','shorthand'=>'lst','extend'=>true,'alphaEnabled'=>true],
+			'shade'=>['label'=>'陰','default'=>'#00000033','shorthand'=>'sh','extend'=>true,'alphaEnabled'=>true],
+			'shadow'=>['label'=>'影','default'=>'#0000004d','shorthand'=>'shd','extend'=>true,'alphaEnabled'=>true],
 		]);
 	}
 	public static function get_size_roles(){
@@ -371,33 +371,11 @@ class style_config{
 	public static function get_tones($colors){
 		$roles=static::get_color_roles();
 		$tones=[];
-		$lacks=[];
 		foreach($roles as $role=>$conf){
 			$key=$conf['shorthand'];
-			$color=$colors[$role]??$colors[$key]??null;
-			if(empty($color)){$lacks[]=$role;}
-			if($conf['alphaEnabled']){
-				$raw=Factory::fromString($color);
-				$hsl=$raw->toHsl();
-				$tones[$key]=[
-					'h'=>round($hsl->hue()),
-					's'=>round($hsl->saturation()),
-					'l'=>round($hsl->lightness()),
-					'a'=>round($raw->alpha(),2),
-				];
-			}
-			else{
-				$hsl=Factory::fromString($color)->toHsl();
-				$hsb=$hsl->toHsb();
-				$tones[$key]=[
-					'h'=>round($hsl->hue()),
-					's'=>round($hsl->saturation()),
-					'l'=>round($hsl->lightness()),
-					't'=>round(1-$hsl->lightness()/100,2),
-					'S'=>round($hsb->saturation()),
-					'B'=>round($hsb->brightness()),
-				];
-			}
+			$color=$colors[$role]??$colors[$key]??$conf['default']??'#888';
+			$tones[$key]=Color::hex_to_oklch($color);
+			$tones[$key]['t']=(1-$tones[$key]['l'])/100;
 		}
 		return $tones;
 	}
