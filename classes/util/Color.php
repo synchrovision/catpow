@@ -19,7 +19,7 @@ abstract class Color{
 			$alpha = strlen($hex) === 3?1:(hexdec(substr($hex, 3, 1)) / 15);
 		}
 		else{
-			throw new \Error('Invalid hex color');
+			throw new \Error('Invalid hex color : '.$hex);
 		}
 
 		// HEX → sRGB (0–1)
