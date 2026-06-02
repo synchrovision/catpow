@@ -6,14 +6,23 @@ abstract class Color{
 		// # を除去
 		$hex = ltrim($hex, '#');
 
-		if (strlen($hex) !== 6) {
-			throw new InvalidArgumentException('Invalid hex color');
+		if (strlen($hex) === 6 || strlen($hex) === 8) {
+			$r = hexdec(substr($hex, 0, 2)) / 255;
+			$g = hexdec(substr($hex, 2, 2)) / 255;
+			$b = hexdec(substr($hex, 4, 2)) / 255;
+			$alpha = strlen($hex) === 6?1:(hexdec(substr($hex, 6, 2)) / 255);
+		}
+		elseif(strlen($hex) === 3 || strlen($hex) === 4) {
+			$r = hexdec(substr($hex, 0, 1)) / 15;
+			$g = hexdec(substr($hex, 1, 1)) / 15;
+			$b = hexdec(substr($hex, 2, 1)) / 15;
+			$alpha = strlen($hex) === 3?1:(hexdec(substr($hex, 3, 1)) / 15);
+		}
+		else{
+			throw new \Error('Invalid hex color');
 		}
 
 		// HEX → sRGB (0–1)
-		$r = hexdec(substr($hex, 0, 2)) / 255;
-		$g = hexdec(substr($hex, 2, 2)) / 255;
-		$b = hexdec(substr($hex, 4, 2)) / 255;
 
 		// sRGB → Linear RGB
 		$linear = function ($c) {
@@ -31,9 +40,9 @@ abstract class Color{
 		$m = 0.2119034982 * $r + 0.6806995451 * $g + 0.1073969566 * $b;
 		$s = 0.0883024619 * $r + 0.2817188376 * $g + 0.6299787005 * $b;
 
-		$l_ = cbrt($l);
-		$m_ = cbrt($m);
-		$s_ = cbrt($s);
+		$l_ = \pow($l,1/3);
+		$m_ = \pow($m,1/3);
+		$s_ = \pow($s,1/3);
 
 		$L = 0.2104542553 * $l_ + 0.7936177850 * $m_ - 0.0040720468 * $s_;
 		$a = 1.9779984951 * $l_ - 2.4285922050 * $m_ + 0.4505937099 * $s_;
@@ -47,15 +56,17 @@ abstract class Color{
 		}
 
 		return [
-			'l' => $L,     // 0–1
-			'c' => $C,     // 通常 0–0.4 程度
-			'h' => $H,     // 0–360
+			'l' => $L,
+			'c' => $C,
+			'h' => $H,
+			'a' => $alpha
 		];
 	}
 	public static function oklch_to_hex(Array $lch): string {
 		$L=$lch['l'];
 		$C=$lch['c'];
 		$H=$lch['h'];
+		$alpha=$lch['a']??1;
 		// H をラジアンに変換
 		$hRad = deg2rad($H);
 
@@ -95,10 +106,11 @@ abstract class Color{
 
 		// sRGB → HEX
 		return sprintf(
-			'#%02X%02X%02X',
+			'#%02X%02X%02X%02X',
 			(int) round($r * 255),
 			(int) round($g * 255),
-			(int) round($b * 255)
+			(int) round($b * 255),
+			(int) round($alpha * 255)
 		);
 	}
 }
