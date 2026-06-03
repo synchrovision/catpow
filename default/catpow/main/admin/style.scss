@@ -145,7 +145,7 @@
 				}
 			}
 			details{
-				@include bnd((w:a 600,mg:1em a,o:h));
+				@include bnd((w:a 720,mg:1em a,o:h));
 				@include bdr((s:s,w:1,r:8,c:gray));
 				summary{
 					@include bnd((pd:8));
