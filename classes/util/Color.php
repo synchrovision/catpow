@@ -2,29 +2,13 @@
 namespace Catpow\util;
 
 abstract class Color{
-	public static function hex_to_oklch(string $hex): array {
-		// # を除去
-		$hex = ltrim($hex, '#');
+	//oklch <=> rgb
+	public static function rgb_to_oklch(Array $rgb): array {
+		$r = $rgb['r'] / 255;
+		$g = $rgb['g'] / 255;
+		$b = $rgb['b'] / 255;
+		$alpha = $rgb['a'];
 
-		if (strlen($hex) === 6 || strlen($hex) === 8) {
-			$r = hexdec(substr($hex, 0, 2)) / 255;
-			$g = hexdec(substr($hex, 2, 2)) / 255;
-			$b = hexdec(substr($hex, 4, 2)) / 255;
-			$alpha = strlen($hex) === 6?1:(hexdec(substr($hex, 6, 2)) / 255);
-		}
-		elseif(strlen($hex) === 3 || strlen($hex) === 4) {
-			$r = hexdec(substr($hex, 0, 1)) / 15;
-			$g = hexdec(substr($hex, 1, 1)) / 15;
-			$b = hexdec(substr($hex, 2, 1)) / 15;
-			$alpha = strlen($hex) === 3?1:(hexdec(substr($hex, 3, 1)) / 15);
-		}
-		else{
-			throw new \Error('Invalid hex color : '.$hex);
-		}
-
-		// HEX → sRGB (0–1)
-
-		// sRGB → Linear RGB
 		$linear = function ($c) {
 			return ($c <= 0.04045)
 				? $c / 12.92
@@ -62,7 +46,7 @@ abstract class Color{
 			'a' => $alpha
 		];
 	}
-	public static function oklch_to_hex(Array $lch): string {
+	public static function oklch_to_rgb(Array $lch): array {
 		$L=$lch['l'];
 		$C=$lch['c'];
 		$H=$lch['h'];
@@ -105,12 +89,167 @@ abstract class Color{
 		$b = min(max($b, 0), 1);
 
 		// sRGB → HEX
+		return [
+			'r'=>(int) round($r * 255),
+			'g'=>(int) round($g * 255),
+			'b'=>(int) round($b * 255),
+			'a'=>$alpha
+		];
+	}
+
+	// color code string => oklch
+	public static function to_oklch(string $color): array {
+		if(substr($color,0,1)==='#'){return self::hex_to_oklch($color);}
+		if(substr($color,0,3)==='rgb'){return self::rgb_to_oklch(self::parse_rgb_code($color));}
+		if(substr($color,0,3)==='hsl'){return self::rgb_to_oklch(self::hsl_to_rgb(self::parse_hsl_code($color)));}
+	}
+
+	//hsl <=> rgb
+	public static function hsl_to_rgb(array $hsl): array {
+		$h = $hsl['h'] / 360;
+		$s = $hsl['s'] / 100;
+		$l = $hsl['l'] / 100;
+		$a = $hsl['a'] ?? 1;
+
+		if ($s === 0.0) {
+			return [
+				'r' => $l,
+				'g' => $l,
+				'b' => $l,
+				'a' => $a
+			];
+		}
+
+		$q = $l < 0.5 ? $l * (1 + $s) : $l + $s - $l * $s;
+		$p = 2 * $l - $q;
+
+		$hue_to_rgb = function ($p, $q, $t) {
+			if ($t < 0) $t += 1;
+			if ($t > 1) $t -= 1;
+			if ($t < 1/6) return $p + ($q - $p) * 6 * $t;
+			if ($t < 1/2) return $q;
+			if ($t < 2/3) return $p + ($q - $p) * (2/3 - $t) * 6;
+			return $p;
+		};
+
+		return [
+			'r' => $hue_to_rgb($p, $q, $h + 1/3),
+			'g' => $hue_to_rgb($p, $q, $h),
+			'b' => $hue_to_rgb($p, $q, $h - 1/3),
+			'a' => $a
+		];
+	}
+	public static function rgb_to_hsl(array $rgb): array {
+		$r = $rgb['r'];
+		$g = $rgb['g'];
+		$b = $rgb['b'];
+		$a = $rgb['a'] ?? 1;
+
+		$max = max($r, $g, $b);
+		$min = min($r, $g, $b);
+		$delta = $max - $min;
+
+		$l = ($max + $min) / 2;
+
+		if ($delta === 0.0) {
+			$h = 0;
+			$s = 0;
+		} else {
+			$s = $l < 0.5 ? $delta / ($max + $min) : $delta / (2 - $max - $min);
+
+			if ($max === $r) {
+				$h = ((($g - $b) / $delta) % 6) / 6;
+			} elseif ($max === $g) {
+				$h = ((($b - $r) / $delta) + 2) / 6;
+			} else {
+				$h = ((($r - $g) / $delta) + 4) / 6;
+			}
+		}
+
+		return [
+			'h' => $h * 360,
+			's' => $s * 100,
+			'l' => $l * 100,
+			'a' => $a
+		];
+	}
+
+	//oklch <=> hex
+	public static function hex_to_oklch(string $hex): array {
+		return self::rgb_to_oklch(self::hex_to_rgb($hex));
+	}
+	public static function oklch_to_hex(Array $lch): string {
+		return self::rgb_to_hex(self::oklch_to_rgb($lch));
+	}
+
+	//hex <=> rgb
+	public static function hex_to_rgb(string $hex){
+		$hex = ltrim($hex, '#');
+
+		if (strlen($hex) === 6 || strlen($hex) === 8) {
+			$r = hexdec(substr($hex, 0, 2)) / 255;
+			$g = hexdec(substr($hex, 2, 2)) / 255;
+			$b = hexdec(substr($hex, 4, 2)) / 255;
+			$a = strlen($hex) === 6?1:(hexdec(substr($hex, 6, 2)) / 255);
+		}
+		elseif(strlen($hex) === 3 || strlen($hex) === 4) {
+			$r = hexdec(substr($hex, 0, 1)) / 15;
+			$g = hexdec(substr($hex, 1, 1)) / 15;
+			$b = hexdec(substr($hex, 2, 1)) / 15;
+			$a = strlen($hex) === 3?1:(hexdec(substr($hex, 3, 1)) / 15);
+		}
+		else{
+			throw new \Error('Invalid hex color : '.$hex);
+		}
+		return compact('r','g','b','a');
+	}
+	public static function rgb_to_hex(array $rgb){
 		return sprintf(
 			'#%02X%02X%02X%02X',
-			(int) round($r * 255),
-			(int) round($g * 255),
-			(int) round($b * 255),
-			(int) round($alpha * 255)
+			(int) round($rgb['r']),
+			(int) round($rgb['g']),
+			(int) round($rgb['b']),
+			(int) round($rgb['a'] * 255)
 		);
+	}
+
+	//parse color code string
+	public static function parse_rgb_code(string $code): array{
+		preg_match('/^rgba?\((?P<r>[\d\.]+)(?P<ru>%?)\s+(?P<g>[\d\.]+)(?P<gu>%?)\s+(?P<b>[\d\.]+)(?P<bu>%?)(\s+\/\s+(?P<a>[\d\.]+)(?P<au>%?))?\)$/',$code,$matches);
+		if(empty($matches)){
+			error_log(sprintf('Error : %s is not valid rgb code',$code));
+			return ['r'=>0, 'g'=>0, 'b'=>0, 'a'=>1];
+		}
+		return [
+			'r'=>floatval($matches['r'])*(empty($matches['ru'])?1:2.55),
+			'g'=>floatval($matches['g'])*(empty($matches['gu'])?1:2.55),
+			'b'=>floatval($matches['b'])*(empty($matches['bu'])?1:2.55),
+			'a'=>empty($matches['a'])?1:(floatval($matches['a'])*(empty($matches['au'])?1:0.01))
+		];
+	}
+	public static function parse_hsl_code(string $code): array{
+		preg_match('/^hsla?\((?P<h>[\d\.]+)(deg)?\s+(?P<s>[\d\.]+)%?\s+(?P<l>[\d\.]+)%?(\s+\/\s+(?P<a>[\d\.]+)(?P<au>%?))?\)$/',$code,$matches);
+		if(empty($matches)){
+			error_log(sprintf('Error : %s is not valid hsl code',$code));
+			return ['h'=>0, 's'=>0, 'l'=>0, 'a'=>1];
+		}
+		return [
+			'h'=>floatval($matches['h']),
+			's'=>floatval($matches['s']),
+			'l'=>floatval($matches['l']),
+			'a'=>empty($matches['a'])?1:(floatval($matches['a'])*(empty($matches['au'])?1:0.01))
+		];
+	}
+	public static function parse_oklch_code(string $code): array{
+		preg_match('/^oklch\((?P<l>[\d\.]+)(?P<lu>%?)\s+(?P<c>[\d\.]+)(?P<cu>%?)\s+(?P<h>[\d\.]+)(deg)?(\s+\/\s+(?P<a>[\d\.]+)(?P<au>%?))?\)$/',$code,$matches);
+		if(empty($matches)){
+			error_log(sprintf('Error : %s is not valid oklch code',$code));
+		}
+		return [
+			'l'=>floatval($matches['l'])*(empty($matches['lu'])?1:0.01),
+			'c'=>floatval($matches['c'])*(empty($matches['cu'])?1:0.01),
+			'h'=>floatval($matches['h']),
+			'a'=>empty($matches['a'])?1:(floatval($matches['a'])*(empty($matches['au'])?1:0.01))
+		];
 	}
 }
