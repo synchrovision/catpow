@@ -3,11 +3,6 @@
 * 色・フォントのカスタマイズとCSS変数
 */
 namespace Catpow\util;
-use Spatie\Color\Hex;
-use Spatie\Color\Hsl;
-use Spatie\Color\Hsla;
-use Spatie\Color\Rgba;
-use Spatie\Color\Factory;
 
 class style_config{
 	public static 
@@ -374,7 +369,7 @@ class style_config{
 		foreach($roles as $role=>$conf){
 			$key=$conf['shorthand'];
 			$color=$colors[$role]??$colors[$key]??$conf['default']??'#888';
-			$tones[$key]=Color::hex_to_oklch($color);
+			$tones[$key]=Color::to_oklch($color);
 			$tones[$key]['t']=(1-$tones[$key]['l'])/100;
 		}
 		return $tones;
