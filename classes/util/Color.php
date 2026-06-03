@@ -187,15 +187,15 @@ abstract class Color{
 		$hex = ltrim($hex, '#');
 
 		if (strlen($hex) === 6 || strlen($hex) === 8) {
-			$r = hexdec(substr($hex, 0, 2)) / 255;
-			$g = hexdec(substr($hex, 2, 2)) / 255;
-			$b = hexdec(substr($hex, 4, 2)) / 255;
+			$r = hexdec(substr($hex, 0, 2));
+			$g = hexdec(substr($hex, 2, 2));
+			$b = hexdec(substr($hex, 4, 2));
 			$a = strlen($hex) === 6?1:(hexdec(substr($hex, 6, 2)) / 255);
 		}
 		elseif(strlen($hex) === 3 || strlen($hex) === 4) {
-			$r = hexdec(substr($hex, 0, 1)) / 15;
-			$g = hexdec(substr($hex, 1, 1)) / 15;
-			$b = hexdec(substr($hex, 2, 1)) / 15;
+			$r = hexdec(substr($hex, 0, 1)) * 17;
+			$g = hexdec(substr($hex, 1, 1)) * 17;
+			$b = hexdec(substr($hex, 2, 1)) * 17;
 			$a = strlen($hex) === 3?1:(hexdec(substr($hex, 3, 1)) / 15);
 		}
 		else{
