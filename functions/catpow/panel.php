@@ -3,11 +3,20 @@
 	<li>
 		<h3>テーマ作成</h3>
 		<p>新規のCatpow対応テーマを作成します。</p>
-		<ul class="cp-admin-buttons">
-			<li class="item">
-				<?php button('<i class="fas fa-folder-plus"></i>新規テーマ作成','action','replace',['setup_type'=>'theme']);?>
-			</li>
-		</ul>
+		<details>
+			<summary>新規テーマ作成</summary>
+			<dl>
+				<?php foreach(\cp::$content->conf['meta'] as $meta_name=>$meta_conf): ?>
+				<dt><?=$meta_conf['label']??$meta_name?></dt>
+				<dd><?php input($meta_name); ?></dd>
+				<?php endforeach; ?>
+			</dl>
+			<ul class="cp-admin-buttons">
+				<li class="item">
+					<?php button('<i class="fas fa-folder-plus"></i>新規テーマ作成','action','replace',['setup_type'=>'theme']);?>
+				</li>
+			</ul>
+		</details>
 	</li>
 	<li>
 		<h3>セットアップ</h3>

@@ -1,4 +1,13 @@
 <?php
 $conf=[
 	'cat'=>'primary',
+	'meta'=>[
+		'theme_title'=>['type'=>'text','label'=>'タイトル','placeholder'=>'テーマタイトル','size'=>40],
+		'theme_name'=>['type'=>'text','label'=>'テーマ名','placeholder'=>'半角英数','size'=>20],
+		'version'=>['type'=>'text','label'=>'バージョン','placeholder'=>'0.0.0-alpha','size'=>10,'default'=>'0.0.0-alpha'],
+		'theme_uri'=>['type'=>'text','label'=>'URI','placeholder'=>'テーマURI','size'=>40],
+		'theme_description'=>['type'=>'textarea','label'=>'説明文','placeholder'=>'テーマの説明文','cols'=>40,'rows'=>3],
+		'author_name'=>['type'=>'text','label'=>'製作者','placeholder'=>'製作者','size'=>20],
+		'author_uri'=>['type'=>'text','label'=>'製作者URI','placeholder'=>'製作者URI','size'=>40],
+	]
 ];

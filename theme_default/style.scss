@@ -1,9 +1,10 @@
 /*
- Theme Name: (Input Theme Name)
- Theme URI: (Input Theme URL)
- Author: (Input Author Name)
- Author URI: (Input Author URL)
- Description: (Input Theme Description)
+ Theme Name: {%theme_title%}
+ Theme URI: {%theme_uri%}
+ Author: {%author_name%}
+ Author URI: {%author_uri%}
+ Description: {%theme_description%}
+ Version: {%version%}
  */
 @import 'config/style_config.scss';
 @include default_break;

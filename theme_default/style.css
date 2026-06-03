@@ -1,48 +1,49 @@
 /*
- Theme Name: (Input Theme Name)
- Theme URI: (Input Theme URL)
- Author: (Input Author Name)
- Author URI: (Input Author URL)
- Description: (Input Theme Description)
+ Theme Name: {%theme_title%}
+ Theme URI: {%theme_uri%}
+ Author: {%author_name%}
+ Author URI: {%author_uri%}
+ Description: {%theme_description%}
+ Version: {%version%}
  */
 * {
-  margin: 0;
-  padding: 0;
-  background: transparent;
-  text-decoration: none;
-  font-style: normal;
+	margin: 0;
+	padding: 0;
+	background: transparent;
+	text-decoration: none;
+	font-style: normal;
 }
 img {
-  vertical-align: bottom;
-  border: none;
+	vertical-align: bottom;
+	border: none;
 }
 html {
-  -webkit-text-size-adjust: 100%;
-  text-size-adjust: 100%;
+	-webkit-text-size-adjust: 100%;
+	text-size-adjust: 100%;
 }
 html {
-  overflow-x: clip;
-  color: oklch(var(--cp-tones-tx-l) var(--cp-tones-tx-c) var(--cp-tones-tx-h) / var(--cp-tones-tx-a,1));
-  font-family: var(--cp-font-family-t-p);
+	overflow-x: clip;
+	color: oklch(var(--cp-tones-tx-l) var(--cp-tones-tx-c) var(--cp-tones-tx-h) / var(--cp-tones-tx-a, 1));
+	font-family: var(--cp-font-family-t-p);
 }
-@media (max-width:480px) {
-  html {
-    font-size: 4vw;
-  }
+@media (max-width: 480px) {
+	html {
+		font-size: 4vw;
+	}
 }
 html body {
-  -webkit-text-size-adjust: 100%;
-  text-size-adjust: 100%;
-  background-color: oklch(var(--cp-tones-bx-l) var(--cp-tones-bx-c) var(--cp-tones-bx-h) / var(--cp-tones-bx-a,1));
-  color: oklch(var(--cp-tones-tx-l) var(--cp-tones-tx-c) var(--cp-tones-tx-h) / var(--cp-tones-tx-a,1));
+	-webkit-text-size-adjust: 100%;
+	text-size-adjust: 100%;
+	background-color: oklch(var(--cp-tones-bx-l) var(--cp-tones-bx-c) var(--cp-tones-bx-h) / var(--cp-tones-bx-a, 1));
+	color: oklch(var(--cp-tones-tx-l) var(--cp-tones-tx-c) var(--cp-tones-tx-h) / var(--cp-tones-tx-a, 1));
 }
-@media (max-width:960px) {
-  html body {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  html body::-webkit-scrollbar {
-    display: none;
-  }
+@media (max-width: 960px) {
+	html body {
+		-ms-overflow-style: none;
+		scrollbar-width: none;
+	}
+	html body::-webkit-scrollbar {
+		display: none;
+	}
 }
 /*# sourceMappingURL=./style.css.map */
