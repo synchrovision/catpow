@@ -74,6 +74,7 @@ wp.blocks.registerBlockType("catpow/listed", {
 				"headingTag",
 				"level",
 				"hasContentWidth",
+				"hasMargin",
 				{
 					name: "type",
 					label: "タイプ",

@@ -86,6 +86,7 @@
           "headingTag",
           "level",
           "hasContentWidth",
+          "hasMargin",
           {
             name: "type",
             label: "\u30BF\u30A4\u30D7",
