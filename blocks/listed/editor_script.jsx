@@ -75,6 +75,8 @@ wp.blocks.registerBlockType("catpow/listed", {
 				"level",
 				"hasContentWidth",
 				"hasMargin",
+				"color",
+				"colorScheme",
 				{
 					name: "type",
 					label: "タイプ",
@@ -194,6 +196,7 @@ wp.blocks.registerBlockType("catpow/listed", {
 		}, []);
 		const selectiveItemTemplateClasses = useMemo(() => {
 			const selectiveItemTemplateClasses = [
+				"color",
 				{
 					name: "imageCode",
 					input: "text",
@@ -236,7 +239,7 @@ wp.blocks.registerBlockType("catpow/listed", {
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
 						<TextareaControl label="クラス" onChange={(clss) => setAttributes({ classes: clss })} value={classArray.join(" ")} />
 					</PanelBody>
-					<CP.SelectClassPanel title="リストアイテム" icon="edit" set={setAttributes} attr={attributes} items={items} index={attributes.currentItemIndex} triggerClasses={selectiveClasses[3]} />
+					<CP.SelectClassPanel title="リストアイテム" icon="edit" set={setAttributes} attr={attributes} items={items} index={attributes.currentItemIndex} triggerClasses={selectiveClasses[6]} />
 					{states.isTemplate && (
 						<CP.SelectClassPanel
 							title="テンプレート"
