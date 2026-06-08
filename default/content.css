@@ -625,10 +625,10 @@
   font-weight: 200;
 }
 :root .has-font-weight-light {
-  font-weight: var(--cp-font-weight-s-l);
+  font-weight: 300;
 }
 :root .has-font-weight-regular {
-  font-weight: var(--cp-font-weight-s-r);
+  font-weight: 400;
 }
 :root .has-font-weight-medium {
   font-weight: 500;
@@ -637,7 +637,7 @@
   font-weight: 600;
 }
 :root .has-font-weight-bold {
-  font-weight: var(--cp-font-weight-s-b);
+  font-weight: 700;
 }
 :root .has-font-weight-ultra-bold {
   font-weight: 800;
@@ -659,35 +659,35 @@
 }
 :root .has-font-safe-serif.has-font-weight-safe-bold {
   font-family: Georgia, "Times New Roman", Times, serif;
-  font-weight: var(--cp-font-weight-s-b);
+  font-weight: 700;
 }
 :root .has-font-safe-sans-serif {
   font-family: Arial, Helvetica, sans-serif;
 }
 :root .has-font-safe-sans-serif.has-font-weight-safe-bold {
   font-family: "Arial Black", Arial, Helvetica, sans-serif;
-  font-weight: var(--cp-font-weight-s-b);
+  font-weight: 700;
 }
 :root .has-font-safe-mono-spaced {
   font-family: Courier New, Courier, monospace;
 }
 :root .has-font-safe-mono-spaced.has-font-weight-safe-bold {
   font-family: Courier New, Courier, monospace;
-  font-weight: var(--cp-font-weight-s-b);
+  font-weight: 700;
 }
 :root .has-font-safe-gohic {
   font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN W3", "Hiragino Sans", "Meiryo", "メイリオ", "MS PGothic", sans-serif;
 }
 :root .has-font-safe-gohic.has-font-weight-safe-bold {
   font-family: "Yu Gothic", "Yu Gothic UI", Meiryo, "Hiragino Kaku Gothic ProN", "Hiragino Sans", sans-serif;
-  font-weight: var(--cp-font-weight-s-b);
+  font-weight: 700;
 }
 :root .has-font-safe-mincho {
   font-family: "Hiragino Mincho ProN", "ヒラギノ明朝 ProN W3", "MS PMincho", "ＭＳ Ｐ明朝", serif;
 }
 :root .has-font-safe-mincho.has-font-weight-safe-bold {
   font-family: "Yu Mincho", "MS Mincho", "Hiragino Mincho ProN", serif;
-  font-weight: var(--cp-font-weight-s-b);
+  font-weight: 700;
 }
 :root .has-background-color {
   background-color: oklch(var(--cp-tones-bx-l) var(--cp-tones-bx-c) var(--cp-tones-bx-h) / var(--cp-tones-bx-a,1));
@@ -3358,7 +3358,7 @@ html {
 .cp-rtf-large {
   display: inline-block;
   font-size: 1.5em;
-  font-weight: var(--cp-font-weight-s-b);
+  font-weight: 700;
   color: oklch(var(--cp-tones-hx-l) var(--cp-tones-hx-c) var(--cp-tones-hx-h) / var(--cp-tones-hx-a,1));
 }
 .cp-rtf-u {
@@ -3412,13 +3412,13 @@ html {
 .cp-rtf-tel {
   font-size: 1.5em;
   font-family: var(--cp-font-family-f-e);
-  font-weight: var(--cp-font-weight-s-b);
+  font-weight: 700;
   color: oklch(var(--cp-tones-m-l) var(--cp-tones-m-c) var(--cp-tones-m-h) / var(--cp-tones-m-a,1));
 }
 .cp-rtf-mailto {
   font-size: 1.5em;
   font-family: var(--cp-font-family-f-e);
-  font-weight: var(--cp-font-weight-s-b);
+  font-weight: 700;
   color: oklch(var(--cp-tones-m-l) var(--cp-tones-m-c) var(--cp-tones-m-h) / var(--cp-tones-m-a,1));
 }
 .cp-rtf-listed {
@@ -3516,7 +3516,7 @@ html {
   border-radius: 50%;
   background-color: oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1));
   font-size: 1.1em;
-  font-weight: var(--cp-font-weight-s-b);
+  font-weight: 700;
   font-family: var(--cp-font-family-f-d);
   color: oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1));
 }
@@ -3543,7 +3543,7 @@ html {
   left: 0rem;
   top: 0rem;
   font-size: 1.1em;
-  font-weight: var(--cp-font-weight-s-b);
+  font-weight: 700;
   font-family: dc;
   color: oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1));
 }
@@ -3557,16 +3557,15 @@ html {
   color: oklch(var(--cp-tones-hx-l) var(--cp-tones-hx-c) var(--cp-tones-hx-h) / var(--cp-tones-hx-a,1));
 }
 .cp-rtf-strong {
-  font-weight: var(--cp-font-weight-s-b);
+  color: oklch(var(--cp-tones-hx-l) var(--cp-tones-hx-c) var(--cp-tones-hx-h) / var(--cp-tones-hx-a,1));
 }
 .cp-rtf-stronger {
-  font-size: 1.2em;
+  font-size: var(--cp-font-size-r-l);
   color: oklch(var(--cp-tones-hx-l) var(--cp-tones-hx-c) var(--cp-tones-hx-h) / var(--cp-tones-hx-a,1));
 }
 .cp-rtf-strongest {
-  font-size: 1.5em;
-  font-weight: hx;
-  color: oklch(var(--cp-tones-a-l) var(--cp-tones-a-c) var(--cp-tones-a-h) / var(--cp-tones-a-a,1));
+  font-size: var(--cp-font-size-r-xl);
+  color: oklch(var(--cp-tones-hx-l) var(--cp-tones-hx-c) var(--cp-tones-hx-h) / var(--cp-tones-hx-a,1));
 }
 .cpform div.cpform_nav {
   display: block;

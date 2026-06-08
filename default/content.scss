@@ -409,13 +409,13 @@ html{
 			@include txt((c:hx));
 		}
 		&-strong{
-			@include txt((w:b));
+			@include txt((c:hx));
 		}
 		&-stronger{
-			@include txt((p:1.2em,c:hx));
+			@include txt((p:r-l,c:hx));
 		}
 		&-strongest{
-			@include txt((p:1.5em,w:hx,c:a));
+			@include txt((p:r-xl,c:hx));
 		}
 	}
 }
