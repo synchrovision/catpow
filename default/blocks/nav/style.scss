@@ -1,0 +1,21 @@
+@import "admin_style_config.scss";
+@import "fontawesome.scss";
+@import "text-placeholders.scss";
+@import "component-placeholders.scss";
+
+.wp-block-catpow-nav{
+	$block:&;
+	&__menu{
+		@include bnd((mg:0,pd:0,c:i));
+		@include txt((l:n));
+		&-item{
+			@extend %paragraph;
+			@include bnd((pd:c-l,pdi:0,bi:a,bs:b));
+			&-link{
+				@include bnd((d:b));
+				@include txt((c:t));
+			}
+		}
+	}
+}
+
