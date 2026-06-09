@@ -1265,14 +1265,14 @@
   }, {});
 
   // node_modules-included/catpow/src/util/rtf.js
-  var rtf = (text, pref = "rtf", level = 3) => {
+  var rtf = (text, pref = "rtf") => {
     if (typeof text !== "string") {
       if (text.toString == null) {
         return "";
       }
       text = text.toString();
     }
-    text = replaceBlockFormat(text, pref, level);
+    text = replaceBlockFormat(text, pref);
     text = joinConsecutiveLists(text, pref);
     text = replaceInlineFormat(text, pref);
     text = replaceLineBreak(text);
@@ -1302,19 +1302,18 @@
     });
     return text;
   };
-  var replaceBlockFormat = (text, pref, level = 3, indent = 0) => {
-    if (level > 6) return text;
-    const h = "^" + (indent > 0 ? `([\u3000\\t]{${indent}})` : "()");
-    const t = "(.+((\\n" + (indent > 0 ? "\\1" : "") + "[\u3000\\t]).+)*)$";
-    const c3 = ` is-level${level}` + (indent > 0 ? ` is-indent${indent}` : "");
-    const l = level;
-    const p = "$2";
-    const p2 = "$3";
-    if (indent > 0 && !text.match(new RegExp(h, "gum"))) {
+  var replaceBlockFormat = (text, pref, level = 0) => {
+    if (level > 3) return text;
+    const prefix = level > 0 ? `([ \u3000	]{${level}})` : "";
+    const classLevel = level > 0 ? ` is-level-${level}` : "";
+    const h = "^" + (level > 0 ? `([\u3000\\t]{${level}})` : "()");
+    const t = "(.+((\\n" + (level > 0 ? "\\1" : "") + "[\u3000\\t]).+)*)$";
+    const c3 = level > 0 ? ` is-level-${level}` : "";
+    const l = level + 4;
+    const p = "$2\n";
+    const p2 = "$3\n";
+    if (level > 0 && !text.match(new RegExp(h, "gum"))) {
       return text;
-    }
-    if (indent > 0) {
-      text = text.replace(new RegExp(`((\\n[\u3000\\t]{${indent}}[^\\n]*)+)`), `<div class="${pref}-indent is-level${level} is-indent${indent}">$1</div>`);
     }
     text = text.replace(
       new RegExp(h + "\\^([^\\s\u3000].{0,20}?) [:\uFF1A] " + t, "gum"),
@@ -1322,16 +1321,16 @@
       text
     );
     text = text.replace(new RegExp(h + "([^\\s\u3000].{0,20}?) [:\uFF1A] " + t, "gum"), `<dl class="${pref}-dl${c3}"><dt class="${pref}-dl__dt">$2</dt><dd class="${pref}-dl__dd">${p2}</dd></dl>`, text);
-    text = text.replace(new RegExp(h + "[\u203B*] " + t, "gum"), `<span class="${pref}-annotation${c3}">${p}</span>`);
-    text = text.replace(new RegExp(h + "[\u25A0#] " + t, "gum"), `<h${l} class="${pref}-title${c3}">${p}</h${l}>`);
-    text = text.replace(new RegExp(h + "[-\u30FB] " + t, "gum"), `<ul class="${pref}-ul${c3}"><li class="${pref}-ul__li">${p}</li></ul>`);
+    text = text.replace(new RegExp(h + "\u203B" + t, "gum"), `<span class="${pref}-annotation${c3}">${p}</span>`);
+    text = text.replace(new RegExp(h + "\u25A0 " + t, "gum"), `<h${l} class="${pref}-title${c3}">${p}</h${l}>`);
+    text = text.replace(new RegExp(h + "\u30FB " + t, "gum"), `<ul class="${pref}-ul${c3}"><li class="${pref}-ul__li">${p}</li></ul>`);
     text = text.replace(new RegExp(h + "\\d{1,2}\\. " + t, "gum"), `<ol class="${pref}-ol${c3}"><li class="${pref}-ol__li">${p}</li></ol>`);
     text = text.replace(
       new RegExp(h + "([\u2460-\u2473]|[^\\s\u3000]\\.) " + t, "gum"),
       `<dl class="${pref}-listed${c3}"><dt class="${pref}-listed__dt">$2</dt><dd class="${pref}-listed__dd">${p2}</dd></dl><!--/listed-->`
     );
-    if (level < 6) {
-      return replaceBlockFormat(text, pref, level + 1, indent + 1);
+    if (level < 3) {
+      return replaceBlockFormat(text, pref, level + 1);
     }
     return text;
   };
@@ -1341,9 +1340,8 @@
     return text;
   };
   var replaceLineBreak = (text) => {
-    text = text.replace(/\s*(<(h\d|div|dl|dt|dd|ul|ol|li) .+?>)\s*/g, "$1");
-    text = text.replace(/\s*(<\/(h\d|div|dl|dt|dd|ul|ol|li)>)\s*/g, "$1");
-    text = text.replace(/(\n[　\t]*)/g, "<br/>");
+    text = text.replace(/\s*(<\/(h\d|dl|dt|dd|ul|ol|li)+?>)\s*/g, "$1");
+    text = text.replace(/(\n[　\t]*|\n[　\t]+)/g, "<br/>");
     return text;
   };
 
@@ -1875,7 +1873,7 @@
     }, deps);
   };
 
-  // node_modules-included/catpow/src/component/Bem.tsx
+  // node_modules-included/catpow/src/component/Bem.jsx
   init_react();
   var applyBem = (component, { ...ctx }) => {
     if (Array.isArray(component)) {
@@ -2427,7 +2425,7 @@
         };
         return /* @__PURE__ */ wp.element.createElement("picture", { className: className + " is-picture", ...otherProps }, /* @__PURE__ */ wp.element.createElement("img", { className: primaryClassName + "-img", src: source.srcset, alt: item[keys.alt] }));
       }
-      return /* @__PURE__ */ wp.element.createElement("picture", { className: className + " is-picture", ...otherProps }, item[keys.sources] && item[keys.sources].map((source) => /* @__PURE__ */ wp.element.createElement("source", { srcSet: source.srcset, media: CP.devices[source.device].media_query, "data-device": source.device, key: source.device })), /* @__PURE__ */ wp.element.createElement("img", { className: primaryClassName + "-img", src, alt: item[keys.alt] }));
+      return /* @__PURE__ */ wp.element.createElement("picture", { className: className + " is-picture", ...otherProps }, item[keys.sources] && item[keys.sources].sort(({ device: d1 }, { device: d2 }) => CP.devices[d1].width - CP.devices[d2].width).map((source) => /* @__PURE__ */ wp.element.createElement("source", { srcSet: source.srcset, media: CP.devices[source.device].media_query, "data-device": source.device, key: source.device })), /* @__PURE__ */ wp.element.createElement("img", { className: primaryClassName + "-img", src, alt: item[keys.alt] }));
     }
     return /* @__PURE__ */ wp.element.createElement("img", { className: className + " is-img", src, alt: item[keys.alt], srcSet: item[keys.srcset], sizes, "data-mime": item[keys.mime], ...otherProps });
   };

@@ -64,7 +64,10 @@ export const ResponsiveImageBody = (props) => {
 		}
 		return (
 			<picture className={className + " is-picture"} {...otherProps}>
-				{item[keys.sources] && item[keys.sources].map((source) => <source srcSet={source.srcset} media={CP.devices[source.device].media_query} data-device={source.device} key={source.device} />)}
+				{item[keys.sources] &&
+					item[keys.sources]
+						.sort(({ device: d1 }, { device: d2 }) => CP.devices[d1].width - CP.devices[d2].width)
+						.map((source) => <source srcSet={source.srcset} media={CP.devices[source.device].media_query} data-device={source.device} key={source.device} />)}
 				<img className={primaryClassName + "-img"} src={src} alt={item[keys.alt]} />
 			</picture>
 		);
