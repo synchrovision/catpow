@@ -100,8 +100,8 @@ var el = (tag, props, children, namespace) => {
   return el2;
 };
 
-// _gklb8ptqx:/Users/hatanokazuhiro/repos/feliz.jpn.com/wp-content/plugins/catpow/elements/art-frame-cloud/element/style.css
-var style_default = ".art-frame-cloud__body {\n  background-color: hsla(var(--cp-tones-sx-h),var(--cp-tones-sx-s),var(--cp-tones-sx-l),var(--cp-tones-sx-a,1));\n}\n/*# sourceMappingURL=./style.css.map */";
+// _ikffpsp71:/Users/hatanokazuhiro/repos/e-production.co.jp/wp-content/plugins/catpow/elements/art-frame-cloud/element/style.css
+var style_default = ".art-frame-cloud__body {\n  background-color: oklch(var(--cp-tones-sx-l) var(--cp-tones-sx-c) var(--cp-tones-sx-h) / var(--cp-tones-sx-a,1));\n}\n/*# sourceMappingURL=./style.css.map */";
 
 // ../elements/art-frame-cloud/element/index.mjs.jsx
 var ArtFrameCloud = class extends HTMLElement {

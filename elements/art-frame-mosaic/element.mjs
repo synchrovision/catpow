@@ -234,7 +234,7 @@ var translateColor = (color, tint, alpha) => {
   return color;
 };
 
-// _pq2z3bkq7:/Users/hatanokazuhiro/repos/feliz.jpn.com/wp-content/plugins/catpow/elements/art-frame-mosaic/element/style.css
+// _g7g3l1yz9:/Users/hatanokazuhiro/repos/e-production.co.jp/wp-content/plugins/catpow/elements/art-frame-mosaic/element/style.css
 var style_default = ".art-frame-mosaic {\n  position: relative;\n}\n.art-frame-mosaic__arts {\n  display: block;\n  position: absolute;\n  top: 0rem;\n  right: 0rem;\n  bottom: 0rem;\n  left: 0rem;\n  inset: 0rem;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n}\n/*# sourceMappingURL=./style.css.map */";
 
 // ../elements/art-frame-mosaic/element/index.mjs.jsx
