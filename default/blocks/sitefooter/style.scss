@@ -7,7 +7,7 @@
 	}
 	&__copyright{
 		@extend %caption;
-		@include bnd((pd:c-l));
+		@include bnd((pd:c-h));
 		@include txt((a:c,c:tx));
 	}
 }

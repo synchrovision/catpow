@@ -6,7 +6,7 @@
   letter-spacing: var(--cp-letter-spacing-t-c, normal);
 }
 .wp-block-catpow-sitefooter__copyright {
-  padding: var(--cp-padding-c-l);
+  padding: var(--cp-padding-c-h);
   text-align: center;
   color: oklch(var(--cp-tones-tx-l) var(--cp-tones-tx-c) var(--cp-tones-tx-h) / var(--cp-tones-tx-a,1));
 }
