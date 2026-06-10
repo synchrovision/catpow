@@ -1,0 +1,48 @@
+@import "config/style_config.scss";
+@import "text-placeholders.scss";
+@import "component-placeholders.scss";
+
+.wp-block-catpow-sphere{
+	$block:&;
+	$item:#{$block}__item;
+	@include flx((w:w,j:c,g:c-c));
+	@include txt((a:c,l:n));
+	&__item{
+		@extend %card-component;
+		@include bnd((p:r,f:0 0 i,h:a,a:1,pd:0,cnt:i,o:c));
+		@include bg((c:bx));
+		@include grd((tc:1fr));
+		@include bdr((r:50%));
+		&-image{
+			@include bnd((p:r));
+			&-img{
+				@include bnd((d:b,p:a,i:0,w:f,h:f,op:c,of:c));
+			}
+		}
+		&-texts{
+			@include bnd((ac:c));
+			@include txt((a:c,c:tx));
+			&-icon{
+				@include bnd((w:min(32cqw,4em),h:a,a:1,mgi:a));
+				@include txt((a:c,c:mx));
+			}
+			&-title{
+				@extend %heading;
+				@include bnd((mg:0 a));
+			}
+			&-caption{
+				@extend %caption;
+				@include bnd((mg:0 a));
+			}
+			&-text{
+				@extend %paragraph;
+				@include bnd((mg:0 a));
+			}
+		}
+	}
+	&.has-image{
+		#{$item}{
+			@include grd((tr:2fr 3fr));
+		}
+	}
+}

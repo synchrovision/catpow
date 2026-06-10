@@ -14,47 +14,18 @@ wp.blocks.registerBlockType("catpow/sphere", {
 				type: "block",
 				blocks: CP.listedConvertibles,
 				transform: (attributes) => {
-					attributes.classes = "wp-block-catpow-sphere medium hasSubTitle hasText";
+					attributes.classes = "wp-block-catpow-sphere medium has-subtitle has-text";
 					return wp.blocks.createBlock("catpow/sphere", attributes);
 				},
 			},
 		],
 	},
-	attributes: {
-		version: { type: "number", default: 0 },
-		classes: { source: "attribute", selector: "ul", attribute: "class", default: "wp-block-catpow-sphere" },
-		items: {
-			source: "query",
-			selector: "li.item",
-			query: {
-				classes: { source: "attribute", attribute: "class" },
-				subImageSrc: { source: "attribute", selector: ".contents .image [src]", attribute: "src" },
-				subImageAlt: { source: "attribute", selector: ".contents .image [src]", attribute: "alt" },
-				subTitle: { source: "html", selector: ".contents h4" },
-				text: { source: "html", selector: ".contents p" },
-			},
-			default: [...Array(3)].map(() => {
-				return {
-					classes: "item",
-					title: ["Title"],
-					titleCaption: ["Caption"],
-					subTitle: ["SubTitle"],
-					src: wpinfo.theme_url + "/images/dummy_icon.svg",
-					alt: "dummy",
-					text: ["Text"],
-					linkUrl: wpinfo.home_url,
-				};
-			}),
-		},
-		countPrefix: { source: "text", selector: ".counter .prefix", default: "" },
-		countSuffix: { source: "text", selector: ".counter .suffix", default: "" },
-	},
 	example: CP.example,
 	edit({ attributes, className, setAttributes, isSelected }) {
 		const { useState, useMemo } = wp.element;
-		const { BlockControls, InspectorControls, RichText } = wp.blockEditor;
+		const { BlockControls, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
 		const { PanelBody, TextareaControl, ToolbarGroup } = wp.components;
-		const { items = [], classes = "", countPrefix, countSuffix } = attributes;
+		const { items = [], classes = "", vars, HeadingTag, countPrefix, countSuffix, EditMode = false } = attributes;
 		const primaryClass = "wp-block-catpow-sphere";
 
 		const states = CP.classNamesToFlags(classes);
@@ -62,68 +33,36 @@ wp.blocks.registerBlockType("catpow/sphere", {
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
-				{ name: "size", type: "buttons", label: "サイズ", filter: "size", values: ["small", "medium", "large"] },
-				{ name: "image", label: "画像", values: "hasSubImage" },
-				{ name: "subTitle", label: "タイトル", values: "hasSubTitle" },
+				"headingTag",
+				"level",
+				"hasContentWidth",
+				"hasMargin",
+				"itemSize",
+				"color",
+				"colorScheme",
+				{ name: "image", label: "画像", values: "hasImage" },
+				{ name: "icon", label: "アイコン", values: "hasIcon" },
+				{ name: "catpion", label: "キャプション", values: "hasCaption" },
 				{ name: "text", label: "テキスト", values: "hasText" },
 			];
 			wp.hooks.applyFilters("catpow.blocks.sphere.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
 		}, []);
 		const selectiveItemClasses = useMemo(() => {
-			const selectiveItemClasses = ["color"];
+			const selectiveItemClasses = [
+				"color",
+				{
+					preset: "icon",
+					cond: () => states.hasIcon,
+				},
+			];
 			wp.hooks.applyFilters("catpow.blocks.sphere.selectiveItemClasses", CP.finderProxy(selectiveItemClasses));
 			return selectiveItemClasses;
-		}, []);
+		}, [classes]);
 
-		let rtn = [];
 		const save = () => {
 			setAttributes({ items: JSON.parse(JSON.stringify(items)) });
 		};
-
-		items.map((item, index) => {
-			if (!item.controlClasses) {
-				item.controlClasses = "control";
-			}
-			rtn.push(
-				<CP.Item tag="li" set={setAttributes} attr={attributes} items={items} index={index} isSelected={isSelected} key={index}>
-					<div className="contents">
-						{states.hasSubImage && (
-							<div className="image">
-								<CP.SelectResponsiveImage attr={attributes} set={setAttributes} keys={imageKeys.subImage} index={index} size="medium" />
-							</div>
-						)}
-						{states.hasSubTitle && (
-							<h4>
-								<RichText
-									onChange={(subTitle) => {
-										items[index].subTitle = subTitle;
-										save();
-									}}
-									value={item.subTitle}
-									placeholder="SubTitle"
-								/>
-							</h4>
-						)}
-						{states.hasText && (
-							<p>
-								<RichText
-									onChange={(text) => {
-										items[index].text = text;
-										save();
-									}}
-									value={item.text}
-								/>
-							</p>
-						)}
-					</div>
-				</CP.Item>
-			);
-		});
-
-		if (attributes.EditMode === undefined) {
-			attributes.EditMode = false;
-		}
 
 		return (
 			<>
@@ -147,41 +86,90 @@ wp.blocks.registerBlockType("catpow/sphere", {
 					<CP.SelectClassPanel title="アイテム" icon="edit" set={setAttributes} attr={attributes} items={items} index={attributes.currentItemIndex} selectiveClasses={selectiveItemClasses} />
 					<CP.ItemControlInfoPanel />
 				</InspectorControls>
-				<ul className={attributes.EditMode ? primaryClass + " edit" : classes}>{rtn}</ul>
+				<CP.Bem prefix="wp-block-catpow">
+					<ul {...useBlockProps({ className: classes, style: vars })}>
+						{items.map((item, index) => {
+							const itemStates = CP.classNamesToFlags(item.classes);
+							return (
+								<CP.Item tag="li" className={item.classes} set={setAttributes} attr={attributes} items={items} index={index} isSelected={isSelected} key={index}>
+									{states.hasImage && (
+										<div className="_image">
+											<CP.SelectResponsiveImage className="_img" attr={attributes} set={setAttributes} keys={imageKeys.image} index={index} size="large" />
+										</div>
+									)}
+									<div className="_texts">
+										{states.hasIcon && <CP.OutputIcon className="_icon" item={item} />}
+										<RichText
+											tagName={HeadingTag}
+											className="_title"
+											onChange={(title) => {
+												items[index].title = title;
+												save();
+											}}
+											value={item.title}
+											placeholder="Title"
+										/>
+										{states.hasCaption && (
+											<RichText
+												tagName="p"
+												className="_caption"
+												onChange={(caption) => {
+													items[index].caption = caption;
+													save();
+												}}
+												value={item.caption}
+												placeholder="Caption"
+											/>
+										)}
+										{states.hasText && (
+											<RichText
+												tagName="p"
+												className="_text"
+												onChange={(text) => {
+													items[index].text = text;
+													save();
+												}}
+												value={item.text}
+												placeholder="Text"
+											/>
+										)}
+									</div>
+								</CP.Item>
+							);
+						})}
+					</ul>
+				</CP.Bem>
 			</>
 		);
 	},
 	save({ attributes, className }) {
 		const { RichText } = wp.blockEditor;
-		const { items = [], classes = "", countPrefix, countSuffix } = attributes;
+		const { items = [], classes = "", vars, HeadingTag, countPrefix, countSuffix } = attributes;
 
 		const states = CP.classNamesToFlags(classes);
-		const { imageKeys } = CP.config.sphere;
 
-		let rtn = [];
-		items.map((item, index) => {
-			rtn.push(
-				<li className={item.classes} key={index}>
-					<div className="contents">
-						{states.hasSubImage && (
-							<div className="image">
-								<img src={item.subImageSrc} alt={item.subImageAlt} />
-							</div>
-						)}
-						{states.hasSubTitle && (
-							<h4>
-								<RichText.Content value={item.subTitle} />
-							</h4>
-						)}
-						{states.hasText && (
-							<p>
-								<RichText.Content value={item.text} />
-							</p>
-						)}
-					</div>
-				</li>
-			);
-		});
-		return <ul className={classes}>{rtn}</ul>;
+		return (
+			<CP.Bem prefix="wp-block-catpow">
+				<ul className={classes} style={vars}>
+					{items.map((item, index) => {
+						return (
+							<li className={item.classes} key={index}>
+								{states.hasImage && (
+									<div className="_image">
+										<img src={item.src} alt={item.alt} />
+									</div>
+								)}
+								<div className="_texts">
+									{states.hasIcon && <CP.OutputIcon className="_icon" item={item} />}
+									<RichText.Content tagName={HeadingTag} className="_title" value={item.title} />
+									{states.catption && <RichText.Content tagName="p" calssName="_caption" value={item.caption} />}
+									{states.hasText && <RichText.Content tagName="p" className="_text" value={item.text} />}
+								</div>
+							</li>
+						);
+					})}
+				</ul>
+			</CP.Bem>
+		);
 	},
 });
