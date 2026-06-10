@@ -13,15 +13,8 @@
           value: item.embedIconSrc,
           color: 0,
           onChange: (image) => {
-            fetch(image.url.split("?")[0]).then((res) => res.text()).then((text) => {
-              const el = parser.parseFromString(text, "image/svg+xml");
-              if (el.querySelector("parsererror")) {
-                return;
-              }
-              save({
-                embedIconSrc: image.url,
-                embedIconCode: serializer.serializeToString(el)
-              });
+            save({
+              embedIconSrc: image.url
             });
           }
         }
@@ -29,7 +22,7 @@
     },
     Output: (props) => {
       const { className = "icon", item } = props;
-      return /* @__PURE__ */ wp.element.createElement("div", { className, "data-src": item.embedIconSrc, dangerouslySetInnerHTML: { __html: item.embedIconCode } });
+      return /* @__PURE__ */ wp.element.createElement("svg", { className, "data-src": item.embedIconSrc, xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("use", { href: item.embedIconSrc + "#root" }));
     }
   };
 })();

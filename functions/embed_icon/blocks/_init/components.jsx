@@ -10,24 +10,19 @@ CP.EmbedIcon = {
 				value={item.embedIconSrc}
 				color={0}
 				onChange={(image) => {
-					fetch(image.url.split("?")[0])
-						.then((res) => res.text())
-						.then((text) => {
-							const el = parser.parseFromString(text, "image/svg+xml");
-							if (el.querySelector("parsererror")) {
-								return;
-							}
-							save({
-								embedIconSrc: image.url,
-								embedIconCode: serializer.serializeToString(el),
-							});
-						});
+					save({
+						embedIconSrc: image.url,
+					});
 				}}
 			/>
 		);
 	},
 	Output: (props) => {
 		const { className = "icon", item } = props;
-		return <div className={className} data-src={item.embedIconSrc} dangerouslySetInnerHTML={{ __html: item.embedIconCode }} />;
+		return (
+			<svg className={className} data-src={item.embedIconSrc} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+				<use href={item.embedIconSrc + "#root"} />
+			</svg>
+		);
 	},
 };
