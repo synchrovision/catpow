@@ -163,6 +163,8 @@ export const selectiveClassesPresets = {
 			hasImageRight: __("右", "catpow"),
 		},
 	},
+	hasIcon: { label: "アイコン", values: "hasIcon", sub: ["icon"] },
+	icon: { input: "icon", label: "アイコン" },
 	hasFontSize({ preset, vars = "vars", ...otherParams }) {
 		return {
 			name: "hasFontSize",

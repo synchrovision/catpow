@@ -5997,6 +5997,8 @@
         hasImageRight: __13("\u53F3", "catpow")
       }
     },
+    hasIcon: { label: "\u30A2\u30A4\u30B3\u30F3", values: "hasIcon", sub: ["icon"] },
+    icon: { input: "icon", label: "\u30A2\u30A4\u30B3\u30F3" },
     hasFontSize({ preset, vars = "vars", ...otherParams }) {
       return {
         name: "hasFontSize",
