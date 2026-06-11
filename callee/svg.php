@@ -13,11 +13,11 @@ if(!empty($_GET['color'])){
 	}
 }
 elseif(isset($_GET['c'])){
-	if(preg_match('/^([a-zA-Z]+?)?(--|_)?(\d+)?(?:s(\-?\d+))?(?:l(\-?\d+))?$/',$_GET['c'],$matches)){
+	if(preg_match('/^([a-zA-Z]+?)?(--|_)?(\d+)?(?:c(\-?\d+))?(?:l(\-?\d+))?$/',$_GET['c'],$matches)){
 		$key=$matches[1]?:'m';
 		$staticHue=($matches[2]??null)==='--';
 		$num=$matches[3]??null;
-		$sv=$matches[4]??null;
+		$cv=$matches[4]??null;
 		$lv=$matches[5]??null;
 		$config_dir=dirname(__DIR__,3)."/config";
 		if(file_exists($sites=$config_dir.'/sites.json') && $sites=json_decode(file_get_contents($sites),true)){
@@ -42,9 +42,9 @@ elseif(isset($_GET['c'])){
 		}
 		if(($tones=json_decode(file_get_contents($json),true)) && $tone=$tones[$key]??null){
 			$h=$staticHue?(($num??0)*30):(empty($num)?$tone['h']:$tone['h']+($num-6)*$tones['hr']+$tones['hs']);
-			$s=!empty($sv)?(rtrim($tone['s'],'%')+$sv*20).'%':$tone['s'];
+			$c=!empty($cv)?(rtrim($tone['c'],'%')+$sv*20).'%':$tone['c'];
 			$l=!empty($lv)?(rtrim($tone['l'],'%')+$lv*10).'%':$tone['l'];
-			$c=sprintf('hsl(%s,%s,%s)',$h,$s,$l);
+			$c=sprintf('oklch(%s %s %s)',$l,$c,$h);
 			$svg=str_replace('<svg ',"<svg color='{$c}' fill='currentcolor' ",$svg);
 		}
 	}
