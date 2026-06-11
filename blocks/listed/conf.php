@@ -1,7 +1,7 @@
 <?php
 $block_class="wp-block-catpow-listed";
 $attributes=[
-	"classes"=>["source"=>"attribute","selector"=>"ul","attribute"=>"class","default"=>"wp-block-catpow-listed is-level-3 is-type-menu has-item-size-medium has-header has-title has-title-caption has-image has-text"],
+	"classes"=>["source"=>"attribute","selector"=>"ul","attribute"=>"class","default"=>"wp-block-catpow-listed is-level3 is-type-menu has-item-size-medium has-header has-title has-title-caption has-image has-text has-link"],
 	"commonItemClasses"=>["type"=>"string"],
 	"vars"=>['type'=>'object'],
 	
@@ -13,7 +13,7 @@ $attributes=[
 		"query"=>[
 			"classes"=>["source"=>"attribute","attribute"=>"data-class"],
 			"title"=>["source"=>"html","selector"=>".{$block_class}__item-header-text-title"],
-			"titleCaption"=>["source"=>"html","selector"=>".{$block_class}__item-header-text-titlecaption"],
+			"titleCaption"=>["source"=>"html","selector"=>".{$block_class}__item-header-text-caption"],
 
 			"headerImageSrc"=>["source"=>"attribute","selector"=>".{$block_class}__item-header-image [src]","attribute"=>"src"],
 			"headerImageAlt"=>["source"=>"attribute","selector"=>".{$block_class}__item-header-image [src]","attribute"=>"alt"],
@@ -29,7 +29,8 @@ $attributes=[
 
 			"subTitle"=>["source"=>"html","selector"=>".{$block_class}__item-contents-subtitle"],
 			"text"=>["source"=>"html","selector"=>".{$block_class}__item-contents-text"],
-			"linkUrl"=>["source"=>"attribute","selector"=>".{$block_class}__item-link a","attribute"=>"href"],
+			"linkText"=>["source"=>"html","selector"=>".{$block_class}__item-contents-link"],
+			"linkUrl"=>["source"=>"attribute","selector"=>".{$block_class}__item-contents-link","attribute"=>"href"],
 		],
 		"default"=>array_map(function()use($block_class){
 			return [
@@ -42,6 +43,7 @@ $attributes=[
 				"src"=>cp::get_file_url("/images/dummy.jpg"),
 				"alt"=>"dummy",
 				"text"=>["Text"],
+				"linkText"=>"Read More",
 				"linkUrl"=>home_url()
 			];
 		},range(0,3))

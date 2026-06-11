@@ -16,6 +16,9 @@ CP.config.listed = {
 			items: "items",
 		},
 	},
+	linkKeys: {
+		link: { href: "linkUrl", items: "items" },
+	},
 };
 
 wp.blocks.registerBlockType("catpow/listed", {
@@ -227,7 +230,7 @@ wp.blocks.registerBlockType("catpow/listed", {
 			setAttributes({ items: JSON.parse(JSON.stringify(items)) });
 		};
 
-		const { imageKeys } = CP.config.listed;
+		const { imageKeys, linkKeys } = CP.config.listed;
 
 		const blockProps = useBlockProps({ className: EditMode || (AltMode && doLoop) ? "cp-altcontent" : classes, style: vars });
 
@@ -301,6 +304,7 @@ wp.blocks.registerBlockType("catpow/listed", {
 								},
 								{ type: "text", key: "subTitle", cond: states.hasSubTitle },
 								{ type: "text", key: "text", cond: states.hasText },
+								{ type: "text", key: "linkText", cond: states.hasLink },
 								{ type: "text", key: "linkUrl", cond: states.hasLink },
 							]}
 							isTemplate={states.isTemplate}
@@ -358,7 +362,7 @@ wp.blocks.registerBlockType("catpow/listed", {
 															{states.hasTitle && states.hasTitleCaption && (
 																<RichText
 																	tagName="p"
-																	className="_titlecaption"
+																	className="_caption"
 																	onChange={(titleCaption) => {
 																		item.titleCaption = titleCaption;
 																		save();
@@ -406,20 +410,17 @@ wp.blocks.registerBlockType("catpow/listed", {
 																value={item.text}
 															/>
 														)}
-													</div>
-												)}
-												{states.hasLink && isSelected && (
-													<div className="_link">
-														<p
-															contentEditable={true}
-															suppressContentEditableWarning={true}
-															onBlur={(e) => {
-																item.linkUrl = e.currentTarget.innerHTML;
-																save();
-															}}
-														>
-															{item.linkUrl}
-														</p>
+														{states.hasLink && (
+															<CP.Link.Edit className="_link" attr={attributes} set={setAttributes} keys={linkKeys.link} index={index}>
+																<RichText
+																	onChange={(linkText) => {
+																		item.linkText = linkText;
+																		save();
+																	}}
+																	value={item.linkText}
+																/>
+															</CP.Link.Edit>
+														)}
 													</div>
 												)}
 											</CP.Item>
@@ -437,7 +438,7 @@ wp.blocks.registerBlockType("catpow/listed", {
 		const { InnerBlocks, RichText, useBlockProps } = wp.blockEditor;
 		const { vars, items = [], HeadingTag, classes = "", commonItemClasses, countPrefix, countSuffix, subCountPrefix, subCountSuffix, doLoop } = attributes;
 		const states = CP.classNamesToFlags(classes);
-		const { imageKeys } = CP.config.listed;
+		const { imageKeys, linkKeys } = CP.config.listed;
 
 		return (
 			<>
@@ -466,7 +467,7 @@ wp.blocks.registerBlockType("catpow/listed", {
 										)}
 										<div className="_text">
 											{states.hasTitle && <RichText.Content tagName={HeadingTag} className="_title" value={item.title} />}
-											{states.hasTitle && states.hasTitleCaption && <RichText.Content tagName="p" className="_titlecaption" value={item.titleCaption} />}
+											{states.hasTitle && states.hasTitleCaption && <RichText.Content tagName="p" className="_caption" value={item.titleCaption} />}
 										</div>
 									</header>
 								)}
@@ -486,11 +487,11 @@ wp.blocks.registerBlockType("catpow/listed", {
 										)}
 										{states.hasSubTitle && <RichText.Content tagName="p" className="_subtitle" value={item.subTitle} />}
 										{states.hasText && <RichText.Content tagName="p" className="_text" value={item.text} />}
-									</div>
-								)}
-								{states.hasLink && item.linkUrl && (
-									<div className="_link">
-										<a href={item.linkUrl}> </a>
+										{states.hasLink && (
+											<CP.Link className="_link" attr={attributes} keys={linkKeys.link} index={index}>
+												<RichText.Content value={item.linkText} />
+											</CP.Link>
+										)}
 									</div>
 								)}
 							</li>
@@ -505,127 +506,4 @@ wp.blocks.registerBlockType("catpow/listed", {
 			</>
 		);
 	},
-	deprecated: [
-		{
-			save({ attributes, className }) {
-				const { items = [], classes = "", countPrefix, countSuffix, subCountPrefix, subCountSuffix, linkUrl, linkText, loopParam } = attributes;
-				var classArray = _.uniq(classes.split(" "));
-
-				var states = CP.classNamesToFlags(classes);
-
-				const imageKeys = {
-					image: { src: "src", alt: "alt", code: "imageCode", items: "items" },
-					headerImage: {
-						src: "headerImageSrc",
-						alt: "headerImageAlt",
-						code: "headerImageCode",
-						items: "items",
-					},
-					subImage: {
-						src: "subImageSrc",
-						alt: "subImageAlt",
-						code: "subImageCode",
-						items: "items",
-					},
-					backgroundImage: {
-						src: "backgroundImageSrc",
-						srcset: "backgroundImageSrcset",
-						code: "backgroundImageCode",
-						items: "items",
-					},
-				};
-
-				let rtn = [];
-				items.map((item, index) => {
-					rtn.push(
-						<li className={item.classes}>
-							{states.hasImage && (
-								<div className="image">
-									<CP.ResponsiveImage attr={attributes} keys={imageKeys.image} index={index} isTemplate={states.isTemplate} />
-								</div>
-							)}
-							{states.hasHeader && (
-								<header>
-									{states.hasCounter && (
-										<div className="counter">
-											{countPrefix && <span className="prefix">{countPrefix}</span>}
-											<span className="number">{index + 1}</span>
-											{countSuffix && <span className="suffix">{countSuffix}</span>}
-										</div>
-									)}
-									{states.hasHeaderImage && (
-										<div className="image">
-											<CP.ResponsiveImage attr={attributes} keys={imageKeys.headerImage} index={index} isTemplate={states.isTemplate} />
-										</div>
-									)}
-									<div className="text">
-										{states.hasTitle && (
-											<h3>
-												<RichText.Content value={item.title} />
-											</h3>
-										)}
-										{states.hasTitle && states.hasTitleCaption && (
-											<p>
-												<RichText.Content value={item.titleCaption} />
-											</p>
-										)}
-									</div>
-								</header>
-							)}
-							{(states.hasSubImage || states.hasSubTitle || states.hasText) && (
-								<div className="contents">
-									{states.hasSubCounter && (
-										<div className="subcounter">
-											{subCountPrefix && <span className="prefix">{subCountPrefix}</span>}
-											<span className="number">{index + 1}</span>
-											{subCountSuffix && <span className="suffix">{subCountSuffix}</span>}
-										</div>
-									)}
-									{states.hasSubImage && (
-										<div className="image">
-											<CP.ResponsiveImage attr={attributes} keys={imageKeys.subImage} index={index} isTemplate={states.isTemplate} />
-										</div>
-									)}
-									{states.hasSubTitle && (
-										<h4>
-											<RichText.Content value={item.subTitle} />
-										</h4>
-									)}
-									{states.hasText && (
-										<p>
-											<RichText.Content value={item.text} />
-										</p>
-									)}
-								</div>
-							)}
-							{states.hasBackgroundImage && (
-								<div className="background">
-									<CP.ResponsiveImage attr={attributes} keys={imageKeys.backgroundImage} index={index} isTemplate={states.isTemplate} />
-								</div>
-							)}
-							{states.hasLink && item.linkUrl && (
-								<div className="link">
-									<a href={item.linkUrl}> </a>
-								</div>
-							)}
-						</li>,
-					);
-				});
-				return (
-					<ul className={classes}>
-						{states.doLoop && "[loop_template " + (loopParam || "") + "]"}
-						{rtn}
-						{states.doLoop && "[/loop_template]"}
-					</ul>
-				);
-			},
-			migrate(attributes) {
-				var states = CP.classNamesToFlags(classes);
-				attributes.content_path = attributes.loopParam.split(" ")[0];
-				attributes.query = attributes.loopParam.split(" ").slice(1).join("\n");
-				attributes.doLoop = states.doLoop;
-				return attributes;
-			},
-		},
-	],
 });

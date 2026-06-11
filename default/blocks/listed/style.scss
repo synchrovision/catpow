@@ -18,7 +18,7 @@
 					@extend %heading-block;
 					@extend %heading;
 				}
-				&-titlecaption{
+				&-caption{
 					@extend %caption-block;
 					@extend %caption;
 				}
@@ -33,6 +33,15 @@
 			&-text{
 				@extend %paragraph-block;
 				@extend %paragraph;
+			}
+			&-link{
+				@extend %button-component;
+				@extend %ui-block;
+				@extend %ui;
+				@include bnd((d:b));
+				@include bg((c:bx));
+				@include bdr((s:s));
+				@include txt((a:c,c:mx));
 			}
 		}
 	}
@@ -69,7 +78,7 @@
 							@include bnd((mg:0,pd:0));
 							@include txt((c:mx));
 						}
-						&-titlecaption{
+						&-caption{
 							@include bnd((mgb:0));
 						}
 					}
@@ -226,7 +235,7 @@
 							}
 						}
 						&-text{
-							&-titlecaption{
+							&-caption{
 								@include bnd((mgb:0));
 							}
 						}
