@@ -204,14 +204,14 @@ $colors:(
 		}
 	}
 	&-link{
+		@include anc((n:--link,s:a));
 		@include bnd((p:r));
-		&__portal{
-			@include bnd((d:b,p:a,i:0));
-			@include usr((e:n));
+		&__popover{
+			@include pos((anc:--link,a:b c,t:fb));
+			@include bnd((d:b,p:f,t:0,b:0,h:fit,w:fit));
 			&-box{
-				@include bnd((p:a));
 				&-input{
-					@include bnd((d:b,p:a,w:1em fit,h:2em,pd:.25em 1em,pdl:1.5em,b:-2.5em,l:-200,r:-200,mg:a,bs:b));
+					@include bnd((d:b,p:r,w:1em fit,h:1em,pd:.5em 1em,mg:.5em));
 					@include bg((c:b));
 					@include bdr((s:s,w:2,r:4,c:wp));
 					@include txt((p:14,h:1em,c:t));
@@ -455,7 +455,7 @@ $colors:(
 			@include pos((anc:--item,a:c));
 		}
 		&__body{
-			@include bnd((pd:2 5,p:r,w:fit,h:fit));
+			@include bnd((pd:2 5,p:r,w:fit,h:fit,mgi:a));
 			@include txt((a:c,p:12,h:1em));
 			@include bg((c:b));
 			@include bdr((r:10));

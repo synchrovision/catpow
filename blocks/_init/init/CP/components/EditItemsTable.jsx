@@ -168,17 +168,16 @@ export const EditItemsTable = (props) => {
 										}
 									}
 								})}
-								<td>
-									<CP.ItemControl
-										controls={{
-											delete: (e) => CP.deleteItem(propsForControl),
-											clone: (e) => CP.cloneItem(propsForControl),
-											up: (e) => CP.upItem(propsForControl),
-											down: (e) => CP.downItem(propsForControl),
-										}}
-										float={false}
-									/>
-								</td>
+								<CP.ItemControl
+									tagName="td"
+									controls={{
+										delete: (e) => CP.deleteItem(propsForControl),
+										clone: (e) => CP.cloneItem(propsForControl),
+										up: (e) => CP.upItem(propsForControl),
+										down: (e) => CP.downItem(propsForControl),
+									}}
+									float={false}
+								/>
 							</tr>
 						);
 					})}

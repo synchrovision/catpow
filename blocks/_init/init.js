@@ -3454,7 +3454,7 @@
 
   // ../blocks/_init/init/CP/components/ItemControl.jsx
   var ItemControl = (props) => {
-    const { id, className = "", tag: Tag = "div", controls, children } = props;
+    const { id, className = "", tagName: Tag = "div", controls, children } = props;
     const float = Object.hasOwnProperty("float") ? props.float : Tag != "td";
     const { useState: useState5, useLayoutEffect: useLayoutEffect2 } = wp.element;
     const [open, setOpen] = useState5(false);
@@ -4929,9 +4929,10 @@
             }
           }
         }),
-        /* @__PURE__ */ wp.element.createElement("td", null, /* @__PURE__ */ wp.element.createElement(
+        /* @__PURE__ */ wp.element.createElement(
           CP.ItemControl,
           {
+            tagName: "td",
             controls: {
               delete: (e) => CP.deleteItem(propsForControl),
               clone: (e) => CP.cloneItem(propsForControl),
@@ -4940,7 +4941,7 @@
             },
             float: false
           }
-        ))
+        )
       );
     }))));
   };
@@ -5428,37 +5429,21 @@
     const item = useMemo9(() => keys.items ? attr[keys.items][index] : attr, [attr, keys.items, index]);
     const [hasSelection, setHasSelection] = useState5(false);
     const [ref, setRef] = useState5(false);
-    const [portalBoxRef, setPortalBoxRef] = useState5(false);
+    const [popoverRef, setPopoverRef] = useState5(false);
     useEffect4(() => {
-      if (!ref || !portalBoxRef) {
+      if (!ref) {
         return;
       }
       const updateHasSelection = () => {
-        if (ref.ownerDocument.getSelection().containsNode(ref, true)) {
-          tracePosition();
-          setHasSelection(true);
-          ref.ownerDocument.addEventListener("scroll", tracePosition);
-        } else {
-          setHasSelection(false);
-          ref.ownerDocument.removeEventListener("scroll", tracePosition);
-        }
-      };
-      const tracePosition = () => {
-        const bnd1 = ref.getBoundingClientRect();
-        portalBoxRef.style.setProperty("top", bnd1.top + "px");
-        portalBoxRef.style.setProperty("left", bnd1.left + "px");
-        portalBoxRef.style.setProperty("width", bnd1.width + "px");
-        portalBoxRef.style.setProperty("height", bnd1.height + "px");
+        setHasSelection(ref.ownerDocument.getSelection().containsNode(ref, true));
       };
       ref.ownerDocument.addEventListener("selectionchange", updateHasSelection);
-      portalBoxRef.ownerDocument.addEventListener("selectionchange", updateHasSelection);
       return () => {
         ref.ownerDocument.removeEventListener("selectionchange", updateHasSelection);
-        portalBoxRef.ownerDocument.removeEventListener("selectionchange", updateHasSelection);
       };
-    }, [ref, portalBoxRef, setHasSelection]);
+    }, [ref, setHasSelection]);
     const states = { "is-selected": isSelected === "auto" ? hasSelection : isSelected };
-    return /* @__PURE__ */ wp.element.createElement(CP.Bem, null, /* @__PURE__ */ wp.element.createElement("span", { className: clsx("cp-link", className, states), ...otherProps, ref: setRef }, props.children, /* @__PURE__ */ wp.element.createElement(Portal, { id: "cp-link", className: "_portal", container: ".editor-visual-editor" }, /* @__PURE__ */ wp.element.createElement("div", { className: "_box", ref: setPortalBoxRef }, /* @__PURE__ */ wp.element.createElement(
+    return /* @__PURE__ */ wp.element.createElement(CP.Bem, null, /* @__PURE__ */ wp.element.createElement("span", { className: clsx("cp-link", className, states), ...otherProps, ref: setRef }, props.children, /* @__PURE__ */ wp.element.createElement("div", { className: "_popover", container: ".editor-visual-editor", inert: !hasSelection, ref: setPopoverRef }, /* @__PURE__ */ wp.element.createElement("div", { className: "_box" }, /* @__PURE__ */ wp.element.createElement(
       "div",
       {
         className: clsx("_input", states),

@@ -31,7 +31,7 @@ export const SelectPreparedImage = ({ className = "cp-selectpreparedimage", name
 			}
 			return newState;
 		},
-		{ page: 0, images: null, image: null }
+		{ page: 0, images: null, image: null },
 	);
 
 	useEffect(() => {

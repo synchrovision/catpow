@@ -1,5 +1,4 @@
 ﻿import { clsx } from "clsx";
-import { Portal } from "catpow/component";
 
 export const Link = (props) => {
 	const { className, attr, keys, index, ...otherProps } = props;
@@ -22,46 +21,29 @@ Link.Edit = (props) => {
 
 	const [hasSelection, setHasSelection] = useState(false);
 	const [ref, setRef] = useState(false);
-	const [portalBoxRef, setPortalBoxRef] = useState(false);
+	const [popoverRef, setPopoverRef] = useState(false);
 
 	useEffect(() => {
-		if (!ref || !portalBoxRef) {
+		if (!ref) {
 			return;
 		}
 		const updateHasSelection = () => {
-			if (ref.ownerDocument.getSelection().containsNode(ref, true)) {
-				tracePosition();
-				setHasSelection(true);
-				ref.ownerDocument.addEventListener("scroll", tracePosition);
-			} else {
-				setHasSelection(false);
-				ref.ownerDocument.removeEventListener("scroll", tracePosition);
-			}
-		};
-		const tracePosition = () => {
-			const bnd1 = ref.getBoundingClientRect();
-			portalBoxRef.style.setProperty("top", bnd1.top + "px");
-			portalBoxRef.style.setProperty("left", bnd1.left + "px");
-			portalBoxRef.style.setProperty("width", bnd1.width + "px");
-			portalBoxRef.style.setProperty("height", bnd1.height + "px");
+			setHasSelection(ref.ownerDocument.getSelection().containsNode(ref, true));
 		};
 		ref.ownerDocument.addEventListener("selectionchange", updateHasSelection);
-		portalBoxRef.ownerDocument.addEventListener("selectionchange", updateHasSelection);
 
 		return () => {
 			ref.ownerDocument.removeEventListener("selectionchange", updateHasSelection);
-			portalBoxRef.ownerDocument.removeEventListener("selectionchange", updateHasSelection);
 		};
-	}, [ref, portalBoxRef, setHasSelection]);
-
+	}, [ref, setHasSelection]);
 	const states = { "is-selected": isSelected === "auto" ? hasSelection : isSelected };
 
 	return (
 		<CP.Bem>
 			<span className={clsx("cp-link", className, states)} {...otherProps} ref={setRef}>
 				{props.children}
-				<Portal id="cp-link" className="_portal" container=".editor-visual-editor">
-					<div className="_box" ref={setPortalBoxRef}>
+				<div className="_popover" container=".editor-visual-editor" inert={!hasSelection} ref={setPopoverRef}>
+					<div className="_box">
 						<div
 							className={clsx("_input", states)}
 							contentEditable="plaintext-only"
@@ -79,7 +61,7 @@ Link.Edit = (props) => {
 							{item[keys.href] || ""}
 						</div>
 					</div>
-				</Portal>
+				</div>
 			</span>
 		</CP.Bem>
 	);

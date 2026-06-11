@@ -349,34 +349,32 @@
   border-right-style: none;
 }
 .cp-link {
+  anchor-name: --link;
+  anchor-scope: all;
   position: relative;
 }
-.cp-link__portal {
+.cp-link__popover {
+  -webkit-position-anchor: --link;
+  position-anchor: --link;
+  -webkit-position-area: bottom center;
+  position-area: bottom center;
+  -webkit-position-try: flip-block;
+  position-try: flip-block;
   display: block;
-  position: absolute;
+  position: fixed;
   top: 0rem;
-  right: 0rem;
   bottom: 0rem;
-  left: 0rem;
-  inset: 0rem;
-  pointer-events: none;
+  height: fit-content;
+  width: fit-content;
 }
-.cp-link__portal-box {
-  position: absolute;
-}
-.cp-link__portal-box-input {
+.cp-link__popover-box-input {
   display: block;
-  position: absolute;
+  position: relative;
   min-width: 1em;
   width: fit-content;
-  height: 2em;
-  padding: 0.25em 1em;
-  padding-left: 1.5em;
-  bottom: -2.5em;
-  left: -12.5rem;
-  right: -12.5rem;
-  margin: auto;
-  box-sizing: border-box;
+  height: 1em;
+  padding: 0.5em 1em;
+  margin: 0.5em;
   background-color: oklch(var(--cp-tones-b-l) var(--cp-tones-b-c) var(--cp-tones-b-h) / var(--cp-tones-b-a,1));
   border-style: solid;
   border-width: 0.125rem;
@@ -393,7 +391,7 @@
   transform: translateY(0rem);
   pointer-events: auto;
 }
-.cp-link__portal-box-input::before {
+.cp-link__popover-box-input::before {
   content: "";
   display: block;
   position: absolute;
@@ -417,11 +415,11 @@
   color: oklch(var(--cp-tones-i-l) var(--cp-tones-i-c) var(--cp-tones-i-h) / var(--cp-tones-i-a,1));
   box-shadow: 0 1px 3px oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
-.cp-link__portal-box-input:empty:after {
+.cp-link__popover-box-input:empty:after {
   content: "Input URL";
   opacity: 0.5;
 }
-.cp-link__portal-box-input:not(.is-selected) {
+.cp-link__popover-box-input:not(.is-selected) {
   opacity: 0;
   transform: -webkit- translateY(-0.5em);
   transform: translateY(-0.5em);
@@ -771,6 +769,7 @@
   position: relative;
   width: fit-content;
   height: fit-content;
+  margin-inline: auto;
   text-align: center;
   font-size: 0.75rem;
   line-height: 1em;

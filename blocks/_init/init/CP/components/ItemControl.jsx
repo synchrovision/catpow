@@ -1,7 +1,7 @@
 ﻿import clsx from "clsx";
 
 export const ItemControl = (props) => {
-	const { id, className = "", tag: Tag = "div", controls, children } = props;
+	const { id, className = "", tagName: Tag = "div", controls, children } = props;
 	const float = Object.hasOwnProperty("float") ? props.float : Tag != "td";
 	const { useState, useLayoutEffect } = wp.element;
 
