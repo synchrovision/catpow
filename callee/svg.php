@@ -13,7 +13,10 @@ if(!empty($_GET['color'])){
 	}
 }
 elseif(isset($_GET['c'])){
-	if(preg_match('/^([a-zA-Z]+?)?(--|_)?(\d+)?(?:c(\-?\d+))?(?:l(\-?\d+))?$/',$_GET['c'],$matches)){
+	if($_GET['c']==='currentColor'){
+		$svg=str_replace('<svg ',"<svg color='currentColor' fill='currentcolor' ",$svg);
+	}
+	elseif(preg_match('/^([a-zA-Z]+?)?(--|_)?(\d+)?(?:c(\-?\d+))?(?:l(\-?\d+))?$/',$_GET['c'],$matches)){
 		$key=$matches[1]?:'m';
 		$staticHue=($matches[2]??null)==='--';
 		$num=$matches[3]??null;
