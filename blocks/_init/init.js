@@ -3454,13 +3454,14 @@
 
   // ../blocks/_init/init/CP/components/ItemControl.jsx
   var ItemControl = (props) => {
-    const { className = "", tag: Tag = "div", controls, children } = props;
+    const { id, className = "", tag: Tag = "div", controls, children } = props;
     const float = Object.hasOwnProperty("float") ? props.float : Tag != "td";
-    const { useState: useState5 } = wp.element;
+    const { useState: useState5, useLayoutEffect: useLayoutEffect2 } = wp.element;
     const [open, setOpen] = useState5(false);
     return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "cp" }, /* @__PURE__ */ wp.element.createElement(
       Tag,
       {
+        id,
         className: clsx_default("itemcontrol-", className, {
           "is-open": open,
           "is-position-absolute": float

@@ -1,15 +1,16 @@
 ﻿import clsx from "clsx";
 
 export const ItemControl = (props) => {
-	const { className = "", tag: Tag = "div", controls, children } = props;
+	const { id, className = "", tag: Tag = "div", controls, children } = props;
 	const float = Object.hasOwnProperty("float") ? props.float : Tag != "td";
-	const { useState } = wp.element;
+	const { useState, useLayoutEffect } = wp.element;
 
 	const [open, setOpen] = useState(false);
 
 	return (
 		<CP.Bem prefix="cp">
 			<Tag
+				id={id}
 				className={clsx("itemcontrol-", className, {
 					"is-open": open,
 					"is-position-absolute": float,

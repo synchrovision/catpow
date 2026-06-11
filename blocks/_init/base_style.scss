@@ -21,6 +21,9 @@ $colors:(
 	}
 }
 .cp{
+	&-item{
+		@include anc((n:--item,s:a));
+	}
 	&-label{
 		@include bnd((w:fit,mgl:a,pd:.25em,ac:c));
 		@include flx((a:c));
@@ -448,7 +451,8 @@ $colors:(
 		$block:&;
 		@include bnd((p:r));
 		&.is-position-absolute{
-			@include bnd((p:a,t:0,r:0,z:1000));
+			@include bnd((p:f,t:0,r:0));
+			@include pos((anc:--item,a:c));
 		}
 		&__body{
 			@include bnd((pd:2 5,p:r,w:fit,h:fit));

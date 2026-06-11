@@ -13,6 +13,10 @@
   width: 6.25rem;
   height: auto;
 }
+.cp-item {
+  anchor-name: --item;
+  anchor-scope: all;
+}
 .cp-label {
   width: fit-content;
   margin-left: auto;
@@ -754,10 +758,13 @@
   position: relative;
 }
 .cp-itemcontrol.is-position-absolute {
-  position: absolute;
+  position: fixed;
   top: 0rem;
   right: 0rem;
-  z-index: 1000;
+  -webkit-position-anchor: --item;
+  position-anchor: --item;
+  -webkit-position-area: center;
+  position-area: center;
 }
 .cp-itemcontrol__body {
   padding: 0.125rem 0.3125rem;
