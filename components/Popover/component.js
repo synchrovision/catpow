@@ -22,6 +22,6 @@
           setIsOpen(!isOpen);
         }
       }
-    ), /* @__PURE__ */ wp.element.createElement("div", { className: "_body", inert: !isOpen, inert: !isOpen, popover: closeOnClickAway ? "auto" : "manual", ref: setPopoverRef }, /* @__PURE__ */ wp.element.createElement("div", { className: "_arrow" }), /* @__PURE__ */ wp.element.createElement("div", { className: "_contents" }, children), closeButton && /* @__PURE__ */ wp.element.createElement("div", { className: "_control" }, /* @__PURE__ */ wp.element.createElement("div", { className: "_button is-button-close", onClick: () => setIsOpen(false) })))));
+    ), /* @__PURE__ */ wp.element.createElement("div", { className: "_body", inert: !isOpen, popover: closeOnClickAway ? "auto" : "manual", ref: setPopoverRef }, /* @__PURE__ */ wp.element.createElement("div", { className: "_arrow" }), /* @__PURE__ */ wp.element.createElement("div", { className: "_contents" }, children), closeButton && /* @__PURE__ */ wp.element.createElement("div", { className: "_control" }, /* @__PURE__ */ wp.element.createElement("div", { className: "_button is-button-close", onClick: () => setIsOpen(false) })))));
   };
 })();

@@ -24,7 +24,7 @@
 						setIsOpen(!isOpen);
 					}}
 				></div>
-				<div className="_body" inert={!isOpen} inert={!isOpen} popover={closeOnClickAway ? "auto" : "manual"} ref={setPopoverRef}>
+				<div className="_body" inert={!isOpen} popover={closeOnClickAway ? "auto" : "manual"} ref={setPopoverRef}>
 					<div className="_arrow"></div>
 					<div className="_contents">{children}</div>
 					{closeButton && (
