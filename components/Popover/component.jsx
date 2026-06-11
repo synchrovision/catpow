@@ -1,69 +1,39 @@
 ﻿Catpow.Popover = function (props) {
-	const { className = "cp-popover", children, open, onClose, size = "middle", closeButton = false, closeOnClickAway = true } = props;
-	const { Fragment, useEffect, useState, useRef } = wp.element;
-	const [state, setPopoverState] = useState("closed");
-	const [positionX, setPositionX] = useState("");
-	const [positionY, setPositionY] = useState("");
-	const { bem } = Catpow.util;
-	const classes = bem(className);
+	const { className = "cp-popover", children, open = false, onClose, size = "middle", closeButton = false, closeOnClickAway = true } = props;
+	const { Fragment, useEffect, useLayoutEffect, useState, useRef } = wp.element;
 
-	useEffect(() => setPopoverState(open ? "open" : state === "closed" ? "closed" : "close"), [open]);
-
-	const ref = useRef({});
-	const [contentRef, setContentRef] = useState();
+	const [isOpen, setIsOpen] = useState(!!open);
+	const [popoverRef, setPopoverRef] = useState();
 
 	useEffect(() => {
-		if (ref.current.getBoundingClientRect && open) {
-			const bnd = ref.current.getBoundingClientRect();
-			const x = bnd.left + bnd.width / 2;
-			const ux = window.innerWidth / 8,
-				cy = window.innerHeight / 2;
-			setPositionY(bnd.bottom < cy ? "bottom" : "top");
-			setPositionX(x < ux * 3 ? "right" : x > ux * 5 ? "left" : "center");
+		setIsOpen(!!open);
+	}, [open]);
+	useLayoutEffect(() => {
+		if (popoverRef?.togglePopover) {
+			popoverRef.togglePopover(isOpen);
 		}
-	}, [ref, open]);
+	}, [isOpen]);
 
-	useEffect(() => {
-		if (!open || !contentRef || !onClose || !closeOnClickAway) {
-			return;
-		}
-		const doc = contentRef.ownerDocument;
-		const cb = (e) => {
-			if (!contentRef.contains(e.target)) {
-				onClose();
-				doc.body.removeEventListener("click", cb);
-			}
-		};
-		requestAnimationFrame(() => {
-			doc.body.addEventListener("click", cb);
-		});
-		return () => doc.body.removeEventListener("click", cb);
-	}, [open, onClose, closeOnClickAway, contentRef]);
-
+	console.log("Popover");
 	return (
-		<Fragment>
-			<div className={classes.anchor()} ref={ref}></div>
-			<Catpow.External className={classes.container()} trace={ref.current}>
+		<Catpow.Bem>
+			<div className={`${className} is-size-${size} is-${isOpen ? "open" : "close"}`}>
 				<div
-					className={classes(`is-size-${size} is-${state} is-${positionX} is-${positionY}`)}
-					onAnimationEnd={() => {
-						if (state === "close") {
-							setPopoverState("closed");
-						}
+					className="_anchor"
+					onClick={() => {
+						setIsOpen(!isOpen);
 					}}
-					ref={setContentRef}
-				>
-					<div className={classes._body()}>
-						<div className={classes._body.arrow()}></div>
-						<div className={classes._body.contents()}>{children}</div>
-						{closeButton && (
-							<div className={classes._body.control()}>
-								<div className={classes._body.control.button("is-button-close")} onClick={onClose}></div>
-							</div>
-						)}
-					</div>
+				></div>
+				<div className="_body" inert={!isOpen} inert={!isOpen} popover={closeOnClickAway ? "auto" : "manual"} ref={setPopoverRef}>
+					<div className="_arrow"></div>
+					<div className="_contents">{children}</div>
+					{closeButton && (
+						<div className="_control">
+							<div className="_button is-button-close" onClick={() => setIsOpen(false)}></div>
+						</div>
+					)}
 				</div>
-			</Catpow.External>
-		</Fragment>
+			</div>
+		</Catpow.Bem>
 	);
 };

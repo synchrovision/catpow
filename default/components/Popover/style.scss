@@ -1,5 +1,8 @@
 @import 'admin_style_config.scss';
 .cp-popover{
+	$block:&;
+	@include anc((n:--anchor,s:a));
+	@include bnd((d:b,p:a,i:0,w:f,h:f,z:10000));
 	&.is-open{
 		@include anm((a:PopoverOpen .5s a 1 f));
 	}
@@ -10,23 +13,18 @@
 		@include bnd((d:n));
 		@include usr((e:n));
 	}
-	&-anchor{
-		@include bnd((d:b,p:a,t:0,b:0,l:0,r:0,z:10000));
-		@include usr((e:n));
-	}
-	&-container{
-		@include bnd((p:f,t:0,r:0,w:500,h:100,z:'500000'));
-		@include usr((e:n));
-		@include trn((t:.1s));
+	&__anchor{
+		@include bnd((d:b,p:a,i:0,w:f,h:f));
 	}
 	&__body{
-		@include bnd((d:b,p:a,mg:a));
-		@include bdr((r:10));
+		@include pos((anc:--anchor,a:t c,t:fb));
+		@include bnd((d:b,p:f,t:0,b:0,mg:1em));
+		@include bdr((s:n,r:10));
 		@include bg((c:b));
 		@include shd((b:10));
 		@include usr((e:a));
 		&-arrow{
-			@include bnd((d:b,p:a,w:32,h:16));
+			@include bnd((d:n));
 			@include bg((c:b));
 		}
 		&-contents{
@@ -52,50 +50,6 @@
 						@include trn((r:-45deg));
 					}
 				}
-			}
-		}
-	}
-	&.is-top &{
-		&__body{
-			@include bnd((b:f));
-			@include trn((y:-10));
-			&-arrow{
-				@include bnd((t:f));
-				clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
-			}
-		}
-	}
-	&.is-bottom &{
-		&__body{
-			@include bnd((t:f));
-			@include trn((y:10));
-			&-arrow{
-				@include bnd((b:f));
-				clip-path: polygon(0% 100%, 100% 100%, 50% 0%);
-			}
-		}
-	}
-	&.is-left &{
-		&__body{
-			@include bnd((r:0));
-				&-arrow{
-				@include bnd((mgr:30));
-			}
-		}
-	}
-	&.is-center &{
-		&__body{
-			@include bnd((l:-30vw,r:-30vw));
-			&-arrow{
-				@include bnd((l:-30vw,r:-30vw,mgi:a));
-			}
-		}
-	}
-	&.is-right &{
-		&__body{
-			@include bnd((l:0));
-			&-arrow{
-				@include bnd((mgl:30));
 			}
 		}
 	}
