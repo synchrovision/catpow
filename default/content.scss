@@ -268,7 +268,7 @@ html{
 		}
 		&-tag{
 			@extend %label-component;
-			@include bnd((d:ib));
+			@include bnd((d:ib,mg:c-l));
 			@include bg((c:mx));
 			@include txt((c:bx,h:1em,s:n));
 			@include usr((c:p));

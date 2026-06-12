@@ -3379,6 +3379,7 @@ html {
 }
 .cp-rtf-tag {
   display: inline-block;
+  margin: var(--cp-margin-c-l);
   background-color: oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1));
   color: oklch(var(--cp-tones-bx-l) var(--cp-tones-bx-c) var(--cp-tones-bx-h) / var(--cp-tones-bx-a,1));
   line-height: 1em;
