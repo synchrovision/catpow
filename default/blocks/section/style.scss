@@ -46,7 +46,7 @@
 						}
 					}
 					&-title{
-						@include bnd((p:r,pd:f,z:2));
+						@include bnd((p:r,pd:f,pdi:0,z:2));
 						&-prefix{
 							@include txt((p:1.25em,h:1.5em,w:r,f:d,c:mx));
 						}
