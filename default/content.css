@@ -738,6 +738,7 @@
 }
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 6.25rem;
   color: oklch(var(--cp-tones-tx-l) var(--cp-tones-tx-c) var(--cp-tones-tx-h) / var(--cp-tones-tx-a,1));
   font-family: var(--cp-font-family-t-p);
 }
