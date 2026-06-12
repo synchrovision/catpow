@@ -81,13 +81,25 @@
 					}
 				}
 			}
+			&.is-align-left > #{$body} > #{$header},
+			&.is-align-right > #{$body} > #{$header}{
+				#{$header}{
+					&-image{
+						&-picture{
+							&-img{
+								@include bnd((w:calc(70vw - 100px)));
+							}
+						}
+					}
+				}
+			}
 			&.is-align-left > #{$body} > #{$header}{
 				#{$header}{
 					&-image{
 						&-picture{
 							&-img{
 								@include msk((g:l 90deg 0% 40%));
-								@include bnd((w:60%,mgl:a));
+								@include bnd((mgl:a));
 							}
 						}
 					}
@@ -112,7 +124,7 @@
 						&-picture{
 							&-img{
 								@include msk((g:l -90deg 0% 40%));
-								@include bnd((w:60%,mgr:a));
+								@include bnd((mgr:a));
 							}
 						}
 					}
