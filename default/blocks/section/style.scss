@@ -10,7 +10,7 @@
 	@include bnd((d:b,p:r,mgi:a,pd:b,bi:a));
 	&__header{
 		&-title{
-			@include bnd((mgi:a));
+			@include bnd((mgi:a,bs:b));
 			@include txt((p:t-h));
 			&-heading{
 				@extend %heading-block;
@@ -31,40 +31,30 @@
 		}
 	}
 	&.is-type-scene{
-		@include bnd((p:r,z:1));
+		@include bnd((p:r,pdt:0,z:1));
 		> #{$body}{
 			@include bnd((p:r,z:1));
 			> #{$header}{
-				@include bnd((p:r,o:h,pd:20));
-				@include bp(720){
-					@include bnd((pd:40 20 20));
-				}
+				@include bnd((p:r));
 				#{$header}{
-					&-title{
-						@include bnd((p:r,z:1));
-						&-prefix{
-							@include txt((a:c,p:1.25em,h:1.5em,w:r,f:d,c:mx));
-						}
-						&-image{
-							@include bnd((d:b));
-							@include txt((a:c));
-							img{
-								@include bnd((d:b,w:a,h:80,of:c,op:c));
+					&-image{
+						@include bnd((d:b,p:a,i:0,z:1));
+						&-picture{
+							&-img{
+								@include bnd((d:b,p:a,w:f,h:f,i:0,op:c,of:c));
 							}
+						}
+					}
+					&-title{
+						@include bnd((p:r,pd:f,z:2));
+						&-prefix{
+							@include txt((p:1.25em,h:1.5em,w:r,f:d,c:mx));
 						}
 						&-heading{
-							@include bnd((pd:20 10,p:r));
-							@include txt((a:c,c:mx,b:k));
-							strong{
-								@include txt((p:1.5em,c:ax));
-							}
+							@include txt((c:mx,b:k));
 						}
 						&-lead{
-							@include bnd((pd:20 10,p:r,w:fit f,mg:a));
-							@include txt((a:j,c:tx,w:t));
-							@include bp(-960){
-								@include bnd((w:fit 400));
-							}
+							@include txt((c:tx,w:t));
 						}
 					}
 				}
@@ -84,33 +74,50 @@
 			}
 		}
 		&.has-header-image{
-			> #{$body} > #{$header}{
+			 > #{$body} > #{$header}{
 				#{$header}{
 					&-title{
-						&-image{
-							@include bnd((p:r,f:0 1 a,nth:1));
-							img{
-								@include bnd((d:b,w:a,h:6em,mgi:a));
-							}
-						}
+
 					}
 				}
 			}
-		}
-		@include bp(pc){
-			&.is-aligin-left > #{$body}{
-				@include flx((w:w));
-			}
-			&.is-aligin-right > #{$body}{
-				@include flx((w:w,d:rr));
-			}
-			&.is-aligin-left,&.is-aligin-right{
-				 > #{$body}{
-					> #{$header}{
-						@include bnd((f:0 0 400));
+			&.is-align-left > #{$body} > #{$header}{
+				#{$header}{
+					&-image{
+						&-picture{
+							&-img{
+								@include msk((g:l 90deg 0% 40%));
+								@include bnd((w:60%,mgl:a));
+							}
+						}
 					}
-					> #{$contents}{
-						@include bnd((f:1 1 400));
+					&-title{
+						@include txt((a:l));
+					}
+				}
+			}
+			&.is-align-center > #{$body} > #{$header}{
+				#{$header}{
+					&-image{
+						@include msk((g:l 90deg 0% 0% 10% 30% 70% 90%));
+					}
+					&-title{
+						@include txt((a:c));
+					}
+				}
+			}
+			&.is-align-right > #{$body} > #{$header}{
+				#{$header}{
+					&-image{
+						&-picture{
+							&-img{
+								@include msk((g:l -90deg 0% 40%));
+								@include bnd((w:60%,mgr:a));
+							}
+						}
+					}
+					&-title{
+						@include txt((a:r));
 					}
 				}
 			}
@@ -130,11 +137,6 @@
 							@include txt((c:tx));
 						}
 					}
-				}
-			}
-			> #{$contents}{
-				.gmap{
-					@include bnd((h:300 a));
 				}
 			}
 		}

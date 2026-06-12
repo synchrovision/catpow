@@ -35,5 +35,5 @@ $attributes=[
 	'iconSrc'=>['source'=>'attribute','selector'=>'.icon [src]','attribute'=>'src','default'=>cp::get_file_url('images/dummy_icon.svg')],
 	'iconAlt'=>['source'=>'attribute','selector'=>'.icon [src]','attribute'=>'alt'],
 ]
-+BlockConfig::getPictureAttributes(".{$block_class}__header-title-image-image",'headerImage',['tb','sp'],'dummy_title_image.png')
++BlockConfig::getPictureAttributes(".{$block_class}__header-image-picture",'headerImage',['tb','sp'],'dummy_title_image.png')
 +BlockConfig::getPictureAttributes(".{$block_class}__header-title-titleimage-image",'titleImage',['tb','sp'],'dummy_title_image.png');
