@@ -1,0 +1,68 @@
+{
+	"$defs": {
+		"jsonSchema": {
+			"properties": {
+				"@editor": {
+					"type": "string",
+					"enum": [
+						"Toggle",
+						"Time",
+						"Text",
+						"Textarea",
+						"StepSelect",
+						"Select",
+						"ReadOnly",
+						"SearchSelect",
+						"Range",
+						"Radio",
+						"ObjectInput",
+						"Number",
+						"None",
+						"Input",
+						"index.js Duration",
+						"DateTime",
+						"Date",
+						"Checkbox",
+						"ArrayInput"
+					]
+				},
+				"type": { "type": "string", "enum": ["string", "number", "integer", "array", "boolean"] },
+				"label": { "type": "string" },
+				"layout": { "type": "string", "enum": ["inline", "table", "block"] },
+				"size": { "type": "string", "enum": ["small", "medium", "large"] },
+				"minimum": { "type": "number" },
+				"maximum": { "type": "number" },
+				"multipleOf": { "type": "number" },
+				"maxLength": { "type": "integer" },
+				"pattern": { "type": "string" },
+				"rows": { "type": "integer" },
+				"cols": { "type": "integer" },
+				"format": { "type": "string", "enum": ["uri", "uri-reference", "email", "email", "idn-email", "datetime", "date-time", "date", "time", "duration", "text"] },
+				"properties": {
+					"type": "object",
+					"additionalProperties": { "$ref": "#/$defs/jsonSchema" }
+				},
+				"items": {
+					"$ref": "#/$defs/jsonSchema"
+				},
+				"enum": {
+					"type": "array",
+					"items": { "type": "string" }
+				},
+				"options": {
+					"type": "object"
+				},
+				"default": {
+					"oneOf": [{ "type": "string" }, { "type": "number" }, { "type": "array" }, { "type": "boolean" }]
+				}
+			}
+		}
+	},
+	"properties": {
+		"emptyElement": { "type": "boolean", "default": true },
+		"properties": {
+			"type": "object",
+			"additionalProperties": { "$ref": "#/$defs/jsonSchema" }
+		}
+	}
+}

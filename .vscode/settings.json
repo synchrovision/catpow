@@ -11,6 +11,10 @@
 	},
 	"json.schemas": [
 		{
+			"fileMatch": ["elements/**/schema.json", "default/elements/**/schema.json"],
+			"url": "./schema/editor.json"
+		},
+		{
 			"fileMatch": ["components/**/deps.json", "default/components/**/deps.json"],
 			"url": "./schema/component.deps.json"
 		},
