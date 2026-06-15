@@ -644,6 +644,21 @@ export const SelectClassPanelBlock = ({ prm }) => {
 					rtn.push(<CP.SelectPictureSources index={props.index} set={props.set} attr={props.attr} keys={prm.keys} sizes={prm.sizes} devices={prm.devices} isTemplate={prm.isTemplate} />);
 					break;
 				}
+				case "pictures": {
+					if (prm.label) {
+						rtn.push(<h5>{prm.label}</h5>);
+					}
+					rtn.push(
+						<ul className="cp-pictures">
+							{props.attr[prm.key].map((item, index) => (
+								<CP.Item tag="li" className="cp-pictures__item" set={props.set} attr={props.attr} items={props.attr[prm.key]} index={index} indexKey={prm.indexKey} isSelected={true} key={index}>
+									<CP.SelectPictureSources index={index} set={props.set} attr={props.attr} keys={prm.keys} sizes={prm.sizes} devices={prm.devices} compact={true} isTemplate={prm.isTemplate} />
+								</CP.Item>
+							))}
+						</ul>,
+					);
+					break;
+				}
 				case "backgroundimage": {
 					if (prm.label) {
 						rtn.push(<h5>{prm.label}</h5>);

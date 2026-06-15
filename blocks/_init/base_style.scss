@@ -23,6 +23,7 @@ $colors:(
 .cp{
 	&-item{
 		@include anc((n:--item,s:a));
+		@include trn((s:1));
 	}
 	&-label{
 		@include bnd((w:fit,mgl:a,pd:.25em,ac:c));
@@ -333,11 +334,9 @@ $colors:(
 		}
 	}
 	&-selectpicturesources{
+		$block:&;
 		@include bnd((w:f,pd:8,bs:b,cnt:i));
 		@include grd((tc:2fr 1fr,g:8));
-		&.is-compact{
-			@include bnd((w:100));
-		}
 		&__item{
 			@include bnd((p:r));
 			@include bg((c:#ddd));
@@ -354,6 +353,23 @@ $colors:(
 			&-img{
 				@include bnd((d:b,w:f,h:50cqw,op:c,of:c));
 			}
+		}
+		&.is-compact{
+			@include bnd((w:a 300,h:a,a:3));
+			@include grd((tc:2fr 1fr 2fr 1fr,g:4));
+			#{$block}{
+				@include bnd((p:r));
+				&-image{
+					&-img{
+						@include bnd((d:b,p:a,i:0,w:f,h:f,op:c,o:fc));
+					}
+				}
+			}
+		}
+	}
+	&-pictures{
+		&__item{
+			@include bnd((pdt:16));
 		}
 	}
 	&-customcolorvars{
@@ -451,7 +467,7 @@ $colors:(
 		$block:&;
 		@include bnd((p:r));
 		&.is-position-absolute{
-			@include bnd((p:f,t:0,r:0));
+			@include bnd((p:f,t:0,r:0,z:100));
 			@include pos((anc:--item,a:c));
 		}
 		&__body{

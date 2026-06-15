@@ -4200,6 +4200,15 @@
             rtn.push(/* @__PURE__ */ wp.element.createElement(CP.SelectPictureSources, { index: props.index, set: props.set, attr: props.attr, keys: prm.keys, sizes: prm.sizes, devices: prm.devices, isTemplate: prm.isTemplate }));
             break;
           }
+          case "pictures": {
+            if (prm.label) {
+              rtn.push(/* @__PURE__ */ wp.element.createElement("h5", null, prm.label));
+            }
+            rtn.push(
+              /* @__PURE__ */ wp.element.createElement("ul", { className: "cp-pictures" }, props.attr[prm.key].map((item2, index) => /* @__PURE__ */ wp.element.createElement(CP.Item, { tag: "li", className: "cp-pictures__item", set: props.set, attr: props.attr, items: props.attr[prm.key], index, indexKey: prm.indexKey, isSelected: true, key: index }, /* @__PURE__ */ wp.element.createElement(CP.SelectPictureSources, { index, set: props.set, attr: props.attr, keys: prm.keys, sizes: prm.sizes, devices: prm.devices, compact: true, isTemplate: prm.isTemplate }))))
+            );
+            break;
+          }
           case "backgroundimage": {
             if (prm.label) {
               rtn.push(/* @__PURE__ */ wp.element.createElement("h5", null, prm.label));
