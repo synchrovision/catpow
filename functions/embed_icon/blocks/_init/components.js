@@ -22,7 +22,7 @@
     },
     Output: (props) => {
       const { className = "icon", item } = props;
-      return /* @__PURE__ */ wp.element.createElement("svg", { className, "data-src": item.embedIconSrc, xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("use", { href: item.embedIconSrc.replace(/\?.+$/, "?c=currentColor") + "#root" }));
+      return /* @__PURE__ */ wp.element.createElement("svg", { className, "data-src": item?.embedIconSrc, xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 20 20" }, /* @__PURE__ */ wp.element.createElement("use", { href: item?.embedIconSrc?.replace(/\?.+$/, "") + "?c=currentColor#root" }));
     }
   };
 })();
