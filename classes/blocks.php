@@ -303,9 +303,11 @@ class blocks{
 					$attributes=apply_filters("cp_block_attributes_{$filter}",$attributes,$filter_args);
 				}
 			}
-			if(!empty($attributes['items']['filters'])){
-				foreach($attributes['items']['filters'] as $filter=>$filter_args){
-					$attributes['items']=apply_filters("cp_block_items_attributes_{$filter}",$attributes['items'],$filter_args);
+			foreach($attributes as $name=>$attr){
+				if(!empty($attr['filters'])){
+					foreach($attr['filters'] as $filter=>$filter_args){
+						$attributes[$name]=apply_filters("cp_block_items_attributes_{$filter}",$attributes[$name],$filter_args);
+					}
 				}
 			}
 			$param['attributes']=$attributes;
