@@ -71,14 +71,23 @@
 		}
 	}
 	&.is-type-info{
-		@include tbl(());
+		@include bnd((d:b));
 		#{$block}{
-			&__tbody{
+			&__thead,&__tbody{
+				@include grd((tc:a 1fr));
 				&-tr{
-					&+tr{
-						th,td{
-							@include bdr((p:t,s:s,w:1,c:tx 50));
+					@include bnd((gc:span 2));
+					@include grd((tc:s));
+					@include bp(-pc){
+						&-th,&-td{
+							@include bnd((gc:span 2));
 						}
+						&-th{
+							@include bnd((pdb:0));
+						}
+					}
+					&:not(:first-child){
+						@include bdr((p:t,s:s,w:1,c:tx 50,r:0));
 					}
 				}
 			}

@@ -102,13 +102,36 @@
   display: inline-block;
 }
 .wp-block-catpow-simpletable.is-type-info {
-  border-collapse: collapse;
-  border-spacing: 0px;
+  display: block;
 }
-.wp-block-catpow-simpletable.is-type-info .wp-block-catpow-simpletable__tbody-tr + tr th, .wp-block-catpow-simpletable.is-type-info .wp-block-catpow-simpletable__tbody-tr + tr td {
+.wp-block-catpow-simpletable.is-type-info .wp-block-catpow-simpletable__thead, .wp-block-catpow-simpletable.is-type-info .wp-block-catpow-simpletable__tbody {
+  display: -webkit-grid;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto 1fr;
+  grid-template-columns: auto 1fr;
+}
+.wp-block-catpow-simpletable.is-type-info .wp-block-catpow-simpletable__thead-tr, .wp-block-catpow-simpletable.is-type-info .wp-block-catpow-simpletable__tbody-tr {
+  grid-column: span 2;
+  display: -webkit-grid;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: subgrid;
+  grid-template-columns: subgrid;
+}
+@media (max-width:959px) {
+  .wp-block-catpow-simpletable.is-type-info .wp-block-catpow-simpletable__thead-tr-th, .wp-block-catpow-simpletable.is-type-info .wp-block-catpow-simpletable__thead-tr-td, .wp-block-catpow-simpletable.is-type-info .wp-block-catpow-simpletable__tbody-tr-th, .wp-block-catpow-simpletable.is-type-info .wp-block-catpow-simpletable__tbody-tr-td {
+    grid-column: span 2;
+  }
+  .wp-block-catpow-simpletable.is-type-info .wp-block-catpow-simpletable__thead-tr-th, .wp-block-catpow-simpletable.is-type-info .wp-block-catpow-simpletable__tbody-tr-th {
+    padding-bottom: 0rem;
+  }
+}
+.wp-block-catpow-simpletable.is-type-info .wp-block-catpow-simpletable__thead-tr:not(:first-child), .wp-block-catpow-simpletable.is-type-info .wp-block-catpow-simpletable__tbody-tr:not(:first-child) {
   border-top-style: solid;
   border-top-width: 0.0625rem;
   border-top-color: oklch(calc(1 - var(--cp-tones-tx-t) * 50) var(--cp-tones-tx-c) var(--cp-tones-tx-h) / var(--cp-tones-tx-a,1));
+  border-radius: 0rem;
 }
 .wp-block-catpow-simpletable.is-type-history {
   border-collapse: collapse;
