@@ -143,6 +143,20 @@ export const EditItemsTable = (props) => {
 												</td>
 											);
 										}
+										case "icon": {
+											return (
+												<td key={c}>
+													<CP.InputIcon
+														prm={col}
+														item={item}
+														save={(values) => {
+															Object.assign(item, values);
+															save();
+														}}
+													/>
+												</td>
+											);
+										}
 										case "items": {
 											col.columns.forEach((subCol) => {
 												if (subCol.keys) {
