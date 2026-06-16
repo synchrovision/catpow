@@ -1,0 +1,8 @@
+{
+	"properties": {
+		"duration": { "type": "integer", "minimum": 1000, "maximum": 20000, "steps": { "1000": 0, "5000": 100, "10000": 500, "20000": 1000 }, "default": 5000 },
+		"interval": { "type": "integer", "minimum": 0, "maximum": 100, "default": 50 },
+		"zoom": { "type": "integer", "minimum": -100, "maximum": 100, "default": 0 },
+		"slide": { "type": "boolean", "default": false }
+	}
+}

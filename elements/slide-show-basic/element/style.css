@@ -1,0 +1,27 @@
+.slide-show-basic__body-picture {
+  display: block;
+  position: absolute;
+  top: 0rem;
+  right: 0rem;
+  bottom: 0rem;
+  left: 0rem;
+  inset: 0rem;
+  width: 100%;
+  height: 100%;
+  object-position: center;
+  object-fit: cover;
+}
+.slide-show-basic__body-picture-img {
+  display: block;
+  position: absolute;
+  top: 0rem;
+  right: 0rem;
+  bottom: 0rem;
+  left: 0rem;
+  inset: 0rem;
+  width: 100%;
+  height: 100%;
+  object-position: center;
+  object-fit: cover;
+}
+/*# sourceMappingURL=./style.css.map */
