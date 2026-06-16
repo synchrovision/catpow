@@ -9,6 +9,10 @@ class SlideShowBasic extends HTMLElement {
 	}
 	connectedCallback() {
 		this.pictures = [...this.querySelectorAll("picture")];
+		this.pictures.forEach((picture) => {
+			picture.setAttribute("class", "_picture");
+			[...picture.children].forEach((child) => child.removeAttribute("class"));
+		});
 		this.render();
 	}
 	attributeChangedCallback(name, oldValue, newValue) {
@@ -31,7 +35,7 @@ class SlideShowBasic extends HTMLElement {
 		const pictures = this.pictures;
 		const delay = duration * 0.5 + duration * 0.5 * interval * 0.01;
 		const fadeDuration = duration * 0.5 - duration * 0.5 * interval * 0.01;
-		const totalDuration = (pictures.length - 1) * delay + duration;
+		const totalDuration = pictures.length * delay;
 		const options = {
 			duration: totalDuration,
 			iterations: Infinity,
@@ -44,9 +48,7 @@ class SlideShowBasic extends HTMLElement {
 		];
 		console.log(keyframes);
 		pictures.forEach((picture, index) => {
-			console.log({ ...options, delay: delay * index });
-			picture.setAttribute("class", "_picture");
-			[...picture.children].forEach((child) => child.removeAttribute("class"));
+			picture.getAnimations().forEach((animation) => animation.cancel());
 			picture.animate(keyframes, { ...options, delay: delay * index });
 		});
 		const style = el("style", {}, [cssCode]);

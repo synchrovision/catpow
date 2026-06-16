@@ -81,7 +81,7 @@ var el = (tag, props, children, namespace) => {
   return el2;
 };
 
-// _dhxtapf3i:/Users/hatanokazuhiro/repos/e-production.co.jp/wp-content/plugins/catpow/elements/slide-show-basic/element/style.css
+// _pn9vgnh5c:/Users/hatanokazuhiro/repos/e-production.co.jp/wp-content/plugins/catpow/elements/slide-show-basic/element/style.css
 var style_default = ".slide-show-basic__body-picture {\n  display: block;\n  position: absolute;\n  top: 0rem;\n  right: 0rem;\n  bottom: 0rem;\n  left: 0rem;\n  inset: 0rem;\n  width: 100%;\n  height: 100%;\n  object-position: center;\n  object-fit: cover;\n}\n.slide-show-basic__body-picture-img {\n  display: block;\n  position: absolute;\n  top: 0rem;\n  right: 0rem;\n  bottom: 0rem;\n  left: 0rem;\n  inset: 0rem;\n  width: 100%;\n  height: 100%;\n  object-position: center;\n  object-fit: cover;\n}\n/*# sourceMappingURL=./style.css.map */";
 
 // ../elements/slide-show-basic/element/index.mjs.jsx
@@ -93,6 +93,10 @@ var SlideShowBasic = class extends HTMLElement {
   }
   connectedCallback() {
     this.pictures = [...this.querySelectorAll("picture")];
+    this.pictures.forEach((picture) => {
+      picture.setAttribute("class", "_picture");
+      [...picture.children].forEach((child) => child.removeAttribute("class"));
+    });
     this.render();
   }
   attributeChangedCallback(name, oldValue, newValue) {
@@ -115,7 +119,7 @@ var SlideShowBasic = class extends HTMLElement {
     const pictures = this.pictures;
     const delay = duration * 0.5 + duration * 0.5 * interval * 0.01;
     const fadeDuration = duration * 0.5 - duration * 0.5 * interval * 0.01;
-    const totalDuration = (pictures.length - 1) * delay + duration;
+    const totalDuration = pictures.length * delay;
     const options = {
       duration: totalDuration,
       iterations: Infinity
@@ -128,9 +132,7 @@ var SlideShowBasic = class extends HTMLElement {
     ];
     console.log(keyframes);
     pictures.forEach((picture, index) => {
-      console.log({ ...options, delay: delay * index });
-      picture.setAttribute("class", "_picture");
-      [...picture.children].forEach((child) => child.removeAttribute("class"));
+      picture.getAnimations().forEach((animation) => animation.cancel());
       picture.animate(keyframes, { ...options, delay: delay * index });
     });
     const style = el("style", {}, [style_default]);
