@@ -118,6 +118,17 @@ export const selectiveClassesPresets = {
 			...otherParams,
 		};
 	},
+	alignContent: {
+		name: "alignContent",
+		type: "buttons",
+		label: __("コンテンツ揃え", "catpow"),
+		values: {
+			hasAlignContentStart: __("上", "catpow"),
+			hasAlignContentCenter: __("中央", "catpow"),
+			hasAlignContentSpaceBetween: __("両端", "catpow"),
+			hasAlignContentEnd: __("下", "catpow"),
+		},
+	},
 	textAlign: {
 		name: "textAlign",
 		type: "buttons",
@@ -484,6 +495,7 @@ export const selectiveClassesPresets = {
 					},
 				],
 			},
+			...otherParams,
 		};
 	},
 	itemAlign: {
