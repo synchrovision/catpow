@@ -2,8 +2,6 @@
 CP.EmbedIcon = {
 	Input: (props) => {
 		const { item, prm, save } = props;
-		const parser = new DOMParser();
-		const serializer = new XMLSerializer();
 		return (
 			<CP.SelectPreparedImage
 				name="icon"
