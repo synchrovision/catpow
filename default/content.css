@@ -221,6 +221,18 @@
 :root .has-item-size-custom {
   --cp-size-i:var(--cp-size-i-custom);
 }
+:root .has-align-content-start {
+  align-content: start;
+}
+:root .has-align-content-center {
+  align-content: center;
+}
+:root .has-align-content-space-between {
+  align-content: space-between;
+}
+:root .has-align-content-end {
+  align-content: end;
+}
 :root .has-clip-path {
   padding-top: calc((var(--cp-padding-top,0) + var(--cp-clip-shape-upper-height,40) * 0.0625rem));
   padding-bottom: calc((var(--cp-padding-bottom,0) + var(--cp-clip-shape-below-height,40) * 0.0625rem));
