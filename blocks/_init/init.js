@@ -4914,6 +4914,19 @@
             case "picture": {
               return /* @__PURE__ */ wp.element.createElement("td", { key: c3 }, /* @__PURE__ */ wp.element.createElement(CP.SelectPictureSources, { index, attr, set, keys: { items: itemsKey2, ...col.keys }, sizes: col.sizes, devices: col.devices, isTemplate }));
             }
+            case "icon": {
+              return /* @__PURE__ */ wp.element.createElement("td", { key: c3 }, /* @__PURE__ */ wp.element.createElement(
+                CP.InputIcon,
+                {
+                  prm: col,
+                  item,
+                  save: (values) => {
+                    Object.assign(item, values);
+                    save();
+                  }
+                }
+              ));
+            }
             case "items": {
               col.columns.forEach((subCol) => {
                 if (subCol.keys) {
@@ -5947,6 +5960,17 @@
         ...otherParams
       };
     },
+    alignContent: {
+      name: "alignContent",
+      type: "buttons",
+      label: __13("\u30B3\u30F3\u30C6\u30F3\u30C4\u63C3\u3048", "catpow"),
+      values: {
+        hasAlignContentStart: __13("\u4E0A", "catpow"),
+        hasAlignContentCenter: __13("\u4E2D\u592E", "catpow"),
+        hasAlignContentSpaceBetween: __13("\u4E21\u7AEF", "catpow"),
+        hasAlignContentEnd: __13("\u4E0B", "catpow")
+      }
+    },
     textAlign: {
       name: "textAlign",
       type: "buttons",
@@ -6312,7 +6336,8 @@
               input: "responsiveItemSize"
             }
           ]
-        }
+        },
+        ...otherParams
       };
     },
     itemAlign: {
