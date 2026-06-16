@@ -14,7 +14,6 @@
 		}
 	}, [isOpen]);
 
-	console.log("Popover");
 	return (
 		<Catpow.Bem>
 			<div className={`${className} is-size-${size} is-${isOpen ? "open" : "close"}`}>
@@ -24,7 +23,7 @@
 						setIsOpen(!isOpen);
 					}}
 				></div>
-				<div className="_body" inert={!isOpen} popover={closeOnClickAway ? "auto" : "manual"} ref={setPopoverRef}>
+				<div className="_body" {...{ inert: isOpen ? null : "" }} popover={closeOnClickAway ? "auto" : "manual"} ref={setPopoverRef}>
 					<div className="_arrow"></div>
 					<div className="_contents">{children}</div>
 					{closeButton && (

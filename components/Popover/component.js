@@ -13,7 +13,6 @@
         popoverRef.togglePopover(isOpen);
       }
     }, [isOpen]);
-    console.log("Popover");
     return /* @__PURE__ */ wp.element.createElement(Catpow.Bem, null, /* @__PURE__ */ wp.element.createElement("div", { className: `${className} is-size-${size} is-${isOpen ? "open" : "close"}` }, /* @__PURE__ */ wp.element.createElement(
       "div",
       {
@@ -22,6 +21,6 @@
           setIsOpen(!isOpen);
         }
       }
-    ), /* @__PURE__ */ wp.element.createElement("div", { className: "_body", inert: !isOpen, popover: closeOnClickAway ? "auto" : "manual", ref: setPopoverRef }, /* @__PURE__ */ wp.element.createElement("div", { className: "_arrow" }), /* @__PURE__ */ wp.element.createElement("div", { className: "_contents" }, children), closeButton && /* @__PURE__ */ wp.element.createElement("div", { className: "_control" }, /* @__PURE__ */ wp.element.createElement("div", { className: "_button is-button-close", onClick: () => setIsOpen(false) })))));
+    ), /* @__PURE__ */ wp.element.createElement("div", { className: "_body", ...{ inert: isOpen ? null : "" }, popover: closeOnClickAway ? "auto" : "manual", ref: setPopoverRef }, /* @__PURE__ */ wp.element.createElement("div", { className: "_arrow" }), /* @__PURE__ */ wp.element.createElement("div", { className: "_contents" }, children), closeButton && /* @__PURE__ */ wp.element.createElement("div", { className: "_control" }, /* @__PURE__ */ wp.element.createElement("div", { className: "_button is-button-close", onClick: () => setIsOpen(false) })))));
   };
 })();
