@@ -3,33 +3,34 @@
 	$block:&;
 	@include anc((n:--anchor,s:a));
 	@include bnd((d:b,p:a,i:0,w:f,h:f,z:10000));
+	@include trn((z:0));
 	&.is-open{
-		@include anm((a:PopoverOpen .5s a 1 f));
 	}
 	&.is-close{
-		@include anm((a:PopoverClose .5s a 1 f));
-	}
-	&.is-closed{
-		@include bnd((d:n));
-		@include usr((e:n));
 	}
 	&__anchor{
 		@include bnd((d:b,p:a,i:0,w:f,h:f));
 	}
 	&__body{
-		@include pos((anc:--anchor,a:t c,t:fb));
-		@include bnd((d:b,p:f,t:0,b:0,mg:1em));
-		@include bdr((s:n,r:10));
+		@include pos((anc:--anchor,a:b c,t:mh t c));
+		@include bnd((p:f,t:0,b:0,mg:1em));
+		@include bdr((s:n,r:8));
 		@include bg((c:b));
-		@include shd((b:10));
-		@include usr((e:a));
+		@include shd((b:8));
+		@include trn((t:.4s,o:1));
+		@starting-style {
+			&{
+				@include bnd((d:b));
+				@include trn((o:0));
+			}
+		}
 		&-arrow{
 			@include bnd((d:n));
 			@include bg((c:b));
 		}
 		&-contents{
 			@include bnd((h:a 50vh,ox:h,oy:a));
-			@include bdr((r:10));
+			@include bdr((r:8));
 		}
 		&-control{
 			&-button{
@@ -68,21 +69,5 @@
 		&__body{
 			@include bnd((w:max 90vw,h:a 80vh));
 		}
-	}
-}
-@keyframes PopoverOpen{
-	0%{
-		@include trn((o:0));
-	}
-	100%{
-		@include trn((o:1));
-	}
-}
-@keyframes PopoverClose{
-	0%{
-		@include trn((o:1));
-	}
-	100%{
-		@include trn((o:0));
 	}
 }
