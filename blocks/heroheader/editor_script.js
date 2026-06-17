@@ -76,6 +76,7 @@
           },
           "backgroundImage",
           { preset: "hasContentWidth", classKey: "bodyClasses" },
+          { name: "hasTextBackground", label: __("\u30C6\u30AD\u30B9\u30C8\u80CC\u666F", "catpow"), values: "hasTextBackground", classKey: "bodyClasses" },
           { preset: "hasPadding", classKey: "bodyClasses" },
           { preset: "textAlign", classKey: "bodyClasses" },
           { preset: "alignContent", classKey: "bodyClasses" },

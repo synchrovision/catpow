@@ -46,6 +46,7 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 				},
 				"backgroundImage",
 				{ preset: "hasContentWidth", classKey: "bodyClasses" },
+				{ name: "hasTextBackground", label: __("テキスト背景", "catpow"), values: "hasTextBackground", classKey: "bodyClasses" },
 				{ preset: "hasPadding", classKey: "bodyClasses" },
 				{ preset: "textAlign", classKey: "bodyClasses" },
 				{ preset: "alignContent", classKey: "bodyClasses" },
