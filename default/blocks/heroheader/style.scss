@@ -17,7 +17,8 @@
 					&::before{
 						content:'';
 						@include bnd((d:b,p:a,i:0 -30vw,z:1));
-						@include bg((g:l 90deg n bx n));
+						@include bg((g:l 60deg n bx n));
+						@include trn((o:.8));
 					}
 				}
 			}
