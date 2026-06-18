@@ -630,6 +630,40 @@
   --cp-margin-t-c:var(--cp-margin-t-c-6,0.75rem);
   --cp-font-size-t-c:var(--cp-font-size-t-c-6,0.75rem);
 }
+:root .has-text-color-text {
+  color: oklch(var(--cp-tones-tx-l) var(--cp-tones-tx-c) var(--cp-tones-tx-h) / var(--cp-tones-tx-a,1));
+}
+:root .has-text-color-highlight {
+  color: oklch(var(--cp-tones-hx-l) var(--cp-tones-hx-c) var(--cp-tones-hx-h) / var(--cp-tones-hx-a,1));
+}
+:root .has-text-color-gradient {
+  display: inline-block;
+  color: transparent;
+  background-image: -webkit-linear-gradient(left, oklch(var(--cp-tones-hx-l) var(--cp-tones-hx-c) var(--cp-tones-hx-h) / var(--cp-tones-hx-a,1)), oklch(from oklch(var(--cp-tones-hx-l) var(--cp-tones-hx-c) var(--cp-tones-hx-h) / var(--cp-tones-hx-a,1)) l c calc(h + 90)));
+  background-image: -moz-linear-gradient(left, oklch(var(--cp-tones-hx-l) var(--cp-tones-hx-c) var(--cp-tones-hx-h) / var(--cp-tones-hx-a,1)), oklch(from oklch(var(--cp-tones-hx-l) var(--cp-tones-hx-c) var(--cp-tones-hx-h) / var(--cp-tones-hx-a,1)) l c calc(h + 90)));
+  background-image: -ms-linear-gradient(left, oklch(var(--cp-tones-hx-l) var(--cp-tones-hx-c) var(--cp-tones-hx-h) / var(--cp-tones-hx-a,1)), oklch(from oklch(var(--cp-tones-hx-l) var(--cp-tones-hx-c) var(--cp-tones-hx-h) / var(--cp-tones-hx-a,1)) l c calc(h + 90)));
+  background-image: -o-linear-gradient(left, oklch(var(--cp-tones-hx-l) var(--cp-tones-hx-c) var(--cp-tones-hx-h) / var(--cp-tones-hx-a,1)), oklch(from oklch(var(--cp-tones-hx-l) var(--cp-tones-hx-c) var(--cp-tones-hx-h) / var(--cp-tones-hx-a,1)) l c calc(h + 90)));
+  background-image: linear-gradient(90deg, oklch(var(--cp-tones-hx-l) var(--cp-tones-hx-c) var(--cp-tones-hx-h) / var(--cp-tones-hx-a,1)), oklch(from oklch(var(--cp-tones-hx-l) var(--cp-tones-hx-c) var(--cp-tones-hx-h) / var(--cp-tones-hx-a,1)) l c calc(h + 90)));
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -ms-background-clip: text;
+  background-clip: text;
+}
+:root .has-font-size-relative-x-small {
+  font-size: var(--cp-font-size-r-xs);
+}
+:root .has-font-size-relative-small {
+  font-size: var(--cp-font-size-r-s);
+}
+:root .has-font-size-relative-medium {
+  font-size: var(--cp-font-size-r-m);
+}
+:root .has-font-size-relative-large {
+  font-size: var(--cp-font-size-r-l);
+}
+:root .has-font-size-relative-x-large {
+  font-size: var(--cp-font-size-r-xl);
+}
 :root .has-font-weight-thin {
   font-weight: var(--cp-font-weight-t);
 }
@@ -657,6 +691,21 @@
 :root .has-font-weight-heavy {
   font-weight: 900;
 }
+:root .has-font-weight-specific-x-light {
+  font-weight: var(--cp-font-weight-s-xl);
+}
+:root .has-font-weight-specific-light {
+  font-weight: var(--cp-font-weight-s-l);
+}
+:root .has-font-weight-specific-regular {
+  font-weight: var(--cp-font-weight-s-r);
+}
+:root .has-font-weight-specific-bold {
+  font-weight: var(--cp-font-weight-s-b);
+}
+:root .has-font-weight-specific-x-bold {
+  font-weight: var(--cp-font-weight-s-xb);
+}
 :root .has-text-align-left {
   text-align: left;
 }
@@ -665,6 +714,24 @@
 }
 :root .has-text-align-right {
   text-align: right;
+}
+:root .has-font-family-gohic {
+  font-family: var(--cp-font-family-f-g);
+}
+:root .has-font-family-mincho {
+  font-family: var(--cp-font-family-f-m);
+}
+:root .has-font-family-english {
+  font-family: var(--cp-font-family-f-e);
+}
+:root .has-font-family-code {
+  font-family: var(--cp-font-family-f-c);
+}
+:root .has-font-family-decoration {
+  font-family: var(--cp-font-family-f-d);
+}
+:root .has-font-family-script {
+  font-family: var(--cp-font-family-f-s);
 }
 :root .has-font-safe-serif {
   font-family: Georgia, "Times New Roman", Times, serif;
