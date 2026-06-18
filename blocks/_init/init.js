@@ -2246,8 +2246,8 @@
 
   // ../blocks/_init/init/CP/components/SelectButtons.jsx
   var SelectButtons = (props) => {
-    const { BaseControl, Button, ButtonGroup } = wp.components;
-    return /* @__PURE__ */ wp.element.createElement(BaseControl, { label: props.label, help: props.help, id: "cp-slectbuttons-" + wp.compose.useInstanceId(SelectButtons) }, /* @__PURE__ */ wp.element.createElement("div", { className: "cp-selectbuttons" }, /* @__PURE__ */ wp.element.createElement(ButtonGroup, null, props.options.map((option) => {
+    const { BaseControl: BaseControl2, Button, ButtonGroup } = wp.components;
+    return /* @__PURE__ */ wp.element.createElement(BaseControl2, { label: props.label, help: props.help, id: "cp-slectbuttons-" + wp.compose.useInstanceId(SelectButtons) }, /* @__PURE__ */ wp.element.createElement("div", { className: "cp-selectbuttons" }, /* @__PURE__ */ wp.element.createElement(ButtonGroup, null, props.options.map((option) => {
       const [, icon, label] = option.label.match(/^(?::([\w\-]+):)?(.*)$/u);
       return /* @__PURE__ */ wp.element.createElement(
         Button,
@@ -2265,7 +2265,7 @@
   // ../blocks/_init/init/CP/components/SelectGridButtons.jsx
   var { useMemo: useMemo2 } = wp.element;
   var SelectGridButtons = (props) => {
-    const { Icon, BaseControl } = wp.components;
+    const { Icon, BaseControl: BaseControl2 } = wp.components;
     const options3 = useMemo2(() => {
       return props.options.map((option) => {
         const [, icon, label] = option.label.match(/^(?::([\w\-]+):)?(.*)$/u);
@@ -2278,7 +2278,7 @@
     }, [props.options]);
     const maxStrlen = options3.reduce((acc, cur) => Math.max(acc, cur.label.length + cur.label.replace(/[ -~]+/, "").length), 3);
     const colNum = Math.min(6, Math.floor(36 / (maxStrlen + 2)));
-    return /* @__PURE__ */ wp.element.createElement(BaseControl, { label: props.label, help: props.help, id: "cp-selectgridbuttons-" + wp.compose.useInstanceId(SelectGridButtons) }, /* @__PURE__ */ wp.element.createElement(CP.Bem, null, /* @__PURE__ */ wp.element.createElement("ul", { className: "cp-selectgridbuttons has-columns-" + colNum }, props.options.map((option) => {
+    return /* @__PURE__ */ wp.element.createElement(BaseControl2, { label: props.label, help: props.help, id: "cp-selectgridbuttons-" + wp.compose.useInstanceId(SelectGridButtons) }, /* @__PURE__ */ wp.element.createElement(CP.Bem, null, /* @__PURE__ */ wp.element.createElement("ul", { className: "cp-selectgridbuttons has-columns-" + colNum }, props.options.map((option) => {
       const [, icon, label] = option.label.match(/^(?::([\w\-]+):)?(.*)$/u);
       return /* @__PURE__ */ wp.element.createElement(
         "li",
@@ -4622,14 +4622,14 @@
 
   // ../blocks/_init/init/CP/components/SelectColorClass.jsx
   var SelectColorClass = (props) => {
-    const { BaseControl } = wp.components;
+    const { BaseControl: BaseControl2 } = wp.components;
     const { label, help } = props;
-    return /* @__PURE__ */ wp.element.createElement(BaseControl, { label, help }, /* @__PURE__ */ wp.element.createElement(CP.SelectThemeColor, { onChange: props.onChange, selected: props.selected }));
+    return /* @__PURE__ */ wp.element.createElement(BaseControl2, { label, help }, /* @__PURE__ */ wp.element.createElement(CP.SelectThemeColor, { onChange: props.onChange, selected: props.selected }));
   };
 
   // ../blocks/_init/init/CP/components/SelectPatternClass.jsx
   var SelectPatternClass = (props) => {
-    const { BaseControl } = wp.components;
+    const { BaseControl: BaseControl2 } = wp.components;
     const { label, help, selected, onChange } = props;
     var items2 = Array.from(Array(6), (v, i) => {
       var classes = "bgPattern" + i;
@@ -4639,7 +4639,7 @@
       }
       return /* @__PURE__ */ wp.element.createElement("li", { className: classes, onClick: () => onChange(value2), key: value2 }, " ");
     });
-    return /* @__PURE__ */ wp.element.createElement(BaseControl, { label, help }, /* @__PURE__ */ wp.element.createElement("ul", { className: "cp-selectpattern" }, items2));
+    return /* @__PURE__ */ wp.element.createElement(BaseControl2, { label, help }, /* @__PURE__ */ wp.element.createElement("ul", { className: "cp-selectpattern" }, items2));
   };
 
   // ../blocks/_init/init/CP/components/SelectSize.jsx
@@ -4664,7 +4664,7 @@
 
   // ../blocks/_init/init/CP/components/SelectPositionClass.jsx
   var SelectPositionClass = (props) => {
-    const { BaseControl } = wp.components;
+    const { BaseControl: BaseControl2 } = wp.components;
     const rows = [
       ["topLeft", "top", "topRight"],
       ["left", "center", "right"],
@@ -4673,7 +4673,7 @@
     const values = _.flatten(rows);
     const { label, help, itemsKey: itemsKey2, index, disable } = props;
     let value2 = itemsKey2 ? CP.getItemSelectiveClass(props, values) : CP.getSelectiveClass(props, values);
-    return /* @__PURE__ */ wp.element.createElement(BaseControl, { label, help }, /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "cp" }, /* @__PURE__ */ wp.element.createElement("table", { className: "selectposition-" }, /* @__PURE__ */ wp.element.createElement("tbody", { className: "_body" }, rows.map((cols, index2) => /* @__PURE__ */ wp.element.createElement("tr", { className: "_row", key: index2 }, cols.map((col) => {
+    return /* @__PURE__ */ wp.element.createElement(BaseControl2, { label, help }, /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "cp" }, /* @__PURE__ */ wp.element.createElement("table", { className: "selectposition-" }, /* @__PURE__ */ wp.element.createElement("tbody", { className: "_body" }, rows.map((cols, index2) => /* @__PURE__ */ wp.element.createElement("tr", { className: "_row", key: index2 }, cols.map((col) => {
       var isChecked = value2 == col;
       if (disable && disable.includes(col)) {
         return /* @__PURE__ */ wp.element.createElement("td", { className: "_cell is-disabled", key: col }, " ");
@@ -4987,7 +4987,7 @@
   var EventInputCards = (props) => {
     const { title, onChange } = props;
     const { useState: useState5, useReducer: useReducer3, useCallback: useCallback3, useEffect: useEffect4, useMemo: useMemo9 } = wp.element;
-    const { BaseControl, Card: Card2, CardHeader, CardBody: CardBody2, CardFooter, Flex, FlexItem, FlexBlock, Icon, TextControl: TextControl2 } = wp.components;
+    const { BaseControl: BaseControl2, Card: Card2, CardHeader, CardBody: CardBody2, CardFooter, Flex, FlexItem, FlexBlock, Icon, TextControl: TextControl2 } = wp.components;
     const { processerId, eventTypes, parseEventValue, createEventValue, createEventString, eventParams } = props.processer;
     const reducer = useCallback3((state2, action) => {
       switch (action.type) {
@@ -5142,7 +5142,7 @@
         )));
       })), /* @__PURE__ */ wp.element.createElement(CardFooter, { className: "cp-eventinputcard__footer", size: "xSmall", justify: "center" }, createEventString(event)));
     }, []);
-    return /* @__PURE__ */ wp.element.createElement(BaseControl, null, state.events.length > 0 ? state.events.map((event, index) => /* @__PURE__ */ wp.element.createElement(EventInputCard, { event, index, canRemove: state.events.length > 1, key: index })) : /* @__PURE__ */ wp.element.createElement(EventInputCard, { event: {}, index: 0 }));
+    return /* @__PURE__ */ wp.element.createElement(BaseControl2, null, state.events.length > 0 ? state.events.map((event, index) => /* @__PURE__ */ wp.element.createElement(EventInputCard, { event, index, canRemove: state.events.length > 1, key: index })) : /* @__PURE__ */ wp.element.createElement(EventInputCard, { event: {}, index: 0 }));
   };
 
   // ../blocks/_init/init/CP/components/ServerSideRender.jsx
@@ -5275,7 +5275,7 @@
     const { className, set, attr, keys, index, devices: devices2 } = props;
     const { useState: useState5, useMemo: useMemo9, useCallback: useCallback3, useRef: useRef3, useEffect: useEffect4 } = wp.element;
     const { BlockControls: BlockControls2, InspectorControls } = wp.blockEditor;
-    const { BaseControl, Icon, PanelBody, RangeControl: RangeControl2, TextControl: TextControl2, Toolbar, ToolbarGroup: ToolbarGroup2, ToolbarButton, ToolbarDropdownMenu } = wp.components;
+    const { BaseControl: BaseControl2, Icon, PanelBody, RangeControl: RangeControl2, TextControl: TextControl2, Toolbar, ToolbarGroup: ToolbarGroup2, ToolbarButton, ToolbarDropdownMenu } = wp.components;
     const item = keys.items ? attr[keys.items][index] : attr;
     const pictures = item[keys.pictures];
     const classes = useMemo9(() => bem("cp-placedpictures " + className), [className]);
@@ -8218,9 +8218,60 @@
   // ../blocks/_init/init/format.jsx
   var { __: __14 } = wp.i18n;
   var { BlockControls, RichTextToolbarButton, RichTextShortcut } = wp.blockEditor;
-  var { Popover, BaseControle, TextControl, RangeControl, Card, CardBody, ToolbarGroup } = wp.components;
+  var { Popover, BaseControl, TextControl, RangeControl, Card, CardBody, ToolbarGroup } = wp.components;
   var { useState: useState4, useMemo: useMemo8, useCallback: useCallback2, useReducer: useReducer2, useEffect: useEffect3 } = wp.element;
   var { removeFormat, applyFormat, toggleFormat, insert, create, slice } = wp.richText;
+  var textColorClasses = {
+    "has-text-color-text": "\u901A\u5E38",
+    "has-text-color-highlight": "\u5F37\u8ABF",
+    "has-text-color-gradient": "\u30B0\u30E9\u30C7\u30FC\u30B7\u30E7\u30F3"
+  };
+  var textColorClassSet = new Set(Object.keys(textColorClasses));
+  var fontSizeClasses = {
+    "has-font-size-relative-x-small": "\u6975\u5C0F",
+    "has-font-size-relative-small": "\u5C0F",
+    "has-font-size-relative-medium": "\u4E2D",
+    "has-font-size-relative-large": "\u5927",
+    "has-font-size-relative-x-large": "\u6975\u5927"
+  };
+  var fontSizeClassSet = new Set(Object.keys(fontSizeClasses));
+  var fontWeightClasses = {
+    "has-font-weight-specific-x-light": "\u6975\u7D30",
+    "has-font-weight-specific-light": "\u7D30",
+    "has-font-weight-specific-regular": "\u4E2D",
+    "has-font-weight-specific-bold": "\u592A",
+    "has-font-weight-specific-x-bold": "\u6975\u592A"
+  };
+  var fontWeightClassSet = new Set(Object.keys(fontWeightClasses));
+  var fontFamilyClasses = {
+    "has-font-family-gothic": "\u30B4\u30B7\u30C3\u30AF",
+    "has-font-family-mincho": "\u660E\u671D",
+    "has-font-family-english": "\u82F1\u6570",
+    "has-font-family-code": "\u30B3\u30FC\u30C9",
+    "has-font-family-decoration": "\u88C5\u98FE",
+    "has-font-family-script": "\u624B\u66F8\u304D"
+  };
+  var fontFamilyClassSet = new Set(Object.keys(fontFamilyClasses));
+  var toggleClass2 = (classes, targetClass, classSet) => {
+    if (!classes) {
+      return targetClass;
+    }
+    const currentClassSet = new Set(classes.split(" "));
+    if (currentClassSet.has(targetClass)) {
+      currentClassSet.delete(targetClass);
+      return [...currentClassSet].join(" ");
+    }
+    if (classSet) {
+      return [...currentClassSet.difference(classSet).add(targetClass)].join(" ");
+    }
+    return [...currentClassSet.add(targetClass)].join(" ");
+  };
+  var getClassInSet = (classes, classSet) => {
+    if (!classes) {
+      return void 0;
+    }
+    return classes.split(" ").find((c3) => classSet.has(c3));
+  };
   wp.richText.registerFormatType("catpow/title", {
     title: "Title",
     tagName: "span",
@@ -8469,13 +8520,7 @@
         [value2, activeAttributes]
       );
       const { options: options3 } = useMemo8(
-        () => CP.parseSelections({
-          "has-font-size-relative-x-small": "\u6975\u5C0F",
-          "has-font-size-relative-small": "\u5C0F",
-          "has-font-size-relative-medium": "\u4E2D",
-          "has-font-size-relative-large": "\u5927",
-          "has-font-size-relative-x-large": "\u6975\u5927"
-        }),
+        () => CP.parseSelections(fontSizeClasses),
         []
       );
       const icon = /* @__PURE__ */ wp.element.createElement("svg", { role: "img", focusable: "false", xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", viewBox: "0 0 20 20", "aria-hidden": "true" }, /* @__PURE__ */ wp.element.createElement("path", { d: "M8.3.7v2.9c-.2,0-.5,0-1,0s-.8,0-1,.3c-.2.2-.3.5-.3.7v1.2h2.4v2.5h-2.4v11.1h-3.6v-11.1H.5v-2.5h2v-.9c0-1.5.2-2.5.7-3,.5-.8,1.8-1.2,3.8-1.2s.4,0,.6,0c.2,0,.4,0,.8,0Z" }), /* @__PURE__ */ wp.element.createElement("path", { d: "M14.4,4.8v2.3c-.2,0-.4,0-.8,0s-.6,0-.8.2c-.1.2-.2.4-.2.6v.9h1.8v2h-1.8v8.7h-2.8v-8.7h-1.6v-2h1.5v-.7c0-1.2.2-1.9.6-2.4.4-.6,1.4-1,3-1s.3,0,.5,0c.1,0,.3,0,.6,0Z" }), /* @__PURE__ */ wp.element.createElement("path", { d: "M19.2,8.7v1.7c-.1,0-.3,0-.6,0s-.5,0-.6.2c-.1.1-.2.3-.2.4v.7h1.4v1.5h-1.4v6.4h-2.1v-6.4h-1.2v-1.5h1.1v-.5c0-.8.1-1.4.4-1.7.3-.5,1-.7,2.2-.7s.2,0,.4,0c.1,0,.3,0,.4,0Z" }));
@@ -8495,7 +8540,7 @@
         return onChange(
           toggleFormat(value2, {
             type: "catpow/fontweight",
-            attributes: { weight: "has-font-weight-regular" }
+            attributes: { weight: "has-font-weight-specific-regular" }
           })
         );
       };
@@ -8511,17 +8556,71 @@
         [value2, activeAttributes]
       );
       const { options: options3 } = useMemo8(
-        () => CP.parseSelections({
-          "has-font-weight-x-light": "\u6975\u7D30",
-          "has-font-weight-light": "\u7D30",
-          "has-font-weight-regular": "\u4E2D",
-          "has-font-weight-bold": "\u592A",
-          "has-font-weight-x-bold": "\u6975\u592A"
-        }),
+        () => CP.parseSelections(fontWeightClasses),
         []
       );
       const icon = /* @__PURE__ */ wp.element.createElement("svg", { role: "img", focusable: "false", xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", viewBox: "0 0 20 20", "aria-hidden": "true" }, /* @__PURE__ */ wp.element.createElement("path", { d: "M6.8,3.5v2.1c-.2,0-.4,0-.8,0-.4,0-.6,0-.7.2-.1.2-.2.3-.2.5v.8h1.8v1.8h-1.8v8.1h-2.7v-8.1H.8v-1.8h1.5v-.6c0-1.1.2-1.8.6-2.2.4-.6,1.4-.9,2.9-.9s.3,0,.5,0,.3,0,.6,0Z" }), /* @__PURE__ */ wp.element.createElement("path", { d: "M10.2,4.3c.4-.6,1.2-.8,2.3-.8s.2,0,.3,0c.1,0,.2,0,.4,0v1.5c-.2,0-.3,0-.4,0,0,0-.2,0-.2,0-.5,0-.8.1-.9.4-.1.3-.2.9-.2,2h1.7v1.3h-1.7v8.5h-1.7v-8.5h-1.4v-1.3h1.4v-1.5c0-.7.2-1.2.4-1.5Z" }), /* @__PURE__ */ wp.element.createElement("path", { d: "M14.4,8.3v-.9h1.5v-1.5c0-.8.2-1.4.5-1.8.3-.5.9-.7,1.7-.7s.4,0,.5,0c.2,0,.3,0,.5,0v1c-.3,0-.5,0-.7,0-.3,0-.5,0-.7.2-.2.1-.3.2-.4.4,0,.2-.1.4-.1.6s0,.4,0,.7v1.2h2v.9h-2v8.8h-1.2v-8.8h-1.5Z" }));
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, isActive && /* @__PURE__ */ wp.element.createElement(Popover, { anchor: contentRef.current, position: "bottom center", focusOnMount: false }, /* @__PURE__ */ wp.element.createElement(Card, { size: "small" }, /* @__PURE__ */ wp.element.createElement(CardBody, null, /* @__PURE__ */ wp.element.createElement(CP.ColorVarTracer, { target: contentRef.current }, /* @__PURE__ */ wp.element.createElement(CP.SelectButtons, { onChange: (weight) => setAttributes({ weight }), selected: activeAttributes["weight"], options: options3 }))))), /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(ToolbarGroup, { controls: [{ icon, onClick: onToggle, isActive }] })));
+    }
+  });
+  wp.richText.registerFormatType("catpow/compose", {
+    title: "compose",
+    tagName: "span",
+    className: "cp-rtf-compose",
+    attributes: {
+      classes: "class",
+      vars: "style"
+    },
+    edit(props) {
+      const { isActive, value: value2, onChange, activeAttributes, contentRef } = props;
+      const onToggle = () => {
+        return onChange(
+          toggleFormat(value2, {
+            type: "catpow/compose",
+            attributes: { classes: "has-text-color-hilight has-color0" }
+          })
+        );
+      };
+      const setAttributes = useCallback2(
+        (attr) => {
+          onChange(
+            applyFormat(value2, {
+              type: "catpow/compose",
+              attributes: Object.assign(activeAttributes, attr)
+            })
+          );
+        },
+        [value2, activeAttributes]
+      );
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, isActive && /* @__PURE__ */ wp.element.createElement(Popover, { anchor: contentRef.current, position: "bottom center", focusOnMount: false }, /* @__PURE__ */ wp.element.createElement(Card, { size: "medium" }, /* @__PURE__ */ wp.element.createElement(CardBody, null, /* @__PURE__ */ wp.element.createElement(CP.ColorVarTracer, { target: contentRef.current }, /* @__PURE__ */ wp.element.createElement(BaseControl, { label: "\u8272" }, /* @__PURE__ */ wp.element.createElement(
+        CP.SelectButtons,
+        {
+          onChange: (targetClass) => setAttributes({ classes: toggleClass2(activeAttributes.classes, targetClass, textColorClassSet) }),
+          selected: getClassInSet(activeAttributes.classes, textColorClassSet),
+          options: CP.parseSelections(textColorClasses).options
+        }
+      )), /* @__PURE__ */ wp.element.createElement(BaseControl, null, /* @__PURE__ */ wp.element.createElement(Catpow.SelectColorToneClass, { onChange: ({ classes }) => setAttributes({ classes }), selected: activeAttributes.classes })), /* @__PURE__ */ wp.element.createElement(BaseControl, { label: "\u30D5\u30A9\u30F3\u30C8" }, /* @__PURE__ */ wp.element.createElement(
+        CP.SelectButtons,
+        {
+          onChange: (targetClass) => setAttributes({ classes: toggleClass2(activeAttributes.classes, targetClass, fontFamilyClassSet) }),
+          selected: getClassInSet(activeAttributes.classes, fontFamilyClassSet),
+          options: CP.parseSelections(fontFamilyClasses).options
+        }
+      )), /* @__PURE__ */ wp.element.createElement(BaseControl, { label: "\u30A6\u30A7\u30A4\u30C8" }, /* @__PURE__ */ wp.element.createElement(
+        CP.SelectButtons,
+        {
+          onChange: (targetClass) => setAttributes({ classes: toggleClass2(activeAttributes.classes, targetClass, fontWeightClassSet) }),
+          selected: getClassInSet(activeAttributes.classes, fontWeightClassSet),
+          options: CP.parseSelections(fontWeightClasses).options
+        }
+      )), /* @__PURE__ */ wp.element.createElement(BaseControl, { label: "\u30B5\u30A4\u30BA" }, /* @__PURE__ */ wp.element.createElement(
+        CP.SelectButtons,
+        {
+          onChange: (targetClass) => setAttributes({ classes: toggleClass2(activeAttributes.classes, targetClass, fontSizeClassSet) }),
+          selected: getClassInSet(activeAttributes.classes, fontSizeClassSet),
+          options: CP.parseSelections(fontSizeClasses).options
+        }
+      )))))), /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(ToolbarGroup, { controls: [{ icon: "admin-settings", onClick: onToggle, isActive }] })));
     }
   });
   wp.richText.registerFormatType("catpow/custom", {

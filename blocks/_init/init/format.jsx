@@ -1,8 +1,62 @@
 ﻿const { __ } = wp.i18n;
 const { BlockControls, RichTextToolbarButton, RichTextShortcut } = wp.blockEditor;
-const { Popover, BaseControle, TextControl, RangeControl, Card, CardBody, ToolbarGroup } = wp.components;
+const { Popover, BaseControl, TextControl, RangeControl, Card, CardBody, ToolbarGroup } = wp.components;
 const { useState, useMemo, useCallback, useReducer, useEffect } = wp.element;
 const { removeFormat, applyFormat, toggleFormat, insert, create, slice } = wp.richText;
+
+const textColorClasses = {
+	"has-text-color-text": "通常",
+	"has-text-color-highlight": "強調",
+	"has-text-color-gradient": "グラデーション",
+};
+const textColorClassSet = new Set(Object.keys(textColorClasses));
+
+const fontSizeClasses = {
+	"has-font-size-relative-x-small": "極小",
+	"has-font-size-relative-small": "小",
+	"has-font-size-relative-medium": "中",
+	"has-font-size-relative-large": "大",
+	"has-font-size-relative-x-large": "極大",
+};
+const fontSizeClassSet = new Set(Object.keys(fontSizeClasses));
+const fontWeightClasses = {
+	"has-font-weight-specific-x-light": "極細",
+	"has-font-weight-specific-light": "細",
+	"has-font-weight-specific-regular": "中",
+	"has-font-weight-specific-bold": "太",
+	"has-font-weight-specific-x-bold": "極太",
+};
+const fontWeightClassSet = new Set(Object.keys(fontWeightClasses));
+const fontFamilyClasses = {
+	"has-font-family-gothic": "ゴシック",
+	"has-font-family-mincho": "明朝",
+	"has-font-family-english": "英数",
+	"has-font-family-code": "コード",
+	"has-font-family-decoration": "装飾",
+	"has-font-family-script": "手書き",
+};
+const fontFamilyClassSet = new Set(Object.keys(fontFamilyClasses));
+
+const toggleClass = (classes, targetClass, classSet) => {
+	if (!classes) {
+		return targetClass;
+	}
+	const currentClassSet = new Set(classes.split(" "));
+	if (currentClassSet.has(targetClass)) {
+		currentClassSet.delete(targetClass);
+		return [...currentClassSet].join(" ");
+	}
+	if (classSet) {
+		return [...currentClassSet.difference(classSet).add(targetClass)].join(" ");
+	}
+	return [...currentClassSet.add(targetClass)].join(" ");
+};
+const getClassInSet = (classes, classSet) => {
+	if (!classes) {
+		return undefined;
+	}
+	return classes.split(" ").find((c) => classSet.has(c));
+};
 
 import { translateColor } from "catpow/scssc";
 
@@ -415,14 +469,7 @@ wp.richText.registerFormatType("catpow/fontsize", {
 			[value, activeAttributes],
 		);
 		const { options } = useMemo(
-			() =>
-				CP.parseSelections({
-					"has-font-size-relative-x-small": "極小",
-					"has-font-size-relative-small": "小",
-					"has-font-size-relative-medium": "中",
-					"has-font-size-relative-large": "大",
-					"has-font-size-relative-x-large": "極大",
-				}),
+			() => CP.parseSelections(fontSizeClasses),
 
 			[],
 		);
@@ -469,7 +516,7 @@ wp.richText.registerFormatType("catpow/fontweight", {
 			return onChange(
 				toggleFormat(value, {
 					type: "catpow/fontweight",
-					attributes: { weight: "has-font-weight-regular" },
+					attributes: { weight: "has-font-weight-specific-regular" },
 				}),
 			);
 		};
@@ -485,14 +532,7 @@ wp.richText.registerFormatType("catpow/fontweight", {
 			[value, activeAttributes],
 		);
 		const { options } = useMemo(
-			() =>
-				CP.parseSelections({
-					"has-font-weight-x-light": "極細",
-					"has-font-weight-light": "細",
-					"has-font-weight-regular": "中",
-					"has-font-weight-bold": "太",
-					"has-font-weight-x-bold": "極太",
-				}),
+			() => CP.parseSelections(fontWeightClasses),
 
 			[],
 		);
@@ -520,6 +560,88 @@ wp.richText.registerFormatType("catpow/fontweight", {
 				)}
 				<BlockControls>
 					<ToolbarGroup controls={[{ icon, onClick: onToggle, isActive }]} />
+				</BlockControls>
+			</>
+		);
+	},
+});
+
+wp.richText.registerFormatType("catpow/compose", {
+	title: "compose",
+	tagName: "span",
+	className: "cp-rtf-compose",
+	attributes: {
+		classes: "class",
+		vars: "style",
+	},
+	edit(props) {
+		const { isActive, value, onChange, activeAttributes, contentRef } = props;
+
+		const onToggle = () => {
+			return onChange(
+				toggleFormat(value, {
+					type: "catpow/compose",
+					attributes: { classes: "has-text-color-hilight has-color0" },
+				}),
+			);
+		};
+		const setAttributes = useCallback(
+			(attr) => {
+				onChange(
+					applyFormat(value, {
+						type: "catpow/compose",
+						attributes: Object.assign(activeAttributes, attr),
+					}),
+				);
+			},
+			[value, activeAttributes],
+		);
+
+		return (
+			<>
+				{isActive && (
+					<Popover anchor={contentRef.current} position="bottom center" focusOnMount={false}>
+						<Card size="medium">
+							<CardBody>
+								<CP.ColorVarTracer target={contentRef.current}>
+									<BaseControl label="色">
+										<CP.SelectButtons
+											onChange={(targetClass) => setAttributes({ classes: toggleClass(activeAttributes.classes, targetClass, textColorClassSet) })}
+											selected={getClassInSet(activeAttributes.classes, textColorClassSet)}
+											options={CP.parseSelections(textColorClasses).options}
+										/>
+									</BaseControl>
+									<BaseControl>
+										<Catpow.SelectColorToneClass onChange={({ classes }) => setAttributes({ classes })} selected={activeAttributes.classes} />
+									</BaseControl>
+									<BaseControl label="フォント">
+										<CP.SelectButtons
+											onChange={(targetClass) => setAttributes({ classes: toggleClass(activeAttributes.classes, targetClass, fontFamilyClassSet) })}
+											selected={getClassInSet(activeAttributes.classes, fontFamilyClassSet)}
+											options={CP.parseSelections(fontFamilyClasses).options}
+										/>
+									</BaseControl>
+									<BaseControl label="ウェイト">
+										<CP.SelectButtons
+											onChange={(targetClass) => setAttributes({ classes: toggleClass(activeAttributes.classes, targetClass, fontWeightClassSet) })}
+											selected={getClassInSet(activeAttributes.classes, fontWeightClassSet)}
+											options={CP.parseSelections(fontWeightClasses).options}
+										/>
+									</BaseControl>
+									<BaseControl label="サイズ">
+										<CP.SelectButtons
+											onChange={(targetClass) => setAttributes({ classes: toggleClass(activeAttributes.classes, targetClass, fontSizeClassSet) })}
+											selected={getClassInSet(activeAttributes.classes, fontSizeClassSet)}
+											options={CP.parseSelections(fontSizeClasses).options}
+										/>
+									</BaseControl>
+								</CP.ColorVarTracer>
+							</CardBody>
+						</Card>
+					</Popover>
+				)}
+				<BlockControls>
+					<ToolbarGroup controls={[{ icon: "admin-settings", onClick: onToggle, isActive }]} />
 				</BlockControls>
 			</>
 		);
