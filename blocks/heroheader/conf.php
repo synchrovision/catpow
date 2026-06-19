@@ -3,7 +3,7 @@ use Catpow\util\BlockConfig;
 $block_class="wp-block-catpow-heroheader";
 $attributes=[
 	"classes"=>["source"=>"attribute","selector"=>".{$block_class}","attribute"=>"class","default"=>"{$block_class} is-size-medium is-level1 has-color-scheme-inverted has-text has-buttons"],
-	"bodyClasses"=>["source"=>"attribute","selector"=>".{$block_class}__body","attribute"=>"class","default"=>"{$block_class}__body has-item-size-medium"],
+	"bodyClasses"=>["source"=>"attribute","selector"=>".{$block_class}__body","attribute"=>"class","default"=>"{$block_class}__body has-item-size-medium has-align-content-center has-text-align-center"],
 	"vars"=>["type"=>"object"],
 	"HeadingTag"=>["type"=>"string","default"=>"h1"],
 	"title"=>["source"=>"html","selector"=>".{$block_class}__body-texts-title","default"=>"[post title]"],
@@ -40,5 +40,5 @@ $attributes=[
 		],range(1,3))
 	],
 	"element"=>["type"=>"string","default"=>"slide-show-basic"],
-	"params"=>["type"=>"object","default"=>[]],
+	"params"=>["type"=>"object","default"=>["zoom"=>12,"interval"=>50,"duration"=>5000]],
 ];
