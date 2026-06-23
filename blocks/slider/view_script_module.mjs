@@ -45,9 +45,9 @@ store("catpow/slider", {
 			);
 			const items = [...contents.children];
 			ctx.items = items;
+			const startItem = items[0];
+			const endItem = items[items.length - 1];
 			const updateCssVars = withScope(() => {
-				const startItem = items[0];
-				const endItem = items[items.length - 1];
 				const w = endItem.offsetLeft - startItem.offsetLeft;
 				const u = w / (items.length - 1);
 				const o = startItem.offsetLeft - blockEl.scrollLeft - (blockEl.offsetWidth - startItem.offsetWidth) / 2;
@@ -61,7 +61,7 @@ store("catpow/slider", {
 				getContext().current = activeItemIndex % orgItems.length;
 			});
 			blockEl.addEventListener("scroll", updateCssVars);
-			ctx.items[ctx.current + ctx.length].scrollIntoView({ inline: "center", behavior: "instant" });
+			blockEl.scrollTo({ left: ((endItem.offsetLeft - startItem.offsetLeft) / (items.length - 1)) * (ctx.current + ctx.length) - (blockEl.offsetWidth - startItem.offsetWidth) / 2 });
 			updateCssVars();
 		},
 		isActive: () => getContext().current == getElement().attributes["data-index"],
