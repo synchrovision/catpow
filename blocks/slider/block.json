@@ -1,0 +1,16 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"textdomain": "catpow",
+	"name": "catpow/slider",
+	"title": "🐾 Slider",
+	"description": "スライダーのブロックです。",
+	"icon": "video-alt3",
+	"category": "catpow",
+	"supports": {
+		"anchor": false,
+		"className": false,
+		"color": false,
+		"interactivity": true
+	}
+}

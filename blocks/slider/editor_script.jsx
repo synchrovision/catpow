@@ -1,5 +1,9 @@
 ﻿const { __ } = wp.i18n;
 
+import { debounce } from "catpow/util";
+import { clsx } from "clsx";
+import { useCallback } from "react";
+
 CP.config.slider = {
 	devices: ["tb", "sp"],
 	imageKeys: {
@@ -16,20 +20,13 @@ CP.config.slider = {
 };
 
 wp.blocks.registerBlockType("catpow/slider", {
-	title: "🐾 Slider",
-	description: "スライダーのブロックです。",
-	icon: "video-alt3",
-	category: "catpow",
 	transforms: {
 		from: [
 			{
 				type: "block",
 				blocks: CP.listedConvertibles,
 				transform: (attributes) => {
-					attributes.classes = "wp-block-catpow-slider story hasTitle hasText hasImage";
-					if (!attributes.controlClasses) {
-						attributes.controlClasses = "controls loop autoplay flickable";
-					}
+					attributes.classes = "wp-block-catpow-slider is-type-card has-title has-text has-image";
 					if (!attributes.config) {
 						attributes.config = "{}";
 					}
@@ -55,278 +52,172 @@ wp.blocks.registerBlockType("catpow/slider", {
 
 	example: CP.example,
 	edit({ attributes, className, setAttributes, isSelected }) {
-		const { useState, useMemo } = wp.element;
-		const { InnerBlocks, InspectorControls, RichText } = wp.blockEditor;
+		const { useState, useMemo, useEffect } = wp.element;
+		const { InnerBlocks, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
 		const { Icon, PanelBody, TextControl, TextareaControl } = wp.components;
-		const { vars, classes = "", controlClasses = "", config, items, doLoop, EditMode = false, AltMode = false, device } = attributes;
+		const { classes = "", vars, controlClasses = "", HeadingTag, config, items, doLoop, EditMode = false, AltMode = false, device } = attributes;
+
+		const [blockEl, setBlockEl] = useState(false);
+
+		const configData = useMemo(() => JSON.parse(config), [config]);
+		if (configData.current === undefined) {
+			configData.current = 0;
+		}
+		const { currentItemIndex = configData.current } = attributes;
 
 		const states = CP.classNamesToFlags(classes);
 		const controlStates = CP.classNamesToFlags(controlClasses);
 		const { devices, imageKeys, imageSizes, linkKeys } = CP.config.slider;
 
-		var statesClasses = [
-			{ label: "アロー", values: "hasArrows" },
-			{ label: "ドット", values: "hasDots" },
-			{ input: "range", label: "表示スライド", json: "config", key: "initialSlide", min: 0, max: items.length - 1 },
-		];
-		var animateClasses = [
-			{ label: "ループ", values: "loop", sub: [{ label: "アイテムを反復", values: "loopItems" }] },
-			{
-				label: "自動再生",
-				values: "autoplay",
-				sub: [
-					{ input: "range", label: "自動再生間隔（単位:0.1秒）", json: "config", key: "interval", coef: 100, min: 0, max: 100 },
-					{ input: "range", label: "操作停止時間（単位:0.1秒）", json: "config", key: "wait", coef: 100, min: 0, max: 100 },
-					{ label: "ホバーで停止", values: "stopbyhover" },
-				],
-			},
-		];
-		var controllerClasses = [
-			{ label: "フリック操作", values: "flickable" },
-			{ label: "スクロール操作", values: "scrollable" },
-			{ label: "閉じる操作", values: "closable" },
-		];
-
 		const selectiveClasses = useMemo(() => {
 			const { devices, imageKeys, imageSizes } = CP.config.slider;
 			const selectiveClasses = [
+				"headingTag",
+				"level",
+				"hasContentWidth",
+				"itemSize",
+				"hasMargin",
+				"hasPadding",
+				"color",
+				"colorScheme",
 				{
 					name: "type",
 					label: "タイプ",
-					values: ["visual", "story", "articles", "banners", "index"],
+					values: { isTypeCarousel: "カルーセル", isTypeCard: "カード", isTypeFlat: "フラット" },
 					filter: "type",
 					type: "gridbuttons",
-					sub: {
-						visual: [
-							{
-								name: "hasTitle",
-								label: "見出し",
-								values: "hasTitle",
-								sub: [
-									{ name: "subTitle", label: "サブタイトル", values: "hasSubTitle" },
-									{ name: "text", label: "テキスト", values: "hasText" },
-								],
-							},
-							"colorScheme",
-							{
-								name: "image",
-								type: "buttons",
-								label: "画像",
-								values: { hasImage: "イメージ画像", hasSlide: "スライド画像" },
-								sub: {
-									hasImage: [{ name: "thumbnail", label: "サムネール", values: "hasThumbnail" }],
-								},
-							},
-							"backgroundImage",
-							{ name: "link", label: "リンク", values: "hasLink" },
-						],
-						story: [
-							{ name: "subTitle", label: "サブタイトル", values: "hasSubTitle" },
-							"colorScheme",
-							{ name: "image", label: "画像", values: "hasImage", sub: [{ name: "thumbnail", label: "サムネール", values: "hasThumbnail" }] },
-							"backgroundImage",
-							{ name: "link", label: "リンク", values: "hasLink" },
-						],
-						banners: [
-							"itemSize",
-							{ name: "title", label: "タイトル", values: "hasTitle" },
-							{ name: "text", label: "テキスト", values: "hasText" },
-							{ name: "link", label: "リンク", values: "hasLink" },
-						],
-						articles: [
-							{ name: "title", label: "タイトル", values: "hasTitle" },
-							{ name: "text", label: "テキスト", values: "hasText" },
-							{ name: "image", label: "画像", values: "hasImage" },
-							{ name: "link", label: "リンク", values: "hasLink" },
-						],
-						index: [
-							{ name: "subTitle", label: "サブタイトル", values: "hasSubTitle" },
-							{ name: "image", label: "画像", values: "hasImage" },
-							{ name: "link", label: "リンク", values: "hasLink" },
-						],
-					},
-					bind: {
-						story: ["hasTitle", "hasText"],
-						banners: ["hasSlide"],
-						index: ["hasTitle", "hasText"],
-					},
-					item: {
-						visual: [
-							"color",
-							"pattern",
-							{ name: "slide", input: "picture", label: "スライド画像", keys: imageKeys.slide, devices, cond: "hasSlide" },
-							{ name: "backgroundImage", input: "picture", label: "背景画像", keys: imageKeys.backgroundImage, devices, cond: "hasBackgroundImage" },
-						],
-						story: ["color", "pattern", { name: "backgroundImage", input: "picture", label: "背景画像", keys: imageKeys.backgroundImage, devices, cond: "hasBackgroundImage" }],
-					},
 				},
-				{
-					label: "テンプレート",
-					values: "isTemplate",
-					sub: [
-						{
-							name: "loop",
-							input: "bool",
-							label: "ループ",
-							key: "doLoop",
-							sub: [
-								{ name: "contentPath", label: "content path", input: "text", key: "content_path" },
-								{ name: "query", label: "query", input: "textarea", key: "query" },
-								{ name: "loopCount", label: "プレビューループ数", input: "range", key: "loopCount", min: 1, max: 16 },
-							],
-						},
-					],
-				},
+				{ label: __("タイトル", "catpow"), values: "hasTitle" },
+				{ label: __("キャプション", "catpow"), values: "hasCaption" },
+				{ label: __("テキスト", "catpow"), values: "hasText" },
+				{ label: __("リンク", "catpow"), values: "hasLink" },
+				{ label: "アロー", values: "hasArrows" },
+				{ label: "ドット", values: "hasDots" },
+				{ input: "range", label: "初期スライド", json: "config", key: "current", min: 0, max: items.length - 1 },
+				"isTemplate",
 			];
 			wp.hooks.applyFilters("catpow.blocks.slider.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
 		}, []);
+		const animateClasses = [
+			{
+				input: "bool",
+				label: "自動再生",
+				json: "config",
+				key: "autoPlay",
+				sub: [
+					{ input: "range", label: "自動再生間隔（秒）", json: "config", key: "interval", coef: 1000, min: 0.5, max: 10, step: 0.1 },
+					{ input: "range", label: "手動操作後停止時間（秒）", json: "config", key: "wait", coef: 1000, min: 0, max: 60, step: 1 },
+				],
+			},
+		];
 
 		const save = () => {
 			setAttributes({ items: JSON.parse(JSON.stringify(items)) });
 		};
 
-		var rtn = [];
-		var thumbs = [];
-		var dots = [];
-
-		let configData = JSON.parse(config);
-		if (configData.initialSlide === undefined) {
-			configData.initialSlide = 0;
-		}
-		const gotoItem = (i) => {
-			configData.initialSlide = (i + items.length) % items.length;
-			setAttributes({ currentItemIndex: configData.initialSlide, config: JSON.stringify(configData) });
-		};
-		const prevItem = () => {
-			gotoItem(configData.initialSlide - 1);
-		};
-		const nextItem = () => {
-			gotoItem(configData.initialSlide + 1);
-		};
-		const getRelativeIndex = (i, c, l, lp) => {
-			if (!lp) {
-				return i - c;
-			}
+		const gotoItem = useCallback(
+			(i) => {
+				configData.current = (i + items.length) % items.length;
+				setAttributes({ currentItemIndex: configData.current, config: JSON.stringify(configData) });
+			},
+			[configData],
+		);
+		const prevItem = useCallback(() => {
+			gotoItem(configData.current - 1);
+		}, [gotoItem]);
+		const nextItem = useCallback(() => {
+			gotoItem(configData.current + 1);
+		}, [gotoItem]);
+		const getRelativeIndex = (i, c, l) => {
 			const h = l >> 1;
 			return ((i - c + h + l) % l) - h;
 		};
-
-		const pushItem = (item, index) => {
-			var posClass, itemClass;
-			const p = getRelativeIndex(index, configData.initialSlide, items.length, controlStates.loop);
+		const getPosClass = (index) => {
+			const p = getRelativeIndex(index, currentItemIndex, items.length);
 			if (p == 0) {
-				posClass = "active";
-			} else if (p > 0) {
-				posClass = "after";
-				if (p === 1) {
-					posClass += " next";
-				}
-			} else {
-				posClass = "before";
-				if (p === 1) {
-					posClass += " prev";
-				}
+				return "is-active";
 			}
-			itemClass = posClass + " item item" + p;
-			rtn.push(
-				<CP.Item tag="li" className={itemClass} set={setAttributes} attr={attributes} items={items} index={index} style={{ "--item-p": p }} key={index}>
-					{states.hasSlide && (
-						<div className="slide">
-							<CP.SelectResponsiveImage attr={attributes} set={setAttributes} keys={imageKeys.slide} devices={devices} device={device} index={index} isTemplate={states.isTemplate} />
-						</div>
-					)}
-					{states.hasImage && (
-						<div className="image">
-							<CP.SelectResponsiveImage attr={attributes} set={setAttributes} keys={imageKeys.image} index={index} isTemplate={states.isTemplate} />
-						</div>
-					)}
-					{(states.hasTitle || states.hasSubTitle || states.hasText) && (
-						<div className="texts">
-							{states.hasTitle && (
-								<RichText
-									tagName="h3"
-									className="title"
-									onChange={(title) => {
-										item.title = title;
-										save();
-									}}
-									value={item.title}
-								/>
-							)}
-							{states.hasSubTitle && (
-								<RichText
-									tagName="h4"
-									className="subtitle"
-									onChange={(subTitle) => {
-										item.subTitle = subTitle;
-										save();
-									}}
-									value={item.subTitle}
-								/>
-							)}
-							{states.hasText && (
-								<RichText
-									tagName="p"
-									className="text"
-									onChange={(text) => {
-										item.text = text;
-										save();
-									}}
-									value={item.text}
-								/>
-							)}
-						</div>
-					)}
-					{states.hasBackgroundImage && (
-						<div className="background">
-							<CP.SelectResponsiveImage attr={attributes} set={setAttributes} keys={imageKeys.backgroundImage} devices={devices} device={device} index={index} isTemplate={states.isTemplate} />
-						</div>
-					)}
-					{states.hasLink && <CP.Link.Edit className="link" attr={attributes} set={setAttributes} keys={linkKeys.link} index={index} isSelected={isSelected} />}
-				</CP.Item>,
-			);
-			if (states.hasImage && states.hasThumbnail) {
-				thumbs.push(
-					<li className={"item " + posClass + " thumb" + p} onClick={() => gotoItem(index)} key={index}>
-						<CP.SelectResponsiveImage attr={attributes} set={setAttributes} keys={imageKeys.image} index={index} isTemplate={states.isTemplate} />
-					</li>,
-				);
+			if (p == 1) {
+				return "is-next";
 			}
-			if (states.hasDots) {
-				dots.push(<li className={"dot " + posClass + " dot" + p} onClick={() => gotoItem(index)} key={index}></li>);
+			if (p == -1) {
+				return "is-prev";
+			}
+			if (p > 0) {
+				return "is-after";
+			}
+			if (p < 0) {
+				return "is-before";
 			}
 		};
 
-		const l = items.length;
-		for (let i = 0; i < l; i++) {
-			pushItem(items[i % l], i % l);
-		}
+		useEffect(() => {
+			if (!blockEl) {
+				return;
+			}
+			const contents = blockEl.querySelector(".wp-block-catpow-slider__contents");
+			const items = [...contents.children];
+			const scrollToMainItems = debounce((e) => {
+				const scrollLeftMax = blockEl.scrollWidth - blockEl.clientWidth;
+				const gap = contents.children[attributes.items.length].offsetLeft - contents.children[0].offsetLeft;
+				const threasholdLeft = scrollLeftMax / 2 - gap / 2;
+				const threasholdRight = threasholdLeft + gap;
+				if (blockEl.scrollLeft < threasholdLeft) {
+					blockEl.scrollTo({ left: blockEl.scrollLeft + gap, behavior: "instant" });
+				} else if (blockEl.scrollLeft > threasholdRight) {
+					blockEl.scrollTo({ left: blockEl.scrollLeft - gap, behavior: "instant" });
+				}
+			}, 160);
+			const updateCssVars = () => {
+				const startItem = items[0];
+				const endItem = items[items.length - 1];
+				const w = endItem.offsetLeft - startItem.offsetLeft;
+				const u = w / (items.length - 1);
+				const o = startItem.offsetLeft - blockEl.scrollLeft - (blockEl.offsetWidth - startItem.offsetWidth) / 2;
+				const activeItemIndex = Math.floor((-o / w) * items.length);
+				for (let i = 0; i < items.length; i++) {
+					items[i].classList.toggle("is-prev", activeItemIndex === i - 1);
+					items[i].classList.toggle("is-active", activeItemIndex === i);
+					items[i].classList.toggle("is-next", activeItemIndex === i + 1);
+					items[i].style.setProperty("--cp-slider-item-position", o + u * i);
+				}
+				gotoItem(activeItemIndex % attributes.items.length);
+			};
+			blockEl.addEventListener("scroll", scrollToMainItems);
+			blockEl.addEventListener("scroll", updateCssVars);
+			updateCssVars();
+			return () => {
+				blockEl.removeEventListener("scroll", scrollToMainItems);
+				blockEl.removeEventListener("scroll", updateCssVars);
+			};
+		}, [blockEl, items, gotoItem]);
 
-		if (attributes.EditMode === undefined) {
-			attributes.EditMode = false;
-		}
+		const blockProps = useBlockProps({ className: EditMode || AltMode ? "cp-altcontent" : classes, style: vars });
 
 		return (
 			<>
 				<CP.SelectModeToolbar set={setAttributes} attr={attributes} />
 				<InspectorControls>
 					<CP.SelectClassPanel title="クラス" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
-					<CP.SelectClassPanel title="表示設定" icon="admin-appearance" set={setAttributes} attr={attributes} selectiveClasses={statesClasses} />
-					<CP.SelectClassPanel classKey="controlClasses" title="アニメーション設定" icon="video-alt3" set={setAttributes} attr={attributes} selectiveClasses={animateClasses} />
-					<CP.SelectClassPanel classKey="controlClasses" title="操作設定" icon="universal-access" set={setAttributes} attr={attributes} selectiveClasses={controllerClasses} />
+					<CP.SelectClassPanel title="アニメーション設定" icon="video-alt3" set={setAttributes} attr={attributes} selectiveClasses={animateClasses} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
 						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
-						<TextareaControl label="コントローラークラス" onChange={(controlClasses) => setAttributes({ controlClasses })} value={controlClasses} />
 					</PanelBody>
-					<CP.SelectClassPanel title="スライド" icon="edit" set={setAttributes} attr={attributes} items={items} index={attributes.currentItemIndex} triggerClasses={selectiveClasses[0]} />
+					<CP.SelectClassPanel
+						title="スライド"
+						icon="edit"
+						set={setAttributes}
+						attr={attributes}
+						items={items}
+						index={attributes.currentItemIndex}
+						triggerClasses={selectiveClasses.find(({ item }) => !!item)}
+					/>
 					<CP.ItemControlInfoPanel />
 				</InspectorControls>
 				{attributes.EditMode ? (
-					<div className="cp-altcontent">
-						<div className="label">
-							<Icon icon="edit" />
-						</div>
+					<div {...blockProps}>
+						<CP.Label icon="edit" />
 						<CP.EditItemsTable
 							set={setAttributes}
 							attr={attributes}
@@ -338,8 +229,9 @@ wp.blocks.registerBlockType("catpow/slider", {
 								{ type: "picture", label: "bg", keys: imageKeys.backgroundImage, devices, cond: states.hasBackgroundImage },
 								{ type: "text", key: "backgroundImageCode", cond: states.isTemplate && states.hasBackgroundImage },
 								{ type: "text", key: "title", cond: states.hasTitle },
-								{ type: "text", key: "subTitle", cond: states.hasSubTitle },
+								{ type: "text", key: "caption", cond: states.hasCaption },
 								{ type: "text", key: "text", cond: states.hasText },
+								{ type: "text", key: "linkText", cond: states.hasLink },
 								{ type: "text", key: "linkUrl", cond: states.hasLink },
 							]}
 							isTemplate={states.isTemplate}
@@ -348,30 +240,95 @@ wp.blocks.registerBlockType("catpow/slider", {
 				) : (
 					<>
 						{AltMode && doLoop ? (
-							<div className="cp-altcontent">
-								<div className="label">
-									<Icon icon="welcome-comments" />
-								</div>
+							<div {...blockProps}>
+								<CP.Label icon="welcome-comments" />
 								<InnerBlocks />
 							</div>
 						) : (
-							<div className={classes} style={vars}>
-								<ul className="contents">{rtn}</ul>
-								<div className={controlClasses} data-config={config}>
-									{states.hasArrows && (
-										<div className="arrow prev" onClick={prevItem}>
-											{" "}
-										</div>
-									)}
-									{states.hasImage && states.hasThumbnail && <ul className="thumbnail">{thumbs}</ul>}
-									{states.hasDots && <ul className="dots">{dots}</ul>}
-									{states.hasArrows && (
-										<div className="arrow next" onClick={nextItem}>
-											{" "}
-										</div>
-									)}
+							<CP.Bem prefix="wp-block-catpow">
+								<div {...blockProps} ref={setBlockEl}>
+									<ul className="_contents">
+										{[0, 1, 2].map(() =>
+											items.map((item, index) => {
+												return (
+													<CP.Item tag="li" className={clsx(item.classes, getPosClass(index))} set={setAttributes} attr={attributes} items={items} index={index} key={index}>
+														<div className="_body">
+															{states.hasImage && (
+																<div className="_image">
+																	<CP.SelectResponsiveImage className="_img" attr={attributes} set={setAttributes} keys={imageKeys.image} index={index} isTemplate={states.isTemplate} />
+																</div>
+															)}
+															{(states.hasTitle || states.hasCaption || states.hasText || states.hasLink) && (
+																<div className="_texts">
+																	{states.hasTitle && (
+																		<RichText
+																			tagName={HeadingTag}
+																			className="_title"
+																			onChange={(title) => {
+																				item.title = title;
+																				save();
+																			}}
+																			value={item.title}
+																			placeholder="Title"
+																		/>
+																	)}
+																	{states.hasCaption && (
+																		<RichText
+																			tagName="p"
+																			className="_caption"
+																			onChange={(caption) => {
+																				item.caption = caption;
+																				save();
+																			}}
+																			value={item.caption}
+																			placeholder="Caption"
+																		/>
+																	)}
+																	{states.hasText && (
+																		<RichText
+																			tagName="p"
+																			className="_text"
+																			onChange={(text) => {
+																				item.text = text;
+																				save();
+																			}}
+																			value={item.text}
+																			placeholder="Text"
+																		/>
+																	)}
+																	{states.hasLink && (
+																		<CP.Link.Edit className="_link" attr={attributes} set={setAttributes} keys={linkKeys.link} index={index} isSelected={isSelected}>
+																			<RichText
+																				onChange={(linkText) => {
+																					item.linkText = linkText;
+																					save();
+																				}}
+																				value={item.linkText}
+																				placeholder="Link"
+																			/>
+																		</CP.Link.Edit>
+																	)}
+																</div>
+															)}
+														</div>
+													</CP.Item>
+												);
+											}),
+										)}
+									</ul>
+									<div className={controlClasses} data-config={config}>
+										{states.hasArrows && <div className="_arrow is-arrow-prev" onClick={prevItem}></div>}
+										{states.hasDots && (
+											<ul className="_dots">
+												{items.map((item, index) => {
+													return <li className={clsx("_dot", getPosClass(index))} onClick={() => gotoItem(index)} key={index}></li>;
+												})}
+											</ul>
+										)}
+										{states.hasArrows && <div className="_arrow is-arrow-next" onClick={nextItem}></div>}
+									</div>
 								</div>
-							</div>
+							</CP.Bem>
 						)}
 					</>
 				)}
@@ -379,66 +336,62 @@ wp.blocks.registerBlockType("catpow/slider", {
 		);
 	},
 	save({ attributes, className }) {
-		const { InnerBlocks, RichText } = wp.blockEditor;
-		const { vars, classes = "", controlClasses = "", config, items = [], doLoop } = attributes;
+		const { InnerBlocks, RichText, useBlockProps } = wp.blockEditor;
+		const { vars, classes = "", controlClasses = "", HeadingTag, config, items = [], doLoop } = attributes;
 
 		const states = CP.classNamesToFlags(classes);
 		const { devices, imageKeys, imageSizes, linkKeys } = CP.config.slider;
 
-		var rtn = [];
-		var thumbs = [];
-		items.map(function (item, index) {
-			rtn.push(
-				<li className={item.classes} key={index}>
-					{states.hasSlide && (
-						<div className="slide">
-							<CP.ResponsiveImage attr={attributes} keys={imageKeys.slide} devices={devices} index={index} isTemplate={states.isTemplate} />
-						</div>
-					)}
-					{states.hasImage && (
-						<div className="image">
-							<CP.ResponsiveImage attr={attributes} keys={imageKeys.image} index={index} isTemplate={states.isTemplate} />
-						</div>
-					)}
-					{(states.hasTitle || states.hasSubTitle || states.hasText) && (
-						<div className="texts">
-							{states.hasTitle && <RichText.Content tagName="h3" className="title" value={item.title} />}
-							{states.hasSubTitle && <RichText.Content tagName="h4" className="subtitle" value={item.subTitle} />}
-							{states.hasText && <RichText.Content tagName="p" className="text" value={item.text} />}
-						</div>
-					)}
-					{states.hasBackgroundImage && (
-						<div className="background">
-							<CP.ResponsiveImage attr={attributes} keys={imageKeys.backgroundImage} devices={devices} index={index} isTemplate={states.isTemplate} />
-						</div>
-					)}
-					{states.hasLink && <CP.Link className="link" attr={attributes} keys={linkKeys.link} index={index} />}
-				</li>,
-			);
-			if (states.hasImage && states.hasThumbnail) {
-				thumbs.push(
-					<li className={item.classes} key={index}>
-						<CP.ResponsiveImage attr={attributes} keys={imageKeys.image} index={index} isTemplate={states.isTemplate} />
-					</li>,
-				);
-			}
+		const blockProps = useBlockProps.save({
+			className: classes,
+			style: vars,
+			"data-wp-interactive": "catpow/slider",
+			"data-wp-context": config,
+			"data-wp-init": "callbacks.initBlock",
 		});
 
 		return (
 			<>
-				<div className={classes} style={vars}>
-					<ul className="contents">{rtn}</ul>
-					<div className={controlClasses} data-config={config}>
-						{states.hasArrows && <div className="arrow prev"> </div>}
-						{states.hasImage && states.hasThumbnail && <ul className="thumbnail">{thumbs}</ul>}
-						{states.hasDots && (
-							<ul className="dots">
-								<li className="dot"> </li>
-							</ul>
-						)}
-						{states.hasArrows && <div className="arrow next"> </div>}
+				<CP.Bem prefix="wp-block-catpow">
+					<div {...blockProps}>
+						<ul className="_contents">
+							{items.map((item, index) => (
+								<li className={item.classes} key={index}>
+									<div className="_body">
+										{states.hasImage && (
+											<div className="_image">
+												<CP.ResponsiveImage className="_img" attr={attributes} keys={imageKeys.image} index={index} isTemplate={states.isTemplate} />
+											</div>
+										)}
+										{(states.hasTitle || states.hasCaption || states.hasText || states.hasLink) && (
+											<div className="_texts">
+												{states.hasTitle && <RichText.Content tagName={HeadingTag} className="_title" value={item.title} />}
+												{states.hasCaption && <RichText.Content tagName="p" className="_caption" value={item.caption} />}
+												{states.hasText && <RichText.Content tagName="p" className="_text" value={item.text} />}
+												{states.hasLink && (
+													<CP.Link className="_link" attr={attributes} keys={linkKeys.link} index={index}>
+														<RichText.Content value={item.linkText} />
+													</CP.Link>
+												)}
+											</div>
+										)}
+									</div>
+								</li>
+							))}
+						</ul>
+						<div className={controlClasses} data-config={config}>
+							{states.hasArrows && <div className="_arrow is-arrow-prev" data-wp-on--click="actions.prev"></div>}
+							{states.hasDots && (
+								<ul className="_dots">
+									{items.map((item, index) => (
+										<li className="_dot" data-wp-on--click="actions.onClickItem" data-wp-class--is-active="callbacks.isActive" data-index={index}></li>
+									))}
+								</ul>
+							)}
+							{states.hasArrows && <div className="_arrow is-arrow-next" data-wp-on--click="actions.next"></div>}
+						</div>
 					</div>
-				</div>
+				</CP.Bem>
 				{doLoop && (
 					<on-empty>
 						<InnerBlocks.Content />
@@ -447,235 +400,4 @@ wp.blocks.registerBlockType("catpow/slider", {
 			</>
 		);
 	},
-	deprecated: [
-		{
-			attributes: {
-				classes: { source: "attribute", selector: "div", attribute: "class", default: "hasTitle hasText hasImage" },
-				controlClasses: { source: "attribute", selector: "div.controls", attribute: "class", default: "controls loop autoplay flickable" },
-				config: {
-					source: "attribute",
-					selector: "div.controls",
-					attribute: "data-config",
-					default: "{}",
-				},
-				items: {
-					source: "query",
-					selector: "li.item",
-					query: {
-						title: { source: "html", selector: ".text h3" },
-						subTitle: { source: "html", selector: ".text h4" },
-						src: { source: "attribute", selector: ".image [src]", attribute: "src" },
-						alt: { source: "attribute", selector: ".image [src]", attribute: "alt" },
-						text: { source: "html", selector: ".text p" },
-						url: { source: "attribute", selector: "a", attribute: "href" },
-						bg: { source: "attribute", attribute: "style" },
-					},
-					default: [
-						{
-							title: ["Title"],
-							subTitle: ["SubTitle"],
-							src: wpinfo.theme_url + "/images/dummy.jpg",
-							alt: "dummy",
-							text: ["Text"],
-							url: "https://",
-							bg: "background-image:url('" + wpinfo.theme_url + "/images/dummy.jpg')",
-						},
-					],
-				},
-			},
-
-			save({ attributes, className }) {
-				const { InnerBlocks, RichText } = wp.blockEditor;
-				const { classes = "", controlClasses = "", config, items = [] } = attributes;
-				var classArray = _.uniq(classes.split(" "));
-				var controlClassArray = _.uniq(controlClasses.split(" "));
-				var states = {
-					hasArrows: false,
-					hasDots: false,
-					hasThumbnail: false,
-
-					hasTitle: false,
-					hasSubTitle: false,
-					hasText: false,
-					hasImage: false,
-					hasBackgroundImage: false,
-				};
-				var controlStates = {
-					loop: false,
-					autoplay: false,
-					flickable: false,
-					scrollable: false,
-					stopbyhover: false,
-					closable: false,
-				};
-				const hasClass = (cls) => classArray.indexOf(cls) !== -1;
-				Object.keys(states).forEach(function (key) {
-					this[key] = hasClass(key);
-				}, states);
-				const hasControlClass = (cls) => controlClassArray.indexOf(cls) !== -1;
-				Object.keys(controlStates).forEach(function (key) {
-					this[key] = hasClass(key);
-				}, controlStates);
-
-				var rtn = [];
-				var thumbs = [];
-				items.map(function (item, index) {
-					if (states.hasBackgroundImage) {
-						if (typeof item.bg === "string") {
-							item.bg = { backgroundImage: item.bg.slice("background-image:".length) };
-						}
-					} else {
-						item.bg = {};
-					}
-					rtn.push(
-						<li className={"item"} style={item.bg} key={index}>
-							{states.hasImage && (
-								<div className="image">
-									<img src={item.src} alt={item.alt} />
-								</div>
-							)}
-							<div className="text">
-								{states.hasTitle && (
-									<h3>
-										<RichText.Content value={item.title} />
-									</h3>
-								)}
-								{states.hasSubTitle && (
-									<h4>
-										<RichText.Content value={item.subTitle} />
-									</h4>
-								)}
-								{states.hasText && (
-									<p>
-										<RichText.Content value={item.text} />
-									</p>
-								)}
-							</div>
-						</li>,
-					);
-					if (states.hasThumbnail) {
-						thumbs.push(
-							<li className={"item"} style={item.bg}>
-								<img src={item.src} alt={item.alt} />
-							</li>,
-						);
-					}
-				});
-
-				return (
-					<div className={classes}>
-						<ul className="contents">{rtn}</ul>
-						<div className={controlClasses} data-config={config}>
-							{states.hasArrows && <div className="arrow prev"> </div>}
-							{states.hasThumbnail && <ul className="thumbnail">{thumbs}</ul>}
-							{states.hasDots && (
-								<ul className="dots">
-									<li className="dot"> </li>
-								</ul>
-							)}
-							{states.hasArrows && <div className="arrow next"> </div>}
-						</div>
-					</div>
-				);
-			},
-		},
-		{
-			save({ attributes, className }) {
-				const { InnerBlocks, RichText } = wp.blockEditor;
-				const { classes = "", controlClasses = "", config, items = [] } = attributes;
-				var classArray = _.uniq(classes.split(" "));
-				var controlClassArray = _.uniq(controlClasses.split(" "));
-
-				var states = CP.classNamesToFlags(classes);
-
-				const imageKeys = {
-					image: { src: "src", alt: "alt", code: "imageCode", items: "items" },
-					slide: { src: "slideSrc", alt: "slideAlt", srscet: "slideSrcset", code: "slideCode", items: "items" },
-					backgroundImage: { src: "backgroundImageSrc", alt: "backgroundImageAlt", srcset: "backgroundImageSrcset", code: "backgroundImageCode", items: "items" },
-				};
-
-				var rtn = [];
-				var thumbs = [];
-				items.map(function (item, index) {
-					rtn.push(
-						<li className={item.classes} key={index}>
-							{states.hasSlide && (
-								<div className="slide">
-									<CP.ResponsiveImage attr={attributes} keys={imageKeys.slide} index={index} isTemplate={states.isTemplate} />
-								</div>
-							)}
-							{states.hasImage && (
-								<div className="image">
-									<CP.ResponsiveImage attr={attributes} keys={imageKeys.image} index={index} isTemplate={states.isTemplate} />
-								</div>
-							)}
-							{(states.hasTitle || states.hasSubTitle || states.hasText) && (
-								<div className="text">
-									{states.hasTitle && (
-										<h3>
-											<RichText.Content value={item.title} />
-										</h3>
-									)}
-									{states.hasSubTitle && (
-										<h4>
-											<RichText.Content value={item.subTitle} />
-										</h4>
-									)}
-									{states.hasText && (
-										<p>
-											<RichText.Content value={item.text} />
-										</p>
-									)}
-								</div>
-							)}
-							{states.hasBackgroundImage && (
-								<div className="background">
-									<CP.ResponsiveImage attr={attributes} keys={imageKeys.backgroundImage} index={index} isTemplate={states.isTemplate} />
-								</div>
-							)}
-							{states.hasLink && (
-								<div className="link">
-									<a href={item.linkUrl}> </a>
-								</div>
-							)}
-						</li>,
-					);
-					if (states.hasImage && states.hasThumbnail) {
-						thumbs.push(
-							<li className={item.classes}>
-								<CP.ResponsiveImage attr={attributes} keys={imageKeys.image} index={index} isTemplate={states.isTemplate} />
-							</li>,
-						);
-					}
-				});
-
-				return (
-					<div className={classes}>
-						<ul className="contents">
-							{states.doLoop && "[loop_template " + (loopParam || "") + "]"}
-							{rtn}
-							{states.doLoop && "[/loop_template]"}
-						</ul>
-						<div className={controlClasses} data-config={config}>
-							{states.hasArrows && <div className="arrow prev"> </div>}
-							{states.hasImage && states.hasThumbnail && <ul className="thumbnail">{thumbs}</ul>}
-							{states.hasDots && (
-								<ul className="dots">
-									<li className="dot"> </li>
-								</ul>
-							)}
-							{states.hasArrows && <div className="arrow next"> </div>}
-						</div>
-					</div>
-				);
-			},
-			migrate(attributes) {
-				var states = CP.classNamesToFlags(classes);
-				attributes.content_path = attributes.loopParam.split(" ")[0];
-				attributes.query = attributes.loopParam.split(" ").slice(1).join("\n");
-				attributes.doLoop = states.doLoop;
-				return attributes;
-			},
-		},
-	],
 });
