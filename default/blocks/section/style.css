@@ -46,6 +46,15 @@
   width: 100%;
   margin-inline: auto;
 }
+.wp-block-catpow-section.is-align-left > .wp-block-catpow-section__body > .wp-block-catpow-section__header {
+  text-align: left;
+}
+.wp-block-catpow-section.is-align-center > .wp-block-catpow-section__body > .wp-block-catpow-section__header {
+  text-align: center;
+}
+.wp-block-catpow-section.is-align-right > .wp-block-catpow-section__body > .wp-block-catpow-section__header {
+  text-align: right;
+}
 .wp-block-catpow-section.is-type-scene {
   position: relative;
   padding-top: 0rem;

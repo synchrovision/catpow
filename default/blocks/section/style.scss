@@ -30,6 +30,21 @@
 			}
 		}
 	}
+	&.is-align-left{
+		>#{$body}>#{$header}{
+			@include txt((a:l));
+		}
+	}
+	&.is-align-center{
+		>#{$body}>#{$header}{
+			@include txt((a:c));
+		}
+	}
+	&.is-align-right{
+		>#{$body}>#{$header}{
+			@include txt((a:r));
+		}
+	}
 	&.is-type-scene{
 		@include bnd((p:r,pdt:0,z:1));
 		> #{$body}{
