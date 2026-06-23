@@ -190,8 +190,8 @@
         const contents = blockEl.querySelector(".wp-block-catpow-slider__contents");
         const items2 = [...contents.children];
         const scrollToMainItems = debounce((e) => {
-          const scrollLeftMax = blockEl.scrollWidth - blockEl.clientWidth;
           const gap = contents.children[attributes.items.length].offsetLeft - contents.children[0].offsetLeft;
+          const scrollLeftMax = gap * 3 - blockEl.clientWidth;
           const threasholdLeft = scrollLeftMax / 2 - gap / 2;
           const threasholdRight = threasholdLeft + gap;
           if (blockEl.scrollLeft < threasholdLeft) {

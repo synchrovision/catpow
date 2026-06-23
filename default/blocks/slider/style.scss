@@ -7,20 +7,26 @@
 	@include hide-scrollbar;
 	@include bnd((p:r,z:1,mxw:f,ox:a,bs:b,sst:x m,sss:a));
 	&__contents{
-		@include bnd((o:v));
-		@include flx((w:n,g:c-c));
+		@include bnd((w:max,o:v));
+		@include grd((rc:i,f:c,ac:fit,g:c-c));
 		@include txt((l:n));
 		&-item{
 			@include bnd((p:r,f:0 0 i,ssa:c));
 			@include trn((z:0));
+			@include grd((tr:s,g:0));
 			&-body{
+				@include grd((tr:s));
 				&-image{
 					&-img{
-						@include bnd((d:b,w:f,h:a));
+						@include bnd((d:b,w:f,h:f a,op:c,of:c));
 					}
 				}
 				&-texts{
 					@include txt((c:tx));
+					@include flx((w:n,a:f,d:c));
+					&-title,&-caption,&-text{
+						@include bnd((w:f));
+					}
 					&-title{
 						@extend %heading-block;
 						@extend %heading;
@@ -47,6 +53,9 @@
 					}
 					>:last-child{
 						@include bnd((mgb:0));
+					}
+					>:nth-last-child(2){
+						@include bnd((f:1 0 a));
 					}
 				}
 			}
@@ -98,6 +107,18 @@
 				}
 			}
 
+		}
+	}
+	&.has-image{
+		#{$block}{
+			&__contents{
+				&-item{
+					@include bnd((gr:span 2));
+					&-body{
+						@include bnd((gr:span 2));
+					}
+				}
+			}
 		}
 	}
 	&.is-type-carousel{

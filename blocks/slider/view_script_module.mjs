@@ -32,8 +32,8 @@ store("catpow/slider", {
 			blockEl.addEventListener(
 				"scroll",
 				debounce((e) => {
-					const scrollLeftMax = blockEl.scrollWidth - blockEl.clientWidth;
 					const gap = contents.children[orgItems.length].offsetLeft - contents.children[0].offsetLeft;
+					const scrollLeftMax = gap * 3 - blockEl.clientWidth;
 					const threasholdLeft = scrollLeftMax / 2 - gap / 2;
 					const threasholdRight = threasholdLeft + gap;
 					if (blockEl.scrollLeft < threasholdLeft) {
