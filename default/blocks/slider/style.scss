@@ -5,7 +5,7 @@
 .wp-block-catpow-slider{
 	$block:&;
 	@include hide-scrollbar;
-	@include bnd((p:r,z:1,mxw:f,ox:a,bs:b,sst:x m,sss:a));
+	@include bnd((p:r,z:1,mxw:f,ox:a,oy:h,bs:b,sst:x m,sss:a));
 	&__contents{
 		@include bnd((w:max,o:v));
 		@include grd((rc:i,f:c,ac:fit,g:c-c));
