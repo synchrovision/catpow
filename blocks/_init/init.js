@@ -8563,6 +8563,41 @@
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, isActive && /* @__PURE__ */ wp.element.createElement(Popover, { anchor: contentRef.current, position: "bottom center", focusOnMount: false }, /* @__PURE__ */ wp.element.createElement(Card, { size: "small" }, /* @__PURE__ */ wp.element.createElement(CardBody, null, /* @__PURE__ */ wp.element.createElement(CP.ColorVarTracer, { target: contentRef.current }, /* @__PURE__ */ wp.element.createElement(CP.SelectButtons, { onChange: (weight) => setAttributes({ weight }), selected: activeAttributes["weight"], options: options3 }))))), /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(ToolbarGroup, { controls: [{ icon, onClick: onToggle, isActive }] })));
     }
   });
+  wp.richText.registerFormatType("catpow/inlineblock", {
+    title: "inlineblock",
+    tagName: "span",
+    className: "cp-rtf-inline-block",
+    attributes: {
+      classes: "class"
+    },
+    edit({ isActive, value: value2, onChange, activeAttributes, contentRef }) {
+      const onToggle = () => onChange(toggleFormat(value2, { type: "catpow/inlineblock" }));
+      const setAttributes = useCallback2(
+        (attr) => {
+          onChange(
+            applyFormat(value2, {
+              type: "catpow/inlineblock",
+              attributes: Object.assign(activeAttributes, attr)
+            })
+          );
+        },
+        [value2, activeAttributes]
+      );
+      const [blockNumberClasses, blockNumberClassSet] = useMemo8(() => {
+        const classes = range(1, 10).reduce((p, c3) => ({ ...p, [`is-block-${c3}`]: `${c3}` }), {});
+        return [classes, new Set(Object.keys(classes))];
+      }, []);
+      const icon = /* @__PURE__ */ wp.element.createElement("svg", { role: "img", focusable: "false", xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", viewBox: "0 0 20 20", "aria-hidden": "true" }, /* @__PURE__ */ wp.element.createElement("rect", { x: "1", y: "10", width: "1", height: "10" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "18", y: "10", width: "1", height: "10" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "2", y: "15", width: "16", height: "2" }));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, isActive && /* @__PURE__ */ wp.element.createElement(Popover, { anchor: contentRef.current, position: "bottom center", focusOnMount: false }, /* @__PURE__ */ wp.element.createElement(Card, { size: "medium" }, /* @__PURE__ */ wp.element.createElement(CardBody, null, /* @__PURE__ */ wp.element.createElement(BaseControl, { label: "\u30D6\u30ED\u30C3\u30AF\u756A\u53F7" }, /* @__PURE__ */ wp.element.createElement(
+        CP.SelectButtons,
+        {
+          onChange: (targetClass) => setAttributes({ classes: toggleClass2(activeAttributes.classes, targetClass, blockNumberClassSet) }),
+          selected: getClassInSet(activeAttributes.classes, blockNumberClassSet),
+          options: CP.parseSelections(blockNumberClasses).options
+        }
+      ))))), /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(ToolbarGroup, { controls: [{ icon, onClick: onToggle, isActive }] })));
+    }
+  });
   wp.richText.registerFormatType("catpow/compose", {
     title: "compose",
     tagName: "span",

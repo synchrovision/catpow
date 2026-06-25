@@ -417,6 +417,9 @@ html{
 		&-strongest{
 			@include txt((p:r-xl,c:hx));
 		}
+		&-inline-block{
+			@include bnd((d:ib));
+		}
 	}
 }
 .cpform{

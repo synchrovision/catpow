@@ -1,4 +1,6 @@
-﻿const { __ } = wp.i18n;
+﻿import { range } from "catpow/util";
+
+const { __ } = wp.i18n;
 const { BlockControls, RichTextToolbarButton, RichTextShortcut } = wp.blockEditor;
 const { Popover, BaseControl, TextControl, RangeControl, Card, CardBody, ToolbarGroup } = wp.components;
 const { useState, useMemo, useCallback, useReducer, useEffect } = wp.element;
@@ -554,6 +556,66 @@ wp.richText.registerFormatType("catpow/fontweight", {
 								<CP.ColorVarTracer target={contentRef.current}>
 									<CP.SelectButtons onChange={(weight) => setAttributes({ weight })} selected={activeAttributes["weight"]} options={options} />
 								</CP.ColorVarTracer>
+							</CardBody>
+						</Card>
+					</Popover>
+				)}
+				<BlockControls>
+					<ToolbarGroup controls={[{ icon, onClick: onToggle, isActive }]} />
+				</BlockControls>
+			</>
+		);
+	},
+});
+
+wp.richText.registerFormatType("catpow/inlineblock", {
+	title: "inlineblock",
+	tagName: "span",
+	className: "cp-rtf-inline-block",
+	attributes: {
+		classes: "class",
+	},
+	edit({ isActive, value, onChange, activeAttributes, contentRef }) {
+		const onToggle = () => onChange(toggleFormat(value, { type: "catpow/inlineblock" }));
+
+		const setAttributes = useCallback(
+			(attr) => {
+				onChange(
+					applyFormat(value, {
+						type: "catpow/inlineblock",
+						attributes: Object.assign(activeAttributes, attr),
+					}),
+				);
+			},
+			[value, activeAttributes],
+		);
+
+		const [blockNumberClasses, blockNumberClassSet] = useMemo(() => {
+			const classes = range(1, 10).reduce((p, c) => ({ ...p, [`is-block-${c}`]: `${c}` }), {});
+			return [classes, new Set(Object.keys(classes))];
+		}, []);
+
+		const icon = (
+			<svg role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" aria-hidden="true">
+				<rect x="1" y="10" width="1" height="10" />
+				<rect x="18" y="10" width="1" height="10" />
+				<rect x="2" y="15" width="16" height="2" />
+			</svg>
+		);
+
+		return (
+			<>
+				{isActive && (
+					<Popover anchor={contentRef.current} position="bottom center" focusOnMount={false}>
+						<Card size="medium">
+							<CardBody>
+								<BaseControl label="ブロック番号">
+									<CP.SelectButtons
+										onChange={(targetClass) => setAttributes({ classes: toggleClass(activeAttributes.classes, targetClass, blockNumberClassSet) })}
+										selected={getClassInSet(activeAttributes.classes, blockNumberClassSet)}
+										options={CP.parseSelections(blockNumberClasses).options}
+									/>
+								</BaseControl>
 							</CardBody>
 						</Card>
 					</Popover>

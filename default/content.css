@@ -3648,6 +3648,9 @@ html {
   font-size: var(--cp-font-size-r-xl);
   color: oklch(var(--cp-tones-hx-l) var(--cp-tones-hx-c) var(--cp-tones-hx-h) / var(--cp-tones-hx-a,1));
 }
+.cp-rtf-inline-block {
+  display: inline-block;
+}
 .cpform div.cpform_nav {
   display: block;
   position: fixed;
