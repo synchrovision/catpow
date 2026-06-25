@@ -185,6 +185,8 @@ wp.blocks.registerBlockType("catpow/section", {
 				"color",
 				"colorScheme",
 				"backgroundColor",
+				{ preset: "colorScheme", label: __("ヘッダ配色", "catpow"), classKey: "headerClasses" },
+				{ preset: "backgroundColor", label: __("ヘッダ背景色", "catpow"), classKey: "headerClasses" },
 				"backgroundImage",
 				"backgroundPattern",
 				"contentWidth",

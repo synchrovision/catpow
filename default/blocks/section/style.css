@@ -94,6 +94,9 @@
   position: relative;
   padding: var(--cp-padding-f);
   padding-inline: 0rem;
+  min-height: 8em;
+  height: auto;
+  align-content: center;
   z-index: 2;
 }
 .wp-block-catpow-section.is-type-scene > .wp-block-catpow-section__body > .wp-block-catpow-section__header .wp-block-catpow-section__header-title-prefix {

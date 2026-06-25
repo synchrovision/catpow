@@ -183,6 +183,8 @@
           "color",
           "colorScheme",
           "backgroundColor",
+          { preset: "colorScheme", label: __("\u30D8\u30C3\u30C0\u914D\u8272", "catpow"), classKey: "headerClasses" },
+          { preset: "backgroundColor", label: __("\u30D8\u30C3\u30C0\u80CC\u666F\u8272", "catpow"), classKey: "headerClasses" },
           "backgroundImage",
           "backgroundPattern",
           "contentWidth"
