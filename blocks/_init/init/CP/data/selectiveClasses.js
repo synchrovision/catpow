@@ -118,6 +118,17 @@ export const selectiveClassesPresets = {
 			...otherParams,
 		};
 	},
+	align: {
+		name: "align",
+		type: "buttons",
+		label: __("横揃え", "catpow"),
+		required: true,
+		values: {
+			isAlignLeft: __("左", "catpow"),
+			isAlignCenter: __("中", "catpow"),
+			isAlignRight: __("右", "catpow"),
+		},
+	},
 	alignContent: {
 		name: "alignContent",
 		type: "buttons",

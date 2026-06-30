@@ -5960,6 +5960,17 @@
         ...otherParams
       };
     },
+    align: {
+      name: "align",
+      type: "buttons",
+      label: __13("\u6A2A\u63C3\u3048", "catpow"),
+      required: true,
+      values: {
+        isAlignLeft: __13("\u5DE6", "catpow"),
+        isAlignCenter: __13("\u4E2D", "catpow"),
+        isAlignRight: __13("\u53F3", "catpow")
+      }
+    },
     alignContent: {
       name: "alignContent",
       type: "buttons",
