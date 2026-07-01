@@ -1,0 +1,79 @@
+@import "admin_style_config.scss";
+@import "text-placeholders.scss";
+@import "component-placeholders.scss";
+
+
+.wp-block-catpow-sidebar-articlenav{
+    $block:&;
+	&__items{
+        @include bnd((mg:0,pd:0));
+        @include txt((l:n));
+		&-item{
+			&-link{
+                @extend %ui;
+                @include bnd((d:b,p:r,pd:c-l,pdr:0,pdl:1em));
+                @include txt((c:tx));
+                &::before{
+                    content:"";
+                    @include bnd((p:a,l:0,t:calc(50% - 0.35em),w:.4em,h:a,a:.75));
+                    @include bg((c:mx));
+                    @include clp((t:r f));
+                    @include trn((t:.2s,o:.25));
+                }
+				&.is-active{
+                    &::before{
+                        @include trn((o:1));
+                    }
+				}
+			}
+			&-subitems{
+                @include bnd((mg:0,pd:0));
+                @include txt((l:n));
+				&-item{
+                    @include bnd((pdl:.5em));
+					&-link{
+                        @extend %ui;
+                        @include bnd((d:b,p:r,pd:c-l,pdr:0,pdl:1em));
+                        @include txt((c:tx));
+                        &::before{
+                            content:"";
+                            @include bnd((p:a,l:0,t:calc(50% - 0.35em),w:.4em,h:a,a:.75));
+                            @include bg((c:mx));
+                            @include clp((t:r f));
+                            @include trn((t:.2s,o:.25));
+                        }
+        				&.is-active{
+                            &::before{
+                                @include trn((o:1));
+                            }
+        				}
+					}
+					&-enditems{
+                        @include bnd((mg:0,pd:0));
+                        @include txt((l:n));
+						&-item{
+                            @include bnd((pdl:.5em));
+							&-link{
+                                @extend %ui;
+                                @include bnd((d:b,p:r,pd:c-l,pdr:0,pdl:1em));
+                                @include txt((c:tx));
+                                &::before{
+                                    content:"";
+                                    @include bnd((p:a,l:0,t:calc(50% - 0.35em),w:.4em,h:a,a:.75));
+                                    @include bg((c:mx));
+                                    @include clp((t:r f));
+                                    @include trn((t:.2s,o:.25));
+                                }
+                				&.is-active{
+                                    &::before{
+                                        @include trn((o:1));
+                                    }
+                				}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
