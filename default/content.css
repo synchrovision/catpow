@@ -823,7 +823,12 @@ html {
 }
 @media (max-width:480px) {
   html {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
     font-size: 4vw;
+  }
+  html::-webkit-scrollbar {
+    display: none;
   }
 }
 .has-color--0 {

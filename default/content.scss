@@ -11,6 +11,7 @@ html{
 	@include bnd((sb:s,spdt:100));
 	@include txt((c:tx,f:t-p));
 	@include bp(-480){
+		@include hide-scrollbar;
 		@include txt((p:4vw));
 	}
 }
