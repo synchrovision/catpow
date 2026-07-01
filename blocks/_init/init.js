@@ -1885,7 +1885,7 @@
     if (component?.props == null) {
       return;
     }
-    if (component.type == react_default.Fragment) {
+    if (component.type == react_default.Fragment || component.type == "template") {
       applyBem(component.props.children, ctx);
       return;
     }
