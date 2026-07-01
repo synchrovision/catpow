@@ -63,14 +63,14 @@
 				&-button{
 					@include bnd((d:b,p:r,o:h));
 					@include txt((c:i));
-					@include bg((c:m));
+					@include bg((g:l 60deg m oklch(from clr(m) l c calc(h + var(--cp-tones-hr) * 2))));
 					@include shd((t:t-u));
 					&::before{
 						content:'';
 						@include bnd((d:b,p:a,i:0,r:f));
 						@include bdr((r:calc(#{sz(r-b)} - #{sz(2)})));
 						@include bg((c:m 90));
-						@include trn((t:.3s));
+						@include trn((t:.3s,bm:o,o:.5));
 					}
 					&:hover{
 						&::before{

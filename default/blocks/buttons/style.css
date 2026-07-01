@@ -146,7 +146,11 @@
   position: relative;
   overflow: hidden;
   color: oklch(var(--cp-tones-i-l) var(--cp-tones-i-c) var(--cp-tones-i-h) / var(--cp-tones-i-a,1));
-  background-color: oklch(var(--cp-tones-m-l) var(--cp-tones-m-c) var(--cp-tones-m-h) / var(--cp-tones-m-a,1));
+  background-image: -webkit-linear-gradient(top, oklch(var(--cp-tones-m-l) var(--cp-tones-m-c) var(--cp-tones-m-h) / var(--cp-tones-m-a,1)), oklch(from oklch(var(--cp-tones-m-l) var(--cp-tones-m-c) var(--cp-tones-m-h) / var(--cp-tones-m-a,1)) l c calc(h + var(--cp-tones-hr) * 2)));
+  background-image: -moz-linear-gradient(top, oklch(var(--cp-tones-m-l) var(--cp-tones-m-c) var(--cp-tones-m-h) / var(--cp-tones-m-a,1)), oklch(from oklch(var(--cp-tones-m-l) var(--cp-tones-m-c) var(--cp-tones-m-h) / var(--cp-tones-m-a,1)) l c calc(h + var(--cp-tones-hr) * 2)));
+  background-image: -ms-linear-gradient(top, oklch(var(--cp-tones-m-l) var(--cp-tones-m-c) var(--cp-tones-m-h) / var(--cp-tones-m-a,1)), oklch(from oklch(var(--cp-tones-m-l) var(--cp-tones-m-c) var(--cp-tones-m-h) / var(--cp-tones-m-a,1)) l c calc(h + var(--cp-tones-hr) * 2)));
+  background-image: -o-linear-gradient(top, oklch(var(--cp-tones-m-l) var(--cp-tones-m-c) var(--cp-tones-m-h) / var(--cp-tones-m-a,1)), oklch(from oklch(var(--cp-tones-m-l) var(--cp-tones-m-c) var(--cp-tones-m-h) / var(--cp-tones-m-a,1)) l c calc(h + var(--cp-tones-hr) * 2)));
+  background-image: linear-gradient(60deg, oklch(var(--cp-tones-m-l) var(--cp-tones-m-c) var(--cp-tones-m-h) / var(--cp-tones-m-a,1)), oklch(from oklch(var(--cp-tones-m-l) var(--cp-tones-m-c) var(--cp-tones-m-h) / var(--cp-tones-m-a,1)) l c calc(h + var(--cp-tones-hr) * 2)));
   text-shadow: var(--cp-shadow-t-u) oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
 .wp-block-catpow-buttons__item.is-rank-primary .wp-block-catpow-buttons-button::before {
@@ -163,6 +167,8 @@
   background-color: oklch(calc(1 - var(--cp-tones-m-t) * 90) var(--cp-tones-m-c) var(--cp-tones-m-h) / var(--cp-tones-m-a,1));
   -webkit-transition: 0.3s;
   transition: 0.3s;
+  mix-blend-mode: overlay;
+  opacity: 0.5;
 }
 .wp-block-catpow-buttons__item.is-rank-primary .wp-block-catpow-buttons-button:hover::before {
   right: 0rem;
