@@ -1,25 +1,20 @@
 @import 'admin_style_config.scss';
 
-div.wp-block-catpow-sidebar{
-	&>.block-editor-inner-blocks{
-		@include bnd((f:1 1 600));
-		&>.block-editor-block-list__layout{
-			@include flx((w:w));
-			&>.block-editor-block-list__block{
-				&[data-type="catpow/maincolumn"]{
-					@include bnd((f:10 10 300));
-				}
-				&[data-type="catpow/sidecolumn"]{
-					@include bnd((f:0 0 240));
-				}
-			}
+.wp-block-catpow-sidebar{
+	@include bnd((p:r));
+	@include anc((n:--sidebar-block,s:a));
+	>.cp-label{
+		@include bnd((p:f,b:0,t:0,r:0,z:10));
+		@include pos((anc:--sidebar-block,a:t c));
+	}
+	&-column{
+		>.cp-label{
+			@include bnd((p:a,t:0,r:0,z:10));
 		}
 	}
-	&.left{
-		&>.block-editor-inner-blocks{
-			&>.block-editor-block-list__layout{
-				@include flx((d:rr));
-			}
+	>.block-editor-inner-blocks{
+		&,>.block-editor-block-list__layout{
+			@include bnd((d:c));
 		}
 	}
 }

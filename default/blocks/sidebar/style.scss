@@ -1,20 +1,146 @@
 @import "admin_style_config.scss";
+@import "text-placeholders.scss";
+@import "component-placeholders.scss";
 
-div.wp-block-catpow-sidebar{
+
+.wp-block-catpow-sidebar{
+    $block:&;
+    $column:#{$block}-column;
+    @include bnd((p:r,o:c));
     @include flx((w:w));
-    div.wp-block-catpow-maincolumn{
-        @include bnd((f:10 10 300));
-    }
-    div.wp-block-catpow-sidecolumn{
-        @include bnd((f:1 1 300,pd:10,bs:b));
-		@include bdr((p:r,s:s,w:1,c:t 30));
-    }
-    &.left{
+    &.is-align-left{
         @include flx((d:rr));
     }
-	@include bp(pc){
-		div.wp-block-catpow-sidecolumn{
-			@include bnd((f:0 0 240));
-		}
-	}
+    @include bp(-768){
+        &.is-stuck{
+            @include flx((d:c));
+            &.is-stuck-top{
+                @include flx((d:cr));
+            }
+            #{$column}{
+                &.is-column-side{
+                    #{$column}{
+                        &__container{
+                            @include bnd((h:a unset));
+                        }
+                        &__button{
+                            @include bnd((d:n));
+                        }
+                    }
+                }
+            }
+        }
+        &.is-sticky{
+            @include bnd((d:b));
+            #{$column}{
+                &.is-column-side{
+                    @include bnd((p:f,t:0,b:0,w:i,z:10));
+                    @include trn((t:.4s));
+                    #{$column}{
+                        &__container{
+                            @include bnd((h:a unset));
+                        }
+                        &__button{
+                            @include bnd((p:a,i:0,mg:a,w:1em,h:4em));
+                            @include bg((c:bx));
+                            @include bdr((r:c-b));
+                            @include trn((t:.4s,x:0,o:1));
+                            @include usr((c:p));
+                            &-icon{
+                                @include bnd((d:b,p:a,i:0,mg:a,w:.5em,h:1em));
+                                @include bg((c:tx));
+                            }
+                        }
+                    }
+                }
+            }
+            &.is-align-left{
+                #{$column}{
+                    &.is-column-side{
+                        @include bnd((l:0));
+                        @include trn((x: -100%));
+                        #{$column}{
+                            &__button{
+                                @include bnd((mgl:f));
+                                @include bdr((lr:0));
+                                &-icon{
+                                    @include clp((t:r f));
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            &.is-align-right{
+                #{$column}{
+                    &.is-column-side{
+                        @include bnd((r:0));
+                        @include trn((x: 100%));
+                        #{$column}{
+                            &__button{
+                                @include bnd((mgr:f));
+                                @include bdr((rr:0));
+                                &-icon{
+                                    @include clp((t:l f));
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            &.is-open{
+                #{$column}{
+                    &.is-column-side{
+                        @include trn((x:0));
+                    }
+                }
+            }
+            &:not(.is-viewing){
+                &.is-align-left{
+                    #{$column}{
+                        &.is-column-side{
+                            #{$column}{
+                                &__button{
+                                    @include trn((x: -100%,o:0));
+                                }
+                            }
+                        }
+                    }
+                }
+                &.is-align-right{
+                    #{$column}{
+                        &.is-column-side{
+                            #{$column}{
+                                &__button{
+                                    @include trn((x: 100%,o:0));
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &-column{
+        &.is-column-side{
+            @include bnd((f:1 1 i,bs:b));
+            @include txt((c:tx));
+            #{$column}{
+                &__container{
+                    @include bnd((p:s,t:pt,h:a calc(100vh - var(--cp-page-top-offset)),pd:c-c,oy:a));
+                }
+            }
+        }
+        &.is-column-main{
+            @include bnd((f:99 99 i));
+            
+        }
+    }
+    &-section{
+        &__header{
+            &-title{
+                @extend %lead;
+            }
+        }
+    }
 }
