@@ -14,6 +14,7 @@ class icon extends \Catpow\api{
 			foreach(glob($dir_path.'/*.{png,svg,gif,jpg}',defined('GLOB_BRACE')?GLOB_BRACE:0) as $image_file){
 				$size=getimagesize($image_file);
 				$data[]=[
+					'filename'=>basename($image_file),
 					'url'=>$dir_url.'/'.basename($image_file),
 					'path'=>$image_file,
 					'width'=>$size[0]??false,
@@ -29,6 +30,7 @@ class icon extends \Catpow\api{
 		foreach($posts as $post){
 			$image=wp_get_attachment_image_src($post->ID,'full');
 			$data[]=[
+				'filename'=>basename($image[0]),
 				'url'=>$image[0],
 				'path'=>get_attached_file($post->ID),
 				'width'=>$image[1],
