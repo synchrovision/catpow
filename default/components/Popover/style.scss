@@ -13,7 +13,7 @@
 	}
 	&__body{
 		@include pos((anc:--anchor,a:b c,t:mh t c));
-		@include bnd((p:f,t:0,b:0,mg:1em));
+		@include bnd((p:f,t:0,b:0,pd:0,mg:1em));
 		@include bdr((s:n,r:8));
 		@include bg((c:b));
 		@include shd((b:8));
