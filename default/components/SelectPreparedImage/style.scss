@@ -5,19 +5,76 @@
 	&__img{
 		@include bnd((d:b,w:2em,h:2em));
 	}
-	&-items{
-		@include bnd((mg:0,pd:0));
-		@include flx((w:w));
+	&__popover{
+		@include bnd((p:r,w:20em,oy:a));
+		&-current{
+			@include bnd((p:r,t:0,l:0,r:0,pd:.5em));
+			@include flx((w:n,a:c,g:.5em));
+			@include bg((c:white));
+			&-img{
+				@include bnd((d:ib,w:3em,h:3em));
+			}
+			&-filename{
+				@include bnd((pd:.5em,f:1 1 a));
+				@include txt((w:m));
+			}
+		}
+		&-search{
+			@include bnd((p:s,t:0,l:0,r:0,pd:.5em));
+			@include flx((w:n,a:c,g:.5em,j:b));
+			@include bg((c:white));
+			@include bdr((p:b,s:s,w:1,c:gray));
+			&::before{
+				content:'search';
+				@include txt((p:2em,f:Material Icons,c:gray));
+			}
+			& &-input{
+				@include bnd((d:b,f:1 1 a,h:unset a,pd:.25em 1em,bs:b));
+				@include bdr((s:s,w:1,c:gray,r:1em));
+				@include txt((p:14,h:1em));
+			}
+		}
+		&-pages{
+			@include bnd((p:r,mg:0,pd:0));
+			&-page{
+				@include bnd((mg:0,pd:0));
+				&:not(.is-active){
+					@include bnd((d:n));
+				}
+			}
+		}
+		&-pagenation{
+			@include bnd((p:r,mg:0 a,pd:.5em));
+			@include bdr((p:t,s:s,w:1,c:gray));
+			@include grd((tc:repeat(10,1fr),g:.2em));
+			&-btn{
+				@include bnd((pd:.25em 0));
+				@include bdr((s:n,r:.2em));
+				@include bg((c:lightgray));
+				@include txt((a:c,p:12,c:white));
+				@include usr((c:p));
+				&.is-active{
+					@include bg((c:wp));
+				}
+			}
+		}
+	}
+	&__items{
+		@include bnd((mg:0,pd:2,w:20em f));
+		@include grd((tc:repeat(10,1fr),tr:repeat(10,1fr),g:2));
 		@include bg((c:b));
 		@include txt((l:n));
 		&-item{
 			@include bnd((f:0 0 2em,mg:0,pd:0,bs:b));
+			@include trn((t:.2s,o:.4));
 			@include usr((c:p));
-			&__img{
-				@include bnd((w:f,h:a));
+			&-img{
+				@include bnd((d:b,w:f,h:a));
 			}
 			&.is-active{
-				@include bg((c:wp));
+				@include bdr((p:o,s:s,w:2,c:wp));
+				@include bg((c:white));
+				@include trn((o:1));
 			}
 		}
 	}
