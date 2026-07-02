@@ -1008,61 +1008,6 @@
 .cp-selectpattern li.active {
   background-color: var(--wp-admin-theme-color);
 }
-.cp-selectpreparedimage {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-box-lines: multiple;
-  -webkit-flex-wrap: wrap;
-  flex-wrap: wrap;
-  background-color: oklch(calc(1 - var(--cp-tones-t-t) * 20) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
-  border-style: solid;
-  border-width: 0.0625rem;
-  border-color: oklch(calc(1 - var(--cp-tones-t-t) * 10) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
-}
-.cp-selectpreparedimage-items-item {
-  -webkit-box-flex: 0;
-  flex-grow: 0;
-  flex-shrink: 0;
-  flex-basis: 10%;
-  box-sizing: border-box;
-  cursor: pointer;
-}
-.cp-selectpreparedimage-items-item > img.cp-selectpreparedimage-items-item__img {
-  width: 100%;
-  height: auto;
-  pointer-events: auto;
-}
-.cp-selectpreparedimage-items-item.active {
-  background-color: var(--wp-admin-theme-color);
-}
-.cp-selectpreparedimageset {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-box-lines: multiple;
-  -webkit-flex-wrap: wrap;
-  flex-wrap: wrap;
-  background-color: oklch(calc(1 - var(--cp-tones-t-t) * 20) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
-  border-style: solid;
-  border-width: 0.0625rem;
-  border-color: oklch(calc(1 - var(--cp-tones-t-t) * 10) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
-}
-.cp-selectpreparedimageset .item {
-  -webkit-box-flex: 0;
-  flex-grow: 0;
-  flex-shrink: 0;
-  flex-basis: 33%;
-  box-sizing: border-box;
-  cursor: pointer;
-}
-.cp-selectpreparedimageset .item img {
-  width: 100%;
-  height: auto;
-}
-.cp-selectpreparedimageset .item.active {
-  background-color: var(--wp-admin-theme-color);
-}
 .cp-selectgridbuttons {
   margin: 0rem;
 }

@@ -256,11 +256,11 @@ export const SelectClassPanelBlock = ({ prm }) => {
 			switch (prm.input) {
 				case "border":
 					rtn.push(
-						<CP.SelectPreparedImage
+						<Catpow.SelectPreparedImage
 							name="border"
 							value={CP.getUrlInStyleCode(tgt.borderImage)}
 							color={prm.color || 0}
-							onChange={(image) => {
+							onSelect={(image) => {
 								if (!image.conf) {
 									return;
 								}
@@ -274,11 +274,11 @@ export const SelectClassPanelBlock = ({ prm }) => {
 					break;
 				case "pattern":
 					rtn.push(
-						<CP.SelectPreparedImage
+						<Catpow.SelectPreparedImage
 							name="pattern"
 							value={CP.getUrlInStyleCode(tgt.backgroundImage)}
 							color={prm.color || 0}
-							onChange={(image) => {
+							onSelect={(image) => {
 								if (!image.conf) {
 									return;
 								}
@@ -308,7 +308,7 @@ export const SelectClassPanelBlock = ({ prm }) => {
 					break;
 				case "frame":
 					rtn.push(
-						<CP.SelectPreparedImageSet
+						<Catpow.SelectPreparedImageSet
 							name="frame"
 							value={CP.getUrlInStyleCode(tgt.borderImage)}
 							color={prm.color || 0}
@@ -688,11 +688,11 @@ export const SelectClassPanelBlock = ({ prm }) => {
 						rtn.push(<h5>{prm.label}</h5>);
 					}
 					rtn.push(
-						<CP.SelectPreparedImage
+						<Catpow.SelectPreparedImage
 							name={prm.input}
 							value={item[prm.keys.src]}
 							color={prm.color || CP.getColor({ attr: item }) || 0}
-							onChange={(image) => {
+							onSelect={(image) => {
 								save({
 									[prm.keys.src]: image.url,
 									[prm.keys.alt]: image.alt,

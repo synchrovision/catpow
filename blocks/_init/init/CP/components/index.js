@@ -13,8 +13,6 @@ export * from "./ResponsiveImage.jsx";
 export * from "./ResponsiveItemSizeInput.jsx";
 export * from "./ResponsiveSizeInput.jsx";
 export * from "./SelectPictureSources.jsx";
-export * from "./SelectPreparedImage.jsx";
-export * from "./SelectPreparedImageSet.jsx";
 export * from "./InputBackgroundImage/index.js";
 export * from "./InputIcon.jsx";
 export * from "./OutputIcon.jsx";

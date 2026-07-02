@@ -5,7 +5,7 @@
 		prm.keys.src = prm.keys.src || prm.input + "Src";
 		prm.keys.alt = prm.keys.alt || prm.input + "Alt";
 		return (
-			<CP.SelectPreparedImage
+			<Catpow.SelectPreparedImage
 				name={prm.input}
 				value={item[prm.keys.src]}
 				color={prm.color || CP.getColor({ attr: item }) || 0}

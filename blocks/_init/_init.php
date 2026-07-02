@@ -1,5 +1,5 @@
 <?php
-\cp::use_components(['JsonEditor','JsonEditor/Image']);
+\cp::use_components(['JsonEditor','JsonEditor/Image','SelectPreparedImage','SelectPreparedImageSet']);
 
 $data=[];
 \cp::conf_data_walk(function($data_type,$data_name,$conf_data)use(&$data){

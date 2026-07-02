@@ -851,8 +851,6 @@
     SelectPatternClass: () => SelectPatternClass,
     SelectPictureSources: () => SelectPictureSources,
     SelectPositionClass: () => SelectPositionClass,
-    SelectPreparedImage: () => SelectPreparedImage,
-    SelectPreparedImageSet: () => SelectPreparedImageSet,
     SelectResponsiveImage: () => SelectResponsiveImage,
     SelectSize: () => SelectSize,
     SelectThemeColor: () => SelectThemeColor,
@@ -1265,14 +1263,14 @@
   }, {});
 
   // node_modules-included/catpow/src/util/rtf.js
-  var rtf = (text, pref = "rtf") => {
+  var rtf = (text, pref = "rtf", level = 3) => {
     if (typeof text !== "string") {
       if (text.toString == null) {
         return "";
       }
       text = text.toString();
     }
-    text = replaceBlockFormat(text, pref);
+    text = replaceBlockFormat(text, pref, level);
     text = joinConsecutiveLists(text, pref);
     text = replaceInlineFormat(text, pref);
     text = replaceLineBreak(text);
@@ -1302,18 +1300,19 @@
     });
     return text;
   };
-  var replaceBlockFormat = (text, pref, level = 0) => {
-    if (level > 3) return text;
-    const prefix = level > 0 ? `([ \u3000	]{${level}})` : "";
-    const classLevel = level > 0 ? ` is-level-${level}` : "";
-    const h = "^" + (level > 0 ? `([\u3000\\t]{${level}})` : "()");
-    const t = "(.+((\\n" + (level > 0 ? "\\1" : "") + "[\u3000\\t]).+)*)$";
-    const c3 = level > 0 ? ` is-level-${level}` : "";
-    const l = level + 4;
-    const p = "$2\n";
-    const p2 = "$3\n";
-    if (level > 0 && !text.match(new RegExp(h, "gum"))) {
+  var replaceBlockFormat = (text, pref, level = 3, indent = 0) => {
+    if (level > 6) return text;
+    const h = "^" + (indent > 0 ? `([\u3000\\t]{${indent}})` : "()");
+    const t = "(.+((\\n" + (indent > 0 ? "\\1" : "") + "[\u3000\\t]).+)*)$";
+    const c3 = ` is-level${level}` + (indent > 0 ? ` is-indent${indent}` : "");
+    const l = level;
+    const p = "$2";
+    const p2 = "$3";
+    if (indent > 0 && !text.match(new RegExp(h, "gum"))) {
       return text;
+    }
+    if (indent > 0) {
+      text = text.replace(new RegExp(`((\\n[\u3000\\t]{${indent}}[^\\n]*)+)`), `<div class="${pref}-indent is-level${level} is-indent${indent}">$1</div>`);
     }
     text = text.replace(
       new RegExp(h + "\\^([^\\s\u3000].{0,20}?) [:\uFF1A] " + t, "gum"),
@@ -1321,16 +1320,16 @@
       text
     );
     text = text.replace(new RegExp(h + "([^\\s\u3000].{0,20}?) [:\uFF1A] " + t, "gum"), `<dl class="${pref}-dl${c3}"><dt class="${pref}-dl__dt">$2</dt><dd class="${pref}-dl__dd">${p2}</dd></dl>`, text);
-    text = text.replace(new RegExp(h + "\u203B" + t, "gum"), `<span class="${pref}-annotation${c3}">${p}</span>`);
-    text = text.replace(new RegExp(h + "\u25A0 " + t, "gum"), `<h${l} class="${pref}-title${c3}">${p}</h${l}>`);
-    text = text.replace(new RegExp(h + "\u30FB " + t, "gum"), `<ul class="${pref}-ul${c3}"><li class="${pref}-ul__li">${p}</li></ul>`);
+    text = text.replace(new RegExp(h + "[\u203B*] " + t, "gum"), `<span class="${pref}-annotation${c3}">${p}</span>`);
+    text = text.replace(new RegExp(h + "[\u25A0#] " + t, "gum"), `<h${l} class="${pref}-title${c3}">${p}</h${l}>`);
+    text = text.replace(new RegExp(h + "[-\u30FB] " + t, "gum"), `<ul class="${pref}-ul${c3}"><li class="${pref}-ul__li">${p}</li></ul>`);
     text = text.replace(new RegExp(h + "\\d{1,2}\\. " + t, "gum"), `<ol class="${pref}-ol${c3}"><li class="${pref}-ol__li">${p}</li></ol>`);
     text = text.replace(
       new RegExp(h + "([\u2460-\u2473]|[^\\s\u3000]\\.) " + t, "gum"),
       `<dl class="${pref}-listed${c3}"><dt class="${pref}-listed__dt">$2</dt><dd class="${pref}-listed__dd">${p2}</dd></dl><!--/listed-->`
     );
-    if (level < 3) {
-      return replaceBlockFormat(text, pref, level + 1);
+    if (level < 6) {
+      return replaceBlockFormat(text, pref, level + 1, indent + 1);
     }
     return text;
   };
@@ -1340,8 +1339,9 @@
     return text;
   };
   var replaceLineBreak = (text) => {
-    text = text.replace(/\s*(<\/(h\d|dl|dt|dd|ul|ol|li)+?>)\s*/g, "$1");
-    text = text.replace(/(\n[　\t]*|\n[　\t]+)/g, "<br/>");
+    text = text.replace(/\s*(<(h\d|div|dl|dt|dd|ul|ol|li) .+?>)\s*/g, "$1");
+    text = text.replace(/\s*(<\/(h\d|div|dl|dt|dd|ul|ol|li)>)\s*/g, "$1");
+    text = text.replace(/(\n[　\t]*)/g, "<br/>");
     return text;
   };
 
@@ -1873,7 +1873,7 @@
     }, deps);
   };
 
-  // node_modules-included/catpow/src/component/Bem.jsx
+  // node_modules-included/catpow/src/component/Bem.tsx
   init_react();
   var applyBem = (component, { ...ctx }) => {
     if (Array.isArray(component)) {
@@ -2493,134 +2493,6 @@
     return /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("div", { className: clsx_default("cp-selectpicturesources", { "is-compact": compact }) }, /* @__PURE__ */ wp.element.createElement("div", { className: "_item", style: { gridColumn: `span ${devices2.length}` } }, /* @__PURE__ */ wp.element.createElement("div", { className: "_label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: CP.devices.pc.icon })), /* @__PURE__ */ wp.element.createElement(CP.SelectResponsiveImage, { ...props, className: "-image is-device-pc", keys, devices: devices2 })), devices2.map((device) => /* @__PURE__ */ wp.element.createElement("div", { className: "_item", key: device }, /* @__PURE__ */ wp.element.createElement("div", { className: "_label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: CP.devices[device].icon })), /* @__PURE__ */ wp.element.createElement(CP.SelectResponsiveImage, { ...props, className: clsx_default("-image", `is-device-${device}`), keys, devices: devices2, device })))));
   };
 
-  // ../blocks/_init/init/CP/components/SelectPreparedImage.jsx
-  var SelectPreparedImage = ({ className = "cp-selectpreparedimage", name, value: value2, color = 0, onChange, ...otherProps }) => {
-    const { useState: useState5, useEffect: useEffect4, useReducer: useReducer3 } = wp.element;
-    const { setURLparams, removeURLparam } = Catpow.util;
-    const [open, setOpen] = useState5(false);
-    const [state, dispatch] = useReducer3(
-      (state2, action) => {
-        const newState = { ...state2 };
-        switch (action.type) {
-          case "nextPage":
-            newState.page--;
-            break;
-          case "prevPage":
-            newState.page++;
-            break;
-          case "gotoPage":
-            newState.page = action.page;
-            break;
-          case "update":
-            if (action.images) {
-              newState.images = action.images;
-              const bareURL = removeURLparam(value2, "c");
-              newState.image = action.images.find((image) => image.url === bareURL);
-            }
-            if (action.image) {
-              newState.image = action.image;
-            }
-        }
-        return newState;
-      },
-      { page: 0, images: null, image: null }
-    );
-    useEffect4(() => {
-      if (state.images === null) {
-        if (CP.cache.has([SelectPreparedImage, name])) {
-          dispatch({ type: "update", images: CP.cache.get([SelectPreparedImage, name]) });
-        } else {
-          wp.apiFetch({ path: "cp/v1/images/" + name }).then((images) => {
-            CP.cache.set([SelectPreparedImage, name], images);
-            dispatch({ type: "update", images });
-          });
-        }
-      }
-    }, [state.images]);
-    useEffect4(() => {
-      onChange({
-        ...state.image,
-        url: setURLparams(state.image ? state.image.url : value2, {
-          c: color,
-          theme: wpinfo.theme
-        })
-      });
-    }, [state.image]);
-    if (state.images === null) {
-      return false;
-    }
-    return /* @__PURE__ */ wp.element.createElement(CP.Bem, null, /* @__PURE__ */ wp.element.createElement("div", { className: clsx_default(className, "is-" + name, open ? "is-open" : "is-close"), ...otherProps }, /* @__PURE__ */ wp.element.createElement("img", { className: "_img", src: value2, alt: "", width: "40", height: "40", onClick: () => setOpen(true) }), /* @__PURE__ */ wp.element.createElement(Catpow.Popover, { open, onClose: () => setOpen(false) }, /* @__PURE__ */ wp.element.createElement(CP.Bem, null, /* @__PURE__ */ wp.element.createElement("ul", { className: className + "-items" }, state.images.map((image) => {
-      const url = setURLparams(image.url, { c: color, theme: wpinfo.theme });
-      return /* @__PURE__ */ wp.element.createElement("li", { className: clsx_default("-item", { "is-active": value2 == url }), key: image.url }, /* @__PURE__ */ wp.element.createElement("img", { src: url, alt: image.alt, onClick: () => dispatch({ type: "update", image }) }));
-    }))))));
-  };
-
-  // ../blocks/_init/init/CP/components/SelectPreparedImageSet.jsx
-  var SelectPreparedImageSet = ({ className, name, value: value2, color = 0, onChange, ...otherProps }) => {
-    const { getURLparam, setURLparam, setURLparams, removeURLparam } = Catpow.util;
-    const [state, dispatch] = wp.element.useReducer(
-      (state2, action) => {
-        switch (action.type) {
-          case "update": {
-            const newState = { ...state2 };
-            if (action.imagesets) {
-              newState.imagesets = action.imagesets;
-              const bareURL = removeURLparam(value2, "c");
-              for (const key in newState.imagesets) {
-                if (newState.imagesets[key].url === bareURL) {
-                  newState.imageset = {
-                    ...newState.imagesets[key],
-                    url: setURLparams(bareURL, { c: color, theme: wpinfo.theme })
-                  };
-                  break;
-                }
-              }
-            }
-            if (action.imageset) {
-              newState.imageset = action.imageset;
-            }
-            if (newState.imageset) {
-              onChange(
-                newState.imageset.map((item) => {
-                  return {
-                    ...item,
-                    url: setURLparams(item.url, {
-                      c: color,
-                      theme: wpinfo.theme
-                    })
-                  };
-                })
-              );
-            }
-            return newState;
-          }
-        }
-        return state2;
-      },
-      { page: 0, imagesets: null, imageset: null }
-    );
-    CP.cache.PreparedImageSets = CP.cache.PreparedImageSets || {};
-    if (state.imagesets === null) {
-      if (CP.cache.PreparedImageSets[name]) {
-        dispatch({ type: "update", imagesets: CP.cache.PreparedImageSets[name] });
-      } else {
-        wp.apiFetch({ path: "cp/v1/imageset/" + name }).then((imagesets) => {
-          CP.cache.PreparedImageSets[name] = imagesets;
-          dispatch({ type: "update", imagesets });
-        });
-      }
-      return false;
-    }
-    return /* @__PURE__ */ wp.element.createElement("ul", { className: "cp-selectpreparedimageset " + name + " " + className, ...otherProps }, Object.keys(state.imagesets).map((key) => {
-      const imageset = state.imagesets[key];
-      const url = setURLparams(imageset[0].url, {
-        c: color,
-        theme: wpinfo.theme
-      });
-      return /* @__PURE__ */ wp.element.createElement("li", { className: "item " + (value2 == url ? "active" : ""), key }, /* @__PURE__ */ wp.element.createElement("img", { src: url, alt: imageset[0].alt, onClick: () => dispatch({ type: "update", imageset }) }));
-    }));
-  };
-
   // ../blocks/_init/init/CP/components/InputBackgroundImage/BackgroundImageDataGenerators/index.js
   var BackgroundImageDataGenerators_exports = {};
   __export(BackgroundImageDataGenerators_exports, {
@@ -3197,7 +3069,7 @@
       prm.keys.src = prm.keys.src || prm.input + "Src";
       prm.keys.alt = prm.keys.alt || prm.input + "Alt";
       return /* @__PURE__ */ wp.element.createElement(
-        CP.SelectPreparedImage,
+        Catpow.SelectPreparedImage,
         {
           name: prm.input,
           value: item[prm.keys.src],
@@ -3759,12 +3631,12 @@
           case "border":
             rtn.push(
               /* @__PURE__ */ wp.element.createElement(
-                CP.SelectPreparedImage,
+                Catpow.SelectPreparedImage,
                 {
                   name: "border",
                   value: CP.getUrlInStyleCode(tgt.borderImage),
                   color: prm.color || 0,
-                  onChange: (image) => {
+                  onSelect: (image) => {
                     if (!image.conf) {
                       return;
                     }
@@ -3780,12 +3652,12 @@
           case "pattern":
             rtn.push(
               /* @__PURE__ */ wp.element.createElement(
-                CP.SelectPreparedImage,
+                Catpow.SelectPreparedImage,
                 {
                   name: "pattern",
                   value: CP.getUrlInStyleCode(tgt.backgroundImage),
                   color: prm.color || 0,
-                  onChange: (image) => {
+                  onSelect: (image) => {
                     if (!image.conf) {
                       return;
                     }
@@ -3817,7 +3689,7 @@
           case "frame":
             rtn.push(
               /* @__PURE__ */ wp.element.createElement(
-                CP.SelectPreparedImageSet,
+                Catpow.SelectPreparedImageSet,
                 {
                   name: "frame",
                   value: CP.getUrlInStyleCode(tgt.borderImage),
@@ -4236,12 +4108,12 @@
             }
             rtn.push(
               /* @__PURE__ */ wp.element.createElement(
-                CP.SelectPreparedImage,
+                Catpow.SelectPreparedImage,
                 {
                   name: prm.input,
                   value: item[prm.keys.src],
                   color: prm.color || CP.getColor({ attr: item }) || 0,
-                  onChange: (image) => {
+                  onSelect: (image) => {
                     save({
                       [prm.keys.src]: image.url,
                       [prm.keys.alt]: image.alt
