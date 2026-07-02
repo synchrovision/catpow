@@ -1,5 +1,5 @@
 ﻿Catpow.SelectPreparedImageSet = (props) => {
-	const { className = "cp-selectpreparedimageset", name, value, color, onChange, ...otherProps } = props;
+	const { className = "cp-selectpreparedimageset", name, value, color, onSelect, onChange, ...otherProps } = props;
 	const { useEffect, useReducer, useMemo } = wp.element;
 	const { getURLparam, setURLparam, setURLparams, removeURLparam, bem } = Catpow.util;
 	const classes = useMemo(() => bem(className), []);
@@ -22,16 +22,19 @@
 						state.imageset = action.imageset;
 					}
 					if (state.imageset) {
+						if (onSelect) {
+							onSelect(state.imageset);
+						}
 						onChange(
 							state.imageset.map((item) => {
 								return { ...item, url: setURLparams(item.url, { c: color, theme: wpinfo.theme }) };
-							})
+							}),
 						);
 					}
 			}
 			return { ...state };
 		},
-		{ page: 0, imagesets: null, imageset: null }
+		{ page: 0, imagesets: null, imageset: null },
 	);
 
 	const cache = useMemo(() => {
