@@ -180,7 +180,8 @@
   fill: oklch(var(--cp-tones-i-l) var(--cp-tones-i-c) var(--cp-tones-i-h) / var(--cp-tones-i-a,1));
 }
 .wp-block-catpow-buttons__item.is-rank-secondary .wp-block-catpow-buttons-button {
-  text-shadow: var(--cp-shadow-t-u) oklch(calc(1 - var(--cp-tones-shd-t) * 100) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / calc(var(--cp-tones-shd-a,1) * 0.4));
+  background-color: oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1));
+  color: oklch(var(--cp-tones-bx-l) var(--cp-tones-bx-c) var(--cp-tones-bx-h) / var(--cp-tones-bx-a,1));
 }
 .wp-block-catpow-buttons__item.is-rank-tertiary {
   opacity: 0.8;

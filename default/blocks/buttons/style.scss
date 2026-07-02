@@ -89,7 +89,8 @@
 		&.is-rank-secondary{
 			#{$block}{
 				&-button{
-					@include shd((t:t-u clr(shd 1 .4)));
+					@include bg((c:mx));
+					@include txt((c:bx));
 				}
 			}
 		}
