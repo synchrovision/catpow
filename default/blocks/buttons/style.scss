@@ -19,7 +19,8 @@
 		@include trn((t:.2s));
 		@include usr((c:p));
 		&__icon{
-			@include bnd((p:a,w:1.8em,h:1.8em,t:0,b:0,l:1em,mg:a));
+			@include bnd((p:a,w:1em,h:1em,t:0,b:0,l:.5em,mg:a));
+			@include txt((t:0,p:1.8em,l:1em));
 			svg{
 				@include svg((f:crr));
 			}

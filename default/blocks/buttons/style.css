@@ -58,12 +58,15 @@
 }
 .wp-block-catpow-buttons-button__icon {
   position: absolute;
-  width: 1.8em;
-  height: 1.8em;
+  width: 1em;
+  height: 1em;
   top: 0rem;
   bottom: 0rem;
-  left: 1em;
+  left: 0.5em;
   margin: auto;
+  letter-spacing: 0;
+  font-size: 1.8em;
+  list-style: 1em;
 }
 .wp-block-catpow-buttons-button__icon svg {
   fill: currentcolor;
