@@ -3,13 +3,13 @@ CP.EmbedIcon = {
 	Input: (props) => {
 		const { item, prm, save } = props;
 		return (
-			<CP.SelectPreparedImage
+			<Catpow.SelectPreparedImage
 				name="icon"
 				value={item.embedIconSrc}
 				color="currentColor"
-				onChange={(image) => {
+				onChange={(src) => {
 					save({
-						embedIconSrc: image.url,
+						embedIconSrc: src,
 					});
 				}}
 			/>
