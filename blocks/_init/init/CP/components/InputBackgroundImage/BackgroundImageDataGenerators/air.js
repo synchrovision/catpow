@@ -1,5 +1,5 @@
-﻿import { baseGradientParams, alphaParams, wParams, hParams, getBaseGradientCode } from "./common";
-import { pfloor } from "catpow/util";
+﻿import { baseGradientParams, invertParams, alphaParams, aParams, wParams, hParams, rParams, seedParams, getBaseGradientCode } from "./common";
+import { srand, pfloor } from "catpow/util";
 const { __ } = wp.i18n;
 
 export const air = {
@@ -7,23 +7,47 @@ export const air = {
 	order: 4,
 	params: {
 		...baseGradientParams,
+		...invertParams,
+		...aParams,
 		...wParams,
 		...hParams,
+		...rParams,
 		...alphaParams,
+		...seedParams,
 	},
 	getData(params = {}) {
-		const { w = 50, h = 50, alpha = 25 } = params;
-		const p1 = 50 + pfloor(h / 5, 1),
-			p2 = 50 + pfloor(h / 10, 1),
-			p3 = 50 + pfloor(h / 3, 1);
-		const gradient1 = `radial-gradient(${80 + w / 2}% 100% at 40% 0%,rgba(255,255,255,0),rgba(255,255,255,0) ${p1}%,rgba(255,255,255,${alpha / 100}) ${p1}%,rgba(255,255,255,0))`;
-		const gradient2 = `radial-gradient(${100 + w}% 100% at 25% 100%,rgba(255,255,255,0),rgba(255,255,255,${alpha / 100}) ${p2}%,rgba(255,255,255,0) ${p2}%,rgba(255,255,255,0))`;
-		const gradient3 = `radial-gradient(${100 + w}% 100% at 100% 100%,rgba(255,255,255,0),rgba(255,255,255,${alpha / 100}) ${p3}%,rgba(255,255,255,0) ${p3}%,rgba(255,255,255,0))`;
-		const gradient4 = getBaseGradientCode(params);
+		const { invert = false, a = 3, w = 50, h = 50, r = 0, alpha = 25, seed = 10 } = params;
+		const rand = srand(seed);
+
+		const image = [];
+		const blendmode = [];
+
+		const c = (alpha = 100) => (invert ? `rgba(0,0,0,${alpha / 100})` : `rgba(255,255,255,${alpha / 100})`);
+
+		for (let i = 0; i < a; i++) {
+			const cr = 50 + w + rand(0, w / 4);
+			const rad = ((r + rand(-30, 30)) / 180) * Math.PI + Math.PI * (i % 2);
+			const or = cr + rand(-h, h);
+			const ox = 50 + Math.sin(rad) * or;
+			const oy = 50 + Math.cos(rad) * or;
+			const p = 99 - 2000 / cr;
+			blendmode.push(invert ? "multiply" : "overlay");
+			image.push(`radial-gradient(${cr}% ${cr}% at ${ox}% ${oy}%,${c(0)},${c(0)} ${p}%,${c(alpha)} ${i % 4 < 2 ? 99 : p}%,${c(0)} 99%)`);
+		}
+
+		if (invert) {
+			image.push(`linear-gradient(#fff, #fff)`);
+			blendmode.push("normal");
+			image.unshift(getBaseGradientCode(params));
+			blendmode.unshift("screen");
+		} else {
+			image.push(getBaseGradientCode(params));
+			blendmode.push("normal");
+		}
 		return {
-			image: [gradient1, gradient2, gradient3, gradient4],
+			image,
 			size: ["cover"],
-			blendmode: ["overlay", "overlay", "overlay", "normal"],
+			blendmode,
 		};
 	},
 };

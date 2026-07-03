@@ -133,10 +133,10 @@
     return t;
   }
   function __decorate(decorators, target, key, desc) {
-    var c3 = arguments.length, r2 = c3 < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    var c = arguments.length, r2 = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r2 = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r2 = (c3 < 3 ? d(r2) : c3 > 3 ? d(target, key, r2) : d(target, key)) || r2;
-    return c3 > 3 && r2 && Object.defineProperty(target, key, r2), r2;
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r2 = (c < 3 ? d(r2) : c > 3 ? d(target, key, r2) : d(target, key)) || r2;
+    return c > 3 && r2 && Object.defineProperty(target, key, r2), r2;
   }
   function __param(paramIndex, decorator) {
     return function(target, key) {
@@ -1150,7 +1150,7 @@
               classes.push(arguments[i]);
               continue;
             }
-            classes.push.apply(classes, Array.isArray(arguments[i]) ? arguments[i] : Object.keys(arguments[i]).filter((c3) => arguments[i][c3]));
+            classes.push.apply(classes, Array.isArray(arguments[i]) ? arguments[i] : Object.keys(arguments[i]).filter((c) => arguments[i][c]));
           }
           if (classes.length > 0) {
             return (className + " " + classes.join(" ")).replace(" --", " " + firstClass + "--");
@@ -1168,9 +1168,6 @@
       }
     );
   };
-
-  // node_modules-included/catpow/src/util/calc/round.js
-  var pfloor = (n, p) => parseFloat(Math.floor(parseFloat(n + "e" + p)) + "e-" + p);
 
   // node_modules-included/catpow/src/util/calc/srand.js
   var srand = (w = 88675123) => {
@@ -1235,8 +1232,8 @@
   var kebabToCamel = (str) => str.replace(/\-([a-z])/g, (m) => m[1].toUpperCase());
 
   // node_modules-included/catpow/src/util/string/classNamesToFlags.js
-  var classNamesToFlags = (classNames) => classNames && classNames.split(" ").map(kebabToCamel).reduce((p, c3) => {
-    p[c3] = true;
+  var classNamesToFlags = (classNames) => classNames && classNames.split(" ").map(kebabToCamel).reduce((p, c) => {
+    p[c] = true;
     return p;
   }, {}) || {};
 
@@ -1257,8 +1254,8 @@
   var flagsToWords = (flags) => flags && Object.keys(flags).filter((word) => flags[word]).join(" ");
 
   // node_modules-included/catpow/src/util/string/wordsToFlags.js
-  var wordsToFlags = (words) => words && words.split(" ").reduce((p, c3) => {
-    p[c3] = true;
+  var wordsToFlags = (words) => words && words.split(" ").reduce((p, c) => {
+    p[c] = true;
     return p;
   }, {});
 
@@ -1304,7 +1301,7 @@
     if (level > 6) return text;
     const h = "^" + (indent > 0 ? `([\u3000\\t]{${indent}})` : "()");
     const t = "(.+((\\n" + (indent > 0 ? "\\1" : "") + "[\u3000\\t]).+)*)$";
-    const c3 = ` is-level${level}` + (indent > 0 ? ` is-indent${indent}` : "");
+    const c = ` is-level${level}` + (indent > 0 ? ` is-indent${indent}` : "");
     const l = level;
     const p = "$2";
     const p2 = "$3";
@@ -1316,17 +1313,17 @@
     }
     text = text.replace(
       new RegExp(h + "\\^([^\\s\u3000].{0,20}?) [:\uFF1A] " + t, "gum"),
-      `<dl class="${pref}-notes${c3}"><dt class="${pref}-notes__dt">$2</dt><dd class="${pref}-notes__dd">${p2}</dd></dl><!--/notes-->`,
+      `<dl class="${pref}-notes${c}"><dt class="${pref}-notes__dt">$2</dt><dd class="${pref}-notes__dd">${p2}</dd></dl><!--/notes-->`,
       text
     );
-    text = text.replace(new RegExp(h + "([^\\s\u3000].{0,20}?) [:\uFF1A] " + t, "gum"), `<dl class="${pref}-dl${c3}"><dt class="${pref}-dl__dt">$2</dt><dd class="${pref}-dl__dd">${p2}</dd></dl>`, text);
-    text = text.replace(new RegExp(h + "[\u203B*] " + t, "gum"), `<span class="${pref}-annotation${c3}">${p}</span>`);
-    text = text.replace(new RegExp(h + "[\u25A0#] " + t, "gum"), `<h${l} class="${pref}-title${c3}">${p}</h${l}>`);
-    text = text.replace(new RegExp(h + "[-\u30FB] " + t, "gum"), `<ul class="${pref}-ul${c3}"><li class="${pref}-ul__li">${p}</li></ul>`);
-    text = text.replace(new RegExp(h + "\\d{1,2}\\. " + t, "gum"), `<ol class="${pref}-ol${c3}"><li class="${pref}-ol__li">${p}</li></ol>`);
+    text = text.replace(new RegExp(h + "([^\\s\u3000].{0,20}?) [:\uFF1A] " + t, "gum"), `<dl class="${pref}-dl${c}"><dt class="${pref}-dl__dt">$2</dt><dd class="${pref}-dl__dd">${p2}</dd></dl>`, text);
+    text = text.replace(new RegExp(h + "[\u203B*] " + t, "gum"), `<span class="${pref}-annotation${c}">${p}</span>`);
+    text = text.replace(new RegExp(h + "[\u25A0#] " + t, "gum"), `<h${l} class="${pref}-title${c}">${p}</h${l}>`);
+    text = text.replace(new RegExp(h + "[-\u30FB] " + t, "gum"), `<ul class="${pref}-ul${c}"><li class="${pref}-ul__li">${p}</li></ul>`);
+    text = text.replace(new RegExp(h + "\\d{1,2}\\. " + t, "gum"), `<ol class="${pref}-ol${c}"><li class="${pref}-ol__li">${p}</li></ol>`);
     text = text.replace(
       new RegExp(h + "([\u2460-\u2473]|[^\\s\u3000]\\.) " + t, "gum"),
-      `<dl class="${pref}-listed${c3}"><dt class="${pref}-listed__dt">$2</dt><dd class="${pref}-listed__dd">${p2}</dd></dl><!--/listed-->`
+      `<dl class="${pref}-listed${c}"><dt class="${pref}-listed__dt">$2</dt><dd class="${pref}-listed__dd">${p2}</dd></dl><!--/listed-->`
     );
     if (level < 6) {
       return replaceBlockFormat(text, pref, level + 1, indent + 1);
@@ -2031,9 +2028,9 @@
       () => {
         if (isStart) {
           setTargetName(
-            Object.keys(values).reduce((p, c3) => {
-              if (p === null || Math.abs(cnv.getProgress(values[c3]) - value2) < Math.abs(cnv.getProgress(values[p]) - value2)) {
-                return c3;
+            Object.keys(values).reduce((p, c) => {
+              if (p === null || Math.abs(cnv.getProgress(values[c]) - value2) < Math.abs(cnv.getProgress(values[p]) - value2)) {
+                return c;
               }
               return p;
             }, null)
@@ -2047,7 +2044,7 @@
       50,
       [value2]
     );
-    const positions = Object.keys(values).reduce((p, c3) => ({ ...p, ["--pos-" + c3]: cnv.getProgress(values[c3]) }), {});
+    const positions = Object.keys(values).reduce((p, c) => ({ ...p, ["--pos-" + c]: cnv.getProgress(values[c]) }), {});
     positions["--min-pos"] = Math.min(...Object.values(positions));
     positions["--max-pos"] = Math.max(...Object.values(positions));
     return /* @__PURE__ */ wp.element.createElement(RangeInputContext.Provider, { value: { values } }, /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("div", { className, style: positions }, /* @__PURE__ */ wp.element.createElement("div", { className: "_bar" }, /* @__PURE__ */ wp.element.createElement("div", { className: "_body", ref }, /* @__PURE__ */ wp.element.createElement("div", { className: "_range" }), Object.keys(values).map((name) => {
@@ -2635,10 +2632,10 @@
         const cf = (p) => `var(--cp-container-tones-${key}-${p})`;
         const rf = (p) => `var(--cp-root-tones-${key}-${p})`;
         const h = num ? staticHue ? num : num === "0" || num === "6" ? f("h") : `calc(${relativeHue ? cf("h") : rf("h")} + var(--cp-tones-hr) * ${num - 6} + var(--cp-tones-hs))` : f("h");
-        const c3 = f("c");
+        const c = f("c");
         const l = tint ? `calc(1 - ${f("t")} * ${tint} / 100)` : `${f("l")}`;
         const a = alpha ? `calc(${f("a")} * ${alpha})` : f("a");
-        return `oklch(${l} ${c3} ${h} / ${a})`;
+        return `oklch(${l} ${c} ${h} / ${a})`;
       }
     } else {
       const matches2 = color.match(/^([a-z]+)\-([a-z]+)$/);
@@ -2663,9 +2660,12 @@
   var hParam = { steps: { 1: 0, 10: 1, 20: 2, 50: 5, 100: 10, 200: 20 } };
   var baseGradientParams = {
     useAccentColor: { type: "boolean" },
+    useInvertibleColor: { type: "boolean" },
     baseGradientRotate: { "@editor": "Angle" },
-    baseGradientColor1: { minimum: 1, maximum: 12 },
-    baseGradientColor2: { minimum: 1, maximum: 12 }
+    baseGradientRange: { steps: { [-180]: 0, [-90]: 30, 90: 15, 180: 30 } }
+  };
+  var invertParams = {
+    invert: { type: "boolean" }
   };
   var contrastParams = {
     contrast: { steps: { 6: 1, 10: 2, 60: 5, 100: 10 } }
@@ -2702,9 +2702,14 @@
     seed: { minimum: 1, maximum: 100 }
   };
   var getBaseGradientCode = (params) => {
-    const { useAccentColor = true, baseGradientRotate = 0, baseGradientColor1 = 6, baseGradientColor2 = 7 } = params;
-    const colorKey = useAccentColor ? "sx" : "bx";
-    return `linear-gradient(${baseGradientRotate}deg in oklch,${translateColor(colorKey + baseGradientColor1)},${translateColor(colorKey + baseGradientColor2)})`;
+    const {
+      useAccentColor = true,
+      useInvertibleColor = true,
+      baseGradientRotate = 0,
+      baseGradientRange = 0,
+      colorKey = useInvertibleColor ? useAccentColor ? "sx" : "bx" : useAccentColor ? "a" : "m"
+    } = params;
+    return `linear-gradient(${baseGradientRotate}deg in oklch,${translateColor(colorKey)},oklch(from ${translateColor(colorKey)} l c calc(h + ${baseGradientRange})))`;
   };
 
   // ../blocks/_init/init/CP/components/InputBackgroundImage/BackgroundImageDataGenerators/custom.js
@@ -2831,12 +2836,12 @@
 
   // ../blocks/_init/init/CP/components/InputBackgroundImage/BackgroundImageDataGenerators/dots.js
   var { __: __6 } = wp.i18n;
-  var c = (l = 100) => `rgb(${l},${l},${l})`;
   var dots = {
     label: __6("\u30C9\u30C3\u30C8", "catpow"),
     order: 3,
     params: {
       ...baseGradientParams,
+      ...invertParams,
       ...rParams,
       w1: wParam,
       w2: wParam,
@@ -2844,18 +2849,20 @@
       ...alphaParams
     },
     getData(params = {}) {
-      const { r: r2 = 0, w1 = 80, w2 = 80, contrast = 50, alpha = 25 } = params;
+      const { invert = false, r: r2 = 0, w1 = 80, w2 = 80, contrast = 50, alpha = 25 } = params;
+      const c = (l = 100) => invert ? `rgb(${255 - l},${255 - l},${255 - l})` : `rgb(${l},${l},${l})`;
       const l1 = c(Math.floor(alpha / 100 * 255));
       const l2 = c(Math.floor(alpha * (100 - contrast) / 1e4 * 255));
+      const [c1, c2] = invert ? ["#000", "#fff"] : ["#fff", "#000"];
       const image = [];
       image.push(getBaseGradientCode(params));
-      image.push(`radial-gradient(circle at center, #fff, #fff ${w1}%, #000 ${w1}%, #000)`);
+      image.push(`radial-gradient(circle at center, ${c1}, ${c1} ${w1}%, ${c2} ${w1}%, ${c2})`);
       image.push(`linear-gradient(${r2}deg,${l1},${l2},${l2},${l1})`);
       return {
         image,
         size: ["cover", `${w2}px ${w2}px`, "cover"],
         repeat: ["no-repeat", "repeat", "no-repeat"],
-        blendmode: ["screen", "multiply", "normal"]
+        blendmode: ["screen", invert ? "screen" : "multiply", "normal"]
       };
     }
   };
@@ -2867,21 +2874,43 @@
     order: 4,
     params: {
       ...baseGradientParams,
+      ...invertParams,
+      ...aParams,
       ...wParams,
       ...hParams,
-      ...alphaParams
+      ...rParams,
+      ...alphaParams,
+      ...seedParams
     },
     getData(params = {}) {
-      const { w = 50, h = 50, alpha = 25 } = params;
-      const p1 = 50 + pfloor(h / 5, 1), p2 = 50 + pfloor(h / 10, 1), p3 = 50 + pfloor(h / 3, 1);
-      const gradient1 = `radial-gradient(${80 + w / 2}% 100% at 40% 0%,rgba(255,255,255,0),rgba(255,255,255,0) ${p1}%,rgba(255,255,255,${alpha / 100}) ${p1}%,rgba(255,255,255,0))`;
-      const gradient2 = `radial-gradient(${100 + w}% 100% at 25% 100%,rgba(255,255,255,0),rgba(255,255,255,${alpha / 100}) ${p2}%,rgba(255,255,255,0) ${p2}%,rgba(255,255,255,0))`;
-      const gradient3 = `radial-gradient(${100 + w}% 100% at 100% 100%,rgba(255,255,255,0),rgba(255,255,255,${alpha / 100}) ${p3}%,rgba(255,255,255,0) ${p3}%,rgba(255,255,255,0))`;
-      const gradient4 = getBaseGradientCode(params);
+      const { invert = false, a = 3, w = 50, h = 50, r: r2 = 0, alpha = 25, seed = 10 } = params;
+      const rand = srand(seed);
+      const image = [];
+      const blendmode = [];
+      const c = (alpha2 = 100) => invert ? `rgba(0,0,0,${alpha2 / 100})` : `rgba(255,255,255,${alpha2 / 100})`;
+      for (let i = 0; i < a; i++) {
+        const cr = 50 + w + rand(0, w / 4);
+        const rad = (r2 + rand(-30, 30)) / 180 * Math.PI + Math.PI * (i % 2);
+        const or = cr + rand(-h, h);
+        const ox = 50 + Math.sin(rad) * or;
+        const oy = 50 + Math.cos(rad) * or;
+        const p = 99 - 2e3 / cr;
+        blendmode.push(invert ? "multiply" : "overlay");
+        image.push(`radial-gradient(${cr}% ${cr}% at ${ox}% ${oy}%,${c(0)},${c(0)} ${p}%,${c(alpha)} ${i % 4 < 2 ? 99 : p}%,${c(0)} 99%)`);
+      }
+      if (invert) {
+        image.push(`linear-gradient(#fff, #fff)`);
+        blendmode.push("normal");
+        image.unshift(getBaseGradientCode(params));
+        blendmode.unshift("screen");
+      } else {
+        image.push(getBaseGradientCode(params));
+        blendmode.push("normal");
+      }
       return {
-        image: [gradient1, gradient2, gradient3, gradient4],
+        image,
         size: ["cover"],
-        blendmode: ["overlay", "overlay", "overlay", "normal"]
+        blendmode
       };
     }
   };
@@ -2893,37 +2922,44 @@
     order: 4,
     params: {
       ...baseGradientParams,
+      ...invertParams,
       ...aParams,
       ...wParams,
       ...alphaParams,
       ...seedParams
     },
     getData(params = {}) {
-      const { a = 5, w = 50, alpha = 25, seed = 10 } = params;
+      const { invert = false, a = 5, w = 50, alpha = 25, seed = 10 } = params;
       const rand = srand(seed);
       const image = [];
       const blendmode = [];
+      const c = (alpha2 = 100) => invert ? `rgba(0,0,0,${alpha2 / 100})` : `rgba(255,255,255,${alpha2 / 100})`;
       for (let i = 0; i < a; i++) {
         const s = 10 + w / 4 + rand(0, Math.floor(w / 8));
-        image.push(
-          `radial-gradient(circle farthest-side at ${rand(-w, 100 + w)}% ${rand(-w, 100 + w)}%,rgba(255,255,255,0),rgba(255,255,255,0) ${s - s / 5}%,rgba(255,255,255,${alpha / 200}) ${s}%,rgba(255,255,255,0) ${s}%,rgba(255,255,255,0) 100%)`
-        );
-        blendmode.push("overlay");
+        blendmode.push(invert ? "multiply" : "overlay");
+        image.push(`radial-gradient(circle farthest-side at ${rand(-w, 100 + w)}% ${rand(-w, 100 + w)}%,${c(0)},${c(0)} ${s - s / 5}%,${c(alpha)} ${s}%,${c(0)} ${s}%,${c(0)} 100%)`);
       }
-      image.push(getBaseGradientCode(params));
-      blendmode.push("normal");
+      if (invert) {
+        image.push(`linear-gradient(#fff, #fff)`);
+        blendmode.push("normal");
+        image.unshift(getBaseGradientCode(params));
+        blendmode.unshift("screen");
+      } else {
+        image.push(getBaseGradientCode(params));
+        blendmode.push("normal");
+      }
       return { image, size: ["cover"], blendmode, repeat: ["no-repeat"] };
     }
   };
 
   // ../blocks/_init/init/CP/components/InputBackgroundImage/BackgroundImageDataGenerators/ice.js
   var { __: __9 } = wp.i18n;
-  var c2 = (alpha = 100) => `rgba(255,255,255,${alpha / 100})`;
   var ice = {
     label: __9("\u30A2\u30A4\u30B9", "catpow"),
     order: 4,
     params: {
       ...baseGradientParams,
+      ...invertParams,
       ...aParams,
       ...hParams,
       ...rParams,
@@ -2931,19 +2967,27 @@
       ...alphaParams
     },
     getData(params = {}) {
-      const { a = 5, h = 50, r: r2 = 0, seed = 10, alpha = 25 } = params;
+      const { invert = false, a = 5, h = 50, r: r2 = 0, seed = 10, alpha = 25 } = params;
       const rand = srand(seed);
+      const c = (alpha2 = 100) => invert ? `rgba(0,0,0,${alpha2 / 100})` : `rgba(255,255,255,${alpha2 / 100})`;
       const image = [];
       const blendmode = [];
       const dr = h / 10 * 9;
       for (let i = 0; i < a; i++) {
         const d = r2 + rand(-dr, dr);
         const p = rand(10, 90);
-        blendmode.push("overlay");
-        image.push(`linear-gradient(${d}deg,${c2(0)},${c2(0)} ${p}%,${c2(alpha)} ${p}%,${c2(0)})`);
+        blendmode.push(invert ? "multiply" : "overlay");
+        image.push(`linear-gradient(${d}deg,${c(0)},${c(0)} ${p}%,${c(alpha)} ${p}%,${c(0)},${c(0)})`);
       }
-      image.push(getBaseGradientCode(params));
-      blendmode.push("normal");
+      if (invert) {
+        image.push(`linear-gradient(#fff, #fff)`);
+        blendmode.push("normal");
+        image.unshift(getBaseGradientCode(params));
+        blendmode.unshift("screen");
+      } else {
+        image.push(getBaseGradientCode(params));
+        blendmode.push("normal");
+      }
       return {
         image,
         size: ["cover"],
@@ -3096,34 +3140,34 @@
     const el = wp.element.createElement;
     const Row = useCallback3((props2) => {
       const { cols: cols2, value: value3, onChange: onChange2 } = props2;
-      return /* @__PURE__ */ wp.element.createElement("tr", { className: "cp-datainputtable__body__row" }, Object.keys(cols2).map((c3) => /* @__PURE__ */ wp.element.createElement("td", { className: "cp-datainputtable__body__row__cell", key: c3 }, /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement("tr", { className: "cp-datainputtable__body__row" }, Object.keys(cols2).map((c) => /* @__PURE__ */ wp.element.createElement("td", { className: "cp-datainputtable__body__row__cell", key: c }, /* @__PURE__ */ wp.element.createElement(
         CP.DynamicInput,
         {
-          value: value3[c3],
+          value: value3[c],
           onChange: (val) => {
-            value3[c3] = val;
+            value3[c] = val;
             onChange2(value3);
           },
-          param: cols2[c3]
+          param: cols2[c]
         }
       ))));
     }, []);
     const defaultRowValues = useMemo9(() => {
       const rowValue = {};
-      Object.keys(cols).forEach((c3) => {
-        rowValue[c3] = cols[c3].default || "";
+      Object.keys(cols).forEach((c) => {
+        rowValue[c] = cols[c].default || "";
       });
       return [rowValue];
     }, [cols]);
     const colsWithoutLabel = useMemo9(() => {
       const colsWithoutLabel2 = {};
-      Object.keys(cols).forEach((c3) => {
-        const { label, ...otherParams } = cols[c3];
-        colsWithoutLabel2[c3] = otherParams;
+      Object.keys(cols).forEach((c) => {
+        const { label, ...otherParams } = cols[c];
+        colsWithoutLabel2[c] = otherParams;
       });
       return colsWithoutLabel2;
     }, [cols]);
-    return /* @__PURE__ */ wp.element.createElement("table", { className: "cp-datainputtable" }, /* @__PURE__ */ wp.element.createElement("thead", { className: "cp-datainputtable__head" }, /* @__PURE__ */ wp.element.createElement("tr", { className: "cp-datainputtable__head__row" }, Object.keys(cols).map((c3) => /* @__PURE__ */ wp.element.createElement("th", { className: "cp-datainputtable__head__row__cell", key: c3 }, cols[c3].label || c3)))), /* @__PURE__ */ wp.element.createElement("tbody", { className: "cp-datainputtable__body" }, (value2 || defaultRowValues).map((rowValue, index) => /* @__PURE__ */ wp.element.createElement(
+    return /* @__PURE__ */ wp.element.createElement("table", { className: "cp-datainputtable" }, /* @__PURE__ */ wp.element.createElement("thead", { className: "cp-datainputtable__head" }, /* @__PURE__ */ wp.element.createElement("tr", { className: "cp-datainputtable__head__row" }, Object.keys(cols).map((c) => /* @__PURE__ */ wp.element.createElement("th", { className: "cp-datainputtable__head__row__cell", key: c }, cols[c].label || c)))), /* @__PURE__ */ wp.element.createElement("tbody", { className: "cp-datainputtable__body" }, (value2 || defaultRowValues).map((rowValue, index) => /* @__PURE__ */ wp.element.createElement(
       Row,
       {
         cols: colsWithoutLabel,
@@ -4704,7 +4748,7 @@
       return columns2;
     }, []);
     const columns = getActiveColumns(props);
-    return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "cp" }, /* @__PURE__ */ wp.element.createElement("table", { className: "cp-edititemstable" }, /* @__PURE__ */ wp.element.createElement("thead", null, /* @__PURE__ */ wp.element.createElement("tr", null, columns.map((col, c3) => /* @__PURE__ */ wp.element.createElement("th", { key: c3 }, col.label || col.key)), /* @__PURE__ */ wp.element.createElement("th", null))), /* @__PURE__ */ wp.element.createElement("tbody", null, items2.map((item, index) => {
+    return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "cp" }, /* @__PURE__ */ wp.element.createElement("table", { className: "cp-edititemstable" }, /* @__PURE__ */ wp.element.createElement("thead", null, /* @__PURE__ */ wp.element.createElement("tr", null, columns.map((col, c) => /* @__PURE__ */ wp.element.createElement("th", { key: c }, col.label || col.key)), /* @__PURE__ */ wp.element.createElement("th", null))), /* @__PURE__ */ wp.element.createElement("tbody", null, items2.map((item, index) => {
       const propsForControl = { tag: "tr", set, itemsKey: itemsKey2, items: items2, index };
       return /* @__PURE__ */ wp.element.createElement(
         "tr",
@@ -4714,10 +4758,10 @@
           },
           key: index
         },
-        columns.map((col, c3) => {
+        columns.map((col, c) => {
           switch (col.type) {
             case "select": {
-              return /* @__PURE__ */ wp.element.createElement("td", { key: c3 }, /* @__PURE__ */ wp.element.createElement(
+              return /* @__PURE__ */ wp.element.createElement("td", { key: c }, /* @__PURE__ */ wp.element.createElement(
                 "select",
                 {
                   value: item[col.key],
@@ -4730,7 +4774,7 @@
               ));
             }
             case "text": {
-              return /* @__PURE__ */ wp.element.createElement("td", { key: c3 }, /* @__PURE__ */ wp.element.createElement(
+              return /* @__PURE__ */ wp.element.createElement("td", { key: c }, /* @__PURE__ */ wp.element.createElement(
                 RichText,
                 {
                   value: item[col.key],
@@ -4742,7 +4786,7 @@
               ));
             }
             case "number": {
-              return /* @__PURE__ */ wp.element.createElement("td", { key: c3 }, /* @__PURE__ */ wp.element.createElement(
+              return /* @__PURE__ */ wp.element.createElement("td", { key: c }, /* @__PURE__ */ wp.element.createElement(
                 "input",
                 {
                   type: "number",
@@ -4755,7 +4799,7 @@
               ));
             }
             case "color": {
-              return /* @__PURE__ */ wp.element.createElement("td", { key: c3 }, /* @__PURE__ */ wp.element.createElement(
+              return /* @__PURE__ */ wp.element.createElement("td", { key: c }, /* @__PURE__ */ wp.element.createElement(
                 "input",
                 {
                   type: "color",
@@ -4768,7 +4812,7 @@
               ));
             }
             case "date": {
-              return /* @__PURE__ */ wp.element.createElement("td", { key: c3 }, /* @__PURE__ */ wp.element.createElement(
+              return /* @__PURE__ */ wp.element.createElement("td", { key: c }, /* @__PURE__ */ wp.element.createElement(
                 "input",
                 {
                   type: "date",
@@ -4781,13 +4825,13 @@
               ));
             }
             case "image": {
-              return /* @__PURE__ */ wp.element.createElement("td", { key: c3 }, /* @__PURE__ */ wp.element.createElement(CP.SelectResponsiveImage, { attr, set, keys: { items: itemsKey2, src: col.key, ...col.keys }, index, size: col.size || "vga", isTemplate }));
+              return /* @__PURE__ */ wp.element.createElement("td", { key: c }, /* @__PURE__ */ wp.element.createElement(CP.SelectResponsiveImage, { attr, set, keys: { items: itemsKey2, src: col.key, ...col.keys }, index, size: col.size || "vga", isTemplate }));
             }
             case "picture": {
-              return /* @__PURE__ */ wp.element.createElement("td", { key: c3 }, /* @__PURE__ */ wp.element.createElement(CP.SelectPictureSources, { index, attr, set, keys: { items: itemsKey2, ...col.keys }, sizes: col.sizes, devices: col.devices, isTemplate }));
+              return /* @__PURE__ */ wp.element.createElement("td", { key: c }, /* @__PURE__ */ wp.element.createElement(CP.SelectPictureSources, { index, attr, set, keys: { items: itemsKey2, ...col.keys }, sizes: col.sizes, devices: col.devices, isTemplate }));
             }
             case "icon": {
-              return /* @__PURE__ */ wp.element.createElement("td", { key: c3 }, /* @__PURE__ */ wp.element.createElement(
+              return /* @__PURE__ */ wp.element.createElement("td", { key: c }, /* @__PURE__ */ wp.element.createElement(
                 CP.InputIcon,
                 {
                   prm: col,
@@ -4805,7 +4849,7 @@
                   subCol.keys.subItems = col.key;
                 }
               });
-              return /* @__PURE__ */ wp.element.createElement("td", { key: c3 }, /* @__PURE__ */ wp.element.createElement(
+              return /* @__PURE__ */ wp.element.createElement("td", { key: c }, /* @__PURE__ */ wp.element.createElement(
                 CP.EditItemsTable,
                 {
                   set: () => {
@@ -4819,7 +4863,7 @@
               ));
             }
             default: {
-              return /* @__PURE__ */ wp.element.createElement("td", { key: c3 }, item[col.key]);
+              return /* @__PURE__ */ wp.element.createElement("td", { key: c }, item[col.key]);
             }
           }
         }),
@@ -5057,7 +5101,7 @@
   // ../blocks/_init/init/CP/components/ServerSideRenderPart.jsx
   var ServerSideRenderPart = (props) => {
     const { className, ...otherProps } = props;
-    return /* @__PURE__ */ wp.element.createElement("div", { className }, "[ssr_parts" + Object.keys(otherProps).reduce((p, c3) => p += ` ${c3}=${otherProps[c3]}`, "") + "]");
+    return /* @__PURE__ */ wp.element.createElement("div", { className }, "[ssr_parts" + Object.keys(otherProps).reduce((p, c) => p += ` ${c}=${otherProps[c]}`, "") + "]");
   };
   ServerSideRenderPart.Preview = (props) => {
     const { className, name, ...otherProps } = props;
@@ -7287,11 +7331,11 @@
     set({ [itemsKey2]: JSON.parse(JSON.stringify(items2)) });
   };
   var getItemColor = ({ items: items2, index }) => {
-    let c3 = (items2[index].classes || "").split(" ").find((cls) => cls.slice(0, 5) === "color");
-    if (!c3) {
+    let c = (items2[index].classes || "").split(" ").find((cls) => cls.slice(0, 5) === "color");
+    if (!c) {
       return 0;
     }
-    return parseInt(c3.slice(5));
+    return parseInt(c.slice(5));
   };
   var switchItemPattern = ({ items: items2, index, set }, pattern, itemsKey2) => {
     if (itemsKey2 === void 0) {
@@ -7616,7 +7660,7 @@
 
   // ../blocks/_init/init/CP/functions/flags.js
   var testFlags = (cond, flags) => cond & flags === cond;
-  var filterArrayWithFlags = (array, flags) => array.filter((c3, i) => flags & 1 << i);
+  var filterArrayWithFlags = (array, flags) => array.filter((c, i) => flags & 1 << i);
 
   // ../blocks/_init/init/CP/functions/transform.js
   var isRowsConvertibleToItems = (rows, itemsConf) => {
@@ -7697,8 +7741,8 @@
       classes = classes.split(" ");
     }
     const rtn = {};
-    classes.find((c3) => {
-      const matches = c3.match(colorToneClassPattern);
+    classes.find((c) => {
+      const matches = c.match(colorToneClassPattern);
       if (matches) {
         if (matches[1]) {
           rtn.h = matches[2];
@@ -7787,16 +7831,16 @@
           return CP.flagsToClassNames(state);
         }
         case "value": {
-          return extractColorToneValue(Object.keys(state).filter((c3) => state[c3]));
+          return extractColorToneValue(Object.keys(state).filter((c) => state[c]));
         }
         case "h": {
-          return Object.keys(state).find((c3) => colorStatePattern.test(c3));
+          return Object.keys(state).find((c) => colorStatePattern.test(c));
         }
         case "s":
         case "l": {
           const r2 = prop.toUpperCase();
-          return Object.keys(state).find((c3) => {
-            const match = c3.match(toneStatePattern);
+          return Object.keys(state).find((c) => {
+            const match = c.match(toneStatePattern);
             return match && match[2] === r2;
           });
         }
@@ -7812,11 +7856,11 @@
         case "s":
         case "l": {
           if (prop === "h") {
-            CP.filterFlags(state, (c3) => !colorStatePattern.test(c3));
+            CP.filterFlags(state, (c) => !colorStatePattern.test(c));
           } else {
             const r2 = prop.toUpperCase();
-            CP.filterFlags(state, (c3) => {
-              const match = c3.match(toneStatePattern);
+            CP.filterFlags(state, (c) => {
+              const match = c.match(toneStatePattern);
               return !(match && match[2] === r2);
             });
           }
@@ -8153,7 +8197,7 @@
     if (!classes) {
       return void 0;
     }
-    return classes.split(" ").find((c3) => classSet.has(c3));
+    return classes.split(" ").find((c) => classSet.has(c));
   };
   wp.richText.registerFormatType("catpow/title", {
     title: "Title",
@@ -8467,7 +8511,7 @@
         [value2, activeAttributes]
       );
       const [blockNumberClasses, blockNumberClassSet] = useMemo8(() => {
-        const classes = range(1, 10).reduce((p, c3) => ({ ...p, [`is-block-${c3}`]: `${c3}` }), {});
+        const classes = range(1, 10).reduce((p, c) => ({ ...p, [`is-block-${c}`]: `${c}` }), {});
         return [classes, new Set(Object.keys(classes))];
       }, []);
       const icon = /* @__PURE__ */ wp.element.createElement("svg", { role: "img", focusable: "false", xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", viewBox: "0 0 20 20", "aria-hidden": "true" }, /* @__PURE__ */ wp.element.createElement("rect", { x: "1", y: "10", width: "1", height: "10" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "18", y: "10", width: "1", height: "10" }), /* @__PURE__ */ wp.element.createElement("rect", { x: "2", y: "15", width: "16", height: "2" }));

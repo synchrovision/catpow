@@ -7,9 +7,12 @@ export const hParam = { steps: { 1: 0, 10: 1, 20: 2, 50: 5, 100: 10, 200: 20 } }
 
 export const baseGradientParams = {
 	useAccentColor: { type: "boolean" },
+	useInvertibleColor: { type: "boolean" },
 	baseGradientRotate: { "@editor": "Angle" },
-	baseGradientColor1: { minimum: 1, maximum: 12 },
-	baseGradientColor2: { minimum: 1, maximum: 12 },
+	baseGradientRange: { steps: { [-180]: 0, [-90]: 30, 90: 15, 180: 30 } },
+};
+export const invertParams = {
+	invert: { type: "boolean" },
 };
 export const contrastParams = {
 	contrast: { steps: { 6: 1, 10: 2, 60: 5, 100: 10 } },
@@ -47,7 +50,12 @@ export const seedParams = {
 };
 
 export const getBaseGradientCode = (params) => {
-	const { useAccentColor = true, baseGradientRotate = 0, baseGradientColor1 = 6, baseGradientColor2 = 7 } = params;
-	const colorKey = useAccentColor ? "sx" : "bx";
-	return `linear-gradient(${baseGradientRotate}deg in oklch,${translateColor(colorKey + baseGradientColor1)},${translateColor(colorKey + baseGradientColor2)})`;
+	const {
+		useAccentColor = true,
+		useInvertibleColor = true,
+		baseGradientRotate = 0,
+		baseGradientRange = 0,
+		colorKey = useInvertibleColor ? (useAccentColor ? "sx" : "bx") : useAccentColor ? "a" : "m",
+	} = params;
+	return `linear-gradient(${baseGradientRotate}deg in oklch,${translateColor(colorKey)},oklch(from ${translateColor(colorKey)} l c calc(h + ${baseGradientRange})))`;
 };
