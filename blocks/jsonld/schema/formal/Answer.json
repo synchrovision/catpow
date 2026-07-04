@@ -1,0 +1,9 @@
+{
+	"$schema": "../schema.json",
+	"name": "Answer",
+	"label": "回答",
+	"url": "https://schema.org/Answer",
+	"items": [
+		{ "name": "text", "label": "回答本文", "input": "textarea", "required": true }
+	]
+}

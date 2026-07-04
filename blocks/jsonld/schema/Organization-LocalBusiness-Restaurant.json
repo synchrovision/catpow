@@ -1,0 +1,11 @@
+{
+	"$schema": "./schema.json",
+	"name": "Restaurant",
+	"label": "飲食店",
+	"extends": ["Organization", "LocalBusiness"],
+	"items": [
+		{ "name": "servesCuisine", "label": "料理の種類", "input": "text", "multiple": true },
+		{ "name": "menu", "label": "メニューURL", "input": "url" },
+		{ "name": "acceptsReservations", "label": "予約可否", "input": "toggle" }
+	]
+}

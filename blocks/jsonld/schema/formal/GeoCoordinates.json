@@ -1,0 +1,10 @@
+{
+	"$schema": "../schema.json",
+	"name": "GeoCoordinates",
+	"label": "緯度・経度",
+	"url": "https://schema.org/GeoCoordinates",
+	"items": [
+		{ "name": "latitude", "label": "緯度", "input": "number", "min": -90, "max": 90, "step": 0.000001, "required": true },
+		{ "name": "longitude", "label": "経度", "input": "number", "min": -180, "max": 180, "step": 0.000001, "required": true }
+	]
+}

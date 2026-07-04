@@ -1,0 +1,26 @@
+{
+	"$schema": "./schema.json",
+	"name": "Recipe",
+	"label": "レシピ",
+	"url": "https://developers.google.com/search/docs/appearance/structured-data/recipe",
+	"items": [
+		{ "name": "name", "label": "名称", "input": "text", "required": true },
+		{ "name": "image", "label": "画像", "input": "image", "multiple": true, "required": true },
+		{ "name": "author", "label": "作成者", "@type": ["Person", "Organization"] },
+		{ "name": "datePublished", "label": "公開日", "input": "date" },
+		{ "name": "description", "label": "概要", "input": "textarea" },
+		{ "name": "prepTime", "label": "準備時間（ISO 8601）", "input": "text" },
+		{ "name": "cookTime", "label": "調理時間（ISO 8601）", "input": "text" },
+		{ "name": "totalTime", "label": "合計時間（ISO 8601）", "input": "text" },
+		{ "name": "keywords", "label": "キーワード", "input": "text" },
+		{ "name": "recipeCategory", "label": "料理カテゴリ", "input": "text" },
+		{ "name": "recipeCuisine", "label": "料理の地域", "input": "text" },
+		{ "name": "recipeYield", "label": "分量", "input": "text" },
+		{ "name": "recipeIngredient", "label": "材料", "input": "text", "multiple": true, "required": true },
+		{ "name": "recipeInstructions", "label": "手順", "input": "textarea", "required": true },
+		{ "name": "nutrition", "label": "栄養情報", "input": "textarea" },
+		{ "name": "aggregateRating", "label": "総合評価", "@type": "AggregateRating" },
+		{ "name": "review", "label": "レビュー", "@type": "Review", "multiple": true },
+		{ "name": "video", "label": "動画", "@type": "VideoObject" }
+	]
+}

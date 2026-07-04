@@ -1,0 +1,10 @@
+{
+	"$schema": "../schema.json",
+	"name": "Question",
+	"label": "質問",
+	"url": "https://schema.org/Question",
+	"items": [
+		{ "name": "name", "label": "質問", "input": "text", "required": true },
+		{ "name": "acceptedAnswer", "label": "回答", "@type": "Answer", "required": true }
+	]
+}

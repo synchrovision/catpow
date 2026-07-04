@@ -1,0 +1,13 @@
+{
+	"$schema": "../schema.json",
+	"name": "AggregateOffer",
+	"label": "価格帯",
+	"url": "https://schema.org/AggregateOffer",
+	"items": [
+		{ "name": "lowPrice", "label": "最低価格", "input": "number", "required": true },
+		{ "name": "highPrice", "label": "最高価格", "input": "number" },
+		{ "name": "priceCurrency", "label": "通貨コード", "input": "text", "default": "JPY", "required": true },
+		{ "name": "offerCount", "label": "オファー数", "input": "number" },
+		{ "name": "offers", "label": "オファー", "@type": "Offer", "multiple": true }
+	]
+}

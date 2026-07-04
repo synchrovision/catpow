@@ -1,0 +1,14 @@
+{
+	"$schema": "../schema.json",
+	"name": "MerchantReturnPolicy",
+	"label": "返品ポリシー",
+	"url": "https://schema.org/MerchantReturnPolicy",
+	"items": [
+		{ "name": "url", "label": "ポリシーURL", "input": "url" },
+		{ "name": "applicableCountry", "label": "対象国", "input": "text", "multiple": true },
+		{ "name": "returnPolicyCategory", "label": "返品条件", "input": "url" },
+		{ "name": "merchantReturnDays", "label": "返品可能日数", "input": "number" },
+		{ "name": "returnMethod", "label": "返品方法", "input": "url" },
+		{ "name": "returnFees", "label": "返品送料条件", "input": "url" }
+	]
+}

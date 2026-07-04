@@ -4,9 +4,9 @@
 	"label": "コース",
 	"url": "https://developers.google.com/search/docs/appearance/structured-data/course",
 	"items": [
-		{ "name": "name", "label": "名称" },
+		{ "name": "name", "label": "名称", "input": "text", "required": true },
 		{ "name": "url", "label": "URL", "input": "url" },
-		{ "name": "description", "label": "説明", "input": "textarea" },
-		{ "name": "provider", "label": "公開組織", "@type": "Organization" }
+		{ "name": "description", "label": "説明", "input": "textarea", "required": true },
+		{ "name": "provider", "label": "提供組織", "@type": "Organization", "required": true }
 	]
 }

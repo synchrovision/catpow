@@ -1,0 +1,17 @@
+{
+	"$schema": "./schema.json",
+	"name": "Person",
+	"label": "人物",
+	"url": "https://schema.org/Person",
+	"items": [
+		{ "name": "name", "label": "氏名", "input": "text", "required": true },
+		{ "name": "url", "label": "公式URL", "input": "url" },
+		{ "name": "image", "label": "画像", "input": "image" },
+		{ "name": "description", "label": "プロフィール", "input": "textarea" },
+		{ "name": "email", "label": "メール", "input": "email" },
+		{ "name": "telephone", "label": "電話番号", "input": "tel" },
+		{ "name": "jobTitle", "label": "肩書き", "input": "text" },
+		{ "name": "worksFor", "label": "所属組織", "@type": "Organization" },
+		{ "name": "sameAs", "label": "プロフィールURL", "input": "url", "multiple": true }
+	]
+}

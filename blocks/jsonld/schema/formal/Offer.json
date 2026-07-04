@@ -1,0 +1,16 @@
+{
+	"$schema": "../schema.json",
+	"name": "Offer",
+	"label": "オファー",
+	"url": "https://schema.org/Offer",
+	"items": [
+		{ "name": "url", "label": "購入・申込URL", "input": "url" },
+		{ "name": "price", "label": "価格", "input": "number" },
+		{ "name": "priceCurrency", "label": "通貨コード", "input": "text", "default": "JPY" },
+		{ "name": "availability", "label": "在庫状況URL", "input": "url" },
+		{ "name": "validFrom", "label": "販売開始日時", "input": "datetime" },
+		{ "name": "priceValidUntil", "label": "価格有効期限", "input": "date" },
+		{ "name": "seller", "label": "販売者", "@type": "Organization" },
+		{ "name": "hasMerchantReturnPolicy", "label": "返品ポリシー", "@type": "MerchantReturnPolicy" }
+	]
+}

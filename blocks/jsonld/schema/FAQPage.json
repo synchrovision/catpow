@@ -1,0 +1,9 @@
+{
+	"$schema": "./schema.json",
+	"name": "FAQPage",
+	"label": "よくある質問",
+	"url": "https://developers.google.com/search/docs/appearance/structured-data/faqpage",
+	"items": [
+		{ "name": "mainEntity", "label": "質問と回答", "@type": "Question", "multiple": true, "required": true }
+	]
+}

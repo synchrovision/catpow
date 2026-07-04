@@ -4,14 +4,17 @@
 	"label": "組織",
 	"url": "https://developers.google.com/search/docs/appearance/structured-data/organization",
 	"items": [
-		{ "name": "name", "label": "名称", "input": "text" },
-		{ "name": "logo", "label": "ロゴ", "input": "url" },
+		{ "name": "name", "label": "名称", "input": "text", "required": true },
+		{ "name": "logo", "label": "ロゴ", "input": "image" },
 		{ "name": "description", "label": "詳細説明", "input": "textarea" },
 		{ "name": "url", "label": "URL", "input": "url" },
 		{ "name": "email", "label": "メール", "input": "email" },
 		{ "name": "telephone", "label": "電話番号", "input": "tel" },
 		{ "name": "address", "label": "住所", "@type": "PostalAddress", "required": true, "multiple": true },
 		{ "name": "contactPoint", "label": "連絡先", "@type": "ContactPoint" },
-		{ "name": "foundingDate", "label": "設立日", "input": "date" }
+		{ "name": "foundingDate", "label": "設立日", "input": "date" },
+		{ "name": "sameAs", "label": "公式プロフィールURL", "input": "url", "multiple": true },
+		{ "name": "legalName", "label": "正式名称", "input": "text" },
+		{ "name": "taxID", "label": "税務識別番号", "input": "text" }
 	]
 }

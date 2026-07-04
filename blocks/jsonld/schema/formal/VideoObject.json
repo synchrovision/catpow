@@ -4,7 +4,13 @@
 	"label": "動画",
 	"url": "https://schema.org/VideoObject",
 	"items": [
-		{ "name": "contentUrl", "label": "URL", "input": "url", "required": true },
-		{ "name": "hasPart", "label": "クリップ", "@type": "Clip" }
+		{ "name": "name", "label": "動画名", "input": "text", "required": true },
+		{ "name": "description", "label": "説明", "input": "textarea", "required": true },
+		{ "name": "thumbnailUrl", "label": "サムネイルURL", "input": "image", "multiple": true, "required": true },
+		{ "name": "uploadDate", "label": "公開日時", "input": "datetime", "required": true },
+		{ "name": "contentUrl", "label": "動画ファイルURL", "input": "url" },
+		{ "name": "embedUrl", "label": "埋め込みURL", "input": "url" },
+		{ "name": "duration", "label": "長さ（ISO 8601）", "input": "text" },
+		{ "name": "hasPart", "label": "クリップ", "@type": "Clip", "multiple": true }
 	]
 }

@@ -1,0 +1,10 @@
+{
+	"$schema": "../schema.json",
+	"name": "Brand",
+	"label": "ブランド",
+	"url": "https://schema.org/Brand",
+	"items": [
+		{ "name": "name", "label": "ブランド名", "input": "text", "required": true },
+		{ "name": "logo", "label": "ロゴ", "input": "image" }
+	]
+}

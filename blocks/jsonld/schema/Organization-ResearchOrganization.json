@@ -1,6 +1,6 @@
 {
 	"$schema": "./schema.json",
 	"name": "ResearchOrganization",
-	"label": "調査期間",
+	"label": "研究機関",
 	"extends": "Organization"
 }

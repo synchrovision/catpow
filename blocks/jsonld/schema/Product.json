@@ -1,0 +1,21 @@
+{
+	"$schema": "./schema.json",
+	"name": "Product",
+	"label": "商品",
+	"url": "https://developers.google.com/search/docs/appearance/structured-data/product",
+	"items": [
+		{ "name": "name", "label": "商品名", "input": "text", "required": true },
+		{ "name": "image", "label": "商品画像", "input": "image", "multiple": true },
+		{ "name": "description", "label": "商品説明", "input": "textarea" },
+		{ "name": "sku", "label": "SKU", "input": "text" },
+		{ "name": "gtin", "label": "GTIN", "input": "text" },
+		{ "name": "mpn", "label": "メーカー品番", "input": "text" },
+		{ "name": "brand", "label": "ブランド", "@type": ["Brand", "Organization"] },
+		{ "name": "offers", "label": "販売情報", "@type": ["Offer", "AggregateOffer"] },
+		{ "name": "aggregateRating", "label": "総合評価", "@type": "AggregateRating" },
+		{ "name": "review", "label": "レビュー", "@type": "Review", "multiple": true },
+		{ "name": "url", "label": "商品URL", "input": "url" },
+		{ "name": "color", "label": "色", "input": "text" },
+		{ "name": "size", "label": "サイズ", "input": "text" }
+	]
+}

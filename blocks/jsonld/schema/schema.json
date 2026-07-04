@@ -1,6 +1,6 @@
 {
 	"type": "object",
-	"required": ["name", "items"],
+	"required": ["name"],
 	"definitions": {
 		"item": {
 			"type": "object",
@@ -8,10 +8,10 @@
 				"name": { "type": "string" },
 				"label": { "type": "string" },
 				"@type": { "type": ["string", "array"], "items": { "type": "string" } },
-				"type": { "type": "string", "enum": ["boolean", "number", "text", "array", "object"] },
+				"type": { "type": "string", "enum": ["boolean", "number", "string", "array", "object"] },
 				"input": { "type": "string", "enum": ["toggle", "number", "range", "datetime", "text", "url", "email", "tel", "date", "textarea", "select", "radio", "checkbox", "image"] },
 				"items": { "type": "array", "items": { "$ref": "#/definitions/item" } },
-				"default": { "type": ["boolean", "number", "text", "array", "object"] },
+				"default": { "type": ["boolean", "number", "string", "array", "object"] },
 				"multiple": { "type": "boolean" },
 				"required": { "type": "boolean" }
 			},
@@ -77,7 +77,12 @@
 		"label": { "type": "string" },
 		"desc": { "type": "string" },
 		"url": { "type": "string" },
-		"extends": { "type": "string" },
+		"extends": {
+			"oneOf": [
+				{ "type": "string" },
+				{ "type": "array", "items": { "type": "string" }, "minItems": 1 }
+			]
+		},
 		"items": {
 			"type": "array",
 			"items": { "$ref": "#/definitions/item" }

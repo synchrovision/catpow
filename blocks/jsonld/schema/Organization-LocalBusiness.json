@@ -2,5 +2,13 @@
 	"$schema": "./schema.json",
 	"name": "LocalBusiness",
 	"label": "ローカルビジネス（推奨）",
-	"extends": "Organization"
+	"extends": "Organization",
+	"url": "https://developers.google.com/search/docs/appearance/structured-data/local-business",
+	"items": [
+		{ "name": "priceRange", "label": "価格帯", "input": "text" },
+		{ "name": "geo", "label": "緯度・経度", "@type": "GeoCoordinates" },
+		{ "name": "openingHours", "label": "営業時間", "input": "text", "multiple": true },
+		{ "name": "aggregateRating", "label": "総合評価", "@type": "AggregateRating" },
+		{ "name": "review", "label": "レビュー", "@type": "Review", "multiple": true }
+	]
 }

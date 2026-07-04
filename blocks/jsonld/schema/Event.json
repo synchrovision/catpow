@@ -1,0 +1,21 @@
+{
+	"$schema": "./schema.json",
+	"name": "Event",
+	"label": "イベント",
+	"url": "https://developers.google.com/search/docs/appearance/structured-data/event",
+	"items": [
+		{ "name": "name", "label": "イベント名", "input": "text", "required": true },
+		{ "name": "startDate", "label": "開始日時", "input": "datetime", "required": true },
+		{ "name": "endDate", "label": "終了日時", "input": "datetime" },
+		{ "name": "location", "label": "会場", "@type": "Place", "required": true },
+		{ "name": "description", "label": "説明", "input": "textarea" },
+		{ "name": "image", "label": "画像", "input": "image", "multiple": true },
+		{ "name": "url", "label": "イベントURL", "input": "url" },
+		{ "name": "eventStatus", "label": "開催状態URL", "input": "url" },
+		{ "name": "eventAttendanceMode", "label": "参加形式URL", "input": "url" },
+		{ "name": "previousStartDate", "label": "変更前の開始日時", "input": "datetime" },
+		{ "name": "offers", "label": "チケット", "@type": "Offer", "multiple": true },
+		{ "name": "organizer", "label": "主催者", "@type": ["Person", "Organization"] },
+		{ "name": "performer", "label": "出演者", "@type": ["Person", "Organization"], "multiple": true }
+	]
+}
