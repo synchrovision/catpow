@@ -6382,17 +6382,19 @@
         isRateDanger: __13("\u5371\u967A", "catpow")
       }
     },
-    clipPath({ preset, vars = "vars", ...otherParams }) {
+    clipPath({ preset, classKey = "classes", vars = "vars", ...otherParams }) {
       return {
         name: "clipPath",
         label: __13("\u30AF\u30EA\u30C3\u30D7", "catpow"),
         values: "hasClipPath",
+        classKey,
         sub: [
           {
             name: "shape",
             label: __13("\u5F62\u72B6", "catpow"),
             type: "buttons",
             required: true,
+            classKey,
             values: {
               hasClipShapeEllipse: __13("\u6955\u5186", "catpow"),
               hasClipShapeSlope: __13("\u50BE\u659C", "catpow"),
@@ -6405,6 +6407,7 @@
                   name: "direction",
                   type: "buttons",
                   required: true,
+                  classKey,
                   values: {
                     hasClipShapeBoth: __13("\u4E21\u65B9", "catpow"),
                     hasClipShapeUpper: __13("\u4E0A", "catpow"),
@@ -6426,6 +6429,7 @@
                   name: "uppper",
                   type: "buttons",
                   required: true,
+                  classKey,
                   values: {
                     hasClipShapeUpperNone: __13("\u306A\u3057", "catpow"),
                     hasClipShapeUpperLeft: __13("\u5DE6", "catpow"),
@@ -6436,6 +6440,7 @@
                   name: "below",
                   type: "buttons",
                   required: true,
+                  classKey,
                   values: {
                     hasClipShapeBelowNone: __13("\u306A\u3057", "catpow"),
                     hasClipShapeBelowLeft: __13("\u5DE6", "catpow"),
@@ -6466,6 +6471,7 @@
                   name: "uppper",
                   type: "buttons",
                   required: true,
+                  classKey,
                   values: {
                     hasClipShapeUpperNone: __13("\u306A\u3057", "catpow"),
                     hasClipShapeUpperIn: __13("\u5185", "catpow"),
@@ -6476,6 +6482,7 @@
                   name: "below",
                   type: "buttons",
                   required: true,
+                  classKey,
                   values: {
                     hasClipShapeBelowNone: __13("\u306A\u3057", "catpow"),
                     hasClipShapeBelowIn: __13("\u5185", "catpow"),
@@ -6506,6 +6513,7 @@
                   name: "uppper",
                   type: "buttons",
                   required: true,
+                  classKey,
                   values: {
                     hasClipShapeUpperNone: __13("\u306A\u3057", "catpow"),
                     hasClipShapeUpperIn: __13("\u5185", "catpow"),
@@ -6516,6 +6524,7 @@
                   name: "below",
                   type: "buttons",
                   required: true,
+                  classKey,
                   values: {
                     hasClipShapeBelowNone: __13("\u306A\u3057", "catpow"),
                     hasClipShapeBelowIn: __13("\u5185", "catpow"),

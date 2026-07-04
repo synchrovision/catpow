@@ -624,17 +624,19 @@ export const selectiveClassesPresets = {
 			isRateDanger: __("危険", "catpow"),
 		},
 	},
-	clipPath({ preset, vars = "vars", ...otherParams }) {
+	clipPath({ preset, classKey = "classes", vars = "vars", ...otherParams }) {
 		return {
 			name: "clipPath",
 			label: __("クリップ", "catpow"),
 			values: "hasClipPath",
+			classKey,
 			sub: [
 				{
 					name: "shape",
 					label: __("形状", "catpow"),
 					type: "buttons",
 					required: true,
+					classKey,
 					values: {
 						hasClipShapeEllipse: __("楕円", "catpow"),
 						hasClipShapeSlope: __("傾斜", "catpow"),
@@ -647,6 +649,7 @@ export const selectiveClassesPresets = {
 								name: "direction",
 								type: "buttons",
 								required: true,
+								classKey,
 								values: {
 									hasClipShapeBoth: __("両方", "catpow"),
 									hasClipShapeUpper: __("上", "catpow"),
@@ -668,6 +671,7 @@ export const selectiveClassesPresets = {
 								name: "uppper",
 								type: "buttons",
 								required: true,
+								classKey,
 								values: {
 									hasClipShapeUpperNone: __("なし", "catpow"),
 									hasClipShapeUpperLeft: __("左", "catpow"),
@@ -678,6 +682,7 @@ export const selectiveClassesPresets = {
 								name: "below",
 								type: "buttons",
 								required: true,
+								classKey,
 								values: {
 									hasClipShapeBelowNone: __("なし", "catpow"),
 									hasClipShapeBelowLeft: __("左", "catpow"),
@@ -708,6 +713,7 @@ export const selectiveClassesPresets = {
 								name: "uppper",
 								type: "buttons",
 								required: true,
+								classKey,
 								values: {
 									hasClipShapeUpperNone: __("なし", "catpow"),
 									hasClipShapeUpperIn: __("内", "catpow"),
@@ -718,6 +724,7 @@ export const selectiveClassesPresets = {
 								name: "below",
 								type: "buttons",
 								required: true,
+								classKey,
 								values: {
 									hasClipShapeBelowNone: __("なし", "catpow"),
 									hasClipShapeBelowIn: __("内", "catpow"),
@@ -748,6 +755,7 @@ export const selectiveClassesPresets = {
 								name: "uppper",
 								type: "buttons",
 								required: true,
+								classKey,
 								values: {
 									hasClipShapeUpperNone: __("なし", "catpow"),
 									hasClipShapeUpperIn: __("内", "catpow"),
@@ -758,6 +766,7 @@ export const selectiveClassesPresets = {
 								name: "below",
 								type: "buttons",
 								required: true,
+								classKey,
 								values: {
 									hasClipShapeBelowNone: __("なし", "catpow"),
 									hasClipShapeBelowIn: __("内", "catpow"),
