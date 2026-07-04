@@ -57,7 +57,7 @@
     return conf.multiple ? [""] : "";
   };
   var fillUndefinedData = (data, conf) => {
-    const itemConf = conf.isDynamicType ? conf.confs[(conf.multiple ? data[0]["@type"] : data["@type"]) || Object.keys(conf.confs)[0]] : conf;
+    const itemConf = conf.isDynamicType ? conf.confs[(conf.multiple ? data?.[0]?.["@type"] : data["@type"]) || Object.keys(conf.confs)[0]] : conf;
     itemConf.items.forEach((item) => {
       if (item.type === "object") {
         if (item.multiple) {
