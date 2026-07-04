@@ -1,5 +1,7 @@
 ﻿import { clsx } from "clsx";
 
+const getPlainText = (html) => wp.richText.getTextContent(wp.richText.create({ html: String(html || "") }));
+
 CP.config.faq = {
 	imageKeys: {
 		image: { src: "src", alt: "alt", items: "items" },
@@ -20,7 +22,7 @@ wp.blocks.registerBlockType("catpow/faq", {
 	},
 	attributes: {
 		version: { type: "number", default: 0 },
-		classes: { source: "attribute", selector: "ul", attribute: "class", default: "wp-block-catpow-faq" },
+		classes: { source: "attribute", selector: "ul", attribute: "class", default: "wp-block-catpow-faq is-level3" },
 		vars: { type: "object" },
 		items: {
 			source: "query",
@@ -205,6 +207,18 @@ wp.blocks.registerBlockType("catpow/faq", {
 		const { items = [], classes = "", vars, counterPrefix, counterSuffix } = attributes;
 
 		const states = CP.classNamesToFlags(classes);
+		const structuredData = {
+			"@context": "https://schema.org",
+			"@type": "FAQPage",
+			mainEntity: items.map((item) => ({
+				"@type": "Question",
+				name: getPlainText(item.title),
+				acceptedAnswer: {
+					"@type": "Answer",
+					text: states.hasSubTitle && item.subTitle ? `<h4>${item.subTitle}</h4>${item.text || ""}` : String(item.text || ""),
+				},
+			})),
+		};
 
 		const blockProps = useBlockProps.save({
 			className: classes,
@@ -217,47 +231,50 @@ wp.blocks.registerBlockType("catpow/faq", {
 		});
 
 		return (
-			<CP.Bem prefix="wp-block-catpow">
-				<ul {...blockProps}>
-					{items.map((item, index) => (
-						<li id={`{$uid}-${index + 1}`} className={item.classes} data-wp-class--is-open="callbacks.isOpen" data-index={index} key={index}>
-							<header id={`{$uid}-${index + 1}-header`} className="_header" data-wp-on--click="actions.onClickToggle" data-index={index}>
-								{states.hasCounter && (
-									<div className="_counter">
-										{counterPrefix && <span className="_prefix">{counterPrefix}</span>}
-										<span className="_number">{index + 1}</span>
-										{counterSuffix && <span className="_suffix">{counterSuffix}</span>}
+			<>
+				<CP.Bem prefix="wp-block-catpow">
+					<ul {...blockProps}>
+						{items.map((item, index) => (
+							<li id={`{$uid}-${index + 1}`} className={item.classes} data-wp-class--is-open="callbacks.isOpen" data-index={index} key={index}>
+								<header id={`{$uid}-${index + 1}-header`} className="_header" data-wp-on--click="actions.onClickToggle" data-index={index}>
+									{states.hasCounter && (
+										<div className="_counter">
+											{counterPrefix && <span className="_prefix">{counterPrefix}</span>}
+											<span className="_number">{index + 1}</span>
+											{counterSuffix && <span className="_suffix">{counterSuffix}</span>}
+										</div>
+									)}
+									{states.hasImage && (
+										<div className="_image">
+											<img src={item.src} alt={item.alt} />
+										</div>
+									)}
+									<div className="_text">
+										<RichText.Content tagName="h3" className="_title" value={item.title} />
+										{states.hasTitleCaption && <RichText.Content tagName="p" className="_caption" value={item.titleCaption} />}
 									</div>
-								)}
-								{states.hasImage && (
-									<div className="_image">
-										<img src={item.src} alt={item.alt} />
+									{states.isAccordion && (
+										<button
+											className="_button"
+											data-wp-bind--aria-expanded="callbacks.isOpen"
+											data-wp-on--click="actions.onClickToggle"
+											aria-controls={`{$uid}-${index + 1}-contents`}
+											data-index={index}
+										/>
+									)}
+								</header>
+								<div id={`{$uid}-${index + 1}-contents`} className="_contents" data-wp-bind--aria-hidden="!callbacks.isOpen" data-index={index}>
+									<div className="_body">
+										{states.hasSubTitle && <RichText.Content tagName="h4" className="_subtitle" value={item.subTitle} />}
+										<RichText.Content tagName="p" className="_text" value={item.text} />
 									</div>
-								)}
-								<div className="_text">
-									<RichText.Content tagName="h3" className="_title" value={item.title} />
-									{states.hasTitleCaption && <RichText.Content tagName="p" className="_caption" value={item.titleCaption} />}
 								</div>
-								{states.isAccordion && (
-									<button
-										className="_button"
-										data-wp-bind--aria-expanded="callbacks.isOpen"
-										data-wp-on--click="actions.onClickToggle"
-										aria-controls={`{$uid}-${index + 1}-contents`}
-										data-index={index}
-									/>
-								)}
-							</header>
-							<div id={`{$uid}-${index + 1}-contents`} className="_contents" data-wp-bind--aria-hidden="!callbacks.isOpen" data-index={index}>
-								<div className="_body">
-									{states.hasSubTitle && <RichText.Content tagName="h4" className="_subtitle" value={item.subTitle} />}
-									<RichText.Content tagName="p" className="_text" value={item.text} />
-								</div>
-							</div>
-						</li>
-					))}
-				</ul>
-			</CP.Bem>
+							</li>
+						))}
+					</ul>
+				</CP.Bem>
+				<script type="application/ld+json">{JSON.stringify(structuredData).replace(/</g, "\\u003c")}</script>
+			</>
 		);
 	},
 });
