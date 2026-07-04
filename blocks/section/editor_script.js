@@ -55,9 +55,11 @@
                 { name: "titleImage", label: __("\u30BF\u30A4\u30C8\u30EB\u753B\u50CF", "catpow"), values: "hasTitleImage", sub: [{ input: "picture", keys: imageKeys2.titleImage, devices: devices2 }] },
                 { name: "headerImage", label: __("\u30D8\u30C3\u30C0\u753B\u50CF", "catpow"), values: "hasHeaderImage", sub: [{ input: "picture", keys: imageKeys2.headerImage }] },
                 { name: "lead", label: __("\u30EA\u30FC\u30C9", "catpow"), values: "hasLead" },
+                { preset: "colorScheme", label: __("\u30D8\u30C3\u30C0\u914D\u8272", "catpow"), classKey: "headerClasses" },
                 { preset: "backgroundColor", label: __("\u30D8\u30C3\u30C0\u80CC\u666F\u8272", "catpow"), name: "headerBackgroundColor", classKey: "headerClasses" },
                 { preset: "backgroundImage", label: __("\u30D8\u30C3\u30C0\u80CC\u666F\u753B\u50CF", "catpow"), name: "headerBackgroundImage", classKey: "headerClasses", vars: "headerVars" },
                 { preset: "backgroundPattern", label: __("\u30D8\u30C3\u30C0\u80CC\u666F\u30D1\u30BF\u30FC\u30F3", "catpow"), name: "headerBackgroundPattern", classKey: "headerClasses", vars: "headerVars" },
+                { preset: "clipPath", label: __("\u30D8\u30C3\u30C0\u30AF\u30EA\u30C3\u30D7", "catpow"), name: "headerClip", classKey: "headerClasses", vars: "headerVars" },
                 {
                   name: "navIcon",
                   label: __("\u30E1\u30CB\u30E5\u30FC\u30A2\u30A4\u30B3\u30F3", "catpow"),
@@ -183,8 +185,6 @@
           "color",
           "colorScheme",
           "backgroundColor",
-          { preset: "colorScheme", label: __("\u30D8\u30C3\u30C0\u914D\u8272", "catpow"), classKey: "headerClasses" },
-          { preset: "backgroundColor", label: __("\u30D8\u30C3\u30C0\u80CC\u666F\u8272", "catpow"), classKey: "headerClasses" },
           "backgroundImage",
           "backgroundPattern",
           "contentWidth"
