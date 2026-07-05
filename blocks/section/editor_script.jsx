@@ -142,11 +142,13 @@ wp.blocks.registerBlockType("catpow/section", {
 							},
 						],
 						isTypeColumn: [
-							{ name: "icon", label: __("アイコン", "catpow"), values: "hasIcon", sub: [{ input: "icon", color }] },
-							{ name: "border", type: "buttons", label: __("線", "catpow"), values: { hasNoBorder: __("なし", "catpow"), hasThinBorder: __("細", "catpow"), hasBoldBorder: __("太", "catpow") } },
-							{ name: "round", label: __("角丸", "catpow"), values: "hasBorderRadius" },
-							{ name: "shadow", label: __("影", "catpow"), values: "hasBoxShadow", sub: [{ label: __("内側", "catpow"), values: "hasBoxShadowInset" }] },
-							"customContentWidth",
+							"hasIcon",
+							{ name: "headerImage", label: __("ヘッダ画像", "catpow"), values: "hasHeaderImage", sub: [{ input: "picture", keys: imageKeys.headerImage }] },
+							{ name: "lead", label: __("リード", "catpow"), values: "hasLead" },
+							{ preset: "colorScheme", label: __("ヘッダ配色", "catpow"), classKey: "headerClasses" },
+							{ preset: "backgroundColor", label: __("ヘッダ背景色", "catpow"), name: "headerBackgroundColor", classKey: "headerClasses" },
+							{ preset: "backgroundImage", label: __("ヘッダ背景画像", "catpow"), name: "headerBackgroundImage", classKey: "headerClasses", vars: "headerVars" },
+							{ preset: "backgroundPattern", label: __("ヘッダ背景パターン", "catpow"), name: "headerBackgroundPattern", classKey: "headerClasses", vars: "headerVars" },
 							{
 								name: "navIcon",
 								label: __("メニューアイコン", "catpow"),

@@ -140,11 +140,13 @@
                 }
               ],
               isTypeColumn: [
-                { name: "icon", label: __("\u30A2\u30A4\u30B3\u30F3", "catpow"), values: "hasIcon", sub: [{ input: "icon", color }] },
-                { name: "border", type: "buttons", label: __("\u7DDA", "catpow"), values: { hasNoBorder: __("\u306A\u3057", "catpow"), hasThinBorder: __("\u7D30", "catpow"), hasBoldBorder: __("\u592A", "catpow") } },
-                { name: "round", label: __("\u89D2\u4E38", "catpow"), values: "hasBorderRadius" },
-                { name: "shadow", label: __("\u5F71", "catpow"), values: "hasBoxShadow", sub: [{ label: __("\u5185\u5074", "catpow"), values: "hasBoxShadowInset" }] },
-                "customContentWidth",
+                "hasIcon",
+                { name: "headerImage", label: __("\u30D8\u30C3\u30C0\u753B\u50CF", "catpow"), values: "hasHeaderImage", sub: [{ input: "picture", keys: imageKeys2.headerImage }] },
+                { name: "lead", label: __("\u30EA\u30FC\u30C9", "catpow"), values: "hasLead" },
+                { preset: "colorScheme", label: __("\u30D8\u30C3\u30C0\u914D\u8272", "catpow"), classKey: "headerClasses" },
+                { preset: "backgroundColor", label: __("\u30D8\u30C3\u30C0\u80CC\u666F\u8272", "catpow"), name: "headerBackgroundColor", classKey: "headerClasses" },
+                { preset: "backgroundImage", label: __("\u30D8\u30C3\u30C0\u80CC\u666F\u753B\u50CF", "catpow"), name: "headerBackgroundImage", classKey: "headerClasses", vars: "headerVars" },
+                { preset: "backgroundPattern", label: __("\u30D8\u30C3\u30C0\u80CC\u666F\u30D1\u30BF\u30FC\u30F3", "catpow"), name: "headerBackgroundPattern", classKey: "headerClasses", vars: "headerVars" },
                 {
                   name: "navIcon",
                   label: __("\u30E1\u30CB\u30E5\u30FC\u30A2\u30A4\u30B3\u30F3", "catpow"),

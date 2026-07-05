@@ -9,12 +9,21 @@
 	$contents:#{$block}__contents;
 	@include bnd((d:b,p:r,mgi:a,pd:b,bi:a));
 	&__header{
+		&-image{
+			@include bnd((p:r));
+			&-picture{
+				&-img{
+					@include bnd((d:b,w:f,h:a));
+				}
+			}
+		}
 		&-title{
-			@include bnd((mgi:a,bs:b));
+			@include bnd((p:r,mgi:a,bs:b));
+			@include flx((w:n,g:.5em,a:c));
 			@include txt((p:t-h));
 			&-heading{
-				@extend %heading-block;
 				@extend %heading;
+				@include bnd((mg:0));
 			}
 			&-lead{
 				@extend %lead-block;
@@ -50,6 +59,7 @@
 		> #{$body}{
 			@include bnd((p:r,z:1));
 			> #{$header}{
+				@extend %heading-block;
 				@include bnd((p:r));
 				#{$header}{
 					&-image{
@@ -62,10 +72,16 @@
 					}
 					&-title{
 						@include bnd((p:r,pd:f,pdi:0,h:8em a,ac:c,z:2));
+						@include flx((w:n,g:.5em));
+						&-icon{
+							@include bnd((d:ib));
+							@include txt((c:tx));
+						}
 						&-prefix{
 							@include txt((p:1.25em,h:1.5em,w:r,f:d,c:mx));
 						}
 						&-heading{
+							@include bnd((f:1 1 a));
 							@include txt((c:mx,b:k));
 						}
 						&-lead{
@@ -170,24 +186,24 @@
 		&.has-header-image{
 			> #{$body} > #{$header}{
 				#{$header}{
-					&-title{
-						&-image{
-							@include bnd((p:r,f:0 1 a,nth:1));
-							img{
-								@include bnd((d:b,w:a,h:4em,mgi:a));
-							}
+					&-image{
+						@include bnd((p:r,f:0 1 a,nth:1));
+						img{
+							@include bnd((d:b,w:a,h:4em,mgi:a));
 						}
 					}
 				}
 			}
 			&.is-align-left,&.is-align-right{
 				> #{$body} > #{$header}{
+					@include flx((w:n,a:c,g:.5em));
 					#{$header}{
+						&-image{
+							@include bnd((p:r,f:0 1 a,nth:1));
+						}
 						&-title{
+							@include bnd((f:1 1 a));
 							@include flx((w:w,j:c,a:c,g:1.5em));
-							&-image{
-								@include bnd((p:r,f:0 1 a,nth:1));
-							}
 							&-heading{
 								@include bnd((f:1 1 a,nth:2));
 							}
@@ -201,10 +217,10 @@
 			&.is-align-right{
 				> #{$body} > #{$header}{
 					#{$header}{
+						&-image{
+							@include bnd((nth:2));
+						}
 						&-title{
-							&-image{
-								@include bnd((nth:2));
-							}
 							&-heading{
 								@include bnd((nth:1));
 							}
@@ -220,6 +236,9 @@
 						@extend %header-component;
 						@include bg((c:mx));
 						@include txt((c:ix));
+						&-heading{
+							@include txt((c:ix));
+						}
 					}
 				}
 			}
@@ -266,11 +285,15 @@
 	}
 	&.is-type-column{
 		> #{$body}{
-			@include bnd((bs:b,p:r,pd:2em,mgi:a,z:1));
+			@extend %frame-component;
+			@include bnd((bs:b,p:r,pd:0,mgi:a,z:1,o:c));
 			> #{$header}{
-				@include bnd((pd:1em));
 				#{$header}{
+					&-image{
+
+					}
 					&-title{
+						@include bnd((pd:c-f));
 						&-heading{
 							@include txt((b:k,c:tx,f:t-h));
 						}
@@ -281,25 +304,30 @@
 				}
 			}
 			> #{$block}__contents{
-				@include bnd((pd:1em));
+				@include bnd((pd:c-f));
 			}
 		}
 		&.is-align-left,&.is-align-right{
 			> #{$body}{
 				@include flx((w:w,a:f));
 				> #{$header}{
-					@include bnd((f:1 1 300));
+					@include bnd((f:1 1 200));
 				}
 				> #{$block}__contents{
-					@include bnd((f:8 8 300));
+					@include bnd((f:9 9 300));
 				}
+			}
+		}
+		&.is-align-right{
+			> #{$body}{
+				@include flx((d:rr));
 			}
 		}
 		&.is-align-center{
 			> #{$body}{
 				> #{$header}{
 					#{$header}{
-					&-title{
+						&-title{
 							@include txt((a:c));
 						}
 					}
