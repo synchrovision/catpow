@@ -834,24 +834,26 @@ export const selectiveClassesPresets = {
 			...otherParams,
 		};
 	},
-	hasPadding({ preset, vars = "vars", ...otherParams }) {
+	hasPadding({ preset, classKey = "classes", vars = "vars", ...otherParams }) {
 		return {
 			name: "hasPadding",
 			label: __("パディング", "catpow"),
 			values: "hasPadding",
+			classKey,
 			sub: [
-				{ preset: "paddingTop", vars },
-				{ preset: "paddingInline", vars },
-				{ preset: "paddingBottom", vars },
+				{ preset: "paddingTop", classKey, vars },
+				{ preset: "paddingInline", classKey, vars },
+				{ preset: "paddingBottom", classKey, vars },
 			],
 			...otherParams,
 		};
 	},
-	paddingTop({ preset, vars = "vars", ...otherParams }) {
+	paddingTop({ preset, classKey = "classes", vars = "vars", ...otherParams }) {
 		return {
 			name: "paddingTop",
 			type: "buttons",
 			label: __("上パディング", "catpow"),
+			classKey,
 			values: {
 				hasPaddingTopXLarge: __("極大", "catpow"),
 				hasPaddingTopLarge: __("大", "catpow"),
@@ -865,6 +867,7 @@ export const selectiveClassesPresets = {
 					{
 						name: "paddingTopCustom",
 						input: "range",
+						classKey,
 						vars,
 						key: "--cp-padding-top-custom",
 						min: 0,
@@ -878,11 +881,12 @@ export const selectiveClassesPresets = {
 			...otherParams,
 		};
 	},
-	paddingInline({ preset, vars = "vars", ...otherParams }) {
+	paddingInline({ preset, classKey = "classes", vars = "vars", ...otherParams }) {
 		return {
 			name: "paddingInline",
 			type: "buttons",
 			label: __("横パディング", "catpow"),
+			classKey,
 			values: {
 				hasPaddingInlineXLarge: __("極大", "catpow"),
 				hasPaddingInlineLarge: __("大", "catpow"),
@@ -896,6 +900,7 @@ export const selectiveClassesPresets = {
 					{
 						name: "paddingInlineCustom",
 						input: "range",
+						classKey,
 						vars,
 						key: "--cp-padding-inline-custom",
 						min: 0,
@@ -909,11 +914,12 @@ export const selectiveClassesPresets = {
 			...otherParams,
 		};
 	},
-	paddingBottom({ preset, vars = "vars", ...otherParams }) {
+	paddingBottom({ preset, classKey = "classes", vars = "vars", ...otherParams }) {
 		return {
 			name: "paddingBottom",
 			type: "buttons",
 			label: __("下パディング", "catpow"),
+			classKey,
 			values: {
 				hasPaddingBottomXLarge: __("極大", "catpow"),
 				hasPaddingBottomLarge: __("大", "catpow"),
@@ -927,6 +933,7 @@ export const selectiveClassesPresets = {
 					{
 						name: "paddingBottomCustom",
 						input: "range",
+						classKey,
 						vars,
 						key: "--cp-padding-bottom-custom",
 						min: 0,
@@ -940,7 +947,7 @@ export const selectiveClassesPresets = {
 			...otherParams,
 		};
 	},
-	customPadding({ preset, vars = "vars", ...otherParams }) {
+	customPadding({ preset, classKey = "classes", vars = "vars", ...otherParams }) {
 		return {
 			name: "customPadding",
 			label: __("余白", "catpow"),
@@ -950,6 +957,7 @@ export const selectiveClassesPresets = {
 					name: "paddingTop",
 					label: __("上余白", "catpow"),
 					input: "range",
+					classKey,
 					vars,
 					key: "--cp-padding-top",
 					min: 0,
@@ -962,6 +970,7 @@ export const selectiveClassesPresets = {
 					name: "paddingBottom",
 					label: __("下余白", "catpow"),
 					input: "range",
+					classKey,
 					vars,
 					key: "--cp-padding-bottom",
 					min: 0,
@@ -974,6 +983,7 @@ export const selectiveClassesPresets = {
 					name: "paddingInline",
 					label: __("横余白", "catpow"),
 					input: "range",
+					classKey,
 					vars,
 					key: "--cp-padding-inline",
 					min: 0,
@@ -986,11 +996,12 @@ export const selectiveClassesPresets = {
 			...otherParams,
 		};
 	},
-	hasMargin({ preset, vars = "vars", ...otherParams }) {
+	hasMargin({ preset, classKey = "classes", vars = "vars", ...otherParams }) {
 		return {
 			name: "hasMargin",
 			label: __("マージン", "catpow"),
 			values: "hasMargin",
+			classKey,
 			sub: [
 				{ preset: "marginTop", vars },
 				{ preset: "marginBottom", vars },
@@ -998,7 +1009,7 @@ export const selectiveClassesPresets = {
 			...otherParams,
 		};
 	},
-	marginTop({ preset, vars = "vars", ...otherParams }) {
+	marginTop({ preset, classKey = "classes", vars = "vars", ...otherParams }) {
 		return {
 			name: "margin",
 			type: "buttons",
@@ -1016,6 +1027,7 @@ export const selectiveClassesPresets = {
 					{
 						name: "marginTop",
 						input: "range",
+						classKey,
 						vars,
 						key: "--cp-margin-top-custom",
 						min: -400,
@@ -1029,7 +1041,7 @@ export const selectiveClassesPresets = {
 			...otherParams,
 		};
 	},
-	marginBottom({ preset, vars = "vars", ...otherParams }) {
+	marginBottom({ preset, classKey = "classes", vars = "vars", ...otherParams }) {
 		return {
 			name: "margin",
 			type: "buttons",
@@ -1047,6 +1059,7 @@ export const selectiveClassesPresets = {
 					{
 						name: "marginBottom",
 						input: "range",
+						classKey,
 						vars,
 						key: "--cp-margin-bottom-custom",
 						min: -400,
@@ -1060,16 +1073,18 @@ export const selectiveClassesPresets = {
 			...otherParams,
 		};
 	},
-	customMargin({ preset, vars = "vars", ...otherParams }) {
+	customMargin({ preset, classKey = "classes", vars = "vars", ...otherParams }) {
 		return {
 			name: "customMargin",
 			label: __("間隔", "catpow"),
 			values: "hasCustomMargin",
+			classKey,
 			sub: [
 				{
 					name: "marginTop",
 					label: __("上間隔", "catpow"),
 					input: "range",
+					classKey,
 					vars,
 					key: "--cp-margin-top",
 					min: -400,
@@ -1082,6 +1097,7 @@ export const selectiveClassesPresets = {
 					name: "marginBottom",
 					label: __("下間隔", "catpow"),
 					input: "range",
+					classKey,
 					vars,
 					key: "--cp-margin-bottom",
 					min: -400,
