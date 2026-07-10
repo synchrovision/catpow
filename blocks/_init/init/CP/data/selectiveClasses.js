@@ -410,6 +410,24 @@ export const selectiveClassesPresets = {
 			...otherParams,
 		};
 	},
+	hasBorderImage({ preset, vars = "vars", ...otherParams }) {
+		return {
+			name: "hasBorderImage",
+			label: __("ボーダー画像", "catpow"),
+			values: "hasBorderImage",
+			sub: [{ preset: "borderImage", vars, label: null }],
+			...otherParams,
+		};
+	},
+	borderImage({ preset, vars = "vars", ...otherParams }) {
+		return {
+			name: "borderImage",
+			input: "border",
+			vars,
+			key: "--cp-border-image",
+			...otherParams,
+		};
+	},
 	headingTag({ preset, name = "headingTag", label = "見出しタグ", key = "HeadingTag", classKey = "classes", ...otherParams }) {
 		return {
 			name,
