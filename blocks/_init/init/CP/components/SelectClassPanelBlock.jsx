@@ -450,6 +450,29 @@ export const SelectClassPanelBlock = ({ prm }) => {
 					);
 					break;
 				}
+				case "border": {
+					rtn.push(
+						<Catpow.SelectPreparedImage
+							name="border"
+							value={props.attr?.[prm.vars]?.[prm.key]?.match(/url\("(.+?)(\?.+)?"\)/)[1]}
+							color={colorNumber}
+							onSelect={(image) => {
+								console.log({ image });
+								if (!image.conf) {
+									return;
+								}
+								const { slice, width, repeat } = image.conf;
+								save({
+									[prm.vars]: {
+										...props.attr[prm.vars],
+										[prm.key]: `url("${image.url}") fill ${slice} / ${width} ${repeat}`,
+									},
+								});
+							}}
+						/>,
+					);
+					break;
+				}
 				case "position": {
 					rtn.push(
 						<CP.PositionInput
