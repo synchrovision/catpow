@@ -11,6 +11,7 @@ export const Item = (props) => {
 			style: props.style,
 			"data-index": index,
 			"data-refine-cond": items[index]["cond"],
+			"aria-selected": isSelected && index == attr[indexKey],
 			onKeyDown: (e) => {
 				if (e.ctrlKey || e.metaKey) {
 					switch (e.key) {
