@@ -135,19 +135,16 @@ wp.blocks.registerBlockType("catpow/accessmap", {
 			<>
 				<CP.SelectModeToolbar set={setAttributes} attr={attributes} />
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
 						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
 					</PanelBody>
-					<CP.SelectClassPanel title="リストアイテム" icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndexindex]} selectiveClasses={selectiveItemClasses} />
+					<CP.SelectClassPanel title="リストアイテム" icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={selectiveItemClasses} />
 					{states.isTemplate && (
 						<CP.SelectClassPanel
 							title="テンプレート"
 							icon="edit"
-							set={setAttributes}
-							attr={attributes}
-							items={items}
-							index={attributes.currentItemIndex}
+							{...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]}
 							selectiveClasses={selectiveItemTemplateClasses}
 						/>
 					)}

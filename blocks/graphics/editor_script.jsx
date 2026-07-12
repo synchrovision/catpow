@@ -615,7 +615,7 @@ wp.blocks.registerBlockType("catpow/graphics", {
 					</CP.Bem>
 				</div>
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} initialOpen={true}>
+					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} initialOpen={true}>
 						{!states.hasBaseImage && (
 							<InputHeights
 								value={heights}
@@ -636,10 +636,7 @@ wp.blocks.registerBlockType("catpow/graphics", {
 						<CP.SelectClassPanel
 							title="アイテム"
 							icon="edit"
-							set={setAttributes}
-							attr={attributes}
-							items={items}
-							index={currentItemIndexes[0]}
+							{...{ setAttributes, attributes }} itemKeys={["items", currentItemIndexes[0]]}
 							selectiveClasses={selectiveItemClasses}
 							initialOpen={true}
 						/>

@@ -71,17 +71,14 @@
           }
         });
       }, [items.length]);
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", initialOpen: true, icon: "admin-generic", set: setAttributes, attr: attributes, selectiveClasses })), /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps({ className: classes, style: { ...vars, "--current-index": currentIndex, "--length": items.length } }), "data-current-index": currentIndex }, /* @__PURE__ */ wp.element.createElement("ul", { className: "_tab" }, items.map((item, index) => {
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", initialOpen: true, icon: "admin-generic", ...{ setAttributes, attributes }, selectiveClasses })), /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps({ className: classes, style: { ...vars, "--current-index": currentIndex, "--length": items.length } }), "data-current-index": currentIndex }, /* @__PURE__ */ wp.element.createElement("ul", { className: "_tab" }, items.map((item, index) => {
         return /* @__PURE__ */ wp.element.createElement(
           CP.Item,
           {
             tag: "li",
             className: clsx("_item", currentIndex == index ? "is-active" : currentIndex > index ? "is-before" : "is-after"),
-            set: setAttributes,
-            attr: attributes,
-            items,
-            index,
-            isSelected,
+            ...{ setAttributes, attributes },
+            itemKeys: ["items", index],
             style: { "--index": index },
             key: index
           },

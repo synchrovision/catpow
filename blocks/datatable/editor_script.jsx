@@ -255,8 +255,8 @@ wp.blocks.registerBlockType("catpow/datatable", {
 					)}
 				</>
 				<InspectorControls>
-					<CP.SelectClassPanel title="表示設定" icon="admin-appearance" set={setAttributes} attr={attributes} selectiveClasses={statesClasses} />
-					<CP.SelectClassPanel title="クラス" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title="表示設定" icon="admin-appearance" {...{ setAttributes, attributes }} selectiveClasses={statesClasses} />
+					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
 						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
 					</PanelBody>

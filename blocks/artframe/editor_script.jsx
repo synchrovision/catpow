@@ -69,7 +69,7 @@ wp.blocks.registerBlockType("catpow/artframe", {
 					</Element>
 				</div>
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" initialOpen={true} icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title="クラス" initialOpen={true} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 				</InspectorControls>
 			</>
 		);

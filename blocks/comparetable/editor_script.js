@@ -510,19 +510,14 @@
             );
           }));
         }))
-      )))))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", set: setAttributes, attr: attributes, selectiveClasses }), r2 === 0 ? /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u884C", icon: "art", set: setAttributes, attr: attributes, selectiveClasses: selectiveHeaderRowClasses, items: rows, itemsKey: "rows", index: r2 }) : /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u884C", icon: "art", set: setAttributes, attr: attributes, selectiveClasses: selectiveRowClasses, items: rows, itemsKey: "rows", index: r2 }), states.hasHeaderColumn && c === 0 ? /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u5217", icon: "art", set: setAttributes, attr: attributes, selectiveClasses: selectiveHeaderColClasses, classKey: "headerColClasses" }) : /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u5217", icon: "art", set: setAttributes, attr: attributes, selectiveClasses: selectiveColClasses, items: cols, itemsKey: "cols", index: c }), states.hasHeaderColumn && r2 === 0 && c === 0 ? /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30BB\u30EB", icon: "art", set: setAttributes, attr: attributes, selectiveClasses: selectiveFirstCellClasses, classKey: "firstCellClasses" }) : /* @__PURE__ */ wp.element.createElement(
+      )))))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), r2 === 0 ? /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u884C", icon: "art", ...{ setAttributes, attributes }, selectiveClasses: selectiveHeaderRowClasses, itemKeys: ["rows", r2] }) : /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u884C", icon: "art", ...{ setAttributes, attributes }, selectiveClasses: selectiveRowClasses, itemKeys: ["rows", r2] }), states.hasHeaderColumn && c === 0 ? /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u5217", icon: "art", ...{ setAttributes, attributes }, selectiveClasses: selectiveHeaderColClasses, classKey: "headerColClasses" }) : /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u5217", icon: "art", ...{ setAttributes, attributes }, selectiveClasses: selectiveColClasses, itemKeys: ["cols", c] }), states.hasHeaderColumn && r2 === 0 && c === 0 ? /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30BB\u30EB", icon: "art", ...{ setAttributes, attributes }, selectiveClasses: selectiveFirstCellClasses, classKey: "firstCellClasses" }) : /* @__PURE__ */ wp.element.createElement(
         CP.SelectClassPanel,
         {
           title: "\u30BB\u30EB",
           icon: "art",
-          set: setAttributes,
-          attr: attributes,
+          ...{ setAttributes, attributes },
           selectiveClasses: c === 0 ? selectiveHeaderColCellClasses : selectiveCellClasses,
-          items: rows,
-          itemsKey: "rows",
-          index: r2,
-          subItemsKey: "cells",
-          subIndex: c
+          itemKeys: ["rows", r2, "cells", c]
         }
       )));
     },

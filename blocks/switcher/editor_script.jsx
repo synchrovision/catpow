@@ -157,7 +157,7 @@ wp.blocks.registerBlockType("catpow/switcher", {
 				</div>
 				{currentBlockId && <style>{CP.createStyleCode({ ["#" + currentBlockId]: { display: "block" } })}</style>}
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" classKey="factor" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} initialOpen={true} />
+					<CP.SelectClassPanel title="クラス" icon="art" classKey="factor" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} initialOpen={true} />
 				</InspectorControls>
 			</>
 		);

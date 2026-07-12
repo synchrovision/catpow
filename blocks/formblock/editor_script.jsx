@@ -132,7 +132,7 @@ wp.blocks.registerBlockType("catpow/formblockcontent", {
 							}}
 						/>
 					</PanelBody>
-					{actions && <CP.SelectClassPanel title="アクション" icon="edit" set={setAttributes} attr={attributes} selectiveClasses={actions} initialOpen={true} />}
+					{actions && <CP.SelectClassPanel title="アクション" icon="edit" {...{ setAttributes, attributes }} selectiveClasses={actions} initialOpen={true} />}
 				</InspectorControls>
 			</>
 		);

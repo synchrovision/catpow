@@ -161,7 +161,7 @@ wp.blocks.registerBlockType("catpow/flow", {
 					/>
 				</BlockControls>
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
 						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
 					</PanelBody>
@@ -201,7 +201,7 @@ wp.blocks.registerBlockType("catpow/flow", {
 									item.controlClasses = "control";
 								}
 								return (
-									<CP.Item tag="li" className="_item" set={setAttributes} attr={attributes} items={items} index={index} isSelected={isSelected} key={index}>
+									<CP.Item tag="li" className="_item" {...{ setAttributes, attributes }} itemKeys={["items", index]} key={index}>
 										{states.hasImage && (
 											<div className="_image">
 												<CP.SelectResponsiveImage attr={attributes} set={setAttributes} keys={imageKeys.image} index={index} size="vga" />

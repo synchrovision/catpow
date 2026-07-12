@@ -78,7 +78,7 @@ wp.blocks.registerBlockType("catpow/t-banners", {
 										{itemGroup.map((item, index) => (
 											<>
 												{index > 0 && <td className="_td is-spacer-cell" style={{ width: `${gapX}px` }}></td>}
-												<CP.Item className="_td" tag="td" set={setAttributes} attr={attributes} items={items} index={gIndex * columns + index} isSelected={isSelected} key={index}>
+												<CP.Item className="_td" tag="td" {...{ setAttributes, attributes }} itemKeys={["items", gIndex * columns + index]} key={index}>
 													<CP.Link.Edit className="_link" set={setAttributes} attr={attributes} keys={{ items: "items", href: "url" }} index={gIndex * columns + index}>
 														<CP.SelectResponsiveImage
 															className="_img"
@@ -108,7 +108,7 @@ wp.blocks.registerBlockType("catpow/t-banners", {
 					</table>
 				</CP.Bem>
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} initialOpen={true} />
+					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} initialOpen={true} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
 						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
 					</PanelBody>

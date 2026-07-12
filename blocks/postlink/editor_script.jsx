@@ -35,7 +35,7 @@ wp.blocks.registerBlockType("catpow/postlink", {
 					<ServerSideRender block="catpow/postlink" attributes={Object.assign({}, attributes, { preview: true })} />
 				</div>
 				<InspectorControls>
-					<CP.SelectClassPanel title={__("クラス", "catpow")} icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title={__("クラス", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 					<PanelBody title="Path"></PanelBody>
 				</InspectorControls>
 			</>

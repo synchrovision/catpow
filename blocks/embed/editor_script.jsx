@@ -62,7 +62,7 @@ wp.blocks.registerBlockType("catpow/embed", {
 							}}
 						/>
 					</PanelBody>
-					{options && <CP.SelectClassPanel title="設定" icon="edit" set={setAttributes} attr={attributes} selectiveClasses={options} initialOpen={true} />}
+					{options && <CP.SelectClassPanel title="設定" icon="edit" {...{ setAttributes, attributes }} selectiveClasses={options} initialOpen={true} />}
 				</InspectorControls>
 			</>
 		);

@@ -105,9 +105,9 @@
 		return (
 			<>
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" initialOpen={true} icon="admin-generic" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title="クラス" initialOpen={true} icon="admin-generic" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 					{settings ? (
-						<CP.SelectClassPanel title="セット設定" initialOpen={false} icon="admin-generic" set={setSettings} attr={settings} selectiveClasses={settingsSelectiveClasses}>
+						<CP.SelectClassPanel title="セット設定" initialOpen={false} icon="admin-generic" setAttributes={setSettings} attributes={settings} selectiveClasses={settingsSelectiveClasses}>
 							<CP.EditItemsTable set={setSettings} attr={settings} columns={[{ type: "text", key: "label" }]} />
 							{!isWaiting ? (
 								post === "default" ? (

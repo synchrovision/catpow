@@ -238,19 +238,16 @@ wp.blocks.registerBlockType("catpow/listed", {
 			<>
 				<CP.SelectModeToolbar set={setAttributes} attr={attributes} />
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
 						<TextareaControl label="クラス" onChange={(clss) => setAttributes({ classes: clss })} value={classArray.join(" ")} />
 					</PanelBody>
-					<CP.SelectClassPanel title="リストアイテム" icon="edit" set={setAttributes} attr={attributes} items={items} index={attributes.currentItemIndex} triggerClasses={selectiveClasses[6]} />
+					<CP.SelectClassPanel title="リストアイテム" icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} triggerClasses={selectiveClasses[6]} />
 					{states.isTemplate && (
 						<CP.SelectClassPanel
 							title="テンプレート"
 							icon="edit"
-							set={setAttributes}
-							attr={attributes}
-							items={items}
-							index={attributes.currentItemIndex}
+							{...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]}
 							selectiveClasses={selectiveItemTemplateClasses}
 						/>
 					)}
@@ -327,7 +324,7 @@ wp.blocks.registerBlockType("catpow/listed", {
 											item.controlClasses = "control";
 										}
 										return (
-											<CP.Item tag="li" className={clsx("_item", item.classes, commonItemClasses)} set={setAttributes} attr={attributes} items={items} index={index} isSelected={isSelected} key={i}>
+											<CP.Item tag="li" className={clsx("_item", item.classes, commonItemClasses)} {...{ setAttributes, attributes }} itemKeys={["items", index]} key={i}>
 												{states.hasImage && (
 													<div className="_image">
 														<CP.SelectResponsiveImage attr={attributes} set={setAttributes} keys={imageKeys.image} index={index} size="vga" isTemplate={states.isTemplate} />

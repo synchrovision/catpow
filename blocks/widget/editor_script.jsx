@@ -33,7 +33,7 @@ wp.blocks.registerBlockType("catpow/widget", {
 							}}
 						/>
 					</PanelBody>
-					{statesClasses && <CP.SelectClassPanel initialOpen={true} title="設定" icon="admin-appearance" set={setAttributes} attr={attributes} selectiveClasses={statesClasses} />}
+					{statesClasses && <CP.SelectClassPanel initialOpen={true} title="設定" icon="admin-appearance" {...{ setAttributes, attributes }} selectiveClasses={statesClasses} />}
 				</InspectorControls>
 			</>
 		);

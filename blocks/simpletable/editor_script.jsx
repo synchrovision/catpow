@@ -130,8 +130,8 @@
 		return (
 			<>
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
-					<CP.SelectClassPanel title="行" icon="edit" set={setAttributes} attr={attributes} items={rows} index={attributes.currentItemIndex} triggerClasses={selectiveClasses[3]} />
+					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title="行" icon="edit" {...{ setAttributes, attributes }} itemKeys={["rows", attributes.currentItemIndex]} triggerClasses={selectiveClasses[3]} />
 					<CP.ItemControlInfoPanel />
 				</InspectorControls>
 				<CP.Bem prefix="wp-block-catpow">
@@ -139,7 +139,7 @@
 						<tbody>
 							{rows.map((row, index) => {
 								return (
-									<CP.Item tag="tr" className={row.classes} set={setAttributes} attr={attributes} items={rows} itemskey="rows" index={index} isSelected={isSelected} key={index}>
+									<CP.Item tag="tr" className={row.classes} {...{ setAttributes, attributes }} itemKeys={["rows", index]} key={index}>
 										<RichText
 											tagName="th"
 											className="_th"

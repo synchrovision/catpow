@@ -116,7 +116,7 @@
             setAttributes({ name: name2 });
           }
         }
-      )), actions && /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30A2\u30AF\u30B7\u30E7\u30F3", icon: "edit", set: setAttributes, attr: attributes, selectiveClasses: actions, initialOpen: true })));
+      )), actions && /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30A2\u30AF\u30B7\u30E7\u30F3", icon: "edit", ...{ setAttributes, attributes }, selectiveClasses: actions, initialOpen: true })));
     },
     save({ attributes, className, setAttributes }) {
       const { InnerBlocks } = wp.blockEditor;

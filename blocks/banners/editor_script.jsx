@@ -78,7 +78,7 @@ wp.blocks.registerBlockType("catpow/banners", {
 				<CP.SelectModeToolbar set={setAttributes} attr={attributes} />
 				<CP.SelectDeviceToolbar attr={attributes} set={setAttributes} devices={devices} />
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
 						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
 					</PanelBody>
@@ -86,14 +86,11 @@ wp.blocks.registerBlockType("catpow/banners", {
 						<CP.SelectClassPanel
 							title="テンプレート"
 							icon="edit"
-							set={setAttributes}
-							attr={attributes}
-							items={items}
-							index={attributes.currentItemIndex}
+							{...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]}
 							selectiveClasses={itemTemplateSelectiveClasses}
 						/>
 					) : (
-						<CP.SelectClassPanel title="バナー" icon="edit" set={setAttributes} attr={attributes} items={items} index={attributes.currentItemIndex} selectiveClasses={selectiveItemClasses} />
+						<CP.SelectClassPanel title="バナー" icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={selectiveItemClasses} />
 					)}
 					<CP.ItemControlInfoPanel />
 				</InspectorControls>
@@ -137,7 +134,7 @@ wp.blocks.registerBlockType("catpow/banners", {
 											item.controlClasses = "control";
 										}
 										return (
-											<CP.Item className="_item" tag="li" set={setAttributes} attr={attributes} items={items} index={index} isSelected={isSelected} key={index}>
+											<CP.Item className="_item" tag="li" {...{ setAttributes, attributes }} itemKeys={["items", index]} key={index}>
 												{states.hasTitle && (
 													<RichText
 														tagName={HeadingTag}

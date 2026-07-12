@@ -22,7 +22,7 @@
             setAttributes({ func: func2 });
           }
         }
-      )), statesClasses && /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { initialOpen: true, title: "\u8A2D\u5B9A", icon: "admin-appearance", set: setAttributes, attr: attributes, selectiveClasses: statesClasses })));
+      )), statesClasses && /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { initialOpen: true, title: "\u8A2D\u5B9A", icon: "admin-appearance", ...{ setAttributes, attributes }, selectiveClasses: statesClasses })));
     },
     save({ attributes, className, setAttributes }) {
       return "null";

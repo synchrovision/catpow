@@ -540,31 +540,25 @@ wp.blocks.registerBlockType("catpow/comparetable", {
 					)}
 				</>
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 					{r === 0 ? (
-						<CP.SelectClassPanel title="行" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveHeaderRowClasses} items={rows} itemsKey="rows" index={r} />
+						<CP.SelectClassPanel title="行" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveHeaderRowClasses} itemKeys={["rows", r]} />
 					) : (
-						<CP.SelectClassPanel title="行" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveRowClasses} items={rows} itemsKey="rows" index={r} />
+						<CP.SelectClassPanel title="行" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveRowClasses} itemKeys={["rows", r]} />
 					)}
 					{states.hasHeaderColumn && c === 0 ? (
-						<CP.SelectClassPanel title="列" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveHeaderColClasses} classKey="headerColClasses" />
+						<CP.SelectClassPanel title="列" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveHeaderColClasses} classKey="headerColClasses" />
 					) : (
-						<CP.SelectClassPanel title="列" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveColClasses} items={cols} itemsKey="cols" index={c} />
+						<CP.SelectClassPanel title="列" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveColClasses} itemKeys={["cols", c]} />
 					)}
 					{states.hasHeaderColumn && r === 0 && c === 0 ? (
-						<CP.SelectClassPanel title="セル" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveFirstCellClasses} classKey="firstCellClasses" />
+						<CP.SelectClassPanel title="セル" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveFirstCellClasses} classKey="firstCellClasses" />
 					) : (
 						<CP.SelectClassPanel
 							title="セル"
 							icon="art"
-							set={setAttributes}
-							attr={attributes}
-							selectiveClasses={c === 0 ? selectiveHeaderColCellClasses : selectiveCellClasses}
-							items={rows}
-							itemsKey="rows"
-							index={r}
-							subItemsKey="cells"
-							subIndex={c}
+							{...{ setAttributes, attributes }}
+							selectiveClasses={c === 0 ? selectiveHeaderColCellClasses : selectiveCellClasses} itemKeys={["rows", r, "cells", c]}
 						/>
 					)}
 				</InspectorControls>

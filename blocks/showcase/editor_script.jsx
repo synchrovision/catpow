@@ -137,7 +137,7 @@ wp.blocks.registerBlockType("catpow/showcase", {
 					/>
 				</BlockControls>
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
 						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
 					</PanelBody>
@@ -145,14 +145,11 @@ wp.blocks.registerBlockType("catpow/showcase", {
 						<CP.SelectClassPanel
 							title="テンプレート"
 							icon="edit"
-							set={setAttributes}
-							attr={attributes}
-							items={items}
-							index={attributes.currentItemIndex}
+							{...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]}
 							selectiveClasses={selectiveItemTemplateClasses}
 						/>
 					) : (
-						<CP.SelectClassPanel title="アイテム" icon="edit" set={setAttributes} attr={attributes} items={items} index={attributes.currentItemIndex} selectiveClasses={selectiveItemClasses} />
+						<CP.SelectClassPanel title="アイテム" icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={selectiveItemClasses} />
 					)}
 					<CP.ItemControlInfoPanel />
 				</InspectorControls>
@@ -197,7 +194,7 @@ wp.blocks.registerBlockType("catpow/showcase", {
 											item.controlClasses = "control";
 										}
 										return (
-											<CP.Item tag="li" className={item.classes} set={setAttributes} attr={attributes} items={items} index={index} isSelected={isSelected} key={index}>
+											<CP.Item tag="li" className={item.classes} {...{ setAttributes, attributes }} itemKeys={["items", index]} key={index}>
 												<div className="_image">
 													<CP.SelectResponsiveImage attr={attributes} set={setAttributes} keys={imageKeys.image} index={index} size="full" isTemplate={states.isTemplate} />
 												</div>

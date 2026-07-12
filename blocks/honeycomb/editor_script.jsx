@@ -230,8 +230,8 @@ wp.blocks.registerBlockType("catpow/honeycomb", {
 							value={attributes.grid}
 						/>
 					</PanelBody>
-					<CP.SelectClassPanel title="クラス" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
-					<CP.SelectClassPanel title="アイテム" icon="edit" set={setAttributes} attr={attributes} items={items} index={attributes.currentItemIndex} selectiveClasses={selectiveItemClasses} />
+					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title="アイテム" icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={selectiveItemClasses} />
 					{items[attributes.currentItemIndex] && (
 						<PanelBody title="ITEM CLASS" icon="admin-generic" initialOpen={false}>
 							<TextareaControl

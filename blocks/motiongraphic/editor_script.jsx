@@ -67,7 +67,7 @@ wp.blocks.registerBlockType("catpow/motiongraphic", {
 					</div>
 				</div>
 				<InspectorControls>
-					{selections && <CP.SelectClassPanel classKey="component" title="設定" icon="edit" set={setAttributes} attr={attributes} selectiveClasses={selections} initialOpen={true} />}
+					{selections && <CP.SelectClassPanel classKey="component" title="設定" icon="edit" {...{ setAttributes, attributes }} selectiveClasses={selections} initialOpen={true} />}
 				</InspectorControls>
 			</>
 		);

@@ -137,12 +137,12 @@ wp.blocks.registerBlockType("catpow/lightbox", {
 			<>
 				<CP.SelectModeToolbar set={setAttributes} attr={attributes} modes={["EditMode", "AltMode", "OpenMode"]} />
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
 						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
 						<TextareaControl label="ボックスクラス" onChange={(sliderClasses) => setAttributes({ sliderClasses })} value={sliderClasses} />
 					</PanelBody>
-					<CP.SelectClassPanel title="リストアイテム" icon="edit" set={setAttributes} attr={attributes} items={items} index={attributes.currentItemIndex} selectiveClasses={selectiveItemClasses} />
+					<CP.SelectClassPanel title="リストアイテム" icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={selectiveItemClasses} />
 					<CP.ItemControlInfoPanel />
 				</InspectorControls>
 				{!OpenMode ? (
@@ -209,7 +209,7 @@ wp.blocks.registerBlockType("catpow/lightbox", {
 														item.controlClasses = "control";
 													}
 													return (
-														<CP.Item tag="li" className={item.classes} set={setAttributes} attr={attributes} items={items} index={index} key={index}>
+														<CP.Item tag="li" className={item.classes} {...{ setAttributes, attributes }} itemKeys={["items", index]} key={index}>
 															<div className="_image">
 																<CP.SelectResponsiveImage className="_img" attr={attributes} set={setAttributes} keys={imageKeys.thumbnail} index={index} size="vga" isTemplate={states.isTemplate} />
 															</div>

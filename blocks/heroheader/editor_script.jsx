@@ -80,7 +80,7 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 		return (
 			<>
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 				</InspectorControls>
 				<CP.SelectModeToolbar set={setAttributes} attr={attributes} />
 				{EditMode ? (
@@ -124,7 +124,7 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 								{states.hasButtons && (
 									<div className="_buttons">
 										{buttons.map((button, index) => (
-											<CP.Item tag="li" className="_button" set={setAttributes} attr={attributes} items={buttons} itemsKey="buttons" index={index} indexKey="currentButtonIndex" key={index}>
+											<CP.Item tag="li" className="_button" {...{ setAttributes, attributes }} itemKeys={["buttons", index]} indexKey="currentButtonIndex" key={index}>
 												<CP.Link.Edit className="_link" set={setAttributes} attr={attributes} keys={{ items: "buttons", href: "linkUrl" }} index={index}>
 													<CP.OutputIcon className="_icon" item={button} />
 													<RichText

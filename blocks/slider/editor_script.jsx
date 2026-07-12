@@ -199,18 +199,15 @@ wp.blocks.registerBlockType("catpow/slider", {
 			<>
 				<CP.SelectModeToolbar set={setAttributes} attr={attributes} />
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
-					<CP.SelectClassPanel title="アニメーション設定" icon="video-alt3" set={setAttributes} attr={attributes} selectiveClasses={animateClasses} />
+					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title="アニメーション設定" icon="video-alt3" {...{ setAttributes, attributes }} selectiveClasses={animateClasses} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
 						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
 					</PanelBody>
 					<CP.SelectClassPanel
 						title="スライド"
 						icon="edit"
-						set={setAttributes}
-						attr={attributes}
-						items={items}
-						index={attributes.currentItemIndex}
+						{...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]}
 						triggerClasses={selectiveClasses.find(({ item }) => !!item)}
 					/>
 					<CP.ItemControlInfoPanel />
@@ -251,7 +248,7 @@ wp.blocks.registerBlockType("catpow/slider", {
 										{[0, 1, 2].map(() =>
 											items.map((item, index) => {
 												return (
-													<CP.Item tag="li" className={clsx(item.classes, getPosClass(index))} set={setAttributes} attr={attributes} items={items} index={index} key={index}>
+													<CP.Item tag="li" className={clsx(item.classes, getPosClass(index))} {...{ setAttributes, attributes }} itemKeys={["items", index]} key={index}>
 														<div className="_body">
 															{states.hasImage && (
 																<div className="_image">

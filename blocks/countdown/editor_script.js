@@ -17,7 +17,7 @@
         wp.hooks.applyFilters("catpow.blocks.countdown.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps({ className: classes, style: vars }) }, /* @__PURE__ */ wp.element.createElement(Catpow.CountDown, { target })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, selectiveClasses && /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u8A2D\u5B9A", icon: "edit", set: setAttributes, attr: attributes, selectiveClasses, initialOpen: true })));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps({ className: classes, style: vars }) }, /* @__PURE__ */ wp.element.createElement(Catpow.CountDown, { target })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, selectiveClasses && /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u8A2D\u5B9A", icon: "edit", ...{ setAttributes, attributes }, selectiveClasses, initialOpen: true })));
     },
     save({ attributes, className, setAttributes }) {
       const { classes = "", vars, target } = attributes;

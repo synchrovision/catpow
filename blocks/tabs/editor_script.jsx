@@ -63,7 +63,7 @@ wp.blocks.registerBlockType("catpow/tabs", {
 		return (
 			<>
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" initialOpen={true} icon="admin-generic" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title="クラス" initialOpen={true} icon="admin-generic" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 				</InspectorControls>
 				<CP.Bem prefix="wp-block-catpow">
 					<div {...useBlockProps({ className: classes, style: { ...vars, "--current-index": currentIndex, "--length": items.length } })} data-current-index={currentIndex}>
@@ -73,11 +73,7 @@ wp.blocks.registerBlockType("catpow/tabs", {
 									<CP.Item
 										tag="li"
 										className={clsx("_item", currentIndex == index ? "is-active" : currentIndex > index ? "is-before" : "is-after")}
-										set={setAttributes}
-										attr={attributes}
-										items={items}
-										index={index}
-										isSelected={isSelected}
+										{...{ setAttributes, attributes }} itemKeys={["items", index]}
 										style={{ "--index": index }}
 										key={index}
 									>

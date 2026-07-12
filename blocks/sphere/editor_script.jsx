@@ -79,17 +79,14 @@ wp.blocks.registerBlockType("catpow/sphere", {
 					/>
 				</BlockControls>
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} initialOpen={true} />
+					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} initialOpen={true} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
 						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
 					</PanelBody>
 					<CP.SelectClassPanel
 						title="アイテム"
 						icon="edit"
-						set={setAttributes}
-						attr={attributes}
-						items={items}
-						index={attributes.currentItemIndex}
+						{...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]}
 						selectiveClasses={selectiveItemClasses}
 						initialOpen={true}
 					/>
@@ -100,7 +97,7 @@ wp.blocks.registerBlockType("catpow/sphere", {
 						{items.map((item, index) => {
 							const itemStates = CP.classNamesToFlags(item.classes);
 							return (
-								<CP.Item tag="li" className={item.classes} set={setAttributes} attr={attributes} items={items} index={index} isSelected={isSelected} key={index}>
+								<CP.Item tag="li" className={item.classes} {...{ setAttributes, attributes }} itemKeys={["items", index]} key={index}>
 									{states.hasImage && (
 										<div className="_image">
 											<CP.SelectResponsiveImage className="_img" attr={attributes} set={setAttributes} keys={imageKeys.image} index={index} size="large" />

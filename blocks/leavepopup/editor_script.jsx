@@ -30,7 +30,7 @@ wp.blocks.registerBlockType("catpow/leavepopup", {
 					</CP.Bem>
 				</CP.Collapsible>
 				<InspectorControls>
-					<CP.SelectClassPanel title={__("クラス", "catpow")} icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title={__("クラス", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 				</InspectorControls>
 			</>
 		);

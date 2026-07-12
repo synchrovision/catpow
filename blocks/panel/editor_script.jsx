@@ -135,7 +135,7 @@ wp.blocks.registerBlockType("catpow/panel", {
 								const itemStates = CP.classNamesToFlags(item.classes);
 
 								return (
-									<CP.Item tag="li" className={item.classes} set={setAttributes} attr={attributes} items={items} index={index} isSelected={isSelected} key={index}>
+									<CP.Item tag="li" className={item.classes} {...{ setAttributes, attributes }} itemKeys={["items", index]} key={index}>
 										{itemStates.hasImage && (
 											<div className="_image">
 												<CP.SelectResponsiveImage className="_img" attr={attributes} set={setAttributes} keys={imageKeys.image} index={index} size="vga" />
@@ -189,8 +189,8 @@ wp.blocks.registerBlockType("catpow/panel", {
 						<p>合計グリッド数：{totalGrid}</p>
 						<p>期待グリッド数：{expectedGrid}</p>
 					</PanelBody>
-					<CP.SelectClassPanel title="クラス" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
-					<CP.SelectClassPanel title="パネル" icon="edit" set={setAttributes} attr={attributes} items={items} index={attributes.currentItemIndex} triggerClasses={selectiveClasses[4]} />
+					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title="パネル" icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} triggerClasses={selectiveClasses[4]} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
 						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
 					</PanelBody>

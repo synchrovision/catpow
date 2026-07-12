@@ -153,7 +153,7 @@ wp.blocks.registerBlockType("catpow/section", {
 				</CP.Bem>
 				<InspectorControls>
 					<CP.ColorVarTracer target={mainBlock}>
-						<CP.SelectClassPanel title={__("クラス", "catpow")} icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} initialOpen={true} />
+						<CP.SelectClassPanel title={__("クラス", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} initialOpen={true} />
 						<PanelBody title="ID" icon="admin-links" initialOpen={false}>
 							<TextControl
 								label="ID"

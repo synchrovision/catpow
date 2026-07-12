@@ -26,7 +26,7 @@ wp.blocks.registerBlockType("catpow/countdown", {
 					<Catpow.CountDown target={target} />
 				</div>
 				<InspectorControls>
-					{selectiveClasses && <CP.SelectClassPanel title="設定" icon="edit" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} initialOpen={true} />}
+					{selectiveClasses && <CP.SelectClassPanel title="設定" icon="edit" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} initialOpen={true} />}
 				</InspectorControls>
 			</>
 		);
