@@ -68,12 +68,17 @@ Catpow.SelectPreparedImage = (props) => {
 		}
 	}, [state.images]);
 	useEffect(() => {
-		if (state.image != null && state.image.url !== value) {
-			if (onSelect) {
-				onSelect(state.image);
-			}
-			if (onChange) {
-				onChange(state.image.url);
+		if (state.image != null) {
+			const newUrl = new URL(state.image.url);
+			newUrl.searchParams.set("theme", wpinfo?.theme);
+			newUrl.searchParams.set("c", color);
+			if (newUrl.toString() !== value) {
+				if (onSelect) {
+					onSelect({ ...state.image, url: newUrl.toString() });
+				}
+				if (onChange) {
+					onChange(newUrl.toString());
+				}
 			}
 		}
 	}, [state.image]);
@@ -90,7 +95,7 @@ Catpow.SelectPreparedImage = (props) => {
 					<div className={className + "__popover"}>
 						<div className="_current">
 							<img className="_img" src={value} alt="" />
-							<div className="_filename">{value.split("/").pop()}</div>
+							<div className="_filename">{value?.split("/").pop()}</div>
 						</div>
 						<div className="_search">
 							<input type="text" placeholder="Search images..." value={state.keyword} onChange={(e) => dispatch({ type: "update", keyword: e.target.value })} />

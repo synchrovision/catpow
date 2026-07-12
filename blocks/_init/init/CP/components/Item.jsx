@@ -1,7 +1,8 @@
 ﻿import clsx from "clsx";
 
 export const Item = (props) => {
-	const { tag = "div", items, index, indexKey = "currentItemIndex", set, attr, children } = props;
+	const { tag = "div", items, index, indexKey = "currentItemIndex", set, attr, attributes, setAttributes, itemKeys = [], children } = props;
+	const [itemsKey, itemIndex, subItemsKey, subItemIndex] = itemKeys;
 	const isSelected = props.isSelected === undefined ? index == attr[indexKey] : props.isSelected;
 
 	return wp.element.createElement(

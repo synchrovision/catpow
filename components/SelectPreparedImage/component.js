@@ -189,19 +189,24 @@
       }
     }, [state.images]);
     useEffect2(() => {
-      if (state.image != null && state.image.url !== value) {
-        if (onSelect) {
-          onSelect(state.image);
-        }
-        if (onChange) {
-          onChange(state.image.url);
+      if (state.image != null) {
+        const newUrl = new URL(state.image.url);
+        newUrl.searchParams.set("theme", wpinfo?.theme);
+        newUrl.searchParams.set("c", color);
+        if (newUrl.toString() !== value) {
+          if (onSelect) {
+            onSelect({ ...state.image, url: newUrl.toString() });
+          }
+          if (onChange) {
+            onChange(newUrl.toString());
+          }
         }
       }
     }, [state.image]);
     if (state.images === null) {
       return false;
     }
-    return /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("div", { className: clsx(className, "is-" + name, open ? "is-open" : "is-close"), ...otherProps }, /* @__PURE__ */ wp.element.createElement("img", { className: "_img", src: value, alt: "", width: "40", height: "40", onClick: () => setOpen(true) }), /* @__PURE__ */ wp.element.createElement(Catpow.Popover, { open, onClose: () => setOpen(false) }, /* @__PURE__ */ wp.element.createElement("div", { className: className + "__popover" }, /* @__PURE__ */ wp.element.createElement("div", { className: "_current" }, /* @__PURE__ */ wp.element.createElement("img", { className: "_img", src: value, alt: "" }), /* @__PURE__ */ wp.element.createElement("div", { className: "_filename" }, value.split("/").pop())), /* @__PURE__ */ wp.element.createElement("div", { className: "_search" }, /* @__PURE__ */ wp.element.createElement("input", { type: "text", placeholder: "Search images...", value: state.keyword, onChange: (e) => dispatch({ type: "update", keyword: e.target.value }) })), /* @__PURE__ */ wp.element.createElement("div", { className: "_pages" }, [...chunk(state.activeImages, 100)].map((pageImages, index) => /* @__PURE__ */ wp.element.createElement("div", { className: clsx("_page", { "is-active": state.page === index }), key: index }, /* @__PURE__ */ wp.element.createElement("ul", { className: "items_" }, pageImages.map((image) => {
+    return /* @__PURE__ */ wp.element.createElement(Bem, null, /* @__PURE__ */ wp.element.createElement("div", { className: clsx(className, "is-" + name, open ? "is-open" : "is-close"), ...otherProps }, /* @__PURE__ */ wp.element.createElement("img", { className: "_img", src: value, alt: "", width: "40", height: "40", onClick: () => setOpen(true) }), /* @__PURE__ */ wp.element.createElement(Catpow.Popover, { open, onClose: () => setOpen(false) }, /* @__PURE__ */ wp.element.createElement("div", { className: className + "__popover" }, /* @__PURE__ */ wp.element.createElement("div", { className: "_current" }, /* @__PURE__ */ wp.element.createElement("img", { className: "_img", src: value, alt: "" }), /* @__PURE__ */ wp.element.createElement("div", { className: "_filename" }, value?.split("/").pop())), /* @__PURE__ */ wp.element.createElement("div", { className: "_search" }, /* @__PURE__ */ wp.element.createElement("input", { type: "text", placeholder: "Search images...", value: state.keyword, onChange: (e) => dispatch({ type: "update", keyword: e.target.value }) })), /* @__PURE__ */ wp.element.createElement("div", { className: "_pages" }, [...chunk(state.activeImages, 100)].map((pageImages, index) => /* @__PURE__ */ wp.element.createElement("div", { className: clsx("_page", { "is-active": state.page === index }), key: index }, /* @__PURE__ */ wp.element.createElement("ul", { className: "items_" }, pageImages.map((image) => {
       return /* @__PURE__ */ wp.element.createElement("li", { className: clsx("_item", { "is-active": value == image.url }), key: image.url }, /* @__PURE__ */ wp.element.createElement("img", { className: "_img", src: image.url, alt: image.alt, onClick: () => dispatch({ type: "update", image }) }));
     }))))), /* @__PURE__ */ wp.element.createElement("div", { className: "_pagenation" }, [...chunk(state.activeImages, 100)].map((_, index) => /* @__PURE__ */ wp.element.createElement("button", { key: index, className: clsx("_btn", { "is-active": state.page === index }), onClick: () => dispatch({ type: "gotoPage", page: index }) }, index + 1)))))));
   };
