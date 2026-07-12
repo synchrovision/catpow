@@ -1,40 +1,43 @@
-﻿const { useState, useMemo, useEffect } = wp.element;
+﻿import { useColorNumber } from "./useColorNumber";
 
-export const useInheritColor = (props, images) => {
-	const { attributes, className, setAttributes, context } = props;
-	const { setURLparams } = Catpow.util;
-	const { classes, color = "0" } = attributes;
-	const inheritColor = useMemo(() => {
-		return color === "0" || context["catpow/color"] === color;
-	}, [color, context["catpow/color"]]);
+const { useState, useMemo, useEffect } = wp.element;
+
+export const useInheritColor = (props, params) => {
+	const { attributes, setAttributes } = props;
+
+	const [ref, setRef] = useState(false);
+
+	const colorNumber = useColorNumber(ref);
+
 	useEffect(() => {
-		if (context["catpow/color"] == null) {
-			return;
+		if (!ref || colorNumber == null) return;
+		const modifiedAttributes = Object.keys(attributes)
+			.filter((key) => key.match(/^(\w+V|v)ars$/))
+			.reduce((p, c) => {
+				const value = attributes[c];
+				if (typeof value !== "object") {
+					return p;
+				}
+				const newValues = Object.keys(value).reduce((newValues, key) => {
+					const matches = value[key].match(/\burl\("(.+)?"\)\b/);
+					if (matches) {
+						const url = new URL(matches[1]);
+						if (url.searchParams.has("c") && url.searchParams.get("c") !== colorNumber) {
+							url.searchParams.set(c, colorNumber);
+							newValues[key] = value[key].replace(matches[0], `url("${url}")`);
+						}
+					}
+					return newValues;
+				}, {});
+				if (Object.keys(newValues).length) {
+					p[c] = { ...value, newValues };
+				}
+				return p;
+			}, {});
+		if (Object.keys(modifiedAttributes).length) {
+			setAttributes(modifiedAttributes);
 		}
-		if (inheritColor && context["catpow/color"] !== "0") {
-			setAttributes({ color: context["catpow/color"] });
-		}
-		setAttributes({ inheritColor: color === context["catpow/color"] });
-	}, [context["catpow/color"]]);
-	useEffect(() => {
-		return;
-		const atts = {
-			classes: classes
-				.split(" ")
-				.filter((str) => !CP.colorToneClassPattern.test(str))
-				.concat(CP.colorToneValueToClasses(color))
-				.join(" "),
-		};
-		images.forEach((key) => {
-			if (!attributes[key]) {
-				return;
-			}
-			if (attributes[key].indexOf("url(") !== -1) {
-				atts[key] = attributes[key].replace(/url\((.+?)\)/, (m, p1) => "url(" + setURLparams(p1, { c: color, theme: wpinfo.theme }) + ")");
-				return;
-			}
-			atts[key] = setURLparams(attributes[key], { c: color, theme: wpinfo.theme });
-		});
-		setAttributes(atts);
-	}, [color]);
+	}, [ref, colorNumber]);
+
+	return setRef;
 };
