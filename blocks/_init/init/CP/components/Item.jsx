@@ -1,18 +1,20 @@
 ﻿import clsx from "clsx";
 
 export const Item = (props) => {
-	const { tag = "div", items, index, indexKey = "currentItemIndex", set, attr, attributes, setAttributes, itemKeys = [], children } = props;
-	const [itemsKey, itemIndex, subItemsKey, subItemIndex] = itemKeys;
-	const isSelected = props.isSelected === undefined ? index == attr[indexKey] : props.isSelected;
+	const { tag = "div", indexKey = "currentItemIndex", set, attr, attributes, setAttributes, itemKeys = [], children } = props;
+	const items = CP.getTheItems(props);
+	const item = CP.getTheItem(props);
+	const index = CP.getTheItemIndex(props);
+	const isSelected = props.isSelected === undefined ? index == (attr || attributes)[indexKey] : props.isSelected;
 
 	return wp.element.createElement(
 		tag,
 		{
-			className: clsx(props.className || items[index].classes, "cp-item"),
+			className: clsx(props.className || item.classes, "cp-item"),
 			style: props.style,
 			"data-index": index,
-			"data-refine-cond": items[index]["cond"],
-			"aria-selected": isSelected && index == attr[indexKey],
+			"data-refine-cond": item["cond"],
+			"aria-selected": isSelected && index == (attr || attributes)[indexKey],
 			onKeyDown: (e) => {
 				if (e.ctrlKey || e.metaKey) {
 					switch (e.key) {
@@ -40,7 +42,7 @@ export const Item = (props) => {
 				}
 			},
 			onClick: (e) => {
-				set({ [indexKey]: index });
+				(set || setAttributes)({ [indexKey]: index });
 			},
 		},
 		<>
