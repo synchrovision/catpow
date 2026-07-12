@@ -13,8 +13,11 @@ export const SelectClassPanel = (props) => {
 		index,
 		subItemsKey,
 		subIndex,
-		set,
-		attr,
+		setAttributes,
+		set = setAttributes,
+		attributes,
+		attr = attributes,
+		itemKeys,
 		triggerClasses,
 	} = wp.hooks.applyFilters("catpow.SelectClassPanelProps", props);
 	let { itemsKey = items ? "items" : null, itemClasses } = props;
@@ -116,13 +119,14 @@ export const SelectClassPanel = (props) => {
 		},
 		[set, styleDatas],
 	);
+	const colorNumber = useMemo(() => CP.getClosestBlockAttributesComputed(({ classes }) => CP.getColorNumber(classes), wp.data.select("core/block-editor").getSelectedBlock(), itemKeys));
 
 	if (!item || !selectiveClasses) {
 		return false;
 	}
 	return (
 		<PanelBody title={props.title} initialOpen={props.initialOpen || false} icon={props.icon}>
-			<CP.SelectClassPanelContext.Provider value={{ props, item, states, allStates, set, save, saveClasses, styleDatas, saveCss, primaryClassKey }}>
+			<CP.SelectClassPanelContext.Provider value={{ props, item, states, allStates, set, save, saveClasses, styleDatas, saveCss, primaryClassKey, colorNumber }}>
 				{selectiveClasses.map((prm, index) => (
 					<Fragment key={index}>
 						<SelectClassPanelBlock prm={prm} />
