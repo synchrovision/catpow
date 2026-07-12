@@ -488,6 +488,11 @@
 :root .has-border-radius-custom {
   --cp-border-radius:var(--cp-border-radius-custom);
 }
+:root .has-border-image {
+  border-style: solid;
+  border-image: var(--cp-border-image);
+  border-radius: n;
+}
 :root .has-item-gap {
   --cp-item-gap:var(--cp-item-gap-block,0) var(--cp-item-gap-inline,0);
   gap: var(--cp-item-gap);
