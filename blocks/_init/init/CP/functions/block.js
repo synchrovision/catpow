@@ -6,7 +6,8 @@
 		return wp.blocks.createBlock(...block);
 	});
 };
-export const getClosestBlockAttributesComputed = (callback, block, itemsKey, index, subItemsKey, subIndex) => {
+export const getClosestBlockAttributesComputed = (callback, block, itemKeys) => {
+	const [itemsKey, index, subItemsKey, subIndex] = itemKeys || [];
 	if (itemsKey && block.attributes[itemsKey][index]) {
 		if (subItemsKey && block.attributes[itemsKey][index][subItemsKey][subIndex]) {
 			const result = callback(block.attributes[itemsKey][index][subItemsKey][subIndex]);
