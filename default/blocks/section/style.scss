@@ -18,8 +18,7 @@
 			}
 		}
 		&-title{
-			@include bnd((p:r,mgi:a,bs:b));
-			@include flx((w:n,g:.5em,a:c));
+			@include bnd((p:r,mgi:a,bs:b,ac:c));
 			@include txt((p:t-h));
 			&-heading{
 				@extend %heading;
@@ -37,21 +36,6 @@
 					}
 				}
 			}
-		}
-	}
-	&.is-align-left{
-		>#{$body}>#{$header}{
-			@include txt((a:l));
-		}
-	}
-	&.is-align-center{
-		>#{$body}>#{$header}{
-			@include txt((a:c));
-		}
-	}
-	&.is-align-right{
-		>#{$body}>#{$header}{
-			@include txt((a:r));
 		}
 	}
 	&.is-type-scene{
@@ -72,7 +56,6 @@
 					}
 					&-title{
 						@include bnd((p:r,pd:f,pdi:0,h:8em a,ac:c,z:2));
-						@include flx((w:n,g:.5em));
 						&-icon{
 							@include bnd((d:ib));
 							@include txt((c:tx));
@@ -134,18 +117,12 @@
 							}
 						}
 					}
-					&-title{
-						@include txt((a:l));
-					}
 				}
 			}
 			&.is-align-center > #{$body} > #{$header}{
 				#{$header}{
 					&-image{
 						@include msk((g:l 90deg 0% 0% 10% 30% 70% 90%));
-					}
-					&-title{
-						@include txt((a:c));
 					}
 				}
 			}
@@ -158,9 +135,6 @@
 								@include bnd((mgr:a));
 							}
 						}
-					}
-					&-title{
-						@include txt((a:r));
 					}
 				}
 			}
@@ -285,8 +259,16 @@
 	}
 	&.is-type-column{
 		> #{$body}{
-			@extend %frame-component;
-			@include bnd((bs:b,p:r,pd:0,mgi:a,z:1,o:c));
+			@include bnd((bs:b,p:r,mgi:a,z:1,o:c));
+			@include bdr((s:s,w:c-f,c:lx,r:c-f));
+			@include shd((b:c-f));
+			&:not(.has-padding){
+				@include bnd((pd:0));
+			}
+			&.has-border-image{
+				@include bdr((r:unset));
+				@include shd((b:n));
+			}
 			> #{$header}{
 				#{$header}{
 					&-image{
@@ -311,7 +293,7 @@
 			> #{$body}{
 				@include flx((w:w,a:f));
 				> #{$header}{
-					@include bnd((f:1 1 200));
+					@include bnd((f:1 1 i));
 				}
 				> #{$block}__contents{
 					@include bnd((f:9 9 300));
@@ -326,8 +308,13 @@
 		&.is-align-center{
 			> #{$body}{
 				> #{$header}{
+					@include flx((w:w));
 					#{$header}{
+						&-image{
+							@include bnd((f:1 1 i));
+						}
 						&-title{
+							@include bnd((f:9 9 400));
 							@include txt((a:c));
 						}
 					}

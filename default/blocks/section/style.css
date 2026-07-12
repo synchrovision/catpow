@@ -18,12 +18,6 @@
   line-height: var(--cp-line-height-t-l, 1.5);
   letter-spacing: var(--cp-letter-spacing-t-l, normal);
 }
-.wp-block-catpow-section.is-type-column > .wp-block-catpow-section__body {
-  padding: var(--cp-padding-c-f);
-  border-width: var(--cp-border-width-c-f, 0);
-  border-radius: var(--cp-border-radius-c-f, 0);
-  box-shadow: var(--cp-shadow-c-f) oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
-}
 .wp-block-catpow-section.is-type-article.has-heading-type-header > .wp-block-catpow-section__body > .wp-block-catpow-section__header .wp-block-catpow-section__header-title {
   padding: var(--cp-padding-c-h);
   border-width: var(--cp-border-width-c-h, 0);
@@ -49,15 +43,7 @@
   position: relative;
   margin-inline: auto;
   box-sizing: border-box;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-box-lines: single;
-  -webkit-flex-wrap: nowrap;
-  flex-wrap: nowrap;
-  gap: 0.5em;
-  -webkit-align-items: center;
-  align-items: center;
+  align-content: center;
   font-size: var(--cp-font-size-t-h);
 }
 .wp-block-catpow-section__header-title-heading {
@@ -72,15 +58,6 @@
   max-width: 75rem;
   width: 100%;
   margin-inline: auto;
-}
-.wp-block-catpow-section.is-align-left > .wp-block-catpow-section__body > .wp-block-catpow-section__header {
-  text-align: left;
-}
-.wp-block-catpow-section.is-align-center > .wp-block-catpow-section__body > .wp-block-catpow-section__header {
-  text-align: center;
-}
-.wp-block-catpow-section.is-align-right > .wp-block-catpow-section__body > .wp-block-catpow-section__header {
-  text-align: right;
 }
 .wp-block-catpow-section.is-type-scene {
   position: relative;
@@ -125,13 +102,6 @@
   height: auto;
   align-content: center;
   z-index: 2;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-box-lines: single;
-  -webkit-flex-wrap: nowrap;
-  flex-wrap: nowrap;
-  gap: 0.5em;
 }
 .wp-block-catpow-section.is-type-scene > .wp-block-catpow-section__body > .wp-block-catpow-section__header .wp-block-catpow-section__header-title-icon {
   display: inline-block;
@@ -167,23 +137,14 @@
   mask-image: linear-gradient(90deg, #0000 0%, #ffff 40%);
   margin-left: auto;
 }
-.wp-block-catpow-section.is-type-scene.has-header-image.is-align-left > .wp-block-catpow-section__body > .wp-block-catpow-section__header .wp-block-catpow-section__header-title {
-  text-align: left;
-}
 .wp-block-catpow-section.is-type-scene.has-header-image.is-align-center > .wp-block-catpow-section__body > .wp-block-catpow-section__header .wp-block-catpow-section__header-image {
   -webkit-mask-image: linear-gradient(90deg, #0000 0%, #ffff 0%, #ffff 10%, #0000 30%, #0000 70%, #ffff 90%);
   mask-image: linear-gradient(90deg, #0000 0%, #ffff 0%, #ffff 10%, #0000 30%, #0000 70%, #ffff 90%);
-}
-.wp-block-catpow-section.is-type-scene.has-header-image.is-align-center > .wp-block-catpow-section__body > .wp-block-catpow-section__header .wp-block-catpow-section__header-title {
-  text-align: center;
 }
 .wp-block-catpow-section.is-type-scene.has-header-image.is-align-right > .wp-block-catpow-section__body > .wp-block-catpow-section__header .wp-block-catpow-section__header-image-picture-img {
   -webkit-mask-image: linear-gradient(-90deg, #0000 0%, #ffff 40%);
   mask-image: linear-gradient(-90deg, #0000 0%, #ffff 40%);
   margin-right: auto;
-}
-.wp-block-catpow-section.is-type-scene.has-header-image.is-align-right > .wp-block-catpow-section__body > .wp-block-catpow-section__header .wp-block-catpow-section__header-title {
-  text-align: right;
 }
 .wp-block-catpow-section.is-type-article > .wp-block-catpow-section__body {
   position: relative;
@@ -311,10 +272,21 @@
 .wp-block-catpow-section.is-type-column > .wp-block-catpow-section__body {
   box-sizing: border-box;
   position: relative;
-  padding: 0rem;
   margin-inline: auto;
   z-index: 1;
   overflow: clip;
+  border-style: solid;
+  border-width: var(--cp-border-width-c-f);
+  border-color: oklch(var(--cp-tones-lx-l) var(--cp-tones-lx-c) var(--cp-tones-lx-h) / var(--cp-tones-lx-a,1));
+  border-radius: var(--cp-border-radius-c-f);
+  box-shadow: var(--cp-shadow-c-f) oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
+}
+.wp-block-catpow-section.is-type-column > .wp-block-catpow-section__body:not(.has-padding) {
+  padding: 0rem;
+}
+.wp-block-catpow-section.is-type-column > .wp-block-catpow-section__body.has-border-image {
+  border-radius: unset;
+  box-shadow: none;
 }
 .wp-block-catpow-section.is-type-column > .wp-block-catpow-section__body > .wp-block-catpow-section__header .wp-block-catpow-section__header-title {
   padding: var(--cp-padding-c-f);
@@ -345,7 +317,7 @@
   -webkit-box-flex: 1;
   flex-grow: 1;
   flex-shrink: 1;
-  flex-basis: 12.5rem;
+  flex-basis: var(--cp-size-i);
 }
 .wp-block-catpow-section.is-type-column.is-align-left > .wp-block-catpow-section__body > .wp-block-catpow-section__contents, .wp-block-catpow-section.is-type-column.is-align-right > .wp-block-catpow-section__body > .wp-block-catpow-section__contents {
   -webkit-box-flex: 9;
@@ -362,7 +334,25 @@
   -webkit-flex-direction: row-reverse;
   flex-direction: row-reverse;
 }
+.wp-block-catpow-section.is-type-column.is-align-center > .wp-block-catpow-section__body > .wp-block-catpow-section__header {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: multiple;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+.wp-block-catpow-section.is-type-column.is-align-center > .wp-block-catpow-section__body > .wp-block-catpow-section__header .wp-block-catpow-section__header-image {
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: var(--cp-size-i);
+}
 .wp-block-catpow-section.is-type-column.is-align-center > .wp-block-catpow-section__body > .wp-block-catpow-section__header .wp-block-catpow-section__header-title {
+  -webkit-box-flex: 9;
+  flex-grow: 9;
+  flex-shrink: 9;
+  flex-basis: 25rem;
   text-align: center;
 }
 .wp-block-catpow-section.is-type-column.has-thin-border > .wp-block-catpow-section__body {

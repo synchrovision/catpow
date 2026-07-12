@@ -15,6 +15,7 @@ $attributes=[
 	'clipVars'=>['type'=>'object','default'=>['--cp-clip-shape-amount'=>'40','--cp-clip-shape-upper-width'=>'40','--cp-clip-shape-upper-height'=>'40',
 	'--cp-clip-shape-below-width'=>'40','--cp-clip-shape-below-height'=>'40']],
 	'headerVars'=>['type'=>'object'],
+	'bodyVars'=>['type'=>'object'],
 
 	'SectionTag'=>['type'=>'string','default'=>'section'],
 	'HeadingTag'=>['type'=>'string','default'=>'h2'],

@@ -17,7 +17,7 @@ wp.blocks.registerBlockType("catpow/section", {
 		const { PanelBody, TextareaControl, TextControl } = wp.components;
 		const { attributes, setAttributes } = props;
 		const { useMemo, useState } = wp.element;
-		const { SectionTag, HeadingTag, color, anchor, classes, bodyClasses, headerClasses, titleClasses, vars, clipVars, headerVars, prefix, title, lead, titleImageCode, headerImageCode } = attributes;
+		const { SectionTag, HeadingTag, color, anchor, classes, bodyClasses, headerClasses, titleClasses, vars, clipVars, headerVars, bodyVars, title, lead, titleImageCode, headerImageCode } = attributes;
 
 		const states = CP.classNamesToFlags(classes);
 		const { devices, imageKeys } = CP.config.section;
@@ -52,129 +52,14 @@ wp.blocks.registerBlockType("catpow/section", {
 									},
 								],
 							},
-							"hasIcon",
-							{ name: "prefix", label: __("プレフィクス", "catpow"), values: "hasPrefix" },
 							{ name: "titleImage", label: __("タイトル画像", "catpow"), values: "hasTitleImage", sub: [{ input: "picture", keys: imageKeys.titleImage, devices }] },
-							{ name: "headerImage", label: __("ヘッダ画像", "catpow"), values: "hasHeaderImage", sub: [{ input: "picture", keys: imageKeys.headerImage }] },
-							{ name: "lead", label: __("リード", "catpow"), values: "hasLead" },
-							{ preset: "colorScheme", label: __("ヘッダ配色", "catpow"), classKey: "headerClasses" },
-							{ preset: "backgroundColor", label: __("ヘッダ背景色", "catpow"), name: "headerBackgroundColor", classKey: "headerClasses" },
-							{ preset: "backgroundImage", label: __("ヘッダ背景画像", "catpow"), name: "headerBackgroundImage", classKey: "headerClasses", vars: "headerVars" },
-							{ preset: "backgroundPattern", label: __("ヘッダ背景パターン", "catpow"), name: "headerBackgroundPattern", classKey: "headerClasses", vars: "headerVars" },
 							{ preset: "clipPath", label: __("ヘッダクリップ", "catpow"), name: "headerClip", classKey: "headerClasses", vars: "headerVars" },
-							{
-								name: "navIcon",
-								label: __("メニューアイコン", "catpow"),
-								values: "hasNavIcon",
-								sub: [{ input: "image", label: __("アイコン", "catpow"), keys: imageKeys.navIcon, size: "thumbnail" }],
-							},
-							{ name: "decoration", label: __("デコレーション", "catpow"), values: "hasDecoration" },
-							{ preset: "clipPath", vars: "clipVars" },
-							"hasPadding",
-							"hasMargin",
-							{
-								name: "template",
-								label: __("テンプレート", "catpow"),
-								values: "isTemplate",
-								sub: [
-									{
-										name: "headerImageCode",
-										input: "text",
-										label: __("ヘッダ画像コード", "catpow"),
-										key: "headerImageCode",
-										cond: "hasHeaderImage",
-									},
-									{
-										name: "headerBackgroundImageCode",
-										input: "text",
-										label: __("ヘッダ背景画像コード", "catpow"),
-										key: "headerBackgroundImageCode",
-										cond: "hasHeaderBackgroundImage",
-									},
-									{
-										name: "backgroundImageCode",
-										input: "text",
-										label: __("背景画像コード", "catpow"),
-										key: "backgroundImageCode",
-										cond: "hasBackgroundImage",
-									},
-								],
-							},
 						],
-						isTypeArticle: [
-							{
-								name: "headingType",
-								type: "gridbuttons",
-								label: __("見出しタイプ", "catpow"),
-								filter: "heading_type",
-								values: { hasHeadingTypeHeader: "header", hasHeadingTypeHeadline: "headline", hasHeadingTypeCatch: "catch" },
-							},
-							{ name: "headerImage", label: __("ヘッダ画像", "catpow"), values: "hasHeaderImage", sub: [{ input: "image", keys: imageKeys.headerImage }] },
-							{ name: "lead", label: __("リード", "catpow"), values: "hasLead" },
-							{
-								name: "navIcon",
-								label: __("メニューアイコン", "catpow"),
-								values: "hasNavIcon",
-								sub: [{ input: "image", label: __("アイコン", "catpow"), keys: imageKeys.navIcon, size: "thumbnail" }],
-							},
-							{ name: "decoration", label: __("デコレーション", "catpow"), values: "hasDecoration" },
-							{ preset: "clipPath", vars: "clipVars" },
-							"hasPadding",
-							"hasMargin",
-							{
-								name: "template",
-								label: __("テンプレート", "catpow"),
-								values: "isTemplate",
-								sub: [
-									{
-										input: "text",
-										label: __("ヘッダ画像コード", "catpow"),
-										key: "headerImageCode",
-										cond: "hasHeaderImage",
-									},
-									{
-										input: "text",
-										label: __("背景画像コード", "catpow"),
-										key: "backgroundImageCode",
-										cond: "hasBackgroundImage",
-									},
-								],
-							},
-						],
+						isTypeArticle: ["headingType"],
 						isTypeColumn: [
-							"hasIcon",
-							{ name: "headerImage", label: __("ヘッダ画像", "catpow"), values: "hasHeaderImage", sub: [{ input: "picture", keys: imageKeys.headerImage }] },
-							{ name: "lead", label: __("リード", "catpow"), values: "hasLead" },
-							{ preset: "colorScheme", label: __("ヘッダ配色", "catpow"), classKey: "headerClasses" },
-							{ preset: "backgroundColor", label: __("ヘッダ背景色", "catpow"), name: "headerBackgroundColor", classKey: "headerClasses" },
-							{ preset: "backgroundImage", label: __("ヘッダ背景画像", "catpow"), name: "headerBackgroundImage", classKey: "headerClasses", vars: "headerVars" },
-							{ preset: "backgroundPattern", label: __("ヘッダ背景パターン", "catpow"), name: "headerBackgroundPattern", classKey: "headerClasses", vars: "headerVars" },
-							{
-								name: "navIcon",
-								label: __("メニューアイコン", "catpow"),
-								values: "hasNavIcon",
-								sub: [{ input: "image", label: __("アイコン", "catpow"), keys: imageKeys.navIcon, size: "thumbnail" }],
-							},
-							{
-								name: "borderImage",
-								label: __("ボーダー画像", "catpow"),
-								values: "hasBorderImage",
-								sub: [{ input: "border", css: "borderImageCss", sel: ({ attr }) => `#${attr.anchor} > .contents`, color }],
-							},
-							{ name: "decoration", label: __("デコレーション", "catpow"), values: "hasDecoration" },
-							{
-								name: "template",
-								label: __("テンプレート", "catpow"),
-								values: "isTemplate",
-								sub: [
-									{
-										input: "text",
-										label: __("背景画像コード", "catpow"),
-										key: "backgroundImageCode",
-										cond: "hasBackgroundImage",
-									},
-								],
-							},
+							{ preset: "itemSize", label: __("ヘッダサイズ", "catpow"), name: "headerSize", classKey: "headerClasses", vars: "headerVars" },
+							{ preset: "hasBorderImage", classKey: "bodyClasses" },
+							{ preset: "hasPadding", classKey: "bodyClasses" },
 						],
 					},
 					bind: {
@@ -186,12 +71,34 @@ wp.blocks.registerBlockType("catpow/section", {
 						},
 					},
 				},
+				"contentWidth",
+				"hasPadding",
+				"hasMargin",
+				{ preset: "clipPath", vars: "clipVars" },
+				"align",
+				{ preset: "textAlign", classKey: "headerClasses" },
+
 				"color",
 				"colorScheme",
 				"backgroundColor",
 				"backgroundImage",
 				"backgroundPattern",
-				"contentWidth",
+
+				{ preset: "colorScheme", label: __("ヘッダ配色", "catpow"), classKey: "headerClasses" },
+				{ preset: "backgroundColor", label: __("ヘッダ背景色", "catpow"), name: "headerBackgroundColor", classKey: "headerClasses" },
+				{ preset: "backgroundImage", label: __("ヘッダ背景画像", "catpow"), name: "headerBackgroundImage", classKey: "headerClasses", vars: "headerVars" },
+				{ preset: "backgroundPattern", label: __("ヘッダ背景パターン", "catpow"), name: "headerBackgroundPattern", classKey: "headerClasses", vars: "headerVars" },
+
+				{ name: "headerImage", label: __("ヘッダ画像", "catpow"), values: "hasHeaderImage", sub: [{ input: "picture", keys: imageKeys.headerImage }] },
+				"hasIcon",
+				{ name: "lead", label: __("リード", "catpow"), values: "hasLead" },
+				{ name: "decoration", label: __("デコレーション", "catpow"), values: "hasDecoration" },
+				{
+					name: "navIcon",
+					label: __("メニューアイコン", "catpow"),
+					values: "hasNavIcon",
+					sub: [{ input: "image", label: __("アイコン", "catpow"), keys: imageKeys.navIcon, size: "thumbnail" }],
+				},
 			];
 			wp.hooks.applyFilters("catpow.blocks.section.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
@@ -210,7 +117,7 @@ wp.blocks.registerBlockType("catpow/section", {
 				</BlockControls>
 				<CP.Bem prefix="wp-block-catpow">
 					<SectionTag ref={setMainBlock} {...blockProps}>
-						<div className={bodyClasses}>
+						<div className={bodyClasses} style={bodyVars}>
 							{states.hasDecoration && <CP.PlacedPictures.Edit className="decoration_" set={setAttributes} attr={attributes} devices={devices} keys={imageKeys.decoration} />}
 							<header className={headerClasses} style={headerVars}>
 								{states.hasHeaderImage && (
@@ -224,11 +131,6 @@ wp.blocks.registerBlockType("catpow/section", {
 								)}
 								<div className={titleClasses}>
 									{states.hasIcon && <CP.OutputIcon className="_icon" item={attributes} />}
-									{states.hasPrefix && (
-										<div className="_prefix">
-											<RichText tagName="div" value={prefix} placeholder="Prefix" onChange={(prefix) => setAttributes({ prefix })} />
-										</div>
-									)}
 									{states.hasTitleImage ? (
 										<HeadingTag className="_titleimage">
 											{states.isTemplate && titleImageCode ? (
@@ -251,7 +153,7 @@ wp.blocks.registerBlockType("catpow/section", {
 				</CP.Bem>
 				<InspectorControls>
 					<CP.ColorVarTracer target={mainBlock}>
-						<CP.SelectClassPanel title={__("クラス", "catpow")} icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
+						<CP.SelectClassPanel title={__("クラス", "catpow")} icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} initialOpen={true} />
 						<PanelBody title="ID" icon="admin-links" initialOpen={false}>
 							<TextControl
 								label="ID"
@@ -271,7 +173,8 @@ wp.blocks.registerBlockType("catpow/section", {
 	},
 	save({ attributes }) {
 		const { InnerBlocks, RichText, useBlockProps } = wp.blockEditor;
-		const { SectionTag, HeadingTag, anchor, navIcon, classes, bodyClasses, headerClasses, titleClasses, vars, clipVars, headerVars, prefix, title, lead, titleImageCode, headerImageCode } = attributes;
+		const { SectionTag, HeadingTag, anchor, navIcon, classes, bodyClasses, headerClasses, titleClasses, vars, clipVars, headerVars, bodyVars, title, lead, titleImageCode, headerImageCode } =
+			attributes;
 
 		const states = CP.classNamesToFlags(classes);
 		const { devices, imageKeys } = CP.config.section;
@@ -285,7 +188,7 @@ wp.blocks.registerBlockType("catpow/section", {
 		return (
 			<CP.Bem prefix="wp-block-catpow">
 				<SectionTag data-icon={navIcon} {...blockProps}>
-					<div className={bodyClasses}>
+					<div className={bodyClasses} style={bodyVars}>
 						{states.hasDecoration && <CP.PlacedPictures className="decoration_" attr={attributes} keys={imageKeys.decoration} />}
 						<header className={headerClasses} style={headerVars}>
 							{states.hasHeaderImage && (
@@ -293,11 +196,6 @@ wp.blocks.registerBlockType("catpow/section", {
 							)}
 							<div className={titleClasses}>
 								{states.hasIcon && <CP.OutputIcon className="_icon" item={attributes} />}
-								{states.hasPrefix && (
-									<div className="_prefix">
-										<RichText.Content value={prefix} />
-									</div>
-								)}
 								{states.hasTitleImage ? (
 									<HeadingTag className="_titleimage">
 										{states.isTemplate && titleImageCode ? titleImageCode : <CP.ResponsiveImage className="_image" attr={attributes} keys={imageKeys.titleImage} devices={devices} />}
