@@ -139,7 +139,7 @@ wp.blocks.registerBlockType("catpow/accessmap", {
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
 						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
 					</PanelBody>
-					<CP.SelectClassPanel title="リストアイテム" icon="edit" set={setAttributes} attr={attributes} items={items} index={attributes.currentItemIndex} selectiveClasses={selectiveItemClasses} />
+					<CP.SelectClassPanel title="リストアイテム" icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndexindex]} selectiveClasses={selectiveItemClasses} />
 					{states.isTemplate && (
 						<CP.SelectClassPanel
 							title="テンプレート"
@@ -202,7 +202,7 @@ wp.blocks.registerBlockType("catpow/accessmap", {
 											item.controlClasses = "control";
 										}
 										return (
-											<CP.Item tag="div" className={item.classes} set={setAttributes} attr={attributes} items={items} index={index} isSelected={isSelected} key={i}>
+											<CP.Item tag="div" className={item.classes} {...{ setAttributes, attributes }} itemKeys={["items", index]} key={i}>
 												<div className="_map">
 													{states.isTemplate ? (
 														<CP.DummyImage className="_gmap" text={item.q || item.address.replace(/<br\/?>|\n/, " ")} />
