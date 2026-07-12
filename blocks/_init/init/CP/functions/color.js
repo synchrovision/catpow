@@ -1,3 +1,5 @@
+﻿export const getColorNumber = (classes) => classes?.match(/\bhas\-color((\-|__)?\d+)\b/)?.[1];
+
 export const extractColorToneValue = (classes) => generateColorToneValue(extractColorToneValues(classes));
 export const extractColorToneValues = (classes) => {
 	if (!Array.isArray(classes)) {
