@@ -1,47 +1,4 @@
-﻿//@deprecated
-export const switchNumberClass = ({ set, attr }, label, value) => {
-	let classArray = (attr.classes || "").split(" ");
-	let i = classArray.findIndex((cls) => cls.slice(0, label.length) === label);
-	if (i === -1) {
-		if (value) {
-			classArray.push(label + value);
-		}
-	} else {
-		if (value) {
-			classArray.splice(i, 1, label + value);
-		} else {
-			classArray.splice(i, 1);
-		}
-	}
-	set({ classes: classArray.join(" ") });
-};
-//@deprecated
-export const getNumberClass = ({ attr }, label) => {
-	let value = (attr.classes || "").split(" ").find((cls) => cls.slice(0, label.length) === label);
-	if (!value) {
-		return 0;
-	}
-	return parseInt(value.slice(label.length));
-};
-//@deprecated
-export const switchColor = (props, value) => {
-	CP.switchNumberClass(props, "color", value);
-};
-//@deprecated
-export const getColor = (props) => {
-	return CP.getNumberClass(props, "color");
-};
-
-//@deprecated
-export const switchPattern = (props, value) => {
-	CP.switchNumberClass(props, "pattern", value);
-};
-//@deprecated
-export const getPattern = (props) => {
-	return CP.getNumberClass(props, "pattern");
-};
-
-export const switchSelectiveClass = ({ set, attr }, values, value, key) => {
+﻿export const switchSelectiveClass = ({ set, attr }, values, value, key) => {
 	if (key === undefined) {
 		key = "classes";
 	}
@@ -96,70 +53,6 @@ export const getSelectiveClassLabel = ({ attr }, values, key) => {
 		}
 	}
 	return null;
-};
-
-//@deprecated
-export const getSubClasses = (prm) => {
-	let rtn = {};
-	let values;
-	if (Array.isArray(prm.values)) {
-		values = prm.values;
-	} else {
-		values = Object.keys(prm.values);
-	}
-	values.forEach((val) => {
-		if (prm.sub && prm.sub[val]) {
-			rtn[val] = CP.getAllSubClasses(prm.sub[val]);
-		} else {
-			rtn[val] = [];
-		}
-	});
-	return rtn;
-};
-//@deprecated
-export const getAllSubClasses = (prms) => {
-	let rtn = [];
-	prms.forEach((prm) => {
-		if (typeof prm === "object") {
-			if (prm.values) {
-				if (Array.isArray(prm.values)) {
-					rtn = rtn.concat(prm.values);
-				} else if (_.isObject(prm.values)) {
-					rtn = rtn.concat(Object.keys(prm.values));
-				} else {
-					rtn.push(prm.values);
-				}
-			}
-			if (prm.sub) {
-				if (Array.isArray(prm.sub)) {
-					rtn = rtn.concat(CP.getAllSubClasses(prm.sub));
-				} else {
-					Object.keys(prm.sub).forEach((key) => {
-						rtn = rtn.concat(CP.getAllSubClasses(prm.sub[key]));
-					});
-				}
-			}
-		}
-	});
-	return rtn;
-};
-//@deprecated
-export const getBindClasses = (prm) => {
-	let rtn = {};
-	let values;
-	if (Array.isArray(prm.values)) {
-		values = prm.values;
-	} else {
-		values = Object.keys(prm.values);
-	}
-	values.forEach((val) => {
-		if (prm.bind && prm.bind[val]) {
-			rtn[val] = prm.bind[val];
-		} else {
-			rtn[val] = [];
-		}
-	});
-	return rtn;
 };
 export const getClassFlagsByValue = (prm, primaryClassKey = "classes") => {
 	const cacheKeys = [CP.getClassFlagsByValue, prm, primaryClassKey];
