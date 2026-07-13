@@ -53,7 +53,7 @@
       if (!config || !resolvedProps) {
         return /* @__PURE__ */ wp.element.createElement(Catpow.Spinner, null);
       }
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { set: setAttributes, attr: attributes }), /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(Catpow.MegaMenu, { ...resolvedProps })), EditMode && /* @__PURE__ */ wp.element.createElement(Catpow.JsonEditor, { json: attributes.props, debug: false, schema: config.schema, onChange: onChangeHandle }));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { setAttributes, attributes }), /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(Catpow.MegaMenu, { ...resolvedProps })), EditMode && /* @__PURE__ */ wp.element.createElement(Catpow.JsonEditor, { json: attributes.props, debug: false, schema: config.schema, onChange: onChangeHandle }));
     },
     save({ attributes, className, setAttributes }) {
       const { useBlockProps } = wp.blockEditor;

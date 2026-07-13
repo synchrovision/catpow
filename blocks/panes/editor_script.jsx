@@ -46,7 +46,7 @@ wp.blocks.registerBlockType("catpow/panes", {
 
 		return (
 			<>
-				<CP.SelectModeToolbar set={setAttributes} attr={attributes} />
+				<CP.SelectModeToolbar setAttributes={setAttributes} attributes={attributes} />
 				<InspectorControls>
 					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
@@ -59,8 +59,8 @@ wp.blocks.registerBlockType("catpow/panes", {
 					<div {...blockProps}>
 						<CP.Label icon="edit" />
 						<CP.EditItemsTable
-							set={setAttributes}
-							attr={attributes}
+							setAttributes={setAttributes}
+							attributes={attributes}
 							columns={[
 								{
 									type: "image",

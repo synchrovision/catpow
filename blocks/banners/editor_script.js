@@ -67,7 +67,7 @@
         setAttributes({ items: JSON.parse(JSON.stringify(items)) });
       };
       const blockProps = useBlockProps({ className: EditMode || AltMode && doLoop ? "cp-altcontent" : classes2, style: vars });
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { set: setAttributes, attr: attributes }), /* @__PURE__ */ wp.element.createElement(CP.SelectDeviceToolbar, { attr: attributes, set: setAttributes, devices }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: "\u30AF\u30E9\u30B9", onChange: (classes3) => setAttributes({ classes: classes3 }), value: classes2 })), states.isTemplate ? /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { setAttributes, attributes }), /* @__PURE__ */ wp.element.createElement(CP.SelectDeviceToolbar, { attributes, setAttributes, devices }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: "\u30AF\u30E9\u30B9", onChange: (classes3) => setAttributes({ classes: classes3 }), value: classes2 })), states.isTemplate ? /* @__PURE__ */ wp.element.createElement(
         CP.SelectClassPanel,
         {
           title: "\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8",
@@ -79,8 +79,8 @@
       ) : /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30D0\u30CA\u30FC", icon: "edit", ...{ setAttributes, attributes }, itemKeys: ["items", attributes.currentItemIndex], selectiveClasses: selectiveItemClasses }), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), EditMode ? /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(CP.Label, { icon: "edit" }), /* @__PURE__ */ wp.element.createElement(
         CP.EditItemsTable,
         {
-          set: setAttributes,
-          attr: attributes,
+          setAttributes,
+          attributes,
           columns: [
             { type: "text", key: "title", cond: states.hasTitle },
             {

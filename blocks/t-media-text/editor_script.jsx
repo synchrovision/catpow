@@ -99,8 +99,8 @@ wp.blocks.registerBlockType("catpow/t-media-text", {
 					</table>
 				</CP.Bem>
 				<BlockControls>
-					<CP.ImagePositionClassToolbar set={setAttributes} attr={attributes} />
-					<CP.VerticalAlignClassToolbar set={setAttributes} attr={attributes} />
+					<CP.ImagePositionClassToolbar setAttributes={setAttributes} attributes={attributes} />
+					<CP.VerticalAlignClassToolbar setAttributes={setAttributes} attributes={attributes} />
 				</BlockControls>
 				<InspectorControls>
 					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} initialOpen={true} />

@@ -245,7 +245,7 @@ wp.blocks.registerBlockType("catpow/jsonld", {
 			<CP.JsonLdBlockContext.Provider value={{ types, save }}>
 				<CP.Bem prefix="wp-block-catpow">
 					<div {...blockProps}>
-						<CP.SelectModeToolbar attr={attributes} set={setAttributes} />
+						<CP.SelectModeToolbar attributes={attributes} setAttributes={setAttributes} />
 						{EditMode ? (
 							<div className="-editor">
 								<div className="_type">

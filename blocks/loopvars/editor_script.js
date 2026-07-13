@@ -12,11 +12,11 @@
       const { items, columns, EditMode = false } = attributes;
       const blockProps = useBlockProps({ className: EditMode ? "cp-altcontent" : "" });
       console.log({ items, columns });
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { set: setAttributes, attr: attributes }), EditMode ? /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(CP.Label, { icon: "edit" }, "vars"), /* @__PURE__ */ wp.element.createElement(CP.EditItemsTable, { set: setAttributes, attr: attributes, itemsKey: "items", columns })) : /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(CP.Label, { icon: "admin-generic" }, "LoopVars"), /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: [["catpow/section", { title: "[var title]" }, [["core/paragraph", { content: "[var text]" }]]]] })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "\u5909\u6570" }, /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { setAttributes, attributes }), EditMode ? /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(CP.Label, { icon: "edit" }, "vars"), /* @__PURE__ */ wp.element.createElement(CP.EditItemsTable, { setAttributes, attributes, itemsKey: "items", columns })) : /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(CP.Label, { icon: "admin-generic" }, "LoopVars"), /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: [["catpow/section", { title: "[var title]" }, [["core/paragraph", { content: "[var text]" }]]]] })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "\u5909\u6570" }, /* @__PURE__ */ wp.element.createElement(
         CP.EditItemsTable,
         {
-          set: setAttributes,
-          attr: attributes,
+          setAttributes,
+          attributes,
           itemsKey: "columns",
           columns: [
             {

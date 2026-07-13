@@ -67,7 +67,7 @@ wp.blocks.registerBlockType("catpow/contactinfo", {
 
 		return (
 			<>
-				<CP.SelectModeToolbar set={setAttributes} attr={attributes} />
+				<CP.SelectModeToolbar setAttributes={setAttributes} attributes={attributes} />
 				<InspectorControls>
 					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
@@ -82,8 +82,8 @@ wp.blocks.registerBlockType("catpow/contactinfo", {
 							<Icon icon="edit" />
 						</div>
 						<CP.EditItemsTable
-							set={setAttributes}
-							attr={attributes}
+							setAttributes={setAttributes}
+							attributes={attributes}
 							columns={[
 								{ type: "text", key: "title", cond: states.hasItemTitle },
 								{ type: "text", key: "lead", cond: states.hasItemLead },

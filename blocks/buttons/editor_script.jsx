@@ -70,9 +70,9 @@ wp.blocks.registerBlockType("catpow/buttons", {
 		return (
 			<>
 				<BlockControls>
-					<CP.AlignClassToolbar set={setAttributes} attr={attributes} />
+					<CP.AlignClassToolbar setAttributes={setAttributes} attributes={attributes} />
 				</BlockControls>
-				<CP.SelectModeToolbar set={setAttributes} attr={attributes} />
+				<CP.SelectModeToolbar setAttributes={setAttributes} attributes={attributes} />
 				<InspectorControls>
 					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 					<CP.SelectClassPanel title="ボタン" icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={selectiveItemClasses} />
@@ -88,8 +88,8 @@ wp.blocks.registerBlockType("catpow/buttons", {
 								<Icon icon="edit" />
 							</div>
 							<CP.EditItemsTable
-								set={setAttributes}
-								attr={attributes}
+								setAttributes={setAttributes}
+								attributes={attributes}
 								columns={[
 									{ type: "text", key: "copy", cond: states.hasMicroCopy },
 									{ type: "text", key: "text", cond: true },

@@ -157,8 +157,8 @@ wp.blocks.registerBlockType("catpow/showcase", {
 					<div className="cp-altcontent">
 						<CP.Label icon="edit" />
 						<CP.EditItemsTable
-							set={setAttributes}
-							attr={attributes}
+							setAttributes={setAttributes}
+							attributes={attributes}
 							columns={[
 								{ type: "image", label: "image", keys: imageKeys.image },
 								{ type: "text", key: "imageCode", cond: states.isTemplate },

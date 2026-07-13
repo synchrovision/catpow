@@ -100,7 +100,7 @@ wp.blocks.registerBlockType("catpow/pricecard", {
 
 		return (
 			<>
-				<CP.SelectModeToolbar set={setAttributes} attr={attributes} />
+				<CP.SelectModeToolbar setAttributes={setAttributes} attributes={attributes} />
 				<InspectorControls>
 					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 					<CP.SelectClassPanel title="アイテム" icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={itemSelectiveClasses} />
@@ -113,8 +113,8 @@ wp.blocks.registerBlockType("catpow/pricecard", {
 					<div {...blockProps}>
 						<CP.Label icon="edit" />
 						<CP.EditItemsTable
-							set={setAttributes}
-							attr={attributes}
+							setAttributes={setAttributes}
+							attributes={attributes}
 							columns={[
 								{ type: "text", key: "title", cond: states.hasTitle },
 								{

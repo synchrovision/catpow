@@ -135,7 +135,7 @@ wp.blocks.registerBlockType("catpow/lightbox", {
 
 		return (
 			<>
-				<CP.SelectModeToolbar set={setAttributes} attr={attributes} modes={["EditMode", "AltMode", "OpenMode"]} />
+				<CP.SelectModeToolbar setAttributes={setAttributes} attributes={attributes} modes={["EditMode", "AltMode", "OpenMode"]} />
 				<InspectorControls>
 					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
@@ -153,8 +153,8 @@ wp.blocks.registerBlockType("catpow/lightbox", {
 									<Icon icon="edit" />
 								</div>
 								<CP.EditItemsTable
-									set={setAttributes}
-									attr={attributes}
+									setAttributes={setAttributes}
+									attributes={attributes}
 									columns={[
 										{
 											type: "image",

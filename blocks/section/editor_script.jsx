@@ -113,7 +113,7 @@ wp.blocks.registerBlockType("catpow/section", {
 		return (
 			<>
 				<BlockControls>
-					<CP.AlignClassToolbar set={setAttributes} attr={attributes} />
+					<CP.AlignClassToolbar setAttributes={setAttributes} attributes={attributes} />
 				</BlockControls>
 				<CP.Bem prefix="wp-block-catpow">
 					<SectionTag ref={setMainBlock} {...blockProps}>

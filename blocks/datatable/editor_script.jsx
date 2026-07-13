@@ -169,7 +169,7 @@ wp.blocks.registerBlockType("catpow/datatable", {
 
 		return (
 			<>
-				<CP.SelectModeToolbar set={setAttributes} attr={attributes} modes={["AltMode"]} />
+				<CP.SelectModeToolbar setAttributes={setAttributes} attributes={attributes} modes={["AltMode"]} />
 				<>
 					{AltMode && doLoop ? (
 						<div {...blockProps} className="cp-altcontent">

@@ -15,11 +15,11 @@
 
 		return (
 			<>
-				<CP.SelectModeToolbar set={setAttributes} attr={attributes} />
+				<CP.SelectModeToolbar setAttributes={setAttributes} attributes={attributes} />
 				{EditMode ? (
 					<div {...blockProps}>
 						<CP.Label icon="edit">vars</CP.Label>
-						<CP.EditItemsTable set={setAttributes} attr={attributes} itemsKey="items" columns={columns} />
+						<CP.EditItemsTable setAttributes={setAttributes} attributes={attributes} itemsKey="items" columns={columns} />
 					</div>
 				) : (
 					<div {...blockProps}>
@@ -30,8 +30,8 @@
 				<InspectorControls>
 					<PanelBody title="変数">
 						<CP.EditItemsTable
-							set={setAttributes}
-							attr={attributes}
+							setAttributes={setAttributes}
+							attributes={attributes}
 							itemsKey="columns"
 							columns={[
 								{

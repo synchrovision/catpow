@@ -362,7 +362,7 @@
       useEffect(() => {
         setAttributes({ lock: { move: true, remove: false } });
       }, []);
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectDeviceToolbar, { attr: attributes, set: setAttributes, devices: CP.config.graphics.devicesForCss, defaultInput: "pc" }), /* @__PURE__ */ wp.element.createElement(BlockControls, null, device !== "pc" && /* @__PURE__ */ wp.element.createElement(ToolbarButton, { icon: "update", label: "update", onClick: copyFirstRect }), currentItemIndexes.length > 0 && /* @__PURE__ */ wp.element.createElement(ToolbarGroup, { label: "control" }, currentItemIndexes.length === 1 && /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectDeviceToolbar, { attributes, setAttributes, devices: CP.config.graphics.devicesForCss, defaultInput: "pc" }), /* @__PURE__ */ wp.element.createElement(BlockControls, null, device !== "pc" && /* @__PURE__ */ wp.element.createElement(ToolbarButton, { icon: "update", label: "update", onClick: copyFirstRect }), currentItemIndexes.length > 0 && /* @__PURE__ */ wp.element.createElement(ToolbarGroup, { label: "control" }, currentItemIndexes.length === 1 && /* @__PURE__ */ wp.element.createElement(
         ToolbarButton,
         {
           icon: "insert",

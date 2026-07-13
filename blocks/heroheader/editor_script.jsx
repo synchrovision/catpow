@@ -82,13 +82,13 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 				<InspectorControls>
 					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 				</InspectorControls>
-				<CP.SelectModeToolbar set={setAttributes} attr={attributes} />
+				<CP.SelectModeToolbar setAttributes={setAttributes} attributes={attributes} />
 				{EditMode ? (
 					<div {...blockProps}>
 						<CP.Label icon="edit" />
 						<CP.EditItemsTable
-							set={setAttributes}
-							attr={attributes}
+							setAttributes={setAttributes}
+							attributes={attributes}
 							itemsKey="buttons"
 							columns={[
 								{ type: "icon", label: "icon" },

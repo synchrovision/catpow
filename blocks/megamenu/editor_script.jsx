@@ -64,7 +64,7 @@
 
 		return (
 			<>
-				<CP.SelectModeToolbar set={setAttributes} attr={attributes} />
+				<CP.SelectModeToolbar setAttributes={setAttributes} attributes={attributes} />
 				<div {...blockProps}>
 					<Catpow.MegaMenu {...resolvedProps} />
 				</div>

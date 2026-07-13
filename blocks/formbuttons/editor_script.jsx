@@ -56,13 +56,13 @@ wp.blocks.registerBlockType("catpow/formbuttons", {
 
 		return (
 			<>
-				<CP.SelectModeToolbar set={setAttributes} attr={attributes} />
+				<CP.SelectModeToolbar setAttributes={setAttributes} attributes={attributes} />
 				{EditMode ? (
 					<div {...blockProps}>
 						<CP.Label icon="edit" />
 						<CP.EditItemsTable
-							set={setAttributes}
-							attr={attributes}
+							setAttributes={setAttributes}
+							attributes={attributes}
 							columns={[
 								{ type: "text", key: "copy", cond: states.hasMicroCopy },
 								{ type: "text", key: "text", cond: true },
@@ -141,7 +141,7 @@ wp.blocks.registerBlockType("catpow/formbuttons", {
 					<CP.ItemControlInfoPanel />
 				</InspectorControls>
 				<BlockControls>
-					<CP.AlignClassToolbar set={setAttributes} attr={attributes} />
+					<CP.AlignClassToolbar setAttributes={setAttributes} attributes={attributes} />
 				</BlockControls>
 			</>
 		);

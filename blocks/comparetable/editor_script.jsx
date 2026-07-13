@@ -294,7 +294,7 @@ wp.blocks.registerBlockType("catpow/comparetable", {
 
 		return (
 			<>
-				<CP.SelectModeToolbar set={setAttributes} attr={attributes} modes={["AltMode"]} />
+				<CP.SelectModeToolbar setAttributes={setAttributes} attributes={attributes} modes={["AltMode"]} />
 				<>
 					{AltMode && doLoop ? (
 						<div className="cp-altcontent">

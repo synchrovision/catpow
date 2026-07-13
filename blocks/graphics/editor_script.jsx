@@ -374,7 +374,7 @@ wp.blocks.registerBlockType("catpow/graphics", {
 
 		return (
 			<>
-				<CP.SelectDeviceToolbar attr={attributes} set={setAttributes} devices={CP.config.graphics.devicesForCss} defaultInput="pc" />
+				<CP.SelectDeviceToolbar attributes={attributes} setAttributes={setAttributes} devices={CP.config.graphics.devicesForCss} defaultInput="pc" />
 				<BlockControls>
 					{device !== "pc" && <ToolbarButton icon="update" label="update" onClick={copyFirstRect} />}
 					{currentItemIndexes.length > 0 && (

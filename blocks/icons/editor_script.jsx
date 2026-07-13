@@ -81,7 +81,7 @@
 							},
 						]}
 					/>
-					<CP.AlignClassToolbar set={setAttributes} attr={attributes} />
+					<CP.AlignClassToolbar setAttributes={setAttributes} attributes={attributes} />
 				</BlockControls>
 				<InspectorControls>
 					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
@@ -95,8 +95,8 @@
 					<div {...blockProps}>
 						<CP.Label icon="edit" />
 						<CP.EditItemsTable
-							set={setAttributes}
-							attr={attributes}
+							setAttributes={setAttributes}
+							attributes={attributes}
 							columns={[
 								{ type: "image", key: "src" },
 								{ type: "text", key: "alt" },

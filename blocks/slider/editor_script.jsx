@@ -197,7 +197,7 @@ wp.blocks.registerBlockType("catpow/slider", {
 
 		return (
 			<>
-				<CP.SelectModeToolbar set={setAttributes} attr={attributes} />
+				<CP.SelectModeToolbar setAttributes={setAttributes} attributes={attributes} />
 				<InspectorControls>
 					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 					<CP.SelectClassPanel title="アニメーション設定" icon="video-alt3" {...{ setAttributes, attributes }} selectiveClasses={animateClasses} />
@@ -216,8 +216,8 @@ wp.blocks.registerBlockType("catpow/slider", {
 					<div {...blockProps}>
 						<CP.Label icon="edit" />
 						<CP.EditItemsTable
-							set={setAttributes}
-							attr={attributes}
+							setAttributes={setAttributes}
+							attributes={attributes}
 							columns={[
 								{ type: "picture", label: "slide", keys: imageKeys.slide, devices, cond: states.hasSlide },
 								{ type: "text", key: "slideCode", cond: states.isTemplate && states.hasSlide },

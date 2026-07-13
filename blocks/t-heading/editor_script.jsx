@@ -111,7 +111,7 @@
 					</table>
 				</CP.Bem>
 				<BlockControls>
-					<CP.AlignClassToolbar set={setAttributes} attr={attributes} />
+					<CP.AlignClassToolbar setAttributes={setAttributes} attributes={attributes} />
 				</BlockControls>
 				<InspectorControls>
 					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} initialOpen={true} />

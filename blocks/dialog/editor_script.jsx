@@ -50,7 +50,7 @@ wp.blocks.registerBlockType("catpow/dialog", {
 
 		return (
 			<>
-				<CP.SelectModeToolbar set={setAttributes} attr={attributes} />
+				<CP.SelectModeToolbar setAttributes={setAttributes} attributes={attributes} />
 				<InspectorControls>
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
 						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
@@ -64,8 +64,8 @@ wp.blocks.registerBlockType("catpow/dialog", {
 						<div {...blockProps}>
 							<CP.Label icon="edit" />
 							<CP.EditItemsTable
-								set={setAttributes}
-								attr={attributes}
+								setAttributes={setAttributes}
+								attributes={attributes}
 								columns={[
 									{
 										type: "image",
