@@ -33,3 +33,32 @@ export const walkBlocksRecursive = (blocks, callback) => {
 		if (callback(block) !== false && block.innerBlocks) block.innerBlocks.forEach(callback);
 	});
 };
+export const updateBlockAttributesColor = (block, colorNumber) => {
+	const { attributes, clientId } = block;
+	const modifiedAttributes = Object.keys(attributes)
+		.filter((key) => key.match(/^(\w+V|v)ars$/))
+		.reduce((p, c) => {
+			const value = attributes[c];
+			if (typeof value !== "object") {
+				return p;
+			}
+			const newValues = Object.keys(value).reduce((newValues, key) => {
+				const matches = value[key].match(/url\("(.+)?"\)/);
+				if (matches) {
+					const url = new URL(matches[1]);
+					if (url.searchParams.has("c") && url.searchParams.get("c") !== colorNumber) {
+						url.searchParams.set("c", colorNumber);
+						newValues[key] = value[key].replace(matches[0], `url("${url.toString()}")`);
+					}
+				}
+				return newValues;
+			}, {});
+			if (Object.keys(newValues).length) {
+				p[c] = { ...value, ...newValues };
+			}
+			return p;
+		}, {});
+	if (Object.keys(modifiedAttributes).length) {
+		wp.data.dispatch("core/block-editor").updateBlockAttributes(clientId, modifiedAttributes);
+	}
+};
