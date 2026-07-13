@@ -1,21 +1,21 @@
 import { bem } from "catpow/util";
 
 export const EditItemsTable = (props) => {
-	const { set, attr, itemsKey = "items", isTemplate = false } = props;
+	const { setAttributes, attributes, itemKeys = ["items"], isTemplate = false } = props;
 	const { useCallback } = wp.element;
 	const { RichText } = wp.blockEditor;
 	const classes = bem("cp-edititemstable");
 
-	const items = attr[itemsKey] || [];
+	const items = CP.getTheItems({ attributes, itemKeys }) || [];
 	const save = () => {
-		set({ [itemsKey]: JSON.parse(JSON.stringify(items)) });
+		setAttributes({ [itemKeys[0]]: JSON.parse(JSON.stringify(attributes[itemKeys[0]])) });
 	};
 	const getActiveColumns = useCallback((props) => {
 		const columns = [];
 		props.columns.forEach((col) => {
 			if (col.hasOwnProperty("cond")) {
 				if (typeof col.cond === "function") {
-					if (!col.cond(props.attr)) {
+					if (!col.cond(attributes)) {
 						return false;
 					}
 				} else if (!col.cond) {
@@ -23,7 +23,7 @@ export const EditItemsTable = (props) => {
 				}
 			}
 			if (col.type === "dynamic") {
-				columns.push.apply(columns, col.getColumns(props.attr));
+				columns.push.apply(columns, col.getColumns(attributes));
 			} else {
 				columns.push(col);
 			}
@@ -45,11 +45,11 @@ export const EditItemsTable = (props) => {
 				</thead>
 				<tbody>
 					{items.map((item, index) => {
-						const propsForControl = { tag: "tr", set, itemsKey, items, index };
+						const propsForControl = { attributes, setAttributes, itemKeys: [...itemKeys, index] };
 						return (
 							<tr
 								onClick={(e) => {
-									set({ currentItemIndex: index });
+									setAttributes({ currentItemIndex: index });
 								}}
 								key={index}
 							>
@@ -132,14 +132,14 @@ export const EditItemsTable = (props) => {
 										case "image": {
 											return (
 												<td key={c}>
-													<CP.SelectResponsiveImage attr={attr} set={set} keys={{ items: itemsKey, src: col.key, ...col.keys }} index={index} size={col.size || "vga"} isTemplate={isTemplate} />
+												<CP.SelectResponsiveImage {...{ attributes, setAttributes }} itemKeys={[...itemKeys, index]} keys={{ src: col.key, ...col.keys }} size={col.size || "vga"} isTemplate={isTemplate} />
 												</td>
 											);
 										}
 										case "picture": {
 											return (
 												<td key={c}>
-													<CP.SelectPictureSources index={index} attr={attr} set={set} keys={{ items: itemsKey, ...col.keys }} sizes={col.sizes} devices={col.devices} isTemplate={isTemplate} />
+												<CP.SelectPictureSources {...{ attributes, setAttributes }} itemKeys={[...itemKeys, index]} keys={col.keys} sizes={col.sizes} devices={col.devices} isTemplate={isTemplate} />
 												</td>
 											);
 										}
@@ -165,12 +165,9 @@ export const EditItemsTable = (props) => {
 											});
 											return (
 												<td key={c}>
-													<CP.EditItemsTable
-														set={() => {
-															save();
-														}}
-														attr={item}
-														itemsKey={col.itemsKey}
+												<CP.EditItemsTable
+													{...{ attributes, setAttributes }}
+													itemKeys={[...itemKeys, index, col.itemsKey]}
 														columns={col.columns}
 														isTemplate={isTemplate}
 													/>

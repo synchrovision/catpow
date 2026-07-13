@@ -902,12 +902,9 @@
     generateColorToneValue: () => generateColorToneValue,
     generateToneClass: () => generateToneClass,
     getAllClassFlags: () => getAllClassFlags,
-    getAllSubClasses: () => getAllSubClasses,
     getBindClassFlagsByValue: () => getBindClassFlagsByValue,
-    getBindClasses: () => getBindClasses,
     getClassFlagsByValue: () => getClassFlagsByValue,
     getClosestBlockAttributesComputed: () => getClosestBlockAttributesComputed,
-    getColor: () => getColor,
     getColorNumber: () => getColorNumber,
     getDataListId: () => getDataListId,
     getImageSizesForDevices: () => getImageSizesForDevices,
@@ -917,15 +914,12 @@
     getItemSelectiveClass: () => getItemSelectiveClass,
     getJsonValue: () => getJsonValue,
     getMediaQueryKeyForDevice: () => getMediaQueryKeyForDevice,
-    getNumberClass: () => getNumberClass,
-    getPattern: () => getPattern,
     getPictureSoucesAttributes: () => getPictureSoucesAttributes,
     getPictureSoucesAttributesDefaultValueForDevices: () => getPictureSoucesAttributesDefaultValueForDevices,
     getPictureSoucesAttributesForDevices: () => getPictureSoucesAttributesForDevices,
     getSelecedFormatElement: () => getSelecedFormatElement,
     getSelectiveClass: () => getSelectiveClass,
     getSelectiveClassLabel: () => getSelectiveClassLabel,
-    getSubClasses: () => getSubClasses,
     getTheItem: () => getTheItem,
     getTheItemIndex: () => getTheItemIndex,
     getTheItems: () => getTheItems,
@@ -955,13 +949,10 @@
     selectiveClassesPresets: () => selectiveClassesPresets,
     setJsonValue: () => setJsonValue,
     setJsonValues: () => setJsonValues,
-    switchColor: () => switchColor,
     switchItemColor: () => switchItemColor,
     switchItemPattern: () => switchItemPattern,
     switchItemSelectiveClass: () => switchItemSelectiveClass,
     switchJsonValue: () => switchJsonValue,
-    switchNumberClass: () => switchNumberClass,
-    switchPattern: () => switchPattern,
     switchSelectiveClass: () => switchSelectiveClass,
     tableConvertibles: () => tableConvertibles,
     testFlags: () => testFlags,
@@ -971,10 +962,12 @@
     toneStatePattern: () => toneStatePattern,
     translateCssVal: () => translateCssVal,
     upItem: () => upItem,
+    updateBlockAttributesColor: () => updateBlockAttributesColor,
     updateItemByKeyAndIndex: () => updateItemByKeyAndIndex,
     useColorNumber: () => useColorNumber,
     useInheritColor: () => useInheritColor,
     useManageStyleData: () => useManageStyleData,
+    walkBlocksRecursive: () => walkBlocksRecursive,
     wordsToFlags: () => wordsToFlags
   });
 
@@ -2303,10 +2296,10 @@
       className = "cp-selectresponsiveimage",
       controlClassName = "cp-selectresponsiveimage-controls",
       type,
-      attr,
-      set,
+      attributes,
+      setAttributes,
+      itemKeys,
       keys = {},
-      index = 0,
       size,
       devices: devices2,
       device,
@@ -2317,9 +2310,15 @@
     const { Icon } = wp.components;
     const [isOpen, setIsOpen] = useState2(false);
     let onClick;
-    const itemsKey2 = keys.items && Array.isArray(keys.items) ? keys.items[0] : keys.items;
-    const items2 = itemsKey2 && attr[itemsKey2];
-    const item = CP.getItemByKeyAndIndex(props, keys?.items, index);
+    const item = itemKeys ? CP.getTheItem(props) : attributes;
+    const save = (data) => {
+      if (itemKeys) {
+        Object.assign(CP.getTheItem(props), data);
+        CP.saveItem(props);
+      } else {
+        setAttributes(data);
+      }
+    };
     if (device) {
       const sizeData = CP.devices[device];
       onClick = (e) => CP.selectImage(
@@ -2331,24 +2330,14 @@
             } else {
               item[keys.sources].push({ device, srcset: src });
             }
-            if (items2) {
-              set({ [itemsKey2]: JSON.parse(JSON.stringify(items2)) });
-            } else {
-              set({
-                [keys.sources]: JSON.parse(JSON.stringify(item[keys.sources]))
-              });
-            }
+            save({ [keys.sources]: JSON.parse(JSON.stringify(item[keys.sources])) });
           } else {
             if (item[keys.srcset].match(sizeData.reg)) {
               item[keys.srcset] = item[keys.srcset].replace(sizeData.reg, src + sizeData.rep);
             } else {
               item[keys.srcset] += "," + src + sizeData.rep;
             }
-            if (items2) {
-              set({ [itemsKey2]: JSON.parse(JSON.stringify(items2)) });
-            } else {
-              set({ [keys.srcset]: item[keys.srcset] });
-            }
+            save({ [keys.srcset]: item[keys.srcset] });
           }
         },
         { keys: { src: "src" }, type, size: sizeData.media_size }
@@ -2357,12 +2346,7 @@
       onClick = (e) => {
         CP.selectImage(
           function(data) {
-            if (itemsKey2) {
-              Object.assign(item, data);
-              set({ [itemsKey2]: JSON.parse(JSON.stringify(items2)) });
-            } else {
-              set(data);
-            }
+            save(data);
           },
           { keys, type, size, devices: devices2 }
         );
@@ -2371,20 +2355,20 @@
     if (isTemplate && keys.code && item[keys.code]) {
       return /* @__PURE__ */ wp.element.createElement(CP.DummyImage, { text: item[keys.code] });
     }
-    return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, showSelectPictureSources ? /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImageBody, { ...props, className, item, keys }), /* @__PURE__ */ wp.element.createElement(CP.Bem, null, /* @__PURE__ */ wp.element.createElement("div", { className: clsx(controlClassName, { "is-open": isOpen }) }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit", onClick: () => setIsOpen(!isOpen) }), /* @__PURE__ */ wp.element.createElement("div", { className: "_body", ...{ inert: isOpen ? null : "" } }, /* @__PURE__ */ wp.element.createElement(CP.SelectPictureSources, { attr, set, keys, index, size, devices: devices2 }))))) : /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImageBody, { ...props, className, item, keys, style: { pointerEvents: "auto" }, onClick }));
+    return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, showSelectPictureSources ? /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImageBody, { ...props, className, item, keys }), /* @__PURE__ */ wp.element.createElement(CP.Bem, null, /* @__PURE__ */ wp.element.createElement("div", { className: clsx(controlClassName, { "is-open": isOpen }) }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit", onClick: () => setIsOpen(!isOpen) }), /* @__PURE__ */ wp.element.createElement("div", { className: "_body", ...{ inert: isOpen ? null : "" } }, /* @__PURE__ */ wp.element.createElement(CP.SelectPictureSources, { ...{ attributes, setAttributes, itemKeys, keys, size, devices: devices2 } }))))) : /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImageBody, { ...props, className, item, keys, style: { pointerEvents: "auto" }, onClick }));
   };
 
   // ../blocks/_init/init/CP/components/ResponsiveImage.jsx
   var ResponsiveImage = (props) => {
-    const { className = "cp-responsiveimage", attr, set, keys, index, sizes, devices: devices2, device, isTemplate, ...otherProps } = props;
-    let item = CP.getItemByKeyAndIndex(props, keys?.items, index);
+    const { className = "cp-responsiveimage", attributes, setAttributes, itemKeys, keys, sizes, devices: devices2, device, isTemplate, ...otherProps } = props;
+    const item = itemKeys ? CP.getTheItem(props) : attributes;
     if (isTemplate && keys.code && item[keys.code]) {
       return item[keys.code];
     }
     return /* @__PURE__ */ wp.element.createElement(ResponsiveImageBody, { ...props, className, item });
   };
   var ResponsiveImageBody = (props) => {
-    const { className = "cp-responsiveimage", attr, set, keys, index, devices: devices2, device, isTemplate, item, size, ...otherProps } = props;
+    const { className = "cp-responsiveimage", keys, devices: devices2, device, isTemplate, item, size, ...otherProps } = props;
     let { sizes } = props;
     const primaryClassName = className.split(" ")[0];
     if (item?.[keys?.mime] === "application/pdf") {
@@ -3054,9 +3038,9 @@
     wp.hooks.applyFilters("catpow.blocks.backgroundImageDataGenerators", BackgroundImageDataGenerators_exports);
   });
   var InputBackgroundImage = (props) => {
-    const { title = "BackgroundImage", attr = {}, set, keys = {}, prefix = "--cp-background-image" } = props;
+    const { title = "BackgroundImage", attributes = {}, setAttributes, keys = {}, prefix = "--cp-background-image" } = props;
     fillValueKeys(keys, prefix);
-    const [data, setData] = useState3(extractData(attr, keys));
+    const [data, setData] = useState3(extractData(attributes, keys));
     const schema = useMemo4(() => {
       const schema2 = {
         properties: {
@@ -3094,7 +3078,7 @@
           if (gen != null) {
             const mergedData = { ...data2, ...gen.getData(data2.params) };
             setData(mergedData);
-            set(getValuesFromData(mergedData, keys));
+            setAttributes(getValuesFromData(mergedData, keys));
           }
         }
       }
@@ -3284,13 +3268,11 @@
     }, [param.items, dataSet, onChange]);
     return /* @__PURE__ */ wp.element.createElement("ul", { className: classes() }, dataSet && dataSet.map((data, index) => {
       const dataProps = {
-        tag: "li",
-        set: ({ dataSet: dataSet2 }) => {
-          onChange(dataSet2);
+        attributes: { dataset: dataSet },
+        setAttributes: ({ dataset }) => {
+          onChange(dataset);
         },
-        items: dataSet,
-        itemsKey: "dataset",
-        index
+        itemKeys: ["dataset", index]
       };
       return /* @__PURE__ */ wp.element.createElement("li", { className: classes.row(), key: index }, /* @__PURE__ */ wp.element.createElement("ul", { className: classes.row.items() }, Object.keys(param.items).map((key) => {
         return /* @__PURE__ */ wp.element.createElement("li", { className: classes.row.items.item(), key }, /* @__PURE__ */ wp.element.createElement(
@@ -3320,11 +3302,12 @@
 
   // ../blocks/_init/init/CP/components/Item.jsx
   var Item = (props) => {
-    const { tag = "div", indexKey = "currentItemIndex", set, attr, attributes, setAttributes, itemKeys = [], children } = props;
-    const items2 = CP.getTheItems(props);
+    const { tag = "div", setAttributes, attributes, itemKeys = [], children } = props;
+    const selectionKey = itemKeys.length > 2 ? "currentSubItemIndex" : "currentItemIndex";
+    const items = CP.getTheItems(props);
     const item = CP.getTheItem(props);
     const index = CP.getTheItemIndex(props);
-    const isSelected = props.isSelected === void 0 ? index == (attr || attributes)[indexKey] : props.isSelected;
+    const isSelected = props.isSelected === void 0 ? index == attributes[selectionKey] : props.isSelected;
     return wp.element.createElement(
       tag,
       {
@@ -3332,7 +3315,7 @@
         style: props.style,
         "data-index": index,
         "data-refine-cond": item["cond"],
-        "aria-selected": isSelected && index == (attr || attributes)[indexKey],
+        "aria-selected": isSelected && index == attributes[selectionKey],
         onKeyDown: (e) => {
           if (e.ctrlKey || e.metaKey) {
             switch (e.key) {
@@ -3360,7 +3343,7 @@
           }
         },
         onClick: (e) => {
-          (set || setAttributes)({ [indexKey]: index });
+          setAttributes({ [selectionKey]: index });
         }
       },
       /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, children, isSelected && /* @__PURE__ */ wp.element.createElement(
@@ -3410,8 +3393,8 @@
   var SelectClassPanelBlock = ({ prm }) => {
     const { Fragment: Fragment2, useMemo: useMemo11, useContext: useContext2, createElement: el } = wp.element;
     const { CheckboxControl, RadioControl, SelectControl, TextareaControl, TextControl: TextControl2, ColorPicker, __experimentalGradientPicker: GradientPicker } = wp.components;
-    const { props, item, states, allStates, set, save, saveClasses, styleDatas, saveCss, primaryClassKey, colorNumber } = useContext2(SelectClassPanelContext);
-    const { subItemsKey } = props;
+    const { props, item, states, allStates, save, saveClasses, primaryClassKey, block, colorNumber } = useContext2(SelectClassPanelContext);
+    const { attributes, setAttributes, itemKeys, subItemsKey } = props;
     const { classKey = primaryClassKey } = prm;
     const targetStates = allStates[classKey] || {};
     if (prm.hasOwnProperty("cond")) {
@@ -3429,14 +3412,6 @@
       }
     }
     let rtn = [];
-    if (prm.keys) {
-      if (props.items) {
-        prm.keys.items = prm.keys.items || props.itemsKey;
-        if (subItemsKey) {
-          prm.keys.subItems = prm.keys.subItems || subItemsKey;
-        }
-      }
-    }
     if (prm.json) {
       if (prm.input) {
         switch (prm.input) {
@@ -3452,7 +3427,7 @@
                 CP.DynamicInput,
                 {
                   param: prm,
-                  value: JSON.parse(props.attr[prm.json])[prm.key],
+                  value: JSON.parse(props.attributes[prm.json])[prm.key],
                   onChange: (val) => {
                     if (prm.filter) {
                       val = prm.filter(val, states, props);
@@ -3471,21 +3446,20 @@
             if (prm.label) {
               rtn.push(/* @__PURE__ */ wp.element.createElement("h5", null, prm.label));
             }
-            let attr = JSON.parse(props.attr[prm.json]) || {};
+            let pictureAttributes = JSON.parse(props.attributes[prm.json]) || {};
             if (prm.key) {
-              attr = attr[prm.key] || {};
+              pictureAttributes = pictureAttributes[prm.key] || {};
             }
             rtn.push(
               /* @__PURE__ */ wp.element.createElement(
                 CP.SelectPictureSources,
                 {
-                  index: props.index,
-                  set: (val) => {
+                  setAttributes: (val) => {
                     if (prm.filter) {
                       val = prm.filter(val, states, props);
                     }
                     if (prm.key) {
-                      CP.setJsonValue(props, prm.json, prm.key, Object.assign(attr, val));
+                      CP.setJsonValue(props, prm.json, prm.key, Object.assign(pictureAttributes, val));
                     } else {
                       CP.setJsonValues(props, prm.json, prm.keys, val);
                     }
@@ -3493,7 +3467,7 @@
                       prm.effect(val, states, props);
                     }
                   },
-                  attr,
+                  attributes: pictureAttributes,
                   keys: prm.keys,
                   sizes: prm.sizes,
                   devices: prm.devices,
@@ -3588,9 +3562,9 @@
           case "buttons":
           case "gridbuttons": {
             if (prm.sub) {
-              if (prm.sub[JSON.parse(props.attr[prm.json])[prm.key]]) {
+              if (prm.sub[JSON.parse(props.attributes[prm.json])[prm.key]]) {
                 let sub = [];
-                prm.sub[JSON.parse(props.attr[prm.json])[prm.key]].forEach((prm2) => {
+                prm.sub[JSON.parse(props.attributes[prm.json])[prm.key]].forEach((prm2) => {
                   sub.push(/* @__PURE__ */ wp.element.createElement(SelectClassPanelBlock, { prm: prm2 }));
                 });
                 rtn.push(/* @__PURE__ */ wp.element.createElement("div", { className: "sub" }, sub));
@@ -3600,7 +3574,7 @@
           }
           case "bool": {
             if (prm.sub) {
-              if (JSON.parse(props.attr[prm.json])[prm.key]) {
+              if (JSON.parse(props.attributes[prm.json])[prm.key]) {
                 let sub = [];
                 prm.sub.forEach((prm2) => {
                   sub.push(/* @__PURE__ */ wp.element.createElement(SelectClassPanelBlock, { prm: prm2 }));
@@ -3664,7 +3638,7 @@
             TextControl2,
             {
               label: prm.label,
-              value: JSON.parse(props.attr[prm.json])[prm.key],
+              value: JSON.parse(props.attributes[prm.json])[prm.key],
               onChange: (val) => {
                 CP.setJsonValue(props, prm.json, prm.key, val);
               }
@@ -3672,122 +3646,12 @@
           )
         );
       }
-    } else if (prm.css) {
-      const { device = "pc" } = prm;
-      const media = CP.getMediaQueryKeyForDevice(device);
-      const sel = typeof prm.sel === "function" ? prm.sel(props) : prm.sel;
-      styleDatas[prm.css] = styleDatas[prm.css] || {};
-      styleDatas[prm.css][media] = styleDatas[prm.css][media] || {};
-      styleDatas[prm.css][media][sel] = styleDatas[prm.css][media][sel] || {};
-      const tgt = styleDatas[prm.css][media][sel];
-      if (prm.input) {
-        switch (prm.input) {
-          case "border":
-            rtn.push(
-              /* @__PURE__ */ wp.element.createElement(
-                Catpow.SelectPreparedImage,
-                {
-                  name: "border",
-                  value: CP.getUrlInStyleCode(tgt.borderImage),
-                  color: prm.color || 0,
-                  onSelect: (image) => {
-                    if (!image.conf) {
-                      return;
-                    }
-                    const { slice: slice2, width, repeat } = image.conf;
-                    tgt.borderStyle = "solid";
-                    tgt.borderImage = "url(" + image.url + ") fill " + slice2 + " / " + width + " " + repeat;
-                    saveCss(prm.css);
-                  }
-                }
-              )
-            );
-            break;
-          case "pattern":
-            rtn.push(
-              /* @__PURE__ */ wp.element.createElement(
-                Catpow.SelectPreparedImage,
-                {
-                  name: "pattern",
-                  value: CP.getUrlInStyleCode(tgt.backgroundImage),
-                  color: prm.color || 0,
-                  onSelect: (image) => {
-                    if (!image.conf) {
-                      return;
-                    }
-                    const { size, width, height, repeat, x, y } = image.conf;
-                    tgt.backgroundImage = "url(" + image.url + ")";
-                    if (width && height) {
-                      tgt.backgroundSize = width + "px " + height + "px";
-                    } else if (size) {
-                      tgt.backgroundSize = CP.translateCssVal("background-size", size);
-                    } else {
-                      delete tgt.backgroundSize;
-                    }
-                    if (repeat) {
-                      tgt.backgroundRepeat = CP.translateCssVal("background-repeat", repeat);
-                    } else {
-                      delete tgt.backgroundRepeat;
-                    }
-                    if (x && y) {
-                      tgt.backgroundPosition = x + "% " + y + "%";
-                    } else {
-                      delete tgt.backgroundPosition;
-                    }
-                    saveCss(prm.css);
-                  }
-                }
-              )
-            );
-            break;
-          case "frame":
-            rtn.push(
-              /* @__PURE__ */ wp.element.createElement(
-                Catpow.SelectPreparedImageSet,
-                {
-                  name: "frame",
-                  value: CP.getUrlInStyleCode(tgt.borderImage),
-                  color: prm.color || 0,
-                  onChange: (imageset) => {
-                    imageset.forEach((image) => {
-                      if (!image.conf) {
-                        return;
-                      }
-                      const { device: device2, slice: slice2, width, repeat } = image.conf;
-                      const media2 = CP.getMediaQueryKeyForDevice(device2);
-                      styleDatas[prm.css][media2] = styleDatas[prm.css][media2] || {};
-                      styleDatas[prm.css][media2][sel] = styleDatas[prm.css][media2][sel] || {};
-                      styleDatas[prm.css][media2][sel].borderStyle = "solid";
-                      styleDatas[prm.css][media2][sel].borderImage = "url(" + image.url + ") fill " + slice2 + " / " + width + " " + repeat;
-                    });
-                    saveCss(prm.css);
-                  }
-                }
-              )
-            );
-            break;
-        }
-      } else {
-        rtn.push(
-          /* @__PURE__ */ wp.element.createElement(
-            TextControl2,
-            {
-              label: prm.label,
-              value: tgt[prm.attr],
-              onChange: (val) => {
-                tgt[prm.attr] = val;
-                saveCss(prm.css);
-              }
-            }
-          )
-        );
-      }
     } else if (prm.vars) {
       if (prm.input) {
-        if (props.attr?.[prm.vars]?.[prm.key] === void 0 && prm.default != null) {
+        if (props.attributes?.[prm.vars]?.[prm.key] === void 0 && prm.default != null) {
           save({
             [prm.vars]: {
-              ...props.attr[prm.vars],
+              ...props.attributes[prm.vars],
               [prm.key]: prm.default
             }
           });
@@ -3805,14 +3669,14 @@
                 CP.DynamicInput,
                 {
                   param: prm,
-                  value: props.attr?.[prm.vars]?.[prm.key],
+                  value: props.attributes?.[prm.vars]?.[prm.key],
                   onChange: (val) => {
                     if (prm.filter) {
                       val = prm.filter(val, states, props);
                     }
                     save({
                       [prm.vars]: {
-                        ...props.attr[prm.vars],
+                        ...props.attributes[prm.vars],
                         [prm.key]: `${val}`
                       }
                     });
@@ -3827,9 +3691,9 @@
               /* @__PURE__ */ wp.element.createElement(
                 CP.CustomColorVars,
                 {
-                  value: props.attr[prm.vars],
+                  value: props.attributes[prm.vars],
                   onChange: (vars) => {
-                    const newVars = { ...props.attr[prm.vars] };
+                    const newVars = { ...props.attributes[prm.vars] };
                     Object.keys(vars).forEach((key) => {
                       if (vars[key] === null) {
                         delete newVars[key];
@@ -3850,11 +3714,11 @@
                 CP.SelectBlendMode,
                 {
                   label: prm.label,
-                  value: props.attr?.[prm.vars]?.[prm.key],
+                  value: props.attributes?.[prm.vars]?.[prm.key],
                   onChange: (val) => {
                     save({
                       [prm.vars]: {
-                        ...props.attr[prm.vars],
+                        ...props.attributes[prm.vars],
                         [prm.key]: `${val}`
                       }
                     });
@@ -3869,11 +3733,11 @@
               /* @__PURE__ */ wp.element.createElement(
                 CP.SelectResponsiveImage,
                 {
-                  attr: props.attr[prm.vars],
-                  set: (data) => {
+                  attributes: props.attributes[prm.vars],
+                  setAttributes: (data) => {
                     save({
                       [prm.vars]: {
-                        ...props.attr[prm.vars],
+                        ...props.attributes[prm.vars],
                         ...data
                       }
                     });
@@ -3889,11 +3753,11 @@
               /* @__PURE__ */ wp.element.createElement(
                 CP.InputBackgroundImage,
                 {
-                  attr: props.attr[prm.vars],
-                  set: (data) => {
+                  attributes: props.attributes[prm.vars],
+                  setAttributes: (data) => {
                     save({
                       [prm.vars]: {
-                        ...props.attr[prm.vars],
+                        ...props.attributes[prm.vars],
                         ...data
                       }
                     });
@@ -3911,17 +3775,16 @@
                 Catpow.SelectPreparedImage,
                 {
                   name: "border",
-                  value: props.attr?.[prm.vars]?.[prm.key]?.match(/url\("(.+?)(\?.+)?"\)/)[1],
+                  value: props.attributes?.[prm.vars]?.[prm.key]?.match(/url\("(.+?)(\?.+)?"\)/)[1],
                   color: colorNumber,
                   onSelect: (image) => {
-                    console.log({ image });
                     if (!image.conf) {
                       return;
                     }
                     const { slice: slice2, width, repeat } = image.conf;
                     save({
                       [prm.vars]: {
-                        ...props.attr[prm.vars],
+                        ...props.attributes[prm.vars],
                         [prm.key]: `url("${image.url}") fill ${slice2} / ${width} ${repeat}`
                       }
                     });
@@ -3937,11 +3800,11 @@
                 CP.PositionInput,
                 {
                   label: prm.label,
-                  value: props.attr?.[prm.vars]?.[prm.key],
+                  value: props.attributes?.[prm.vars]?.[prm.key],
                   onChange: (val) => {
                     save({
                       [prm.vars]: {
-                        ...props.attr[prm.vars],
+                        ...props.attributes[prm.vars],
                         [prm.key]: `${val}`
                       }
                     });
@@ -3957,11 +3820,11 @@
                 CP.SelectSize,
                 {
                   label: prm.label,
-                  value: props.attr?.[prm.vars]?.[prm.key],
+                  value: props.attributes?.[prm.vars]?.[prm.key],
                   onChange: (val) => {
                     save({
                       [prm.vars]: {
-                        ...props.attr[prm.vars],
+                        ...props.attributes[prm.vars],
                         [prm.key]: `${val}`
                       }
                     });
@@ -3977,11 +3840,11 @@
                 CP.ResponsiveSizeInput,
                 {
                   label: prm.label,
-                  value: props.attr?.[prm.vars]?.[prm.key],
+                  value: props.attributes?.[prm.vars]?.[prm.key],
                   onChange: (val) => {
                     save({
                       [prm.vars]: {
-                        ...props.attr[prm.vars],
+                        ...props.attributes[prm.vars],
                         [prm.key]: `${val}`
                       }
                     });
@@ -3997,11 +3860,11 @@
                 CP.ResponsiveItemSizeInput,
                 {
                   label: prm.label,
-                  value: props.attr?.[prm.vars]?.[prm.key],
+                  value: props.attributes?.[prm.vars]?.[prm.key],
                   onChange: (val) => {
                     save({
                       [prm.vars]: {
-                        ...props.attr[prm.vars],
+                        ...props.attributes[prm.vars],
                         [prm.key]: `${val}`
                       }
                     });
@@ -4018,10 +3881,10 @@
             TextControl2,
             {
               label: prm.label,
-              value: props.attr?.[prm.vars]?.[prm.key],
+              value: props.attributes?.[prm.vars]?.[prm.key],
               onChange: (val) => {
                 save({
-                  [prm.vars]: { ...props.attr[prm.vars], [prm.key]: `${val}` }
+                  [prm.vars]: { ...props.attributes[prm.vars], [prm.key]: `${val}` }
                 });
               }
             }
@@ -4037,8 +3900,13 @@
               label: __11("\u8272", "catpow"),
               selected: targetStates,
               onChange: (proxy) => {
-                if (!props.items) {
-                  set({ color: proxy.value });
+                if (!itemKeys) {
+                  setAttributes({ color: proxy.value });
+                  CP.updateBlockAttributesColor(block, proxy.value);
+                  CP.walkBlocksRecursive(block.innerBlocks, (block2) => {
+                    if (CP.getColorNumber(block2.attributes?.classes)) return false;
+                    CP.updateBlockAttributesColor(block2, proxy.value);
+                  });
                 }
                 saveClasses();
               }
@@ -4051,8 +3919,6 @@
             CP.SelectPatternClass,
             {
               label: __11("\u30D1\u30BF\u30FC\u30F3", "catpow"),
-              set: props.set,
-              attr: props.attr,
               selected: Object.keys(states).find((key) => /^pattern\d+/.test(key)),
               onChange: (pattern) => {
                 CP.filterFlags(states, (key) => !/^pattern\d+/.test(key));
@@ -4131,9 +3997,9 @@
               /* @__PURE__ */ wp.element.createElement(
                 CP.SelectResponsiveImage,
                 {
-                  index: props.index,
-                  set: props.set,
-                  attr: props.attr,
+                  setAttributes,
+                  attributes,
+                  itemKeys,
                   keys: prm.keys,
                   size: prm.size,
                   sizes: prm.sizes,
@@ -4149,7 +4015,7 @@
             if (prm.label) {
               rtn.push(/* @__PURE__ */ wp.element.createElement("h5", null, prm.label));
             }
-            rtn.push(/* @__PURE__ */ wp.element.createElement(CP.SelectPictureSources, { index: props.index, set: props.set, attr: props.attr, keys: prm.keys, sizes: prm.sizes, devices: prm.devices, isTemplate: prm.isTemplate }));
+            rtn.push(/* @__PURE__ */ wp.element.createElement(CP.SelectPictureSources, { ...{ attributes, setAttributes, itemKeys }, keys: prm.keys, sizes: prm.sizes, devices: prm.devices, isTemplate: prm.isTemplate }));
             break;
           }
           case "pictures": {
@@ -4157,7 +4023,7 @@
               rtn.push(/* @__PURE__ */ wp.element.createElement("h5", null, prm.label));
             }
             rtn.push(
-              /* @__PURE__ */ wp.element.createElement("ul", { className: "cp-pictures" }, props.attr[prm.key].map((item2, index) => /* @__PURE__ */ wp.element.createElement(CP.Item, { tag: "li", className: "cp-pictures__item", set: props.set, attr: props.attr, items: props.attr[prm.key], index, indexKey: prm.indexKey, isSelected: true, key: index }, /* @__PURE__ */ wp.element.createElement(CP.SelectPictureSources, { index, set: props.set, attr: props.attr, keys: prm.keys, sizes: prm.sizes, devices: prm.devices, compact: true, isTemplate: prm.isTemplate }))))
+              /* @__PURE__ */ wp.element.createElement("ul", { className: "cp-pictures" }, props.attributes[prm.key].map((item2, index) => /* @__PURE__ */ wp.element.createElement(CP.Item, { tag: "li", className: "cp-pictures__item", ...{ attributes, setAttributes }, itemKeys: [prm.key, index], isSelected: true, key: index }, /* @__PURE__ */ wp.element.createElement(CP.SelectPictureSources, { ...{ attributes, setAttributes }, itemKeys: [prm.key, index], keys: prm.keys, sizes: prm.sizes, devices: prm.devices, compact: true, isTemplate: prm.isTemplate }))))
             );
             break;
           }
@@ -4165,11 +4031,11 @@
             if (prm.label) {
               rtn.push(/* @__PURE__ */ wp.element.createElement("h5", null, prm.label));
             }
-            rtn.push(/* @__PURE__ */ wp.element.createElement(CP.InputBackgroundImage, { index: props.index, set: props.set, attr: props.attr, keys: prm.keys, sizes: prm.sizes, devices: prm.devices, isTemplate: prm.isTemplate }));
+            rtn.push(/* @__PURE__ */ wp.element.createElement(CP.InputBackgroundImage, { ...{ attributes, setAttributes }, keys: prm.keys }));
             break;
           }
           case "position": {
-            rtn.push(/* @__PURE__ */ wp.element.createElement(CP.SelectPositionClass, { set: props.set, attr: props.attr, label: prm.label, key: prm.key, help: prm.help, disable: prm.disable, itemsKey, index: props.index }));
+            rtn.push(/* @__PURE__ */ wp.element.createElement(CP.SelectPositionClass, { ...{ attributes, setAttributes, itemKeys }, label: prm.label, key: prm.key, help: prm.help, disable: prm.disable }));
           }
           case "icon": {
             if (prm.label) {
@@ -4353,21 +4219,7 @@
   var SelectClassPanel = (props) => {
     const { Fragment: Fragment2, useMemo: useMemo11, useCallback: useCallback3, createElement: el } = wp.element;
     const { PanelBody } = wp.components;
-    const {
-      blockClasssKey = "classes",
-      classKey: primaryClassKey = "classes",
-      items: items2,
-      index,
-      subItemsKey,
-      subIndex,
-      setAttributes,
-      set = setAttributes,
-      attributes,
-      attr = attributes,
-      itemKeys,
-      triggerClasses
-    } = wp.hooks.applyFilters("catpow.SelectClassPanelProps", props);
-    let { itemsKey: itemsKey2 = items2 ? "items" : null, itemClasses } = props;
+    const { blockClasssKey = "classes", classKey: primaryClassKey = "classes", setAttributes, attributes, itemKeys, triggerClasses } = wp.hooks.applyFilters("catpow.SelectClassPanelProps", props);
     const selectiveClasses = useMemo11(() => {
       if (!triggerClasses || !triggerClasses.item) {
         if (!props.selectiveClasses) {
@@ -4378,23 +4230,14 @@
         }
         return CP.resolveSelectiveClassesPresets(Object.values(props.selectiveClasses));
       }
-      const blockStates = CP.classNamesToFlags(attr[blockClasssKey]);
+      const blockStates = CP.classNamesToFlags(attributes[blockClasssKey]);
       return CP.resolveSelectiveClassesPresets(triggerClasses.item[Object.keys(triggerClasses.item).find((value2) => blockStates[value2])]);
-    }, [props.selectiveClasses, triggerClasses && attr[blockClasssKey]]);
-    const { styleDatas } = attr;
+    }, [props.selectiveClasses, triggerClasses && attributes[blockClasssKey]]);
     const item = useMemo11(() => {
-      if (!items2) {
-        return attr;
-      }
-      if (!items2[index]) {
-        return false;
-      }
-      if (subItemsKey) {
-        return items2[index][subItemsKey][subIndex];
-      }
-      return items2[index];
-    }, [attr, items2, index, subItemsKey, subIndex]);
-    const states = useMemo11(() => CP.classNamesToFlags(item[primaryClassKey]), [item[primaryClassKey]]);
+      if (!itemKeys) return attributes;
+      return CP.getTheItem(props);
+    }, [attributes, itemKeys]);
+    const states = useMemo11(() => CP.classNamesToFlags(item?.[primaryClassKey]), [item?.[primaryClassKey]]);
     const allStates = useMemo11(() => {
       const allStates2 = { [primaryClassKey]: states };
       const addClassKeyFlagsInPrm = (prm, flags) => {
@@ -4437,20 +4280,20 @@
         props.selectiveClasses.forEach((prm) => addClassKeyFlagsInPrm(prm, classKeyFlags));
       }
       Object.keys(classKeyFlags).forEach((classKey) => {
-        allStates2[classKey] = CP.classNamesToFlags(item[classKey]);
+        allStates2[classKey] = CP.classNamesToFlags(item?.[classKey]);
       });
       return allStates2;
     }, [props.selectiveClasses, item, states, primaryClassKey]);
     const save = useCallback3(
       (data) => {
-        if (items2) {
-          Object.assign(item, data);
-          set({ [itemsKey2]: JSON.parse(JSON.stringify(items2)) });
+        if (itemKeys) {
+          Object.assign(CP.getTheItem(props), data);
+          CP.saveItem(props);
         } else {
-          set(data);
+          setAttributes(data);
         }
       },
-      [set, index, items2, itemsKey2]
+      [setAttributes, itemKeys]
     );
     const saveClasses = useCallback3(
       (classKey = primaryClassKey) => {
@@ -4458,25 +4301,20 @@
       },
       [primaryClassKey, save, allStates]
     );
-    const saveCss = useCallback3(
-      (cssKey) => {
-        set({ [cssKey]: CP.createStyleCodeWithMediaQuery(styleDatas[cssKey]) });
-      },
-      [set, styleDatas]
-    );
     const colorNumber = useMemo11(() => CP.getClosestBlockAttributesComputed(({ classes }) => CP.getColorNumber(classes), wp.data.select("core/block-editor").getSelectedBlock(), itemKeys));
+    const block = wp.data.select("core/block-editor").getSelectedBlock();
     if (!item || !selectiveClasses) {
       return false;
     }
-    return /* @__PURE__ */ wp.element.createElement(PanelBody, { title: props.title, initialOpen: props.initialOpen || false, icon: props.icon }, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanelContext.Provider, { value: { props, item, states, allStates, set, save, saveClasses, styleDatas, saveCss, primaryClassKey, colorNumber } }, selectiveClasses.map((prm, index2) => /* @__PURE__ */ wp.element.createElement(Fragment2, { key: index2 }, /* @__PURE__ */ wp.element.createElement(SelectClassPanelBlock, { prm }))), props.children));
+    return /* @__PURE__ */ wp.element.createElement(PanelBody, { title: props.title, initialOpen: props.initialOpen || false, icon: props.icon }, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanelContext.Provider, { value: { props, item, states, allStates, save, saveClasses, primaryClassKey, block, colorNumber } }, selectiveClasses.map((prm, index) => /* @__PURE__ */ wp.element.createElement(Fragment2, { key: index }, /* @__PURE__ */ wp.element.createElement(SelectClassPanelBlock, { prm }))), props.children));
   };
 
   // ../blocks/_init/init/CP/components/AlignClassToolbar.jsx
   var { useMemo: useMemo5 } = wp.element;
   var AlignClassToolbar = (props) => {
-    const { set, attr, classKey = "classes", aligns = { left: "is-align-left", center: "is-align-center", right: "is-align-right" } } = props;
+    const { setAttributes, attributes, classKey = "classes", aligns = { left: "is-align-left", center: "is-align-center", right: "is-align-right" } } = props;
     const { BlockAlignmentToolbar } = wp.blockEditor;
-    const classSet = useMemo5(() => new Set(attr[classKey]?.split(" ") || []), [attr[classKey]]);
+    const classSet = useMemo5(() => new Set(attributes[classKey]?.split(" ") || []), [attributes[classKey]]);
     const alignClassSet = useMemo5(() => new Set(Object.values(aligns)), [aligns]);
     return /* @__PURE__ */ wp.element.createElement(
       BlockAlignmentToolbar,
@@ -4484,7 +4322,7 @@
         value: Object.entries(aligns).find(([key, val]) => classSet.has(val))?.[0] || "left",
         controls: Object.keys(aligns),
         onChange: (align) => {
-          set({ [classKey]: [...classSet.difference(alignClassSet).add(aligns[align])].join(" ") });
+          setAttributes({ [classKey]: [...classSet.difference(alignClassSet).add(aligns[align])].join(" ") });
         }
       }
     );
@@ -4493,9 +4331,9 @@
   // ../blocks/_init/init/CP/components/VerticalAlignClassToolbar.jsx
   var { useMemo: useMemo6 } = wp.element;
   var VerticalAlignClassToolbar = (props) => {
-    const { set, attr, classKey = "classes", aligns = { top: "has-vertical-align-top", center: "has-vertical-align-middle", bottom: "has-vertical-align-bottom" } } = props;
+    const { setAttributes, attributes, classKey = "classes", aligns = { top: "has-vertical-align-top", center: "has-vertical-align-middle", bottom: "has-vertical-align-bottom" } } = props;
     const { BlockVerticalAlignmentToolbar } = wp.blockEditor;
-    const classSet = useMemo6(() => new Set(attr[classKey]?.split(" ") || []), [attr[classKey]]);
+    const classSet = useMemo6(() => new Set(attributes[classKey]?.split(" ") || []), [attributes[classKey]]);
     const alignClassSet = useMemo6(() => new Set(Object.values(aligns)), [aligns]);
     return /* @__PURE__ */ wp.element.createElement(
       BlockVerticalAlignmentToolbar,
@@ -4503,7 +4341,7 @@
         value: Object.entries(aligns).find(([key, val]) => classSet.has(val))?.[0] || "top",
         controls: Object.keys(aligns),
         onChange: (align) => {
-          set({ [classKey]: [...classSet.difference(alignClassSet).add(aligns[align])].join(" ") });
+          setAttributes({ [classKey]: [...classSet.difference(alignClassSet).add(aligns[align])].join(" ") });
         }
       }
     );
@@ -4587,7 +4425,7 @@
   var SelectPatternClass = (props) => {
     const { BaseControl: BaseControl2 } = wp.components;
     const { label, help, selected, onChange } = props;
-    var items2 = Array.from(Array(6), (v, i) => {
+    var items = Array.from(Array(6), (v, i) => {
       var classes = "bgPattern" + i;
       const value2 = "pattern" + i;
       if (value2 == selected) {
@@ -4595,7 +4433,7 @@
       }
       return /* @__PURE__ */ wp.element.createElement("li", { className: classes, onClick: () => onChange(value2), key: value2 }, " ");
     });
-    return /* @__PURE__ */ wp.element.createElement(BaseControl2, { label, help }, /* @__PURE__ */ wp.element.createElement("ul", { className: "cp-selectpattern" }, items2));
+    return /* @__PURE__ */ wp.element.createElement(BaseControl2, { label, help }, /* @__PURE__ */ wp.element.createElement("ul", { className: "cp-selectpattern" }, items));
   };
 
   // ../blocks/_init/init/CP/components/SelectSize.jsx
@@ -4627,9 +4465,22 @@
       ["bottomLeft", "bottom", "bottomRight"]
     ];
     const values = _.flatten(rows);
-    const { label, help, itemsKey: itemsKey2, index, disable } = props;
-    let value2 = itemsKey2 ? CP.getItemSelectiveClass(props, values) : CP.getSelectiveClass(props, values);
-    return /* @__PURE__ */ wp.element.createElement(BaseControl2, { label, help }, /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "cp" }, /* @__PURE__ */ wp.element.createElement("table", { className: "selectposition-" }, /* @__PURE__ */ wp.element.createElement("tbody", { className: "_body" }, rows.map((cols, index2) => /* @__PURE__ */ wp.element.createElement("tr", { className: "_row", key: index2 }, cols.map((col) => {
+    const { label, help, attributes, setAttributes, itemKeys, disable, key: classKey = "classes" } = props;
+    const item = itemKeys ? CP.getTheItem(props) : attributes;
+    const classSet = new Set((item[classKey] || "").split(" "));
+    const value2 = values.find((value3) => classSet.has(value3));
+    const select = (value3) => {
+      values.forEach((value4) => classSet.delete(value4));
+      classSet.add(value3);
+      const data = { [classKey]: [...classSet].filter(Boolean).join(" ") };
+      if (itemKeys) {
+        Object.assign(CP.getTheItem(props), data);
+        CP.saveItem(props);
+      } else {
+        setAttributes(data);
+      }
+    };
+    return /* @__PURE__ */ wp.element.createElement(BaseControl2, { label, help }, /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "cp" }, /* @__PURE__ */ wp.element.createElement("table", { className: "selectposition-" }, /* @__PURE__ */ wp.element.createElement("tbody", { className: "_body" }, rows.map((cols, index) => /* @__PURE__ */ wp.element.createElement("tr", { className: "_row", key: index }, cols.map((col) => {
       var isChecked = value2 == col;
       if (disable && disable.includes(col)) {
         return /* @__PURE__ */ wp.element.createElement("td", { className: "_cell is-disabled", key: col }, " ");
@@ -4638,13 +4489,7 @@
         "td",
         {
           className: clsx("_cell", { "is-active": isChecked }),
-          onClick: () => {
-            if (itemsKey2) {
-              CP.switchItemSelectiveClass(props, values, col, props.key);
-            } else {
-              CP.switchSelectiveClass(props, values, col, props.key);
-            }
-          },
+          onClick: () => select(col),
           key: col
         },
         " "
@@ -4693,8 +4538,8 @@
   var SelectModeToolbar = (props) => {
     const { BlockControls: BlockControls2 } = wp.blockEditor;
     const { ToolbarGroup: ToolbarGroup2 } = wp.components;
-    const { set, attr, modes = ["EditMode", "AltMode"] } = props;
-    const SomeMode = modes.some((mode) => attr[mode]);
+    const { setAttributes, attributes, modes = ["EditMode", "AltMode"] } = props;
+    const SomeMode = modes.some((mode) => attributes[mode]);
     const icons = {
       EditMode: "edit",
       OpenMode: "video-alt3",
@@ -4705,10 +4550,10 @@
       AltMode: "doLoop"
     };
     return /* @__PURE__ */ wp.element.createElement(BlockControls2, null, modes.map((mode) => {
-      if (!attr[mode] && SomeMode) {
+      if (!attributes[mode] && SomeMode) {
         return false;
       }
-      if (cond[mode] && !attr[cond[mode]]) {
+      if (cond[mode] && !attributes[cond[mode]]) {
         return false;
       }
       return /* @__PURE__ */ wp.element.createElement(
@@ -4718,8 +4563,8 @@
             {
               icon: icons[mode],
               title: mode,
-              isActive: attr[mode],
-              onClick: () => set({ [mode]: !attr[mode] })
+              isActive: attributes[mode],
+              onClick: () => setAttributes({ [mode]: !attributes[mode] })
             }
           ],
           key: mode
@@ -4732,7 +4577,7 @@
   var SelectDeviceToolbar = (props) => {
     const { BlockControls: BlockControls2 } = wp.blockEditor;
     const { ToolbarGroup: ToolbarGroup2 } = wp.components;
-    const { set, attr, devices: devices2 = ["sp", "pc"], defaultInput } = props;
+    const { setAttributes, attributes, devices: devices2 = ["sp", "pc"], defaultInput } = props;
     return /* @__PURE__ */ wp.element.createElement(BlockControls2, null, devices2.map((device) => {
       return /* @__PURE__ */ wp.element.createElement(
         ToolbarGroup2,
@@ -4741,12 +4586,12 @@
             {
               icon: CP.devices[device].icon,
               title: device,
-              isActive: attr.device === device,
+              isActive: attributes.device === device,
               onClick: () => {
-                if (attr.device === device) {
-                  set({ device: defaultInput || null });
+                if (attributes.device === device) {
+                  setAttributes({ device: defaultInput || null });
                 } else {
-                  set({ device });
+                  setAttributes({ device });
                 }
               }
             }
@@ -4759,20 +4604,20 @@
 
   // ../blocks/_init/init/CP/components/EditItemsTable.jsx
   var EditItemsTable = (props) => {
-    const { set, attr, itemsKey: itemsKey2 = "items", isTemplate = false } = props;
+    const { setAttributes, attributes, itemKeys = ["items"], isTemplate = false } = props;
     const { useCallback: useCallback3 } = wp.element;
     const { RichText } = wp.blockEditor;
     const classes = bem("cp-edititemstable");
-    const items2 = attr[itemsKey2] || [];
+    const items = CP.getTheItems({ attributes, itemKeys }) || [];
     const save = () => {
-      set({ [itemsKey2]: JSON.parse(JSON.stringify(items2)) });
+      setAttributes({ [itemKeys[0]]: JSON.parse(JSON.stringify(attributes[itemKeys[0]])) });
     };
     const getActiveColumns = useCallback3((props2) => {
       const columns2 = [];
       props2.columns.forEach((col) => {
         if (col.hasOwnProperty("cond")) {
           if (typeof col.cond === "function") {
-            if (!col.cond(props2.attr)) {
+            if (!col.cond(attributes)) {
               return false;
             }
           } else if (!col.cond) {
@@ -4780,7 +4625,7 @@
           }
         }
         if (col.type === "dynamic") {
-          columns2.push.apply(columns2, col.getColumns(props2.attr));
+          columns2.push.apply(columns2, col.getColumns(attributes));
         } else {
           columns2.push(col);
         }
@@ -4788,13 +4633,13 @@
       return columns2;
     }, []);
     const columns = getActiveColumns(props);
-    return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "cp" }, /* @__PURE__ */ wp.element.createElement("table", { className: "cp-edititemstable" }, /* @__PURE__ */ wp.element.createElement("thead", null, /* @__PURE__ */ wp.element.createElement("tr", null, columns.map((col, c) => /* @__PURE__ */ wp.element.createElement("th", { key: c }, col.label || col.key)), /* @__PURE__ */ wp.element.createElement("th", null))), /* @__PURE__ */ wp.element.createElement("tbody", null, items2.map((item, index) => {
-      const propsForControl = { tag: "tr", set, itemsKey: itemsKey2, items: items2, index };
+    return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "cp" }, /* @__PURE__ */ wp.element.createElement("table", { className: "cp-edititemstable" }, /* @__PURE__ */ wp.element.createElement("thead", null, /* @__PURE__ */ wp.element.createElement("tr", null, columns.map((col, c) => /* @__PURE__ */ wp.element.createElement("th", { key: c }, col.label || col.key)), /* @__PURE__ */ wp.element.createElement("th", null))), /* @__PURE__ */ wp.element.createElement("tbody", null, items.map((item, index) => {
+      const propsForControl = { attributes, setAttributes, itemKeys: [...itemKeys, index] };
       return /* @__PURE__ */ wp.element.createElement(
         "tr",
         {
           onClick: (e) => {
-            set({ currentItemIndex: index });
+            setAttributes({ currentItemIndex: index });
           },
           key: index
         },
@@ -4865,10 +4710,10 @@
               ));
             }
             case "image": {
-              return /* @__PURE__ */ wp.element.createElement("td", { key: c }, /* @__PURE__ */ wp.element.createElement(CP.SelectResponsiveImage, { attr, set, keys: { items: itemsKey2, src: col.key, ...col.keys }, index, size: col.size || "vga", isTemplate }));
+              return /* @__PURE__ */ wp.element.createElement("td", { key: c }, /* @__PURE__ */ wp.element.createElement(CP.SelectResponsiveImage, { ...{ attributes, setAttributes }, itemKeys: [...itemKeys, index], keys: { src: col.key, ...col.keys }, size: col.size || "vga", isTemplate }));
             }
             case "picture": {
-              return /* @__PURE__ */ wp.element.createElement("td", { key: c }, /* @__PURE__ */ wp.element.createElement(CP.SelectPictureSources, { index, attr, set, keys: { items: itemsKey2, ...col.keys }, sizes: col.sizes, devices: col.devices, isTemplate }));
+              return /* @__PURE__ */ wp.element.createElement("td", { key: c }, /* @__PURE__ */ wp.element.createElement(CP.SelectPictureSources, { ...{ attributes, setAttributes }, itemKeys: [...itemKeys, index], keys: col.keys, sizes: col.sizes, devices: col.devices, isTemplate }));
             }
             case "icon": {
               return /* @__PURE__ */ wp.element.createElement("td", { key: c }, /* @__PURE__ */ wp.element.createElement(
@@ -4892,11 +4737,8 @@
               return /* @__PURE__ */ wp.element.createElement("td", { key: c }, /* @__PURE__ */ wp.element.createElement(
                 CP.EditItemsTable,
                 {
-                  set: () => {
-                    save();
-                  },
-                  attr: item,
-                  itemsKey: col.itemsKey,
+                  ...{ attributes, setAttributes },
+                  itemKeys: [...itemKeys, index, col.itemsKey],
                   columns: col.columns,
                   isTemplate
                 }
@@ -5179,9 +5021,9 @@
   // ../blocks/_init/init/CP/components/TextAlignClassToolbar.jsx
   var { useMemo: useMemo7 } = wp.element;
   var TextAlignClassToolbar = (props) => {
-    const { set, attr, classKey = "classes", aligns = { left: "has-text-align-left", center: "has-text-align-center", right: "has-text-align-right" } } = props;
+    const { setAttributes, attributes, classKey = "classes", aligns = { left: "has-text-align-left", center: "has-text-align-center", right: "has-text-align-right" } } = props;
     const { AlignmentToolbar } = wp.blockEditor;
-    const classSet = useMemo7(() => new Set(attr[classKey]?.split(" ") || []), [attr[classKey]]);
+    const classSet = useMemo7(() => new Set(attributes[classKey]?.split(" ") || []), [attributes[classKey]]);
     const alignClassSet = useMemo7(() => new Set(Object.values(aligns)), [aligns]);
     return /* @__PURE__ */ wp.element.createElement(
       AlignmentToolbar,
@@ -5189,7 +5031,7 @@
         value: Object.entries(aligns).find(([key, val]) => classSet.has(val))?.[0] || "left",
         controls: Object.keys(aligns),
         onChange: (align) => {
-          set({ [classKey]: [...classSet.difference(alignClassSet).add(aligns[align])].join(" ") });
+          setAttributes({ [classKey]: [...classSet.difference(alignClassSet).add(aligns[align])].join(" ") });
         }
       }
     );
@@ -5219,20 +5061,20 @@
 
   // ../blocks/_init/init/CP/components/PlacedPictures.jsx
   var PlacedPictures = (props) => {
-    const { className, attr, keys, index } = props;
-    const item = keys.items ? attr[keys.items][index] : attr;
+    const { className, attributes, keys } = props;
+    const item = props.itemKeys ? CP.getTheItem(props) : attributes;
     const pictures = item[keys.pictures];
-    return /* @__PURE__ */ wp.element.createElement("div", { className }, pictures && pictures.map((picture, index2) => {
+    return /* @__PURE__ */ wp.element.createElement("div", { className }, pictures && pictures.map((picture, index) => {
       const { style, code, sources, src, alt } = picture;
-      return /* @__PURE__ */ wp.element.createElement("div", { className: "item", style: CP.parseStyleString(style), key: index2 }, code || /* @__PURE__ */ wp.element.createElement("picture", { className: "picture" }, sources && sources.map((source) => /* @__PURE__ */ wp.element.createElement("source", { srcSet: source.srcset, media: CP.devices[source.device].media_query, "data-device": source.device, key: source.device })), /* @__PURE__ */ wp.element.createElement("img", { className: "img", src, alt })));
+      return /* @__PURE__ */ wp.element.createElement("div", { className: "item", style: CP.parseStyleString(style), key: index }, code || /* @__PURE__ */ wp.element.createElement("picture", { className: "picture" }, sources && sources.map((source) => /* @__PURE__ */ wp.element.createElement("source", { srcSet: source.srcset, media: CP.devices[source.device].media_query, "data-device": source.device, key: source.device })), /* @__PURE__ */ wp.element.createElement("img", { className: "img", src, alt })));
     }));
   };
   PlacedPictures.Edit = (props) => {
-    const { className, set, attr, keys, index, devices: devices2 } = props;
+    const { className, setAttributes, attributes, itemKeys, keys, devices: devices2 } = props;
     const { useState: useState7, useMemo: useMemo11, useCallback: useCallback3, useRef: useRef3, useEffect: useEffect6 } = wp.element;
     const { BlockControls: BlockControls2, InspectorControls } = wp.blockEditor;
     const { BaseControl: BaseControl2, Icon, PanelBody, RangeControl: RangeControl2, TextControl: TextControl2, Toolbar, ToolbarGroup: ToolbarGroup2, ToolbarButton, ToolbarDropdownMenu } = wp.components;
-    const item = keys.items ? attr[keys.items][index] : attr;
+    const item = itemKeys ? CP.getTheItem(props) : attributes;
     const pictures = item[keys.pictures];
     const classes = useMemo11(() => bem("cp-placedpictures " + className), [className]);
     const [editMode, setEditMode] = useState7(false);
@@ -5241,7 +5083,7 @@
     const [containerNode, setContainerNode] = useState7(false);
     const targetRefs = useRef3([]);
     useEffect6(() => {
-      setCurrentItemNodes(currentItemIndexes.sort().map((index2) => targetRefs.current[index2]));
+      setCurrentItemNodes(currentItemIndexes.sort().map((index) => targetRefs.current[index]));
     }, [currentItemIndexes, targetRefs, setCurrentItemNodes]);
     const remPx = useMemo11(() => parseFloat(getComputedStyle(document.documentElement).fontSize), []);
     const getPlaceStyle = useCallback3((bnd, tgtBnd) => {
@@ -5270,30 +5112,30 @@
     }, []);
     const onClickItem = useCallback3(
       (e) => {
-        const index2 = parseInt(e.currentTarget.dataset.index);
-        const selected = currentItemIndexes.includes(index2);
+        const index = parseInt(e.currentTarget.dataset.index);
+        const selected = currentItemIndexes.includes(index);
         if (e.shiftKey) {
           if (selected) {
-            setCurrentItemIndexes(currentItemIndexes.filter((i) => i !== index2));
+            setCurrentItemIndexes(currentItemIndexes.filter((i) => i !== index));
           } else {
-            setCurrentItemIndexes(currentItemIndexes.concat([index2]));
+            setCurrentItemIndexes(currentItemIndexes.concat([index]));
           }
         } else if (!selected) {
-          setCurrentItemIndexes([index2]);
+          setCurrentItemIndexes([index]);
         }
       },
       [currentItemIndexes, setCurrentItemIndexes]
     );
     const save = useCallback3(() => {
-      if (keys.items) {
-        items[index][keys.pictures] = JSON.parse(JSON.stringify(pictures));
-        set({ [keys.items]: [...items] });
+      if (itemKeys) {
+        Object.assign(CP.getTheItem(props), { [keys.pictures]: JSON.parse(JSON.stringify(pictures)) });
+        CP.saveItem(props);
       } else {
-        set({ [keys.pictures]: JSON.parse(JSON.stringify(pictures)) });
+        setAttributes({ [keys.pictures]: JSON.parse(JSON.stringify(pictures)) });
       }
-    }, [set, pictures]);
+    }, [setAttributes, attributes, itemKeys, pictures]);
     useEffect6(() => {
-      set({
+      setAttributes({
         lock: {
           move: editMode,
           remove: false
@@ -5331,7 +5173,7 @@
         onClick: () => {
           pictures.push.apply(
             pictures,
-            pictures.filter((item2, index2) => currentItemIndexes.includes(index2))
+            pictures.filter((item2, index) => currentItemIndexes.includes(index))
           );
           save();
         }
@@ -5342,17 +5184,17 @@
         icon: "remove",
         label: "remove",
         onClick: () => {
-          currentItemIndexes.sort().reverse().forEach((index2) => pictures.splice(index2, 1));
+          currentItemIndexes.sort().reverse().forEach((index) => pictures.splice(index, 1));
           save();
         }
       }
-    )), pictures && pictures.map((picture, index2) => {
+    )), pictures && pictures.map((picture, index) => {
       const { style, code, sources, src, alt } = picture;
-      return /* @__PURE__ */ wp.element.createElement("div", { className: "item", style: CP.parseStyleString(style), onClick: (e) => editMode && onClickItem(e), "data-index": index2, ref: (el) => targetRefs.current[index2] = el, key: index2 }, code ? /* @__PURE__ */ wp.element.createElement(CP.DummyImage, { text: code }) : /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement("div", { className: "item", style: CP.parseStyleString(style), onClick: (e) => editMode && onClickItem(e), "data-index": index, ref: (el) => targetRefs.current[index] = el, key: index }, code ? /* @__PURE__ */ wp.element.createElement(CP.DummyImage, { text: code }) : /* @__PURE__ */ wp.element.createElement(
         "picture",
         {
           className: "picture",
-          onClick: (e) => editMode && currentItemIndexes.includes(index2) && CP.selectImage(
+          onClick: (e) => editMode && currentItemIndexes.includes(index) && CP.selectImage(
             function(data) {
               Object.assign(picture, data);
               save();
@@ -5381,12 +5223,12 @@
         onDuplicate: () => {
           pictures.push.apply(
             pictures,
-            pictures.filter((item2, index2) => currentItemIndexes.includes(index2))
+            pictures.filter((item2, index) => currentItemIndexes.includes(index))
           );
           save();
         },
         onDelete: () => {
-          currentItemIndexes.sort().reverse().forEach((index2) => pictures.splice(index2, 1));
+          currentItemIndexes.sort().reverse().forEach((index) => pictures.splice(index, 1));
           save();
         }
       }
@@ -5395,16 +5237,16 @@
 
   // ../blocks/_init/init/CP/components/Link.jsx
   var Link = (props) => {
-    const { className, attr, keys, index, ...otherProps } = props;
-    const item = keys.items ? attr[keys.items][index] : attr;
+    const { className, attributes, itemKeys, keys, ...otherProps } = props;
+    const item = itemKeys ? CP.getTheItem(props) : attributes;
     const href = item?.[keys?.href] || "";
     const target = href.indexOf("://") !== -1 ? "_brank" : null;
     return /* @__PURE__ */ wp.element.createElement("a", { className, href, target, rel: target && "noopener", ...otherProps }, props.children);
   };
   Link.Edit = (props) => {
-    const { className, set, attr, keys, index, isSelected = "auto", ...otherProps } = props;
+    const { className, setAttributes, attributes, itemKeys, keys, isSelected = "auto", ...otherProps } = props;
     const { useMemo: useMemo11, useEffect: useEffect6, useState: useState7 } = wp.element;
-    const item = useMemo11(() => keys.items ? attr[keys.items][index] : attr, [attr, keys.items, index]);
+    const item = useMemo11(() => itemKeys ? CP.getTheItem(props) : attributes, [attributes, itemKeys]);
     const [hasSelection, setHasSelection] = useState7(false);
     const [ref, setRef] = useState7(false);
     const [popoverRef, setPopoverRef] = useState7(false);
@@ -5429,11 +5271,11 @@
         suppressContentEditableWarning: true,
         onBlur: (e) => {
           const href = e.target.textContent;
-          if (keys.items) {
-            Object.assign(attr[keys.items][index], { [keys.href]: href });
-            set({ [keys.items]: JSON.parse(JSON.stringify(attr[keys.items])) });
+          if (itemKeys) {
+            Object.assign(CP.getTheItem(props), { [keys.href]: href });
+            CP.saveItem(props);
           } else {
-            set({ [keys.href]: href });
+            setAttributes({ [keys.href]: href });
           }
         }
       },
@@ -5443,27 +5285,27 @@
 
   // ../blocks/_init/init/CP/components/RTF.jsx
   var RTF = (props) => {
-    const { className, pref = "cp-rtf", level = 3, attr, keys = { text: "text" }, index, ...otherProps } = props;
-    const item = keys.items ? attr[keys.items][index] : attr;
+    const { className, pref = "cp-rtf", level = 3, attributes, itemKeys, keys = { text: "text" }, ...otherProps } = props;
+    const item = itemKeys ? CP.getTheItem(props) : attributes;
     const text = item[keys.text] ? item[keys.text] : "";
     return /* @__PURE__ */ wp.element.createElement("div", { className, ...otherProps, dangerouslySetInnerHTML: { __html: rtf(text, pref, level) } });
   };
   RTF.Edit = (props) => {
-    const { className, pref = "cp-rtf", level = 3, set, attr, keys = { text: "text" }, index, isSelected = true, ...otherProps } = props;
+    const { className, pref = "cp-rtf", level = 3, setAttributes, attributes, itemKeys, keys = { text: "text" }, isSelected = true, ...otherProps } = props;
     const { useMemo: useMemo11, useCallback: useCallback3, useState: useState7 } = wp.element;
     const classes = useMemo11(() => bem("cp-rtf " + className), [className]);
-    const item = useMemo11(() => keys.items ? attr[keys.items][index] : attr, [attr, keys.items, index]);
+    const item = useMemo11(() => itemKeys ? CP.getTheItem(props) : attributes, [attributes, itemKeys]);
     const text = item[keys.text];
     const updateText = useCallback3(
       (text2) => {
-        if (keys.items) {
-          Object.assign(attr[keys.items][index], { [keys.text]: text2 });
-          set({ [keys.items]: JSON.parse(JSON.stringify(attr[keys.items])) });
+        if (itemKeys) {
+          Object.assign(CP.getTheItem(props), { [keys.text]: text2 });
+          CP.saveItem(props);
         } else {
-          set({ [keys.text]: text2 });
+          setAttributes({ [keys.text]: text2 });
         }
       },
-      [set, attr, keys]
+      [setAttributes, attributes, itemKeys, keys]
     );
     const editorFunction = useCallback3(
       (e) => {
@@ -5514,19 +5356,19 @@
   var Loop = (props) => {
     const { current = 0, Component = "div", loop = false, ...otherProps } = props;
     const { useState: useState7, useMemo: useMemo11, useCallback: useCallback3, useEffect: useEffect6, useRef: useRef3 } = wp.element;
-    const items2 = (() => {
-      const items3 = Array.isArray(props.items) ? props.items : Number.isInteger(props.items) ? [...Array(props.items).keys()] : Array.from(props.items);
-      items3.forEach((value2, index) => {
+    const items = (() => {
+      const items2 = Array.isArray(props.items) ? props.items : Number.isInteger(props.items) ? [...Array(props.items).keys()] : Array.from(props.items);
+      items2.forEach((value2, index) => {
         if (typeof value2 !== "object") {
-          items3[index] = { value: value2 };
+          items2[index] = { value: value2 };
         }
       });
-      return items3;
+      return items2;
     })();
     return (() => {
-      const l = items2.length;
+      const l = items.length;
       const h = l >> 1;
-      return items2.map((item, index) => {
+      return items.map((item, index) => {
         return /* @__PURE__ */ wp.element.createElement(Component, { ...otherProps, ...item, index, position: loop ? (index - current + l + h) % l - h : index - current, key: index });
       });
     })();
@@ -6953,41 +6795,6 @@
   });
 
   // ../blocks/_init/init/CP/functions/classes.jsx
-  var switchNumberClass = ({ set, attr }, label, value2) => {
-    let classArray = (attr.classes || "").split(" ");
-    let i = classArray.findIndex((cls) => cls.slice(0, label.length) === label);
-    if (i === -1) {
-      if (value2) {
-        classArray.push(label + value2);
-      }
-    } else {
-      if (value2) {
-        classArray.splice(i, 1, label + value2);
-      } else {
-        classArray.splice(i, 1);
-      }
-    }
-    set({ classes: classArray.join(" ") });
-  };
-  var getNumberClass = ({ attr }, label) => {
-    let value2 = (attr.classes || "").split(" ").find((cls) => cls.slice(0, label.length) === label);
-    if (!value2) {
-      return 0;
-    }
-    return parseInt(value2.slice(label.length));
-  };
-  var switchColor = (props, value2) => {
-    CP.switchNumberClass(props, "color", value2);
-  };
-  var getColor = (props) => {
-    return CP.getNumberClass(props, "color");
-  };
-  var switchPattern = (props, value2) => {
-    CP.switchNumberClass(props, "pattern", value2);
-  };
-  var getPattern = (props) => {
-    return CP.getNumberClass(props, "pattern");
-  };
   var switchSelectiveClass = ({ set, attr }, values, value2, key) => {
     if (key === void 0) {
       key = "classes";
@@ -7041,66 +6848,6 @@
       }
     }
     return null;
-  };
-  var getSubClasses = (prm) => {
-    let rtn = {};
-    let values;
-    if (Array.isArray(prm.values)) {
-      values = prm.values;
-    } else {
-      values = Object.keys(prm.values);
-    }
-    values.forEach((val) => {
-      if (prm.sub && prm.sub[val]) {
-        rtn[val] = CP.getAllSubClasses(prm.sub[val]);
-      } else {
-        rtn[val] = [];
-      }
-    });
-    return rtn;
-  };
-  var getAllSubClasses = (prms) => {
-    let rtn = [];
-    prms.forEach((prm) => {
-      if (typeof prm === "object") {
-        if (prm.values) {
-          if (Array.isArray(prm.values)) {
-            rtn = rtn.concat(prm.values);
-          } else if (_.isObject(prm.values)) {
-            rtn = rtn.concat(Object.keys(prm.values));
-          } else {
-            rtn.push(prm.values);
-          }
-        }
-        if (prm.sub) {
-          if (Array.isArray(prm.sub)) {
-            rtn = rtn.concat(CP.getAllSubClasses(prm.sub));
-          } else {
-            Object.keys(prm.sub).forEach((key) => {
-              rtn = rtn.concat(CP.getAllSubClasses(prm.sub[key]));
-            });
-          }
-        }
-      }
-    });
-    return rtn;
-  };
-  var getBindClasses = (prm) => {
-    let rtn = {};
-    let values;
-    if (Array.isArray(prm.values)) {
-      values = prm.values;
-    } else {
-      values = Object.keys(prm.values);
-    }
-    values.forEach((val) => {
-      if (prm.bind && prm.bind[val]) {
-        rtn[val] = prm.bind[val];
-      } else {
-        rtn[val] = [];
-      }
-    });
-    return rtn;
   };
   var getClassFlagsByValue = (prm, primaryClassKey = "classes") => {
     const cacheKeys = [CP.getClassFlagsByValue, prm, primaryClassKey];
@@ -7331,28 +7078,28 @@
     window.getSelection().anchorNode.parentNode.closest(tag).nextElementSibling.querySelector("[contentEditable]").focus();
   };
   var getTheItemIndex = (props) => {
-    const { items: items2, index, attributes, itemKeys = [] } = props;
-    if (items2) return index;
-    const [itemsKey2, itemIndex, subItemsKey, subItemIndex] = itemKeys;
+    const { items, index, attributes, itemKeys = [] } = props;
+    if (items) return index;
+    const [itemsKey, itemIndex, subItemsKey, subItemIndex] = itemKeys;
     if (subItemsKey) return subItemIndex;
     return itemIndex;
   };
   var getTheItem = (props) => {
-    var { items: items2, index, attributes, itemKeys = [] } = props;
-    if (items2) return items2[index];
-    const [itemsKey2, itemIndex, subItemsKey, subItemIndex] = itemKeys;
-    if (subItemsKey) return attributes?.[itemsKey2]?.[itemIndex]?.[subItemsKey][subItemIndex];
-    return attributes?.[itemsKey2]?.[itemIndex];
+    var { items, index, attributes, itemKeys = [] } = props;
+    if (items) return items[index];
+    const [itemsKey, itemIndex, subItemsKey, subItemIndex] = itemKeys;
+    if (subItemsKey) return attributes?.[itemsKey]?.[itemIndex]?.[subItemsKey][subItemIndex];
+    return attributes?.[itemsKey]?.[itemIndex];
   };
   var getTheItems = (props) => {
-    var { items: items2, attributes, itemKeys = [] } = props;
-    if (items2) return items2;
-    const [itemsKey2, itemIndex, subItemsKey] = itemKeys;
-    if (subItemsKey) return attributes?.[itemsKey2]?.[itemIndex]?.[subItemsKey];
-    return attributes?.[itemsKey2];
+    var { items, attributes, itemKeys = [] } = props;
+    if (items) return items;
+    const [itemsKey, itemIndex, subItemsKey] = itemKeys;
+    if (subItemsKey) return attributes?.[itemsKey]?.[itemIndex]?.[subItemsKey];
+    return attributes?.[itemsKey];
   };
-  var saveItem = ({ items: items2, itemsKey: itemsKey2, set, attributes, setAttributes, itemKeys }) => {
-    if (items2) return set({ [itemsKey2 || "items"]: JSON.parse(JSON.stringify(items2)) });
+  var saveItem = ({ items, itemsKey, set, attributes, setAttributes, itemKeys }) => {
+    if (items) return set({ [itemsKey || "items"]: JSON.parse(JSON.stringify(items)) });
     setAttributes({ [itemKeys[0]]: JSON.parse(JSON.stringify(attributes[itemKeys[0]])) });
   };
   var deleteItem = (props) => {
@@ -7366,17 +7113,17 @@
     selectNextItem(tag);
   };
   var upItem = (props) => {
-    const items2 = getTheItems(props);
+    const items = getTheItems(props);
     const index = getTheItemIndex(props);
     if (index <= 0) return false;
-    getTheItems(props).splice(index - 1, 2, items2[index], items2[index - 1]);
+    getTheItems(props).splice(index - 1, 2, items[index], items[index - 1]);
     saveItem(props);
   };
   var downItem = (props) => {
-    const items2 = getTheItems(props);
+    const items = getTheItems(props);
     const index = getTheItemIndex(props);
-    if (index > items2.length - 2) return false;
-    items2.splice(index, 2, items2[index + 1], items2[index]);
+    if (index > items.length - 2) return false;
+    items.splice(index, 2, items[index + 1], items[index]);
     saveItem(props);
   };
   var getItemByKeyAndIndex = ({ attr }, keys, index) => {
@@ -7389,8 +7136,8 @@
         }
         return item || {};
       } else {
-        const items2 = item[keys] || [];
-        item = items2[index] || {};
+        const items = item[keys] || [];
+        item = items[index] || {};
       }
     }
     return item;
@@ -7416,11 +7163,11 @@
       }
     }
   };
-  var switchItemColor = ({ items: items2, index, set }, color, itemsKey2) => {
-    if (itemsKey2 === void 0) {
-      itemsKey2 = "items";
+  var switchItemColor = ({ items, index, set }, color, itemsKey) => {
+    if (itemsKey === void 0) {
+      itemsKey = "items";
     }
-    let classArray = (items2[index].classes || "").split(" ");
+    let classArray = (items[index].classes || "").split(" ");
     let i = classArray.findIndex((cls) => cls.slice(0, 5) === "color");
     if (i === -1) {
       if (color) {
@@ -7433,21 +7180,21 @@
         classArray.splice(i, 1);
       }
     }
-    items2[index].classes = classArray.join(" ");
-    set({ [itemsKey2]: JSON.parse(JSON.stringify(items2)) });
+    items[index].classes = classArray.join(" ");
+    set({ [itemsKey]: JSON.parse(JSON.stringify(items)) });
   };
-  var getItemColor = ({ items: items2, index }) => {
-    let c = (items2[index].classes || "").split(" ").find((cls) => cls.slice(0, 5) === "color");
+  var getItemColor = ({ items, index }) => {
+    let c = (items[index].classes || "").split(" ").find((cls) => cls.slice(0, 5) === "color");
     if (!c) {
       return 0;
     }
     return parseInt(c.slice(5));
   };
-  var switchItemPattern = ({ items: items2, index, set }, pattern, itemsKey2) => {
-    if (itemsKey2 === void 0) {
-      itemsKey2 = "items";
+  var switchItemPattern = ({ items, index, set }, pattern, itemsKey) => {
+    if (itemsKey === void 0) {
+      itemsKey = "items";
     }
-    let classArray = (items2[index].classes || "").split(" ");
+    let classArray = (items[index].classes || "").split(" ");
     let i = classArray.findIndex((cls) => cls.slice(0, 7) === "pattern");
     if (i === -1) {
       if (pattern) {
@@ -7460,21 +7207,21 @@
         classArray.splice(i, 1);
       }
     }
-    items2[index].classes = classArray.join(" ");
-    set({ [itemsKey2]: JSON.parse(JSON.stringify(items2)) });
+    items[index].classes = classArray.join(" ");
+    set({ [itemsKey]: JSON.parse(JSON.stringify(items)) });
   };
-  var getItemPattern = ({ items: items2, index }) => {
-    let p = (items2[index].classes || "").split(" ").find((cls) => cls.slice(0, 7) === "pattern");
+  var getItemPattern = ({ items, index }) => {
+    let p = (items[index].classes || "").split(" ").find((cls) => cls.slice(0, 7) === "pattern");
     if (!p) {
       return 0;
     }
     return parseInt(p.slice(7));
   };
-  var switchItemSelectiveClass = ({ items: items2, index, set }, values, value2, itemsKey2) => {
-    if (itemsKey2 === void 0) {
-      itemsKey2 = "items";
+  var switchItemSelectiveClass = ({ items, index, set }, values, value2, itemsKey) => {
+    if (itemsKey === void 0) {
+      itemsKey = "items";
     }
-    let classArray = (items2[index].classes || "").split(" ");
+    let classArray = (items[index].classes || "").split(" ");
     if (!Array.isArray(values) && _.isObject(values)) {
       values = Object.keys(values);
     }
@@ -7484,35 +7231,35 @@
     } else {
       classArray.push(value2);
     }
-    items2[index].classes = classArray.join(" ");
-    set({ [itemsKey2]: JSON.parse(JSON.stringify(items2)) });
+    items[index].classes = classArray.join(" ");
+    set({ [itemsKey]: JSON.parse(JSON.stringify(items)) });
   };
-  var getItemSelectiveClass = ({ items: items2, index }, values) => {
-    if (!items2[index].classes) {
+  var getItemSelectiveClass = ({ items, index }, values) => {
+    if (!items[index].classes) {
       return false;
     }
-    let classArray = (items2[index].classes || "").split(" ");
+    let classArray = (items[index].classes || "").split(" ");
     if (!Array.isArray(values) && _.isObject(values)) {
       values = Object.keys(values);
     }
     return _.intersection(classArray, values).shift();
   };
-  var toggleItemClass = ({ items: items2, index, set }, value2, itemsKey2) => {
-    if (itemsKey2 === void 0) {
-      itemsKey2 = "items";
+  var toggleItemClass = ({ items, index, set }, value2, itemsKey) => {
+    if (itemsKey === void 0) {
+      itemsKey = "items";
     }
-    let classArray = (items2[index].classes || "").split(" ");
+    let classArray = (items[index].classes || "").split(" ");
     let i = classArray.indexOf(value2);
     if (i === -1) {
       classArray.push(value2);
     } else {
       classArray.splice(i, 1);
     }
-    items2[index].classes = classArray.join(" ");
-    set({ [itemsKey2]: JSON.parse(JSON.stringify(items2)) });
+    items[index].classes = classArray.join(" ");
+    set({ [itemsKey]: JSON.parse(JSON.stringify(items)) });
   };
-  var hasItemClass = ({ items: items2, index }, value2) => {
-    let classArray = (items2[index].classes || "").split(" ");
+  var hasItemClass = ({ items, index }, value2) => {
+    let classArray = (items[index].classes || "").split(" ");
     return classArray.indexOf(value2) !== -1;
   };
 
@@ -8096,13 +7843,13 @@
     });
   };
   var getClosestBlockAttributesComputed = (callback, block, itemKeys) => {
-    const [itemsKey2, index, subItemsKey, subIndex] = itemKeys || [];
-    if (itemsKey2 && block.attributes[itemsKey2][index]) {
-      if (subItemsKey && block.attributes[itemsKey2][index][subItemsKey][subIndex]) {
-        const result3 = callback(block.attributes[itemsKey2][index][subItemsKey][subIndex]);
+    const [itemsKey, index, subItemsKey, subIndex] = itemKeys || [];
+    if (itemsKey && block.attributes[itemsKey][index]) {
+      if (subItemsKey && block.attributes[itemsKey][index][subItemsKey][subIndex]) {
+        const result3 = callback(block.attributes[itemsKey][index][subItemsKey][subIndex]);
         if (result3 != null) return result3;
       }
-      const result2 = callback(block.attributes[itemsKey2][index]);
+      const result2 = callback(block.attributes[itemsKey][index]);
       if (result2 != null) return result2;
     }
     const result = callback(block.attributes);
@@ -8116,6 +7863,38 @@
       }
     }
     return null;
+  };
+  var walkBlocksRecursive = (blocks, callback) => {
+    blocks.forEach((block) => {
+      if (callback(block) !== false && block.innerBlocks) block.innerBlocks.forEach(callback);
+    });
+  };
+  var updateBlockAttributesColor = (block, colorNumber) => {
+    const { attributes, clientId } = block;
+    const modifiedAttributes = Object.keys(attributes).filter((key) => key.match(/^(\w+V|v)ars$/)).reduce((p, c) => {
+      const value2 = attributes[c];
+      if (typeof value2 !== "object") {
+        return p;
+      }
+      const newValues = Object.keys(value2).reduce((newValues2, key) => {
+        const matches = value2[key].match(/url\("(.+)?"\)/);
+        if (matches) {
+          const url = new URL(matches[1]);
+          if (url.searchParams.has("c") && url.searchParams.get("c") !== colorNumber) {
+            url.searchParams.set("c", colorNumber);
+            newValues2[key] = value2[key].replace(matches[0], `url("${url.toString()}")`);
+          }
+        }
+        return newValues2;
+      }, {});
+      if (Object.keys(newValues).length) {
+        p[c] = { ...value2, ...newValues };
+      }
+      return p;
+    }, {});
+    if (Object.keys(modifiedAttributes).length) {
+      wp.data.dispatch("core/block-editor").updateBlockAttributes(clientId, modifiedAttributes);
+    }
   };
 
   // ../blocks/_init/init/CP/functions/proxy.js

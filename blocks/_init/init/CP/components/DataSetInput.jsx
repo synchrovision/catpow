@@ -22,15 +22,13 @@ export const DataSetInput = (props) => {
 	return (
 		<ul className={classes()}>
 			{dataSet &&
-				dataSet.map((data, index) => {
+			dataSet.map((data, index) => {
 					const dataProps = {
-						tag: "li",
-						set: ({ dataSet }) => {
-							onChange(dataSet);
+						attributes: { dataset: dataSet },
+						setAttributes: ({ dataset }) => {
+							onChange(dataset);
 						},
-						items: dataSet,
-						itemsKey: "dataset",
-						index,
+						itemKeys: ["dataset", index],
 					};
 					return (
 						<li className={classes.row()} key={index}>

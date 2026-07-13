@@ -1,9 +1,9 @@
 ﻿import { clsx } from "clsx";
 
 export const Link = (props) => {
-	const { className, attr, keys, index, ...otherProps } = props;
+	const { className, attributes, itemKeys, keys, ...otherProps } = props;
 
-	const item = keys.items ? attr[keys.items][index] : attr;
+	const item = itemKeys ? CP.getTheItem(props) : attributes;
 	const href = item?.[keys?.href] || "";
 	const target = href.indexOf("://") !== -1 ? "_brank" : null;
 
@@ -14,10 +14,10 @@ export const Link = (props) => {
 	);
 };
 Link.Edit = (props) => {
-	const { className, set, attr, keys, index, isSelected = "auto", ...otherProps } = props;
+	const { className, setAttributes, attributes, itemKeys, keys, isSelected = "auto", ...otherProps } = props;
 	const { useMemo, useEffect, useState } = wp.element;
 
-	const item = useMemo(() => (keys.items ? attr[keys.items][index] : attr), [attr, keys.items, index]);
+	const item = useMemo(() => (itemKeys ? CP.getTheItem(props) : attributes), [attributes, itemKeys]);
 
 	const [hasSelection, setHasSelection] = useState(false);
 	const [ref, setRef] = useState(false);
@@ -50,11 +50,11 @@ Link.Edit = (props) => {
 							suppressContentEditableWarning={true}
 							onBlur={(e) => {
 								const href = e.target.textContent;
-								if (keys.items) {
-									Object.assign(attr[keys.items][index], { [keys.href]: href });
-									set({ [keys.items]: JSON.parse(JSON.stringify(attr[keys.items])) });
+								if (itemKeys) {
+									Object.assign(CP.getTheItem(props), { [keys.href]: href });
+									CP.saveItem(props);
 								} else {
-									set({ [keys.href]: href });
+									setAttributes({ [keys.href]: href });
 								}
 							}}
 						>

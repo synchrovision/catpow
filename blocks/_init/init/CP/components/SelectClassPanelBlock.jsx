@@ -6,10 +6,11 @@ import { SelectClassPanelContext } from "./SelectClassPanel.jsx";
 export const SelectClassPanelBlock = ({ prm }) => {
 	const { Fragment, useMemo, useContext, createElement: el } = wp.element;
 	const { CheckboxControl, RadioControl, SelectControl, TextareaControl, TextControl, ColorPicker, __experimentalGradientPicker: GradientPicker } = wp.components;
-	const { props, item, states, allStates, set, save, saveClasses, styleDatas, saveCss, primaryClassKey, colorNumber } = useContext(SelectClassPanelContext);
-	const { subItemsKey } = props;
+	const { props, item, states, allStates, save, saveClasses, primaryClassKey, block, colorNumber } = useContext(SelectClassPanelContext);
+	const { attributes, setAttributes, itemKeys, subItemsKey } = props;
 	const { classKey = primaryClassKey } = prm;
 	const targetStates = allStates[classKey] || {};
+
 	if (prm.hasOwnProperty("cond")) {
 		if (prm.cond === false) {
 			return false;
@@ -25,14 +26,6 @@ export const SelectClassPanelBlock = ({ prm }) => {
 		}
 	}
 	let rtn = [];
-	if (prm.keys) {
-		if (props.items) {
-			prm.keys.items = prm.keys.items || props.itemsKey;
-			if (subItemsKey) {
-				prm.keys.subItems = prm.keys.subItems || subItemsKey;
-			}
-		}
-	}
 	if (prm.json) {
 		if (prm.input) {
 			switch (prm.input) {
@@ -46,7 +39,7 @@ export const SelectClassPanelBlock = ({ prm }) => {
 					rtn.push(
 						<CP.DynamicInput
 							param={prm}
-							value={JSON.parse(props.attr[prm.json])[prm.key]}
+							value={JSON.parse(props.attributes[prm.json])[prm.key]}
 							onChange={(val) => {
 								if (prm.filter) {
 									val = prm.filter(val, states, props);
@@ -64,19 +57,18 @@ export const SelectClassPanelBlock = ({ prm }) => {
 					if (prm.label) {
 						rtn.push(<h5>{prm.label}</h5>);
 					}
-					let attr = JSON.parse(props.attr[prm.json]) || {};
+					let pictureAttributes = JSON.parse(props.attributes[prm.json]) || {};
 					if (prm.key) {
-						attr = attr[prm.key] || {};
+						pictureAttributes = pictureAttributes[prm.key] || {};
 					}
 					rtn.push(
 						<CP.SelectPictureSources
-							index={props.index}
-							set={(val) => {
+							setAttributes={(val) => {
 								if (prm.filter) {
 									val = prm.filter(val, states, props);
 								}
 								if (prm.key) {
-									CP.setJsonValue(props, prm.json, prm.key, Object.assign(attr, val));
+									CP.setJsonValue(props, prm.json, prm.key, Object.assign(pictureAttributes, val));
 								} else {
 									CP.setJsonValues(props, prm.json, prm.keys, val);
 								}
@@ -84,7 +76,7 @@ export const SelectClassPanelBlock = ({ prm }) => {
 									prm.effect(val, states, props);
 								}
 							}}
-							attr={attr}
+							attributes={pictureAttributes}
 							keys={prm.keys}
 							sizes={prm.sizes}
 							devices={prm.devices}
@@ -169,9 +161,9 @@ export const SelectClassPanelBlock = ({ prm }) => {
 				case "buttons":
 				case "gridbuttons": {
 					if (prm.sub) {
-						if (prm.sub[JSON.parse(props.attr[prm.json])[prm.key]]) {
+						if (prm.sub[JSON.parse(props.attributes[prm.json])[prm.key]]) {
 							let sub = [];
-							prm.sub[JSON.parse(props.attr[prm.json])[prm.key]].forEach((prm) => {
+							prm.sub[JSON.parse(props.attributes[prm.json])[prm.key]].forEach((prm) => {
 								sub.push(<SelectClassPanelBlock prm={prm} />);
 							});
 							rtn.push(<div className="sub">{sub}</div>);
@@ -181,7 +173,7 @@ export const SelectClassPanelBlock = ({ prm }) => {
 				}
 				case "bool": {
 					if (prm.sub) {
-						if (JSON.parse(props.attr[prm.json])[prm.key]) {
+						if (JSON.parse(props.attributes[prm.json])[prm.key]) {
 							let sub = [];
 							prm.sub.forEach((prm) => {
 								sub.push(<SelectClassPanelBlock prm={prm} />);
@@ -237,7 +229,7 @@ export const SelectClassPanelBlock = ({ prm }) => {
 			rtn.push(
 				<TextControl
 					label={prm.label}
-					value={JSON.parse(props.attr[prm.json])[prm.key]}
+					value={JSON.parse(props.attributes[prm.json])[prm.key]}
 					onChange={(val) => {
 						CP.setJsonValue(props, prm.json, prm.key, val);
 					}}
@@ -246,10 +238,10 @@ export const SelectClassPanelBlock = ({ prm }) => {
 		}
 	} else if (prm.vars) {
 		if (prm.input) {
-			if (props.attr?.[prm.vars]?.[prm.key] === undefined && prm.default != null) {
+			if (props.attributes?.[prm.vars]?.[prm.key] === undefined && prm.default != null) {
 				save({
 					[prm.vars]: {
-						...props.attr[prm.vars],
+						...props.attributes[prm.vars],
 						[prm.key]: prm.default,
 					},
 				});
@@ -265,14 +257,14 @@ export const SelectClassPanelBlock = ({ prm }) => {
 					rtn.push(
 						<CP.DynamicInput
 							param={prm}
-							value={props.attr?.[prm.vars]?.[prm.key]}
+							value={props.attributes?.[prm.vars]?.[prm.key]}
 							onChange={(val) => {
 								if (prm.filter) {
 									val = prm.filter(val, states, props);
 								}
 								save({
 									[prm.vars]: {
-										...props.attr[prm.vars],
+										...props.attributes[prm.vars],
 										[prm.key]: `${val}`,
 									},
 								});
@@ -284,9 +276,9 @@ export const SelectClassPanelBlock = ({ prm }) => {
 				case "customColorVars": {
 					rtn.push(
 						<CP.CustomColorVars
-							value={props.attr[prm.vars]}
+							value={props.attributes[prm.vars]}
 							onChange={(vars) => {
-								const newVars = { ...props.attr[prm.vars] };
+								const newVars = { ...props.attributes[prm.vars] };
 								Object.keys(vars).forEach((key) => {
 									if (vars[key] === null) {
 										delete newVars[key];
@@ -304,11 +296,11 @@ export const SelectClassPanelBlock = ({ prm }) => {
 					rtn.push(
 						<CP.SelectBlendMode
 							label={prm.label}
-							value={props.attr?.[prm.vars]?.[prm.key]}
+							value={props.attributes?.[prm.vars]?.[prm.key]}
 							onChange={(val) => {
 								save({
 									[prm.vars]: {
-										...props.attr[prm.vars],
+										...props.attributes[prm.vars],
 										[prm.key]: `${val}`,
 									},
 								});
@@ -320,11 +312,11 @@ export const SelectClassPanelBlock = ({ prm }) => {
 				case "image": {
 					rtn.push(
 						<CP.SelectResponsiveImage
-							attr={props.attr[prm.vars]}
-							set={(data) => {
+							attributes={props.attributes[prm.vars]}
+							setAttributes={(data) => {
 								save({
 									[prm.vars]: {
-										...props.attr[prm.vars],
+										...props.attributes[prm.vars],
 										...data,
 									},
 								});
@@ -337,11 +329,11 @@ export const SelectClassPanelBlock = ({ prm }) => {
 				case "backgroundimage": {
 					rtn.push(
 						<CP.InputBackgroundImage
-							attr={props.attr[prm.vars]}
-							set={(data) => {
+							attributes={props.attributes[prm.vars]}
+							setAttributes={(data) => {
 								save({
 									[prm.vars]: {
-										...props.attr[prm.vars],
+										...props.attributes[prm.vars],
 										...data,
 									},
 								});
@@ -356,17 +348,16 @@ export const SelectClassPanelBlock = ({ prm }) => {
 					rtn.push(
 						<Catpow.SelectPreparedImage
 							name="border"
-							value={props.attr?.[prm.vars]?.[prm.key]?.match(/url\("(.+?)(\?.+)?"\)/)[1]}
+							value={props.attributes?.[prm.vars]?.[prm.key]?.match(/url\("(.+?)(\?.+)?"\)/)[1]}
 							color={colorNumber}
 							onSelect={(image) => {
-								console.log({ image });
 								if (!image.conf) {
 									return;
 								}
 								const { slice, width, repeat } = image.conf;
 								save({
 									[prm.vars]: {
-										...props.attr[prm.vars],
+										...props.attributes[prm.vars],
 										[prm.key]: `url("${image.url}") fill ${slice} / ${width} ${repeat}`,
 									},
 								});
@@ -379,11 +370,11 @@ export const SelectClassPanelBlock = ({ prm }) => {
 					rtn.push(
 						<CP.PositionInput
 							label={prm.label}
-							value={props.attr?.[prm.vars]?.[prm.key]}
+							value={props.attributes?.[prm.vars]?.[prm.key]}
 							onChange={(val) => {
 								save({
 									[prm.vars]: {
-										...props.attr[prm.vars],
+										...props.attributes[prm.vars],
 										[prm.key]: `${val}`,
 									},
 								});
@@ -396,11 +387,11 @@ export const SelectClassPanelBlock = ({ prm }) => {
 					rtn.push(
 						<CP.SelectSize
 							label={prm.label}
-							value={props.attr?.[prm.vars]?.[prm.key]}
+							value={props.attributes?.[prm.vars]?.[prm.key]}
 							onChange={(val) => {
 								save({
 									[prm.vars]: {
-										...props.attr[prm.vars],
+										...props.attributes[prm.vars],
 										[prm.key]: `${val}`,
 									},
 								});
@@ -413,11 +404,11 @@ export const SelectClassPanelBlock = ({ prm }) => {
 					rtn.push(
 						<CP.ResponsiveSizeInput
 							label={prm.label}
-							value={props.attr?.[prm.vars]?.[prm.key]}
+							value={props.attributes?.[prm.vars]?.[prm.key]}
 							onChange={(val) => {
 								save({
 									[prm.vars]: {
-										...props.attr[prm.vars],
+										...props.attributes[prm.vars],
 										[prm.key]: `${val}`,
 									},
 								});
@@ -430,11 +421,11 @@ export const SelectClassPanelBlock = ({ prm }) => {
 					rtn.push(
 						<CP.ResponsiveItemSizeInput
 							label={prm.label}
-							value={props.attr?.[prm.vars]?.[prm.key]}
+							value={props.attributes?.[prm.vars]?.[prm.key]}
 							onChange={(val) => {
 								save({
 									[prm.vars]: {
-										...props.attr[prm.vars],
+										...props.attributes[prm.vars],
 										[prm.key]: `${val}`,
 									},
 								});
@@ -448,10 +439,10 @@ export const SelectClassPanelBlock = ({ prm }) => {
 			rtn.push(
 				<TextControl
 					label={prm.label}
-					value={props.attr?.[prm.vars]?.[prm.key]}
+					value={props.attributes?.[prm.vars]?.[prm.key]}
 					onChange={(val) => {
 						save({
-							[prm.vars]: { ...props.attr[prm.vars], [prm.key]: `${val}` },
+							[prm.vars]: { ...props.attributes[prm.vars], [prm.key]: `${val}` },
 						});
 					}}
 				/>,
@@ -464,8 +455,8 @@ export const SelectClassPanelBlock = ({ prm }) => {
 					label={__("色", "catpow")}
 					selected={targetStates}
 					onChange={(proxy) => {
-						if (!props.items) {
-							props.setAttributes({ color: proxy.value });
+						if (!itemKeys) {
+							setAttributes({ color: proxy.value });
 							CP.updateBlockAttributesColor(block, proxy.value);
 							CP.walkBlocksRecursive(block.innerBlocks, (block) => {
 								if (CP.getColorNumber(block.attributes?.classes)) return false;
@@ -483,8 +474,6 @@ export const SelectClassPanelBlock = ({ prm }) => {
 			rtn.push(
 				<CP.SelectPatternClass
 					label={__("パターン", "catpow")}
-					set={props.set}
-					attr={props.attr}
 					selected={Object.keys(states).find((key) => /^pattern\d+/.test(key))}
 					onChange={(pattern) => {
 						CP.filterFlags(states, (key) => !/^pattern\d+/.test(key));
@@ -554,9 +543,9 @@ export const SelectClassPanelBlock = ({ prm }) => {
 					}
 					rtn.push(
 						<CP.SelectResponsiveImage
-							index={props.index}
-							set={props.set}
-							attr={props.attr}
+							setAttributes={setAttributes}
+							attributes={attributes}
+							itemKeys={itemKeys}
 							keys={prm.keys}
 							size={prm.size}
 							sizes={prm.sizes}
@@ -571,7 +560,7 @@ export const SelectClassPanelBlock = ({ prm }) => {
 					if (prm.label) {
 						rtn.push(<h5>{prm.label}</h5>);
 					}
-					rtn.push(<CP.SelectPictureSources index={props.index} set={props.set} attr={props.attr} keys={prm.keys} sizes={prm.sizes} devices={prm.devices} isTemplate={prm.isTemplate} />);
+					rtn.push(<CP.SelectPictureSources {...{ attributes, setAttributes, itemKeys }} keys={prm.keys} sizes={prm.sizes} devices={prm.devices} isTemplate={prm.isTemplate} />);
 					break;
 				}
 				case "pictures": {
@@ -580,9 +569,9 @@ export const SelectClassPanelBlock = ({ prm }) => {
 					}
 					rtn.push(
 						<ul className="cp-pictures">
-							{props.attr[prm.key].map((item, index) => (
-								<CP.Item tag="li" className="cp-pictures__item" set={props.set} attr={props.attr} items={props.attr[prm.key]} index={index} indexKey={prm.indexKey} isSelected={true} key={index}>
-									<CP.SelectPictureSources index={index} set={props.set} attr={props.attr} keys={prm.keys} sizes={prm.sizes} devices={prm.devices} compact={true} isTemplate={prm.isTemplate} />
+							{props.attributes[prm.key].map((item, index) => (
+								<CP.Item tag="li" className="cp-pictures__item" {...{ attributes, setAttributes }} itemKeys={[prm.key, index]} isSelected={true} key={index}>
+									<CP.SelectPictureSources {...{ attributes, setAttributes }} itemKeys={[prm.key, index]} keys={prm.keys} sizes={prm.sizes} devices={prm.devices} compact={true} isTemplate={prm.isTemplate} />
 								</CP.Item>
 							))}
 						</ul>,
@@ -593,11 +582,11 @@ export const SelectClassPanelBlock = ({ prm }) => {
 					if (prm.label) {
 						rtn.push(<h5>{prm.label}</h5>);
 					}
-					rtn.push(<CP.InputBackgroundImage index={props.index} set={props.set} attr={props.attr} keys={prm.keys} sizes={prm.sizes} devices={prm.devices} isTemplate={prm.isTemplate} />);
+					rtn.push(<CP.InputBackgroundImage {...{ attributes, setAttributes }} keys={prm.keys} />);
 					break;
 				}
 				case "position": {
-					rtn.push(<CP.SelectPositionClass set={props.set} attr={props.attr} label={prm.label} key={prm.key} help={prm.help} disable={prm.disable} itemsKey={itemsKey} index={props.index} />);
+					rtn.push(<CP.SelectPositionClass {...{ attributes, setAttributes, itemKeys }} label={prm.label} key={prm.key} help={prm.help} disable={prm.disable} />);
 				}
 				case "icon": {
 					if (prm.label) {

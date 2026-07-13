@@ -1,7 +1,7 @@
 export const SelectDeviceToolbar = (props) => {
 	const { BlockControls } = wp.blockEditor;
 	const { ToolbarGroup } = wp.components;
-	const { set, attr, devices = ["sp", "pc"], defaultInput } = props;
+	const { setAttributes, attributes, devices = ["sp", "pc"], defaultInput } = props;
 	return (
 		<BlockControls>
 			{devices.map((device) => {
@@ -11,12 +11,12 @@ export const SelectDeviceToolbar = (props) => {
 							{
 								icon: CP.devices[device].icon,
 								title: device,
-								isActive: attr.device === device,
+								isActive: attributes.device === device,
 								onClick: () => {
-									if (attr.device === device) {
-										set({ device: defaultInput || null });
+									if (attributes.device === device) {
+										setAttributes({ device: defaultInput || null });
 									} else {
-										set({ device });
+										setAttributes({ device });
 									}
 								},
 							},

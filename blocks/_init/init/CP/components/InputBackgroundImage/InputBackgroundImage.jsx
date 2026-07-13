@@ -54,9 +54,9 @@ wp.domReady(() => {
 });
 
 export const InputBackgroundImage = (props) => {
-	const { title = "BackgroundImage", attr = {}, set, keys = {}, prefix = "--cp-background-image" } = props;
+	const { title = "BackgroundImage", attributes = {}, setAttributes, keys = {}, prefix = "--cp-background-image" } = props;
 	fillValueKeys(keys, prefix);
-	const [data, setData] = useState(extractData(attr, keys));
+	const [data, setData] = useState(extractData(attributes, keys));
 
 	const schema = useMemo(() => {
 		const schema = {
@@ -98,7 +98,7 @@ export const InputBackgroundImage = (props) => {
 						if (gen != null) {
 							const mergedData = { ...data, ...gen.getData(data.params) };
 							setData(mergedData);
-							set(getValuesFromData(mergedData, keys));
+							setAttributes(getValuesFromData(mergedData, keys));
 						}
 					}}
 				/>

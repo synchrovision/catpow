@@ -7,10 +7,10 @@ export const SelectResponsiveImage = (props) => {
 		className = "cp-selectresponsiveimage",
 		controlClassName = "cp-selectresponsiveimage-controls",
 		type,
-		attr,
-		set,
+		attributes,
+		setAttributes,
+		itemKeys,
 		keys = {},
-		index = 0,
 		size,
 		devices,
 		device,
@@ -23,9 +23,15 @@ export const SelectResponsiveImage = (props) => {
 
 	let onClick;
 
-	const itemsKey = keys.items && Array.isArray(keys.items) ? keys.items[0] : keys.items;
-	const items = itemsKey && attr[itemsKey];
-	const item = CP.getItemByKeyAndIndex(props, keys?.items, index);
+	const item = itemKeys ? CP.getTheItem(props) : attributes;
+	const save = (data) => {
+		if (itemKeys) {
+			Object.assign(CP.getTheItem(props), data);
+			CP.saveItem(props);
+		} else {
+			setAttributes(data);
+		}
+	};
 
 	if (device) {
 		const sizeData = CP.devices[device];
@@ -39,24 +45,14 @@ export const SelectResponsiveImage = (props) => {
 						} else {
 							item[keys.sources].push({ device, srcset: src });
 						}
-						if (items) {
-							set({ [itemsKey]: JSON.parse(JSON.stringify(items)) });
-						} else {
-							set({
-								[keys.sources]: JSON.parse(JSON.stringify(item[keys.sources])),
-							});
-						}
+						save({ [keys.sources]: JSON.parse(JSON.stringify(item[keys.sources])) });
 					} else {
 						if (item[keys.srcset].match(sizeData.reg)) {
 							item[keys.srcset] = item[keys.srcset].replace(sizeData.reg, src + sizeData.rep);
 						} else {
 							item[keys.srcset] += "," + src + sizeData.rep;
 						}
-						if (items) {
-							set({ [itemsKey]: JSON.parse(JSON.stringify(items)) });
-						} else {
-							set({ [keys.srcset]: item[keys.srcset] });
-						}
+						save({ [keys.srcset]: item[keys.srcset] });
 					}
 				},
 				{ keys: { src: "src" }, type, size: sizeData.media_size },
@@ -65,12 +61,7 @@ export const SelectResponsiveImage = (props) => {
 		onClick = (e) => {
 			CP.selectImage(
 				function (data) {
-					if (itemsKey) {
-						Object.assign(item, data);
-						set({ [itemsKey]: JSON.parse(JSON.stringify(items)) });
-					} else {
-						set(data);
-					}
+					save(data);
 				},
 				{ keys, type, size, devices },
 			);
@@ -88,7 +79,7 @@ export const SelectResponsiveImage = (props) => {
 						<div className={clsx(controlClassName, { "is-open": isOpen })}>
 							<Icon icon="edit" onClick={() => setIsOpen(!isOpen)} />
 							<div className="_body" {...{ inert: isOpen ? null : "" }}>
-								<CP.SelectPictureSources attr={attr} set={set} keys={keys} index={index} size={size} devices={devices} />
+								<CP.SelectPictureSources {...{ attributes, setAttributes, itemKeys, keys, size, devices }} />
 							</div>
 						</div>
 					</CP.Bem>

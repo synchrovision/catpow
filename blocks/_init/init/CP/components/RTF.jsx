@@ -2,28 +2,28 @@
 import { Portal } from "catpow/component";
 
 export const RTF = (props) => {
-	const { className, pref = "cp-rtf", level = 3, attr, keys = { text: "text" }, index, ...otherProps } = props;
-	const item = keys.items ? attr[keys.items][index] : attr;
+	const { className, pref = "cp-rtf", level = 3, attributes, itemKeys, keys = { text: "text" }, ...otherProps } = props;
+	const item = itemKeys ? CP.getTheItem(props) : attributes;
 	const text = item[keys.text] ? item[keys.text] : "";
 	return <div className={className} {...otherProps} dangerouslySetInnerHTML={{ __html: rtf(text, pref, level) }} />;
 };
 RTF.Edit = (props) => {
-	const { className, pref = "cp-rtf", level = 3, set, attr, keys = { text: "text" }, index, isSelected = true, ...otherProps } = props;
+	const { className, pref = "cp-rtf", level = 3, setAttributes, attributes, itemKeys, keys = { text: "text" }, isSelected = true, ...otherProps } = props;
 	const { useMemo, useCallback, useState } = wp.element;
 	const classes = useMemo(() => bem("cp-rtf " + className), [className]);
 
-	const item = useMemo(() => (keys.items ? attr[keys.items][index] : attr), [attr, keys.items, index]);
+	const item = useMemo(() => (itemKeys ? CP.getTheItem(props) : attributes), [attributes, itemKeys]);
 	const text = item[keys.text];
 	const updateText = useCallback(
 		(text) => {
-			if (keys.items) {
-				Object.assign(attr[keys.items][index], { [keys.text]: text });
-				set({ [keys.items]: JSON.parse(JSON.stringify(attr[keys.items])) });
+			if (itemKeys) {
+				Object.assign(CP.getTheItem(props), { [keys.text]: text });
+				CP.saveItem(props);
 			} else {
-				set({ [keys.text]: text });
+				setAttributes({ [keys.text]: text });
 			}
 		},
-		[set, attr, keys],
+		[setAttributes, attributes, itemKeys, keys],
 	);
 	const editorFunction = useCallback(
 		(e) => {

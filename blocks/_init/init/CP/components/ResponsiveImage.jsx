@@ -1,6 +1,6 @@
 ﻿export const ResponsiveImage = (props) => {
-	const { className = "cp-responsiveimage", attr, set, keys, index, sizes, devices, device, isTemplate, ...otherProps } = props;
-	let item = CP.getItemByKeyAndIndex(props, keys?.items, index);
+	const { className = "cp-responsiveimage", attributes, setAttributes, itemKeys, keys, sizes, devices, device, isTemplate, ...otherProps } = props;
+	const item = itemKeys ? CP.getTheItem(props) : attributes;
 
 	if (isTemplate && keys.code && item[keys.code]) {
 		return item[keys.code];
@@ -9,7 +9,7 @@
 };
 
 export const ResponsiveImageBody = (props) => {
-	const { className = "cp-responsiveimage", attr, set, keys, index, devices, device, isTemplate, item, size, ...otherProps } = props;
+	const { className = "cp-responsiveimage", keys, devices, device, isTemplate, item, size, ...otherProps } = props;
 	let { sizes } = props;
 	const primaryClassName = className.split(" ")[0];
 	if (item?.[keys?.mime] === "application/pdf") {

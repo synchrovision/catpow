@@ -1,11 +1,12 @@
 ﻿import clsx from "clsx";
 
 export const Item = (props) => {
-	const { tag = "div", indexKey = "currentItemIndex", set, attr, attributes, setAttributes, itemKeys = [], children } = props;
+	const { tag = "div", setAttributes, attributes, itemKeys = [], children } = props;
+	const selectionKey = itemKeys.length > 2 ? "currentSubItemIndex" : "currentItemIndex";
 	const items = CP.getTheItems(props);
 	const item = CP.getTheItem(props);
 	const index = CP.getTheItemIndex(props);
-	const isSelected = props.isSelected === undefined ? index == (attr || attributes)[indexKey] : props.isSelected;
+	const isSelected = props.isSelected === undefined ? index == attributes[selectionKey] : props.isSelected;
 
 	return wp.element.createElement(
 		tag,
@@ -14,7 +15,7 @@ export const Item = (props) => {
 			style: props.style,
 			"data-index": index,
 			"data-refine-cond": item["cond"],
-			"aria-selected": isSelected && index == (attr || attributes)[indexKey],
+			"aria-selected": isSelected && index == attributes[selectionKey],
 			onKeyDown: (e) => {
 				if (e.ctrlKey || e.metaKey) {
 					switch (e.key) {
@@ -42,7 +43,7 @@ export const Item = (props) => {
 				}
 			},
 			onClick: (e) => {
-				(set || setAttributes)({ [indexKey]: index });
+				setAttributes({ [selectionKey]: index });
 			},
 		},
 		<>

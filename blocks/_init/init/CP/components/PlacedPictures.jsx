@@ -1,8 +1,8 @@
 ﻿import { bem } from "catpow/util";
 
 export const PlacedPictures = (props) => {
-	const { className, attr, keys, index } = props;
-	const item = keys.items ? attr[keys.items][index] : attr;
+	const { className, attributes, keys } = props;
+	const item = props.itemKeys ? CP.getTheItem(props) : attributes;
 	const pictures = item[keys.pictures];
 	return (
 		<div className={className}>
@@ -25,11 +25,11 @@ export const PlacedPictures = (props) => {
 };
 
 PlacedPictures.Edit = (props) => {
-	const { className, set, attr, keys, index, devices } = props;
+	const { className, setAttributes, attributes, itemKeys, keys, devices } = props;
 	const { useState, useMemo, useCallback, useRef, useEffect } = wp.element;
 	const { BlockControls, InspectorControls } = wp.blockEditor;
 	const { BaseControl, Icon, PanelBody, RangeControl, TextControl, Toolbar, ToolbarGroup, ToolbarButton, ToolbarDropdownMenu } = wp.components;
-	const item = keys.items ? attr[keys.items][index] : attr;
+	const item = itemKeys ? CP.getTheItem(props) : attributes;
 	const pictures = item[keys.pictures];
 	const classes = useMemo(() => bem("cp-placedpictures " + className), [className]);
 	const [editMode, setEditMode] = useState(false);
@@ -87,16 +87,16 @@ PlacedPictures.Edit = (props) => {
 	);
 
 	const save = useCallback(() => {
-		if (keys.items) {
-			items[index][keys.pictures] = JSON.parse(JSON.stringify(pictures));
-			set({ [keys.items]: [...items] });
+		if (itemKeys) {
+			Object.assign(CP.getTheItem(props), { [keys.pictures]: JSON.parse(JSON.stringify(pictures)) });
+			CP.saveItem(props);
 		} else {
-			set({ [keys.pictures]: JSON.parse(JSON.stringify(pictures)) });
+			setAttributes({ [keys.pictures]: JSON.parse(JSON.stringify(pictures)) });
 		}
-	}, [set, pictures]);
+	}, [setAttributes, attributes, itemKeys, pictures]);
 
 	useEffect(() => {
-		set({
+		setAttributes({
 			lock: {
 				move: editMode,
 				remove: false,

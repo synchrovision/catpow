@@ -6,21 +6,7 @@ export const SelectClassPanelContext = wp.element.createContext({});
 export const SelectClassPanel = (props) => {
 	const { Fragment, useMemo, useCallback, createElement: el } = wp.element;
 	const { PanelBody } = wp.components;
-	const {
-		blockClasssKey = "classes",
-		classKey: primaryClassKey = "classes",
-		items,
-		index,
-		subItemsKey,
-		subIndex,
-		setAttributes,
-		set = setAttributes,
-		attributes,
-		attr = attributes,
-		itemKeys,
-		triggerClasses,
-	} = wp.hooks.applyFilters("catpow.SelectClassPanelProps", props);
-	let { itemsKey = items ? "items" : null, itemClasses } = props;
+	const { blockClasssKey = "classes", classKey: primaryClassKey = "classes", setAttributes, attributes, itemKeys, triggerClasses } = wp.hooks.applyFilters("catpow.SelectClassPanelProps", props);
 	const selectiveClasses = useMemo(() => {
 		if (!triggerClasses || !triggerClasses.item) {
 			if (!props.selectiveClasses) {
@@ -31,25 +17,15 @@ export const SelectClassPanel = (props) => {
 			}
 			return CP.resolveSelectiveClassesPresets(Object.values(props.selectiveClasses));
 		}
-		const blockStates = CP.classNamesToFlags(attr[blockClasssKey]);
+		const blockStates = CP.classNamesToFlags(attributes[blockClasssKey]);
 		return CP.resolveSelectiveClassesPresets(triggerClasses.item[Object.keys(triggerClasses.item).find((value) => blockStates[value])]);
-	}, [props.selectiveClasses, triggerClasses && attr[blockClasssKey]]);
-
-	const { styleDatas } = attr;
+	}, [props.selectiveClasses, triggerClasses && attributes[blockClasssKey]]);
 
 	const item = useMemo(() => {
-		if (!items) {
-			return attr;
-		}
-		if (!items[index]) {
-			return false;
-		}
-		if (subItemsKey) {
-			return items[index][subItemsKey][subIndex];
-		}
-		return items[index];
-	}, [attr, items, index, subItemsKey, subIndex]);
-	const states = useMemo(() => CP.classNamesToFlags(item[primaryClassKey]), [item[primaryClassKey]]);
+		if (!itemKeys) return attributes;
+		return CP.getTheItem(props);
+	}, [attributes, itemKeys]);
+	const states = useMemo(() => CP.classNamesToFlags(item?.[primaryClassKey]), [item?.[primaryClassKey]]);
 	const allStates = useMemo(() => {
 		const allStates = { [primaryClassKey]: states };
 		const addClassKeyFlagsInPrm = (prm, flags) => {
@@ -92,20 +68,20 @@ export const SelectClassPanel = (props) => {
 			props.selectiveClasses.forEach((prm) => addClassKeyFlagsInPrm(prm, classKeyFlags));
 		}
 		Object.keys(classKeyFlags).forEach((classKey) => {
-			allStates[classKey] = CP.classNamesToFlags(item[classKey]);
+			allStates[classKey] = CP.classNamesToFlags(item?.[classKey]);
 		});
 		return allStates;
 	}, [props.selectiveClasses, item, states, primaryClassKey]);
 	const save = useCallback(
 		(data) => {
-			if (items) {
-				Object.assign(item, data);
-				set({ [itemsKey]: JSON.parse(JSON.stringify(items)) });
+			if (itemKeys) {
+				Object.assign(CP.getTheItem(props), data);
+				CP.saveItem(props);
 			} else {
-				set(data);
+				setAttributes(data);
 			}
 		},
-		[set, index, items, itemsKey],
+		[setAttributes, itemKeys],
 	);
 	const saveClasses = useCallback(
 		(classKey = primaryClassKey) => {
@@ -113,20 +89,15 @@ export const SelectClassPanel = (props) => {
 		},
 		[primaryClassKey, save, allStates],
 	);
-	const saveCss = useCallback(
-		(cssKey) => {
-			set({ [cssKey]: CP.createStyleCodeWithMediaQuery(styleDatas[cssKey]) });
-		},
-		[set, styleDatas],
-	);
 	const colorNumber = useMemo(() => CP.getClosestBlockAttributesComputed(({ classes }) => CP.getColorNumber(classes), wp.data.select("core/block-editor").getSelectedBlock(), itemKeys));
+	const block = wp.data.select("core/block-editor").getSelectedBlock();
 
 	if (!item || !selectiveClasses) {
 		return false;
 	}
 	return (
 		<PanelBody title={props.title} initialOpen={props.initialOpen || false} icon={props.icon}>
-			<CP.SelectClassPanelContext.Provider value={{ props, item, states, allStates, set, save, saveClasses, styleDatas, saveCss, primaryClassKey, colorNumber }}>
+			<CP.SelectClassPanelContext.Provider value={{ props, item, states, allStates, save, saveClasses, primaryClassKey, block, colorNumber }}>
 				{selectiveClasses.map((prm, index) => (
 					<Fragment key={index}>
 						<SelectClassPanelBlock prm={prm} />

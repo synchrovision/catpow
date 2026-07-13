@@ -8,8 +8,21 @@ export const SelectPositionClass = (props) => {
 		["bottomLeft", "bottom", "bottomRight"],
 	];
 	const values = _.flatten(rows);
-	const { label, help, itemsKey, index, disable } = props;
-	let value = itemsKey ? CP.getItemSelectiveClass(props, values) : CP.getSelectiveClass(props, values);
+	const { label, help, attributes, setAttributes, itemKeys, disable, key: classKey = "classes" } = props;
+	const item = itemKeys ? CP.getTheItem(props) : attributes;
+	const classSet = new Set((item[classKey] || "").split(" "));
+	const value = values.find((value) => classSet.has(value));
+	const select = (value) => {
+		values.forEach((value) => classSet.delete(value));
+		classSet.add(value);
+		const data = { [classKey]: [...classSet].filter(Boolean).join(" ") };
+		if (itemKeys) {
+			Object.assign(CP.getTheItem(props), data);
+			CP.saveItem(props);
+		} else {
+			setAttributes(data);
+		}
+	};
 
 	return (
 		<BaseControl label={label} help={help}>
@@ -30,13 +43,7 @@ export const SelectPositionClass = (props) => {
 									return (
 										<td
 											className={clsx("_cell", { "is-active": isChecked })}
-											onClick={() => {
-												if (itemsKey) {
-													CP.switchItemSelectiveClass(props, values, col, props.key);
-												} else {
-													CP.switchSelectiveClass(props, values, col, props.key);
-												}
-											}}
+											onClick={() => select(col)}
 											key={col}
 										>
 											{" "}

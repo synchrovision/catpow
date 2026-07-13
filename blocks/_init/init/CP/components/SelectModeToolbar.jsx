@@ -2,8 +2,8 @@
 	const { BlockControls } = wp.blockEditor;
 	const { ToolbarGroup } = wp.components;
 
-	const { set, attr, modes = ["EditMode", "AltMode"] } = props;
-	const SomeMode = modes.some((mode) => attr[mode]);
+	const { setAttributes, attributes, modes = ["EditMode", "AltMode"] } = props;
+	const SomeMode = modes.some((mode) => attributes[mode]);
 	const icons = {
 		EditMode: "edit",
 		OpenMode: "video-alt3",
@@ -16,10 +16,10 @@
 	return (
 		<BlockControls>
 			{modes.map((mode) => {
-				if (!attr[mode] && SomeMode) {
+				if (!attributes[mode] && SomeMode) {
 					return false;
 				}
-				if (cond[mode] && !attr[cond[mode]]) {
+				if (cond[mode] && !attributes[cond[mode]]) {
 					return false;
 				}
 				return (
@@ -28,8 +28,8 @@
 							{
 								icon: icons[mode],
 								title: mode,
-								isActive: attr[mode],
-								onClick: () => set({ [mode]: !attr[mode] }),
+								isActive: attributes[mode],
+								onClick: () => setAttributes({ [mode]: !attributes[mode] }),
 							},
 						]}
 						key={mode}
