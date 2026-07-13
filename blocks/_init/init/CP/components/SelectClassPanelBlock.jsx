@@ -465,7 +465,12 @@ export const SelectClassPanelBlock = ({ prm }) => {
 					selected={targetStates}
 					onChange={(proxy) => {
 						if (!props.items) {
-							set({ color: proxy.value });
+							props.setAttributes({ color: proxy.value });
+							CP.updateBlockAttributesColor(block, proxy.value);
+							CP.walkBlocksRecursive(block.innerBlocks, (block) => {
+								if (CP.getColorNumber(block.attributes?.classes)) return false;
+								CP.updateBlockAttributesColor(block, proxy.value);
+							});
 						}
 						saveClasses();
 					}}
