@@ -69,7 +69,7 @@ wp.blocks.registerBlockType("catpow/unit", {
 			<>
 				<div className={classes}>
 					<figure className="image">
-						<ResponsiveImage attr={attributes} keys={imageKeys.image} />
+						<ResponsiveImage attributes={attributes} keys={imageKeys.image} />
 					</figure>
 					<div className="contents">
 						<InnerBlocks template={[["core/paragraph", { content: CP.dummyText.text }]]} templateLock={false} />
@@ -95,7 +95,7 @@ wp.blocks.registerBlockType("catpow/unit", {
 		return (
 			<div className={classes}>
 				<figure className="image">
-					<ResponsiveImage attr={attributes} keys={imageKeys.image} />
+					<ResponsiveImage attributes={attributes} keys={imageKeys.image} />
 				</figure>
 				<div className="contents">
 					<InnerBlocks.Content />

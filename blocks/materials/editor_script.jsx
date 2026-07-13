@@ -110,11 +110,11 @@
 																<CP.Item
 																	tag="li"
 																	className={subItem.classes}
-																	set={() => {
+																	setAttributes={() => {
 																		item.currentItemIndex = subIndex;
 																		save();
 																	}}
-																	attr={item}
+																	attributes={item}
 																	items={item.items}
 																	index={subIndex}
 																	isSelected={isSelected && currentItemIndex == index && item.currentItemIndex == subIndex}

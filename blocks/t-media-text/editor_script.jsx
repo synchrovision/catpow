@@ -57,8 +57,8 @@ wp.blocks.registerBlockType("catpow/t-media-text", {
 								<tr>
 									<td className="_td is-image-cell" width={width}>
 										<CP.SelectResponsiveImage
-											set={setAttributes}
-											attr={attributes}
+											setAttributes={setAttributes}
+											attributes={attributes}
 											keys={{ src: "src", alt: "alt", code: "imageCode" }}
 											size="large"
 											width="100%"
@@ -79,8 +79,8 @@ wp.blocks.registerBlockType("catpow/t-media-text", {
 									<td className="_td is-spacer-cell" style={{ width: `${gap}px` }} width={gap}></td>
 									<td className="_td is-image-cell" width={width}>
 										<CP.SelectResponsiveImage
-											set={setAttributes}
-											attr={attributes}
+											setAttributes={setAttributes}
+											attributes={attributes}
 											keys={{ src: "src", alt: "alt", code: "imageCode" }}
 											size="large"
 											width="100%"
@@ -128,7 +128,7 @@ wp.blocks.registerBlockType("catpow/t-media-text", {
 						{states.hasImageLeft ? (
 							<tr>
 								<td className="_td is-image-cell" width={width}>
-									<CP.ResponsiveImage attr={attributes} keys={{ src: "src", alt: "alt", code: "imageCode" }} size="large" width="100%" height="auto" isTemplate={states.isTemplate} />
+									<CP.ResponsiveImage attributes={attributes} keys={{ src: "src", alt: "alt", code: "imageCode" }} size="large" width="100%" height="auto" isTemplate={states.isTemplate} />
 								</td>
 								<td className="_td is-spacer-cell" style={{ width: `${gap}px` }} width={gap}></td>
 								<td className="_td is-text-cell">
@@ -142,7 +142,7 @@ wp.blocks.registerBlockType("catpow/t-media-text", {
 								</td>
 								<td className="_td is-spacer-cell" style={{ width: `${gap}px` }} width={gap}></td>
 								<td className="_td is-image-cell" width={width}>
-									<CP.ResponsiveImage attr={attributes} keys={{ src: "src", alt: "alt", code: "imageCode" }} size="large" width="100%" height="auto" isTemplate={states.isTemplate} />
+									<CP.ResponsiveImage attributes={attributes} keys={{ src: "src", alt: "alt", code: "imageCode" }} size="large" width="100%" height="auto" isTemplate={states.isTemplate} />
 								</td>
 							</tr>
 						)}

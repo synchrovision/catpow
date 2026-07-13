@@ -100,7 +100,7 @@ wp.blocks.registerBlockType("catpow/sphere", {
 								<CP.Item tag="li" className={item.classes} {...{ setAttributes, attributes }} itemKeys={["items", index]} key={index}>
 									{states.hasImage && (
 										<div className="_image">
-											<CP.SelectResponsiveImage className="_img" attr={attributes} set={setAttributes} keys={imageKeys.image} index={index} size="large" />
+											<CP.SelectResponsiveImage className="_img" attributes={attributes} setAttributes={setAttributes} keys={imageKeys.image} index={index} size="large" />
 										</div>
 									)}
 									<div className="_texts">

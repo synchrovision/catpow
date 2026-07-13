@@ -486,7 +486,7 @@ wp.blocks.registerBlockType("catpow/graphics", {
 					<CP.Bem prefix="wp-block-catpow">
 						<div id={id} className={clsx(classes, isSelected ? " cp-altcontent " + device : "")} ref={setContainerNode}>
 							{isSelected && <CP.Label icon={CP.devices[device].icon} />}
-							<div className="_base">{states.hasBaseImage && <CP.ResponsiveImage attr={attributes} keys={imageKeys.base} devices={devices} device={device === "pc" ? null : device} />}</div>
+							<div className="_base">{states.hasBaseImage && <CP.ResponsiveImage attributes={attributes} keys={imageKeys.base} devices={devices} device={device === "pc" ? null : device} />}</div>
 							{isSelected && (
 								<CP.BoundingBox
 									targets={currentItemNodes}
@@ -584,8 +584,8 @@ wp.blocks.registerBlockType("catpow/graphics", {
 										return (
 											<CP.SelectResponsiveImage
 												className="_image"
-												attr={attributes}
-												set={setAttributes}
+												attributes={attributes}
+												setAttributes={setAttributes}
 												devices={devices}
 												device={device === "pc" ? null : device}
 												keys={imageKeys.image}
@@ -602,7 +602,7 @@ wp.blocks.registerBlockType("catpow/graphics", {
 											</span>
 										);
 									}
-									return <CP.ResponsiveImage attr={attributes} keys={imageKeys.image} devices={devices} device={device === "pc" ? null : device} index={index} />;
+									return <CP.ResponsiveImage attributes={attributes} keys={imageKeys.image} devices={devices} device={device === "pc" ? null : device} index={index} />;
 								};
 								return (
 									<span id={id + "_item_" + index} className={itemClasses} data-index={index} data-rect={item.rect} ref={(el) => (targetRefs.current[index] = el)} onClick={onClickItem} key={index}>
@@ -670,7 +670,7 @@ wp.blocks.registerBlockType("catpow/graphics", {
 		return (
 			<CP.Bem prefix="wp-block-catpow">
 				<div id={id} className={classes} data-heights={heights}>
-					<div className="_base">{states.hasBaseImage && <CP.ResponsiveImage attr={attributes} keys={imageKeys.base} devices={devices} />}</div>
+					<div className="_base">{states.hasBaseImage && <CP.ResponsiveImage attributes={attributes} keys={imageKeys.base} devices={devices} />}</div>
 					{items.map((item, index) => {
 						var itemStates = CP.classNamesToFlags(item.classes);
 						const itemBody = () => {
@@ -683,7 +683,7 @@ wp.blocks.registerBlockType("catpow/graphics", {
 									</span>
 								);
 							}
-							return <CP.ResponsiveImage attr={attributes} keys={imageKeys.image} index={index} devices={devices} />;
+							return <CP.ResponsiveImage attributes={attributes} keys={imageKeys.image} index={index} devices={devices} />;
 						};
 						const TagName = item.link ? "a" : "span";
 						return (

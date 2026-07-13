@@ -155,7 +155,7 @@ wp.blocks.registerBlockType("catpow/pricecard", {
 											<CP.Item tag="li" className={item.classes} {...{ setAttributes, attributes }} itemKeys={["items", index]} key={index}>
 												{states.hasImage && (
 													<div className="_image">
-														<CP.SelectResponsiveImage attr={attributes} set={setAttributes} keys={imageKeys.image} index={index} size="vga" isTemplate={states.isTemplate} />
+														<CP.SelectResponsiveImage attributes={attributes} setAttributes={setAttributes} keys={imageKeys.image} index={index} size="vga" isTemplate={states.isTemplate} />
 													</div>
 												)}
 												<header className={headerClasses}>
@@ -282,7 +282,7 @@ wp.blocks.registerBlockType("catpow/pricecard", {
 															</dl>
 														)}
 														{states.hasLink && (
-															<CP.Link.Edit className="_link" set={setAttributes} attr={attributes} keys={{ href: "linkUrl", items: "items" }} index={index}>
+															<CP.Link.Edit className="_link" setAttributes={setAttributes} attributes={attributes} keys={{ href: "linkUrl", items: "items" }} index={index}>
 																{linkText}
 															</CP.Link.Edit>
 														)}
@@ -317,7 +317,7 @@ wp.blocks.registerBlockType("catpow/pricecard", {
 								<li className={item.classes} key={index}>
 									{states.hasImage && (
 										<div className="_image">
-											<CP.ResponsiveImage attr={attributes} keys={imageKeys.image} index={index} size="vga" isTemplate={states.isTemplate} />
+											<CP.ResponsiveImage attributes={attributes} keys={imageKeys.image} index={index} size="vga" isTemplate={states.isTemplate} />
 										</div>
 									)}
 									<header className={headerClasses}>
@@ -356,7 +356,7 @@ wp.blocks.registerBlockType("catpow/pricecard", {
 												</dl>
 											)}
 											{states.hasLink && (
-												<CP.Link className="_link" attr={attributes} keys={{ href: "linkUrl", items: "items" }} index={index}>
+												<CP.Link className="_link" attributes={attributes} keys={{ href: "linkUrl", items: "items" }} index={index}>
 													{linkText}
 												</CP.Link>
 											)}

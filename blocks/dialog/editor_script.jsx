@@ -106,8 +106,8 @@ wp.blocks.registerBlockType("catpow/dialog", {
 														<div className="_image">
 															<CP.SelectResponsiveImage
 																className="_img"
-																attr={attributes}
-																set={setAttributes}
+																attributes={attributes}
+																setAttributes={setAttributes}
 																keys={imageKeys.headerImage}
 																index={index}
 																size="thumbnail"
@@ -173,7 +173,7 @@ wp.blocks.registerBlockType("catpow/dialog", {
 								<li className={item.classes} key={index}>
 									<header className="_header">
 										<div className="_image">
-											<CP.ResponsiveImage className="_img" attr={attributes} keys={imageKeys.headerImage} index={index} isTemplate={states.isTemplate} />
+											<CP.ResponsiveImage className="_img" attributes={attributes} keys={imageKeys.headerImage} index={index} isTemplate={states.isTemplate} />
 										</div>
 										<div className="_text">
 											<RichText.Content tagName="h3" className="_heading" value={item.title} />

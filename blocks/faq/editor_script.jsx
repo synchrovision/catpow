@@ -142,7 +142,7 @@ wp.blocks.registerBlockType("catpow/faq", {
 										)}
 										{states.hasImage && (
 											<div className="_image">
-												<CP.SelectResponsiveImage attr={attributes} set={setAttributes} keys={imageKeys.image} index={index} size="vga" />
+												<CP.SelectResponsiveImage attributes={attributes} setAttributes={setAttributes} keys={imageKeys.image} index={index} size="vga" />
 											</div>
 										)}
 										<div className="_text">

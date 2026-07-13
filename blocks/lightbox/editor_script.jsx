@@ -211,7 +211,7 @@ wp.blocks.registerBlockType("catpow/lightbox", {
 													return (
 														<CP.Item tag="li" className={item.classes} {...{ setAttributes, attributes }} itemKeys={["items", index]} key={index}>
 															<div className="_image">
-																<CP.SelectResponsiveImage className="_img" attr={attributes} set={setAttributes} keys={imageKeys.thumbnail} index={index} size="vga" isTemplate={states.isTemplate} />
+																<CP.SelectResponsiveImage className="_img" attributes={attributes} setAttributes={setAttributes} keys={imageKeys.thumbnail} index={index} size="vga" isTemplate={states.isTemplate} />
 															</div>
 															{states.hasTitle && (
 																<div className="_text">
@@ -271,7 +271,7 @@ wp.blocks.registerBlockType("catpow/lightbox", {
 													)}
 													{sliderStates.hasImage && (
 														<div className="_image">
-															<CP.SelectResponsiveImage className="_img" attr={attributes} set={setAttributes} keys={imageKeys.sliderImage} index={index} size="full" isTemplate={states.isTemplate} />
+															<CP.SelectResponsiveImage className="_img" attributes={attributes} setAttributes={setAttributes} keys={imageKeys.sliderImage} index={index} size="full" isTemplate={states.isTemplate} />
 														</div>
 													)}
 													{sliderStates.hasText && (
@@ -344,7 +344,7 @@ wp.blocks.registerBlockType("catpow/lightbox", {
 										key={index}
 									>
 										<div className="_image">
-											<CP.ResponsiveImage className="_img" attr={attributes} keys={imageKeys.thumbnail} index={index} isTemplate={states.isTemplate} />
+											<CP.ResponsiveImage className="_img" attributes={attributes} keys={imageKeys.thumbnail} index={index} isTemplate={states.isTemplate} />
 										</div>
 										{states.hasTitle && (
 											<div className="_text">
@@ -356,7 +356,7 @@ wp.blocks.registerBlockType("catpow/lightbox", {
 											{sliderStates.hasTitle && <RichText.Content tagName={SliderHeadingTag} className="_title" value={item.subTitle} />}
 											{sliderStates.hasImage && (
 												<div className="_image">
-													<CP.ResponsiveImage className="_img" attr={attributes} keys={imageKeys.sliderImage} index={index} isTemplate={states.isTemplate} />
+													<CP.ResponsiveImage className="_img" attributes={attributes} keys={imageKeys.sliderImage} index={index} isTemplate={states.isTemplate} />
 												</div>
 											)}
 											{sliderStates.hasText && <RichText.Content tagName="div" className="_text" value={item.text} />}

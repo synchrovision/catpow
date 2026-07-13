@@ -80,8 +80,8 @@ wp.blocks.registerBlockType("catpow/sticky", {
 									</div>
 								)}
 								{states.imageButton && [
-									<ResponsiveImage className="open" attr={attributes} keys={imageKeys.openButtonImage} />,
-									<ResponsiveImage className="close" attr={attributes} keys={imageKeys.closeButtonImage} />,
+									<ResponsiveImage className="open" attributes={attributes} keys={imageKeys.openButtonImage} />,
+									<ResponsiveImage className="close" attributes={attributes} keys={imageKeys.closeButtonImage} />,
 								]}
 							</div>
 						</div>
@@ -127,8 +127,8 @@ wp.blocks.registerBlockType("catpow/sticky", {
 								</div>
 							)}
 							{states.imageButton && [
-								<ResponsiveImage className="open" attr={attributes} keys={imageKeys.openButtonImage} />,
-								<ResponsiveImage className="close" attr={attributes} keys={imageKeys.closeButtonImage} />,
+								<ResponsiveImage className="open" attributes={attributes} keys={imageKeys.openButtonImage} />,
+								<ResponsiveImage className="close" attributes={attributes} keys={imageKeys.closeButtonImage} />,
 							]}
 						</div>
 					</div>
@@ -163,8 +163,8 @@ wp.blocks.registerBlockType("catpow/sticky", {
 										</div>
 									)}
 									{states.imageButton && [
-										<ResponsiveImage className="open" attr={attributes} keys={imageKeys.openButtonImage} />,
-										<ResponsiveImage className="close" attr={attributes} keys={imageKeys.closeButtonImage} />,
+										<ResponsiveImage className="open" attributes={attributes} keys={imageKeys.openButtonImage} />,
+										<ResponsiveImage className="close" attributes={attributes} keys={imageKeys.closeButtonImage} />,
 									]}
 								</div>
 							</div>

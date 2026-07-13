@@ -96,7 +96,7 @@ wp.blocks.registerBlockType("catpow/panes", {
 										return (
 											<CP.Item tag="li" className={item.classes} {...{ setAttributes, attributes }} itemKeys={["items", index]} key={index}>
 												<div className="_image">
-													<CP.SelectResponsiveImage class="_img" attr={attributes} set={setAttributes} keys={imageKeys.image} index={index} size="large" isTemplate={states.isTemplate} />
+													<CP.SelectResponsiveImage class="_img" attributes={attributes} setAttributes={setAttributes} keys={imageKeys.image} index={index} size="large" isTemplate={states.isTemplate} />
 												</div>
 												<div className="_contents">
 													<div className="_text">
@@ -122,7 +122,7 @@ wp.blocks.registerBlockType("catpow/panes", {
 													</div>
 												</div>
 												{states.hasLink && isSelected && (
-													<CP.Link.Edit className="_link" attr={attributes} set={setAttributes} keys={linkKeys.link} index={index}>
+													<CP.Link.Edit className="_link" attributes={attributes} setAttributes={setAttributes} keys={linkKeys.link} index={index}>
 														<RichText
 															onChange={(linkText) => {
 																item.linkText = linkText;
@@ -156,7 +156,7 @@ wp.blocks.registerBlockType("catpow/panes", {
 						{items.map((item, index) => (
 							<li className={item.classes} key={index}>
 								<div className="_image">
-									<CP.ResponsiveImage className="_img" attr={attributes} keys={imageKeys.image} index={index} isTemplate={states.isTemplate} />
+									<CP.ResponsiveImage className="_img" attributes={attributes} keys={imageKeys.image} index={index} isTemplate={states.isTemplate} />
 								</div>
 								<div className="_contents">
 									<div className="_text">
@@ -166,7 +166,7 @@ wp.blocks.registerBlockType("catpow/panes", {
 									</div>
 								</div>
 								{states.hasLink && item.linkUrl && (
-									<CP.Link className="_link" attr={attributes} keys={linkKeys.link} index={index} {...CP.extractEventDispatcherAttributes("catpow/panes", item)}>
+									<CP.Link className="_link" attributes={attributes} keys={linkKeys.link} index={index} {...CP.extractEventDispatcherAttributes("catpow/panes", item)}>
 										<RichText.Content value={item.linkText} />
 									</CP.Link>
 								)}

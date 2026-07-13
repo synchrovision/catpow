@@ -487,8 +487,8 @@
                 CP.SelectResponsiveImage,
                 {
                   className: "_img",
-                  attr: attributes,
-                  set: setAttributes,
+                  attributes,
+                  setAttributes,
                   keys: imageKeys.image,
                   index: [rowIndex, columnIndex],
                   size: "large",
@@ -620,7 +620,7 @@
                 key: columnIndex
               },
               cellStates.hasLabel && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "div", className: "_label", value: cell.label, "data-role": "label" }),
-              colStates.isImage ? /* @__PURE__ */ wp.element.createElement("div", { className: "_image", "data-role": "image" }, /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImage, { className: "_img", attr: attributes, keys: imageKeys.image, index: [rowIndex, columnIndex], isTemplate: states.isTemplate })) : /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "div", className: "_contents", value: cell.text, "data-role": "contents" })
+              colStates.isImage ? /* @__PURE__ */ wp.element.createElement("div", { className: "_image", "data-role": "image" }, /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImage, { className: "_img", attributes, keys: imageKeys.image, index: [rowIndex, columnIndex], isTemplate: states.isTemplate })) : /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "div", className: "_contents", value: cell.text, "data-role": "contents" })
             );
           }));
         }))

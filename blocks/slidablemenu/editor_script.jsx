@@ -104,7 +104,7 @@ wp.blocks.registerBlockType("catpow/slidablemenu", {
 				<CP.Item tag="li" {...{ setAttributes, attributes }} itemKeys={["items", index]} key={i}>
 					<div className="contents">
 						<div className="image">
-							<CP.SelectResponsiveImage attr={attributes} set={setAttributes} keys={imageKeys.image} index={index} size="vga" isTemplate={states.isTemplate} />
+							<CP.SelectResponsiveImage attributes={attributes} setAttributes={setAttributes} keys={imageKeys.image} index={index} size="vga" isTemplate={states.isTemplate} />
 						</div>
 						<div className="texts">
 							<RichText
@@ -218,7 +218,7 @@ wp.blocks.registerBlockType("catpow/slidablemenu", {
 				<li className={item.classes} key={index}>
 					<div className="contents">
 						<div className="image">
-							<CP.ResponsiveImage attr={attributes} keys={imageKeys.image} index={index} size="vga" isTemplate={states.isTemplate} />
+							<CP.ResponsiveImage attributes={attributes} keys={imageKeys.image} index={index} size="vga" isTemplate={states.isTemplate} />
 						</div>
 						<div className="texts">
 							<RichText.Content tagName="h4" className="title" value={item.title} />

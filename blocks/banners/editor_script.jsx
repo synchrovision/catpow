@@ -146,11 +146,11 @@ wp.blocks.registerBlockType("catpow/banners", {
 														value={item.title}
 													/>
 												)}
-												<CP.Link.Edit className="_link" attr={attributes} set={setAttributes} keys={linkKeys.link} index={index}>
+												<CP.Link.Edit className="_link" attributes={attributes} setAttributes={setAttributes} keys={linkKeys.link} index={index}>
 													<CP.SelectResponsiveImage
 														className="_image"
-														attr={attributes}
-														set={setAttributes}
+														attributes={attributes}
+														setAttributes={setAttributes}
 														keys={imageKeys.image}
 														index={index}
 														devices={devices}
@@ -189,8 +189,8 @@ wp.blocks.registerBlockType("catpow/banners", {
 								<li className={item.classes} key={index}>
 									{states.hasTitle && <RichText.Content tagName={HeadingTag} className="_title" value={item.title} />}
 
-									<CP.Link className="_link" attr={attributes} keys={linkKeys.link} index={index} {...CP.extractEventDispatcherAttributes("catpow/banners", item)}>
-										<CP.ResponsiveImage className="_image" size="regular_banner" attr={attributes} keys={imageKeys.image} index={index} devices={devices} isTemplate={states.isTemplate} />
+									<CP.Link className="_link" attributes={attributes} keys={linkKeys.link} index={index} {...CP.extractEventDispatcherAttributes("catpow/banners", item)}>
+										<CP.ResponsiveImage className="_image" size="regular_banner" attributes={attributes} keys={imageKeys.image} index={index} devices={devices} isTemplate={states.isTemplate} />
 									</CP.Link>
 								</li>
 							);
@@ -233,7 +233,7 @@ wp.blocks.registerBlockType("catpow/banners", {
 										</h3>
 									)}
 									<a href={item.linkUrl} target={item.target} data-event={item.event} rel={item.target ? "noopener noreferrer" : ""}>
-										<CP.ResponsiveImage attr={attributes} keys={imageKeys.image} index={index} isTemplate={states.isTemplate} />
+										<CP.ResponsiveImage attributes={attributes} keys={imageKeys.image} index={index} isTemplate={states.isTemplate} />
 									</a>
 								</li>
 							);

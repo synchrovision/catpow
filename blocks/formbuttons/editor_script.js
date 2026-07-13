@@ -82,7 +82,7 @@
             suppressContentEditableWarning: true
           },
           item.copy
-        ), /* @__PURE__ */ wp.element.createElement(CP.Link.Edit, { className: "-button", attr: attributes, set: setAttributes, keys: linkKeys.link, index }, itemStates.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { className: "_icon", item }), /* @__PURE__ */ wp.element.createElement(
+        ), /* @__PURE__ */ wp.element.createElement(CP.Link.Edit, { className: "-button", attributes, setAttributes, keys: linkKeys.link, index }, itemStates.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { className: "_icon", item }), /* @__PURE__ */ wp.element.createElement(
           "span",
           {
             className: "_text",

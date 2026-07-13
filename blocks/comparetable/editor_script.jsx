@@ -505,8 +505,8 @@ wp.blocks.registerBlockType("catpow/comparetable", {
 																			<div className="_image" data-role="image">
 																				<CP.SelectResponsiveImage
 																					className="_img"
-																					attr={attributes}
-																					set={setAttributes}
+																					attributes={attributes}
+																					setAttributes={setAttributes}
 																					keys={imageKeys.image}
 																					index={[rowIndex, columnIndex]}
 																					size="large"
@@ -697,7 +697,7 @@ wp.blocks.registerBlockType("catpow/comparetable", {
 																{cellStates.hasLabel && <RichText.Content tagName="div" className="_label" value={cell.label} data-role="label" />}
 																{colStates.isImage ? (
 																	<div className="_image" data-role="image">
-																		<CP.ResponsiveImage className="_img" attr={attributes} keys={imageKeys.image} index={[rowIndex, columnIndex]} isTemplate={states.isTemplate} />
+																		<CP.ResponsiveImage className="_img" attributes={attributes} keys={imageKeys.image} index={[rowIndex, columnIndex]} isTemplate={states.isTemplate} />
 																	</div>
 																) : (
 																	<RichText.Content tagName="div" className="_contents" value={cell.text} data-role="contents" />

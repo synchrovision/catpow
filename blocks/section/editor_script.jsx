@@ -118,14 +118,14 @@ wp.blocks.registerBlockType("catpow/section", {
 				<CP.Bem prefix="wp-block-catpow">
 					<SectionTag ref={setMainBlock} {...blockProps}>
 						<div className={bodyClasses} style={bodyVars}>
-							{states.hasDecoration && <CP.PlacedPictures.Edit className="decoration_" set={setAttributes} attr={attributes} devices={devices} keys={imageKeys.decoration} />}
+							{states.hasDecoration && <CP.PlacedPictures.Edit className="decoration_" setAttributes={setAttributes} attributes={attributes} devices={devices} keys={imageKeys.decoration} />}
 							<header className={headerClasses} style={headerVars}>
 								{states.hasHeaderImage && (
 									<div className="_image">
 										{states.isTemplate && headerImageCode ? (
 											<CP.DummyImage text={headerImageCode} />
 										) : (
-											<CP.SelectResponsiveImage className="_picture" set={setAttributes} attr={attributes} keys={imageKeys.headerImage} />
+											<CP.SelectResponsiveImage className="_picture" setAttributes={setAttributes} attributes={attributes} keys={imageKeys.headerImage} />
 										)}
 									</div>
 								)}
@@ -136,7 +136,7 @@ wp.blocks.registerBlockType("catpow/section", {
 											{states.isTemplate && titleImageCode ? (
 												<CP.DummyImage text={titleImageCode} />
 											) : (
-												<CP.SelectResponsiveImage className="_image" set={setAttributes} attr={attributes} keys={imageKeys.titleImage} devices={devices} />
+												<CP.SelectResponsiveImage className="_image" setAttributes={setAttributes} attributes={attributes} keys={imageKeys.titleImage} devices={devices} />
 											)}
 										</HeadingTag>
 									) : (
@@ -189,16 +189,16 @@ wp.blocks.registerBlockType("catpow/section", {
 			<CP.Bem prefix="wp-block-catpow">
 				<SectionTag data-icon={navIcon} {...blockProps}>
 					<div className={bodyClasses} style={bodyVars}>
-						{states.hasDecoration && <CP.PlacedPictures className="decoration_" attr={attributes} keys={imageKeys.decoration} />}
+						{states.hasDecoration && <CP.PlacedPictures className="decoration_" attributes={attributes} keys={imageKeys.decoration} />}
 						<header className={headerClasses} style={headerVars}>
 							{states.hasHeaderImage && (
-								<div className="_image">{states.isTemplate && headerImageCode ? headerImageCode : <CP.ResponsiveImage className="_picture" attr={attributes} keys={imageKeys.headerImage} />}</div>
+								<div className="_image">{states.isTemplate && headerImageCode ? headerImageCode : <CP.ResponsiveImage className="_picture" attributes={attributes} keys={imageKeys.headerImage} />}</div>
 							)}
 							<div className={titleClasses}>
 								{states.hasIcon && <CP.OutputIcon className="_icon" item={attributes} />}
 								{states.hasTitleImage ? (
 									<HeadingTag className="_titleimage">
-										{states.isTemplate && titleImageCode ? titleImageCode : <CP.ResponsiveImage className="_image" attr={attributes} keys={imageKeys.titleImage} devices={devices} />}
+										{states.isTemplate && titleImageCode ? titleImageCode : <CP.ResponsiveImage className="_image" attributes={attributes} keys={imageKeys.titleImage} devices={devices} />}
 									</HeadingTag>
 								) : (
 									<HeadingTag className="_heading">

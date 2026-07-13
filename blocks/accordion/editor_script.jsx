@@ -73,7 +73,7 @@ wp.blocks.registerBlockType("catpow/accordion", {
 									{states.isTemplate && imageCode ? (
 										<CP.DummyImage text={imageCode} />
 									) : (
-										<CP.SelectResponsiveImage set={setAttributes} attr={attributes} keys={imageKeys.image} size={imageSizes.image} />
+										<CP.SelectResponsiveImage setAttributes={setAttributes} attributes={attributes} keys={imageKeys.image} size={imageSizes.image} />
 									)}
 								</div>
 							)}
@@ -125,7 +125,7 @@ wp.blocks.registerBlockType("catpow/accordion", {
 						aria-controls="{$uid}-contents"
 						tabindex="0"
 					>
-						{states.hasImage && <div className="_image">{states.isTemplate && imageCode ? imageCode : <CP.ResponsiveImage attr={attributes} keys={imageKeys.image} size="medium_large" />}</div>}
+						{states.hasImage && <div className="_image">{states.isTemplate && imageCode ? imageCode : <CP.ResponsiveImage attributes={attributes} keys={imageKeys.image} size="medium_large" />}</div>}
 						<RichText.Content tagName={HeadingTag} className="_title" value={title} />
 						<span className="_icon"></span>
 					</div>

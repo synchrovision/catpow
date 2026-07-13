@@ -158,7 +158,7 @@ wp.blocks.registerBlockType("catpow/contactinfo", {
 															value={item.lead}
 														/>
 													)}
-													<CP.Link.Edit className="_link" attr={attributes} set={setAttributes} keys={linkKeys.link} index={index}>
+													<CP.Link.Edit className="_link" attributes={attributes} setAttributes={setAttributes} keys={linkKeys.link} index={index}>
 														{states.hasIcon && <CP.OutputIcon className="_icon" item={attributes} />}
 														<RichText
 															tagName="span"
@@ -227,7 +227,7 @@ wp.blocks.registerBlockType("catpow/contactinfo", {
 									<li className="_item" key={index}>
 										{states.hasItemTitle && <RichText.Content tagName={getSubHeadingTag(HeadingTag)} className="_title" value={item.title} />}
 										{states.hasItemLead && <RichText.Content tagName="p" className="_lead" value={item.lead} />}
-										<CP.Link className="_link" attr={attributes} keys={linkKeys.link} index={index} {...CP.extractEventDispatcherAttributes("catpow/contactinfo", item)}>
+										<CP.Link className="_link" attributes={attributes} keys={linkKeys.link} index={index} {...CP.extractEventDispatcherAttributes("catpow/contactinfo", item)}>
 											{states.hasIcon && <CP.OutputIcon className="_icon" item={attributes} />}
 											<RichText.Content tagName="span" className="_text" value={item.link} />
 										</CP.Link>

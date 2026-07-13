@@ -55,7 +55,7 @@ wp.blocks.registerBlockType("catpow/t-image", {
 									{states.isTemplate ? (
 										<img src={wpinfo.plugins_url + "/catpow/callee/dummy_image.php?text=" + loopImage} width="100%" height="auto" />
 									) : (
-										<CP.SelectResponsiveImage className="_img" set={setAttributes} attr={attributes} keys={{ src: "src", alt: "alt" }} size="large" width="100%" height="auto" />
+										<CP.SelectResponsiveImage className="_img" setAttributes={setAttributes} attributes={attributes} keys={{ src: "src", alt: "alt" }} size="large" width="100%" height="auto" />
 									)}
 								</td>
 							</tr>

@@ -125,7 +125,7 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 									<div className="_buttons">
 										{buttons.map((button, index) => (
 											<CP.Item tag="li" className="_button" {...{ setAttributes, attributes }} itemKeys={["buttons", index]} indexKey="currentButtonIndex" key={index}>
-												<CP.Link.Edit className="_link" set={setAttributes} attr={attributes} keys={{ items: "buttons", href: "linkUrl" }} index={index}>
+												<CP.Link.Edit className="_link" setAttributes={setAttributes} attributes={attributes} keys={{ items: "buttons", href: "linkUrl" }} index={index}>
 													<CP.OutputIcon className="_icon" item={button} />
 													<RichText
 														tagName="span"
@@ -145,7 +145,7 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 							</div>
 							<Element class="wp-block-catpow-heroheader__bg" className="_bg" {...params}>
 								{images.map((image, index) => (
-									<CP.ResponsiveImage className="_picture" attr={attributes} keys={imageKeys.bgImages} index={index} devices={devices} key={index} />
+									<CP.ResponsiveImage className="_picture" attributes={attributes} keys={imageKeys.bgImages} index={index} devices={devices} key={index} />
 								))}
 							</Element>
 						</div>
@@ -175,7 +175,7 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 								<ul className="_buttons">
 									{buttons.map((button, index) => (
 										<li className="_button" key={index}>
-											<CP.Link className="_link" attr={attributes} keys={{ items: "buttons", href: "linkUrl" }} index={index}>
+											<CP.Link className="_link" attributes={attributes} keys={{ items: "buttons", href: "linkUrl" }} index={index}>
 												<CP.OutputIcon className="_icon" item={button} />
 												<RichText.Content tagName="span" className="_text" value={button.text} />
 											</CP.Link>
@@ -186,7 +186,7 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 						</div>
 						<Element className="_bg" {...params}>
 							{images.map((image, index) => (
-								<CP.ResponsiveImage className="_picture" attr={attributes} keys={imageKeys.bgImages} index={index} devices={devices} />
+								<CP.ResponsiveImage className="_picture" attributes={attributes} keys={imageKeys.bgImages} index={index} devices={devices} />
 							))}
 						</Element>
 					</div>

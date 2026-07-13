@@ -154,7 +154,7 @@ wp.blocks.registerBlockType("catpow/ranking", {
 							return (
 								<CP.Item tag="li" className={item.classes} {...{ setAttributes, attributes }} itemKeys={["items", index]} key={index}>
 									<div className="_image">
-										<CP.SelectResponsiveImage attr={attributes} set={setAttributes} keys={imageKeys.image} index={index} size="vga" />
+										<CP.SelectResponsiveImage attributes={attributes} setAttributes={setAttributes} keys={imageKeys.image} index={index} size="vga" />
 									</div>
 									<header className="_header">
 										{states.hasRank && (
@@ -221,7 +221,7 @@ wp.blocks.registerBlockType("catpow/ranking", {
 											value={item.text}
 										/>
 										{states.hasLink && (
-											<CP.Link.Edit className="_link" set={setAttributes} attr={attributes} keys={config.linkKeys.link} index={index}>
+											<CP.Link.Edit className="_link" setAttributes={setAttributes} attributes={attributes} keys={config.linkKeys.link} index={index}>
 												<RichText
 													onChange={(linkText) => {
 														items[index].linkText = linkText;
@@ -283,7 +283,7 @@ wp.blocks.registerBlockType("catpow/ranking", {
 								{states.hasLead && <RichText.Content tagName={SubHeadingTag} className="_lead" value={item.lead} />}
 								<RichText.Content tagName="p" className="_text" value={item.text} />
 								{states.hasLink && item.linkUrl && (
-									<CP.Link className="_link" attr={attributes} keys={config.linkKeys.link} index={index}>
+									<CP.Link className="_link" attributes={attributes} keys={config.linkKeys.link} index={index}>
 										<RichText.Content value={item.linkText} />
 									</CP.Link>
 								)}

@@ -132,7 +132,7 @@ wp.blocks.registerBlockType("catpow/buttons", {
 															{item.copy}
 														</span>
 													)}
-													<CP.Link.Edit className="-button" attr={attributes} set={setAttributes} keys={linkKeys.link} index={index}>
+													<CP.Link.Edit className="-button" attributes={attributes} setAttributes={setAttributes} keys={linkKeys.link} index={index}>
 														{itemStates.hasIcon && <CP.OutputIcon className="_icon" item={item} />}
 														<span
 															className="_text"

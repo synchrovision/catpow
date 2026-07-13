@@ -204,7 +204,7 @@ wp.blocks.registerBlockType("catpow/flow", {
 									<CP.Item tag="li" className="_item" {...{ setAttributes, attributes }} itemKeys={["items", index]} key={index}>
 										{states.hasImage && (
 											<div className="_image">
-												<CP.SelectResponsiveImage attr={attributes} set={setAttributes} keys={imageKeys.image} index={index} size="vga" />
+												<CP.SelectResponsiveImage attributes={attributes} setAttributes={setAttributes} keys={imageKeys.image} index={index} size="vga" />
 											</div>
 										)}
 										<div className="_texts">
@@ -262,7 +262,7 @@ wp.blocks.registerBlockType("catpow/flow", {
 													value={item.text}
 												/>
 											</div>
-											{states.hasLink && <CP.Link.Edit className="_link" attr={attributes} set={setAttributes} keys={linkKeys.link} index={index} />}
+											{states.hasLink && <CP.Link.Edit className="_link" attributes={attributes} setAttributes={setAttributes} keys={linkKeys.link} index={index} />}
 										</div>
 									</CP.Item>
 								);
@@ -308,7 +308,7 @@ wp.blocks.registerBlockType("catpow/flow", {
 										{states.hasSubTitle && <RichText.Content tagName={SubHeadingTag} className="_subtitle" value={item.subTitle} />}
 										<RichText.Content tagName="p" className="_text" value={item.text} />
 									</div>
-									{states.hasLink && item.linkUrl && <CP.Link className="_link" attr={attributes} keys={linkKeys.link} index={index} />}
+									{states.hasLink && item.linkUrl && <CP.Link className="_link" attributes={attributes} keys={linkKeys.link} index={index} />}
 								</div>
 							</li>
 						);

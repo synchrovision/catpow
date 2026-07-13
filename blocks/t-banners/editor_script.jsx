@@ -79,11 +79,11 @@ wp.blocks.registerBlockType("catpow/t-banners", {
 											<>
 												{index > 0 && <td className="_td is-spacer-cell" style={{ width: `${gapX}px` }}></td>}
 												<CP.Item className="_td" tag="td" {...{ setAttributes, attributes }} itemKeys={["items", gIndex * columns + index]} key={index}>
-													<CP.Link.Edit className="_link" set={setAttributes} attr={attributes} keys={{ items: "items", href: "url" }} index={gIndex * columns + index}>
+													<CP.Link.Edit className="_link" setAttributes={setAttributes} attributes={attributes} keys={{ items: "items", href: "url" }} index={gIndex * columns + index}>
 														<CP.SelectResponsiveImage
 															className="_img"
-															set={setAttributes}
-															attr={attributes}
+															setAttributes={setAttributes}
+															attributes={attributes}
 															keys={{ items: "items", src: "src", alt: "alt", code: "loopImage" }}
 															index={gIndex * columns + index}
 															size="medium"

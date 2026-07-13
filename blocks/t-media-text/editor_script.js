@@ -45,8 +45,8 @@
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("table", { width: "100%", className: classes }, /* @__PURE__ */ wp.element.createElement("tbody", null, marginTop > 0 && /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-spacer-cell", style: { height: `${marginTop}rem` }, colSpan: "3" })), states.hasImageLeft ? /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-image-cell", width }, /* @__PURE__ */ wp.element.createElement(
         CP.SelectResponsiveImage,
         {
-          set: setAttributes,
-          attr: attributes,
+          setAttributes,
+          attributes,
           keys: { src: "src", alt: "alt", code: "imageCode" },
           size: "large",
           width: "100%",
@@ -56,8 +56,8 @@
       )), /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-spacer-cell", style: { width: `${gap}px` }, width: gap }), /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-text-cell" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, null))) : /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-text-cell" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)), /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-spacer-cell", style: { width: `${gap}px` }, width: gap }), /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-image-cell", width }, /* @__PURE__ */ wp.element.createElement(
         CP.SelectResponsiveImage,
         {
-          set: setAttributes,
-          attr: attributes,
+          setAttributes,
+          attributes,
           keys: { src: "src", alt: "alt", code: "imageCode" },
           size: "large",
           width: "100%",
@@ -70,7 +70,7 @@
       const { InnerBlocks } = wp.blockEditor;
       const { classes, marginTop, marginBottom, src, alt, imageCode, width, gap } = attributes;
       var states = CP.classNamesToFlags(classes);
-      return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("table", { width: "100%", className: classes }, /* @__PURE__ */ wp.element.createElement("tbody", null, marginTop > 0 && /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-spacer-cell", style: { height: `${marginTop}rem` }, colSpan: "3" })), states.hasImageLeft ? /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-image-cell", width }, /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImage, { attr: attributes, keys: { src: "src", alt: "alt", code: "imageCode" }, size: "large", width: "100%", height: "auto", isTemplate: states.isTemplate })), /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-spacer-cell", style: { width: `${gap}px` }, width: gap }), /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-text-cell" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null))) : /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-text-cell" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)), /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-spacer-cell", style: { width: `${gap}px` }, width: gap }), /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-image-cell", width }, /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImage, { attr: attributes, keys: { src: "src", alt: "alt", code: "imageCode" }, size: "large", width: "100%", height: "auto", isTemplate: states.isTemplate }))), marginBottom > 0 && /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-spacer-cell", style: { height: `${marginBottom}rem` }, colSpan: "3" })))));
+      return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("table", { width: "100%", className: classes }, /* @__PURE__ */ wp.element.createElement("tbody", null, marginTop > 0 && /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-spacer-cell", style: { height: `${marginTop}rem` }, colSpan: "3" })), states.hasImageLeft ? /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-image-cell", width }, /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImage, { attributes, keys: { src: "src", alt: "alt", code: "imageCode" }, size: "large", width: "100%", height: "auto", isTemplate: states.isTemplate })), /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-spacer-cell", style: { width: `${gap}px` }, width: gap }), /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-text-cell" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null))) : /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-text-cell" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)), /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-spacer-cell", style: { width: `${gap}px` }, width: gap }), /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-image-cell", width }, /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImage, { attributes, keys: { src: "src", alt: "alt", code: "imageCode" }, size: "large", width: "100%", height: "auto", isTemplate: states.isTemplate }))), marginBottom > 0 && /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-spacer-cell", style: { height: `${marginBottom}rem` }, colSpan: "3" })))));
     }
   });
 })();

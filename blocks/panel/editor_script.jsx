@@ -138,7 +138,7 @@ wp.blocks.registerBlockType("catpow/panel", {
 									<CP.Item tag="li" className={item.classes} {...{ setAttributes, attributes }} itemKeys={["items", index]} key={index}>
 										{itemStates.hasImage && (
 											<div className="_image">
-												<CP.SelectResponsiveImage className="_img" attr={attributes} set={setAttributes} keys={imageKeys.image} index={index} size="vga" />
+												<CP.SelectResponsiveImage className="_img" attributes={attributes} setAttributes={setAttributes} keys={imageKeys.image} index={index} size="vga" />
 											</div>
 										)}
 										<div className="_texts">

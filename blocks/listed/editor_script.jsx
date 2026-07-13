@@ -327,7 +327,7 @@ wp.blocks.registerBlockType("catpow/listed", {
 											<CP.Item tag="li" className={clsx("_item", item.classes, commonItemClasses)} {...{ setAttributes, attributes }} itemKeys={["items", index]} key={i}>
 												{states.hasImage && (
 													<div className="_image">
-														<CP.SelectResponsiveImage attr={attributes} set={setAttributes} keys={imageKeys.image} index={index} size="vga" isTemplate={states.isTemplate} />
+														<CP.SelectResponsiveImage attributes={attributes} setAttributes={setAttributes} keys={imageKeys.image} index={index} size="vga" isTemplate={states.isTemplate} />
 													</div>
 												)}
 												{states.hasHeader && (
@@ -341,7 +341,7 @@ wp.blocks.registerBlockType("catpow/listed", {
 														)}
 														{states.hasHeaderImage && (
 															<div className="_image">
-																<CP.SelectResponsiveImage attr={attributes} set={setAttributes} keys={imageKeys.headerImage} index={index} size="thumbnail" isTemplate={states.isTemplate} />
+																<CP.SelectResponsiveImage attributes={attributes} setAttributes={setAttributes} keys={imageKeys.headerImage} index={index} size="thumbnail" isTemplate={states.isTemplate} />
 															</div>
 														)}
 														<div className="_text">
@@ -381,7 +381,7 @@ wp.blocks.registerBlockType("catpow/listed", {
 														)}
 														{states.hasSubImage && (
 															<div className="_image">
-																<CP.SelectResponsiveImage attr={attributes} set={setAttributes} keys={imageKeys.subImage} index={index} size="medium" isTemplate={states.isTemplate} />
+																<CP.SelectResponsiveImage attributes={attributes} setAttributes={setAttributes} keys={imageKeys.subImage} index={index} size="medium" isTemplate={states.isTemplate} />
 															</div>
 														)}
 														{states.hasSubTitle && (
@@ -408,7 +408,7 @@ wp.blocks.registerBlockType("catpow/listed", {
 															/>
 														)}
 														{states.hasLink && (
-															<CP.Link.Edit className="_link" attr={attributes} set={setAttributes} keys={linkKeys.link} index={index}>
+															<CP.Link.Edit className="_link" attributes={attributes} setAttributes={setAttributes} keys={linkKeys.link} index={index}>
 																<RichText
 																	onChange={(linkText) => {
 																		item.linkText = linkText;
@@ -445,7 +445,7 @@ wp.blocks.registerBlockType("catpow/listed", {
 							<li className={clsx("_item", item.classes, commonItemClasses)} data-class={item.classes} key={index}>
 								{states.hasImage && (
 									<div className="_image">
-										<CP.ResponsiveImage attr={attributes} keys={imageKeys.image} index={index} isTemplate={states.isTemplate} />
+										<CP.ResponsiveImage attributes={attributes} keys={imageKeys.image} index={index} isTemplate={states.isTemplate} />
 									</div>
 								)}
 								{states.hasHeader && (
@@ -459,7 +459,7 @@ wp.blocks.registerBlockType("catpow/listed", {
 										)}
 										{states.hasHeaderImage && (
 											<div className="_image">
-												<CP.ResponsiveImage attr={attributes} keys={imageKeys.headerImage} index={index} isTemplate={states.isTemplate} />
+												<CP.ResponsiveImage attributes={attributes} keys={imageKeys.headerImage} index={index} isTemplate={states.isTemplate} />
 											</div>
 										)}
 										<div className="_text">
@@ -479,13 +479,13 @@ wp.blocks.registerBlockType("catpow/listed", {
 										)}
 										{states.hasSubImage && (
 											<div className="_image">
-												<CP.ResponsiveImage attr={attributes} keys={imageKeys.subImage} index={index} isTemplate={states.isTemplate} />
+												<CP.ResponsiveImage attributes={attributes} keys={imageKeys.subImage} index={index} isTemplate={states.isTemplate} />
 											</div>
 										)}
 										{states.hasSubTitle && <RichText.Content tagName="p" className="_subtitle" value={item.subTitle} />}
 										{states.hasText && <RichText.Content tagName="p" className="_text" value={item.text} />}
 										{states.hasLink && (
-											<CP.Link className="_link" attr={attributes} keys={linkKeys.link} index={index}>
+											<CP.Link className="_link" attributes={attributes} keys={linkKeys.link} index={index}>
 												<RichText.Content value={item.linkText} />
 											</CP.Link>
 										)}

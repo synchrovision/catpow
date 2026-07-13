@@ -196,7 +196,7 @@ wp.blocks.registerBlockType("catpow/showcase", {
 										return (
 											<CP.Item tag="li" className={item.classes} {...{ setAttributes, attributes }} itemKeys={["items", index]} key={index}>
 												<div className="_image">
-													<CP.SelectResponsiveImage attr={attributes} set={setAttributes} keys={imageKeys.image} index={index} size="full" isTemplate={states.isTemplate} />
+													<CP.SelectResponsiveImage attributes={attributes} setAttributes={setAttributes} keys={imageKeys.image} index={index} size="full" isTemplate={states.isTemplate} />
 												</div>
 												<div className="_texts">
 													{states.hasCounter && (
@@ -241,7 +241,7 @@ wp.blocks.registerBlockType("catpow/showcase", {
 														/>
 													</div>
 													{states.hasLink && (
-														<CP.Link.Edit className="_link" attr={attributes} set={setAttributes} keys={linkKeys.link} index={index}>
+														<CP.Link.Edit className="_link" attributes={attributes} setAttributes={setAttributes} keys={linkKeys.link} index={index}>
 															<RichText
 																onChange={(linkText) => {
 																	items[index].linkText = linkText;
@@ -278,7 +278,7 @@ wp.blocks.registerBlockType("catpow/showcase", {
 						{items.map((item, index) => (
 							<li className={item.classes} key={index}>
 								<div className="_image">
-									<CP.ResponsiveImage attr={attributes} keys={imageKeys.image} index={index} isTemplate={states.isTemplate} />
+									<CP.ResponsiveImage attributes={attributes} keys={imageKeys.image} index={index} isTemplate={states.isTemplate} />
 								</div>
 								<div className="_texts">
 									{states.hasCounter && (
@@ -294,7 +294,7 @@ wp.blocks.registerBlockType("catpow/showcase", {
 										<RichText.Content value={item.text} />
 									</div>
 									{states.hasLink && (
-										<CP.Link className="_link" attr={attributes} keys={linkKeys.link} index={index}>
+										<CP.Link className="_link" attributes={attributes} keys={linkKeys.link} index={index}>
 											<RichText.Content value={item.linkText} />
 										</CP.Link>
 									)}
