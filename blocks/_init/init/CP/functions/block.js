@@ -28,3 +28,8 @@ export const getClosestBlockAttributesComputed = (callback, block, itemKeys) => 
 	}
 	return null;
 };
+export const walkBlocksRecursive = (blocks, callback) => {
+	blocks.forEach((block) => {
+		if (callback(block) !== false && block.innerBlocks) block.innerBlocks.forEach(callback);
+	});
+};
