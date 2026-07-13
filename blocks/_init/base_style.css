@@ -16,8 +16,6 @@
 .cp-item {
   anchor-name: --item;
   anchor-scope: all;
-  transform: -webkit- scale(1);
-  transform: scale(1);
 }
 .cp-label {
   width: fit-content;

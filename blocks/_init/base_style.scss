@@ -23,7 +23,6 @@ $colors:(
 .cp{
 	&-item{
 		@include anc((n:--item,s:a));
-		@include trn((s:1));
 	}
 	&-label{
 		@include bnd((w:fit,mgl:a,pd:.25em,ac:c));
