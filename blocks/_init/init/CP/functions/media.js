@@ -1,4 +1,4 @@
-﻿export const selectImage = (set, { attr, keys, index, size, devices = ["sp", "tb"], type = "image" }) => {
+﻿export const selectImage = (set, { keys, size, devices = ["sp", "tb"], type = "image" }) => {
 	if (CP.uploder === undefined) {
 		CP.uploader = wp.media({
 			title: "Select Image",
@@ -47,11 +47,7 @@
 			if (keys.data) {
 				data[keys.data] = image;
 			}
-			if (attr && keys.items && index) {
-				CP.updateItemByKeyAndIndex({ attr, set }, keys.items, index, data);
-			} else {
-				set(data);
-			}
+			set(data);
 		})
 		.off("open")
 		.on("open", () => {
