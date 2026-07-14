@@ -29,6 +29,16 @@ export const saveItem = ({ items, itemsKey, set, attributes, setAttributes, item
 	if (items) return set({ [itemsKey || "items"]: JSON.parse(JSON.stringify(items)) });
 	setAttributes({ [itemKeys[0]]: JSON.parse(JSON.stringify(attributes[itemKeys[0]])) });
 };
+export const updateItem = (props, values) => {
+	const { attributes, setAttributes, itemKeys } = props;
+	if (itemKeys) {
+		console.log({ props, values });
+		Object.assign(getTheItem(props), values);
+		saveItem(props);
+	} else {
+		setAttributes(values);
+	}
+};
 export const deleteItem = (props) => {
 	getTheItems(props).splice(getTheItemIndex(props), 1);
 	saveItem(props);
