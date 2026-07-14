@@ -89,7 +89,7 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 						<CP.EditItemsTable
 							setAttributes={setAttributes}
 							attributes={attributes}
-							itemsKey="buttons"
+							itemKeys={["buttons"]}
 							columns={[
 								{ type: "icon", label: "icon" },
 								{ type: "text", key: "text" },
@@ -145,7 +145,7 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 							</div>
 							<Element class="wp-block-catpow-heroheader__bg" className="_bg" {...params}>
 								{images.map((image, index) => (
-									<CP.ResponsiveImage className="_picture" attributes={attributes} keys={imageKeys.bgImages} index={index} devices={devices} key={index} />
+									<CP.ResponsiveImage className="_picture" attributes={attributes} keys={imageKeys.bgImages} itemKeys={["images", index]} devices={devices} key={index} />
 								))}
 							</Element>
 						</div>
@@ -186,7 +186,7 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 						</div>
 						<Element className="_bg" {...params}>
 							{images.map((image, index) => (
-								<CP.ResponsiveImage className="_picture" attributes={attributes} keys={imageKeys.bgImages} index={index} devices={devices} />
+								<CP.ResponsiveImage className="_picture" attributes={attributes} keys={imageKeys.bgImages} itemKeys={["images", index]} devices={devices} />
 							))}
 						</Element>
 					</div>

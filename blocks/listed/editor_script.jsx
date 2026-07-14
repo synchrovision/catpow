@@ -247,7 +247,8 @@ wp.blocks.registerBlockType("catpow/listed", {
 						<CP.SelectClassPanel
 							title="テンプレート"
 							icon="edit"
-							{...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]}
+							{...{ setAttributes, attributes }}
+							itemKeys={["items", attributes.currentItemIndex]}
 							selectiveClasses={selectiveItemTemplateClasses}
 						/>
 					)}
@@ -327,7 +328,14 @@ wp.blocks.registerBlockType("catpow/listed", {
 											<CP.Item tag="li" className={clsx("_item", item.classes, commonItemClasses)} {...{ setAttributes, attributes }} itemKeys={["items", index]} key={i}>
 												{states.hasImage && (
 													<div className="_image">
-														<CP.SelectResponsiveImage attributes={attributes} setAttributes={setAttributes} keys={imageKeys.image} index={index} size="vga" isTemplate={states.isTemplate} />
+														<CP.SelectResponsiveImage
+															attributes={attributes}
+															setAttributes={setAttributes}
+															keys={imageKeys.image}
+															itemKeys={["items", index]}
+															size="vga"
+															isTemplate={states.isTemplate}
+														/>
 													</div>
 												)}
 												{states.hasHeader && (
@@ -341,7 +349,14 @@ wp.blocks.registerBlockType("catpow/listed", {
 														)}
 														{states.hasHeaderImage && (
 															<div className="_image">
-																<CP.SelectResponsiveImage attributes={attributes} setAttributes={setAttributes} keys={imageKeys.headerImage} index={index} size="thumbnail" isTemplate={states.isTemplate} />
+																<CP.SelectResponsiveImage
+																	attributes={attributes}
+																	setAttributes={setAttributes}
+																	keys={imageKeys.headerImage}
+																	itemKeys={["items", index]}
+																	size="thumbnail"
+																	isTemplate={states.isTemplate}
+																/>
 															</div>
 														)}
 														<div className="_text">
@@ -381,7 +396,14 @@ wp.blocks.registerBlockType("catpow/listed", {
 														)}
 														{states.hasSubImage && (
 															<div className="_image">
-																<CP.SelectResponsiveImage attributes={attributes} setAttributes={setAttributes} keys={imageKeys.subImage} index={index} size="medium" isTemplate={states.isTemplate} />
+																<CP.SelectResponsiveImage
+																	attributes={attributes}
+																	setAttributes={setAttributes}
+																	keys={imageKeys.subImage}
+																	itemKeys={["items", index]}
+																	size="medium"
+																	isTemplate={states.isTemplate}
+																/>
 															</div>
 														)}
 														{states.hasSubTitle && (
@@ -445,7 +467,7 @@ wp.blocks.registerBlockType("catpow/listed", {
 							<li className={clsx("_item", item.classes, commonItemClasses)} data-class={item.classes} key={index}>
 								{states.hasImage && (
 									<div className="_image">
-										<CP.ResponsiveImage attributes={attributes} keys={imageKeys.image} index={index} isTemplate={states.isTemplate} />
+										<CP.ResponsiveImage attributes={attributes} keys={imageKeys.image} itemKeys={["items", index]} isTemplate={states.isTemplate} />
 									</div>
 								)}
 								{states.hasHeader && (
@@ -459,7 +481,7 @@ wp.blocks.registerBlockType("catpow/listed", {
 										)}
 										{states.hasHeaderImage && (
 											<div className="_image">
-												<CP.ResponsiveImage attributes={attributes} keys={imageKeys.headerImage} index={index} isTemplate={states.isTemplate} />
+												<CP.ResponsiveImage attributes={attributes} keys={imageKeys.headerImage} itemKeys={["items", index]} isTemplate={states.isTemplate} />
 											</div>
 										)}
 										<div className="_text">
@@ -479,7 +501,7 @@ wp.blocks.registerBlockType("catpow/listed", {
 										)}
 										{states.hasSubImage && (
 											<div className="_image">
-												<CP.ResponsiveImage attributes={attributes} keys={imageKeys.subImage} index={index} isTemplate={states.isTemplate} />
+												<CP.ResponsiveImage attributes={attributes} keys={imageKeys.subImage} itemKeys={["items", index]} isTemplate={states.isTemplate} />
 											</div>
 										)}
 										{states.hasSubTitle && <RichText.Content tagName="p" className="_subtitle" value={item.subTitle} />}

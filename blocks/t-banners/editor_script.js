@@ -97,7 +97,7 @@
           setAttributes,
           attributes,
           keys: { items: "items", src: "src", alt: "alt", code: "loopImage" },
-          index: gIndex * columns + index,
+          itemKeys: ["items", gIndex * columns + index],
           size: "medium",
           isTemplate: states.isTemplate
         }

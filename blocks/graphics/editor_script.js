@@ -561,14 +561,14 @@
                 devices,
                 device: device === "pc" ? null : device,
                 keys: imageKeys.image,
-                index
+                itemKeys: ["items", index]
               }
             );
           }
           if (itemStates.isText) {
             return /* @__PURE__ */ wp.element.createElement("span", { className: "_body" }, itemStates.hasTitle && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "h3", className: "_title", value: item.title }), itemStates.hasLead && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "h4", className: "_lead", value: item.lead }), itemStates.hasText && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "p", className: "_text", value: item.text }));
           }
-          return /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImage, { attributes, keys: imageKeys.image, devices, device: device === "pc" ? null : device, index });
+          return /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImage, { attributes, keys: imageKeys.image, devices, device: device === "pc" ? null : device, itemKeys: ["items", index] });
         };
         return /* @__PURE__ */ wp.element.createElement("span", { id: id + "_item_" + index, className: itemClasses, "data-index": index, "data-rect": item.rect, ref: (el) => targetRefs.current[index] = el, onClick: onClickItem, key: index }, itemBody());
       }), /* @__PURE__ */ wp.element.createElement("style", null, device !== "pc" ? CP.createStyleCode(cssDatas[device]) : renderCssDatas(cssDatas))))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", ...{ setAttributes, attributes }, selectiveClasses, initialOpen: true }, !states.hasBaseImage && /* @__PURE__ */ wp.element.createElement(
@@ -622,7 +622,7 @@
           if (itemStates.isText) {
             return /* @__PURE__ */ wp.element.createElement("span", { className: "_body" }, itemStates.hasTitle && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "h3", className: "_title", value: item.title }), itemStates.hasLead && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "h4", className: "_lead", value: item.lead }), itemStates.hasText && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "p", className: "_text", value: item.text }));
           }
-          return /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImage, { attributes, keys: imageKeys.image, index, devices });
+          return /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImage, { attributes, keys: imageKeys.image, itemKeys: ["items", index], devices });
         };
         const TagName = item.link ? "a" : "span";
         return /* @__PURE__ */ wp.element.createElement(TagName, { id: id + "_item_" + index, className: item.classes, href: item.link, "data-rect": item.rect, key: index }, itemBody());

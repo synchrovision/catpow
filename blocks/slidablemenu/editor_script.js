@@ -99,7 +99,7 @@
           item.controlClasses = "control";
         }
         rtn.push(
-          /* @__PURE__ */ wp.element.createElement(CP.Item, { tag: "li", ...{ setAttributes, attributes }, itemKeys: ["items", index], key: i }, /* @__PURE__ */ wp.element.createElement("div", { className: "contents" }, /* @__PURE__ */ wp.element.createElement("div", { className: "image" }, /* @__PURE__ */ wp.element.createElement(CP.SelectResponsiveImage, { attributes, setAttributes, keys: imageKeys.image, index, size: "vga", isTemplate: states.isTemplate })), /* @__PURE__ */ wp.element.createElement("div", { className: "texts" }, /* @__PURE__ */ wp.element.createElement(
+          /* @__PURE__ */ wp.element.createElement(CP.Item, { tag: "li", ...{ setAttributes, attributes }, itemKeys: ["items", index], key: i }, /* @__PURE__ */ wp.element.createElement("div", { className: "contents" }, /* @__PURE__ */ wp.element.createElement("div", { className: "image" }, /* @__PURE__ */ wp.element.createElement(CP.SelectResponsiveImage, { attributes, setAttributes, keys: imageKeys.image, itemKeys: ["items", index], size: "vga", isTemplate: states.isTemplate })), /* @__PURE__ */ wp.element.createElement("div", { className: "texts" }, /* @__PURE__ */ wp.element.createElement(
             RichText,
             {
               tagName: "h4",
@@ -171,7 +171,7 @@
       let rtn = [];
       items.map((item, index) => {
         rtn.push(
-          /* @__PURE__ */ wp.element.createElement("li", { className: item.classes, key: index }, /* @__PURE__ */ wp.element.createElement("div", { className: "contents" }, /* @__PURE__ */ wp.element.createElement("div", { className: "image" }, /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImage, { attributes, keys: imageKeys.image, index, size: "vga", isTemplate: states.isTemplate })), /* @__PURE__ */ wp.element.createElement("div", { className: "texts" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "h4", className: "title", value: item.title }), /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "div", className: "text", value: item.text })), /* @__PURE__ */ wp.element.createElement("a", { className: "link", href: item.linkUrl }, " ")))
+          /* @__PURE__ */ wp.element.createElement("li", { className: item.classes, key: index }, /* @__PURE__ */ wp.element.createElement("div", { className: "contents" }, /* @__PURE__ */ wp.element.createElement("div", { className: "image" }, /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImage, { attributes, keys: imageKeys.image, itemKeys: ["items", index], size: "vga", isTemplate: states.isTemplate })), /* @__PURE__ */ wp.element.createElement("div", { className: "texts" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "h4", className: "title", value: item.title }), /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "div", className: "text", value: item.text })), /* @__PURE__ */ wp.element.createElement("a", { className: "link", href: item.linkUrl }, " ")))
         );
       });
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: classes, style: "--columns:" + columnsCount }, /* @__PURE__ */ wp.element.createElement("ul", { className: "items" }, rtn)), doLoop && /* @__PURE__ */ wp.element.createElement("on-empty", null, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));

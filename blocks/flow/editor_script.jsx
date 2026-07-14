@@ -204,7 +204,7 @@ wp.blocks.registerBlockType("catpow/flow", {
 									<CP.Item tag="li" className="_item" {...{ setAttributes, attributes }} itemKeys={["items", index]} key={index}>
 										{states.hasImage && (
 											<div className="_image">
-												<CP.SelectResponsiveImage attributes={attributes} setAttributes={setAttributes} keys={imageKeys.image} index={index} size="vga" />
+												<CP.SelectResponsiveImage attributes={attributes} setAttributes={setAttributes} keys={imageKeys.image} itemKeys={["items", index]} size="vga" />
 											</div>
 										)}
 										<div className="_texts">

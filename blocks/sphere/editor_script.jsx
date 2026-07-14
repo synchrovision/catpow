@@ -86,7 +86,8 @@ wp.blocks.registerBlockType("catpow/sphere", {
 					<CP.SelectClassPanel
 						title="アイテム"
 						icon="edit"
-						{...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]}
+						{...{ setAttributes, attributes }}
+						itemKeys={["items", attributes.currentItemIndex]}
 						selectiveClasses={selectiveItemClasses}
 						initialOpen={true}
 					/>
@@ -100,7 +101,7 @@ wp.blocks.registerBlockType("catpow/sphere", {
 								<CP.Item tag="li" className={item.classes} {...{ setAttributes, attributes }} itemKeys={["items", index]} key={index}>
 									{states.hasImage && (
 										<div className="_image">
-											<CP.SelectResponsiveImage className="_img" attributes={attributes} setAttributes={setAttributes} keys={imageKeys.image} index={index} size="large" />
+											<CP.SelectResponsiveImage className="_img" attributes={attributes} setAttributes={setAttributes} keys={imageKeys.image} itemKeys={["items", index]} size="large" />
 										</div>
 									)}
 									<div className="_texts">

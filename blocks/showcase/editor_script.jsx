@@ -145,7 +145,8 @@ wp.blocks.registerBlockType("catpow/showcase", {
 						<CP.SelectClassPanel
 							title="テンプレート"
 							icon="edit"
-							{...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]}
+							{...{ setAttributes, attributes }}
+							itemKeys={["items", attributes.currentItemIndex]}
 							selectiveClasses={selectiveItemTemplateClasses}
 						/>
 					) : (
@@ -196,7 +197,14 @@ wp.blocks.registerBlockType("catpow/showcase", {
 										return (
 											<CP.Item tag="li" className={item.classes} {...{ setAttributes, attributes }} itemKeys={["items", index]} key={index}>
 												<div className="_image">
-													<CP.SelectResponsiveImage attributes={attributes} setAttributes={setAttributes} keys={imageKeys.image} index={index} size="full" isTemplate={states.isTemplate} />
+													<CP.SelectResponsiveImage
+														attributes={attributes}
+														setAttributes={setAttributes}
+														keys={imageKeys.image}
+														itemKeys={["items", index]}
+														size="full"
+														isTemplate={states.isTemplate}
+													/>
 												</div>
 												<div className="_texts">
 													{states.hasCounter && (
@@ -278,7 +286,7 @@ wp.blocks.registerBlockType("catpow/showcase", {
 						{items.map((item, index) => (
 							<li className={item.classes} key={index}>
 								<div className="_image">
-									<CP.ResponsiveImage attributes={attributes} keys={imageKeys.image} index={index} isTemplate={states.isTemplate} />
+									<CP.ResponsiveImage attributes={attributes} keys={imageKeys.image} itemKeys={["items", index]} isTemplate={states.isTemplate} />
 								</div>
 								<div className="_texts">
 									{states.hasCounter && (

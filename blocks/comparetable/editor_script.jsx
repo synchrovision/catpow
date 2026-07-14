@@ -508,7 +508,7 @@ wp.blocks.registerBlockType("catpow/comparetable", {
 																					attributes={attributes}
 																					setAttributes={setAttributes}
 																					keys={imageKeys.image}
-																					index={[rowIndex, columnIndex]}
+																					itemKeys={["rows", rowIndex, "cells", columnIndex]}
 																					size="large"
 																					isTemplate={states.isTemplate}
 																				/>
@@ -558,7 +558,8 @@ wp.blocks.registerBlockType("catpow/comparetable", {
 							title="セル"
 							icon="art"
 							{...{ setAttributes, attributes }}
-							selectiveClasses={c === 0 ? selectiveHeaderColCellClasses : selectiveCellClasses} itemKeys={["rows", r, "cells", c]}
+							selectiveClasses={c === 0 ? selectiveHeaderColCellClasses : selectiveCellClasses}
+							itemKeys={["rows", r, "cells", c]}
 						/>
 					)}
 				</InspectorControls>
@@ -697,7 +698,13 @@ wp.blocks.registerBlockType("catpow/comparetable", {
 																{cellStates.hasLabel && <RichText.Content tagName="div" className="_label" value={cell.label} data-role="label" />}
 																{colStates.isImage ? (
 																	<div className="_image" data-role="image">
-																		<CP.ResponsiveImage className="_img" attributes={attributes} keys={imageKeys.image} index={[rowIndex, columnIndex]} isTemplate={states.isTemplate} />
+																		<CP.ResponsiveImage
+																			className="_img"
+																			attributes={attributes}
+																			keys={imageKeys.image}
+																			itemKeys={["rows", rowIndex, "cells", columnIndex]}
+																			isTemplate={states.isTemplate}
+																		/>
 																	</div>
 																) : (
 																	<RichText.Content tagName="div" className="_contents" value={cell.text} data-role="contents" />

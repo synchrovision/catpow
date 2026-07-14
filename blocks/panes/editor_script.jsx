@@ -96,7 +96,15 @@ wp.blocks.registerBlockType("catpow/panes", {
 										return (
 											<CP.Item tag="li" className={item.classes} {...{ setAttributes, attributes }} itemKeys={["items", index]} key={index}>
 												<div className="_image">
-													<CP.SelectResponsiveImage class="_img" attributes={attributes} setAttributes={setAttributes} keys={imageKeys.image} index={index} size="large" isTemplate={states.isTemplate} />
+													<CP.SelectResponsiveImage
+														class="_img"
+														attributes={attributes}
+														setAttributes={setAttributes}
+														keys={imageKeys.image}
+														itemKeys={["items", index]}
+														size="large"
+														isTemplate={states.isTemplate}
+													/>
 												</div>
 												<div className="_contents">
 													<div className="_text">
@@ -156,7 +164,7 @@ wp.blocks.registerBlockType("catpow/panes", {
 						{items.map((item, index) => (
 							<li className={item.classes} key={index}>
 								<div className="_image">
-									<CP.ResponsiveImage className="_img" attributes={attributes} keys={imageKeys.image} index={index} isTemplate={states.isTemplate} />
+									<CP.ResponsiveImage className="_img" attributes={attributes} keys={imageKeys.image} itemKeys={["items", index]} isTemplate={states.isTemplate} />
 								</div>
 								<div className="_contents">
 									<div className="_text">

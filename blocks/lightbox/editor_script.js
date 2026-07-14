@@ -186,7 +186,18 @@
         if (!item.controlClasses) {
           item.controlClasses = "control";
         }
-        return /* @__PURE__ */ wp.element.createElement(CP.Item, { tag: "li", className: item.classes, ...{ setAttributes, attributes }, itemKeys: ["items", index], key: index }, /* @__PURE__ */ wp.element.createElement("div", { className: "_image" }, /* @__PURE__ */ wp.element.createElement(CP.SelectResponsiveImage, { className: "_img", attributes, setAttributes, keys: imageKeys.thumbnail, index, size: "vga", isTemplate: states.isTemplate })), states.hasTitle && /* @__PURE__ */ wp.element.createElement("div", { className: "_text" }, /* @__PURE__ */ wp.element.createElement(
+        return /* @__PURE__ */ wp.element.createElement(CP.Item, { tag: "li", className: item.classes, ...{ setAttributes, attributes }, itemKeys: ["items", index], key: index }, /* @__PURE__ */ wp.element.createElement("div", { className: "_image" }, /* @__PURE__ */ wp.element.createElement(
+          CP.SelectResponsiveImage,
+          {
+            className: "_img",
+            attributes,
+            setAttributes,
+            keys: imageKeys.thumbnail,
+            itemKeys: ["items", index],
+            size: "vga",
+            isTemplate: states.isTemplate
+          }
+        )), states.hasTitle && /* @__PURE__ */ wp.element.createElement("div", { className: "_text" }, /* @__PURE__ */ wp.element.createElement(
           RichText,
           {
             tagName: HeadingTag,
@@ -223,7 +234,18 @@
             value: item.subTitle,
             placeholder: "SubTitle"
           }
-        ), sliderStates.hasImage && /* @__PURE__ */ wp.element.createElement("div", { className: "_image" }, /* @__PURE__ */ wp.element.createElement(CP.SelectResponsiveImage, { className: "_img", attributes, setAttributes, keys: imageKeys.sliderImage, index, size: "full", isTemplate: states.isTemplate })), sliderStates.hasText && /* @__PURE__ */ wp.element.createElement(
+        ), sliderStates.hasImage && /* @__PURE__ */ wp.element.createElement("div", { className: "_image" }, /* @__PURE__ */ wp.element.createElement(
+          CP.SelectResponsiveImage,
+          {
+            className: "_img",
+            attributes,
+            setAttributes,
+            keys: imageKeys.sliderImage,
+            itemKeys: ["items", index],
+            size: "full",
+            isTemplate: states.isTemplate
+          }
+        )), sliderStates.hasText && /* @__PURE__ */ wp.element.createElement(
           RichText,
           {
             tagName: "div",
@@ -269,9 +291,9 @@
               "data-wp-bind--aria-selected": "callbacks.isCurrent",
               key: index
             },
-            /* @__PURE__ */ wp.element.createElement("div", { className: "_image" }, /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImage, { className: "_img", attributes, keys: imageKeys.thumbnail, index, isTemplate: states.isTemplate })),
+            /* @__PURE__ */ wp.element.createElement("div", { className: "_image" }, /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImage, { className: "_img", attributes, keys: imageKeys.thumbnail, itemKeys: ["items", index], isTemplate: states.isTemplate })),
             states.hasTitle && /* @__PURE__ */ wp.element.createElement("div", { className: "_text" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: HeadingTag, className: "_title", value: item.title }), states.hasCaption && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "p", className: "_caption", value: item.caption })),
-            /* @__PURE__ */ wp.element.createElement("div", { className: "contents_" }, sliderStates.hasTitle && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: SliderHeadingTag, className: "_title", value: item.subTitle }), sliderStates.hasImage && /* @__PURE__ */ wp.element.createElement("div", { className: "_image" }, /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImage, { className: "_img", attributes, keys: imageKeys.sliderImage, index, isTemplate: states.isTemplate })), sliderStates.hasText && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "div", className: "_text", value: item.text }))
+            /* @__PURE__ */ wp.element.createElement("div", { className: "contents_" }, sliderStates.hasTitle && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: SliderHeadingTag, className: "_title", value: item.subTitle }), sliderStates.hasImage && /* @__PURE__ */ wp.element.createElement("div", { className: "_image" }, /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImage, { className: "_img", attributes, keys: imageKeys.sliderImage, itemKeys: ["items", index], isTemplate: states.isTemplate })), sliderStates.hasText && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "div", className: "_text", value: item.text }))
           );
         })),
         /* @__PURE__ */ wp.element.createElement("div", { id: "{$uid}", className: sliderClasses, style: sliderVars }, /* @__PURE__ */ wp.element.createElement("ul", { className: "_items" }, items.map((item, index) => {

@@ -98,7 +98,7 @@
 												<CP.Item tag="li" className={item.classes} {...{ setAttributes, attributes }} itemKeys={["items", index]} key={index}>
 													{itemStates.hasImage && (
 														<div className="_image">
-															<CP.SelectResponsiveImage attributes={attributes} setAttributes={setAttributes} keys={imageKeys.image} index={index} size="vga" />
+															<CP.SelectResponsiveImage attributes={attributes} setAttributes={setAttributes} keys={imageKeys.image} itemKeys={["items", index]} size="vga" />
 														</div>
 													)}
 													<RichText

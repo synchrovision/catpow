@@ -589,7 +589,7 @@ wp.blocks.registerBlockType("catpow/graphics", {
 												devices={devices}
 												device={device === "pc" ? null : device}
 												keys={imageKeys.image}
-												index={index}
+												itemKeys={["items", index]}
 											/>
 										);
 									}
@@ -602,7 +602,7 @@ wp.blocks.registerBlockType("catpow/graphics", {
 											</span>
 										);
 									}
-									return <CP.ResponsiveImage attributes={attributes} keys={imageKeys.image} devices={devices} device={device === "pc" ? null : device} index={index} />;
+									return <CP.ResponsiveImage attributes={attributes} keys={imageKeys.image} devices={devices} device={device === "pc" ? null : device} itemKeys={["items", index]} />;
 								};
 								return (
 									<span id={id + "_item_" + index} className={itemClasses} data-index={index} data-rect={item.rect} ref={(el) => (targetRefs.current[index] = el)} onClick={onClickItem} key={index}>
@@ -636,7 +636,8 @@ wp.blocks.registerBlockType("catpow/graphics", {
 						<CP.SelectClassPanel
 							title="アイテム"
 							icon="edit"
-							{...{ setAttributes, attributes }} itemKeys={["items", currentItemIndexes[0]]}
+							{...{ setAttributes, attributes }}
+							itemKeys={["items", currentItemIndexes[0]]}
 							selectiveClasses={selectiveItemClasses}
 							initialOpen={true}
 						/>
@@ -683,7 +684,7 @@ wp.blocks.registerBlockType("catpow/graphics", {
 									</span>
 								);
 							}
-							return <CP.ResponsiveImage attributes={attributes} keys={imageKeys.image} index={index} devices={devices} />;
+							return <CP.ResponsiveImage attributes={attributes} keys={imageKeys.image} itemKeys={["items", index]} devices={devices} />;
 						};
 						const TagName = item.link ? "a" : "span";
 						return (

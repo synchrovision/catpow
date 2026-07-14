@@ -155,7 +155,14 @@ wp.blocks.registerBlockType("catpow/pricecard", {
 											<CP.Item tag="li" className={item.classes} {...{ setAttributes, attributes }} itemKeys={["items", index]} key={index}>
 												{states.hasImage && (
 													<div className="_image">
-														<CP.SelectResponsiveImage attributes={attributes} setAttributes={setAttributes} keys={imageKeys.image} index={index} size="vga" isTemplate={states.isTemplate} />
+														<CP.SelectResponsiveImage
+															attributes={attributes}
+															setAttributes={setAttributes}
+															keys={imageKeys.image}
+															itemKeys={["items", index]}
+															size="vga"
+															isTemplate={states.isTemplate}
+														/>
 													</div>
 												)}
 												<header className={headerClasses}>
@@ -317,7 +324,7 @@ wp.blocks.registerBlockType("catpow/pricecard", {
 								<li className={item.classes} key={index}>
 									{states.hasImage && (
 										<div className="_image">
-											<CP.ResponsiveImage attributes={attributes} keys={imageKeys.image} index={index} size="vga" isTemplate={states.isTemplate} />
+											<CP.ResponsiveImage attributes={attributes} keys={imageKeys.image} itemKeys={["items", index]} size="vga" isTemplate={states.isTemplate} />
 										</div>
 									)}
 									<header className={headerClasses}>

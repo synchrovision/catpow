@@ -108,7 +108,7 @@
         {
           setAttributes,
           attributes,
-          itemsKey: "buttons",
+          itemKeys: ["buttons"],
           columns: [
             { type: "icon", label: "icon" },
             { type: "text", key: "text" }
@@ -149,14 +149,14 @@
           },
           value: button.text
         }
-      )))))), /* @__PURE__ */ wp.element.createElement(Element, { class: "wp-block-catpow-heroheader__bg", className: "_bg", ...params }, images.map((image, index) => /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImage, { className: "_picture", attributes, keys: imageKeys.bgImages, index, devices, key: index }))))));
+      )))))), /* @__PURE__ */ wp.element.createElement(Element, { class: "wp-block-catpow-heroheader__bg", className: "_bg", ...params }, images.map((image, index) => /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImage, { className: "_picture", attributes, keys: imageKeys.bgImages, itemKeys: ["images", index], devices, key: index }))))));
     },
     save({ attributes }) {
       const { classes, bodyClasses, vars, params, HeadingTag, title, text, buttons, images, element: Element = "div" } = attributes;
       const { RichText, useBlockProps } = wp.blockEditor;
       const states = CP.classNamesToFlags(attributes.classes);
       const { devices, imageKeys } = CP.config.heroheader;
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("script", { type: "module", src: heroheaderSelectiveClasses.mjs[Element] }), /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps.save({ className: attributes.classes, style: vars }) }, /* @__PURE__ */ wp.element.createElement("div", { className: bodyClasses }, /* @__PURE__ */ wp.element.createElement("div", { className: "_texts" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: HeadingTag, className: "_title", value: attributes.title }), /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "p", className: "_text", value: attributes.text })), states.hasButtons && /* @__PURE__ */ wp.element.createElement("ul", { className: "_buttons" }, buttons.map((button, index) => /* @__PURE__ */ wp.element.createElement("li", { className: "_button", key: index }, /* @__PURE__ */ wp.element.createElement(CP.Link, { className: "_link", attributes, keys: { items: "buttons", href: "linkUrl" }, index }, /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { className: "_icon", item: button }), /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "span", className: "_text", value: button.text })))))), /* @__PURE__ */ wp.element.createElement(Element, { className: "_bg", ...params }, images.map((image, index) => /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImage, { className: "_picture", attributes, keys: imageKeys.bgImages, index, devices }))))));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("script", { type: "module", src: heroheaderSelectiveClasses.mjs[Element] }), /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps.save({ className: attributes.classes, style: vars }) }, /* @__PURE__ */ wp.element.createElement("div", { className: bodyClasses }, /* @__PURE__ */ wp.element.createElement("div", { className: "_texts" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: HeadingTag, className: "_title", value: attributes.title }), /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "p", className: "_text", value: attributes.text })), states.hasButtons && /* @__PURE__ */ wp.element.createElement("ul", { className: "_buttons" }, buttons.map((button, index) => /* @__PURE__ */ wp.element.createElement("li", { className: "_button", key: index }, /* @__PURE__ */ wp.element.createElement(CP.Link, { className: "_link", attributes, keys: { items: "buttons", href: "linkUrl" }, index }, /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { className: "_icon", item: button }), /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "span", className: "_text", value: button.text })))))), /* @__PURE__ */ wp.element.createElement(Element, { className: "_bg", ...params }, images.map((image, index) => /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImage, { className: "_picture", attributes, keys: imageKeys.bgImages, itemKeys: ["images", index], devices }))))));
     }
   });
 })();

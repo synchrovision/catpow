@@ -154,7 +154,7 @@ wp.blocks.registerBlockType("catpow/ranking", {
 							return (
 								<CP.Item tag="li" className={item.classes} {...{ setAttributes, attributes }} itemKeys={["items", index]} key={index}>
 									<div className="_image">
-										<CP.SelectResponsiveImage attributes={attributes} setAttributes={setAttributes} keys={imageKeys.image} index={index} size="vga" />
+										<CP.SelectResponsiveImage attributes={attributes} setAttributes={setAttributes} keys={imageKeys.image} itemKeys={["items", index]} size="vga" />
 									</div>
 									<header className="_header">
 										{states.hasRank && (

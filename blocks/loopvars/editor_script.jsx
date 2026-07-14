@@ -19,7 +19,7 @@
 				{EditMode ? (
 					<div {...blockProps}>
 						<CP.Label icon="edit">vars</CP.Label>
-						<CP.EditItemsTable setAttributes={setAttributes} attributes={attributes} itemsKey="items" columns={columns} />
+						<CP.EditItemsTable setAttributes={setAttributes} attributes={attributes} itemKeys={["items"]} columns={columns} />
 					</div>
 				) : (
 					<div {...blockProps}>
@@ -32,7 +32,7 @@
 						<CP.EditItemsTable
 							setAttributes={setAttributes}
 							attributes={attributes}
-							itemsKey="columns"
+							itemKeys={["columns"]}
 							columns={[
 								{
 									type: "select",

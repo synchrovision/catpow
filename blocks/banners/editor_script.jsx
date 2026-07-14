@@ -86,7 +86,8 @@ wp.blocks.registerBlockType("catpow/banners", {
 						<CP.SelectClassPanel
 							title="テンプレート"
 							icon="edit"
-							{...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]}
+							{...{ setAttributes, attributes }}
+							itemKeys={["items", attributes.currentItemIndex]}
 							selectiveClasses={itemTemplateSelectiveClasses}
 						/>
 					) : (
@@ -152,7 +153,7 @@ wp.blocks.registerBlockType("catpow/banners", {
 														attributes={attributes}
 														setAttributes={setAttributes}
 														keys={imageKeys.image}
-														index={index}
+														itemKeys={["items", index]}
 														devices={devices}
 														device={device === "pc" ? null : device}
 														isTemplate={states.isTemplate}
@@ -190,7 +191,15 @@ wp.blocks.registerBlockType("catpow/banners", {
 									{states.hasTitle && <RichText.Content tagName={HeadingTag} className="_title" value={item.title} />}
 
 									<CP.Link className="_link" attributes={attributes} keys={linkKeys.link} index={index} {...CP.extractEventDispatcherAttributes("catpow/banners", item)}>
-										<CP.ResponsiveImage className="_image" size="regular_banner" attributes={attributes} keys={imageKeys.image} index={index} devices={devices} isTemplate={states.isTemplate} />
+										<CP.ResponsiveImage
+											className="_image"
+											size="regular_banner"
+											attributes={attributes}
+											keys={imageKeys.image}
+											itemKeys={["items", index]}
+											devices={devices}
+											isTemplate={states.isTemplate}
+										/>
 									</CP.Link>
 								</li>
 							);
@@ -233,7 +242,7 @@ wp.blocks.registerBlockType("catpow/banners", {
 										</h3>
 									)}
 									<a href={item.linkUrl} target={item.target} data-event={item.event} rel={item.target ? "noopener noreferrer" : ""}>
-										<CP.ResponsiveImage attributes={attributes} keys={imageKeys.image} index={index} isTemplate={states.isTemplate} />
+										<CP.ResponsiveImage attributes={attributes} keys={imageKeys.image} itemKeys={["items", index]} isTemplate={states.isTemplate} />
 									</a>
 								</li>
 							);

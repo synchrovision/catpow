@@ -207,7 +207,8 @@ wp.blocks.registerBlockType("catpow/slider", {
 					<CP.SelectClassPanel
 						title="スライド"
 						icon="edit"
-						{...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]}
+						{...{ setAttributes, attributes }}
+						itemKeys={["items", attributes.currentItemIndex]}
 						triggerClasses={selectiveClasses.find(({ item }) => !!item)}
 					/>
 					<CP.ItemControlInfoPanel />
@@ -252,7 +253,14 @@ wp.blocks.registerBlockType("catpow/slider", {
 														<div className="_body">
 															{states.hasImage && (
 																<div className="_image">
-																	<CP.SelectResponsiveImage className="_img" attributes={attributes} setAttributes={setAttributes} keys={imageKeys.image} index={index} isTemplate={states.isTemplate} />
+																	<CP.SelectResponsiveImage
+																		className="_img"
+																		attributes={attributes}
+																		setAttributes={setAttributes}
+																		keys={imageKeys.image}
+																		itemKeys={["items", index]}
+																		isTemplate={states.isTemplate}
+																	/>
 																</div>
 															)}
 															{(states.hasTitle || states.hasCaption || states.hasText || states.hasLink) && (
@@ -357,7 +365,7 @@ wp.blocks.registerBlockType("catpow/slider", {
 									<div className="_body">
 										{states.hasImage && (
 											<div className="_image">
-												<CP.ResponsiveImage className="_img" attributes={attributes} keys={imageKeys.image} index={index} isTemplate={states.isTemplate} />
+												<CP.ResponsiveImage className="_img" attributes={attributes} keys={imageKeys.image} itemKeys={["items", index]} isTemplate={states.isTemplate} />
 											</div>
 										)}
 										{(states.hasTitle || states.hasCaption || states.hasText || states.hasLink) && (
