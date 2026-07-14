@@ -53,27 +53,3 @@ export const downItem = (props) => {
 	items.splice(index, 2, items[index + 1], items[index]);
 	saveItem(props);
 };
-/**
- * @deprecated
- **/
-export const updateItemByKeyAndIndex = ({ attr, set }, keys, index, item) => {
-	if (keys) {
-		if (Array.isArray(keys)) {
-			console.assert(Array.isArray(index) && index.length === keys.length, "index and keys should be same length");
-			let oldItem = attr;
-			for (let i in keys) {
-				if (!oldItem[keys[i]]) {
-					oldItem[keys[i]] = [];
-				}
-				if (!oldItem[keys[i]][index[i]]) {
-					oldItem[keys[i]][index[i]] = {};
-				}
-				oldItem = oldItem[keys[i]][index[i]];
-			}
-			Object.assign(oldItem, item);
-			set({ [keys[0]]: JSON.parse(JSON.stringify(attr[keys[0]])) });
-		} else {
-			set({ [keys]: Object.assign({}, attr[keys] || {}, item) });
-		}
-	}
-};
