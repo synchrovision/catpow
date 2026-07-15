@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 150 150">
+  <defs>
+    <pattern id="dots-h" width="16" height="16" patternUnits="userSpaceOnUse"><circle cx="8" cy="8" r="4" fill="currentColor"/><circle cx="8" cy="8" r="1.5" fill="currentColor"/></pattern>
+    <pattern id="dots-v" width="16" height="16" patternUnits="userSpaceOnUse"><circle cx="8" cy="8" r="4" fill="currentColor"/><circle cx="8" cy="8" r="1.5" fill="currentColor"/></pattern>
+  </defs>
+  <path d="M24 16h102M24 134h102M16 24v102M134 24v102" fill="none" stroke="url(#dots-h)" stroke-width="12" stroke-linecap="round" stroke-dasharray="1 15"/>
+  <g fill="currentColor"><circle cx="16" cy="16" r="8"/><circle cx="134" cy="16" r="8"/><circle cx="16" cy="134" r="8"/><circle cx="134" cy="134" r="8"/></g>
+</svg>
