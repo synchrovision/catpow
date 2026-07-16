@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="base" xmlns="http://www.w3.org/2000/svg" width="150" height="150" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 150 150">
+  <defs>
+    <style>
+      .cls-1 {
+        filter: url(#drop-shadow-3);
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke: #e6e6e6;
+        stroke-miterlimit: 10;
+      }
+
+      .cls-3 {
+        fill: #f8f8f8;
+      }
+    </style>
+    <filter id="drop-shadow-3" x="1" y="3" width="148" height="148" filterUnits="userSpaceOnUse">
+      <feOffset dx="0" dy="2"/>
+      <feGaussianBlur result="blur" stdDeviation="3"/>
+      <feFlood flood-color="#000" flood-opacity=".3"/>
+      <feComposite in2="blur" operator="in"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g class="cls-1">
+    <rect class="cls-3" x="10" y="10" width="130" height="130"/>
+  </g>
+  <line class="cls-2" x1="16.67" y1="37" x2="133" y2="37"/>
+  <line class="cls-2" x1="16.67" y1="62" x2="133" y2="62"/>
+  <line class="cls-2" x1="16.67" y1="87" x2="133" y2="87"/>
+  <line class="cls-2" x1="16.67" y1="112" x2="133" y2="112"/>
+</svg>

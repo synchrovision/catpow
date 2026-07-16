@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="base" xmlns="http://www.w3.org/2000/svg" width="150" height="150" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 150 150">
+  <defs>
+    <style>
+      .cls-1 {
+        filter: url(#drop-shadow-2);
+      }
+
+      .cls-2 {
+        fill: #c7c7c7;
+      }
+
+      .cls-3 {
+        fill: #f8f8f8;
+      }
+
+      .cls-4 {
+        opacity: .8;
+      }
+    </style>
+    <filter id="drop-shadow-2" x="1" y="3" width="148" height="148" filterUnits="userSpaceOnUse">
+      <feOffset dx="0" dy="2"/>
+      <feGaussianBlur result="blur" stdDeviation="3"/>
+      <feFlood flood-color="#000" flood-opacity=".3"/>
+      <feComposite in2="blur" operator="in"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g class="cls-1">
+    <rect class="cls-3" x="10" y="10" width="130" height="130"/>
+  </g>
+  <g>
+    <polygon class="cls-2" points="75 30 60 30 50 20 65 20 75 30"/>
+    <polygon class="cls-4" points="100 30 85 30 75 20 90 20 100 30"/>
+    <polygon class="cls-2" points="75 130 60 130 50 120 65 120 75 130"/>
+    <polygon class="cls-4" points="100 130 85 130 75 120 90 120 100 130"/>
+    <polygon class="cls-2" points="125 30 110 30 100 20 115 20 125 30"/>
+    <polygon class="cls-2" points="125 130 110 130 100 120 115 120 125 130"/>
+    <polygon class="cls-4" points="50 30 35 30 25 20 40 20 50 30"/>
+    <polygon class="cls-2" points="20 75 20 90 30 100 30 85 20 75"/>
+    <polygon class="cls-4" points="20 50 20 65 30 75 30 60 20 50"/>
+    <polygon class="cls-2" points="120 75 120 90 130 100 130 85 120 75"/>
+    <polygon class="cls-4" points="120 50 120 65 130 75 130 60 120 50"/>
+    <polygon class="cls-2" points="20 25 20 40 30 50 30 35 20 25"/>
+    <polygon class="cls-2" points="120 25 120 40 130 50 130 35 120 25"/>
+    <polygon class="cls-4" points="125 20 130 25 130 20 125 20"/>
+    <polygon class="cls-2" points="20 125 20 130 25 130 20 125"/>
+    <polygon class="cls-4" points="40 120 30 120 30 110 20 100 20 115 25 120 30 125 35 130 50 130 40 120"/>
+    <polygon class="cls-4" points="120 100 120 115 130 125 130 110 120 100"/>
+  </g>
+</svg>

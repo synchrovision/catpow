@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 150 150">
+  <defs>
+    <linearGradient id="glow" x1="0" y1="0" x2="150" y2="150" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="oklch(from currentColor calc(l + 0.2) c h)"/>
+      <stop offset="0.5" stop-color="currentColor"/>
+      <stop offset="0.5" stop-color="oklch(from currentColor calc(l - 0.2) c h)"/>
+      <stop offset="1" stop-color="currentColor"/>
+    </linearGradient>
+  </defs>
+  <rect x="13" y="13" width="124" height="124" rx="14" fill="none" stroke="url(#glow)" stroke-width="4"/>
+</svg>
