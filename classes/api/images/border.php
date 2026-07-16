@@ -5,7 +5,7 @@ namespace Catpow\api\images;
 */
 
 class border extends icon{
-	public static $param_pattern='(?P<repeat>s|r)?(?P<slice>\d+(_\d+)*)?',$param_default=['repeat'=>'round','slice'=>null,'ext'=>null];
+	public static $param_pattern='(?P<repeat>sp?|rp?|)?(?P<slice>\d+(_\d+)*)?',$param_default=['repeat'=>'round','slice'=>null,'ext'=>null];
 	public static function fill_data($data){
 		foreach($data as $index=>$image){
 			$conf=&$data[$index]['conf'];
@@ -29,7 +29,7 @@ class border extends icon{
 			if(empty($conf['width'])){
 				$conf['width']=implode(' ',array_map(function($w){return $w.'px';},explode(' ',$conf['slice'])));
 			}
-			$conf['repeat']=['s'=>'stretch','r'=>'repeat'][$conf['repeat']]?:$conf['repeat'];
+			$conf['repeat']=['s'=>'stretch','sp'=>'space','r'=>'round','rp'=>'repeat'][$conf['repeat']]?:$conf['repeat'];
 		}
 		return $data;
 	}
