@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 150 150">
+  <rect x="22" y="22" width="106" height="106" rx="12" fill="none" stroke="currentColor" stroke-width="4"/>
+  <g stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="m8 15 9 7m18-14-3 10m28-8 6 9m22-10-5 10m25-8 8 7m21-9-4 11M9 135l9-7m17 14-3-10m28 8 6-9m22 10-5-10m25 8 8-7m21 9-4-11M15 8l7 9m-14 18 10-3m-8 28 9 6M9 88l10-5m-8 25 7 8m-9 21 11-4M135 8l-7 9m14 18-10-3m8 28-9 6m10 22-10-5m8 25-7 8m9 21-11-4"/></g>
+  <g fill="oklch(from currentColor l c calc(h + 100))"><circle cx="46" cy="14" r="4"/><circle cx="104" cy="136" r="4"/><circle cx="14" cy="104" r="4"/><circle cx="136" cy="46" r="4"/></g>
+</svg>

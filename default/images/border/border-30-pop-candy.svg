@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 150 150">
+  <rect x="10" y="10" width="130" height="130" rx="18" fill="none" stroke="currentColor" stroke-width="12"/>
+  <rect x="10" y="10" width="130" height="130" rx="18" fill="none" stroke="oklch(from currentColor l c calc(h + 95))" stroke-width="7" stroke-dasharray="12 12"/>
+  <rect x="23" y="23" width="104" height="104" rx="8" fill="none" stroke="oklch(from currentColor l c h / .35)" stroke-width="2"/>
+  <g fill="oklch(from currentColor l c calc(h + 180))" stroke="currentColor" stroke-width="2"><circle cx="17" cy="17" r="7"/><circle cx="133" cy="17" r="7"/><circle cx="133" cy="133" r="7"/><circle cx="17" cy="133" r="7"/></g>
+</svg>

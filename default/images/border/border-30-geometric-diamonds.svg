@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 150 150">
+  <g fill="oklch(from currentColor l c h / .18)" stroke="currentColor" stroke-width="2">
+    <path d="m8 8 17 17L8 42 25 59 8 76l17 17-17 17 17 17-15 15M142 8l-17 17 17 17-17 17 17 17-17 17 17 17-17 17 15 15M8 8l17 17 17-17 17 17L76 8l17 17 17-17 17 17 15-15M8 142l17-17 17 17 17-17 17 17 17-17 17 17 17-17 15 15"/>
+  </g>
+  <rect x="25" y="25" width="100" height="100" fill="none" stroke="oklch(from currentColor l c calc(h + 90))" stroke-width="2"/>
+</svg>

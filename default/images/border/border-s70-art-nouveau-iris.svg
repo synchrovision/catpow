@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 150 150">
+  <g fill="none" stroke="currentColor" stroke-width="2"><rect x="16" y="16" width="118" height="118" rx="22"/><path d="M16 54c20 0 30-12 32-38M96 16c2 26 12 38 38 38M134 96c-26 2-38 12-38 38M54 134c-2-26-12-38-38-38"/></g>
+  <g fill="oklch(from currentColor l c calc(h + 65) / .4)" stroke="currentColor" stroke-width="1.5"><path d="M16 16c17-7 29 4 30 20-16 2-27-5-30-20Z"/><path d="M134 16c7 17-4 29-20 30-2-16 5-27 20-30Z"/><path d="M134 134c-17 7-29-4-30-20 16-2 27 5 30 20Z"/><path d="M16 134c-7-17 4-29 20-30 2 16-5 27-20 30Z"/></g>
+  <g fill="currentColor"><circle cx="16" cy="16" r="4"/><circle cx="134" cy="16" r="4"/><circle cx="134" cy="134" r="4"/><circle cx="16" cy="134" r="4"/></g>
+</svg>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 150 150">
+  <g fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+    <path d="M18 132C8 100 30 81 18 52S8 18 34 12C62 5 62 29 75 29s13-24 41-17c26 6 26 11 16 40s12 48 0 80c-6 17-24 12-40 5s-18-7-34 0-34 12-40-5Z"/>
+    <path d="M18 52c18-3 27-13 28-29M132 52c-18-3-27-13-28-29M18 98c18 3 27 13 28 29M132 98c-18 3-27 13-28 29"/>
+  </g>
+  <g fill="oklch(from currentColor l c calc(h + 35) / .55)"><path d="M31 22c14-7 21 1 13 14-13 1-18-4-13-14Z"/><path d="M119 22c-14-7-21 1-13 14 13 1 18-4 13-14Z"/><path d="M31 128c14 7 21-1 13-14-13-1-18 4-13 14Z"/><path d="M119 128c-14 7-21-1-13-14 13-1 18 4 13 14Z"/></g>
+</svg>
