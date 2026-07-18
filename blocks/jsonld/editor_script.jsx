@@ -204,7 +204,7 @@ wp.blocks.registerBlockType("catpow/jsonld", {
 		const typeLabel = useMemo(() => types && data["@type"] && (types[data["@type"]]?.label || data["@type"]), [types, data["@type"]]);
 
 		useEffect(() => {
-			wp.apiFetch({ path: "/cp/v1/blocks/config/jsonld/types" }).then((res) => {
+			wp.apiFetch({ path: "/cp/v1/schema/jsonld" }).then((res) => {
 				const { types, formals } = res;
 				Object.keys(formals).forEach((key) => {
 					formals[key].items.forEach((item) => fillConf(item, res));
