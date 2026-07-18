@@ -1,0 +1,52 @@
+@import "admin_style_config.scss";
+@import "text-placeholders.scss";
+@import 'component-placeholders.scss';
+
+.wp-block-catpow-recruitinfo{
+	@include txt((c:tx));
+	&__header{
+		&-title{
+			@extend %heading-block;
+			@extend %heading;
+			@include bnd((mgt:0));
+		}
+	}
+	&__organization{
+	}
+	&__description{
+		@extend %lead-block;
+		@extend %lead;
+	}
+	&__details{
+		@include grd((tc:a 1fr));
+		&-item{
+			@include bnd((gc:span 2));
+			@include grd((tc:s,g:1em));
+			@include bdr((p:b,s:s,w:1,c:lx));
+			dt,dd{
+				@extend %paragraph;
+				@extend %table-component;
+				@include bnd((pdi:0));
+			}
+		}
+	}
+	&__apply{
+		margin:1.5em 0 0;
+		&-button{
+			@extend %button-component;
+		}
+	}
+	&.is-type-flat{
+		
+	}
+	&.is-type-card{
+		@extend %card-component;
+		@include bdr((s:s,c:lx));
+		@include bg((c:bx));
+	}
+	&.is-type-frame{
+		@extend %frame-component;
+		@include bdr((s:s,c:lx));
+		@include bg((c:bx));
+	}
+}

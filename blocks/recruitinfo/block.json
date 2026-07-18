@@ -1,0 +1,19 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "catpow/recruitinfo",
+	"title": "🐾 RecruitInfo",
+	"icon": "businessperson",
+	"category": "catpow",
+	"textdomain": "catpow",
+	"description": "求人情報とJobPosting構造化データを出力するブロックです。",
+	"supports": {
+		"anchor": true,
+		"className": false,
+		"color": false,
+		"spacing": {
+			"margin": true,
+			"padding": true
+		}
+	}
+}
