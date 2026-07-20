@@ -1003,8 +1003,8 @@ export const selectiveClassesPresets = {
 			values: "hasMargin",
 			classKey,
 			sub: [
-				{ preset: "marginTop", vars },
-				{ preset: "marginBottom", vars },
+				{ preset: "marginTop", classKey, vars },
+				{ preset: "marginBottom", classKey, vars },
 			],
 			...otherParams,
 		};
@@ -1014,6 +1014,7 @@ export const selectiveClassesPresets = {
 			name: "margin",
 			type: "buttons",
 			label: __("上マージン", "catpow"),
+			classKey,
 			values: {
 				hasMarginTopXLarge: __("極大", "catpow"),
 				hasMarginTopLarge: __("大", "catpow"),
@@ -1046,6 +1047,7 @@ export const selectiveClassesPresets = {
 			name: "margin",
 			type: "buttons",
 			label: __("下マージン", "catpow"),
+			classKey,
 			values: {
 				hasMarginBottomXLarge: __("極大", "catpow"),
 				hasMarginBottomLarge: __("大", "catpow"),
