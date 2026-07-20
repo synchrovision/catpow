@@ -116,10 +116,10 @@
     if (typeof b !== "function" && b !== null)
       throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
     extendStatics(d, b);
-    function __15() {
+    function __16() {
       this.constructor = d;
     }
-    d.prototype = b === null ? Object.create(b) : (__15.prototype = b.prototype, new __15());
+    d.prototype = b === null ? Object.create(b) : (__16.prototype = b.prototype, new __16());
   }
   function __rest(s, e) {
     var t = {};
@@ -3375,8 +3375,8 @@
 
   // ../blocks/_init/init/CP/components/ItemControlInfoPanel.jsx
   var ItemControlInfoPanel = () => {
-    const { PanelBody } = wp.components;
-    return /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "\u64CD\u4F5C", initialOpen: false, icon: "info" }, /* @__PURE__ */ wp.element.createElement("table", null, /* @__PURE__ */ wp.element.createElement("tbody", null, /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("th", null, "\u2318/Ctrl + S"), /* @__PURE__ */ wp.element.createElement("td", null, "\u4FDD\u5B58")), /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("th", null, "\u2318/Ctrl + D"), /* @__PURE__ */ wp.element.createElement("td", null, "\u8907\u88FD")), /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("th", null, "\u2318/Ctrl + delete"), /* @__PURE__ */ wp.element.createElement("td", null, "\u524A\u9664")), /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("th", null, "\u2318/Ctrl + \u2191"), /* @__PURE__ */ wp.element.createElement("td", null, "\u524D\u306E\u30A2\u30A4\u30C6\u30E0\u3068\u5165\u308C\u66FF\u3048")), /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("th", null, "\u2318/Ctrl + \u2193"), /* @__PURE__ */ wp.element.createElement("td", null, "\u6B21\u306E\u30A2\u30A4\u30C6\u30E0\u3068\u5165\u308C\u66FF\u3048")))));
+    const { PanelBody: PanelBody2 } = wp.components;
+    return /* @__PURE__ */ wp.element.createElement(PanelBody2, { title: "\u64CD\u4F5C", initialOpen: false, icon: "info" }, /* @__PURE__ */ wp.element.createElement("table", null, /* @__PURE__ */ wp.element.createElement("tbody", null, /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("th", null, "\u2318/Ctrl + S"), /* @__PURE__ */ wp.element.createElement("td", null, "\u4FDD\u5B58")), /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("th", null, "\u2318/Ctrl + D"), /* @__PURE__ */ wp.element.createElement("td", null, "\u8907\u88FD")), /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("th", null, "\u2318/Ctrl + delete"), /* @__PURE__ */ wp.element.createElement("td", null, "\u524A\u9664")), /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("th", null, "\u2318/Ctrl + \u2191"), /* @__PURE__ */ wp.element.createElement("td", null, "\u524D\u306E\u30A2\u30A4\u30C6\u30E0\u3068\u5165\u308C\u66FF\u3048")), /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("th", null, "\u2318/Ctrl + \u2193"), /* @__PURE__ */ wp.element.createElement("td", null, "\u6B21\u306E\u30A2\u30A4\u30C6\u30E0\u3068\u5165\u308C\u66FF\u3048")))));
   };
 
   // ../blocks/_init/init/CP/components/SelectClassPanelBlock.jsx
@@ -4209,7 +4209,7 @@
   var SelectClassPanelContext = wp.element.createContext({});
   var SelectClassPanel = (props) => {
     const { Fragment: Fragment2, useMemo: useMemo11, useCallback: useCallback3, createElement: el } = wp.element;
-    const { PanelBody } = wp.components;
+    const { PanelBody: PanelBody2 } = wp.components;
     const { blockClasssKey = "classes", classKey: primaryClassKey = "classes", setAttributes, attributes, itemKeys, triggerClasses } = wp.hooks.applyFilters("catpow.SelectClassPanelProps", props);
     const selectiveClasses = useMemo11(() => {
       if (!triggerClasses || !triggerClasses.item) {
@@ -4297,7 +4297,7 @@
     if (!item || !selectiveClasses) {
       return false;
     }
-    return /* @__PURE__ */ wp.element.createElement(PanelBody, { title: props.title, initialOpen: props.initialOpen || false, icon: props.icon }, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanelContext.Provider, { value: { props, item, states, allStates, save, saveClasses, primaryClassKey, block, colorNumber } }, selectiveClasses.map((prm, index) => /* @__PURE__ */ wp.element.createElement(Fragment2, { key: index }, /* @__PURE__ */ wp.element.createElement(SelectClassPanelBlock, { prm }))), props.children));
+    return /* @__PURE__ */ wp.element.createElement(PanelBody2, { title: props.title, initialOpen: props.initialOpen || false, icon: props.icon }, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanelContext.Provider, { value: { props, item, states, allStates, save, saveClasses, primaryClassKey, block, colorNumber } }, selectiveClasses.map((prm, index) => /* @__PURE__ */ wp.element.createElement(Fragment2, { key: index }, /* @__PURE__ */ wp.element.createElement(SelectClassPanelBlock, { prm }))), props.children));
   };
 
   // ../blocks/_init/init/CP/components/AlignClassToolbar.jsx
@@ -4490,12 +4490,12 @@
 
   // ../blocks/_init/init/CP/components/ImporterCSVPanel.jsx
   var ImporterCSVPanel = (props) => {
-    const { PanelBody, FormFileUpload } = wp.components;
+    const { PanelBody: PanelBody2, FormFileUpload } = wp.components;
     let reader = new FileReader();
     reader.onload = (e) => {
       props.callback(CP.parseCSV(e.target.result));
     };
-    return /* @__PURE__ */ wp.element.createElement(PanelBody, { title: props.title, initialOpen: false, icon: props.icon }, /* @__PURE__ */ wp.element.createElement(
+    return /* @__PURE__ */ wp.element.createElement(PanelBody2, { title: props.title, initialOpen: false, icon: props.icon }, /* @__PURE__ */ wp.element.createElement(
       FormFileUpload,
       {
         label: "CSV",
@@ -5063,8 +5063,8 @@
   PlacedPictures.Edit = (props) => {
     const { className, setAttributes, attributes, itemKeys, keys, devices: devices2 } = props;
     const { useState: useState7, useMemo: useMemo11, useCallback: useCallback3, useRef: useRef3, useEffect: useEffect6 } = wp.element;
-    const { BlockControls: BlockControls2, InspectorControls } = wp.blockEditor;
-    const { BaseControl: BaseControl2, Icon, PanelBody, RangeControl: RangeControl2, TextControl: TextControl2, Toolbar, ToolbarGroup: ToolbarGroup2, ToolbarButton, ToolbarDropdownMenu } = wp.components;
+    const { BlockControls: BlockControls2, InspectorControls: InspectorControls2 } = wp.blockEditor;
+    const { BaseControl: BaseControl2, Icon, PanelBody: PanelBody2, RangeControl: RangeControl2, TextControl: TextControl2, Toolbar, ToolbarGroup: ToolbarGroup2, ToolbarButton, ToolbarDropdownMenu } = wp.components;
     const item = itemKeys ? CP.getTheItem(props) : attributes;
     const pictures = item[keys.pictures];
     const classes = useMemo11(() => bem("cp-placedpictures " + className), [className]);
@@ -6634,8 +6634,8 @@
         values: "hasMargin",
         classKey,
         sub: [
-          { preset: "marginTop", vars },
-          { preset: "marginBottom", vars }
+          { preset: "marginTop", classKey, vars },
+          { preset: "marginBottom", classKey, vars }
         ],
         ...otherParams
       };
@@ -6645,6 +6645,7 @@
         name: "margin",
         type: "buttons",
         label: __13("\u4E0A\u30DE\u30FC\u30B8\u30F3", "catpow"),
+        classKey,
         values: {
           hasMarginTopXLarge: __13("\u6975\u5927", "catpow"),
           hasMarginTopLarge: __13("\u5927", "catpow"),
@@ -6677,6 +6678,7 @@
         name: "margin",
         type: "buttons",
         label: __13("\u4E0B\u30DE\u30FC\u30B8\u30F3", "catpow"),
+        classKey,
         values: {
           hasMarginBottomXLarge: __13("\u6975\u5927", "catpow"),
           hasMarginBottomLarge: __13("\u5927", "catpow"),
@@ -7922,6 +7924,9 @@
   };
 
   // ../blocks/_init/init/filter.jsx
+  var { __: __14 } = wp.i18n;
+  var { InspectorControls } = wp.blockEditor;
+  var { PanelBody } = wp.components;
   wp.blocks.registerBlockStyle("core/heading", { name: "header", label: "header" });
   wp.blocks.registerBlockStyle("core/heading", { name: "headline", label: "headline" });
   wp.blocks.registerBlockStyle("core/heading", { name: "catch", label: "catch" });
@@ -7954,21 +7959,72 @@
   wp.blocks.registerBlockStyle("core/code", { name: "php", label: "php" });
   wp.blocks.registerBlockStyle("core/code", { name: "html", label: "html" });
   wp.hooks.addFilter("blocks.registerBlockType", "catpow/editor", function(settings, name) {
-    switch (name) {
-      case "core/heading":
-        settings.attributes.className.default = "is-style-headline";
-        break;
-      case "core/paragraph":
-        settings.attributes.fontSize.default = "regular";
-        break;
-      case "core/list":
-        settings.attributes.className.default = "is-style-check";
-        break;
-      case "core/columns":
-        settings.attributes.className.default = "is-style-panel";
-        break;
+    if (name.slice(0, 5) === "core/") {
+      settings.attributes.vars = { type: "object" };
+      switch (name) {
+        case "core/heading":
+          settings.attributes.className.default = "is-style-headline";
+          break;
+        case "core/paragraph":
+          settings.attributes.fontSize.default = "regular";
+          break;
+        case "core/list":
+          settings.attributes.className.default = "is-style-check";
+          break;
+        case "core/columns":
+          settings.attributes.className.default = "is-style-panel";
+          break;
+      }
     }
     return settings;
+  });
+  wp.hooks.addFilter("editor.BlockEdit", "catpow/editor", (BlockEdit) => (props) => {
+    if (props.name.slice(0, 5) === "core/") {
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(
+        CP.SelectClassPanel,
+        {
+          title: __14("\u8A2D\u5B9A"),
+          icon: "pets",
+          ...props,
+          selectiveClasses: [
+            { preset: "level", classKey: "className" },
+            { preset: "hasContentWidth", classKey: "className" },
+            { preset: "hasMargin", classKey: "className" },
+            { preset: "hasPadding", classKey: "className" }
+          ]
+        }
+      )), /* @__PURE__ */ wp.element.createElement(BlockEdit, { ...props }));
+    }
+    return /* @__PURE__ */ wp.element.createElement(BlockEdit, { ...props });
+  });
+  wp.hooks.addFilter(
+    "editor.BlockListBlock",
+    "catpow/editor",
+    wp.compose.createHigherOrderComponent((BlockListBlock) => (props) => {
+      if (props.name.slice(0, 5) === "core/") {
+        return /* @__PURE__ */ wp.element.createElement(
+          BlockListBlock,
+          {
+            ...props,
+            wrapperProps: {
+              ...props.wrapperProps,
+              style: {
+                ...props.wrapperProps?.style,
+                ...props.attributes.vars
+              }
+            }
+          }
+        );
+      }
+      return /* @__PURE__ */ wp.element.createElement(BlockListBlock, { ...props });
+    })
+  );
+  wp.hooks.addFilter("blocks.getSaveContent.extraProps", "catpow/editor", (props, blockType, attributes) => {
+    if (blockType.name.slice(0, 5) === "core/") {
+      console.log("blocks.getSaveContent.extraProps", { props, attributes });
+      Object.assign(props.style ||= {}, attributes.vars);
+    }
+    return props;
   });
   wp.hooks.addFilter(
     "editor.BlockEdit",
@@ -7985,7 +8041,7 @@
   );
 
   // ../blocks/_init/init/format.jsx
-  var { __: __14 } = wp.i18n;
+  var { __: __15 } = wp.i18n;
   var { BlockControls, RichTextToolbarButton, RichTextShortcut } = wp.blockEditor;
   var { Popover, BaseControl, TextControl, RangeControl, Card, CardBody, ToolbarGroup } = wp.components;
   var { useState: useState6, useMemo: useMemo10, useCallback: useCallback2, useReducer: useReducer2, useEffect: useEffect5 } = wp.element;
@@ -8193,10 +8249,10 @@
           return onChange(toggleFormat(value2, { type: "catpow/ruby" }));
         }
         if (wp.richText.isCollapsed(value2)) {
-          alert(__14("\u30EB\u30D3\u3092\u3064\u3051\u305F\u3044\u30C6\u30AD\u30B9\u30C8\u3092\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044"));
+          alert(__15("\u30EB\u30D3\u3092\u3064\u3051\u305F\u3044\u30C6\u30AD\u30B9\u30C8\u3092\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044"));
           return;
         }
-        let rt = prompt(__14("\u30EB\u30D3\u3092\u5165\u529B"));
+        let rt = prompt(__15("\u30EB\u30D3\u3092\u5165\u529B"));
         if (rt === null) {
           return;
         }
@@ -8535,7 +8591,7 @@
     render: (props) => {
       const { useState: useState7, useMemo: useMemo11, useCallback: useCallback3 } = wp.element;
       const { PluginSidebarMoreMenuItem, PluginSidebar } = wp.editor;
-      const { PanelBody } = wp.components;
+      const { PanelBody: PanelBody2 } = wp.components;
       const [structure, setStructure] = useState7(false);
       const { DataStructure: DataStructure2, DataStructureItem: DataStructureItem2 } = CP;
       if (!structure) {
@@ -8605,7 +8661,7 @@
             }
           ), /* @__PURE__ */ wp.element.createElement("path", { d: "M8.7,3.4c0-0.6,0.4-1.1,0.9-1.1C10.2,2.3,11,3.2,11,4c0,0.6-0.5,0.9-1.1,1C9.2,4.9,8.7,4.3,8.7,3.4z" })))
         },
-        /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "\u30C7\u30FC\u30BF\u69CB\u9020", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(DataStructure2, null, structure && Object.keys(structure).map((data_type) => {
+        /* @__PURE__ */ wp.element.createElement(PanelBody2, { title: "\u30C7\u30FC\u30BF\u69CB\u9020", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(DataStructure2, null, structure && Object.keys(structure).map((data_type) => {
           return /* @__PURE__ */ wp.element.createElement(DataStructureItem2, { title: data_type, key: data_type }, structure[data_type].length && /* @__PURE__ */ wp.element.createElement(DataStructure2, null, structure[data_type].map((item) => /* @__PURE__ */ wp.element.createElement(DataStructureItem2, { title: item.label, name: item.name, key: item.name }, item.meta.length && /* @__PURE__ */ wp.element.createElement(RenderMeta, { meta: item.meta })))));
         })))
       ));

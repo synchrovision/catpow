@@ -1,4 +1,8 @@
-﻿wp.blocks.registerBlockStyle("core/heading", { name: "header", label: "header" });
+﻿const { __ } = wp.i18n;
+const { InspectorControls } = wp.blockEditor;
+const { PanelBody } = wp.components;
+
+wp.blocks.registerBlockStyle("core/heading", { name: "header", label: "header" });
 wp.blocks.registerBlockStyle("core/heading", { name: "headline", label: "headline" });
 wp.blocks.registerBlockStyle("core/heading", { name: "catch", label: "catch" });
 
@@ -38,21 +42,76 @@ wp.blocks.registerBlockStyle("core/code", { name: "php", label: "php" });
 wp.blocks.registerBlockStyle("core/code", { name: "html", label: "html" });
 
 wp.hooks.addFilter("blocks.registerBlockType", "catpow/editor", function (settings, name) {
-	switch (name) {
-		case "core/heading":
-			settings.attributes.className.default = "is-style-headline";
-			break;
-		case "core/paragraph":
-			settings.attributes.fontSize.default = "regular";
-			break;
-		case "core/list":
-			settings.attributes.className.default = "is-style-check";
-			break;
-		case "core/columns":
-			settings.attributes.className.default = "is-style-panel";
-			break;
+	if (name.slice(0, 5) === "core/") {
+		settings.attributes.vars = { type: "object" };
+		switch (name) {
+			case "core/heading":
+				settings.attributes.className.default = "is-style-headline";
+				break;
+			case "core/paragraph":
+				settings.attributes.fontSize.default = "regular";
+				break;
+			case "core/list":
+				settings.attributes.className.default = "is-style-check";
+				break;
+			case "core/columns":
+				settings.attributes.className.default = "is-style-panel";
+				break;
+		}
 	}
 	return settings;
+});
+wp.hooks.addFilter("editor.BlockEdit", "catpow/editor", (BlockEdit) => (props) => {
+	if (props.name.slice(0, 5) === "core/") {
+		return (
+			<>
+				<InspectorControls>
+					<CP.SelectClassPanel
+						title={__("設定")}
+						icon="pets"
+						{...props}
+						selectiveClasses={[
+							{ preset: "level", classKey: "className" },
+							{ preset: "hasContentWidth", classKey: "className" },
+							{ preset: "hasMargin", classKey: "className" },
+							{ preset: "hasPadding", classKey: "className" },
+						]}
+					/>
+				</InspectorControls>
+				<BlockEdit {...props} />
+			</>
+		);
+	}
+	return <BlockEdit {...props} />;
+});
+wp.hooks.addFilter(
+	"editor.BlockListBlock",
+	"catpow/editor",
+	wp.compose.createHigherOrderComponent((BlockListBlock) => (props) => {
+		if (props.name.slice(0, 5) === "core/") {
+			return (
+				<BlockListBlock
+					{...props}
+					wrapperProps={{
+						...props.wrapperProps,
+						style: {
+							...props.wrapperProps?.style,
+							...props.attributes.vars,
+						},
+					}}
+				/>
+			);
+		}
+		return <BlockListBlock {...props} />;
+	}),
+);
+
+wp.hooks.addFilter("blocks.getSaveContent.extraProps", "catpow/editor", (props, blockType, attributes) => {
+	if (blockType.name.slice(0, 5) === "core/") {
+		console.log("blocks.getSaveContent.extraProps", { props, attributes });
+		Object.assign((props.style ||= {}), attributes.vars);
+	}
+	return props;
 });
 
 // core/columnsでregisterBlockStyleがエラーを起こすバグの回避
