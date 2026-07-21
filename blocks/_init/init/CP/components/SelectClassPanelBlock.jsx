@@ -467,21 +467,6 @@ export const SelectClassPanelBlock = ({ prm }) => {
 					}}
 				/>,
 			);
-		} else if (prm === "pattern") {
-			/**
-			 * @deprecated This feature should merge to backgroundPattern preset
-			 */
-			rtn.push(
-				<CP.SelectPatternClass
-					label={__("パターン", "catpow")}
-					selected={Object.keys(states).find((key) => /^pattern\d+/.test(key))}
-					onChange={(pattern) => {
-						CP.filterFlags(states, (key) => !/^pattern\d+/.test(key));
-						states[pattern] = true;
-						saveClasses();
-					}}
-				/>,
-			);
 		} else if (prm === "cond") {
 			rtn.push(<TextareaControl label={__("表示条件", "catpow")} value={item["cond"]} onChange={(cond) => save({ cond })} />);
 		} else if (prm === "event") {
@@ -571,7 +556,15 @@ export const SelectClassPanelBlock = ({ prm }) => {
 						<ul className="cp-pictures">
 							{props.attributes[prm.key].map((item, index) => (
 								<CP.Item tag="li" className="cp-pictures__item" {...{ attributes, setAttributes }} itemKeys={[prm.key, index]} isSelected={true} key={index}>
-									<CP.SelectPictureSources {...{ attributes, setAttributes }} itemKeys={[prm.key, index]} keys={prm.keys} sizes={prm.sizes} devices={prm.devices} compact={true} isTemplate={prm.isTemplate} />
+									<CP.SelectPictureSources
+										{...{ attributes, setAttributes }}
+										itemKeys={[prm.key, index]}
+										keys={prm.keys}
+										sizes={prm.sizes}
+										devices={prm.devices}
+										compact={true}
+										isTemplate={prm.isTemplate}
+									/>
 								</CP.Item>
 							))}
 						</ul>,

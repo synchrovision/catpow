@@ -3904,21 +3904,6 @@
             }
           )
         );
-      } else if (prm === "pattern") {
-        rtn.push(
-          /* @__PURE__ */ wp.element.createElement(
-            CP.SelectPatternClass,
-            {
-              label: __11("\u30D1\u30BF\u30FC\u30F3", "catpow"),
-              selected: Object.keys(states).find((key) => /^pattern\d+/.test(key)),
-              onChange: (pattern) => {
-                CP.filterFlags(states, (key) => !/^pattern\d+/.test(key));
-                states[pattern] = true;
-                saveClasses();
-              }
-            }
-          )
-        );
       } else if (prm === "cond") {
         rtn.push(/* @__PURE__ */ wp.element.createElement(TextareaControl, { label: __11("\u8868\u793A\u6761\u4EF6", "catpow"), value: item["cond"], onChange: (cond) => save({ cond }) }));
       } else if (prm === "event") {
@@ -4014,7 +3999,18 @@
               rtn.push(/* @__PURE__ */ wp.element.createElement("h5", null, prm.label));
             }
             rtn.push(
-              /* @__PURE__ */ wp.element.createElement("ul", { className: "cp-pictures" }, props.attributes[prm.key].map((item2, index) => /* @__PURE__ */ wp.element.createElement(CP.Item, { tag: "li", className: "cp-pictures__item", ...{ attributes, setAttributes }, itemKeys: [prm.key, index], isSelected: true, key: index }, /* @__PURE__ */ wp.element.createElement(CP.SelectPictureSources, { ...{ attributes, setAttributes }, itemKeys: [prm.key, index], keys: prm.keys, sizes: prm.sizes, devices: prm.devices, compact: true, isTemplate: prm.isTemplate }))))
+              /* @__PURE__ */ wp.element.createElement("ul", { className: "cp-pictures" }, props.attributes[prm.key].map((item2, index) => /* @__PURE__ */ wp.element.createElement(CP.Item, { tag: "li", className: "cp-pictures__item", ...{ attributes, setAttributes }, itemKeys: [prm.key, index], isSelected: true, key: index }, /* @__PURE__ */ wp.element.createElement(
+                CP.SelectPictureSources,
+                {
+                  ...{ attributes, setAttributes },
+                  itemKeys: [prm.key, index],
+                  keys: prm.keys,
+                  sizes: prm.sizes,
+                  devices: prm.devices,
+                  compact: true,
+                  isTemplate: prm.isTemplate
+                }
+              ))))
             );
             break;
           }
