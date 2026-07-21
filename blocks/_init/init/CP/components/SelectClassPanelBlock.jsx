@@ -449,25 +449,7 @@ export const SelectClassPanelBlock = ({ prm }) => {
 			);
 		}
 	} else {
-		if (prm === "color") {
-			rtn.push(
-				<CP.SelectColorClass
-					label={__("色", "catpow")}
-					selected={targetStates}
-					onChange={(proxy) => {
-						if (!itemKeys) {
-							setAttributes({ color: proxy.value });
-							CP.updateBlockAttributesColor(block, proxy.value);
-							CP.walkBlocksRecursive(block.innerBlocks, (block) => {
-								if (CP.getColorNumber(block.attributes?.classes)) return false;
-								CP.updateBlockAttributesColor(block, proxy.value);
-							});
-						}
-						saveClasses();
-					}}
-				/>,
-			);
-		} else if (prm === "cond") {
+		if (prm === "cond") {
 			rtn.push(<TextareaControl label={__("表示条件", "catpow")} value={item["cond"]} onChange={(cond) => save({ cond })} />);
 		} else if (prm === "event") {
 			const EventInputs = useMemo(() => wp.hooks.applyFilters("catpow.EventInputs", [], { item, save }), [item, save]);
@@ -477,6 +459,27 @@ export const SelectClassPanelBlock = ({ prm }) => {
 				save({ [prm.key]: prm.default });
 			}
 			switch (prm.input) {
+				case "color": {
+					rtn.push(
+						<CP.SelectColorClass
+							label={__("色", "catpow")}
+							selected={targetStates}
+							onChange={(proxy) => {
+								console.log(proxy.classes);
+								if (!itemKeys) {
+									setAttributes({ color: proxy.value });
+									CP.updateBlockAttributesColor(block, proxy.value);
+									CP.walkBlocksRecursive(block.innerBlocks, (block) => {
+										if (CP.getColorNumber(block.attributes?.classes)) return false;
+										CP.updateBlockAttributesColor(block, proxy.value);
+									});
+								}
+								saveClasses();
+							}}
+						/>,
+					);
+					break;
+				}
 				case "select":
 				case "buttons":
 				case "gridbuttons":

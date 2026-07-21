@@ -428,7 +428,7 @@ export const selectiveClassesPresets = {
 			...otherParams,
 		};
 	},
-	headingTag({ preset, name = "headingTag", label = "見出しタグ", key = "HeadingTag", classKey = "classes", ...otherParams }) {
+	headingTag({ preset, name = "headingTag", label = "見出しタグ", key = "HeadingTag", classKey, ...otherParams }) {
 		return {
 			name,
 			input: "buttons",
@@ -610,6 +610,11 @@ export const selectiveClassesPresets = {
 			...otherParams,
 		};
 	},
+	color: {
+		name: "color",
+		input: "color",
+		label: __("色", "catpow"),
+	},
 	colorScheme: {
 		name: "colorScheme",
 		type: "buttons",
@@ -642,7 +647,7 @@ export const selectiveClassesPresets = {
 			isRateDanger: __("危険", "catpow"),
 		},
 	},
-	clipPath({ preset, classKey = "classes", vars = "vars", ...otherParams }) {
+	clipPath({ preset, classKey, vars = "vars", ...otherParams }) {
 		return {
 			name: "clipPath",
 			label: __("クリップ", "catpow"),
@@ -834,7 +839,7 @@ export const selectiveClassesPresets = {
 			...otherParams,
 		};
 	},
-	hasPadding({ preset, classKey = "classes", vars = "vars", ...otherParams }) {
+	hasPadding({ preset, classKey, vars = "vars", ...otherParams }) {
 		return {
 			name: "hasPadding",
 			label: __("パディング", "catpow"),
@@ -848,7 +853,7 @@ export const selectiveClassesPresets = {
 			...otherParams,
 		};
 	},
-	paddingTop({ preset, classKey = "classes", vars = "vars", ...otherParams }) {
+	paddingTop({ preset, classKey, vars = "vars", ...otherParams }) {
 		return {
 			name: "paddingTop",
 			type: "buttons",
@@ -881,7 +886,7 @@ export const selectiveClassesPresets = {
 			...otherParams,
 		};
 	},
-	paddingInline({ preset, classKey = "classes", vars = "vars", ...otherParams }) {
+	paddingInline({ preset, classKey, vars = "vars", ...otherParams }) {
 		return {
 			name: "paddingInline",
 			type: "buttons",
@@ -914,7 +919,7 @@ export const selectiveClassesPresets = {
 			...otherParams,
 		};
 	},
-	paddingBottom({ preset, classKey = "classes", vars = "vars", ...otherParams }) {
+	paddingBottom({ preset, classKey, vars = "vars", ...otherParams }) {
 		return {
 			name: "paddingBottom",
 			type: "buttons",
@@ -947,7 +952,7 @@ export const selectiveClassesPresets = {
 			...otherParams,
 		};
 	},
-	customPadding({ preset, classKey = "classes", vars = "vars", ...otherParams }) {
+	customPadding({ preset, classKey, vars = "vars", ...otherParams }) {
 		return {
 			name: "customPadding",
 			label: __("余白", "catpow"),
@@ -996,7 +1001,7 @@ export const selectiveClassesPresets = {
 			...otherParams,
 		};
 	},
-	hasMargin({ preset, classKey = "classes", vars = "vars", ...otherParams }) {
+	hasMargin({ preset, classKey, vars = "vars", ...otherParams }) {
 		return {
 			name: "hasMargin",
 			label: __("マージン", "catpow"),
@@ -1009,7 +1014,7 @@ export const selectiveClassesPresets = {
 			...otherParams,
 		};
 	},
-	marginTop({ preset, classKey = "classes", vars = "vars", ...otherParams }) {
+	marginTop({ preset, classKey, vars = "vars", ...otherParams }) {
 		return {
 			name: "margin",
 			type: "buttons",
@@ -1042,7 +1047,7 @@ export const selectiveClassesPresets = {
 			...otherParams,
 		};
 	},
-	marginBottom({ preset, classKey = "classes", vars = "vars", ...otherParams }) {
+	marginBottom({ preset, classKey, vars = "vars", ...otherParams }) {
 		return {
 			name: "margin",
 			type: "buttons",
@@ -1075,7 +1080,7 @@ export const selectiveClassesPresets = {
 			...otherParams,
 		};
 	},
-	customMargin({ preset, classKey = "classes", vars = "vars", ...otherParams }) {
+	customMargin({ preset, classKey, vars = "vars", ...otherParams }) {
 		return {
 			name: "customMargin",
 			label: __("間隔", "catpow"),
@@ -1112,7 +1117,7 @@ export const selectiveClassesPresets = {
 			...otherParams,
 		};
 	},
-	hasContentWidth({ preset, classKey = "classes", vars = "vars", ...otherParams }) {
+	hasContentWidth({ preset, classKey, vars = "vars", ...otherParams }) {
 		return {
 			name: "hasContentWidth",
 			label: __("コンテンツ幅", "catpow"),
