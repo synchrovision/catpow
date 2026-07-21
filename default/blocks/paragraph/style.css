@@ -1,53 +1,54 @@
-p.is-style-heading {
+.wp-block-paragraph.is-style-heading {
   margin: var(--cp-margin-t-h, 0);
 }
-p.is-style-heading {
+.wp-block-paragraph.is-style-heading {
   font-family: var(--cp-font-family-t-h, inherit);
   font-size: var(--cp-font-size-t-h, 2em);
   font-weight: var(--cp-font-weight-t-h, regular);
   line-height: var(--cp-line-height-t-h, 1.5);
   letter-spacing: var(--cp-letter-spacing-t-h, normal);
 }
-p.is-style-lead {
+.wp-block-paragraph.is-style-lead {
   margin: var(--cp-margin-t-l, 0);
 }
-p.is-style-lead {
+.wp-block-paragraph.is-style-lead {
   font-family: var(--cp-font-family-t-l, inherit);
   font-size: var(--cp-font-size-t-l, 2em);
   font-weight: var(--cp-font-weight-t-l, regular);
   line-height: var(--cp-line-height-t-l, 1.5);
   letter-spacing: var(--cp-letter-spacing-t-l, normal);
 }
-p.is-style-paragraph {
+.wp-block-paragraph.is-style-paragraph {
   margin: var(--cp-margin-t-p, 0);
 }
-p.is-style-paragraph {
+.wp-block-paragraph.is-style-paragraph {
   font-family: var(--cp-font-family-t-p, inherit);
   font-size: var(--cp-font-size-t-p, 2em);
   font-weight: var(--cp-font-weight-t-p, regular);
   line-height: var(--cp-line-height-t-p, 1.5);
   letter-spacing: var(--cp-letter-spacing-t-p, normal);
 }
-p.is-style-caption {
+.wp-block-paragraph.is-style-caption {
   margin: var(--cp-margin-t-c, 0);
 }
-p.is-style-caption {
+.wp-block-paragraph.is-style-caption {
   font-family: var(--cp-font-family-t-c, inherit);
   font-size: var(--cp-font-size-t-c, 2em);
   font-weight: var(--cp-font-weight-t-c, regular);
   line-height: var(--cp-line-height-t-c, 1.5);
   letter-spacing: var(--cp-letter-spacing-t-c, normal);
 }
-p {
+.wp-block-paragraph {
+  font-size: var(--cp-font-size-t-p);
+  color: oklch(var(--cp-tones-tx-l) var(--cp-tones-tx-c) var(--cp-tones-tx-h) / var(--cp-tones-tx-a,1));
+}
+.wp-block-paragraph.has-regular-font-size, .editor-styles-wrapper .wp-block-paragraph.has-regular-font-size {
   font-size: var(--cp-font-size-t-p);
 }
-p.has-regular-font-size, .editor-styles-wrapper p.has-regular-font-size {
-  font-size: var(--cp-font-size-t-p);
-}
-p.is-style-heading:first-child, p.is-style-lead:first-child, p.is-style-paragraph:first-child, p.is-style-caption:first-child {
+.wp-block-paragraph.is-style-heading:first-child, .wp-block-paragraph.is-style-lead:first-child, .wp-block-paragraph.is-style-paragraph:first-child, .wp-block-paragraph.is-style-caption:first-child {
   margin-top: 0px;
 }
-p.is-style-heading:last-child, p.is-style-lead:last-child, p.is-style-paragraph:last-child, p.is-style-caption:last-child {
+.wp-block-paragraph.is-style-heading:last-child, .wp-block-paragraph.is-style-lead:last-child, .wp-block-paragraph.is-style-paragraph:last-child, .wp-block-paragraph.is-style-caption:last-child {
   margin-bottom: 0px;
 }
 /*# sourceMappingURL=./style.css.map */

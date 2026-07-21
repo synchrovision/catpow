@@ -1,8 +1,8 @@
 @import "config/style_config.scss";
 @import "text-placeholders.scss";
 
-p{
-	@include txt((p:t-p));
+.wp-block-paragraph{
+	@include txt((p:t-p,c:tx));
 	&.has-regular-font-size,
 	.editor-styles-wrapper &.has-regular-font-size {
 		@include txt((p:t-p));
