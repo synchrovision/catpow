@@ -4291,7 +4291,9 @@
       },
       [primaryClassKey, save, allStates]
     );
-    const colorNumber = useMemo11(() => CP.getClosestBlockAttributesComputed(({ classes }) => CP.getColorNumber(classes), wp.data.select("core/block-editor").getSelectedBlock(), itemKeys));
+    const colorNumber = useMemo11(
+      () => CP.getClosestBlockAttributesComputed(({ classes, className }) => CP.getColorNumber(classes || className), wp.data.select("core/block-editor").getSelectedBlock(), itemKeys)
+    );
     const block = wp.data.select("core/block-editor").getSelectedBlock();
     if (!item || !selectiveClasses) {
       return false;
@@ -8009,16 +8011,7 @@
   ]);
   wp.hooks.addFilter("editor.BlockEdit", "catpow/editor", (BlockEdit) => (props) => {
     if (coreBlocksToAddPanel.has(props.name)) {
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __14("\u30B5\u30A4\u30BA\u30FB\u9593\u9694\u30FB\u4F59\u767D"), icon: "pets", classKey: "className", ...props, selectiveClasses: ["level", "hasContentWidth", "hasMargin", "hasPadding"] }), /* @__PURE__ */ wp.element.createElement(
-        CP.SelectClassPanel,
-        {
-          title: __14("\u8272\u30FB\u30DC\u30FC\u30C0\u30FC\u30FB\u80CC\u666F"),
-          icon: "pets",
-          classKey: "className",
-          ...props,
-          selectiveClasses: ["color", "colorScheme", "hasBorderImage", "backgroundColor", "backgroundPattern"]
-        }
-      )), /* @__PURE__ */ wp.element.createElement(BlockEdit, { ...props }));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __14("\u30B5\u30A4\u30BA"), icon: "pets", classKey: "className", ...props, selectiveClasses: ["level", "hasContentWidth"] }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __14("\u9593\u9694\u30FB\u4F59\u767D"), icon: "pets", classKey: "className", ...props, selectiveClasses: ["hasMargin", "hasPadding"] }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __14("\u8272"), icon: "pets", classKey: "className", ...props, selectiveClasses: ["color", "colorScheme"] }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __14("\u30DC\u30FC\u30C0\u30FC"), icon: "pets", classKey: "className", ...props, selectiveClasses: ["hasBorder", "hasBorderRadius", "hasBorderImage"] }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __14("\u80CC\u666F"), icon: "pets", classKey: "className", ...props, selectiveClasses: ["backgroundColor", "backgroundPattern"] })), /* @__PURE__ */ wp.element.createElement(BlockEdit, { ...props }));
     }
     return /* @__PURE__ */ wp.element.createElement(BlockEdit, { ...props });
   });

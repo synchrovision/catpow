@@ -89,7 +89,9 @@ export const SelectClassPanel = (props) => {
 		},
 		[primaryClassKey, save, allStates],
 	);
-	const colorNumber = useMemo(() => CP.getClosestBlockAttributesComputed(({ classes }) => CP.getColorNumber(classes), wp.data.select("core/block-editor").getSelectedBlock(), itemKeys));
+	const colorNumber = useMemo(() =>
+		CP.getClosestBlockAttributesComputed(({ classes, className }) => CP.getColorNumber(classes || className), wp.data.select("core/block-editor").getSelectedBlock(), itemKeys),
+	);
 	const block = wp.data.select("core/block-editor").getSelectedBlock();
 
 	if (!item || !selectiveClasses) {
