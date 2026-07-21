@@ -61,13 +61,38 @@ wp.hooks.addFilter("blocks.registerBlockType", "catpow/editor", function (settin
 	}
 	return settings;
 });
+const coreBlocksToAddPanel = new Set([
+	"core/heading",
+	"core/paragraph",
+	"core/list",
+	"core/quote",
+	"core/pullquote",
+	"core/code",
+	"core/preformatted",
+	"core/verse",
+	"core/details",
+	"core/image",
+	"core/gallery",
+	"core/audio",
+	"core/video",
+	"core/file",
+	"core/cover",
+	"core/media-text",
+	"core/table",
+	"core/separator",
+	"core/buttons",
+	"core/button",
+	"core/group",
+	"core/columns",
+	"core/column",
+]);
 wp.hooks.addFilter("editor.BlockEdit", "catpow/editor", (BlockEdit) => (props) => {
-	if (props.name.slice(0, 5) === "core/") {
+	if (coreBlocksToAddPanel.has(props.name)) {
 		return (
 			<>
 				<InspectorControls>
 					<CP.SelectClassPanel
-						title={__("設定")}
+						title={__("サイズ・間隔・余白")}
 						icon="pets"
 						{...props}
 						selectiveClasses={[
@@ -75,6 +100,17 @@ wp.hooks.addFilter("editor.BlockEdit", "catpow/editor", (BlockEdit) => (props) =
 							{ preset: "hasContentWidth", classKey: "className" },
 							{ preset: "hasMargin", classKey: "className" },
 							{ preset: "hasPadding", classKey: "className" },
+						]}
+					/>
+					<CP.SelectClassPanel
+						title={__("色・ボーダー・背景")}
+						icon="pets"
+						{...props}
+						selectiveClasses={[
+							{ input: "color", classKey: "className" },
+							{ preset: "colorScheme", classKey: "className" },
+							{ preset: "hasBorderImage", classKey: "className" },
+							{ preset: "backgroundPattern", classKey: "className" },
 						]}
 					/>
 				</InspectorControls>
@@ -88,7 +124,7 @@ wp.hooks.addFilter(
 	"editor.BlockListBlock",
 	"catpow/editor",
 	wp.compose.createHigherOrderComponent((BlockListBlock) => (props) => {
-		if (props.name.slice(0, 5) === "core/") {
+		if (coreBlocksToAddPanel.has(props.name)) {
 			return (
 				<BlockListBlock
 					{...props}
@@ -107,8 +143,7 @@ wp.hooks.addFilter(
 );
 
 wp.hooks.addFilter("blocks.getSaveContent.extraProps", "catpow/editor", (props, blockType, attributes) => {
-	if (blockType.name.slice(0, 5) === "core/") {
-		console.log("blocks.getSaveContent.extraProps", { props, attributes });
+	if (coreBlocksToAddPanel.has(blockType.name)) {
 		Object.assign((props.style ||= {}), attributes.vars);
 	}
 	return props;

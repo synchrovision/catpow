@@ -7978,12 +7978,37 @@
     }
     return settings;
   });
+  var coreBlocksToAddPanel = /* @__PURE__ */ new Set([
+    "core/heading",
+    "core/paragraph",
+    "core/list",
+    "core/quote",
+    "core/pullquote",
+    "core/code",
+    "core/preformatted",
+    "core/verse",
+    "core/details",
+    "core/image",
+    "core/gallery",
+    "core/audio",
+    "core/video",
+    "core/file",
+    "core/cover",
+    "core/media-text",
+    "core/table",
+    "core/separator",
+    "core/buttons",
+    "core/button",
+    "core/group",
+    "core/columns",
+    "core/column"
+  ]);
   wp.hooks.addFilter("editor.BlockEdit", "catpow/editor", (BlockEdit) => (props) => {
-    if (props.name.slice(0, 5) === "core/") {
+    if (coreBlocksToAddPanel.has(props.name)) {
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(
         CP.SelectClassPanel,
         {
-          title: __14("\u8A2D\u5B9A"),
+          title: __14("\u30B5\u30A4\u30BA\u30FB\u9593\u9694\u30FB\u4F59\u767D"),
           icon: "pets",
           ...props,
           selectiveClasses: [
@@ -7991,6 +8016,19 @@
             { preset: "hasContentWidth", classKey: "className" },
             { preset: "hasMargin", classKey: "className" },
             { preset: "hasPadding", classKey: "className" }
+          ]
+        }
+      ), /* @__PURE__ */ wp.element.createElement(
+        CP.SelectClassPanel,
+        {
+          title: __14("\u8272\u30FB\u30DC\u30FC\u30C0\u30FC\u30FB\u80CC\u666F"),
+          icon: "pets",
+          ...props,
+          selectiveClasses: [
+            { input: "color", classKey: "className" },
+            { preset: "colorScheme", classKey: "className" },
+            { preset: "hasBorderImage", classKey: "className" },
+            { preset: "backgroundPattern", classKey: "className" }
           ]
         }
       )), /* @__PURE__ */ wp.element.createElement(BlockEdit, { ...props }));
@@ -8001,7 +8039,7 @@
     "editor.BlockListBlock",
     "catpow/editor",
     wp.compose.createHigherOrderComponent((BlockListBlock) => (props) => {
-      if (props.name.slice(0, 5) === "core/") {
+      if (coreBlocksToAddPanel.has(props.name)) {
         return /* @__PURE__ */ wp.element.createElement(
           BlockListBlock,
           {
@@ -8020,8 +8058,7 @@
     })
   );
   wp.hooks.addFilter("blocks.getSaveContent.extraProps", "catpow/editor", (props, blockType, attributes) => {
-    if (blockType.name.slice(0, 5) === "core/") {
-      console.log("blocks.getSaveContent.extraProps", { props, attributes });
+    if (coreBlocksToAddPanel.has(blockType.name)) {
       Object.assign(props.style ||= {}, attributes.vars);
     }
     return props;
