@@ -1,0 +1,96 @@
+@import "config/style_config.scss";
+@import "text-placeholders.scss";
+@import "fontawesome.scss";
+
+.wp-block-list{
+	@extend %paragraph;
+	@include txt((c:tx));
+	&.is-style-annotation,
+	&.is-style-circle,
+	&.is-style-caret,
+	&.is-style-square,
+	&.is-style-star,
+	&.is-style-check,
+	&.is-style-alert,
+	&.is-style-caution{
+		&,& ul,& ol{
+			&,#editor &{
+				@include txt((l:n));
+			}
+		}
+		&>li{
+			@include bnd((p:r,pdl:2em));
+			@include bdr((p:b,s:n));
+			@include txt((c:tx));
+			&::before{
+				@include bnd((d:b,p:a,t:0,l:0));
+				@include txt((c:mx));
+			}
+			ul li{
+				@include bnd((p:r,pdl:1em));
+				&::before{
+					content:'・';
+					@include bnd((d:b,p:a,t:0,l:0));
+				}
+			}
+		}
+	}
+}
+ul{
+	&.is-style-annotation{
+		&>li::before{
+			content: '※';
+			color:inherit;
+		}
+	}
+	&.is-style-circle{
+		&>li::before{
+			@include ico('circle');
+		}
+	}
+	&.is-style-caret{
+		&>li::before{
+			@include ico('caret-right');
+		}
+	}
+	&.is-style-square{
+		&>li::before{
+			@include ico('square');
+		}
+	}
+	&.is-style-star{
+		&>li::before{
+			@include ico('star');
+		}
+	}
+	&.is-style-check{
+		&>li::before{
+			@include ico('check');
+		}
+	}
+	&.is-style-alert{
+		&>li::before{
+			@include ico('exclamation-circle');
+		}
+	}
+	&.is-style-caution{
+		&>li::before{
+			@include ico('exclamation-triangle');
+		}
+	}
+}
+ol.wp-block-list{
+	&.is-style-annotation,
+	&.is-style-circle,
+	&.is-style-caret,
+	&.is-style-square,
+	&.is-style-star,
+	&.is-style-check,
+	&.is-style-alert,
+	&.is-style-caution{
+		@include cnt((f:n,s:'&>li'));
+		li::before{
+			@include txt((p:1.5em));
+		}
+	}
+}

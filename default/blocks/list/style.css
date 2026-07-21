@@ -1,0 +1,81 @@
+@charset "UTF-8";
+.wp-block-list {
+  font-family: var(--cp-font-family-t-p, inherit);
+  font-size: var(--cp-font-size-t-p, 2em);
+  font-weight: var(--cp-font-weight-t-p, regular);
+  line-height: var(--cp-line-height-t-p, 1.5);
+  letter-spacing: var(--cp-letter-spacing-t-p, normal);
+}
+.wp-block-list {
+  color: oklch(var(--cp-tones-tx-l) var(--cp-tones-tx-c) var(--cp-tones-tx-h) / var(--cp-tones-tx-a,1));
+}
+.wp-block-list.is-style-annotation, #editor .wp-block-list.is-style-annotation, .wp-block-list.is-style-annotation ul, #editor .wp-block-list.is-style-annotation ul, .wp-block-list.is-style-annotation ol, #editor .wp-block-list.is-style-annotation ol, .wp-block-list.is-style-circle, #editor .wp-block-list.is-style-circle, .wp-block-list.is-style-circle ul, #editor .wp-block-list.is-style-circle ul, .wp-block-list.is-style-circle ol, #editor .wp-block-list.is-style-circle ol, .wp-block-list.is-style-caret, #editor .wp-block-list.is-style-caret, .wp-block-list.is-style-caret ul, #editor .wp-block-list.is-style-caret ul, .wp-block-list.is-style-caret ol, #editor .wp-block-list.is-style-caret ol, .wp-block-list.is-style-square, #editor .wp-block-list.is-style-square, .wp-block-list.is-style-square ul, #editor .wp-block-list.is-style-square ul, .wp-block-list.is-style-square ol, #editor .wp-block-list.is-style-square ol, .wp-block-list.is-style-star, #editor .wp-block-list.is-style-star, .wp-block-list.is-style-star ul, #editor .wp-block-list.is-style-star ul, .wp-block-list.is-style-star ol, #editor .wp-block-list.is-style-star ol, .wp-block-list.is-style-check, #editor .wp-block-list.is-style-check, .wp-block-list.is-style-check ul, #editor .wp-block-list.is-style-check ul, .wp-block-list.is-style-check ol, #editor .wp-block-list.is-style-check ol, .wp-block-list.is-style-alert, #editor .wp-block-list.is-style-alert, .wp-block-list.is-style-alert ul, #editor .wp-block-list.is-style-alert ul, .wp-block-list.is-style-alert ol, #editor .wp-block-list.is-style-alert ol, .wp-block-list.is-style-caution, #editor .wp-block-list.is-style-caution, .wp-block-list.is-style-caution ul, #editor .wp-block-list.is-style-caution ul, .wp-block-list.is-style-caution ol, #editor .wp-block-list.is-style-caution ol {
+  list-style: none;
+}
+.wp-block-list.is-style-annotation > li, .wp-block-list.is-style-circle > li, .wp-block-list.is-style-caret > li, .wp-block-list.is-style-square > li, .wp-block-list.is-style-star > li, .wp-block-list.is-style-check > li, .wp-block-list.is-style-alert > li, .wp-block-list.is-style-caution > li {
+  position: relative;
+  padding-left: 2em;
+  border-bottom-style: none;
+  color: oklch(var(--cp-tones-tx-l) var(--cp-tones-tx-c) var(--cp-tones-tx-h) / var(--cp-tones-tx-a,1));
+}
+.wp-block-list.is-style-annotation > li::before, .wp-block-list.is-style-circle > li::before, .wp-block-list.is-style-caret > li::before, .wp-block-list.is-style-square > li::before, .wp-block-list.is-style-star > li::before, .wp-block-list.is-style-check > li::before, .wp-block-list.is-style-alert > li::before, .wp-block-list.is-style-caution > li::before {
+  display: block;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  color: oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1));
+}
+.wp-block-list.is-style-annotation > li ul li, .wp-block-list.is-style-circle > li ul li, .wp-block-list.is-style-caret > li ul li, .wp-block-list.is-style-square > li ul li, .wp-block-list.is-style-star > li ul li, .wp-block-list.is-style-check > li ul li, .wp-block-list.is-style-alert > li ul li, .wp-block-list.is-style-caution > li ul li {
+  position: relative;
+  padding-left: 1em;
+}
+.wp-block-list.is-style-annotation > li ul li::before, .wp-block-list.is-style-circle > li ul li::before, .wp-block-list.is-style-caret > li ul li::before, .wp-block-list.is-style-square > li ul li::before, .wp-block-list.is-style-star > li ul li::before, .wp-block-list.is-style-check > li ul li::before, .wp-block-list.is-style-alert > li ul li::before, .wp-block-list.is-style-caution > li ul li::before {
+  content: "・";
+  display: block;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+ul.is-style-annotation > li::before {
+  content: "※";
+  color: inherit;
+}
+ul.is-style-circle > li::before {
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+ul.is-style-caret > li::before {
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+ul.is-style-square > li::before {
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+ul.is-style-star > li::before {
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+ul.is-style-check > li::before {
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+ul.is-style-alert > li::before {
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+ul.is-style-caution > li::before {
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+ol.wp-block-list.is-style-annotation li::before, ol.wp-block-list.is-style-circle li::before, ol.wp-block-list.is-style-caret li::before, ol.wp-block-list.is-style-square li::before, ol.wp-block-list.is-style-star li::before, ol.wp-block-list.is-style-check li::before, ol.wp-block-list.is-style-alert li::before, ol.wp-block-list.is-style-caution li::before {
+  font-size: 1.5em;
+}
+/*# sourceMappingURL=./style.css.map */
