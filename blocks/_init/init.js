@@ -2353,8 +2353,8 @@
   var ResponsiveImage = (props) => {
     const { className = "cp-responsiveimage", attributes, setAttributes, itemKeys, keys, sizes, devices: devices2, device, isTemplate, ...otherProps } = props;
     const item = itemKeys ? CP.getTheItem(props) : attributes;
-    if (isTemplate && keys.code && item[keys.code]) {
-      return item[keys.code];
+    if (isTemplate && keys?.code && item?.[keys?.code]) {
+      return item?.[keys?.code];
     }
     return /* @__PURE__ */ wp.element.createElement(ResponsiveImageBody, { ...props, className, item });
   };
@@ -2363,13 +2363,13 @@
     let { sizes } = props;
     const primaryClassName = className.split(" ")[0];
     if (item?.[keys?.mime] === "application/pdf") {
-      return /* @__PURE__ */ wp.element.createElement("iframe", { className: className + " is-pdf", src: item[keys?.src], "data-mime": item[keys?.mime], ...otherProps });
+      return /* @__PURE__ */ wp.element.createElement("iframe", { className: className + " is-pdf", src: item?.[keys?.src], "data-mime": item?.[keys?.mime], ...otherProps });
     }
-    const type = item?.[keys?.mime] ? item[keys?.mime].split("/")[0] : "image";
+    const type = item?.[keys?.mime] ? item?.[keys?.mime].split("/")[0] : "image";
     if (type == "audio") {
-      return /* @__PURE__ */ wp.element.createElement("audio", { className: className + " is-audio", src: item[keys?.src], "data-mime": item[keys?.mime], ...otherProps });
+      return /* @__PURE__ */ wp.element.createElement("audio", { className: className + " is-audio", src: item?.[keys?.src], "data-mime": item?.[keys?.mime], ...otherProps });
     }
-    if (item[keys?.srcset] && !sizes) {
+    if (item?.[keys?.srcset] && !sizes) {
       if (device) {
         sizes = CP.devices[device].sizes_value;
       } else {
@@ -2378,7 +2378,7 @@
     }
     if (type == "video") {
       const videoAtts = {
-        "data-mime": item[keys.mime],
+        "data-mime": item?.[keys?.mime],
         autoplay: 1,
         loop: 1,
         playsinline: 1,
@@ -2386,26 +2386,26 @@
       };
       if (keys?.sources) {
         if (device) {
-          const source = item[keys.sources] && item[keys.sources].find((source2) => source2.device === device) || {
+          const source = item?.[keys?.sources] && item?.[keys?.sources].find((source2) => source2.device === device) || {
             srcset: wpinfo.theme_url + "/images/dummy.mp4"
           };
           return /* @__PURE__ */ wp.element.createElement("video", { className: className + " is-video", src: source.srcset, ...videoAtts, ...otherProps });
         }
-        return /* @__PURE__ */ wp.element.createElement("video", { className: className + " is-picture", ...videoAtts, ...otherProps }, item[keys.sources] && item[keys.sources].map((source) => /* @__PURE__ */ wp.element.createElement("source", { src: source.srcset, media: CP.devices[source.device].media_query, "data-device": source.device, key: source.device })), /* @__PURE__ */ wp.element.createElement("source", { src: item[keys.src] }));
+        return /* @__PURE__ */ wp.element.createElement("video", { className: className + " is-picture", ...videoAtts, ...otherProps }, item?.[keys?.sources] && item?.[keys?.sources].map((source) => /* @__PURE__ */ wp.element.createElement("source", { src: source.srcset, media: CP.devices[source.device].media_query, "data-device": source.device, key: source.device })), /* @__PURE__ */ wp.element.createElement("source", { src: item?.[keys?.src] }));
       }
-      return /* @__PURE__ */ wp.element.createElement("video", { className: className + " is-video", src: item[keys.src], ...videoAtts, ...otherProps });
+      return /* @__PURE__ */ wp.element.createElement("video", { className: className + " is-video", src: item?.[keys?.src], ...videoAtts, ...otherProps });
     }
-    var src = CP.imageSrcOrDummy(keys.src ? item[keys.src] : keys.url && item[keys.url] ? item[keys.url].slice(4, -1) : null, size);
+    var src = CP.imageSrcOrDummy(keys?.src ? item?.[keys?.src] : keys?.url && item?.[keys?.url] ? item?.[keys?.url].slice(4, -1) : null, size);
     if (keys?.sources) {
       if (device) {
-        const source = item[keys.sources] && item[keys.sources].find((source2) => source2.device === device) || {
+        const source = item?.[keys?.sources] && item?.[keys?.sources].find((source2) => source2.device === device) || {
           srcset: wpinfo.theme_url + "/images/dummy.jpg"
         };
-        return /* @__PURE__ */ wp.element.createElement("picture", { className: className + " is-picture", ...otherProps }, /* @__PURE__ */ wp.element.createElement("img", { className: primaryClassName + "-img", src: source.srcset, alt: item[keys.alt] }));
+        return /* @__PURE__ */ wp.element.createElement("picture", { className: className + " is-picture", ...otherProps }, /* @__PURE__ */ wp.element.createElement("img", { className: primaryClassName + "-img", src: source.srcset, alt: item?.[keys?.alt] }));
       }
-      return /* @__PURE__ */ wp.element.createElement("picture", { className: className + " is-picture", ...otherProps }, item[keys.sources] && item[keys.sources].sort(({ device: d1 }, { device: d2 }) => CP.devices[d1].width - CP.devices[d2].width).map((source) => /* @__PURE__ */ wp.element.createElement("source", { srcSet: source.srcset, media: CP.devices[source.device].media_query, "data-device": source.device, key: source.device })), /* @__PURE__ */ wp.element.createElement("img", { className: primaryClassName + "-img", src, alt: item[keys.alt] }));
+      return /* @__PURE__ */ wp.element.createElement("picture", { className: className + " is-picture", ...otherProps }, item?.[keys?.sources] && item?.[keys?.sources].sort(({ device: d1 }, { device: d2 }) => CP.devices[d1].width - CP.devices[d2].width).map((source) => /* @__PURE__ */ wp.element.createElement("source", { srcSet: source.srcset, media: CP.devices[source.device].media_query, "data-device": source.device, key: source.device })), /* @__PURE__ */ wp.element.createElement("img", { className: primaryClassName + "-img", src, alt: item?.[keys?.alt] }));
     }
-    return /* @__PURE__ */ wp.element.createElement("img", { className: className + " is-img", src, alt: item[keys.alt], srcSet: item[keys.srcset], sizes, "data-mime": item[keys.mime], ...otherProps });
+    return /* @__PURE__ */ wp.element.createElement("img", { className: className + " is-img", src, alt: item?.[keys?.alt], srcSet: item?.[keys?.srcset], sizes, "data-mime": item?.[keys?.mime], ...otherProps });
   };
 
   // ../blocks/_init/init/CP/components/ResponsiveItemSizeInput.jsx
