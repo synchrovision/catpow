@@ -3,8 +3,8 @@ import { Portal } from "catpow/component";
 
 export const RTF = (props) => {
 	const { className, pref = "cp-rtf", level = 3, attributes, itemKeys, keys = { text: "text" }, ...otherProps } = props;
-	const item = itemKeys ? CP.getTheItem(props) : attributes;
-	const text = item[keys.text] ? item[keys.text] : "";
+	const item = (itemKeys ? CP.getTheItem(props) : attributes) || {};
+	const text = item[keys.text] || "";
 	return <div className={className} {...otherProps} dangerouslySetInnerHTML={{ __html: rtf(text, pref, level) }} />;
 };
 RTF.Edit = (props) => {
@@ -12,12 +12,16 @@ RTF.Edit = (props) => {
 	const { useMemo, useCallback, useState } = wp.element;
 	const classes = useMemo(() => bem("cp-rtf " + className), [className]);
 
-	const item = useMemo(() => (itemKeys ? CP.getTheItem(props) : attributes), [attributes, itemKeys]);
-	const text = item[keys.text];
+	const item = useMemo(() => (itemKeys ? CP.getTheItem(props) : attributes) || {}, [attributes, itemKeys]);
+	const text = item[keys.text] || "";
 	const updateText = useCallback(
 		(text) => {
 			if (itemKeys) {
-				Object.assign(CP.getTheItem(props), { [keys.text]: text });
+				const targetItem = CP.getTheItem(props);
+				if (!targetItem) {
+					return;
+				}
+				Object.assign(targetItem, { [keys.text]: text });
 				CP.saveItem(props);
 			} else {
 				setAttributes({ [keys.text]: text });
@@ -50,10 +54,10 @@ RTF.Edit = (props) => {
 
 	return (
 		<>
-			<div className={classes({ "is-active": isSelected && isActive })} onClick={() => setIsActive(!isActive)} {...otherProps} dangerouslySetInnerHTML={{ __html: rtf(item.text, pref) }} />
+			<div className={classes({ "is-active": isSelected && isActive })} onClick={() => setIsActive(!isActive)} {...otherProps} dangerouslySetInnerHTML={{ __html: rtf(text, pref) }} />
 			<Portal id="EditRTF">
 				<div className={classes.portal({ "is-active": isSelected && isActive })}>
-					<div className={classes.portal.preview()} dangerouslySetInnerHTML={{ __html: rtf(item.text, pref, level) }} />
+					<div className={classes.portal.preview()} dangerouslySetInnerHTML={{ __html: rtf(text, pref, level) }} />
 					<div className={classes.portal.input()}>
 						<textarea
 							className={classes.portal.input.edit()}

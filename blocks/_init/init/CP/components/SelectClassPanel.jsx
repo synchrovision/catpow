@@ -75,7 +75,11 @@ export const SelectClassPanel = (props) => {
 	const save = useCallback(
 		(data) => {
 			if (itemKeys) {
-				Object.assign(CP.getTheItem(props), data);
+				const targetItem = CP.getTheItem(props);
+				if (!targetItem) {
+					return;
+				}
+				Object.assign(targetItem, data);
 				CP.saveItem(props);
 			} else {
 				setAttributes(data);

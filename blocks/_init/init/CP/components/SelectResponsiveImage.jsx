@@ -23,10 +23,14 @@ export const SelectResponsiveImage = (props) => {
 
 	let onClick;
 
-	const item = itemKeys ? CP.getTheItem(props) : attributes;
+	const item = (itemKeys ? CP.getTheItem(props) : attributes) || {};
 	const save = (data) => {
 		if (itemKeys) {
-			Object.assign(CP.getTheItem(props), data);
+			const targetItem = CP.getTheItem(props);
+			if (!targetItem) {
+				return;
+			}
+			Object.assign(targetItem, data);
 			CP.saveItem(props);
 		} else {
 			setAttributes(data);
@@ -39,18 +43,20 @@ export const SelectResponsiveImage = (props) => {
 			CP.selectImage(
 				function ({ src }) {
 					if (keys.sources) {
-						const source = item[keys.sources].find((source) => source.device === device);
+						const sources = item[keys.sources] || [];
+						const source = sources.find((source) => source.device === device);
 						if (source) {
 							source.srcset = src;
 						} else {
-							item[keys.sources].push({ device, srcset: src });
+							sources.push({ device, srcset: src });
 						}
-						save({ [keys.sources]: JSON.parse(JSON.stringify(item[keys.sources])) });
+						save({ [keys.sources]: JSON.parse(JSON.stringify(sources)) });
 					} else {
-						if (item[keys.srcset].match(sizeData.reg)) {
-							item[keys.srcset] = item[keys.srcset].replace(sizeData.reg, src + sizeData.rep);
+						const srcset = item[keys.srcset] || "";
+						if (srcset.match(sizeData.reg)) {
+							item[keys.srcset] = srcset.replace(sizeData.reg, src + sizeData.rep);
 						} else {
-							item[keys.srcset] += "," + src + sizeData.rep;
+							item[keys.srcset] = srcset ? srcset + "," + src + sizeData.rep : src + sizeData.rep;
 						}
 						save({ [keys.srcset]: item[keys.srcset] });
 					}
@@ -67,7 +73,7 @@ export const SelectResponsiveImage = (props) => {
 			);
 		};
 	}
-	if (isTemplate && keys.code && item[keys.code]) {
+	if (isTemplate && keys?.code && item?.[keys.code]) {
 		return <CP.DummyImage text={item[keys.code]} />;
 	}
 	return (

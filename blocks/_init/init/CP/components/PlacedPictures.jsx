@@ -1,13 +1,13 @@
 ﻿import { bem } from "catpow/util";
 
 export const PlacedPictures = (props) => {
-	const { className, attributes, keys } = props;
-	const item = props.itemKeys ? CP.getTheItem(props) : attributes;
-	const pictures = item[keys.pictures];
+	const { className, attributes, keys = {} } = props;
+	const item = (props.itemKeys ? CP.getTheItem(props) : attributes) || {};
+	const pictures = item[keys.pictures] || [];
 	return (
 		<div className={className}>
 			{pictures &&
-				pictures.map((picture, index) => {
+				pictures.map((picture = {}, index) => {
 					const { style, code, sources, src, alt } = picture;
 					return (
 						<div className="item" style={CP.parseStyleString(style)} key={index}>
@@ -25,12 +25,12 @@ export const PlacedPictures = (props) => {
 };
 
 PlacedPictures.Edit = (props) => {
-	const { className, setAttributes, attributes, itemKeys, keys, devices } = props;
+	const { className, setAttributes, attributes, itemKeys, keys = {}, devices = [] } = props;
 	const { useState, useMemo, useCallback, useRef, useEffect } = wp.element;
 	const { BlockControls, InspectorControls } = wp.blockEditor;
 	const { BaseControl, Icon, PanelBody, RangeControl, TextControl, Toolbar, ToolbarGroup, ToolbarButton, ToolbarDropdownMenu } = wp.components;
-	const item = itemKeys ? CP.getTheItem(props) : attributes;
-	const pictures = item[keys.pictures];
+	const item = (itemKeys ? CP.getTheItem(props) : attributes) || {};
+	const pictures = item[keys.pictures] || [];
 	const classes = useMemo(() => bem("cp-placedpictures " + className), [className]);
 	const [editMode, setEditMode] = useState(false);
 
@@ -88,7 +88,11 @@ PlacedPictures.Edit = (props) => {
 
 	const save = useCallback(() => {
 		if (itemKeys) {
-			Object.assign(CP.getTheItem(props), { [keys.pictures]: JSON.parse(JSON.stringify(pictures)) });
+			const targetItem = CP.getTheItem(props);
+			if (!targetItem) {
+				return;
+			}
+			Object.assign(targetItem, { [keys.pictures]: JSON.parse(JSON.stringify(pictures)) });
 			CP.saveItem(props);
 		} else {
 			setAttributes({ [keys.pictures]: JSON.parse(JSON.stringify(pictures)) });
@@ -159,7 +163,7 @@ PlacedPictures.Edit = (props) => {
 				)}
 			</BlockControls>
 			{pictures &&
-				pictures.map((picture, index) => {
+				pictures.map((picture = {}, index) => {
 					const { style, code, sources, src, alt } = picture;
 					return (
 						<div className="item" style={CP.parseStyleString(style)} onClick={(e) => editMode && onClickItem(e)} data-index={index} ref={(el) => (targetRefs.current[index] = el)} key={index}>

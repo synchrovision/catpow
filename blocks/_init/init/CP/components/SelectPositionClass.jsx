@@ -9,7 +9,7 @@ export const SelectPositionClass = (props) => {
 	];
 	const values = _.flatten(rows);
 	const { label, help, attributes, setAttributes, itemKeys, disable, key: classKey = "classes" } = props;
-	const item = itemKeys ? CP.getTheItem(props) : attributes;
+	const item = (itemKeys ? CP.getTheItem(props) : attributes) || {};
 	const classSet = new Set((item[classKey] || "").split(" "));
 	const value = values.find((value) => classSet.has(value));
 	const select = (value) => {
@@ -17,7 +17,11 @@ export const SelectPositionClass = (props) => {
 		classSet.add(value);
 		const data = { [classKey]: [...classSet].filter(Boolean).join(" ") };
 		if (itemKeys) {
-			Object.assign(CP.getTheItem(props), data);
+			const targetItem = CP.getTheItem(props);
+			if (!targetItem) {
+				return;
+			}
+			Object.assign(targetItem, data);
 			CP.saveItem(props);
 		} else {
 			setAttributes(data);

@@ -44,7 +44,7 @@ export const EditItemsTable = (props) => {
 					</tr>
 				</thead>
 				<tbody>
-					{items.map((item, index) => {
+					{items.map((item = {}, index) => {
 						const propsForControl = { attributes, setAttributes, itemKeys: [...itemKeys, index] };
 						return (
 							<tr

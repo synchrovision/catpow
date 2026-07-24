@@ -4,7 +4,7 @@ export const Item = (props) => {
 	const { tag = "div", setAttributes, attributes, itemKeys = [], children } = props;
 	const selectionKey = itemKeys.length > 2 ? "currentSubItemIndex" : "currentItemIndex";
 	const items = CP.getTheItems(props);
-	const item = CP.getTheItem(props);
+	const item = CP.getTheItem(props) || {};
 	const index = CP.getTheItemIndex(props);
 	const isSelected = props.isSelected === undefined ? index == attributes[selectionKey] : props.isSelected;
 

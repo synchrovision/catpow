@@ -1,6 +1,6 @@
 ﻿export const StandardIcon = {
 	Input: (props) => {
-		const { item, prm, save } = props;
+		const { item = {}, prm = {}, save } = props;
 		prm.keys = prm.keys || {};
 		prm.keys.src = prm.keys.src || prm.input + "Src";
 		prm.keys.alt = prm.keys.alt || prm.input + "Alt";
@@ -19,7 +19,7 @@
 		);
 	},
 	Output: (props) => {
-		const { className = "icon", item } = props;
+		const { className = "icon", item = {} } = props;
 		return (
 			<span className={className}>
 				<img src={item.iconSrc} alt={item.iconAlt} />

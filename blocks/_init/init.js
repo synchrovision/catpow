@@ -2301,10 +2301,14 @@
     const { Icon } = wp.components;
     const [isOpen, setIsOpen] = useState2(false);
     let onClick;
-    const item = itemKeys ? CP.getTheItem(props) : attributes;
+    const item = (itemKeys ? CP.getTheItem(props) : attributes) || {};
     const save = (data) => {
       if (itemKeys) {
-        Object.assign(CP.getTheItem(props), data);
+        const targetItem = CP.getTheItem(props);
+        if (!targetItem) {
+          return;
+        }
+        Object.assign(targetItem, data);
         CP.saveItem(props);
       } else {
         setAttributes(data);
@@ -2315,18 +2319,20 @@
       onClick = (e) => CP.selectImage(
         function({ src }) {
           if (keys.sources) {
-            const source = item[keys.sources].find((source2) => source2.device === device);
+            const sources = item[keys.sources] || [];
+            const source = sources.find((source2) => source2.device === device);
             if (source) {
               source.srcset = src;
             } else {
-              item[keys.sources].push({ device, srcset: src });
+              sources.push({ device, srcset: src });
             }
-            save({ [keys.sources]: JSON.parse(JSON.stringify(item[keys.sources])) });
+            save({ [keys.sources]: JSON.parse(JSON.stringify(sources)) });
           } else {
-            if (item[keys.srcset].match(sizeData.reg)) {
-              item[keys.srcset] = item[keys.srcset].replace(sizeData.reg, src + sizeData.rep);
+            const srcset = item[keys.srcset] || "";
+            if (srcset.match(sizeData.reg)) {
+              item[keys.srcset] = srcset.replace(sizeData.reg, src + sizeData.rep);
             } else {
-              item[keys.srcset] += "," + src + sizeData.rep;
+              item[keys.srcset] = srcset ? srcset + "," + src + sizeData.rep : src + sizeData.rep;
             }
             save({ [keys.srcset]: item[keys.srcset] });
           }
@@ -2343,7 +2349,7 @@
         );
       };
     }
-    if (isTemplate && keys.code && item[keys.code]) {
+    if (isTemplate && keys?.code && item?.[keys.code]) {
       return /* @__PURE__ */ wp.element.createElement(CP.DummyImage, { text: item[keys.code] });
     }
     return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, showSelectPictureSources ? /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImageBody, { ...props, className, item, keys }), /* @__PURE__ */ wp.element.createElement(CP.Bem, null, /* @__PURE__ */ wp.element.createElement("div", { className: clsx(controlClassName, { "is-open": isOpen }) }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit", onClick: () => setIsOpen(!isOpen) }), /* @__PURE__ */ wp.element.createElement("div", { className: "_body", ...{ inert: isOpen ? null : "" } }, /* @__PURE__ */ wp.element.createElement(CP.SelectPictureSources, { ...{ attributes, setAttributes, itemKeys, keys, size, devices: devices2 } }))))) : /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImageBody, { ...props, className, item, keys, style: { pointerEvents: "auto" }, onClick }));
@@ -3089,7 +3095,7 @@
   // ../blocks/_init/init/CP/components/StandardIcon.jsx
   var StandardIcon = {
     Input: (props) => {
-      const { item, prm, save } = props;
+      const { item = {}, prm = {}, save } = props;
       prm.keys = prm.keys || {};
       prm.keys.src = prm.keys.src || prm.input + "Src";
       prm.keys.alt = prm.keys.alt || prm.input + "Alt";
@@ -3109,7 +3115,7 @@
       );
     },
     Output: (props) => {
-      const { className = "icon", item } = props;
+      const { className = "icon", item = {} } = props;
       return /* @__PURE__ */ wp.element.createElement("span", { className }, /* @__PURE__ */ wp.element.createElement("img", { src: item.iconSrc, alt: item.iconAlt }));
     }
   };
@@ -3296,7 +3302,7 @@
     const { tag = "div", setAttributes, attributes, itemKeys = [], children } = props;
     const selectionKey = itemKeys.length > 2 ? "currentSubItemIndex" : "currentItemIndex";
     const items = CP.getTheItems(props);
-    const item = CP.getTheItem(props);
+    const item = CP.getTheItem(props) || {};
     const index = CP.getTheItemIndex(props);
     const isSelected = props.isSelected === void 0 ? index == attributes[selectionKey] : props.isSelected;
     return wp.element.createElement(
@@ -4277,7 +4283,11 @@
     const save = useCallback3(
       (data) => {
         if (itemKeys) {
-          Object.assign(CP.getTheItem(props), data);
+          const targetItem = CP.getTheItem(props);
+          if (!targetItem) {
+            return;
+          }
+          Object.assign(targetItem, data);
           CP.saveItem(props);
         } else {
           setAttributes(data);
@@ -4458,7 +4468,7 @@
     ];
     const values = _.flatten(rows);
     const { label, help, attributes, setAttributes, itemKeys, disable, key: classKey = "classes" } = props;
-    const item = itemKeys ? CP.getTheItem(props) : attributes;
+    const item = (itemKeys ? CP.getTheItem(props) : attributes) || {};
     const classSet = new Set((item[classKey] || "").split(" "));
     const value2 = values.find((value3) => classSet.has(value3));
     const select = (value3) => {
@@ -4466,7 +4476,11 @@
       classSet.add(value3);
       const data = { [classKey]: [...classSet].filter(Boolean).join(" ") };
       if (itemKeys) {
-        Object.assign(CP.getTheItem(props), data);
+        const targetItem = CP.getTheItem(props);
+        if (!targetItem) {
+          return;
+        }
+        Object.assign(targetItem, data);
         CP.saveItem(props);
       } else {
         setAttributes(data);
@@ -4625,7 +4639,7 @@
       return columns2;
     }, []);
     const columns = getActiveColumns(props);
-    return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "cp" }, /* @__PURE__ */ wp.element.createElement("table", { className: "cp-edititemstable" }, /* @__PURE__ */ wp.element.createElement("thead", null, /* @__PURE__ */ wp.element.createElement("tr", null, columns.map((col, c) => /* @__PURE__ */ wp.element.createElement("th", { key: c }, col.label || col.key)), /* @__PURE__ */ wp.element.createElement("th", null))), /* @__PURE__ */ wp.element.createElement("tbody", null, items.map((item, index) => {
+    return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "cp" }, /* @__PURE__ */ wp.element.createElement("table", { className: "cp-edititemstable" }, /* @__PURE__ */ wp.element.createElement("thead", null, /* @__PURE__ */ wp.element.createElement("tr", null, columns.map((col, c) => /* @__PURE__ */ wp.element.createElement("th", { key: c }, col.label || col.key)), /* @__PURE__ */ wp.element.createElement("th", null))), /* @__PURE__ */ wp.element.createElement("tbody", null, items.map((item = {}, index) => {
       const propsForControl = { attributes, setAttributes, itemKeys: [...itemKeys, index] };
       return /* @__PURE__ */ wp.element.createElement(
         "tr",
@@ -5053,21 +5067,21 @@
 
   // ../blocks/_init/init/CP/components/PlacedPictures.jsx
   var PlacedPictures = (props) => {
-    const { className, attributes, keys } = props;
-    const item = props.itemKeys ? CP.getTheItem(props) : attributes;
-    const pictures = item[keys.pictures];
-    return /* @__PURE__ */ wp.element.createElement("div", { className }, pictures && pictures.map((picture, index) => {
+    const { className, attributes, keys = {} } = props;
+    const item = (props.itemKeys ? CP.getTheItem(props) : attributes) || {};
+    const pictures = item[keys.pictures] || [];
+    return /* @__PURE__ */ wp.element.createElement("div", { className }, pictures && pictures.map((picture = {}, index) => {
       const { style, code, sources, src, alt } = picture;
       return /* @__PURE__ */ wp.element.createElement("div", { className: "item", style: CP.parseStyleString(style), key: index }, code || /* @__PURE__ */ wp.element.createElement("picture", { className: "picture" }, sources && sources.map((source) => /* @__PURE__ */ wp.element.createElement("source", { srcSet: source.srcset, media: CP.devices[source.device].media_query, "data-device": source.device, key: source.device })), /* @__PURE__ */ wp.element.createElement("img", { className: "img", src, alt })));
     }));
   };
   PlacedPictures.Edit = (props) => {
-    const { className, setAttributes, attributes, itemKeys, keys, devices: devices2 } = props;
+    const { className, setAttributes, attributes, itemKeys, keys = {}, devices: devices2 = [] } = props;
     const { useState: useState7, useMemo: useMemo11, useCallback: useCallback3, useRef: useRef3, useEffect: useEffect6 } = wp.element;
     const { BlockControls: BlockControls2, InspectorControls: InspectorControls2 } = wp.blockEditor;
     const { BaseControl: BaseControl2, Icon, PanelBody: PanelBody2, RangeControl: RangeControl2, TextControl: TextControl2, Toolbar, ToolbarGroup: ToolbarGroup2, ToolbarButton, ToolbarDropdownMenu } = wp.components;
-    const item = itemKeys ? CP.getTheItem(props) : attributes;
-    const pictures = item[keys.pictures];
+    const item = (itemKeys ? CP.getTheItem(props) : attributes) || {};
+    const pictures = item[keys.pictures] || [];
     const classes = useMemo11(() => bem("cp-placedpictures " + className), [className]);
     const [editMode, setEditMode] = useState7(false);
     const [currentItemNodes, setCurrentItemNodes] = useState7([]);
@@ -5120,7 +5134,11 @@
     );
     const save = useCallback3(() => {
       if (itemKeys) {
-        Object.assign(CP.getTheItem(props), { [keys.pictures]: JSON.parse(JSON.stringify(pictures)) });
+        const targetItem = CP.getTheItem(props);
+        if (!targetItem) {
+          return;
+        }
+        Object.assign(targetItem, { [keys.pictures]: JSON.parse(JSON.stringify(pictures)) });
         CP.saveItem(props);
       } else {
         setAttributes({ [keys.pictures]: JSON.parse(JSON.stringify(pictures)) });
@@ -5180,7 +5198,7 @@
           save();
         }
       }
-    )), pictures && pictures.map((picture, index) => {
+    )), pictures && pictures.map((picture = {}, index) => {
       const { style, code, sources, src, alt } = picture;
       return /* @__PURE__ */ wp.element.createElement("div", { className: "item", style: CP.parseStyleString(style), onClick: (e) => editMode && onClickItem(e), "data-index": index, ref: (el) => targetRefs.current[index] = el, key: index }, code ? /* @__PURE__ */ wp.element.createElement(CP.DummyImage, { text: code }) : /* @__PURE__ */ wp.element.createElement(
         "picture",
@@ -5229,16 +5247,16 @@
 
   // ../blocks/_init/init/CP/components/Link.jsx
   var Link = (props) => {
-    const { className, attributes, itemKeys, keys, ...otherProps } = props;
+    const { className, attributes, itemKeys, keys = {}, ...otherProps } = props;
     const item = itemKeys ? CP.getTheItem(props) : attributes;
     const href = item?.[keys?.href] || "";
     const target = href.indexOf("://") !== -1 ? "_brank" : null;
     return /* @__PURE__ */ wp.element.createElement("a", { className, href, target, rel: target && "noopener", ...otherProps }, props.children);
   };
   Link.Edit = (props) => {
-    const { className, setAttributes, attributes, itemKeys, keys, isSelected = "auto", ...otherProps } = props;
+    const { className, setAttributes, attributes, itemKeys, keys = {}, isSelected = "auto", ...otherProps } = props;
     const { useMemo: useMemo11, useEffect: useEffect6, useState: useState7 } = wp.element;
-    const item = useMemo11(() => itemKeys ? CP.getTheItem(props) : attributes, [attributes, itemKeys]);
+    const item = useMemo11(() => (itemKeys ? CP.getTheItem(props) : attributes) || {}, [attributes, itemKeys]);
     const [hasSelection, setHasSelection] = useState7(false);
     const [ref, setRef] = useState7(false);
     const [popoverRef, setPopoverRef] = useState7(false);
@@ -5264,7 +5282,11 @@
         onBlur: (e) => {
           const href = e.target.textContent;
           if (itemKeys) {
-            Object.assign(CP.getTheItem(props), { [keys.href]: href });
+            const targetItem = CP.getTheItem(props);
+            if (!targetItem) {
+              return;
+            }
+            Object.assign(targetItem, { [keys.href]: href });
             CP.saveItem(props);
           } else {
             setAttributes({ [keys.href]: href });
@@ -5278,20 +5300,24 @@
   // ../blocks/_init/init/CP/components/RTF.jsx
   var RTF = (props) => {
     const { className, pref = "cp-rtf", level = 3, attributes, itemKeys, keys = { text: "text" }, ...otherProps } = props;
-    const item = itemKeys ? CP.getTheItem(props) : attributes;
-    const text = item[keys.text] ? item[keys.text] : "";
+    const item = (itemKeys ? CP.getTheItem(props) : attributes) || {};
+    const text = item[keys.text] || "";
     return /* @__PURE__ */ wp.element.createElement("div", { className, ...otherProps, dangerouslySetInnerHTML: { __html: rtf(text, pref, level) } });
   };
   RTF.Edit = (props) => {
     const { className, pref = "cp-rtf", level = 3, setAttributes, attributes, itemKeys, keys = { text: "text" }, isSelected = true, ...otherProps } = props;
     const { useMemo: useMemo11, useCallback: useCallback3, useState: useState7 } = wp.element;
     const classes = useMemo11(() => bem("cp-rtf " + className), [className]);
-    const item = useMemo11(() => itemKeys ? CP.getTheItem(props) : attributes, [attributes, itemKeys]);
-    const text = item[keys.text];
+    const item = useMemo11(() => (itemKeys ? CP.getTheItem(props) : attributes) || {}, [attributes, itemKeys]);
+    const text = item[keys.text] || "";
     const updateText = useCallback3(
       (text2) => {
         if (itemKeys) {
-          Object.assign(CP.getTheItem(props), { [keys.text]: text2 });
+          const targetItem = CP.getTheItem(props);
+          if (!targetItem) {
+            return;
+          }
+          Object.assign(targetItem, { [keys.text]: text2 });
           CP.saveItem(props);
         } else {
           setAttributes({ [keys.text]: text2 });
@@ -5321,7 +5347,7 @@
     );
     const [savedText, setSavedText] = useState7(text);
     const [isActive, setIsActive] = useState7(false);
-    return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: classes({ "is-active": isSelected && isActive }), onClick: () => setIsActive(!isActive), ...otherProps, dangerouslySetInnerHTML: { __html: rtf(item.text, pref) } }), /* @__PURE__ */ wp.element.createElement(Portal, { id: "EditRTF" }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.portal({ "is-active": isSelected && isActive }) }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.portal.preview(), dangerouslySetInnerHTML: { __html: rtf(item.text, pref, level) } }), /* @__PURE__ */ wp.element.createElement("div", { className: classes.portal.input() }, /* @__PURE__ */ wp.element.createElement(
+    return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: classes({ "is-active": isSelected && isActive }), onClick: () => setIsActive(!isActive), ...otherProps, dangerouslySetInnerHTML: { __html: rtf(text, pref) } }), /* @__PURE__ */ wp.element.createElement(Portal, { id: "EditRTF" }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.portal({ "is-active": isSelected && isActive }) }, /* @__PURE__ */ wp.element.createElement("div", { className: classes.portal.preview(), dangerouslySetInnerHTML: { __html: rtf(text, pref, level) } }), /* @__PURE__ */ wp.element.createElement("div", { className: classes.portal.input() }, /* @__PURE__ */ wp.element.createElement(
       "textarea",
       {
         className: classes.portal.input.edit(),
