@@ -28,7 +28,7 @@
     icon: "id-alt",
     category: "catpow",
     example: CP.example,
-    edit({ attributes, className, setAttributes, isSelected }) {
+    edit({ attributes, setAttributes, isSelected }) {
       const { InspectorControls, useBlockProps } = wp.blockEditor;
       const { Icon } = wp.components;
       const { classes, vars, sources, src, srcset, alt, code, device } = attributes;
@@ -38,7 +38,7 @@
         {
           input: "picture",
           label: "\u753B\u50CF",
-          keys: imageKeys.image,
+          keys: imageKeys?.image,
           devices,
           isTemplate: states.isTemplate
         },
@@ -61,21 +61,21 @@
         className: clsx(classes, device, { "cp-altcontent": device }),
         style: vars
       });
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectDeviceToolbar, { attr: attributes, set: setAttributes, devices }), /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(
+      const panelProps = { attributes, setAttributes };
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectDeviceToolbar, { ...panelProps, devices }), /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(
         CP.SelectResponsiveImage,
         {
           className: "_picture",
-          attr: attributes,
-          set: setAttributes,
-          keys: imageKeys.image,
+          ...panelProps,
+          keys: imageKeys?.image,
           device,
           devices,
           isTemplate: states.isTemplate,
           showSelectPictureSources: isSelected
         }
-      ))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", set: setAttributes, attr: attributes, selectiveClasses })));
+      ))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", ...panelProps, selectiveClasses })));
     },
-    save({ attributes, className, setAttributes }) {
+    save({ attributes }) {
       const { useBlockProps } = wp.blockEditor;
       const { classes, vars, srouces, src, srcset, alt, code } = attributes;
       const states = CP.classNamesToFlags(classes);
@@ -84,7 +84,7 @@
         className: classes,
         style: vars
       });
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImage, { className: "_picture", attr: attributes, keys: imageKeys.image, devices, isTemplate: states.isTemplate }))));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImage, { className: "_picture", attributes, keys: imageKeys.image, devices, isTemplate: states.isTemplate }))));
     }
   });
 })();

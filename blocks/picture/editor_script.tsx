@@ -17,7 +17,7 @@ wp.blocks.registerBlockType("catpow/picture", {
 	icon: "id-alt",
 	category: "catpow",
 	example: CP.example,
-	edit({ attributes, className, setAttributes, isSelected }) {
+	edit({ attributes, setAttributes, isSelected }) {
 		const { InspectorControls, useBlockProps } = wp.blockEditor;
 		const { Icon } = wp.components;
 		const { classes, vars, sources, src, srcset, alt, code, device } = attributes;
@@ -29,7 +29,7 @@ wp.blocks.registerBlockType("catpow/picture", {
 			{
 				input: "picture",
 				label: "画像",
-				keys: imageKeys.image,
+				keys: imageKeys?.image,
 				devices,
 				isTemplate: states.isTemplate,
 			},
@@ -52,17 +52,17 @@ wp.blocks.registerBlockType("catpow/picture", {
 			className: clsx(classes, device, { "cp-altcontent": device }),
 			style: vars,
 		});
+		const panelProps = { attributes, setAttributes };
 
 		return (
 			<>
-				<CP.SelectDeviceToolbar attr={attributes} set={setAttributes} devices={devices} />
+				<CP.SelectDeviceToolbar {...panelProps} devices={devices} />
 				<CP.Bem prefix="wp-block-catpow">
 					<div {...blockProps}>
 						<CP.SelectResponsiveImage
 							className="_picture"
-							attr={attributes}
-							set={setAttributes}
-							keys={imageKeys.image}
+							{...panelProps}
+							keys={imageKeys?.image}
 							device={device}
 							devices={devices}
 							isTemplate={states.isTemplate}
@@ -71,12 +71,12 @@ wp.blocks.registerBlockType("catpow/picture", {
 					</div>
 				</CP.Bem>
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title="クラス" icon="art" {...panelProps} selectiveClasses={selectiveClasses} />
 				</InspectorControls>
 			</>
 		);
 	},
-	save({ attributes, className, setAttributes }) {
+	save({ attributes }) {
 		const { useBlockProps } = wp.blockEditor;
 		const { classes, vars, srouces, src, srcset, alt, code } = attributes;
 
@@ -91,7 +91,7 @@ wp.blocks.registerBlockType("catpow/picture", {
 			<>
 				<CP.Bem prefix="wp-block-catpow">
 					<div {...blockProps}>
-						<CP.ResponsiveImage className="_picture" attr={attributes} keys={imageKeys.image} devices={devices} isTemplate={states.isTemplate} />
+						<CP.ResponsiveImage className="_picture" attributes={attributes} keys={imageKeys.image} devices={devices} isTemplate={states.isTemplate} />
 					</div>
 				</CP.Bem>
 			</>
