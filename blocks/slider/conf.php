@@ -2,7 +2,7 @@
 use Catpow\util\BlockConfig;
 $block_class="wp-block-catpow-slider";
 $attributes=[
-	"classes"=>["source"=>"attribute","selector"=>"div","attribute"=>"class","default"=>"wp-block-catpow-slider is-level3 is-type-card has-item-size-medium has-title has-text has-image has-arrows has-dots"],
+	"classes"=>["source"=>"attribute","selector"=>"div","attribute"=>"class","default"=>"wp-block-catpow-slider is-level3 is-type-card has-item-size-medium has-texts has-title has-text has-image has-arrows has-dots"],
 	"vars"=>["type"=>"object","default"=>["--cp-image-opacity"=>"0.5","--cp-image-blendmode"=>"normal","--cp-item-size"=>"300"]],
 	"controlClasses"=>["source"=>"attribute","selector"=>".{$block_class}__controls","attribute"=>"class","default"=>"{$block_class}__controls is-loop is-autoplay is-flickable"],
 	"HeadingTag"=>["default"=>"h3"],

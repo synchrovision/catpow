@@ -241,10 +241,10 @@
   background-color: oklch(var(--cp-tones-hx-l) var(--cp-tones-hx-c) var(--cp-tones-hx-h) / var(--cp-tones-hx-a,1));
   opacity: 1;
 }
-.wp-block-catpow-slider.has-image .wp-block-catpow-slider__contents-item {
+.wp-block-catpow-slider.has-image.has-texts .wp-block-catpow-slider__contents-item {
   grid-row: span 2;
 }
-.wp-block-catpow-slider.has-image .wp-block-catpow-slider__contents-item-body {
+.wp-block-catpow-slider.has-image.has-texts .wp-block-catpow-slider__contents-item-body {
   grid-row: span 2;
 }
 .wp-block-catpow-slider.is-type-carousel {

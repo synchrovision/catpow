@@ -184,9 +184,11 @@
         }
       };
       useEffect2(() => {
-        if (!blockEl) {
-          return;
-        }
+        states.hasTexts = states.hasTitle || states.hasCaption || states.hasText || states.hasLink;
+        setAttributes({ classes: CP.flagsToClassNames(states) });
+      }, [classes]);
+      useEffect2(() => {
+        if (!blockEl) return;
         const contents = blockEl.querySelector(".wp-block-catpow-slider__contents");
         const items2 = [...contents.children];
         const scrollToMainItems = debounce((e) => {
@@ -201,6 +203,7 @@
           }
         }, 160);
         const updateCssVars = () => {
+          if (items2.length === 0) return;
           const startItem = items2[0];
           const endItem = items2[items2.length - 1];
           const w = endItem.offsetLeft - startItem.offsetLeft;
@@ -263,9 +266,10 @@
               setAttributes,
               keys: imageKeys.image,
               itemKeys: ["items", index],
+              devices: ["tb", "sp"],
               isTemplate: states.isTemplate
             }
-          )), (states.hasTitle || states.hasCaption || states.hasText || states.hasLink) && /* @__PURE__ */ wp.element.createElement("div", { className: "_texts" }, states.hasTitle && /* @__PURE__ */ wp.element.createElement(
+          )), states.hasTexts && /* @__PURE__ */ wp.element.createElement("div", { className: "_texts" }, states.hasTitle && /* @__PURE__ */ wp.element.createElement(
             RichText,
             {
               tagName: HeadingTag,
@@ -329,7 +333,7 @@
         "data-wp-context": config,
         "data-wp-init": "callbacks.initBlock"
       });
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement("ul", { className: "_contents" }, items.map((item, index) => /* @__PURE__ */ wp.element.createElement("li", { className: item.classes, key: index }, /* @__PURE__ */ wp.element.createElement("div", { className: "_body" }, states.hasImage && /* @__PURE__ */ wp.element.createElement("div", { className: "_image" }, /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImage, { className: "_img", attributes, keys: imageKeys.image, itemKeys: ["items", index], isTemplate: states.isTemplate })), (states.hasTitle || states.hasCaption || states.hasText || states.hasLink) && /* @__PURE__ */ wp.element.createElement("div", { className: "_texts" }, states.hasTitle && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: HeadingTag, className: "_title", value: item.title }), states.hasCaption && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "p", className: "_caption", value: item.caption }), states.hasText && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "p", className: "_text", value: item.text }), states.hasLink && /* @__PURE__ */ wp.element.createElement(CP.Link, { className: "_link", attributes, keys: linkKeys.link, itemKeys: ["items", index] }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.linkText }))))))), /* @__PURE__ */ wp.element.createElement("div", { className: controlClasses, "data-config": config }, states.hasArrows && /* @__PURE__ */ wp.element.createElement("div", { className: "_arrow is-arrow-prev", "data-wp-on--click": "actions.prev" }), states.hasDots && /* @__PURE__ */ wp.element.createElement("ul", { className: "_dots" }, items.map((item, index) => /* @__PURE__ */ wp.element.createElement("li", { className: "_dot", "data-wp-on--click": "actions.onClickItem", "data-wp-class--is-active": "callbacks.isActive", "data-index": index }))), states.hasArrows && /* @__PURE__ */ wp.element.createElement("div", { className: "_arrow is-arrow-next", "data-wp-on--click": "actions.next" })))), doLoop && /* @__PURE__ */ wp.element.createElement("on-empty", null, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement("ul", { className: "_contents" }, items.map((item, index) => /* @__PURE__ */ wp.element.createElement("li", { className: item.classes, key: index }, /* @__PURE__ */ wp.element.createElement("div", { className: "_body" }, states.hasImage && /* @__PURE__ */ wp.element.createElement("div", { className: "_image" }, /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImage, { className: "_img", attributes, keys: imageKeys.image, itemKeys: ["items", index], isTemplate: states.isTemplate })), states.hasTexts && /* @__PURE__ */ wp.element.createElement("div", { className: "_texts" }, states.hasTitle && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: HeadingTag, className: "_title", value: item.title }), states.hasCaption && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "p", className: "_caption", value: item.caption }), states.hasText && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "p", className: "_text", value: item.text }), states.hasLink && /* @__PURE__ */ wp.element.createElement(CP.Link, { className: "_link", attributes, keys: linkKeys.link, itemKeys: ["items", index] }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: item.linkText }))))))), /* @__PURE__ */ wp.element.createElement("div", { className: controlClasses, "data-config": config }, states.hasArrows && /* @__PURE__ */ wp.element.createElement("div", { className: "_arrow is-arrow-prev", "data-wp-on--click": "actions.prev" }), states.hasDots && /* @__PURE__ */ wp.element.createElement("ul", { className: "_dots" }, items.map((item, index) => /* @__PURE__ */ wp.element.createElement("li", { className: "_dot", "data-wp-on--click": "actions.onClickItem", "data-wp-class--is-active": "callbacks.isActive", "data-index": index }))), states.hasArrows && /* @__PURE__ */ wp.element.createElement("div", { className: "_arrow is-arrow-next", "data-wp-on--click": "actions.next" })))), doLoop && /* @__PURE__ */ wp.element.createElement("on-empty", null, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));
     }
   });
 })();

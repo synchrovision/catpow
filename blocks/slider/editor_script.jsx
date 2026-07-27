@@ -153,9 +153,12 @@ wp.blocks.registerBlockType("catpow/slider", {
 		};
 
 		useEffect(() => {
-			if (!blockEl) {
-				return;
-			}
+			states.hasTexts = states.hasTitle || states.hasCaption || states.hasText || states.hasLink;
+			setAttributes({ classes: CP.flagsToClassNames(states) });
+		}, [classes]);
+
+		useEffect(() => {
+			if (!blockEl) return;
 			const contents = blockEl.querySelector(".wp-block-catpow-slider__contents");
 			const items = [...contents.children];
 			const scrollToMainItems = debounce((e) => {
@@ -170,6 +173,7 @@ wp.blocks.registerBlockType("catpow/slider", {
 				}
 			}, 160);
 			const updateCssVars = () => {
+				if (items.length === 0) return;
 				const startItem = items[0];
 				const endItem = items[items.length - 1];
 				const w = endItem.offsetLeft - startItem.offsetLeft;
@@ -259,11 +263,12 @@ wp.blocks.registerBlockType("catpow/slider", {
 																		setAttributes={setAttributes}
 																		keys={imageKeys.image}
 																		itemKeys={["items", index]}
+																		devices={["tb", "sp"]}
 																		isTemplate={states.isTemplate}
 																	/>
 																</div>
 															)}
-															{(states.hasTitle || states.hasCaption || states.hasText || states.hasLink) && (
+															{states.hasTexts && (
 																<div className="_texts">
 																	{states.hasTitle && (
 																		<RichText
@@ -368,7 +373,7 @@ wp.blocks.registerBlockType("catpow/slider", {
 												<CP.ResponsiveImage className="_img" attributes={attributes} keys={imageKeys.image} itemKeys={["items", index]} isTemplate={states.isTemplate} />
 											</div>
 										)}
-										{(states.hasTitle || states.hasCaption || states.hasText || states.hasLink) && (
+										{states.hasTexts && (
 											<div className="_texts">
 												{states.hasTitle && <RichText.Content tagName={HeadingTag} className="_title" value={item.title} />}
 												{states.hasCaption && <RichText.Content tagName="p" className="_caption" value={item.caption} />}
