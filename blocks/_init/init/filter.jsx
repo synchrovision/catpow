@@ -94,8 +94,9 @@ wp.hooks.addFilter("editor.BlockEdit", "catpow/editor", (BlockEdit) => (props) =
 					<CP.SelectClassPanel title={__("サイズ")} icon="pets" classKey="className" {...props} selectiveClasses={["level", "hasContentWidth"]} />
 					<CP.SelectClassPanel title={__("間隔・余白")} icon="pets" classKey="className" {...props} selectiveClasses={["hasMargin", "hasPadding"]} />
 					<CP.SelectClassPanel title={__("色")} icon="pets" classKey="className" {...props} selectiveClasses={["color", "colorScheme"]} />
-					<CP.SelectClassPanel title={__("ボーダー")} icon="pets" classKey="className" {...props} selectiveClasses={["hasBorder", "hasBorderRadius", "hasBorderImage"]} />
+					<CP.SelectClassPanel title={__("ボーダー")} icon="pets" classKey="className" {...props} selectiveClasses={["hasBorder", "borderColor", "hasBorderRadius", "hasBorderImage"]} />
 					<CP.SelectClassPanel title={__("背景")} icon="pets" classKey="className" {...props} selectiveClasses={["backgroundColor", "backgroundPattern"]} />
+					<CP.SelectClassPanel title={__("影")} icon="pets" classKey="className" {...props} selectiveClasses={["boxShadow", "hasTextShadow"]} />
 				</InspectorControls>
 				<BlockEdit {...props} />
 			</>

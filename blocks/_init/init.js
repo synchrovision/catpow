@@ -5999,6 +5999,16 @@
         ...otherParams
       };
     },
+    borderColor: {
+      name: "borderColor",
+      type: "buttons",
+      label: __13("\u7DDA\u8272", "catpow"),
+      values: {
+        hasBorderColorNone: __13("\u306A\u3057", "catpow"),
+        hasBorderColor: __13("\u901A\u5E38", "catpow"),
+        hasBorderColorAlt: __13("\u5F37\u8ABF", "catpow")
+      }
+    },
     borderWidth({ preset, vars = "vars", ...otherParams }) {
       return {
         name: "borderWidth",
@@ -8037,7 +8047,7 @@
   ]);
   wp.hooks.addFilter("editor.BlockEdit", "catpow/editor", (BlockEdit) => (props) => {
     if (coreBlocksToAddPanel.has(props.name)) {
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __14("\u30B5\u30A4\u30BA"), icon: "pets", classKey: "className", ...props, selectiveClasses: ["level", "hasContentWidth"] }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __14("\u9593\u9694\u30FB\u4F59\u767D"), icon: "pets", classKey: "className", ...props, selectiveClasses: ["hasMargin", "hasPadding"] }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __14("\u8272"), icon: "pets", classKey: "className", ...props, selectiveClasses: ["color", "colorScheme"] }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __14("\u30DC\u30FC\u30C0\u30FC"), icon: "pets", classKey: "className", ...props, selectiveClasses: ["hasBorder", "hasBorderRadius", "hasBorderImage"] }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __14("\u80CC\u666F"), icon: "pets", classKey: "className", ...props, selectiveClasses: ["backgroundColor", "backgroundPattern"] })), /* @__PURE__ */ wp.element.createElement(BlockEdit, { ...props }));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __14("\u30B5\u30A4\u30BA"), icon: "pets", classKey: "className", ...props, selectiveClasses: ["level", "hasContentWidth"] }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __14("\u9593\u9694\u30FB\u4F59\u767D"), icon: "pets", classKey: "className", ...props, selectiveClasses: ["hasMargin", "hasPadding"] }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __14("\u8272"), icon: "pets", classKey: "className", ...props, selectiveClasses: ["color", "colorScheme"] }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __14("\u30DC\u30FC\u30C0\u30FC"), icon: "pets", classKey: "className", ...props, selectiveClasses: ["hasBorder", "borderColor", "hasBorderRadius", "hasBorderImage"] }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __14("\u80CC\u666F"), icon: "pets", classKey: "className", ...props, selectiveClasses: ["backgroundColor", "backgroundPattern"] }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __14("\u5F71"), icon: "pets", classKey: "className", ...props, selectiveClasses: ["boxShadow", "hasTextShadow"] })), /* @__PURE__ */ wp.element.createElement(BlockEdit, { ...props }));
     }
     return /* @__PURE__ */ wp.element.createElement(BlockEdit, { ...props });
   });

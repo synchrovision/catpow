@@ -341,6 +341,16 @@ export const selectiveClassesPresets = {
 			...otherParams,
 		};
 	},
+	borderColor: {
+		name: "borderColor",
+		type: "buttons",
+		label: __("線色", "catpow"),
+		values: {
+			hasBorderColorNone: __("なし", "catpow"),
+			hasBorderColor: __("通常", "catpow"),
+			hasBorderColorAlt: __("強調", "catpow"),
+		},
+	},
 	borderWidth({ preset, vars = "vars", ...otherParams }) {
 		return {
 			name: "borderWidth",
