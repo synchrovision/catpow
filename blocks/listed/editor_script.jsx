@@ -430,7 +430,7 @@ wp.blocks.registerBlockType("catpow/listed", {
 															/>
 														)}
 														{states.hasLink && (
-															<CP.Link.Edit className="_link" attributes={attributes} setAttributes={setAttributes} keys={linkKeys.link} index={index}>
+															<CP.Link.Edit className="_link" attributes={attributes} setAttributes={setAttributes} keys={linkKeys.link} itemKeys={["items", index]}>
 																<RichText
 																	onChange={(linkText) => {
 																		item.linkText = linkText;
@@ -507,7 +507,7 @@ wp.blocks.registerBlockType("catpow/listed", {
 										{states.hasSubTitle && <RichText.Content tagName="p" className="_subtitle" value={item.subTitle} />}
 										{states.hasText && <RichText.Content tagName="p" className="_text" value={item.text} />}
 										{states.hasLink && (
-											<CP.Link className="_link" attributes={attributes} keys={linkKeys.link} index={index}>
+											<CP.Link className="_link" attributes={attributes} keys={linkKeys.link} itemKeys={["items", index]}>
 												<RichText.Content value={item.linkText} />
 											</CP.Link>
 										)}

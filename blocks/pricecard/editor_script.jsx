@@ -289,7 +289,7 @@ wp.blocks.registerBlockType("catpow/pricecard", {
 															</dl>
 														)}
 														{states.hasLink && (
-															<CP.Link.Edit className="_link" setAttributes={setAttributes} attributes={attributes} keys={{ href: "linkUrl", items: "items" }} index={index}>
+															<CP.Link.Edit className="_link" setAttributes={setAttributes} attributes={attributes} keys={{ href: "linkUrl", items: "items" }} itemKeys={["items", index]}>
 																{linkText}
 															</CP.Link.Edit>
 														)}
@@ -363,7 +363,7 @@ wp.blocks.registerBlockType("catpow/pricecard", {
 												</dl>
 											)}
 											{states.hasLink && (
-												<CP.Link className="_link" attributes={attributes} keys={{ href: "linkUrl", items: "items" }} index={index}>
+												<CP.Link className="_link" attributes={attributes} keys={{ href: "linkUrl", items: "items" }} itemKeys={["items", index]}>
 													{linkText}
 												</CP.Link>
 											)}

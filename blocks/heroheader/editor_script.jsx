@@ -124,8 +124,8 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 								{states.hasButtons && (
 									<div className="_buttons">
 										{buttons.map((button, index) => (
-											<CP.Item tag="li" className="_button" {...{ setAttributes, attributes }} itemKeys={["buttons", index]} indexKey="currentButtonIndex" key={index}>
-												<CP.Link.Edit className="_link" setAttributes={setAttributes} attributes={attributes} keys={{ items: "buttons", href: "linkUrl" }} index={index}>
+											<CP.Item tag="li" className="_button" {...{ setAttributes, attributes }} itemKeys={["buttons", index]} key={index}>
+												<CP.Link.Edit className="_link" setAttributes={setAttributes} attributes={attributes} keys={{ items: "buttons", href: "linkUrl" }} itemKeys={["buttons", index]}>
 													<CP.OutputIcon className="_icon" item={button} />
 													<RichText
 														tagName="span"
@@ -175,7 +175,7 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 								<ul className="_buttons">
 									{buttons.map((button, index) => (
 										<li className="_button" key={index}>
-											<CP.Link className="_link" attributes={attributes} keys={{ items: "buttons", href: "linkUrl" }} index={index}>
+											<CP.Link className="_link" attributes={attributes} keys={{ items: "buttons", href: "linkUrl" }} itemKeys={["buttons", index]}>
 												<CP.OutputIcon className="_icon" item={button} />
 												<RichText.Content tagName="span" className="_text" value={button.text} />
 											</CP.Link>

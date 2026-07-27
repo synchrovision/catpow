@@ -110,14 +110,10 @@
 																<CP.Item
 																	tag="li"
 																	className={subItem.classes}
-																	setAttributes={() => {
-																		item.currentItemIndex = subIndex;
-																		save();
-																	}}
-																	attributes={item}
-																	items={item.items}
-																	index={subIndex}
-																	isSelected={isSelected && currentItemIndex == index && item.currentItemIndex == subIndex}
+																	setAttributes={setAttributes}
+																	attributes={attributes}
+																	itemKeys={["items", index, "items", subIndex]}
+																	isSelected={isSelected && currentItemIndex == index && attributes.currentSubItemIndex == subIndex}
 																>
 																	<RichText
 																		className="_title"

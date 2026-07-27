@@ -249,7 +249,7 @@ wp.blocks.registerBlockType("catpow/showcase", {
 														/>
 													</div>
 													{states.hasLink && (
-														<CP.Link.Edit className="_link" attributes={attributes} setAttributes={setAttributes} keys={linkKeys.link} index={index}>
+														<CP.Link.Edit className="_link" attributes={attributes} setAttributes={setAttributes} keys={linkKeys.link} itemKeys={["items", index]}>
 															<RichText
 																onChange={(linkText) => {
 																	items[index].linkText = linkText;
@@ -302,7 +302,7 @@ wp.blocks.registerBlockType("catpow/showcase", {
 										<RichText.Content value={item.text} />
 									</div>
 									{states.hasLink && (
-										<CP.Link className="_link" attributes={attributes} keys={linkKeys.link} index={index}>
+										<CP.Link className="_link" attributes={attributes} keys={linkKeys.link} itemKeys={["items", index]}>
 											<RichText.Content value={item.linkText} />
 										</CP.Link>
 									)}

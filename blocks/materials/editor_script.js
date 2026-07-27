@@ -81,14 +81,10 @@
             {
               tag: "li",
               className: subItem.classes,
-              setAttributes: () => {
-                item.currentItemIndex = subIndex;
-                save();
-              },
-              attributes: item,
-              items: item.items,
-              index: subIndex,
-              isSelected: isSelected && currentItemIndex == index && item.currentItemIndex == subIndex
+              setAttributes,
+              attributes,
+              itemKeys: ["items", index, "items", subIndex],
+              isSelected: isSelected && currentItemIndex == index && attributes.currentSubItemIndex == subIndex
             },
             /* @__PURE__ */ wp.element.createElement(
               RichText,

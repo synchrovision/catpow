@@ -130,7 +130,7 @@ wp.blocks.registerBlockType("catpow/panes", {
 													</div>
 												</div>
 												{states.hasLink && isSelected && (
-													<CP.Link.Edit className="_link" attributes={attributes} setAttributes={setAttributes} keys={linkKeys.link} index={index}>
+													<CP.Link.Edit className="_link" attributes={attributes} setAttributes={setAttributes} keys={linkKeys.link} itemKeys={["items", index]}>
 														<RichText
 															onChange={(linkText) => {
 																item.linkText = linkText;
@@ -174,7 +174,7 @@ wp.blocks.registerBlockType("catpow/panes", {
 									</div>
 								</div>
 								{states.hasLink && item.linkUrl && (
-									<CP.Link className="_link" attributes={attributes} keys={linkKeys.link} index={index} {...CP.extractEventDispatcherAttributes("catpow/panes", item)}>
+									<CP.Link className="_link" attributes={attributes} keys={linkKeys.link} itemKeys={["items", index]} {...CP.extractEventDispatcherAttributes("catpow/panes", item)}>
 										<RichText.Content value={item.linkText} />
 									</CP.Link>
 								)}

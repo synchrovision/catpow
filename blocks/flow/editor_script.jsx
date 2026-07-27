@@ -262,7 +262,7 @@ wp.blocks.registerBlockType("catpow/flow", {
 													value={item.text}
 												/>
 											</div>
-											{states.hasLink && <CP.Link.Edit className="_link" attributes={attributes} setAttributes={setAttributes} keys={linkKeys.link} index={index} />}
+											{states.hasLink && <CP.Link.Edit className="_link" attributes={attributes} setAttributes={setAttributes} keys={linkKeys.link} itemKeys={["items", index]} />}
 										</div>
 									</CP.Item>
 								);
@@ -308,7 +308,7 @@ wp.blocks.registerBlockType("catpow/flow", {
 										{states.hasSubTitle && <RichText.Content tagName={SubHeadingTag} className="_subtitle" value={item.subTitle} />}
 										<RichText.Content tagName="p" className="_text" value={item.text} />
 									</div>
-									{states.hasLink && item.linkUrl && <CP.Link className="_link" attributes={attributes} keys={linkKeys.link} index={index} />}
+									{states.hasLink && item.linkUrl && <CP.Link className="_link" attributes={attributes} keys={linkKeys.link} itemKeys={["items", index]} />}
 								</div>
 							</li>
 						);
