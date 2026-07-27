@@ -337,6 +337,9 @@
 :root .has-background-color {
   background-color: oklch(var(--cp-tones-bx-l) var(--cp-tones-bx-c) var(--cp-tones-bx-h) / var(--cp-tones-bx-a,1));
 }
+:root .has-background-color-none {
+  background-color: transparent;
+}
 :root .has-background-color-alt {
   background-color: oklch(var(--cp-tones-sx-l) var(--cp-tones-sx-c) var(--cp-tones-sx-h) / var(--cp-tones-sx-a,1));
 }
@@ -466,6 +469,15 @@
 }
 :root .has-border-style-groove {
   --cp-border-style:$value;
+}
+:root .has-border-color {
+  border-color: oklch(var(--cp-tones-lx-l) var(--cp-tones-lx-c) var(--cp-tones-lx-h) / var(--cp-tones-lx-a,1));
+}
+:root .has-border-color-none {
+  border-color: transparent;
+}
+:root .has-border-color-alt {
+  border-color: oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1));
 }
 :root .has-border-radius {
   border-radius: var(--cp-border-radius, 1rem);
