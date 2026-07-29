@@ -2,44 +2,50 @@
 const { InspectorControls } = wp.blockEditor;
 const { PanelBody } = wp.components;
 
-wp.blocks.registerBlockStyle("core/heading", { name: "header", label: "header" });
-wp.blocks.registerBlockStyle("core/heading", { name: "headline", label: "headline" });
-wp.blocks.registerBlockStyle("core/heading", { name: "catch", label: "catch" });
-
-wp.blocks.registerBlockStyle("core/paragraph", { name: "heading", label: "Heading" });
-wp.blocks.registerBlockStyle("core/paragraph", { name: "lead", label: "Lead" });
-wp.blocks.registerBlockStyle("core/paragraph", { name: "paragraph", label: "Paragraph" });
-wp.blocks.registerBlockStyle("core/paragraph", { name: "caption", label: "Caption" });
-
-wp.blocks.registerBlockStyle("core/list", { name: "annotation", label: "annotation" });
-wp.blocks.registerBlockStyle("core/list", { name: "circle", label: "circle" });
-wp.blocks.registerBlockStyle("core/list", { name: "caret", label: "caret" });
-wp.blocks.registerBlockStyle("core/list", { name: "square", label: "square" });
-wp.blocks.registerBlockStyle("core/list", { name: "star", label: "star" });
-wp.blocks.registerBlockStyle("core/list", { name: "check", label: "check" });
-wp.blocks.registerBlockStyle("core/list", { name: "alert", label: "alert" });
-wp.blocks.registerBlockStyle("core/list", { name: "caution", label: "caution" });
-
-wp.blocks.registerBlockStyle("core/columns", { name: "regular", label: "regular" });
-wp.blocks.registerBlockStyle("core/columns", { name: "panel", label: "panel" });
-
-wp.blocks.registerBlockStyle("core/image", { name: "snap", label: "snap" });
-wp.blocks.registerBlockStyle("core/image", { name: "circle", label: "circle" });
-wp.blocks.registerBlockStyle("core/image", { name: "cover", label: "cover" });
-
-wp.blocks.registerBlockStyle("core/video", { name: "thumbnail", label: "thumbnail" });
-wp.blocks.registerBlockStyle("core/video", { name: "medium", label: "medium" });
-wp.blocks.registerBlockStyle("core/video", { name: "large", label: "large" });
-wp.blocks.registerBlockStyle("core/video", { name: "cover", label: "cover" });
-
-wp.blocks.registerBlockStyle("core/media-text", { name: "card", label: "Card" });
-wp.blocks.registerBlockStyle("core/media-text", { name: "frame", label: "Frame" });
-
-wp.blocks.registerBlockStyle("core/code", { name: "js", label: "js" });
-wp.blocks.registerBlockStyle("core/code", { name: "css", label: "css" });
-wp.blocks.registerBlockStyle("core/code", { name: "scss", label: "scss" });
-wp.blocks.registerBlockStyle("core/code", { name: "php", label: "php" });
-wp.blocks.registerBlockStyle("core/code", { name: "html", label: "html" });
+const blockStyleSelectiveClasses = {
+	"core/heading": [{ type: "buttons", values: { isStyleHeader: __("ヘッダ", "catpow"), isStyleHeadline: __("ヘッドライン", "catpow"), isStyleCatch: __("キャッチ", "catpow") } }],
+	"core/paragraph": [
+		{
+			type: "gridbuttons",
+			values: {
+				isStyleHeading: __("見出し", "catpow"),
+				isStyleLead: __("リード", "catpow"),
+				isStyleParagraph: __("本文", "catpow"),
+				isStyleCaption: __("キャプション", "catpow"),
+			},
+		},
+	],
+	"core/list": [
+		{
+			type: "gridbuttons",
+			values: {
+				isStyleAnnotation: __("注釈", "catpow"),
+				isStyleCircle: __("丸", "catpow"),
+				isStyleCaret: __("矢印", "catpow"),
+				isStyleSquare: __("四角", "catpow"),
+				isStyleStar: __("星", "catpow"),
+				isStyleCheck: __("チェック", "catpow"),
+				isStyleAlert: __("警告", "catpow"),
+				isStyleCaution: __("注意", "catpow"),
+			},
+		},
+	],
+	"core/columns": [{ type: "gridbuttons", values: { regular: __("標準", "catpow"), panel: __("パネル", "catpow") } }],
+	"core/image": [{ type: "gridbuttons", values: { isStylesnap: __("スナップ", "catpow"), isStylecircle: __("丸", "catpow"), isStylecover: __("カバー", "catpow") } }],
+	"core/video": [
+		{
+			type: "gridbuttons",
+			values: {
+				isSizeThumbnail: __("サムネイル", "catpow"),
+				isSizeMedium: __("中", "catpow"),
+				isSizeLarge: __("大", "catpow"),
+				isSizeCover: __("カバー", "catpow"),
+			},
+		},
+	],
+	"core/media-text": [{ type: "gridbuttons", values: { isStyleCard: __("カード", "catpow"), isStyleFrame: __("フレーム", "catpow") } }],
+	"core/code": [{ type: "gridbuttons", values: { js: "js", css: "css", scss: "scss", php: "php", html: "html" } }],
+};
 
 wp.hooks.addFilter("blocks.registerBlockType", "catpow/editor", function (settings, name) {
 	if (name.slice(0, 5) === "core/") {
@@ -61,42 +67,60 @@ wp.hooks.addFilter("blocks.registerBlockType", "catpow/editor", function (settin
 	}
 	return settings;
 });
-const coreBlocksToAddPanel = new Set([
-	"core/heading",
-	"core/paragraph",
-	"core/list",
-	"core/quote",
-	"core/pullquote",
-	"core/code",
-	"core/preformatted",
-	"core/verse",
-	"core/details",
-	"core/image",
-	"core/gallery",
-	"core/audio",
-	"core/video",
-	"core/file",
-	"core/cover",
-	"core/media-text",
-	"core/table",
-	"core/separator",
-	"core/buttons",
-	"core/button",
-	"core/group",
-	"core/columns",
-	"core/column",
-]);
+const coreBlocksToAddPanel = new Set();
+const blockPanelSupports = {};
+wp.hooks.addFilter("blocks.registerBlockType", "catpow/editor", (settings, name, deprecatedSettings) => {
+	if (deprecatedSettings) return settings;
+	if (settings.supports) {
+		const panelSupports = {
+			style: !!blockStyleSelectiveClasses[name],
+			color: !!settings.supports.color,
+			spacing: !!settings.supports.spacing,
+			typography: !!settings.supports.typography,
+			background: !!settings.supports.background,
+		};
+		if (Object.values(panelSupports).some((v) => v)) {
+			if (name.slice(0, 5) === "core/") coreBlocksToAddPanel.add(name);
+			blockPanelSupports[name] = panelSupports;
+			settings = {
+				...settings,
+				supports: {
+					...settings.supports,
+					color: false,
+					spacing: false,
+					typography: false,
+					background: false,
+					shadow: false,
+				},
+			};
+		}
+	}
+	return settings;
+});
 wp.hooks.addFilter("editor.BlockEdit", "catpow/editor", (BlockEdit) => (props) => {
-	if (coreBlocksToAddPanel.has(props.name)) {
+	if (blockPanelSupports[props.name]) {
+		const panelSupports = blockPanelSupports[props.name];
 		return (
 			<>
 				<InspectorControls>
-					<CP.SelectClassPanel title={__("サイズ")} icon="pets" classKey="className" {...props} selectiveClasses={["level", "hasContentWidth"]} />
-					<CP.SelectClassPanel title={__("間隔・余白")} icon="pets" classKey="className" {...props} selectiveClasses={["hasMargin", "hasPadding"]} />
-					<CP.SelectClassPanel title={__("色")} icon="pets" classKey="className" {...props} selectiveClasses={["color", "colorScheme"]} />
-					<CP.SelectClassPanel title={__("ボーダー")} icon="pets" classKey="className" {...props} selectiveClasses={["hasBorder", "borderColor", "hasBorderRadius", "hasBorderImage"]} />
-					<CP.SelectClassPanel title={__("背景")} icon="pets" classKey="className" {...props} selectiveClasses={["backgroundColor", "backgroundPattern"]} />
-					<CP.SelectClassPanel title={__("影")} icon="pets" classKey="className" {...props} selectiveClasses={["boxShadow", "hasTextShadow"]} />
+					{panelSupports.style && <CP.SelectClassPanel title={__("スタイル")} icon="pets" classKey="className" {...props} selectiveClasses={blockStyleSelectiveClasses[props.name]} />}
+					{panelSupports.typography && (
+						<CP.SelectClassPanel title={__("文字")} icon="pets" classKey="className" {...props} selectiveClasses={["level", "hasFontWeight", "hasFontFamily", "hasTextShadow"]} />
+					)}
+					{panelSupports.color && <CP.SelectClassPanel title={__("色")} icon="pets" classKey="className" {...props} selectiveClasses={["color", "colorScheme"]} />}
+					{panelSupports.spacing &&
+						(panelSupports.background ? (
+							<>
+								<CP.SelectClassPanel title={__("サイズ・間隔・余白")} icon="pets" classKey="className" {...props} selectiveClasses={["hasContentWidth", "hasMargin", "hasPadding"]} />
+								<CP.SelectClassPanel title={__("背景")} icon="pets" classKey="className" {...props} selectiveClasses={["backgroundColor", "backgroundPattern"]} />
+								<CP.SelectClassPanel title={__("影")} icon="pets" classKey="className" {...props} selectiveClasses={["boxShadow"]} />
+								<CP.SelectClassPanel title={__("ボーダー")} icon="pets" classKey="className" {...props} selectiveClasses={["hasBorder", "borderColor", "hasBorderRadius", "hasBorderImage"]} />
+							</>
+						) : (
+							<>
+								<CP.SelectClassPanel title={__("サイズ・間隔")} icon="pets" classKey="className" {...props} selectiveClasses={["hasContentWidth", "hasMargin"]} />
+							</>
+						))}
 				</InspectorControls>
 				<BlockEdit {...props} />
 			</>
