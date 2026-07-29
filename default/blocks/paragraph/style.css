@@ -1,4 +1,4 @@
-.wp-block-paragraph.is-style-heading {
+.wp-block-paragraph:not(.has-margin).is-style-heading {
   margin: var(--cp-margin-t-h, 0);
 }
 .wp-block-paragraph.is-style-heading {
@@ -8,7 +8,7 @@
   line-height: var(--cp-line-height-t-h, 1.5);
   letter-spacing: var(--cp-letter-spacing-t-h, normal);
 }
-.wp-block-paragraph.is-style-lead {
+.wp-block-paragraph:not(.has-margin).is-style-lead {
   margin: var(--cp-margin-t-l, 0);
 }
 .wp-block-paragraph.is-style-lead {
@@ -18,7 +18,7 @@
   line-height: var(--cp-line-height-t-l, 1.5);
   letter-spacing: var(--cp-letter-spacing-t-l, normal);
 }
-.wp-block-paragraph.is-style-paragraph {
+.wp-block-paragraph:not(.has-margin).is-style-paragraph {
   margin: var(--cp-margin-t-p, 0);
 }
 .wp-block-paragraph.is-style-paragraph {
@@ -28,7 +28,7 @@
   line-height: var(--cp-line-height-t-p, 1.5);
   letter-spacing: var(--cp-letter-spacing-t-p, normal);
 }
-.wp-block-paragraph.is-style-caption {
+.wp-block-paragraph:not(.has-margin).is-style-caption {
   margin: var(--cp-margin-t-c, 0);
 }
 .wp-block-paragraph.is-style-caption {
@@ -45,10 +45,10 @@
 .wp-block-paragraph.has-regular-font-size, .editor-styles-wrapper .wp-block-paragraph.has-regular-font-size {
   font-size: var(--cp-font-size-t-p);
 }
-.wp-block-paragraph.is-style-heading:first-child, .wp-block-paragraph.is-style-lead:first-child, .wp-block-paragraph.is-style-paragraph:first-child, .wp-block-paragraph.is-style-caption:first-child {
+.wp-block-paragraph:not(.has-margin).is-style-heading:first-child, .wp-block-paragraph:not(.has-margin).is-style-lead:first-child, .wp-block-paragraph:not(.has-margin).is-style-paragraph:first-child, .wp-block-paragraph:not(.has-margin).is-style-caption:first-child {
   margin-top: 0px;
 }
-.wp-block-paragraph.is-style-heading:last-child, .wp-block-paragraph.is-style-lead:last-child, .wp-block-paragraph.is-style-paragraph:last-child, .wp-block-paragraph.is-style-caption:last-child {
+.wp-block-paragraph:not(.has-margin).is-style-heading:last-child, .wp-block-paragraph:not(.has-margin).is-style-lead:last-child, .wp-block-paragraph:not(.has-margin).is-style-paragraph:last-child, .wp-block-paragraph:not(.has-margin).is-style-caption:last-child {
   margin-bottom: 0px;
 }
 /*# sourceMappingURL=./style.css.map */
