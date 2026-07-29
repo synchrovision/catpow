@@ -1,7 +1,7 @@
 @import "admin_style_config.scss";
 
 .wp-block-catpow-picture{
-	@include bnd((mgi:a));
+	@include bnd((mgi:a,o:c));
 	&__picture{
 		&-img{
 			@include bnd((d:b,w:f,h:a,mgi:a));

@@ -1,5 +1,6 @@
 .wp-block-catpow-picture {
   margin-inline: auto;
+  overflow: clip;
 }
 .wp-block-catpow-picture__picture-img {
   display: block;
