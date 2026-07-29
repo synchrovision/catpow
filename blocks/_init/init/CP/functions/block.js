@@ -7,9 +7,10 @@
 	});
 };
 export const getClosestBlockAttributesComputed = (callback, block, itemKeys) => {
+	if (!block) return null;
 	const [itemsKey, index, subItemsKey, subIndex] = itemKeys || [];
-	if (itemsKey && block.attributes[itemsKey][index]) {
-		if (subItemsKey && block.attributes[itemsKey][index][subItemsKey][subIndex]) {
+	if (itemsKey && block?.attributes?.[itemsKey]?.[index]) {
+		if (subItemsKey && block.attributes[itemsKey][index]?.[subItemsKey]?.[subIndex]) {
 			const result = callback(block.attributes[itemsKey][index][subItemsKey][subIndex]);
 			if (result != null) return result;
 		}
