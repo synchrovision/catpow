@@ -35,7 +35,7 @@ const fontFamilyClasses = {
 	"has-font-family-english": "英数",
 	"has-font-family-code": "コード",
 	"has-font-family-decoration": "装飾",
-	"has-font-family-script": "手書き",
+	"has-font-family-script": "筆記",
 };
 const fontFamilyClassSet = new Set(Object.keys(fontFamilyClasses));
 
