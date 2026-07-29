@@ -57,7 +57,7 @@ export const selectiveClassesPresets = {
 		min: 1,
 		max: 20,
 	},
-	backgroundImage({ preset, vars = "vars", classKey, ...otherParams }) {
+	backgroundImage({ preset, classKey, vars = "vars", ...otherParams }) {
 		return {
 			name: "backgroundImage",
 			label: __("背景画像", "catpow"),
@@ -187,20 +187,22 @@ export const selectiveClassesPresets = {
 	},
 	hasIcon: { label: "アイコン", values: "hasIcon", sub: ["icon"] },
 	icon: { input: "icon", label: "アイコン" },
-	hasFontSize({ preset, vars = "vars", ...otherParams }) {
+	hasFontSize({ preset, classKey, vars = "vars", ...otherParams }) {
 		return {
 			name: "hasFontSize",
 			label: __("文字サイズ", "catpow"),
 			values: "hasFontSize",
-			sub: [{ preset: "fontSize", vars, label: null }],
+			classKey,
+			sub: [{ preset: "fontSize", classKey, vars, label: null }],
 			...otherParams,
 		};
 	},
-	fontSize({ preset, vars = "vars", ...otherParams }) {
+	fontSize({ preset, classKey, vars = "vars", ...otherParams }) {
 		return {
 			name: "fontSize",
 			type: "buttons",
 			label: __("文字サイズ", "catpow"),
+			classKey,
 			values: {
 				hasFontSizeXLarge: __("極大", "catpow"),
 				hasFontSizeLarge: __("大", "catpow"),
@@ -227,19 +229,20 @@ export const selectiveClassesPresets = {
 			},
 		};
 	},
-	hasFontWeight({ preset, vars = "vars", ...otherParams }) {
+	hasFontWeight({ preset, classKey, vars = "vars", ...otherParams }) {
 		return {
 			name: "hasFontWeight",
-			label: __("文字サイズ", "catpow"),
+			label: __("文字の太さ", "catpow"),
+			classKey,
 			values: "hasFontWeight",
-			sub: [{ preset: "fontWeight", vars, label: null }],
+			sub: [{ preset: "fontWeight", classKey, label: null }],
 			...otherParams,
 		};
 	},
 	fontWeight: {
 		name: "fontWeight",
 		type: "buttons",
-		label: __("文字ウェイト", "catpow"),
+		label: __("文字の太さ", "catpow"),
 		values: {
 			hasFontWeightLight: "L",
 			hasFontWeightRegular: "R",
@@ -322,20 +325,22 @@ export const selectiveClassesPresets = {
 			],
 		},
 	},
-	hasTextShadow({ preset, vars = "vars", ...otherParams }) {
+	hasTextShadow({ preset, classKey, vars = "vars", ...otherParams }) {
 		return {
 			name: "hasTextShadow",
 			label: __("文字影", "catpow"),
+			classKey,
 			values: "hasTextShadow",
 			sub: [{ preset: "textShadow", vars, label: null }],
 			...otherParams,
 		};
 	},
-	textShadow({ preset, vars = "vars", ...otherParams }) {
+	textShadow({ preset, classKey, vars = "vars", ...otherParams }) {
 		return {
 			name: "textShadow",
 			type: "buttons",
 			label: __("文字影", "catpow"),
+			classKey,
 			values: {
 				hasTextShadowSmall: __("小", "catpow"),
 				hasTextShadowMedium: __("中", "catpow"),
@@ -355,10 +360,11 @@ export const selectiveClassesPresets = {
 			...otherParams,
 		};
 	},
-	hasBorder({ preset, vars = "vars", ...otherParams }) {
+	hasBorder({ preset, classKey, vars = "vars", ...otherParams }) {
 		return {
 			name: "hasBorder",
 			label: __("枠線", "catpow"),
+			classKey,
 			values: "hasBorder",
 			sub: [{ preset: "borderWidth", vars, label: null }],
 			...otherParams,
@@ -374,11 +380,12 @@ export const selectiveClassesPresets = {
 			hasBorderColorAlt: __("強調", "catpow"),
 		},
 	},
-	borderWidth({ preset, vars = "vars", ...otherParams }) {
+	borderWidth({ preset, classKey, vars = "vars", ...otherParams }) {
 		return {
 			name: "borderWidth",
 			type: "buttons",
 			label: __("枠線", "catpow"),
+			classKey,
 			values: {
 				hasBorderWidthThin: __("細", "catpow"),
 				hasBorderWidthMedium: __("中", "catpow"),
@@ -404,20 +411,22 @@ export const selectiveClassesPresets = {
 			...otherParams,
 		};
 	},
-	hasBorderRadius({ preset, vars = "vars", ...otherParams }) {
+	hasBorderRadius({ preset, classKey, vars = "vars", ...otherParams }) {
 		return {
 			name: "hasBorderRadius",
 			label: __("角丸", "catpow"),
+			classKey,
 			values: "hasBorderRadius",
 			sub: [{ preset: "borderRadius", vars, label: null }],
 			...otherParams,
 		};
 	},
-	borderRadius({ preset, vars = "vars", ...otherParams }) {
+	borderRadius({ preset, classKey, vars = "vars", ...otherParams }) {
 		return {
 			name: "borderRadius",
 			type: "buttons",
 			label: __("角丸", "catpow"),
+			classKey,
 			values: {
 				hasBorderRadiusSmall: __("小", "catpow"),
 				hasBorderRadiusMedium: __("中", "catpow"),
@@ -532,12 +541,13 @@ export const selectiveClassesPresets = {
 			isSizeXsmall: __("極小", "catpow"),
 		},
 	},
-	itemSize({ preset, vars = "vars", ...otherParams }) {
+	itemSize({ preset, classKey, vars = "vars", ...otherParams }) {
 		return {
 			name: "itemSize",
 			type: "buttons",
 			label: __("アイテムサイズ", "catpow"),
 			required: true,
+			classKey,
 			values: {
 				hasItemSizeXSmall: __("極小", "catpow"),
 				hasItemSizeSmall: __("小", "catpow"),
@@ -569,10 +579,11 @@ export const selectiveClassesPresets = {
 			hasItemAlignRight: __("右", "catpow"),
 		},
 	},
-	hasItemGap({ preset, vars = "vars", ...otherParams }) {
+	hasItemGap({ preset, classKey, vars = "vars", ...otherParams }) {
 		return {
 			name: "hasItemGap",
 			label: __("アイテム間隔", "catpow"),
+			classKey,
 			values: "hasItemGap",
 			sub: [
 				{ preset: "itemGapBlock", vars },
@@ -612,11 +623,12 @@ export const selectiveClassesPresets = {
 			...otherParams,
 		};
 	},
-	itemGapInline({ preset, vars = "vars", ...otherParams }) {
+	itemGapInline({ preset, classKey, vars = "vars", ...otherParams }) {
 		return {
 			name: "itemGapInline",
 			type: "buttons",
 			label: __("横間隔", "catpow"),
+			classKey,
 			values: {
 				hasItemGapInlineXLarge: __("極大", "catpow"),
 				hasItemGapInlineLarge: __("大", "catpow"),
