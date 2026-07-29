@@ -2,7 +2,10 @@
 @import "text-placeholders.scss";
 @import "component-placeholders.scss";
 
-h1,h2,h3,h4,h5,h6{
+.wp-block-heading{
+	@extend %heading-block;
+	@extend %heading;
+	@include bnd((p:r));
 	&.is-style-header{
 		@extend %header-component;
 	}
@@ -19,35 +22,16 @@ h1,h2,h3,h4,h5,h6{
 	&.is-style-catch{
 		@include txt((c:mx));
 	}
-	&.is-style-header,
-	&.is-style-headline,
-	&.is-style-catch{
-		@extend %heading-block;
-		@extend %heading;
-		@include bnd((p:r));
-	}
 }
 h1,h2,h3{
-	&.is-style-header{
+	&.wp-block-heading.is-style-header{
 		@include bg((c:mx));
 		@include txt((c:ix));
 	}
 }
 h4,h5,h6{
-	&.is-style-header{
+	&.wp-block-heading.is-style-header{
 		@include bg((c:sx));
 		@include txt((c:tx));
-	}
-}
-
-@for $i from 1 through 6{
-	h#{$i}{
-		&.is-style-header,
-		&.is-style-headline,
-		&.is-style-catch{
-			--cp-heading-margin-top:var(--cp-size-hmgt-#{$i});
-			--cp-heading-margin-bottom:var(--cp-size-hmgb-#{$i});
-			@include txt((p:h- + $i));
-		}
 	}
 }
