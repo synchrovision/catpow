@@ -248,6 +248,29 @@ export const selectiveClassesPresets = {
 			hasFontWeightHeavy: "H",
 		},
 	},
+	hasFontFamily({ preset, classKey, vars = "vars", ...otherParams }) {
+		return {
+			name: "hasFontFamily",
+			label: __("フォント", "catpow"),
+			classKey,
+			values: "hasFontFamily",
+			sub: [{ preset: "fontFamily", classKey, label: null }],
+			...otherParams,
+		};
+	},
+	fontFamily: {
+		name: "fontFamily",
+		type: "gridbuttons",
+		label: __("フォント", "catpow"),
+		values: {
+			hasFontFamilyGothic: "ゴシック",
+			hasFontFamilyMincho: "明朝",
+			hasFontFamilyEnglish: "英数",
+			hasFontFamilyCode: "コード",
+			hasFontFamilyDecoration: "装飾",
+			hasFontFamilyScript: "筆記",
+		},
+	},
 	safeFontFamily: {
 		name: "safeFontFamily",
 		type: "buttons",
