@@ -8,7 +8,7 @@ wp.blocks.registerBlockType("catpow/rtf", {
 	icon: "editor-code",
 	category: "catpow",
 	attributes: {
-		classes: { type: "string", default: "" },
+		classes: { type: "string", source: "attribute", attribute: "class", default: "wp-block-catpow-rtf" },
 		level: { type: "number", default: 3 },
 		vars: { type: "object", default: [] },
 		text: { type: "string", default: "■ 見出し\n\nテキスト[リンク](example.com)**強調**" },
@@ -28,16 +28,16 @@ wp.blocks.registerBlockType("catpow/rtf", {
 		return (
 			<>
 				<div {...useBlockProps()}>
-					<CP.RTF.Edit className={"wp-block-catpow-rtf" + classes} level={level} set={setAttributes} attr={attributes} isSelected={isSelected} style={vars} />
+					<CP.RTF.Edit className={classes} level={level} {...{ setAttributes, attributes }} isSelected={isSelected} style={vars} />
 				</div>
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 				</InspectorControls>
 			</>
 		);
 	},
 	save({ attributes }) {
 		const { classes, vars, level } = attributes;
-		return <CP.RTF className={classes} level={level} attr={attributes} style={vars} />;
+		return <CP.RTF className={classes} level={level} {...{ attributes }} style={vars} />;
 	},
 });

@@ -6,7 +6,7 @@
     icon: "editor-code",
     category: "catpow",
     attributes: {
-      classes: { type: "string", default: "" },
+      classes: { type: "string", source: "attribute", attribute: "class", default: "wp-block-catpow-rtf" },
       level: { type: "number", default: 3 },
       vars: { type: "object", default: [] },
       text: { type: "string", default: "\u25A0 \u898B\u51FA\u3057\n\n\u30C6\u30AD\u30B9\u30C8[\u30EA\u30F3\u30AF](example.com)**\u5F37\u8ABF**" }
@@ -21,11 +21,11 @@
         wp.hooks.applyFilters("catpow.blocks.rtf.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps() }, /* @__PURE__ */ wp.element.createElement(CP.RTF.Edit, { className: "wp-block-catpow-rtf" + classes, level, set: setAttributes, attr: attributes, isSelected, style: vars })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", set: setAttributes, attr: attributes, selectiveClasses })));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps() }, /* @__PURE__ */ wp.element.createElement(CP.RTF.Edit, { className: classes, level, ...{ setAttributes, attributes }, isSelected, style: vars })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", ...{ setAttributes, attributes }, selectiveClasses })));
     },
     save({ attributes }) {
       const { classes, vars, level } = attributes;
-      return /* @__PURE__ */ wp.element.createElement(CP.RTF, { className: classes, level, attr: attributes, style: vars });
+      return /* @__PURE__ */ wp.element.createElement(CP.RTF, { className: classes, level, ...{ attributes }, style: vars });
     }
   });
 })();
