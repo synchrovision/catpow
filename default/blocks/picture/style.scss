@@ -7,4 +7,9 @@
 			@include bnd((d:b,w:f,h:a,mgi:a));
 		}
 	}
+	&.is-template{
+		img{
+			@include bnd((d:b,w:f,h:a,mgi:a));
+		}
+	}
 }
