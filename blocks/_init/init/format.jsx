@@ -13,6 +13,14 @@ const textColorClasses = {
 };
 const textColorClassSet = new Set(Object.keys(textColorClasses));
 
+const textEffectClasses = {
+	"has-text-effect-glow": "光彩",
+	"has-text-effect-stroke": "袋",
+	"has-text-effect-double-stroke": "二重袋",
+	"has-text-effect-emboss": "立体",
+};
+const textEffectClassSet = new Set(Object.keys(textEffectClasses));
+
 const fontSizeClasses = {
 	"has-font-size-relative-x-small": "極小",
 	"has-font-size-relative-small": "小",
@@ -671,6 +679,13 @@ wp.richText.registerFormatType("catpow/compose", {
 											onChange={(targetClass) => setAttributes({ classes: toggleClass(activeAttributes.classes, targetClass, textColorClassSet) })}
 											selected={getClassInSet(activeAttributes.classes, textColorClassSet)}
 											options={CP.parseSelections(textColorClasses).options}
+										/>
+									</BaseControl>
+									<BaseControl label="効果">
+										<CP.SelectButtons
+											onChange={(targetClass) => setAttributes({ classes: toggleClass(activeAttributes.classes, targetClass, textEffectClassSet) })}
+											selected={getClassInSet(activeAttributes.classes, textEffectClassSet)}
+											options={CP.parseSelections(textEffectClasses).options}
 										/>
 									</BaseControl>
 									<BaseControl>

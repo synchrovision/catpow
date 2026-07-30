@@ -5809,17 +5809,27 @@
         hasTextAlignRight: __13("\u53F3\u63C3\u3048", "catpow")
       }
     },
-    textRole: {
-      name: "textRole",
+    hasTextType({ preset, classKey, vars = "vars", ...otherParams }) {
+      return {
+        name: "hasTextType",
+        label: __13("\u30C6\u30AD\u30B9\u30C8\u30BF\u30A4\u30D7", "catpow"),
+        classKey,
+        values: "hasTextType",
+        sub: [{ preset: "textType", label: null }],
+        ...otherParams
+      };
+    },
+    textType: {
+      name: "textType",
       type: "buttons",
-      label: __13("\u30C6\u30AD\u30B9\u30C8\u5F62\u5F0F", "catpow"),
+      label: __13("\u30C6\u30AD\u30B9\u30C8\u30BF\u30A4\u30D7", "catpow"),
       required: true,
       values: {
-        hasTextRoleHeading: __13("\u898B\u51FA\u3057", "catpow"),
-        hasTextRoleLead: __13("\u30EA\u30FC\u30C9", "catpow"),
-        hasTextRoleParagraph: __13("\u672C\u6587", "catpow"),
-        hasTextRoleUi: __13("UI", "catpow"),
-        hasTextRoleCaption: __13("\u6CE8\u91C8", "catpow")
+        hasTextTypeHeading: __13("\u898B\u51FA\u3057", "catpow"),
+        hasTextTypeLead: __13("\u30EA\u30FC\u30C9", "catpow"),
+        hasTextTypeParagraph: __13("\u672C\u6587", "catpow"),
+        hasTextTypeUi: __13("UI", "catpow"),
+        hasTextTypeCaption: __13("\u6CE8\u91C8", "catpow")
       }
     },
     verticalAlign: {
@@ -6002,18 +6012,7 @@
         values: {
           hasTextShadowSmall: __13("\u5C0F", "catpow"),
           hasTextShadowMedium: __13("\u4E2D", "catpow"),
-          hasTextShadowLarge: __13("\u5927", "catpow"),
-          hasTextShadowCustom: ":admin-generic:"
-        },
-        sub: {
-          hasTextShadowCustom: [
-            {
-              name: "textShadow",
-              input: "text",
-              vars,
-              key: "--cp-text-shadow-custom"
-            }
-          ]
+          hasTextShadowLarge: __13("\u5927", "catpow")
         },
         ...otherParams
       };
@@ -6164,6 +6163,16 @@
       };
     },
     level: { name: "level", type: "buttons", label: __13("\u30EC\u30D9\u30EB", "catpow"), values: { isLevel1: "1", isLevel2: "2", isLevel3: "3", isLevel4: "4", isLevel5: "5", isLevel6: "6" } },
+    hasHeadingType({ preset, classKey, vars = "vars", ...otherParams }) {
+      return {
+        name: "hasHeadingType",
+        label: __13("\u898B\u51FA\u3057\u30BF\u30A4\u30D7", "catpow"),
+        classKey,
+        values: "hasBorderRadius",
+        sub: [{ preset: "headingType", label: null }],
+        ...otherParams
+      };
+    },
     headingType: {
       name: "headingType",
       type: "buttons",
@@ -8006,19 +8015,10 @@
   var { InspectorControls } = wp.blockEditor;
   var { PanelBody } = wp.components;
   var blockStyleSelectiveClasses = {
-    "core/heading": [{ type: "buttons", values: { isStyleHeader: __14("\u30D8\u30C3\u30C0", "catpow"), isStyleHeadline: __14("\u30D8\u30C3\u30C9\u30E9\u30A4\u30F3", "catpow"), isStyleCatch: __14("\u30AD\u30E3\u30C3\u30C1", "catpow") } }],
-    "core/paragraph": [
-      {
-        type: "gridbuttons",
-        values: {
-          isStyleHeading: __14("\u898B\u51FA\u3057", "catpow"),
-          isStyleLead: __14("\u30EA\u30FC\u30C9", "catpow"),
-          isStyleParagraph: __14("\u672C\u6587", "catpow"),
-          isStyleCaption: __14("\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3", "catpow")
-        }
-      }
-    ],
+    "core/heading": ["hasHeadingType"],
+    "core/paragraph": ["hasTextType"],
     "core/list": [
+      "hasTextType",
       {
         type: "gridbuttons",
         values: {
@@ -8160,6 +8160,13 @@
     "has-text-color-gradient": "\u30B0\u30E9\u30C7\u30FC\u30B7\u30E7\u30F3"
   };
   var textColorClassSet = new Set(Object.keys(textColorClasses));
+  var textEffectClasses = {
+    "has-text-effect-glow": "\u5149\u5F69",
+    "has-text-effect-stroke": "\u888B",
+    "has-text-effect-double-stroke": "\u4E8C\u91CD\u888B",
+    "has-text-effect-emboss": "\u7ACB\u4F53"
+  };
+  var textEffectClassSet = new Set(Object.keys(textEffectClasses));
   var fontSizeClasses = {
     "has-font-size-relative-x-small": "\u6975\u5C0F",
     "has-font-size-relative-small": "\u5C0F",
@@ -8566,6 +8573,13 @@
           onChange: (targetClass) => setAttributes({ classes: toggleClass2(activeAttributes.classes, targetClass, textColorClassSet) }),
           selected: getClassInSet(activeAttributes.classes, textColorClassSet),
           options: CP.parseSelections(textColorClasses).options
+        }
+      )), /* @__PURE__ */ wp.element.createElement(BaseControl, { label: "\u52B9\u679C" }, /* @__PURE__ */ wp.element.createElement(
+        CP.SelectButtons,
+        {
+          onChange: (targetClass) => setAttributes({ classes: toggleClass2(activeAttributes.classes, targetClass, textEffectClassSet) }),
+          selected: getClassInSet(activeAttributes.classes, textEffectClassSet),
+          options: CP.parseSelections(textEffectClasses).options
         }
       )), /* @__PURE__ */ wp.element.createElement(BaseControl, null, /* @__PURE__ */ wp.element.createElement(Catpow.SelectColorToneClass, { onChange: ({ classes }) => setAttributes({ classes }), selected: activeAttributes.classes })), /* @__PURE__ */ wp.element.createElement(BaseControl, { label: "\u30D5\u30A9\u30F3\u30C8" }, /* @__PURE__ */ wp.element.createElement(
         CP.SelectButtons,
