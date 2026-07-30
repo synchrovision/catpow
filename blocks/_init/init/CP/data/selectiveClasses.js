@@ -151,17 +151,27 @@ export const selectiveClassesPresets = {
 			hasTextAlignRight: __("右揃え", "catpow"),
 		},
 	},
-	textRole: {
-		name: "textRole",
+	hasTextType({ preset, classKey, vars = "vars", ...otherParams }) {
+		return {
+			name: "hasTextType",
+			label: __("テキストタイプ", "catpow"),
+			classKey,
+			values: "hasTextType",
+			sub: [{ preset: "textType", label: null }],
+			...otherParams,
+		};
+	},
+	textType: {
+		name: "textType",
 		type: "buttons",
-		label: __("テキスト形式", "catpow"),
+		label: __("テキストタイプ", "catpow"),
 		required: true,
 		values: {
-			hasTextRoleHeading: __("見出し", "catpow"),
-			hasTextRoleLead: __("リード", "catpow"),
-			hasTextRoleParagraph: __("本文", "catpow"),
-			hasTextRoleUi: __("UI", "catpow"),
-			hasTextRoleCaption: __("注釈", "catpow"),
+			hasTextTypeHeading: __("見出し", "catpow"),
+			hasTextTypeLead: __("リード", "catpow"),
+			hasTextTypeParagraph: __("本文", "catpow"),
+			hasTextTypeUi: __("UI", "catpow"),
+			hasTextTypeCaption: __("注釈", "catpow"),
 		},
 	},
 	verticalAlign: {
@@ -345,17 +355,6 @@ export const selectiveClassesPresets = {
 				hasTextShadowSmall: __("小", "catpow"),
 				hasTextShadowMedium: __("中", "catpow"),
 				hasTextShadowLarge: __("大", "catpow"),
-				hasTextShadowCustom: ":admin-generic:",
-			},
-			sub: {
-				hasTextShadowCustom: [
-					{
-						name: "textShadow",
-						input: "text",
-						vars,
-						key: "--cp-text-shadow-custom",
-					},
-				],
 			},
 			...otherParams,
 		};
@@ -506,6 +505,16 @@ export const selectiveClassesPresets = {
 		};
 	},
 	level: { name: "level", type: "buttons", label: __("レベル", "catpow"), values: { isLevel1: "1", isLevel2: "2", isLevel3: "3", isLevel4: "4", isLevel5: "5", isLevel6: "6" } },
+	hasHeadingType({ preset, classKey, vars = "vars", ...otherParams }) {
+		return {
+			name: "hasHeadingType",
+			label: __("見出しタイプ", "catpow"),
+			classKey,
+			values: "hasBorderRadius",
+			sub: [{ preset: "headingType", label: null }],
+			...otherParams,
+		};
+	},
 	headingType: {
 		name: "headingType",
 		type: "buttons",
