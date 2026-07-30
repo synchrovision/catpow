@@ -3,19 +3,10 @@ const { InspectorControls } = wp.blockEditor;
 const { PanelBody } = wp.components;
 
 const blockStyleSelectiveClasses = {
-	"core/heading": [{ type: "buttons", values: { isStyleHeader: __("ヘッダ", "catpow"), isStyleHeadline: __("ヘッドライン", "catpow"), isStyleCatch: __("キャッチ", "catpow") } }],
-	"core/paragraph": [
-		{
-			type: "gridbuttons",
-			values: {
-				isStyleHeading: __("見出し", "catpow"),
-				isStyleLead: __("リード", "catpow"),
-				isStyleParagraph: __("本文", "catpow"),
-				isStyleCaption: __("キャプション", "catpow"),
-			},
-		},
-	],
+	"core/heading": ["hasHeadingType"],
+	"core/paragraph": ["hasTextType"],
 	"core/list": [
+		"hasTextType",
 		{
 			type: "gridbuttons",
 			values: {
