@@ -252,6 +252,7 @@ export const resolveSelectiveClassesPresets = (prms) => {
 	if (prms == null) {
 		return [];
 	}
+	prms = prms.filter((prm) => !!prm);
 	prms.forEach((prm, index) => {
 		if (typeof prm === "string" && CP.selectiveClassesPresets.hasOwnProperty(prm)) {
 			prms[index] = prm = { preset: prm };

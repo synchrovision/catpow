@@ -64,14 +64,14 @@ export const SelectClassPanel = (props) => {
 			}
 		};
 		const classKeyFlags = {};
-		if (Array.isArray(props?.selectiveClasses)) {
-			props.selectiveClasses.forEach((prm) => addClassKeyFlagsInPrm(prm, classKeyFlags));
+		if (Array.isArray(selectiveClasses)) {
+			selectiveClasses.forEach((prm) => addClassKeyFlagsInPrm(prm, classKeyFlags));
 		}
 		Object.keys(classKeyFlags).forEach((classKey) => {
 			allStates[classKey] = CP.classNamesToFlags(item?.[classKey]);
 		});
 		return allStates;
-	}, [props.selectiveClasses, item, states, primaryClassKey]);
+	}, [selectiveClasses, item, states, primaryClassKey]);
 	const save = useCallback(
 		(data) => {
 			if (itemKeys) {
