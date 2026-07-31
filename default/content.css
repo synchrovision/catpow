@@ -1,34 +1,34 @@
 @charset "UTF-8";
 @import url("https://fonts.googleapis.com/css?family=Staatliches&subset=latin-ext");
-:root .has-text-role-heading {
+:root .has-text-type-heading, :root .has-text-type.has-text-type-heading {
   font-family: var(--cp-font-family-t-h, inherit);
   font-size: var(--cp-font-size-t-h, 2em);
   font-weight: var(--cp-font-weight-t-h, regular);
   line-height: var(--cp-line-height-t-h, 1.5);
   letter-spacing: var(--cp-letter-spacing-t-h, normal);
 }
-:root .has-text-role-lead {
+:root .has-text-type-lead, :root .has-text-type.has-text-type-lead {
   font-family: var(--cp-font-family-t-l, inherit);
   font-size: var(--cp-font-size-t-l, 2em);
   font-weight: var(--cp-font-weight-t-l, regular);
   line-height: var(--cp-line-height-t-l, 1.5);
   letter-spacing: var(--cp-letter-spacing-t-l, normal);
 }
-:root .has-text-role-paragraph {
+:root .has-text-type-paragraph, :root .has-text-type.has-text-type-paragraph {
   font-family: var(--cp-font-family-t-p, inherit);
   font-size: var(--cp-font-size-t-p, 2em);
   font-weight: var(--cp-font-weight-t-p, regular);
   line-height: var(--cp-line-height-t-p, 1.5);
   letter-spacing: var(--cp-letter-spacing-t-p, normal);
 }
-:root .has-text-role-ui {
+:root .has-text-type-ui, :root .has-text-type.has-text-type-ui {
   font-family: var(--cp-font-family-t-u, inherit);
   font-size: var(--cp-font-size-t-u, 2em);
   font-weight: var(--cp-font-weight-t-u, regular);
   line-height: var(--cp-line-height-t-u, 1.5);
   letter-spacing: var(--cp-letter-spacing-t-u, normal);
 }
-:root .has-text-role-caption {
+:root .has-text-type-caption, :root .has-text-type.has-text-type-caption {
   font-family: var(--cp-font-family-t-c, inherit);
   font-size: var(--cp-font-size-t-c, 2em);
   font-weight: var(--cp-font-weight-t-c, regular);
@@ -53,29 +53,14 @@
 :root .has-box-shadow-large {
   box-shadow: var(--cp-shadow-s-ol) oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
-:root .has-text-shadow {
-  text-shadow: var(--cp-text-shadow) oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
-  --cp-text-shadow:var(--cp-text-shadow-offset-x,0) var(--cp-text-shadow-offset-y,0) var(--cp-text-shadow-blur,0) var(--cp-color-shd,rgba(0,0,0,.2));
-}
 :root .has-text-shadow-small {
-  --cp-text-shadow-offset-x-small:var(--cp-text-shadow-offset-x-small,0.1em);
-  --cp-text-shadow-offset-y-small:var(--cp-text-shadow-offset-y-small,0.1em);
-  --cp-text-shadow-blur-small:var(--cp-text-shadow-blur-small,0.05em);
+  text-shadow: var(--cp-shadow-s-os-ns) oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
 :root .has-text-shadow-medium {
-  --cp-text-shadow-offset-x-medium:var(--cp-text-shadow-offset-x-medium,0.2em);
-  --cp-text-shadow-offset-y-medium:var(--cp-text-shadow-offset-y-medium,0.2em);
-  --cp-text-shadow-blur-medium:var(--cp-text-shadow-blur-medium,0.1em);
+  text-shadow: var(--cp-shadow-s-om-ns) oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
 :root .has-text-shadow-large {
-  --cp-text-shadow-offset-x-large:var(--cp-text-shadow-offset-x-large,0.4em);
-  --cp-text-shadow-offset-y-large:var(--cp-text-shadow-offset-y-large,0.4em);
-  --cp-text-shadow-blur-large:var(--cp-text-shadow-blur-large,0.2em);
-}
-:root .has-text-shadow-custom {
-  --cp-text-shadow-offset-x-custom:var(--cp-text-shadow-offset-x-custom,0.2em);
-  --cp-text-shadow-offset-y-custom:var(--cp-text-shadow-offset-y-custom,0.2em);
-  --cp-text-shadow-blur-custom:var(--cp-text-shadow-blur-custom,0.1em);
+  text-shadow: var(--cp-shadow-s-ol-ns) oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
 :root .has-padding {
   --cp-padding:var(--cp-padding-top,0) var(--cp-padding-inline,0) var(--cp-padding-bottom,0);
@@ -421,19 +406,19 @@
 :root .has-font-weight {
   font-weight: var(--cp-font-weight);
 }
-:root .has-font-weight-x-light {
+:root .has-font-weight-x-light, :root .has-font-weight.has-font-weight-x-light {
   --cp-font-weight:var(--cp-font-weight-s-xl);
 }
-:root .has-font-weight-light {
+:root .has-font-weight-light, :root .has-font-weight.has-font-weight-light {
   --cp-font-weight:var(--cp-font-weight-s-l);
 }
-:root .has-font-weight-regular {
+:root .has-font-weight-regular, :root .has-font-weight.has-font-weight-regular {
   --cp-font-weight:var(--cp-font-weight-s-r);
 }
-:root .has-font-weight-bold {
+:root .has-font-weight-bold, :root .has-font-weight.has-font-weight-bold {
   --cp-font-weight:var(--cp-font-weight-s-b);
 }
-:root .has-font-weight-x-bold {
+:root .has-font-weight-x-bold, :root .has-font-weight.has-font-weight-x-bold {
   --cp-font-weight:var(--cp-font-weight-s-xb);
 }
 :root .has-border {
@@ -470,15 +455,6 @@
 :root .has-border-style-groove {
   --cp-border-style:$value;
 }
-:root .has-border-color {
-  border-color: oklch(var(--cp-tones-lx-l) var(--cp-tones-lx-c) var(--cp-tones-lx-h) / var(--cp-tones-lx-a,1));
-}
-:root .has-border-color-none {
-  border-color: transparent;
-}
-:root .has-border-color-alt {
-  border-color: oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1));
-}
 :root .has-border-radius {
   border-radius: var(--cp-border-radius, 1rem);
 }
@@ -499,6 +475,15 @@
 }
 :root .has-border-radius-custom {
   --cp-border-radius:var(--cp-border-radius-custom);
+}
+:root .has-border-color {
+  border-color: oklch(var(--cp-tones-lx-l) var(--cp-tones-lx-c) var(--cp-tones-lx-h) / var(--cp-tones-lx-a,1));
+}
+:root .has-border-color-none {
+  border-color: transparent;
+}
+:root .has-border-color-alt {
+  border-color: oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1));
 }
 :root .has-border-image {
   border-style: solid;
@@ -546,7 +531,6 @@
   --cp-item-gap-inline:var(--cp-item-gap-inline-custom);
 }
 :root .is-level1 {
-  font-size: var(--cp-font-size-t-p-1);
   --cp-padding-b:var(--cp-padding-b-1);
   --cp-margin-b:var(--cp-margin-b-1);
   --cp-padding-f:var(--cp-padding-f-1);
@@ -563,7 +547,6 @@
   --cp-font-size-t-c:var(--cp-font-size-t-c-1,2rem);
 }
 :root .is-level2 {
-  font-size: var(--cp-font-size-t-p-2);
   --cp-padding-b:var(--cp-padding-b-2);
   --cp-margin-b:var(--cp-margin-b-2);
   --cp-padding-f:var(--cp-padding-f-2);
@@ -580,7 +563,6 @@
   --cp-font-size-t-c:var(--cp-font-size-t-c-2,1.5rem);
 }
 :root .is-level3 {
-  font-size: var(--cp-font-size-t-p-3);
   --cp-padding-b:var(--cp-padding-b-3);
   --cp-margin-b:var(--cp-margin-b-3);
   --cp-padding-f:var(--cp-padding-f-3);
@@ -597,7 +579,6 @@
   --cp-font-size-t-c:var(--cp-font-size-t-c-3,1.25rem);
 }
 :root .is-level4 {
-  font-size: var(--cp-font-size-t-p-4);
   --cp-padding-b:var(--cp-padding-b-4);
   --cp-margin-b:var(--cp-margin-b-4);
   --cp-padding-f:var(--cp-padding-f-4);
@@ -614,7 +595,6 @@
   --cp-font-size-t-c:var(--cp-font-size-t-c-4,1rem);
 }
 :root .is-level5 {
-  font-size: var(--cp-font-size-t-p-5);
   --cp-padding-b:var(--cp-padding-b-5);
   --cp-margin-b:var(--cp-margin-b-5);
   --cp-padding-f:var(--cp-padding-f-5);
@@ -631,7 +611,6 @@
   --cp-font-size-t-c:var(--cp-font-size-t-c-5,0.875rem);
 }
 :root .is-level6 {
-  font-size: var(--cp-font-size-t-p-6);
   --cp-padding-b:var(--cp-padding-b-6);
   --cp-margin-b:var(--cp-margin-b-6);
   --cp-padding-f:var(--cp-padding-f-6);
@@ -665,6 +644,26 @@
   -moz-background-clip: text;
   -ms-background-clip: text;
   background-clip: text;
+}
+:root .has-text-effect-glow {
+  text-shadow: none;
+  -webkit-filter: drop-shadow(0 0 0.05em oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(0 0 0.2em oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1)));
+  filter: drop-shadow(0 0 0.05em oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(0 0 0.2em oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1)));
+}
+:root .has-text-effect-stroke {
+  text-shadow: none;
+  -webkit-filter: drop-shadow(calc(sin(0deg) * 0.05em) calc(cos(0deg) * 0.05em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(45deg) * 0.05em) calc(cos(45deg) * 0.05em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(90deg) * 0.05em) calc(cos(90deg) * 0.05em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(135deg) * 0.05em) calc(cos(135deg) * 0.05em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(180deg) * 0.05em) calc(cos(180deg) * 0.05em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(225deg) * 0.05em) calc(cos(225deg) * 0.05em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(270deg) * 0.05em) calc(cos(270deg) * 0.05em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(315deg) * 0.05em) calc(cos(315deg) * 0.05em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1)));
+  filter: drop-shadow(calc(sin(0deg) * 0.05em) calc(cos(0deg) * 0.05em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(45deg) * 0.05em) calc(cos(45deg) * 0.05em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(90deg) * 0.05em) calc(cos(90deg) * 0.05em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(135deg) * 0.05em) calc(cos(135deg) * 0.05em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(180deg) * 0.05em) calc(cos(180deg) * 0.05em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(225deg) * 0.05em) calc(cos(225deg) * 0.05em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(270deg) * 0.05em) calc(cos(270deg) * 0.05em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(315deg) * 0.05em) calc(cos(315deg) * 0.05em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1)));
+}
+:root .has-text-effect-double-stroke {
+  text-shadow: none;
+  -webkit-filter: drop-shadow(calc(sin(0deg) * 0.05em) calc(cos(0deg) * 0.05em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(45deg) * 0.05em) calc(cos(45deg) * 0.05em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(90deg) * 0.05em) calc(cos(90deg) * 0.05em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(135deg) * 0.05em) calc(cos(135deg) * 0.05em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(180deg) * 0.05em) calc(cos(180deg) * 0.05em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(225deg) * 0.05em) calc(cos(225deg) * 0.05em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(270deg) * 0.05em) calc(cos(270deg) * 0.05em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(315deg) * 0.05em) calc(cos(315deg) * 0.05em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(0deg) * 0.05em) calc(cos(0deg) * 0.05em) oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1))) drop-shadow(calc(sin(45deg) * 0.05em) calc(cos(45deg) * 0.05em) oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1))) drop-shadow(calc(sin(90deg) * 0.05em) calc(cos(90deg) * 0.05em) oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1))) drop-shadow(calc(sin(135deg) * 0.05em) calc(cos(135deg) * 0.05em) oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1))) drop-shadow(calc(sin(180deg) * 0.05em) calc(cos(180deg) * 0.05em) oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1))) drop-shadow(calc(sin(225deg) * 0.05em) calc(cos(225deg) * 0.05em) oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1))) drop-shadow(calc(sin(270deg) * 0.05em) calc(cos(270deg) * 0.05em) oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1))) drop-shadow(calc(sin(315deg) * 0.05em) calc(cos(315deg) * 0.05em) oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1)));
+  filter: drop-shadow(calc(sin(0deg) * 0.05em) calc(cos(0deg) * 0.05em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(45deg) * 0.05em) calc(cos(45deg) * 0.05em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(90deg) * 0.05em) calc(cos(90deg) * 0.05em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(135deg) * 0.05em) calc(cos(135deg) * 0.05em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(180deg) * 0.05em) calc(cos(180deg) * 0.05em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(225deg) * 0.05em) calc(cos(225deg) * 0.05em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(270deg) * 0.05em) calc(cos(270deg) * 0.05em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(315deg) * 0.05em) calc(cos(315deg) * 0.05em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(0deg) * 0.05em) calc(cos(0deg) * 0.05em) oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1))) drop-shadow(calc(sin(45deg) * 0.05em) calc(cos(45deg) * 0.05em) oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1))) drop-shadow(calc(sin(90deg) * 0.05em) calc(cos(90deg) * 0.05em) oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1))) drop-shadow(calc(sin(135deg) * 0.05em) calc(cos(135deg) * 0.05em) oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1))) drop-shadow(calc(sin(180deg) * 0.05em) calc(cos(180deg) * 0.05em) oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1))) drop-shadow(calc(sin(225deg) * 0.05em) calc(cos(225deg) * 0.05em) oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1))) drop-shadow(calc(sin(270deg) * 0.05em) calc(cos(270deg) * 0.05em) oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1))) drop-shadow(calc(sin(315deg) * 0.05em) calc(cos(315deg) * 0.05em) oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1)));
+}
+:root .has-text-effect-emboss {
+  text-shadow: none;
+  -webkit-filter: drop-shadow(0.05em 0.05em 0.05em oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1))) drop-shadow(-0.05em -0.05em 0.05em oklch(var(--cp-tones-lst-l) var(--cp-tones-lst-c) var(--cp-tones-lst-h) / var(--cp-tones-lst-a,1)));
+  filter: drop-shadow(0.05em 0.05em 0.05em oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1))) drop-shadow(-0.05em -0.05em 0.05em oklch(var(--cp-tones-lst-l) var(--cp-tones-lst-c) var(--cp-tones-lst-h) / var(--cp-tones-lst-a,1)));
 }
 :root .has-font-size-relative-x-small {
   font-size: var(--cp-font-size-r-xs);
@@ -732,7 +731,7 @@
 :root .has-text-align-right {
   text-align: right;
 }
-:root .has-font-family-gohic {
+:root .has-font-family-gothic {
   font-family: var(--cp-font-family-f-g);
 }
 :root .has-font-family-mincho {
@@ -791,41 +790,53 @@
 :root .has-background-color-alt {
   background-color: oklch(var(--cp-tones-sx-l) var(--cp-tones-sx-c) var(--cp-tones-sx-h) / var(--cp-tones-sx-a,1));
 }
+.cp-meta-item.is-multiple > .cp-meta-item-unit {
+  padding: var(--cp-padding-c-c);
+  border-width: var(--cp-border-width-c-c, 0);
+  border-radius: var(--cp-border-radius-c-c, 0);
+  box-shadow: var(--cp-shadow-c-c) oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
+}
 .cp-rtf-tag {
   padding: var(--cp-padding-c-l);
   border-width: var(--cp-border-width-c-l, 0);
   border-radius: var(--cp-border-radius-c-l, 0);
   box-shadow: var(--cp-shadow-c-l) oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
-:root .has-text-role-heading {
+.cp-meta-item-unit-input.is-input-type-text, .cp-meta-item-unit-input.is-type-number {
+  padding: var(--cp-padding-c-i);
+  border-width: var(--cp-border-width-c-i, 0);
+  border-radius: var(--cp-border-radius-c-i, 0);
+  box-shadow: var(--cp-shadow-c-i) oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
+}
+:root .has-text-type-heading, :root .has-text-type.has-text-type-heading {
   font-family: var(--cp-font-family-t-h, inherit);
   font-size: var(--cp-font-size-t-h, 2em);
   font-weight: var(--cp-font-weight-t-h, regular);
   line-height: var(--cp-line-height-t-h, 1.5);
   letter-spacing: var(--cp-letter-spacing-t-h, normal);
 }
-:root .has-text-role-lead {
+:root .has-text-type-lead, :root .has-text-type.has-text-type-lead {
   font-family: var(--cp-font-family-t-l, inherit);
   font-size: var(--cp-font-size-t-l, 2em);
   font-weight: var(--cp-font-weight-t-l, regular);
   line-height: var(--cp-line-height-t-l, 1.5);
   letter-spacing: var(--cp-letter-spacing-t-l, normal);
 }
-:root .has-text-role-paragraph {
+:root .has-text-type-paragraph, :root .has-text-type.has-text-type-paragraph {
   font-family: var(--cp-font-family-t-p, inherit);
   font-size: var(--cp-font-size-t-p, 2em);
   font-weight: var(--cp-font-weight-t-p, regular);
   line-height: var(--cp-line-height-t-p, 1.5);
   letter-spacing: var(--cp-letter-spacing-t-p, normal);
 }
-:root .has-text-role-ui {
+:root .has-text-type-ui, :root .has-text-type.has-text-type-ui {
   font-family: var(--cp-font-family-t-u, inherit);
   font-size: var(--cp-font-size-t-u, 2em);
   font-weight: var(--cp-font-weight-t-u, regular);
   line-height: var(--cp-line-height-t-u, 1.5);
   letter-spacing: var(--cp-letter-spacing-t-u, normal);
 }
-:root .has-text-role-caption {
+:root .has-text-type-caption, :root .has-text-type.has-text-type-caption {
   font-family: var(--cp-font-family-t-c, inherit);
   font-size: var(--cp-font-size-t-c, 2em);
   font-weight: var(--cp-font-weight-t-c, regular);
@@ -3110,16 +3121,15 @@ html {
 .cp-meta-item.is-layout-inline {
   display: inline-block;
 }
-.cp-meta-item.is-multiple .cp-meta-item-unit {
-  position: relative;
-  margin: 0.3125rem;
-  padding: 0.625rem;
-  background-color: oklch(calc(1 - var(--cp-tones-mx-t) * 100) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / calc(var(--cp-tones-mx-a,1) * 0));
-  -webkit-transition: 0.5s;
-  transition: 0.5s;
-  opacity: 1;
+.cp-meta-item.is-multiple {
+  display: -webkit-grid;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr;
+  grid-template-columns: 1fr;
+  grid-gap: var(--cp-margin-c-c);
 }
-.cp-meta-item.is-multiple .cp-meta-item-unit .multiple-input-buttons {
+.cp-meta-item.is-multiple > .cp-meta-item-unit .multiple-input-buttons {
   position: absolute;
   top: -0.625rem;
   right: 0rem;
@@ -3129,7 +3139,7 @@ html {
   transform: -webkit- translateY(0.625rem);
   transform: translateY(0.625rem);
 }
-.cp-meta-item.is-multiple .cp-meta-item-unit .multiple-input-buttons .btn-inc, .cp-meta-item.is-multiple .cp-meta-item-unit .multiple-input-buttons .btn-dec {
+.cp-meta-item.is-multiple > .cp-meta-item-unit .multiple-input-buttons .btn-inc, .cp-meta-item.is-multiple > .cp-meta-item-unit .multiple-input-buttons .btn-dec {
   display: inline-block;
   width: 0.625rem;
   height: 0.625rem;
@@ -3146,20 +3156,20 @@ html {
   transition: 0.5s;
   cursor: pointer;
 }
-.cp-meta-item.is-multiple .cp-meta-item-unit .multiple-input-buttons .btn-inc:hover, .cp-meta-item.is-multiple .cp-meta-item-unit .multiple-input-buttons .btn-dec:hover {
+.cp-meta-item.is-multiple > .cp-meta-item-unit .multiple-input-buttons .btn-inc:hover, .cp-meta-item.is-multiple > .cp-meta-item-unit .multiple-input-buttons .btn-dec:hover {
   color: oklch(var(--cp-tones-bx-l) var(--cp-tones-bx-c) var(--cp-tones-bx-h) / var(--cp-tones-bx-a,1));
 }
-.cp-meta-item.is-multiple .cp-meta-item-unit .multiple-input-buttons .btn-inc::after {
+.cp-meta-item.is-multiple > .cp-meta-item-unit .multiple-input-buttons .btn-inc::after {
   content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
-.cp-meta-item.is-multiple .cp-meta-item-unit .multiple-input-buttons .btn-dec::after {
+.cp-meta-item.is-multiple > .cp-meta-item-unit .multiple-input-buttons .btn-dec::after {
   content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
-.cp-meta-item.is-multiple .cp-meta-item-unit .sort-input-buttons {
+.cp-meta-item.is-multiple > .cp-meta-item-unit .sort-input-buttons {
   position: absolute;
   right: -1.5em;
   top: 50%;
@@ -3169,7 +3179,7 @@ html {
   transform: -webkit- translateY(-50%);
   transform: translateY(-50%);
 }
-.cp-meta-item.is-multiple .cp-meta-item-unit .sort-input-buttons .btn-up, .cp-meta-item.is-multiple .cp-meta-item-unit .sort-input-buttons .btn-down, .cp-meta-item.is-multiple .cp-meta-item-unit .sort-input-buttons .btn-handle {
+.cp-meta-item.is-multiple > .cp-meta-item-unit .sort-input-buttons .btn-up, .cp-meta-item.is-multiple > .cp-meta-item-unit .sort-input-buttons .btn-down, .cp-meta-item.is-multiple > .cp-meta-item-unit .sort-input-buttons .btn-handle {
   display: block;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -3182,29 +3192,29 @@ html {
   opacity: 0.2;
   cursor: pointer;
 }
-.cp-meta-item.is-multiple .cp-meta-item-unit .sort-input-buttons .btn-up:hover, .cp-meta-item.is-multiple .cp-meta-item-unit .sort-input-buttons .btn-down:hover, .cp-meta-item.is-multiple .cp-meta-item-unit .sort-input-buttons .btn-handle:hover {
+.cp-meta-item.is-multiple > .cp-meta-item-unit .sort-input-buttons .btn-up:hover, .cp-meta-item.is-multiple > .cp-meta-item-unit .sort-input-buttons .btn-down:hover, .cp-meta-item.is-multiple > .cp-meta-item-unit .sort-input-buttons .btn-handle:hover {
   opacity: 0.5;
 }
-.cp-meta-item.is-multiple .cp-meta-item-unit .sort-input-buttons .btn-up::after {
+.cp-meta-item.is-multiple > .cp-meta-item-unit .sort-input-buttons .btn-up::after {
   content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
-.cp-meta-item.is-multiple .cp-meta-item-unit .sort-input-buttons .btn-handle::after {
+.cp-meta-item.is-multiple > .cp-meta-item-unit .sort-input-buttons .btn-handle::after {
   content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
-.cp-meta-item.is-multiple .cp-meta-item-unit .sort-input-buttons .btn-down::after {
+.cp-meta-item.is-multiple > .cp-meta-item-unit .sort-input-buttons .btn-down::after {
   content: "";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
-.cp-meta-item.is-multiple .cp-meta-item-unit:hover {
+.cp-meta-item.is-multiple > .cp-meta-item-unit:hover {
   cursor: pointer;
   opacity: 1;
 }
-.cp-meta-item.is-multiple .cp-meta-item-unit:hover .multiple-input-buttons {
+.cp-meta-item.is-multiple > .cp-meta-item-unit:hover .multiple-input-buttons {
   opacity: 1;
   transform: -webkit- translateY(0rem);
   transform: translateY(0rem);
@@ -3235,30 +3245,6 @@ html {
 .cp-meta-item select {
   padding-right: 1.25rem;
 }
-.cp-meta-item-unit-input.is-input-type-text {
-  padding: 0.5em 1em;
-  margin: 0rem 0.5em;
-  width: auto;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  background-color: oklch(calc(1 - var(--cp-tones-tx-t) * 100) var(--cp-tones-tx-c) var(--cp-tones-tx-h) / calc(var(--cp-tones-tx-a,1) * 0.1));
-  border-style: none;
-  color: oklch(var(--cp-tones-tx-l) var(--cp-tones-tx-c) var(--cp-tones-tx-h) / var(--cp-tones-tx-a,1));
-  font-size: 1rem;
-}
-.cp-meta-item-unit-input.is-input-type-text:placeholder {
-  color: oklch(calc(1 - var(--cp-tones-tx-t) * 100) var(--cp-tones-tx-c) var(--cp-tones-tx-h) / calc(var(--cp-tones-tx-a,1) * 0.3));
-}
-.cp-meta-item-unit-input.is-input-type-text::-webkit-input-placeholder {
-  color: oklch(calc(1 - var(--cp-tones-tx-t) * 100) var(--cp-tones-tx-c) var(--cp-tones-tx-h) / calc(var(--cp-tones-tx-a,1) * 0.3));
-}
-.cp-meta-item-unit-input.is-input-type-text:-ms-input-placeholder {
-  color: oklch(calc(1 - var(--cp-tones-tx-t) * 100) var(--cp-tones-tx-c) var(--cp-tones-tx-h) / calc(var(--cp-tones-tx-a,1) * 0.3));
-}
-.cp-meta-item-unit-input.is-input-type-text::-moz-placeholder {
-  color: oklch(calc(1 - var(--cp-tones-tx-t) * 100) var(--cp-tones-tx-c) var(--cp-tones-tx-h) / calc(var(--cp-tones-tx-a,1) * 0.3));
-}
 .cp-meta-item-unit-input.is-input-type-select {
   padding: 0.625rem;
   margin: 0.3125rem;
@@ -3272,7 +3258,6 @@ html {
   font-size: 1rem;
 }
 .cp-meta-item-unit-input.is-type-number {
-  width: 3.75rem;
   text-align: right;
 }
 .cp-meta-item-unit-input.is-value-type-number {
