@@ -8076,6 +8076,8 @@
     if (settings.supports) {
       const panelSupports = {
         style: !!blockStyleSelectiveClasses[name],
+        headingLevel: settings.supports.headingLevel,
+        itemSize: settings.supports.itemSize,
         color: !!settings.supports.color,
         spacing: !!settings.supports.spacing,
         typography: !!settings.supports.typography,
@@ -8088,6 +8090,8 @@
           ...settings,
           supports: {
             ...settings.supports,
+            headingLevel: false,
+            itemSize: false,
             color: false,
             spacing: false,
             typography: false,
@@ -8102,7 +8106,16 @@
   wp.hooks.addFilter("editor.BlockEdit", "catpow/editor", (BlockEdit) => (props) => {
     if (blockPanelSupports[props.name]) {
       const panelSupports = blockPanelSupports[props.name];
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(InspectorControls, null, panelSupports.style && /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __14("\u30B9\u30BF\u30A4\u30EB"), icon: "pets", classKey: "className", ...props, selectiveClasses: blockStyleSelectiveClasses[props.name] }), panelSupports.typography && /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __14("\u6587\u5B57"), icon: "pets", classKey: "className", ...props, selectiveClasses: ["level", "hasFontWeight", "hasFontFamily", "hasTextShadow"] }), panelSupports.color && /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __14("\u8272"), icon: "pets", classKey: "className", ...props, selectiveClasses: ["color", "colorScheme"] }), panelSupports.spacing && (panelSupports.background ? /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __14("\u30B5\u30A4\u30BA\u30FB\u9593\u9694\u30FB\u4F59\u767D"), icon: "pets", classKey: "className", ...props, selectiveClasses: ["hasContentWidth", "hasMargin", "hasPadding"] }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __14("\u80CC\u666F"), icon: "pets", classKey: "className", ...props, selectiveClasses: ["backgroundColor", "backgroundPattern"] }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __14("\u5F71"), icon: "pets", classKey: "className", ...props, selectiveClasses: ["boxShadow"] }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __14("\u30DC\u30FC\u30C0\u30FC"), icon: "pets", classKey: "className", ...props, selectiveClasses: ["hasBorder", "borderColor", "hasBorderRadius", "hasBorderImage"] })) : /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __14("\u30B5\u30A4\u30BA\u30FB\u9593\u9694"), icon: "pets", classKey: "className", ...props, selectiveClasses: ["hasContentWidth", "hasMargin"] })))), /* @__PURE__ */ wp.element.createElement(BlockEdit, { ...props }));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(InspectorControls, null, panelSupports.style && /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __14("\u30B9\u30BF\u30A4\u30EB"), icon: "pets", classKey: "className", ...props, selectiveClasses: blockStyleSelectiveClasses[props.name] }), panelSupports.headingLevel && /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __14("\u30EC\u30D9\u30EB"), icon: "pets", classKey: "className", ...props, selectiveClasses: ["level", "headingTag"] }), panelSupports.typography && /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __14("\u6587\u5B57"), icon: "pets", classKey: "className", ...props, selectiveClasses: ["level", "hasFontWeight", "hasFontFamily", "hasTextShadow"] }), panelSupports.color && /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __14("\u8272"), icon: "pets", classKey: "className", ...props, selectiveClasses: ["color", "colorScheme"] }), panelSupports.spacing && (panelSupports.background ? /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(
+        CP.SelectClassPanel,
+        {
+          title: __14("\u30B5\u30A4\u30BA\u30FB\u9593\u9694\u30FB\u4F59\u767D"),
+          icon: "pets",
+          classKey: "className",
+          ...props,
+          selectiveClasses: ["hasContentWidth", "hasMargin", "hasPadding", panelSupports.itemSize && "itemSize"]
+        }
+      ), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __14("\u80CC\u666F"), icon: "pets", classKey: "className", ...props, selectiveClasses: ["backgroundColor", "backgroundPattern"] }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __14("\u5F71"), icon: "pets", classKey: "className", ...props, selectiveClasses: ["boxShadow"] }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __14("\u30DC\u30FC\u30C0\u30FC"), icon: "pets", classKey: "className", ...props, selectiveClasses: ["hasBorder", "borderColor", "hasBorderRadius", "hasBorderImage"] })) : /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __14("\u30B5\u30A4\u30BA\u30FB\u9593\u9694"), icon: "pets", classKey: "className", ...props, selectiveClasses: ["hasContentWidth", "hasMargin", panelSupports.itemSize && "itemSize"] })))), /* @__PURE__ */ wp.element.createElement(BlockEdit, { ...props }));
     }
     return /* @__PURE__ */ wp.element.createElement(BlockEdit, { ...props });
   });
