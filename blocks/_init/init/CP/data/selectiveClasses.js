@@ -163,7 +163,7 @@ export const selectiveClassesPresets = {
 	},
 	textType: {
 		name: "textType",
-		type: "buttons",
+		type: "gridbuttons",
 		label: __("テキストタイプ", "catpow"),
 		required: true,
 		values: {

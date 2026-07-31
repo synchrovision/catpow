@@ -5822,7 +5822,7 @@
     },
     textType: {
       name: "textType",
-      type: "buttons",
+      type: "gridbuttons",
       label: __13("\u30C6\u30AD\u30B9\u30C8\u30BF\u30A4\u30D7", "catpow"),
       required: true,
       values: {
