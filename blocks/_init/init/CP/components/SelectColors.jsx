@@ -35,14 +35,14 @@
 		(value) => {
 			setIndex(colors.findIndex((color) => color.color == value));
 		},
-		[colors]
+		[colors],
 	);
 	const onChangeOfColorPicker = useCallback(
 		(value) => {
 			updateColors({ index, color: value.hex });
 			onChange(index, value);
 		},
-		[onChange, index, updateColors]
+		[onChange, index, updateColors],
 	);
 
 	return (

@@ -249,11 +249,9 @@ export const parseSelections = (sels) => {
 };
 
 export const resolveSelectiveClassesPresets = (prms) => {
-	if (prms == null) {
-		return [];
-	}
-	prms = prms.filter((prm) => !!prm);
+	if (prms == null) return [];
 	prms.forEach((prm, index) => {
+		if (!prm) return null;
 		if (typeof prm === "string" && CP.selectiveClassesPresets.hasOwnProperty(prm)) {
 			prms[index] = prm = { preset: prm };
 		}

@@ -105,9 +105,7 @@ export const SelectClassPanel = (props) => {
 		<PanelBody title={props.title} initialOpen={props.initialOpen || false} icon={props.icon}>
 			<CP.SelectClassPanelContext.Provider value={{ props, item, states, allStates, save, saveClasses, primaryClassKey, block, colorNumber }}>
 				{selectiveClasses.map((prm, index) => (
-					<Fragment key={index}>
-						<SelectClassPanelBlock prm={prm} />
-					</Fragment>
+					<Fragment key={index}>{prm && <SelectClassPanelBlock prm={prm} />}</Fragment>
 				))}
 				{props.children}
 			</CP.SelectClassPanelContext.Provider>

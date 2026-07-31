@@ -4308,7 +4308,7 @@
     if (!item || !selectiveClasses) {
       return false;
     }
-    return /* @__PURE__ */ wp.element.createElement(PanelBody2, { title: props.title, initialOpen: props.initialOpen || false, icon: props.icon }, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanelContext.Provider, { value: { props, item, states, allStates, save, saveClasses, primaryClassKey, block, colorNumber } }, selectiveClasses.map((prm, index) => /* @__PURE__ */ wp.element.createElement(Fragment2, { key: index }, /* @__PURE__ */ wp.element.createElement(SelectClassPanelBlock, { prm }))), props.children));
+    return /* @__PURE__ */ wp.element.createElement(PanelBody2, { title: props.title, initialOpen: props.initialOpen || false, icon: props.icon }, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanelContext.Provider, { value: { props, item, states, allStates, save, saveClasses, primaryClassKey, block, colorNumber } }, selectiveClasses.map((prm, index) => /* @__PURE__ */ wp.element.createElement(Fragment2, { key: index }, prm && /* @__PURE__ */ wp.element.createElement(SelectClassPanelBlock, { prm }))), props.children));
   };
 
   // ../blocks/_init/init/CP/components/AlignClassToolbar.jsx
@@ -7119,11 +7119,9 @@
     return { options: options3, values };
   };
   var resolveSelectiveClassesPresets = (prms) => {
-    if (prms == null) {
-      return [];
-    }
-    prms = prms.filter((prm) => !!prm);
+    if (prms == null) return [];
     prms.forEach((prm, index) => {
+      if (!prm) return null;
       if (typeof prm === "string" && CP.selectiveClassesPresets.hasOwnProperty(prm)) {
         prms[index] = prm = { preset: prm };
       }
