@@ -19,7 +19,7 @@ wp.blocks.registerBlockType("catpow/t-image", {
 	example: CP.example,
 	edit({ attributes, className, setAttributes }) {
 		const { useState, useMemo } = wp.element;
-		const { InspectorControls } = wp.blockEditor;
+		const { InspectorControls, useBlockProps } = wp.blockEditor;
 		const { PanelBody, TextareaControl } = wp.components;
 		const { isTemplate, classes, width, align, marginTop, marginBottom, src, alt, loopImage } = attributes;
 		var states = CP.classNamesToFlags(classes);
@@ -45,7 +45,7 @@ wp.blocks.registerBlockType("catpow/t-image", {
 		return (
 			<>
 				<CP.Bem prefix="wp-block-catpow">
-					<table className={classes} width={width} align={align}>
+					<table {...useBlockProps({ className: classes })} width={width} align={align}>
 						<tbody>
 							{marginTop > 0 && (
 								<tr>
@@ -80,11 +80,12 @@ wp.blocks.registerBlockType("catpow/t-image", {
 	},
 
 	save({ attributes, className, setAttributes }) {
+		const { useBlockProps } = wp.blockEditor;
 		const { isTemplate, classes, width, align, marginTop, marginBottom, src, alt, loopImage } = attributes;
 		var states = CP.classNamesToFlags(classes);
 		return (
 			<CP.Bem prefix="wp-block-catpow">
-				<table className={classes} width={width} align={align}>
+				<table {...useBlockProps.save({ className: classes })} width={width} align={align}>
 					<tbody>
 						{marginTop > 0 && (
 							<tr>

@@ -23,7 +23,7 @@ wp.blocks.registerBlockType("catpow/slidablemenu", {
 	example: CP.example,
 	edit({ attributes, className, setAttributes, isSelected }) {
 		const { useState, useMemo } = wp.element;
-		const { BlockControls, InnerBlocks, InspectorControls, RichText } = wp.blockEditor;
+		const { BlockControls, InnerBlocks, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
 		const { Icon, PanelBody, TextareaControl, TextControl, ToolbarGroup } = wp.components;
 		const { isTemplate, items = [], classes, columnsCount, loopCount, doLoop, AltMode = false } = attributes;
 		const primaryClassName = "wp-block-catpow-slidablemenu";
@@ -157,6 +157,10 @@ wp.blocks.registerBlockType("catpow/slidablemenu", {
 		if (attributes.EditMode === undefined) {
 			attributes.EditMode = false;
 		}
+		const blockProps = useBlockProps({
+			className: attributes.EditMode || (AltMode && doLoop) ? "cp-altcontent" : classes,
+			style: attributes.EditMode || (AltMode && doLoop) ? undefined : { "--columns": columnsCount },
+		});
 
 		return (
 			<>
@@ -169,7 +173,7 @@ wp.blocks.registerBlockType("catpow/slidablemenu", {
 					<CP.ItemControlInfoPanel />
 				</InspectorControls>
 				{attributes.EditMode ? (
-					<div className="cp-altcontent">
+					<div {...blockProps}>
 						<div className="label">
 							<Icon icon="edit" />
 						</div>
@@ -189,14 +193,14 @@ wp.blocks.registerBlockType("catpow/slidablemenu", {
 				) : (
 					<>
 						{AltMode && doLoop ? (
-							<div className="cp-altcontent">
+							<div {...blockProps}>
 								<div className="label">
 									<Icon icon="welcome-comments" />
 								</div>
 								<InnerBlocks />
 							</div>
 						) : (
-							<div className={classes} style={{ "--columns": columnsCount }}>
+							<div {...blockProps}>
 								<ul className="items">{rtn}</ul>
 							</div>
 						)}
@@ -206,7 +210,7 @@ wp.blocks.registerBlockType("catpow/slidablemenu", {
 		);
 	},
 	save({ attributes, className }) {
-		const { InnerBlocks, RichText } = wp.blockEditor;
+		const { InnerBlocks, RichText, useBlockProps } = wp.blockEditor;
 		const { isTemplate, items = [], classes = "", columnsCount, doLoop } = attributes;
 		var classArray = _.uniq(classes.split(" "));
 
@@ -235,7 +239,7 @@ wp.blocks.registerBlockType("catpow/slidablemenu", {
 
 		return (
 			<>
-				<div className={classes} style={"--columns:" + columnsCount}>
+				<div {...useBlockProps.save({ className: classes, style: { "--columns": columnsCount } })}>
 					<ul className="items">{rtn}</ul>
 				</div>
 				{doLoop && (

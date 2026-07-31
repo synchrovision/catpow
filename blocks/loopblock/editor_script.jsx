@@ -56,7 +56,7 @@ wp.blocks.registerBlockType("catpow/loopblock", {
 	},
 
 	save({ attributes, className, setAttributes }) {
-		const { InnerBlocks } = wp.blockEditor;
+		const { InnerBlocks, useBlockProps } = wp.blockEditor;
 		return <InnerBlocks.Content />;
 	},
 });
@@ -83,7 +83,7 @@ wp.blocks.registerBlockType("catpow/loopblockcontent", {
 		const template = name == "on_empty" ? [["core/paragraph", { align: "center", content: "Not Found" }]] : [["catpow/section"]];
 
 		return (
-			<div className={"loop-block-content"}>
+			<div {...useBlockProps({ className: "loop-block-content" })}>
 				<InnerBlocks template={template} templateLock={false} />
 			</div>
 		);

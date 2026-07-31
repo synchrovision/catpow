@@ -108,7 +108,7 @@ wp.blocks.registerBlockType("catpow/formblockcontent", {
 		},
 	},
 	edit({ attributes, className, setAttributes, clientId }) {
-		const { InnerBlocks, InspectorControls } = wp.blockEditor;
+		const { InnerBlocks, InspectorControls, useBlockProps } = wp.blockEditor;
 		const { PanelBody, TextControl } = wp.components;
 		const { name } = attributes;
 
@@ -118,7 +118,7 @@ wp.blocks.registerBlockType("catpow/formblockcontent", {
 
 		return (
 			<>
-				<div className={"formBlockContent cp-embeddedcontent"}>
+				<div {...useBlockProps({ className: "formBlockContent cp-embeddedcontent" })}>
 					<div className="label">{name}</div>
 					<InnerBlocks template={[["catpow/section"]]} templateLock={false} />
 				</div>

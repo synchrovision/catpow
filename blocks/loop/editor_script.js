@@ -118,9 +118,10 @@
       }
     },
     edit({ attributes }) {
+      const { useBlockProps: useBlockProps2 } = wp.blockEditor;
       const { name } = attributes;
       const template = name == "on_empty" ? [["core/paragraph", { align: "center", content: "Not Found" }]] : [["catpow/section"]];
-      return /* @__PURE__ */ wp.element.createElement("div", { className: "loop-content" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template, templateLock: false }));
+      return /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps2({ className: "loop-content" }) }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template, templateLock: false }));
     },
     save({ attributes }) {
       const { name } = attributes;

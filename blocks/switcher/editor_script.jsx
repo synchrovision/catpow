@@ -33,7 +33,7 @@ wp.blocks.registerBlockType("catpow/switcher", {
 		const { attributes, setAttributes, clientId } = props;
 		const { useRef, useEffect, useMemo } = wp.element;
 		const { Icon } = wp.components;
-		const { InnerBlocks, InspectorControls } = wp.blockEditor;
+		const { InnerBlocks, InspectorControls, useBlockProps } = wp.blockEditor;
 		const { currentIndex = 0 } = attributes;
 		const { factors, factorFlags, flagValues } = CP.config.switcher;
 		const isFirstRenderRef = useRef(true);
@@ -123,7 +123,7 @@ wp.blocks.registerBlockType("catpow/switcher", {
 
 		return (
 			<>
-				<div className="switcher-edit" data-current-index={currentIndex}>
+				<div {...useBlockProps({ className: "switcher-edit" })} data-current-index={currentIndex}>
 					<ul className="tabs">
 						<li className="tab icon">
 							<Icon icon="networking" />
@@ -178,7 +178,7 @@ wp.blocks.registerBlockType("catpow/switchercontent", {
 		cond: { source: "attribute", label: "条件", selector: "switcher-content", attribute: "cond", default: "content" },
 	},
 	edit({ attributes, setAttributes, clientId }) {
-		const { InnerBlocks } = wp.blockEditor;
+		const { InnerBlocks, useBlockProps } = wp.blockEditor;
 		const { cond } = attributes;
 		const { useEffect } = wp.element;
 
@@ -187,7 +187,7 @@ wp.blocks.registerBlockType("catpow/switchercontent", {
 		}, [cond]);
 
 		return (
-			<div id={`block-${clientId}`} className={"switcher-content"}>
+			<div {...useBlockProps({ className: "switcher-content" })} id={`block-${clientId}`}>
 				<InnerBlocks template={[["core/paragraph"]]} templateLock={false} />
 			</div>
 		);

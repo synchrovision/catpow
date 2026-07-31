@@ -70,7 +70,7 @@
 	example: CP.example,
 	edit({ attributes, className, setAttributes }) {
 		const { useState, useMemo } = wp.element;
-		const { InnerBlocks, InspectorControls } = wp.blockEditor;
+		const { InnerBlocks, InspectorControls, useBlockProps } = wp.blockEditor;
 		const { classes, layers = [] } = attributes;
 		const primaryClass = "wp-block-catpow-aquarium";
 		var classArray = _.uniq((className + " " + classes).split(" "));
@@ -83,7 +83,7 @@
 
 		return (
 			<>
-				<div className={classes}>
+				<div {...useBlockProps({ className: classes })}>
 					{layers.map((layer) => {
 						return (
 							<div className={layer.classes}>
@@ -125,10 +125,10 @@
 	},
 	save({ attributes, className, setAttributes }) {
 		const { classes, layers = [] } = attributes;
-		const { InnerBlocks } = wp.blockEditor;
+		const { InnerBlocks, useBlockProps } = wp.blockEditor;
 
 		return (
-			<div className={classes}>
+			<div {...useBlockProps.save({ className: classes })}>
 				{layers.map((layer) => {
 					return (
 						<div className={layer.classes}>

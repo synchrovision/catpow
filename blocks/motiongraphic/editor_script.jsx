@@ -13,7 +13,7 @@ wp.blocks.registerBlockType("catpow/motiongraphic", {
 	},
 	edit({ attributes, setAttributes, className }) {
 		const { useCallback } = wp.element;
-		const { InnerBlocks, InspectorControls } = wp.blockEditor;
+		const { InnerBlocks, InspectorControls, useBlockProps } = wp.blockEditor;
 		const { classes = "", component, props } = attributes;
 		const { selections } = CP.config.motiongraphic;
 
@@ -49,7 +49,7 @@ wp.blocks.registerBlockType("catpow/motiongraphic", {
 
 		return (
 			<>
-				<div className="cp-embeddedcontent">
+				<div {...useBlockProps({ className: "cp-embeddedcontent" })}>
 					<div className="label">{component}</div>
 					<div className={classes}>
 						<div className="wp-block-catpow-motiongraphic__background">

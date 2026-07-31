@@ -33,7 +33,7 @@ wp.blocks.registerBlockType("catpow/t-banners", {
 	example: CP.example,
 	edit({ attributes, className, setAttributes, isSelected }) {
 		const { useState, useMemo } = wp.element;
-		const { InspectorControls } = wp.blockEditor;
+		const { InspectorControls, useBlockProps } = wp.blockEditor;
 		const { PanelBody, TextareaControl } = wp.components;
 		const { isTemplate, classes, width, gapX, gapY, align, marginTop, marginBottom, items, columns } = attributes;
 		var states = CP.classNamesToFlags(classes);
@@ -61,7 +61,7 @@ wp.blocks.registerBlockType("catpow/t-banners", {
 		return (
 			<>
 				<CP.Bem prefix="wp-block-catpow">
-					<table className={classes} width={width} align={align}>
+					<table {...useBlockProps({ className: classes })} width={width} align={align}>
 						<tbody>
 							{marginTop > 0 && (
 								<tr>
@@ -119,11 +119,12 @@ wp.blocks.registerBlockType("catpow/t-banners", {
 	},
 
 	save({ attributes }) {
+		const { useBlockProps } = wp.blockEditor;
 		const { isTemplate, classes, width, gapX, gapY, align, marginTop, marginBottom, items, columns } = attributes;
 		var states = CP.classNamesToFlags(classes);
 		return (
 			<CP.Bem prefix="wp-block-catpow">
-				<table className={classes} width={width} align={align}>
+				<table {...useBlockProps.save({ className: classes })} width={width} align={align}>
 					<tbody>
 						{marginTop > 0 && (
 							<tr>

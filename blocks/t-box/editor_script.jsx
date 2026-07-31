@@ -16,7 +16,7 @@ wp.blocks.registerBlockType("catpow/t-box", {
 	example: CP.example,
 	edit({ attributes, className, setAttributes }) {
 		const { useState, useMemo } = wp.element;
-		const { InnerBlocks, InspectorControls } = wp.blockEditor;
+		const { InnerBlocks, InspectorControls, useBlockProps } = wp.blockEditor;
 		const { PanelBody, TextareaControl } = wp.components;
 		const { classes, width, paddingTop, paddingInline, paddingBottom } = attributes;
 		var states = CP.classNamesToFlags(classes);
@@ -36,7 +36,7 @@ wp.blocks.registerBlockType("catpow/t-box", {
 		return (
 			<>
 				<CP.Bem prefix="wp-block-catpow">
-					<div className={classes}>
+					<div {...useBlockProps({ className: classes })}>
 						<table width={width} cstyle={{ width: `${width}px` }} align="center">
 							<tbody>
 								{paddingTop > 0 && (
@@ -71,12 +71,12 @@ wp.blocks.registerBlockType("catpow/t-box", {
 	},
 
 	save({ attributes, className, setAttributes }) {
-		const { InnerBlocks } = wp.blockEditor;
+		const { InnerBlocks, useBlockProps } = wp.blockEditor;
 		const { classes, width, paddingTop, paddingInline, paddingBottom } = attributes;
 		var states = CP.classNamesToFlags(classes);
 		return (
 			<CP.Bem prefix="wp-block-catpow">
-				<div className={classes}>
+				<div {...useBlockProps.save({ className: classes })}>
 					<table width={width} style={{ width: `${width}px` }} align="center">
 						<tbody>
 							{paddingTop > 0 && (

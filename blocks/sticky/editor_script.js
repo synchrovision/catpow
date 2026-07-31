@@ -23,7 +23,7 @@
     example: CP.example,
     edit({ attributes, className, setAttributes }) {
       const { useState, useMemo } = wp.element;
-      const { InnerBlocks: InnerBlocks2, InspectorControls, RichText: RichText2 } = wp.blockEditor;
+      const { InnerBlocks: InnerBlocks2, InspectorControls, RichText: RichText2, useBlockProps } = wp.blockEditor;
       const { PanelBody, TextareaControl } = wp.components;
       const { classes, labelText } = attributes;
       const states = CP.classNamesToFlags(classes);
@@ -60,7 +60,7 @@
         wp.hooks.applyFilters("catpow.blocks.sticky.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: classes }, states.collapsible && /* @__PURE__ */ wp.element.createElement("div", { className: "stickyButton" }, /* @__PURE__ */ wp.element.createElement("div", { className: "stickyButtonIcon" }, states.labelButton && /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps({ className: classes }) }, states.collapsible && /* @__PURE__ */ wp.element.createElement("div", { className: "stickyButton" }, /* @__PURE__ */ wp.element.createElement("div", { className: "stickyButtonIcon" }, states.labelButton && /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(
         RichText2,
         {
           onChange: (labelText2) => {
@@ -82,11 +82,11 @@
       )), (states.container || states.collapsible) && /* @__PURE__ */ wp.element.createElement(InnerBlocks2, null))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: "\u30AF\u30E9\u30B9", onChange: (classes2) => setAttributes({ classes: classes2 }), value: classes }))));
     },
     save({ attributes, className, setAttributes }) {
-      const { InnerBlocks: InnerBlocks2, RichText: RichText2 } = wp.blockEditor;
+      const { InnerBlocks: InnerBlocks2, RichText: RichText2, useBlockProps } = wp.blockEditor;
       const { classes = "", labelText } = attributes;
       const states = CP.classNamesToFlags(classes);
       const { imageKeys } = CP.config.sticky;
-      return /* @__PURE__ */ wp.element.createElement("div", { className: classes }, states.collapsible && /* @__PURE__ */ wp.element.createElement("div", { className: "stickyButton" }, /* @__PURE__ */ wp.element.createElement("div", { className: "stickyButtonIcon" }, states.labelButton && /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(RichText2.Content, { value: labelText })), states.imageButton && [
+      return /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps.save({ className: classes }) }, states.collapsible && /* @__PURE__ */ wp.element.createElement("div", { className: "stickyButton" }, /* @__PURE__ */ wp.element.createElement("div", { className: "stickyButtonIcon" }, states.labelButton && /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(RichText2.Content, { value: labelText })), states.imageButton && [
         /* @__PURE__ */ wp.element.createElement(ResponsiveImage, { className: "open", attributes, keys: imageKeys.openButtonImage }),
         /* @__PURE__ */ wp.element.createElement(ResponsiveImage, { className: "close", attributes, keys: imageKeys.closeButtonImage })
       ])), /* @__PURE__ */ wp.element.createElement("div", { className: "content" }, states.label && /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(RichText2.Content, { value: labelText })), (states.container || states.collapsible) && /* @__PURE__ */ wp.element.createElement(InnerBlocks2.Content, null)));
@@ -94,10 +94,11 @@
     deplicated: [
       {
         save({ attributes, className, setAttributes }) {
+          const { useBlockProps } = wp.blockEditor;
           const { classes = "", labelText } = attributes;
           const states = CP.classNamesToFlags(classes);
           const { imageKeys } = CP.config.sticky;
-          return /* @__PURE__ */ wp.element.createElement("div", { className: classes }, states.collapsible && /* @__PURE__ */ wp.element.createElement("div", { className: "stickyMenuButton" }, /* @__PURE__ */ wp.element.createElement("div", { className: "stickyMenuButtonIcon" }, states.labelButton && /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: labelText })), states.imageButton && [
+          return /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps.save({ className: classes }) }, states.collapsible && /* @__PURE__ */ wp.element.createElement("div", { className: "stickyMenuButton" }, /* @__PURE__ */ wp.element.createElement("div", { className: "stickyMenuButtonIcon" }, states.labelButton && /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: labelText })), states.imageButton && [
             /* @__PURE__ */ wp.element.createElement(ResponsiveImage, { className: "open", attributes, keys: imageKeys.openButtonImage }),
             /* @__PURE__ */ wp.element.createElement(ResponsiveImage, { className: "close", attributes, keys: imageKeys.closeButtonImage })
           ])), /* @__PURE__ */ wp.element.createElement("div", { className: "content" }, states.label && /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: labelText })), (states.container || states.collapsible) && /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));
@@ -112,12 +113,14 @@
     category: "catpow",
     parent: ["catpow/sticky"],
     edit({ attributes, className, setAttributes }) {
+      const { InnerBlocks: InnerBlocks2, useBlockProps } = wp.blockEditor;
       return [
-        /* @__PURE__ */ wp.element.createElement("div", { className: "sticky_content" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: [["core/paragraph"]], templateLock: false }))
+        /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps({ className: "sticky_content" }) }, /* @__PURE__ */ wp.element.createElement(InnerBlocks2, { template: [["core/paragraph"]], templateLock: false }))
       ];
     },
     save({ attributes, className, setAttributes }) {
-      return /* @__PURE__ */ wp.element.createElement("div", { className: "sticky_content" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null));
+      const { InnerBlocks: InnerBlocks2, useBlockProps } = wp.blockEditor;
+      return /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps.save({ className: "sticky_content" }) }, /* @__PURE__ */ wp.element.createElement(InnerBlocks2.Content, null));
     }
   });
 })();

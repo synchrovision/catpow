@@ -23,7 +23,7 @@ wp.blocks.registerBlockType("catpow/sticky", {
 	example: CP.example,
 	edit({ attributes, className, setAttributes }) {
 		const { useState, useMemo } = wp.element;
-		const { InnerBlocks, InspectorControls, RichText } = wp.blockEditor;
+		const { InnerBlocks, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
 		const { PanelBody, TextareaControl } = wp.components;
 		const { classes, labelText } = attributes;
 
@@ -65,7 +65,7 @@ wp.blocks.registerBlockType("catpow/sticky", {
 
 		return (
 			<>
-				<div className={classes}>
+				<div {...useBlockProps({ className: classes })}>
 					{states.collapsible && (
 						<div className="stickyButton">
 							<div className="stickyButtonIcon">
@@ -110,14 +110,14 @@ wp.blocks.registerBlockType("catpow/sticky", {
 		);
 	},
 	save({ attributes, className, setAttributes }) {
-		const { InnerBlocks, RichText } = wp.blockEditor;
+		const { InnerBlocks, RichText, useBlockProps } = wp.blockEditor;
 		const { classes = "", labelText } = attributes;
 
 		const states = CP.classNamesToFlags(classes);
 		const { imageKeys } = CP.config.sticky;
 
 		return (
-			<div className={classes}>
+			<div {...useBlockProps.save({ className: classes })}>
 				{states.collapsible && (
 					<div className="stickyButton">
 						<div className="stickyButtonIcon">
@@ -147,13 +147,14 @@ wp.blocks.registerBlockType("catpow/sticky", {
 	deplicated: [
 		{
 			save({ attributes, className, setAttributes }) {
+				const { useBlockProps } = wp.blockEditor;
 				const { classes = "", labelText } = attributes;
 
 				const states = CP.classNamesToFlags(classes);
 				const { imageKeys } = CP.config.sticky;
 
 				return (
-					<div className={classes}>
+					<div {...useBlockProps.save({ className: classes })}>
 						{states.collapsible && (
 							<div className="stickyMenuButton">
 								<div className="stickyMenuButtonIcon">
@@ -191,15 +192,17 @@ wp.blocks.registerBlockType("catpow/stickycontent", {
 	category: "catpow",
 	parent: ["catpow/sticky"],
 	edit({ attributes, className, setAttributes }) {
+		const { InnerBlocks, useBlockProps } = wp.blockEditor;
 		return [
-			<div className={"sticky_content"}>
+			<div {...useBlockProps({ className: "sticky_content" })}>
 				<InnerBlocks template={[["core/paragraph"]]} templateLock={false} />
 			</div>,
 		];
 	},
 	save({ attributes, className, setAttributes }) {
+		const { InnerBlocks, useBlockProps } = wp.blockEditor;
 		return (
-			<div className={"sticky_content"}>
+			<div {...useBlockProps.save({ className: "sticky_content" })}>
 				<InnerBlocks.Content />
 			</div>
 		);

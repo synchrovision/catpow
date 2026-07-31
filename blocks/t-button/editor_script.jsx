@@ -18,7 +18,7 @@ wp.blocks.registerBlockType("catpow/t-button", {
 	example: CP.example,
 	edit({ attributes, className, setAttributes }) {
 		const { useState, useMemo } = wp.element;
-		const { InspectorControls, RichText } = wp.blockEditor;
+		const { InspectorControls, RichText, useBlockProps } = wp.blockEditor;
 		const { PanelBody, TextareaControl } = wp.components;
 		const { classes, width, align, marginTop, marginBottom, title } = attributes;
 		var states = CP.classNamesToFlags(classes);
@@ -40,7 +40,7 @@ wp.blocks.registerBlockType("catpow/t-button", {
 		return (
 			<>
 				<CP.Bem prefix="wp-block-catpow">
-					<table className={classes} width={width} align={align}>
+					<table {...useBlockProps({ className: classes })} width={width} align={align}>
 						<tbody>
 							{marginTop > 0 && (
 								<tr>
@@ -78,11 +78,11 @@ wp.blocks.registerBlockType("catpow/t-button", {
 	},
 
 	save({ attributes, className, setAttributes }) {
-		const { RichText } = wp.blockEditor;
+		const { RichText, useBlockProps } = wp.blockEditor;
 		const { classes, width, align, marginTop, marginBottom, title, url } = attributes;
 		return (
 			<CP.Bem prefix="wp-block-catpow">
-				<table className={classes} width={width} align={align}>
+				<table {...useBlockProps.save({ className: classes })} width={width} align={align}>
 					<tbody>
 						{marginTop > 0 && (
 							<tr>

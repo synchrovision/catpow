@@ -42,7 +42,7 @@ wp.blocks.registerBlockType("catpow/t-list", {
 	example: CP.example,
 	edit({ attributes, className, setAttributes }) {
 		const { useState, useMemo } = wp.element;
-		const { InspectorControls, RichText } = wp.blockEditor;
+		const { InspectorControls, RichText, useBlockProps } = wp.blockEditor;
 		const { PanelBody, TextareaControl } = wp.components;
 		const { classes, marginTop, marginBottom, marginBetween, markerSize, markerWidth, markerAlign, markerMargin, markerClasses, markerIndexSize, markerIndexPad, prefix, suffix, items } = attributes;
 		var states = CP.classNamesToFlags(classes);
@@ -87,7 +87,7 @@ wp.blocks.registerBlockType("catpow/t-list", {
 		return (
 			<>
 				<CP.Bem prefix="wp-block-catpow">
-					<table className={classes} width="100%" align="center">
+					<table {...useBlockProps({ className: classes })} width="100%" align="center">
 						<tbody>
 							{marginTop > 0 && (
 								<tr>
@@ -159,13 +159,13 @@ wp.blocks.registerBlockType("catpow/t-list", {
 	},
 
 	save({ attributes, className, setAttributes }) {
-		const { RichText } = wp.blockEditor;
+		const { RichText, useBlockProps } = wp.blockEditor;
 		const { classes, marginTop, marginBottom, marginBetween, markerSize, markerWidth, markerAlign, markerMargin, markerClasses, markerIndexSize, markerIndexPad, prefix, suffix, items } = attributes;
 		var states = CP.classNamesToFlags(classes);
 
 		return (
 			<CP.Bem prefix="wp-block-catpow">
-				<table className={classes} width="100%" align="center">
+				<table {...useBlockProps.save({ className: classes })} width="100%" align="center">
 					<tbody>
 						{marginTop > 0 && (
 							<tr>

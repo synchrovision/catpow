@@ -5,9 +5,9 @@
 	category: "catpow-functional",
 	example: CP.example,
 	edit({ attributes, setAttributes, className }) {
-		const { InnerBlocks } = wp.blockEditor;
+		const { InnerBlocks, useBlockProps } = wp.blockEditor;
 		return (
-			<div className="cp-embeddedcontent">
+			<div {...useBlockProps({ className: "cp-embeddedcontent" })}>
 				<div className="label">UserInfo</div>
 				<InnerBlocks template={[["core/paragraph", { content: "[output last_name] [output first_name]" }]]} />
 			</div>

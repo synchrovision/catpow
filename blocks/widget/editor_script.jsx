@@ -10,7 +10,7 @@ wp.blocks.registerBlockType("catpow/widget", {
 	category: "catpow-embed",
 	example: CP.example,
 	edit({ attributes, setAttributes, className }) {
-		const { InspectorControls } = wp.blockEditor;
+		const { InspectorControls, useBlockProps } = wp.blockEditor;
 		const { PanelBody, TreeSelect } = wp.components;
 		const { serverSideRender: ServerSideRender } = wp;
 		const { func, param } = attributes;
@@ -18,7 +18,7 @@ wp.blocks.registerBlockType("catpow/widget", {
 
 		return (
 			<>
-				<div className="cp-embeddedcontent">
+				<div {...useBlockProps({ className: "cp-embeddedcontent" })}>
 					<div className="label">{func}</div>
 					<ServerSideRender block="catpow/widget" attributes={attributes} />
 				</div>

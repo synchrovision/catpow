@@ -8,7 +8,7 @@
     parent: CP.mailContensContainer,
     example: CP.example,
     edit({ attributes, setAttributes, className }) {
-      const { InnerBlocks, BlockControls, InspectorControls } = wp.blockEditor;
+      const { InnerBlocks, BlockControls, InspectorControls, useBlockProps } = wp.blockEditor;
       const { Icon, PanelBody, TextareaControl, TextControl, ToolbarGroup } = wp.components;
       const { content_path, query, AltMode = false } = attributes;
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(
@@ -23,7 +23,7 @@
             }
           ]
         }
-      )), /* @__PURE__ */ wp.element.createElement("div", { className: "wp-block-catpow-t-loop " + (AltMode ? "cp-altcontent altMode" : "embedded_content") }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, AltMode ? /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" }) : content_path), /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: [["catpow/t-loopcontent"], ["catpow/t-loopcontent", { name: "on_empty" }]], templateLock: "all" })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "Query" }, /* @__PURE__ */ wp.element.createElement(
+      )), /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps({ className: AltMode ? "cp-altcontent altMode" : "embedded_content" }) }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, AltMode ? /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" }) : content_path), /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: [["catpow/t-loopcontent"], ["catpow/t-loopcontent", { name: "on_empty" }]], templateLock: "all" })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "Query" }, /* @__PURE__ */ wp.element.createElement(
         TextControl,
         {
           label: "content path",
@@ -64,10 +64,10 @@
       }
     },
     edit({ attributes, className, setAttributes, clientId }) {
-      const { InnerBlocks } = wp.blockEditor;
+      const { InnerBlocks, useBlockProps } = wp.blockEditor;
       const { name } = attributes;
       const template = name == "on_empty" ? [["catpow/t-paragraph", { align: "center", content: "Not Found" }]] : [["catpow/t-paragraph"]];
-      return /* @__PURE__ */ wp.element.createElement("div", { className: "wp-block-catpow-t-loop-content" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template, templateLock: false }));
+      return /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps() }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template, templateLock: false }));
     },
     save({ attributes, className, setAttributes }) {
       const { InnerBlocks } = wp.blockEditor;

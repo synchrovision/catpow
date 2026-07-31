@@ -101,13 +101,13 @@
       }
     },
     edit({ attributes, className, setAttributes, clientId }) {
-      const { InnerBlocks, InspectorControls } = wp.blockEditor;
+      const { InnerBlocks, InspectorControls, useBlockProps } = wp.blockEditor;
       const { PanelBody, TextControl } = wp.components;
       const { name } = attributes;
       const parentClientId = wp.data.select("core/block-editor").getBlockParentsByBlockName(clientId, "catpow/formblock")[0];
       const parentBlock = wp.data.select("core/block-editor").getBlock(parentClientId);
       const actions = parentBlock.attributes.actions;
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: "formBlockContent cp-embeddedcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, name), /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: [["catpow/section"]], templateLock: false })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "\u8A2D\u5B9A", initialOpen: true }, /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps({ className: "formBlockContent cp-embeddedcontent" }) }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, name), /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: [["catpow/section"]], templateLock: false })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "\u8A2D\u5B9A", initialOpen: true }, /* @__PURE__ */ wp.element.createElement(
         TextControl,
         {
           label: "\u540D\u524D",

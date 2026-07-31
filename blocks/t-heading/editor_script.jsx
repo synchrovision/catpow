@@ -47,7 +47,7 @@
 	example: CP.example,
 	edit({ attributes, className, setAttributes, onReplace, mergeBlocks }) {
 		const { useState, useMemo } = wp.element;
-		const { BlockControls, InspectorControls, RichText } = wp.blockEditor;
+		const { BlockControls, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
 		const { PanelBody, TextareaControl } = wp.components;
 		const { classes, marginTop, marginBottom, title } = attributes;
 		const primaryClass = "wp-block-catpow-t-heading";
@@ -69,7 +69,7 @@
 		return (
 			<>
 				<CP.Bem prefix="wp-block-catpow">
-					<table width="100%" className={classes}>
+					<table {...useBlockProps({ className: classes })} width="100%">
 						<tbody>
 							{marginTop > 0 && (
 								<tr>
@@ -124,11 +124,11 @@
 	},
 
 	save({ attributes, className, setAttributes }) {
-		const { RichText } = wp.blockEditor;
+		const { RichText, useBlockProps } = wp.blockEditor;
 		const { classes, marginTop, marginBottom, title } = attributes;
 		return (
 			<CP.Bem prefix="wp-block-catpow">
-				<table width="100%" className={classes}>
+				<table {...useBlockProps.save({ className: classes })} width="100%">
 					<tbody>
 						{marginTop > 0 && (
 							<tr>

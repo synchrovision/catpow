@@ -22,10 +22,10 @@
     category: "catpow-functional",
     example: CP.example,
     edit({ attributes, setAttributes, className }) {
-      const { InnerBlocks, BlockControls, InspectorControls, useBlockProps } = wp.blockEditor;
+      const { InnerBlocks, BlockControls, InspectorControls, useBlockProps: useBlockProps2 } = wp.blockEditor;
       const { Icon, PanelBody, TextareaControl, TextControl, ToolbarGroup } = wp.components;
       const { content_path, query, AltMode = false } = attributes;
-      const blockProps = useBlockProps({
+      const blockProps = useBlockProps2({
         className: clsx("loop-block", AltMode ? "cp-altcontent" : "cp-embeddedcontent")
       });
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(
@@ -61,7 +61,7 @@
       ))));
     },
     save({ attributes, className, setAttributes }) {
-      const { InnerBlocks } = wp.blockEditor;
+      const { InnerBlocks, useBlockProps: useBlockProps2 } = wp.blockEditor;
       return /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null);
     }
   });
@@ -84,7 +84,7 @@
       const { InnerBlocks } = wp.blockEditor;
       const { name } = attributes;
       const template = name == "on_empty" ? [["core/paragraph", { align: "center", content: "Not Found" }]] : [["catpow/section"]];
-      return /* @__PURE__ */ wp.element.createElement("div", { className: "loop-block-content" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template, templateLock: false }));
+      return /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps({ className: "loop-block-content" }) }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template, templateLock: false }));
     },
     save({ attributes, className, setAttributes }) {
       const { InnerBlocks } = wp.blockEditor;

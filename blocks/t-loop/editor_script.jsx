@@ -6,7 +6,7 @@
 	parent: CP.mailContensContainer,
 	example: CP.example,
 	edit({ attributes, setAttributes, className }) {
-		const { InnerBlocks, BlockControls, InspectorControls } = wp.blockEditor;
+		const { InnerBlocks, BlockControls, InspectorControls, useBlockProps } = wp.blockEditor;
 		const { Icon, PanelBody, TextareaControl, TextControl, ToolbarGroup } = wp.components;
 		const { content_path, query, AltMode = false } = attributes;
 
@@ -24,7 +24,7 @@
 						]}
 					/>
 				</BlockControls>
-				<div className={"wp-block-catpow-t-loop " + (AltMode ? "cp-altcontent altMode" : "embedded_content")}>
+				<div {...useBlockProps({ className: AltMode ? "cp-altcontent altMode" : "embedded_content" })}>
 					<div className="label">{AltMode ? <Icon icon="welcome-comments" /> : content_path}</div>
 					<InnerBlocks template={[["catpow/t-loopcontent"], ["catpow/t-loopcontent", { name: "on_empty" }]]} templateLock="all" />
 				</div>
@@ -72,13 +72,13 @@ wp.blocks.registerBlockType("catpow/t-loopcontent", {
 		},
 	},
 	edit({ attributes, className, setAttributes, clientId }) {
-		const { InnerBlocks } = wp.blockEditor;
+		const { InnerBlocks, useBlockProps } = wp.blockEditor;
 		const { name } = attributes;
 
 		const template = name == "on_empty" ? [["catpow/t-paragraph", { align: "center", content: "Not Found" }]] : [["catpow/t-paragraph"]];
 
 		return (
-			<div className={"wp-block-catpow-t-loop-content"}>
+			<div {...useBlockProps()}>
 				<InnerBlocks template={template} templateLock={false} />
 			</div>
 		);

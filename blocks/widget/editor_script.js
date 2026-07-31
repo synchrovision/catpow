@@ -7,12 +7,12 @@
     category: "catpow-embed",
     example: CP.example,
     edit({ attributes, setAttributes, className }) {
-      const { InspectorControls } = wp.blockEditor;
+      const { InspectorControls, useBlockProps } = wp.blockEditor;
       const { PanelBody, TreeSelect } = wp.components;
       const { serverSideRender: ServerSideRender } = wp;
       const { func, param } = attributes;
       const statesClasses = func ? cpEmbeddablesTree.widget[func].conf : false;
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { className: "cp-embeddedcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, func), /* @__PURE__ */ wp.element.createElement(ServerSideRender, { block: "catpow/widget", attributes })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "Path" }, /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps({ className: "cp-embeddedcontent" }) }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, func), /* @__PURE__ */ wp.element.createElement(ServerSideRender, { block: "catpow/widget", attributes })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "Path" }, /* @__PURE__ */ wp.element.createElement(
         TreeSelect,
         {
           label: "path",

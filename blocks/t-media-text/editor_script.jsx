@@ -20,7 +20,7 @@ wp.blocks.registerBlockType("catpow/t-media-text", {
 	example: CP.example,
 	edit({ attributes, className, setAttributes }) {
 		const { useState, useMemo } = wp.element;
-		const { InnerBlocks, BlockControls, InspectorControls } = wp.blockEditor;
+		const { InnerBlocks, BlockControls, InspectorControls, useBlockProps } = wp.blockEditor;
 		const { PanelBody, TextareaControl } = wp.components;
 		const { isTemplate, classes, marginTop, marginBottom, src, alt, imageCode, width, gap } = attributes;
 		var states = CP.classNamesToFlags(classes);
@@ -48,7 +48,7 @@ wp.blocks.registerBlockType("catpow/t-media-text", {
 		return (
 			<>
 				<CP.Bem prefix="wp-block-catpow">
-					<table width="100%" className={classes}>
+					<table {...useBlockProps({ className: classes })} width="100%">
 						<tbody>
 							{marginTop > 0 && (
 								<tr>
@@ -115,12 +115,12 @@ wp.blocks.registerBlockType("catpow/t-media-text", {
 	},
 
 	save({ attributes, className, setAttributes }) {
-		const { InnerBlocks } = wp.blockEditor;
+		const { InnerBlocks, useBlockProps } = wp.blockEditor;
 		const { isTemplate, classes, marginTop, marginBottom, src, alt, imageCode, width, gap } = attributes;
 		var states = CP.classNamesToFlags(classes);
 		return (
 			<CP.Bem prefix="wp-block-catpow">
-				<table width="100%" className={classes}>
+				<table {...useBlockProps.save({ className: classes })} width="100%">
 					<tbody>
 						{marginTop > 0 && (
 							<tr>
