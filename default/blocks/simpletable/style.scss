@@ -13,6 +13,7 @@
 				@extend %paragraph;
 				@include bnd((pd:cpd));
 				@include txt((a:l,c:tx,v:m));
+				@include shd((b:n));
 			}
 			&-th{
 				@include bnd((p:r,w:160));
@@ -25,46 +26,22 @@
 		}
 	}
 	&.is-type-spec{
+		@include grd((tc:a 1fr,ai:s,g:c-t));
+		@include bp(-720){
+			@include grd((tc:1fr));
+		}
 		#{$block}{
 			&__thead,&__tbody{
+				@include bnd((d:c));
 				&-tr{
-					@include flx((w:w,ai:s));
-					@include bnd((mgb:10));
-					&-th,&-td{
-						@include bnd((d:b,pd:5 20,mg:10));
-						@include txt((a:l,c:tx));
-					}
+					@include bnd((d:c));
 					&-th{
 						@extend %label-component;
-						@include bnd((f:1 1 150,p:r,pdl:2em,o:h));
-						@include txt((a:j,v:t));
-						@include bg((c:tx 1 .1));
-						&::before,&::after{
-							content:'';
-							@include bnd((d:b,p:a,t:-20,b:-20,w:30));
-							@include bg((c:mx));
-							@include trn((r:10deg));
-						}
-						&::before{
-							@include bnd((l:-20));
-						}
-						&::after{
-							@include bnd((r:-20));
-						}
+						@include txt((a:c));
+						@include bg((c:sx));
 					}
 					&-td{
-						@include bnd((f:10 10 300));
 						@include txt((v:m));
-						&::after{
-							content:'';
-							@include bnd((d:b,w:f));
-						}
-						&-img{
-							@include bnd((w:240,h:a));
-						}
-						span{
-							@include bnd((d:ib));
-						}
 					}
 				}
 			}
@@ -155,7 +132,7 @@
 							&::after{
 								@extend %label-component;
 								@include bnd((d:ib,mgl:.5em,bs:c));
-								@include txt((c:bx,p:.6em,h:1em,f:p,v:.3em));
+								@include txt((c:bx,p:.6em,h:1em));
 							}
 						}
 					}

@@ -127,7 +127,7 @@
 			<>
 				<InspectorControls>
 					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
-					<CP.SelectClassPanel title="行" icon="edit" {...{ setAttributes, attributes }} itemKeys={["rows", attributes.currentItemIndex]} triggerClasses={selectiveClasses[3]} />
+					<CP.SelectClassPanel title="行" icon="edit" {...{ setAttributes, attributes }} itemKeys={["rows", attributes.currentItemIndex]} triggerClasses={selectiveClasses[0]} />
 					<CP.ItemControlInfoPanel />
 				</InspectorControls>
 				<CP.Bem prefix="wp-block-catpow">
