@@ -29,6 +29,7 @@ export const SelectClassPanel = (props) => {
 	const allStates = useMemo(() => {
 		const allStates = { [primaryClassKey]: states };
 		const addClassKeyFlagsInPrm = (prm, flags) => {
+			if (!prm) return;
 			if (prm.classKey) {
 				flags[prm.classKey] = true;
 			}

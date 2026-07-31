@@ -4237,6 +4237,7 @@
     const allStates = useMemo11(() => {
       const allStates2 = { [primaryClassKey]: states };
       const addClassKeyFlagsInPrm = (prm, flags) => {
+        if (!prm) return;
         if (prm.classKey) {
           flags[prm.classKey] = true;
         }
