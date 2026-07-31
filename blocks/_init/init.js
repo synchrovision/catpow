@@ -4272,14 +4272,14 @@
         }
       };
       const classKeyFlags = {};
-      if (Array.isArray(props?.selectiveClasses)) {
-        props.selectiveClasses.forEach((prm) => addClassKeyFlagsInPrm(prm, classKeyFlags));
+      if (Array.isArray(selectiveClasses)) {
+        selectiveClasses.forEach((prm) => addClassKeyFlagsInPrm(prm, classKeyFlags));
       }
       Object.keys(classKeyFlags).forEach((classKey) => {
         allStates2[classKey] = CP.classNamesToFlags(item?.[classKey]);
       });
       return allStates2;
-    }, [props.selectiveClasses, item, states, primaryClassKey]);
+    }, [selectiveClasses, item, states, primaryClassKey]);
     const save = useCallback3(
       (data) => {
         if (itemKeys) {
@@ -7122,6 +7122,7 @@
     if (prms == null) {
       return [];
     }
+    prms = prms.filter((prm) => !!prm);
     prms.forEach((prm, index) => {
       if (typeof prm === "string" && CP.selectiveClassesPresets.hasOwnProperty(prm)) {
         prms[index] = prm = { preset: prm };
@@ -8076,6 +8077,7 @@
     if (settings.supports) {
       const panelSupports = {
         style: !!blockStyleSelectiveClasses[name],
+        level: settings.supports.level,
         headingLevel: settings.supports.headingLevel,
         itemSize: settings.supports.itemSize,
         color: !!settings.supports.color,
@@ -8090,6 +8092,7 @@
           ...settings,
           supports: {
             ...settings.supports,
+            level: false,
             headingLevel: false,
             itemSize: false,
             color: false,
@@ -8106,7 +8109,7 @@
   wp.hooks.addFilter("editor.BlockEdit", "catpow/editor", (BlockEdit) => (props) => {
     if (blockPanelSupports[props.name]) {
       const panelSupports = blockPanelSupports[props.name];
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(InspectorControls, null, panelSupports.style && /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __14("\u30B9\u30BF\u30A4\u30EB"), icon: "pets", classKey: "className", ...props, selectiveClasses: blockStyleSelectiveClasses[props.name] }), panelSupports.headingLevel && /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __14("\u30EC\u30D9\u30EB"), icon: "pets", classKey: "className", ...props, selectiveClasses: ["level", "headingTag"] }), panelSupports.typography && /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __14("\u6587\u5B57"), icon: "pets", classKey: "className", ...props, selectiveClasses: ["level", "hasFontWeight", "hasFontFamily", "hasTextShadow"] }), panelSupports.color && /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __14("\u8272"), icon: "pets", classKey: "className", ...props, selectiveClasses: ["color", "colorScheme"] }), panelSupports.spacing && (panelSupports.background ? /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(InspectorControls, null, panelSupports.style && /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __14("\u30B9\u30BF\u30A4\u30EB"), icon: "pets", classKey: "className", ...props, selectiveClasses: blockStyleSelectiveClasses[props.name] }), panelSupports.level && /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __14("\u30EC\u30D9\u30EB"), icon: "pets", classKey: "className", ...props, selectiveClasses: ["level", panelSupports.headingLevel && "headingTag"] }), panelSupports.typography && /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __14("\u6587\u5B57"), icon: "pets", classKey: "className", ...props, selectiveClasses: ["level", "hasFontWeight", "hasFontFamily", "hasTextShadow"] }), panelSupports.color && /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __14("\u8272"), icon: "pets", classKey: "className", ...props, selectiveClasses: ["color", "colorScheme"] }), panelSupports.spacing && (panelSupports.background ? /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(
         CP.SelectClassPanel,
         {
           title: __14("\u30B5\u30A4\u30BA\u30FB\u9593\u9694\u30FB\u4F59\u767D"),

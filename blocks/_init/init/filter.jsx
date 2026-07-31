@@ -65,6 +65,7 @@ wp.hooks.addFilter("blocks.registerBlockType", "catpow/editor", (settings, name,
 	if (settings.supports) {
 		const panelSupports = {
 			style: !!blockStyleSelectiveClasses[name],
+			level: settings.supports.level,
 			headingLevel: settings.supports.headingLevel,
 			itemSize: settings.supports.itemSize,
 			color: !!settings.supports.color,
@@ -79,6 +80,7 @@ wp.hooks.addFilter("blocks.registerBlockType", "catpow/editor", (settings, name,
 				...settings,
 				supports: {
 					...settings.supports,
+					level: false,
 					headingLevel: false,
 					itemSize: false,
 					color: false,
@@ -99,7 +101,7 @@ wp.hooks.addFilter("editor.BlockEdit", "catpow/editor", (BlockEdit) => (props) =
 			<>
 				<InspectorControls>
 					{panelSupports.style && <CP.SelectClassPanel title={__("スタイル")} icon="pets" classKey="className" {...props} selectiveClasses={blockStyleSelectiveClasses[props.name]} />}
-					{panelSupports.headingLevel && <CP.SelectClassPanel title={__("レベル")} icon="pets" classKey="className" {...props} selectiveClasses={["level", "headingTag"]} />}
+					{panelSupports.level && <CP.SelectClassPanel title={__("レベル")} icon="pets" classKey="className" {...props} selectiveClasses={["level", panelSupports.headingLevel && "headingTag"]} />}
 					{panelSupports.typography && (
 						<CP.SelectClassPanel title={__("文字")} icon="pets" classKey="className" {...props} selectiveClasses={["level", "hasFontWeight", "hasFontFamily", "hasTextShadow"]} />
 					)}
