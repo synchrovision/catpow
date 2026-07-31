@@ -40,12 +40,6 @@
       const selectiveClasses = useMemo(() => {
         const { devices, imageKeys, imageSizes } = CP.config.section;
         const selectiveClasses2 = [
-          "headingTag",
-          "level",
-          "color",
-          "colorScheme",
-          "hasContentWidth",
-          "hasMargin",
           {
             name: "type",
             type: "buttons",

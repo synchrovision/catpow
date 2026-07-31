@@ -75,9 +75,6 @@
       const { imageKeys } = CP.config.faq;
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
-          "level",
-          "hasContentWidth",
-          "hasMargin",
           { name: "titleCaption", label: "Q\u306B\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3", values: "hasTitleCaption" },
           { name: "subTitle", label: "A\u306B\u898B\u51FA\u3057", values: "hasSubTitle" },
           { name: "hasImage", label: "\u753B\u50CF", values: "hasImage" },

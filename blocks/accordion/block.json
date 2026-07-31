@@ -1,0 +1,11 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "catpow/accordion",
+	"supports": {
+		"headingLevel": true,
+		"color": true,
+		"spacing": true,
+		"level": true
+	}
+}

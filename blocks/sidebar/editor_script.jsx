@@ -32,7 +32,6 @@ wp.blocks.registerBlockType("catpow/sidebar", {
 						isStuck: [{ name: "stuckDirection", type: "buttons", values: { isStuckTop: __("上", "catpow"), isStuckBottom: __("下", "catpow") } }],
 					},
 				},
-				"itemSize",
 			];
 			const proxy = CP.finderProxy(selectiveClasses);
 			wp.hooks.applyFilters("catpow.blocks.sidebar.selectiveClasses", CP.finderProxy(selectiveClasses));

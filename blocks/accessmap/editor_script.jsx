@@ -17,20 +17,12 @@ wp.blocks.registerBlockType("catpow/accessmap", {
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
-				"headingTag",
-				"level",
-				"color",
-				"colorScheme",
 				{
 					name: "type",
 					type: "buttons",
 					label: "タイプ",
 					values: { isTypeFlat: "フラット", isTypeCard: "カード", isTypeFrame: "フーレム" },
 				},
-				"hasMargin",
-				"hasPadding",
-				"hasContentWidth",
-				"itemSize",
 				{
 					name: "mapColor",
 					type: "buttons",
@@ -135,16 +127,14 @@ wp.blocks.registerBlockType("catpow/accessmap", {
 			<>
 				<CP.SelectModeToolbar setAttributes={setAttributes} attributes={attributes} />
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
-					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
-					</PanelBody>
+					<CP.SelectClassPanel title="スタイル" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 					<CP.SelectClassPanel title="リストアイテム" icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={selectiveItemClasses} />
 					{states.isTemplate && (
 						<CP.SelectClassPanel
 							title="テンプレート"
 							icon="edit"
-							{...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]}
+							{...{ setAttributes, attributes }}
+							itemKeys={["items", attributes.currentItemIndex]}
 							selectiveClasses={selectiveItemTemplateClasses}
 						/>
 					)}

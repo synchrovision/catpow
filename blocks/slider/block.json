@@ -8,9 +8,12 @@
 	"icon": "video-alt3",
 	"category": "catpow",
 	"supports": {
-		"anchor": false,
-		"className": false,
-		"color": false,
-		"interactivity": true
+		"interactivity": true,
+		"level": true,
+		"headingLevel": true,
+		"color": true,
+		"spacing": true,
+		"itemSize": true,
+		"background": true
 	}
 }

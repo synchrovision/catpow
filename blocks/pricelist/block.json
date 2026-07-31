@@ -1,0 +1,11 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "catpow/pricelist",
+	"supports": {
+		"level": true,
+		"spacing": true,
+		"color": true,
+		"background": true
+	}
+}

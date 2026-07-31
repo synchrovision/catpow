@@ -23,7 +23,6 @@
       var states = CP.classNamesToFlags(classes);
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
-          "colorScheme",
           { name: "body", type: "buttons", label: __("\u80CC\u666F\u8272", "catpow"), values: { hasBgNone: "\u306A\u3057", hasBgNormal: "\u901A\u5E38", hasBgStrong: "\u5F37\u8ABF", hasBgAchromatic: "\u767D\u9ED2" } },
           { name: "range", input: "range", label: __("\u5E45", "catpow"), key: "width", min: 400, max: 800, step: 10 },
           { name: "range", input: "range", label: __("\u4E0A\u4F59\u767D", "catpow"), key: "paddingTop", min: 0, max: 10 },

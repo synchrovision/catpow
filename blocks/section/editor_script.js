@@ -25,8 +25,6 @@
         const { devices: devices2, imageKeys: imageKeys2 } = CP.config.section;
         const selectiveClasses2 = [
           { name: "sectionTag", input: "buttons", key: "SectionTag", label: __("\u30BB\u30AF\u30B7\u30E7\u30F3\u30BF\u30B0", "catpow"), values: ["article", "section", "aside", "div"], required: true },
-          "headingTag",
-          "level",
           {
             name: "type",
             label: __("\u30BF\u30A4\u30D7", "catpow"),
@@ -70,16 +68,9 @@
             }
           },
           "contentWidth",
-          "hasPadding",
-          "hasMargin",
           { preset: "clipPath", vars: "clipVars" },
           "align",
           { preset: "textAlign", classKey: "headerClasses" },
-          "color",
-          "colorScheme",
-          "backgroundColor",
-          "backgroundImage",
-          "backgroundPattern",
           { preset: "colorScheme", label: __("\u30D8\u30C3\u30C0\u914D\u8272", "catpow"), classKey: "headerClasses" },
           { preset: "backgroundColor", label: __("\u30D8\u30C3\u30C0\u80CC\u666F\u8272", "catpow"), name: "headerBackgroundColor", classKey: "headerClasses" },
           { preset: "backgroundImage", label: __("\u30D8\u30C3\u30C0\u80CC\u666F\u753B\u50CF", "catpow"), name: "headerBackgroundImage", classKey: "headerClasses", vars: "headerVars" },

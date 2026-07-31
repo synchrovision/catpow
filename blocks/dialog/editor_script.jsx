@@ -26,7 +26,7 @@ wp.blocks.registerBlockType("catpow/dialog", {
 		var states = CP.classNamesToFlags(classes);
 
 		const selectiveClasses = useMemo(() => {
-			const selectiveClasses = ["level", "hasContentWidth", "isTemplate"];
+			const selectiveClasses = [ "isTemplate"];
 			wp.hooks.applyFilters("catpow.blocks.dialog.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
 		}, []);

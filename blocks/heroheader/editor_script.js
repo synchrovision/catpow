@@ -52,10 +52,6 @@
       const { devices, imageKeys } = CP.config.heroheader;
       const selectiveClasses = useMemo2(() => {
         const selectiveClasses2 = [
-          "headingTag",
-          "level",
-          "color",
-          "colorScheme",
           { name: "hasButtons", label: __("\u30DC\u30BF\u30F3", "catow"), values: "hasButtons" },
           {
             name: "blendmode",
@@ -74,7 +70,6 @@
             max: 1,
             step: 0.1
           },
-          "backgroundImage",
           { preset: "hasContentWidth", classKey: "bodyClasses" },
           { name: "hasTextBackground", label: __("\u30C6\u30AD\u30B9\u30C8\u80CC\u666F", "catpow"), values: "hasTextBackground", classKey: "bodyClasses" },
           { preset: "hasPadding", classKey: "bodyClasses" },

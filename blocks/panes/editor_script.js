@@ -35,7 +35,7 @@
       const { items = [], classes = "", HeadingTag, vars, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
       var states = CP.classNamesToFlags(classes);
       const { imageKeys } = CP.config.panes;
-      var selectiveClasses = ["headingTag", "level", "hasContentWidth", "hasMargin", { label: "\u30B7\u30F3\u30DC\u30EB", values: "hasSymbol" }, "isTemplate"];
+      var selectiveClasses = [{ label: "\u30B7\u30F3\u30DC\u30EB", values: "hasSymbol" }, "isTemplate"];
       const itemSelectiveClasses = ["color", { input: "icon" }];
       const save = () => {
         setAttributes({ items: JSON.parse(JSON.stringify(items)) });

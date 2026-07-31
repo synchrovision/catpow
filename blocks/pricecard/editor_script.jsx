@@ -35,14 +35,8 @@ wp.blocks.registerBlockType("catpow/pricecard", {
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
-				"headingTag",
 				{ name: "subHeadingTag", preset: "headingTag", key: "SubHeadingTag", label: "副見出しタグ", classKey: "contentsClasses", cond: "hasSubTitle" },
-				"level",
 				{ name: "contentsLevel", preset: "level", label: "コンテンツレベル", classKey: "contentsClasses" },
-				"hasContentWidth",
-				"hasMargin",
-				"itemSize",
-				"color",
 				{ name: "headerColorScheme", preset: "colorScheme", label: "ヘッダ配色", classKey: "headerClasses" },
 				{ name: "contentsColorScheme", preset: "colorScheme", label: "コンテンツ配色", classKey: "contentsClasses" },
 				{ input: "text", label: "価格単位", key: "priceUnit" },

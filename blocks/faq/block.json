@@ -8,8 +8,9 @@
 	"icon": "editor-help",
 	"category": "catpow",
 	"supports": {
-		"anchor": false,
-		"className": false,
-		"interactivity": true
+		"level": true,
+		"interactivity": true,
+		"spacing": true,
+		"background": true
 	}
 }

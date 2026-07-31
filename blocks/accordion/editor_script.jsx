@@ -39,10 +39,6 @@ wp.blocks.registerBlockType("catpow/accordion", {
 		const selectiveClasses = useMemo(() => {
 			const { imageKeys, imageSizes } = CP.config.accordion;
 			const selectiveClasses = [
-				"headingTag",
-				"level",
-				"color",
-				"hasContentWidth",
 				{ name: "image", label: "画像", values: "hasImage", sub: [{ input: "image", keys: imageKeys.image, size: imageSizes.image }] },
 				{
 					name: "template",

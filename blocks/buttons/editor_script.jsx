@@ -29,15 +29,7 @@ wp.blocks.registerBlockType("catpow/buttons", {
 		const states = CP.classNamesToFlags(classes);
 
 		const selectiveClasses = useMemo(() => {
-			const selectiveClasses = [
-				"level",
-				"hasMargin",
-				"contentWidth",
-				"itemSize",
-				{ name: "microcopy", label: "マイクロコピー", values: "hasMicroCopy" },
-				{ name: "caption", label: "キャプション", values: "hasCaption" },
-				"isTemplate",
-			];
+			const selectiveClasses = [{ name: "microcopy", label: "マイクロコピー", values: "hasMicroCopy" }, { name: "caption", label: "キャプション", values: "hasCaption" }, "isTemplate"];
 			wp.hooks.applyFilters("catpow.blocks.buttons.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
 		}, []);
@@ -74,7 +66,7 @@ wp.blocks.registerBlockType("catpow/buttons", {
 				</BlockControls>
 				<CP.SelectModeToolbar setAttributes={setAttributes} attributes={attributes} />
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title="スタイル" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 					<CP.SelectClassPanel title="ボタン" icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={selectiveItemClasses} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
 						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />

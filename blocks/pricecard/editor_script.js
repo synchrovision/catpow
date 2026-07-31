@@ -34,14 +34,8 @@
       const states = CP.classNamesToFlags(classes);
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
-          "headingTag",
           { name: "subHeadingTag", preset: "headingTag", key: "SubHeadingTag", label: "\u526F\u898B\u51FA\u3057\u30BF\u30B0", classKey: "contentsClasses", cond: "hasSubTitle" },
-          "level",
           { name: "contentsLevel", preset: "level", label: "\u30B3\u30F3\u30C6\u30F3\u30C4\u30EC\u30D9\u30EB", classKey: "contentsClasses" },
-          "hasContentWidth",
-          "hasMargin",
-          "itemSize",
-          "color",
           { name: "headerColorScheme", preset: "colorScheme", label: "\u30D8\u30C3\u30C0\u914D\u8272", classKey: "headerClasses" },
           { name: "contentsColorScheme", preset: "colorScheme", label: "\u30B3\u30F3\u30C6\u30F3\u30C4\u914D\u8272", classKey: "contentsClasses" },
           { input: "text", label: "\u4FA1\u683C\u5358\u4F4D", key: "priceUnit" },

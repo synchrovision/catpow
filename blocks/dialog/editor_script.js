@@ -26,7 +26,7 @@
       const { items = [], classes = "", loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
       var states = CP.classNamesToFlags(classes);
       const selectiveClasses = useMemo(() => {
-        const selectiveClasses2 = ["level", "hasContentWidth", "isTemplate"];
+        const selectiveClasses2 = ["isTemplate"];
         wp.hooks.applyFilters("catpow.blocks.dialog.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);

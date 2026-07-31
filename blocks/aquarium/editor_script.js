@@ -69,7 +69,7 @@
       const primaryClass = "wp-block-catpow-aquarium";
       var classArray = _.uniq((className + " " + classes).split(" "));
       const selectiveClasses = useMemo(() => {
-        const selectiveClasses2 = ["color"];
+        const selectiveClasses2 = [];
         wp.hooks.applyFilters("catpow.blocks.aquarium.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);

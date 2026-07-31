@@ -74,12 +74,6 @@ wp.blocks.registerBlockType("catpow/listed", {
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
-				"headingTag",
-				"level",
-				"hasContentWidth",
-				"hasMargin",
-				"color",
-				"colorScheme",
 				{
 					name: "type",
 					label: "タイプ",

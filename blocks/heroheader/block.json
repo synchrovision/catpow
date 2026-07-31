@@ -1,0 +1,11 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "catpow/heroheader",
+	"supports": {
+		"level": true,
+		"headingLevel": true,
+		"color": true,
+		"spacing": true
+	}
+}

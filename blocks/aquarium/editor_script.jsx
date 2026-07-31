@@ -76,7 +76,7 @@
 		var classArray = _.uniq((className + " " + classes).split(" "));
 
 		const selectiveClasses = useMemo(() => {
-			const selectiveClasses = ["color"];
+			const selectiveClasses = [];
 			wp.hooks.applyFilters("catpow.blocks.aquarium.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
 		}, []);

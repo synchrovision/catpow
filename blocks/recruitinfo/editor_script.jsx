@@ -173,13 +173,6 @@ wp.blocks.registerBlockType("catpow/recruitinfo", {
 
 		const selectiveClasses = useMemo(() => {
 			var selectiveClasses = [
-				"headingTag",
-				"level",
-				"hasContentWidth",
-				"hasMargin",
-				"hasPadding",
-				"color",
-				"colorScheme",
 				{
 					name: "type",
 					type: "buttons",

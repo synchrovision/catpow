@@ -106,14 +106,6 @@
       const selectiveClasses = useMemo2(() => {
         const { devices: devices2, imageKeys: imageKeys2, imageSizes: imageSizes2 } = CP.config.slider;
         const selectiveClasses2 = [
-          "headingTag",
-          "level",
-          "hasContentWidth",
-          "itemSize",
-          "hasMargin",
-          "hasPadding",
-          "color",
-          "colorScheme",
           {
             name: "type",
             label: "\u30BF\u30A4\u30D7",

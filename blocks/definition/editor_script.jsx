@@ -28,7 +28,6 @@ wp.blocks.registerBlockType("catpow/definition", {
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
-				"level",
 				{
 					name: "type",
 					label: __("タイプ", "catpow"),
@@ -36,8 +35,6 @@ wp.blocks.registerBlockType("catpow/definition", {
 					values: { isTypeIndex: "index", isTypeSpec: "spec", isTypeInfo: "info" },
 					required: true,
 				},
-				"hasContentWidth",
-				"hasMargin",
 				"isTemplate",
 			];
 			wp.hooks.applyFilters("catpow.blocks.definition.selectiveClasses", CP.finderProxy(selectiveClasses));

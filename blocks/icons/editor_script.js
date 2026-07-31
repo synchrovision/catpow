@@ -47,10 +47,6 @@
       const { items = [], classes, EditMode = false } = attributes;
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
-          "level",
-          "hasMargin",
-          "color",
-          "colorScheme",
           { name: "size", type: "buttons", label: "\u30B5\u30A4\u30BA", values: { isSizeSmall: "\u5C0F", isSizeMedium: "\u4E2D", isSizeLarge: "\u5927" } },
           { name: "filled", label: "\u5857\u308A", values: "isFilled", sub: [{ name: "shape", type: "buttons", label: "\u5F62\u72B6", values: { isShapeCircle: "\u4E38", isShapeSquare: "\u56DB\u89D2" } }] }
         ];

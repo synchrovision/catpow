@@ -113,9 +113,6 @@ wp.blocks.registerBlockType("catpow/layouttable", {
 
 		const selectiveClasses = useMemo(() => {
 			var selectiveClasses = [
-				"level",
-				"hasContentWidth",
-				"hasMargin",
 				{
 					name: "type",
 					type: "gridbuttons",
@@ -127,7 +124,6 @@ wp.blocks.registerBlockType("catpow/layouttable", {
 						isStylePlan: "plan",
 					},
 				},
-				"color",
 			];
 			wp.hooks.applyFilters("catpow.blocks.layouttable.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;

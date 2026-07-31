@@ -27,8 +27,6 @@ wp.blocks.registerBlockType("catpow/section", {
 			const { devices, imageKeys } = CP.config.section;
 			const selectiveClasses = [
 				{ name: "sectionTag", input: "buttons", key: "SectionTag", label: __("セクションタグ", "catpow"), values: ["article", "section", "aside", "div"], required: true },
-				"headingTag",
-				"level",
 				{
 					name: "type",
 					label: __("タイプ", "catpow"),
@@ -72,17 +70,9 @@ wp.blocks.registerBlockType("catpow/section", {
 					},
 				},
 				"contentWidth",
-				"hasPadding",
-				"hasMargin",
 				{ preset: "clipPath", vars: "clipVars" },
 				"align",
 				{ preset: "textAlign", classKey: "headerClasses" },
-
-				"color",
-				"colorScheme",
-				"backgroundColor",
-				"backgroundImage",
-				"backgroundPattern",
 
 				{ preset: "colorScheme", label: __("ヘッダ配色", "catpow"), classKey: "headerClasses" },
 				{ preset: "backgroundColor", label: __("ヘッダ背景色", "catpow"), name: "headerBackgroundColor", classKey: "headerClasses" },
@@ -192,7 +182,9 @@ wp.blocks.registerBlockType("catpow/section", {
 						{states.hasDecoration && <CP.PlacedPictures className="decoration_" attributes={attributes} keys={imageKeys.decoration} />}
 						<header className={headerClasses} style={headerVars}>
 							{states.hasHeaderImage && (
-								<div className="_image">{states.isTemplate && headerImageCode ? headerImageCode : <CP.ResponsiveImage className="_picture" attributes={attributes} keys={imageKeys.headerImage} />}</div>
+								<div className="_image">
+									{states.isTemplate && headerImageCode ? headerImageCode : <CP.ResponsiveImage className="_picture" attributes={attributes} keys={imageKeys.headerImage} />}
+								</div>
 							)}
 							<div className={titleClasses}>
 								{states.hasIcon && <CP.OutputIcon className="_icon" item={attributes} />}

@@ -17,7 +17,7 @@
       const { useMemo } = wp.element;
       const { InspectorControls, useBlockProps } = wp.blockEditor;
       const selectiveClasses = useMemo(() => {
-        const selectiveClasses2 = [{ input: "range", key: "level", min: 1, max: 6 }, "hasMargin", "hasContentWidth"];
+        const selectiveClasses2 = [{ input: "range", key: "level", min: 1, max: 6 }];
         wp.hooks.applyFilters("catpow.blocks.rtf.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);

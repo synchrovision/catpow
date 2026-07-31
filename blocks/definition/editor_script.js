@@ -27,7 +27,6 @@
       var states = CP.classNamesToFlags(classes);
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
-          "level",
           {
             name: "type",
             label: __("\u30BF\u30A4\u30D7", "catpow"),
@@ -35,8 +34,6 @@
             values: { isTypeIndex: "index", isTypeSpec: "spec", isTypeInfo: "info" },
             required: true
           },
-          "hasContentWidth",
-          "hasMargin",
           "isTemplate"
         ];
         wp.hooks.applyFilters("catpow.blocks.definition.selectiveClasses", CP.finderProxy(selectiveClasses2));

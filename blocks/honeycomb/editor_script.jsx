@@ -81,7 +81,7 @@ wp.blocks.registerBlockType("catpow/honeycomb", {
 		});
 
 		const selectiveClasses = useMemo(() => {
-			const selectiveClasses = ["hasContentWidth", "hasMargin", "color", "colorScheme", "backgroundColor", "backgroundImage"];
+			const selectiveClasses = [];
 			wp.hooks.applyFilters("catpow.blocks.honeycomb.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
 		}, []);

@@ -11,7 +11,7 @@
       const { InnerBlocks, InspectorControls, useBlockProps } = wp.blockEditor;
       const { classes, vars, nav_name } = attributes;
       const selectiveClasses = useMemo(() => {
-        const selectiveClasses2 = [navSelectiveClasses, "level", "hasContentWidth", "hasPadding", "hasMargin", "itemSize", "color", "colorScheme"];
+        const selectiveClasses2 = [navSelectiveClasses];
         wp.hooks.applyFilters("catpow.blocks.nav.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);

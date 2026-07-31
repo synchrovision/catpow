@@ -16,14 +16,8 @@ wp.blocks.registerBlockType("catpow/pageheader", {
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
-				"level",
 				"size",
 				{ name: "breadcrumb", label: __("パンくずリスト", "catpow"), values: "hasBreadcrumb" },
-				"color",
-				"colorScheme",
-				"backgroundColor",
-				"backgroundImage",
-				"backgroundPattern",
 			];
 			wp.hooks.applyFilters("catpow.blocks.pageheader.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;

@@ -35,7 +35,7 @@ wp.blocks.registerBlockType("catpow/panes", {
 		var states = CP.classNamesToFlags(classes);
 		const { imageKeys } = CP.config.panes;
 
-		var selectiveClasses = ["headingTag", "level", "hasContentWidth", "hasMargin", { label: "シンボル", values: "hasSymbol" }, "isTemplate"];
+		var selectiveClasses = [ { label: "シンボル", values: "hasSymbol" }, "isTemplate"];
 		const itemSelectiveClasses = ["color", { input: "icon" }];
 
 		const save = () => {

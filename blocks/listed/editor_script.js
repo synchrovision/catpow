@@ -86,12 +86,6 @@
       var states = CP.classNamesToFlags(classes);
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
-          "headingTag",
-          "level",
-          "hasContentWidth",
-          "hasMargin",
-          "color",
-          "colorScheme",
           {
             name: "type",
             label: "\u30BF\u30A4\u30D7",

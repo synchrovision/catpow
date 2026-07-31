@@ -17,14 +17,8 @@
       const states = CP.classNamesToFlags(attributes.classes);
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
-          "level",
           "size",
-          { name: "breadcrumb", label: __("\u30D1\u30F3\u304F\u305A\u30EA\u30B9\u30C8", "catpow"), values: "hasBreadcrumb" },
-          "color",
-          "colorScheme",
-          "backgroundColor",
-          "backgroundImage",
-          "backgroundPattern"
+          { name: "breadcrumb", label: __("\u30D1\u30F3\u304F\u305A\u30EA\u30B9\u30C8", "catpow"), values: "hasBreadcrumb" }
         ];
         wp.hooks.applyFilters("catpow.blocks.pageheader.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;

@@ -12,13 +12,8 @@ wp.blocks.registerBlockType("catpow/pagenavigation", {
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses: SelectiveClassConfig[] = [
-				"headingTag",
-				"level",
 				{ preset: "headingTag", label: "メニュー見出し", classKey: "menuClasses", key: "MenuHeadingTag" },
 				{ preset: "level", label: "メニューレベル", classKey: "menuClasses" },
-				"hasMargin",
-				"hasContentWidth",
-				"itemSize",
 				{ name: "type", type: "gridbuttons", label: "タイプ", values: { isStyleTree: "tree", isStyleList: "list", isStyleCard: "card", isStyleGrid: "grid" } },
 				{ name: "hasOwnTitle", input: "bool", label: "カスタムタイトル", key: "hasOwnTitle" },
 				{ name: "title", input: "text", label: "タイトル", key: "title", cond: (states, props) => props.attr.hasOwnTitle },

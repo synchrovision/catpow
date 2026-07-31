@@ -98,12 +98,8 @@ wp.blocks.registerBlockType("catpow/flow", {
 					label: "タイプ",
 					values: { isTypeFlat: "フラット", isTypeCard: "カード", isTypeTimeline: "タイムライン" },
 				},
-				"hasContentWidth",
-				"hasMargin",
 				{ preset: "itemSize", cond: (states) => states.isTypeFlat || states.isTypeTimeline },
-				"headingTag",
 				{ name: "subHeadingTag", preset: "headingTag", key: "SubHeadingTag", label: "副見出しタグ", classKey: "contentsClasses", cond: "hasSubTitle" },
-				"level",
 				{ name: "contentsLevel", preset: "level", label: "コンテンツレベル", classKey: "contentsClasses" },
 				{
 					name: "counter",

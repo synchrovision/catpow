@@ -21,10 +21,6 @@ wp.blocks.registerBlockType("catpow/contactinfo", {
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
-				"headingTag",
-				"level",
-				"color",
-				"hasContentWidth",
 				{ name: "title", label: "タイトル", values: "hasTitle" },
 				{ name: "lead", label: "リード", values: "hasLead" },
 				{ name: "caption", label: "キャプション", values: "hasCaption" },
@@ -69,10 +65,7 @@ wp.blocks.registerBlockType("catpow/contactinfo", {
 			<>
 				<CP.SelectModeToolbar setAttributes={setAttributes} attributes={attributes} />
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
-					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
-					</PanelBody>
+					<CP.SelectClassPanel title="スタイル" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 					<CP.SelectClassPanel title="アイテム" icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={selectiveItemClasses} />
 					<CP.ItemControlInfoPanel />
 				</InspectorControls>

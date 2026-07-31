@@ -8,12 +8,10 @@
 	"textdomain": "catpow",
 	"description": "求人情報とJobPosting構造化データを出力するブロックです。",
 	"supports": {
-		"anchor": true,
-		"className": false,
-		"color": false,
-		"spacing": {
-			"margin": true,
-			"padding": true
-		}
+		"level": true,
+		"headingLevel": true,
+		"color": true,
+		"spacing": true,
+		"background": true
 	}
 }

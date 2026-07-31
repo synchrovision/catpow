@@ -7,15 +7,19 @@
 	"description": "見出しと内容のまとまりを表すセクションのブロックです。",
 	"icon": "id-alt",
 	"category": "catpow",
-	"providesContext": { "catpow/color": "color" },
-	"usesContext": ["catpow/color"],
+	"providesContext": {
+		"catpow/color": "color"
+	},
+	"usesContext": [
+		"catpow/color"
+	],
 	"supports": {
 		"anchor": true,
 		"className": false,
-		"color": false,
-		"spacing": {
-			"margin": true,
-			"padding": true
-		}
+		"color": true,
+		"spacing": true,
+		"headingLevel": true,
+		"background": true,
+		"level": true
 	}
 }

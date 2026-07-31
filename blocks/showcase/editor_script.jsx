@@ -54,10 +54,6 @@ wp.blocks.registerBlockType("catpow/showcase", {
 		const selectiveClasses = useMemo(() => {
 			const { imageKeys } = CP.config.showcase;
 			const selectiveClasses = [
-				"headingTag",
-				"level",
-				"color",
-				"colorScheme",
 				{
 					name: "type",
 					type: "buttons",
@@ -88,9 +84,6 @@ wp.blocks.registerBlockType("catpow/showcase", {
 					label: "タイトルキャプション",
 					values: "hasTitleCaption",
 				},
-				"hasMargin",
-				"hasPadding",
-				"hasContentWidth",
 				{ name: "link", label: "リンク", values: "hasLink" },
 				"isTemplate",
 			];

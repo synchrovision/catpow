@@ -57,12 +57,6 @@ wp.blocks.registerBlockType("catpow/lightbox", {
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
-				"headingTag",
-				"level",
-				"color",
-				"colorScheme",
-				"hasContentWidth",
-				"hasMargin",
 				{
 					name: "type",
 					type: "buttons",

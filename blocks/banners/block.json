@@ -1,0 +1,12 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "catpow/banners",
+	"supports": {
+		"level": true,
+		"headingLevel": true,
+		"spacing": true,
+		"itemSize": true,
+		"background": true
+	}
+}

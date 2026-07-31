@@ -30,7 +30,6 @@ wp.blocks.registerBlockType("catpow/div", {
 		const selectiveClasses = useMemo(() => {
 			const { devices, imageKeys } = CP.config.div;
 			const selectiveClasses = [
-				"level",
 				{
 					name: "type",
 					label: "タイプ",
@@ -49,14 +48,6 @@ wp.blocks.registerBlockType("catpow/div", {
 						isTypeFrame: ["hasContentWidth"],
 					},
 				},
-				"hasContentWidth",
-				"color",
-				"colorScheme",
-				"backgroundColor",
-				"backgroundImage",
-				"backgroundPattern",
-				"hasMargin",
-				"hasPadding",
 			];
 			wp.hooks.applyFilters("catpow.blocks.div.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;

@@ -2,5 +2,11 @@
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"name": "catpow/buttons",
 	"apiVersion": 3,
-	"usesContext": ["catpow/color"]
+	"usesContext": ["catpow/color"],
+	"supports": {
+		"level": true,
+		"spacing": true,
+		"itemSize": true,
+		"background": true
+	}
 }

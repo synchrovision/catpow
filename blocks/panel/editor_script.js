@@ -21,10 +21,6 @@
       const { imageKeys } = CP.config.panel;
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
-          "headingTag",
-          "level",
-          "hasContentWidth",
-          "hasMargin",
           {
             name: "type",
             label: "\u30BF\u30A4\u30D7",

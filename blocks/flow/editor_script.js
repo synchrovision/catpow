@@ -97,12 +97,8 @@
             label: "\u30BF\u30A4\u30D7",
             values: { isTypeFlat: "\u30D5\u30E9\u30C3\u30C8", isTypeCard: "\u30AB\u30FC\u30C9", isTypeTimeline: "\u30BF\u30A4\u30E0\u30E9\u30A4\u30F3" }
           },
-          "hasContentWidth",
-          "hasMargin",
           { preset: "itemSize", cond: (states2) => states2.isTypeFlat || states2.isTypeTimeline },
-          "headingTag",
           { name: "subHeadingTag", preset: "headingTag", key: "SubHeadingTag", label: "\u526F\u898B\u51FA\u3057\u30BF\u30B0", classKey: "contentsClasses", cond: "hasSubTitle" },
-          "level",
           { name: "contentsLevel", preset: "level", label: "\u30B3\u30F3\u30C6\u30F3\u30C4\u30EC\u30D9\u30EB", classKey: "contentsClasses" },
           {
             name: "counter",

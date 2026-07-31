@@ -46,10 +46,6 @@
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
-				"level",
-				"hasMargin",
-				"color",
-				"colorScheme",
 				{ name: "size", type: "buttons", label: "サイズ", values: { isSizeSmall: "小", isSizeMedium: "中", isSizeLarge: "大" } },
 				{ name: "filled", label: "塗り", values: "isFilled", sub: [{ name: "shape", type: "buttons", label: "形状", values: { isShapeCircle: "丸", isShapeSquare: "四角" } }] },
 			];

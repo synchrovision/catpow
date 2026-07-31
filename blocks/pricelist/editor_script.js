@@ -14,7 +14,7 @@
       const primaryClass = "wp-block-catpow-pricelist";
       var states = CP.classNamesToFlags(classes);
       const selectiveClasses = useMemo(() => {
-        const selectiveClasses2 = ["hasContentWidth", "hasMargin", "isTemplate"];
+        const selectiveClasses2 = ["isTemplate"];
         wp.hooks.applyFilters("catpow.blocks.pricelist.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);

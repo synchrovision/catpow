@@ -72,14 +72,6 @@ wp.blocks.registerBlockType("catpow/slider", {
 		const selectiveClasses = useMemo(() => {
 			const { devices, imageKeys, imageSizes } = CP.config.slider;
 			const selectiveClasses = [
-				"headingTag",
-				"level",
-				"hasContentWidth",
-				"itemSize",
-				"hasMargin",
-				"hasPadding",
-				"color",
-				"colorScheme",
 				{
 					name: "type",
 					label: "タイプ",

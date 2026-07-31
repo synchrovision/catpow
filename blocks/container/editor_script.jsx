@@ -30,14 +30,6 @@ wp.blocks.registerBlockType("catpow/container", {
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
-				"level",
-				"hasContentWidth",
-				{
-					name: "border",
-					label: __("ボーダー", "catpow"),
-					values: "hasBorder",
-				},
-				"boxShadow",
 				{
 					name: "scrollX",
 					label: __("スクロールX", "catpow"),
@@ -50,7 +42,6 @@ wp.blocks.registerBlockType("catpow/container", {
 					values: "hasScrollY",
 					sub: [{ name: "containerHeight", label: __("コンテナの高さ", "catpow"), vars: "boxSizeVars", key: "--cp-container-height", input: "range", min: 100, max: 1000, step: 10 }],
 				},
-				"hasMargin",
 			];
 			wp.hooks.applyFilters("catpow.blocks.container.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
@@ -66,10 +57,7 @@ wp.blocks.registerBlockType("catpow/container", {
 					</div>
 				</div>
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
-					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
-					</PanelBody>
+					<CP.SelectClassPanel title="スタイル" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 				</InspectorControls>
 			</>
 		);

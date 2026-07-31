@@ -8,8 +8,10 @@
 	"icon": "editor-code",
 	"category": "catpow",
 	"supports": {
-		"anchor": true,
-		"className": false,
-		"color": false
+		"level": true,
+		"headingLevel": true,
+		"color": true,
+		"spacing": true,
+		"background": true
 	}
 }

@@ -22,7 +22,6 @@ wp.blocks.registerBlockType("catpow/sitefooter", {
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
-				"level",
 				{ preset: "colorScheme", label: "コンテンツ配色", classKey: "contentsClasses" },
 				{ preset: "backgroundColor", label: "コンテンツ背景色", classKey: "contentsClasses" },
 				{ preset: "colorScheme", label: "コピーライト配色", classKey: "copyrightClasses" },

@@ -104,8 +104,6 @@
       }
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
-          "level",
-          "color",
           {
             name: "type",
             type: "buttons",

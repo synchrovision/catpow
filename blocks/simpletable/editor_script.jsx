@@ -79,9 +79,6 @@
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
-				"level",
-				"hasContentWidth",
-				"hasMargin",
 				{
 					name: "type",
 					type: "gridbuttons",
@@ -118,7 +115,6 @@
 						],
 					},
 				},
-				"color",
 			];
 			wp.hooks.applyFilters("catpow.blocks.simpletable.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;

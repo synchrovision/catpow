@@ -30,14 +30,6 @@
       const { boxSizeVars, classes = "" } = attributes;
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
-          "level",
-          "hasContentWidth",
-          {
-            name: "border",
-            label: __("\u30DC\u30FC\u30C0\u30FC", "catpow"),
-            values: "hasBorder"
-          },
-          "boxShadow",
           {
             name: "scrollX",
             label: __("\u30B9\u30AF\u30ED\u30FC\u30EBX", "catpow"),
@@ -49,14 +41,13 @@
             label: __("\u30B9\u30AF\u30ED\u30FC\u30EBY", "catpow"),
             values: "hasScrollY",
             sub: [{ name: "containerHeight", label: __("\u30B3\u30F3\u30C6\u30CA\u306E\u9AD8\u3055", "catpow"), vars: "boxSizeVars", key: "--cp-container-height", input: "range", min: 100, max: 1e3, step: 10 }]
-          },
-          "hasMargin"
+          }
         ];
         wp.hooks.applyFilters("catpow.blocks.container.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);
       const blockProps = useBlockProps({ className: classes, style: boxSizeVars });
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement("div", { className: "wp-block-catpow-container__body" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: [["core/paragraph", { content: CP.dummyText.text }]], templateLock: false }))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: "\u30AF\u30E9\u30B9", onChange: (classes2) => setAttributes({ classes: classes2 }), value: classes }))));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement("div", { className: "wp-block-catpow-container__body" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: [["core/paragraph", { content: CP.dummyText.text }]], templateLock: false }))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30B9\u30BF\u30A4\u30EB", icon: "art", ...{ setAttributes, attributes }, selectiveClasses })));
     },
     save({ attributes, className, setAttributes }) {
       const { InnerBlocks, useBlockProps } = wp.blockEditor;

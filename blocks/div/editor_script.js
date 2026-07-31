@@ -30,7 +30,6 @@
       const selectiveClasses = useMemo(() => {
         const { devices: devices2, imageKeys: imageKeys2 } = CP.config.div;
         const selectiveClasses2 = [
-          "level",
           {
             name: "type",
             label: "\u30BF\u30A4\u30D7",
@@ -48,15 +47,7 @@
             bind: {
               isTypeFrame: ["hasContentWidth"]
             }
-          },
-          "hasContentWidth",
-          "color",
-          "colorScheme",
-          "backgroundColor",
-          "backgroundImage",
-          "backgroundPattern",
-          "hasMargin",
-          "hasPadding"
+          }
         ];
         wp.hooks.applyFilters("catpow.blocks.div.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;

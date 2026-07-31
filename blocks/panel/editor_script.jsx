@@ -21,10 +21,6 @@ wp.blocks.registerBlockType("catpow/panel", {
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
-				"headingTag",
-				"level",
-				"hasContentWidth",
-				"hasMargin",
 				{
 					name: "type",
 					label: "タイプ",

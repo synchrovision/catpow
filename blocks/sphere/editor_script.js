@@ -33,13 +33,6 @@
       const { imageKeys } = CP.config.sphere;
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
-          "headingTag",
-          "level",
-          "hasContentWidth",
-          "hasMargin",
-          "itemSize",
-          "color",
-          "colorScheme",
           { name: "image", label: "\u753B\u50CF", values: "hasImage" },
           { name: "icon", label: "\u30A2\u30A4\u30B3\u30F3", values: "hasIcon" },
           { name: "catpion", label: "\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3", values: "hasCaption" },

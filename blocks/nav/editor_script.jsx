@@ -11,7 +11,7 @@ wp.blocks.registerBlockType("catpow/nav", {
 		const { classes, vars, nav_name } = attributes;
 
 		const selectiveClasses = useMemo(() => {
-			const selectiveClasses = [navSelectiveClasses, "level", "hasContentWidth", "hasPadding", "hasMargin", "itemSize", "color", "colorScheme"];
+			const selectiveClasses = [navSelectiveClasses];
 			wp.hooks.applyFilters("catpow.blocks.nav.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
 		}, []);

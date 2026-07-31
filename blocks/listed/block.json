@@ -8,12 +8,10 @@
 	"textdomain": "catpow",
 	"description": "目次やお知らせなどの一覧ブロックです。",
 	"supports": {
-		"anchor": false,
-		"className": false,
-		"color": false,
-		"spacing": {
-			"margin": true,
-			"padding": true
-		}
+		"level": true,
+		"headingLevel": true,
+		"color": true,
+		"spacing": true,
+		"background": true
 	}
 }

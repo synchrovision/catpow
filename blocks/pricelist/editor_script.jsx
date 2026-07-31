@@ -14,7 +14,7 @@
 		var states = CP.classNamesToFlags(classes);
 
 		const selectiveClasses = useMemo(() => {
-			const selectiveClasses = ["hasContentWidth", "hasMargin", "isTemplate"];
+			const selectiveClasses = [ "isTemplate"];
 			wp.hooks.applyFilters("catpow.blocks.pricelist.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
 		}, []);

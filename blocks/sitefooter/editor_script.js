@@ -21,7 +21,6 @@
       const states = CP.classNamesToFlags(classes);
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
-          "level",
           { preset: "colorScheme", label: "\u30B3\u30F3\u30C6\u30F3\u30C4\u914D\u8272", classKey: "contentsClasses" },
           { preset: "backgroundColor", label: "\u30B3\u30F3\u30C6\u30F3\u30C4\u80CC\u666F\u8272", classKey: "contentsClasses" },
           { preset: "colorScheme", label: "\u30B3\u30D4\u30FC\u30E9\u30A4\u30C8\u914D\u8272", classKey: "copyrightClasses" },

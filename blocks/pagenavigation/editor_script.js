@@ -8,13 +8,8 @@
       const { serverSideRender: ServerSideRender } = wp;
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
-          "headingTag",
-          "level",
           { preset: "headingTag", label: "\u30E1\u30CB\u30E5\u30FC\u898B\u51FA\u3057", classKey: "menuClasses", key: "MenuHeadingTag" },
           { preset: "level", label: "\u30E1\u30CB\u30E5\u30FC\u30EC\u30D9\u30EB", classKey: "menuClasses" },
-          "hasMargin",
-          "hasContentWidth",
-          "itemSize",
           { name: "type", type: "gridbuttons", label: "\u30BF\u30A4\u30D7", values: { isStyleTree: "tree", isStyleList: "list", isStyleCard: "card", isStyleGrid: "grid" } },
           { name: "hasOwnTitle", input: "bool", label: "\u30AB\u30B9\u30BF\u30E0\u30BF\u30A4\u30C8\u30EB", key: "hasOwnTitle" },
           { name: "title", input: "text", label: "\u30BF\u30A4\u30C8\u30EB", key: "title", cond: (states, props) => props.attr.hasOwnTitle },

@@ -29,8 +29,7 @@
             sub: {
               isStuck: [{ name: "stuckDirection", type: "buttons", values: { isStuckTop: __("\u4E0A", "catpow"), isStuckBottom: __("\u4E0B", "catpow") } }]
             }
-          },
-          "itemSize"
+          }
         ];
         const proxy = CP.finderProxy(selectiveClasses2);
         wp.hooks.applyFilters("catpow.blocks.sidebar.selectiveClasses", CP.finderProxy(selectiveClasses2));

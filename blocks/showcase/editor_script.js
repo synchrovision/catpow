@@ -53,10 +53,6 @@
       const selectiveClasses = useMemo(() => {
         const { imageKeys: imageKeys2 } = CP.config.showcase;
         const selectiveClasses2 = [
-          "headingTag",
-          "level",
-          "color",
-          "colorScheme",
           {
             name: "type",
             type: "buttons",
@@ -87,9 +83,6 @@
             label: "\u30BF\u30A4\u30C8\u30EB\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3",
             values: "hasTitleCaption"
           },
-          "hasMargin",
-          "hasPadding",
-          "hasContentWidth",
           { name: "link", label: "\u30EA\u30F3\u30AF", values: "hasLink" },
           "isTemplate"
         ];

@@ -52,15 +52,11 @@
       const selectiveClasses = useMemo2(() => {
         const selectiveClasses2 = [
           artframeSelectiveClasses,
-          "level",
-          "color",
-          "colorScheme",
           "zIndex",
           { preset: "backgroundColor", classKey: "contentsClasses" },
           { preset: "backgroundImage", classKey: "contentsClasses" },
           { preset: "backgroundPattern", classKey: "contentsClasses" },
           { preset: "contentWidth", classKey: "contentsBodyClasses" },
-          "hasMargin",
           { preset: "hasPadding", classKey: "contentsBodyClasses" }
         ];
         wp.hooks.applyFilters("catpow.blocks.artframe.selectiveClasses", CP.finderProxy(selectiveClasses2));

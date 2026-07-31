@@ -27,12 +27,6 @@ wp.blocks.registerBlockType("catpow/tabs", {
 		const selectiveClasses = useMemo(() => {
 			const { devices, imageKeys, imageSizes } = CP.config.section;
 			const selectiveClasses = [
-				"headingTag",
-				"level",
-				"color",
-				"colorScheme",
-				"hasContentWidth",
-				"hasMargin",
 				{
 					name: "type",
 					type: "buttons",

@@ -22,10 +22,6 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
-				"headingTag",
-				"level",
-				"color",
-				"colorScheme",
 				{ name: "hasButtons", label: __("ボタン", "catow"), values: "hasButtons" },
 				{
 					name: "blendmode",
@@ -44,7 +40,6 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 					max: 1,
 					step: 0.1,
 				},
-				"backgroundImage",
 				{ preset: "hasContentWidth", classKey: "bodyClasses" },
 				{ name: "hasTextBackground", label: __("テキスト背景", "catpow"), values: "hasTextBackground", classKey: "bodyClasses" },
 				{ preset: "hasPadding", classKey: "bodyClasses" },

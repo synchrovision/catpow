@@ -15,9 +15,6 @@
       const { func, param } = attributes;
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
-          "level",
-          "hasContentWidth",
-          "hasMargin",
           {
             name: "type",
             label: "\u30BF\u30A4\u30D7",

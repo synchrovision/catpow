@@ -40,15 +40,10 @@ wp.blocks.registerBlockType("catpow/unit", {
 		const { devices, imageKeys } = CP.config.unit;
 
 		var selectiveClasses = [
-			"color",
 			{
 				label: "タイプ",
-				filter: "type",
-				values: ["default", "snap", "panel"],
-				sub: {
-					frame: [{ label: "色", values: "hasColor", sub: ["color"] }],
-					columns: [{ label: "幅", values: { narrow: "狭い", regular: "普通", wide: "広い" } }],
-				},
+				type: "buttons",
+				values: ["snap", "panel"],
 			},
 			{ input: "picture", label: "画像", keys: imageKeys.image, devices, isTemplate: states.isTemplate },
 			{
@@ -69,17 +64,14 @@ wp.blocks.registerBlockType("catpow/unit", {
 			<>
 				<div className={classes}>
 					<figure className="image">
-						<ResponsiveImage attributes={attributes} keys={imageKeys.image} />
+						<CP.ResponsiveImage attributes={attributes} keys={imageKeys.image} />
 					</figure>
 					<div className="contents">
 						<InnerBlocks template={[["core/paragraph", { content: CP.dummyText.text }]]} templateLock={false} />
 					</div>
 				</div>
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
-					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
-					</PanelBody>
+					<CP.SelectClassPanel title="スタイル" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 				</InspectorControls>
 			</>
 		);
@@ -95,7 +87,7 @@ wp.blocks.registerBlockType("catpow/unit", {
 		return (
 			<div className={classes}>
 				<figure className="image">
-					<ResponsiveImage attributes={attributes} keys={imageKeys.image} />
+					<CP.ResponsiveImage attributes={attributes} keys={imageKeys.image} />
 				</figure>
 				<div className="contents">
 					<InnerBlocks.Content />

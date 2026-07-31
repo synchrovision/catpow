@@ -33,13 +33,6 @@ wp.blocks.registerBlockType("catpow/sphere", {
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
-				"headingTag",
-				"level",
-				"hasContentWidth",
-				"hasMargin",
-				"itemSize",
-				"color",
-				"colorScheme",
 				{ name: "image", label: "画像", values: "hasImage" },
 				{ name: "icon", label: "アイコン", values: "hasIcon" },
 				{ name: "catpion", label: "キャプション", values: "hasCaption" },

@@ -2,5 +2,11 @@
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
 	"name": "catpow/formbuttons",
-	"usesContext": ["catpow/color"]
+	"usesContext": ["catpow/color"],
+	"supports": {
+		"level": true,
+		"spacing": true,
+		"itemSize": true,
+		"background": true
+	}
 }

@@ -63,9 +63,6 @@ wp.blocks.registerBlockType("catpow/faq", {
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
-				"level",
-				"hasContentWidth",
-				"hasMargin",
 				{ name: "titleCaption", label: "Qにキャプション", values: "hasTitleCaption" },
 				{ name: "subTitle", label: "Aに見出し", values: "hasSubTitle" },
 				{ name: "hasImage", label: "画像", values: "hasImage" },

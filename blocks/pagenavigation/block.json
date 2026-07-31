@@ -8,9 +8,12 @@
 	"icon": "menu",
 	"category": "catpow",
 	"supports": {
-		"anchor": true,
-		"className": false,
+		"interactivity": true,
+		"level": true,
+		"headingLevel": true,
 		"color": false,
-		"interactivity": true
+		"spacing": true,
+		"itemSize": true,
+		"background": true
 	}
 }

@@ -7,11 +7,17 @@
 	"description": "切り抜きと装飾アートのブロックです。",
 	"icon": "images-alt",
 	"name": "catpow/artframe",
-	"providesContext": { "catpow/color": "color" },
-	"usesContext": ["catpow/color"],
+	"providesContext": {
+		"catpow/color": "color"
+	},
+	"usesContext": [
+		"catpow/color"
+	],
 	"supports": {
 		"anchor": true,
 		"className": false,
-		"color": false
+		"color": true,
+		"spacing": true,
+		"level": true
 	}
 }

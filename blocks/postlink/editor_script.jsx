@@ -15,9 +15,6 @@ wp.blocks.registerBlockType("catpow/postlink", {
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
-				"level",
-				"hasContentWidth",
-				"hasMargin",
 				{
 					name: "type",
 					label: "タイプ",

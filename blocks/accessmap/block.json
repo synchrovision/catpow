@@ -1,0 +1,13 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "catpow/accessmap",
+	"supports": {
+		"level": true,
+		"headingLevel": true,
+		"itemSize": true,
+		"color": true,
+		"spacing": true,
+		"background": true
+	}
+}

@@ -7,15 +7,18 @@
 	"name": "catpow/div",
 	"title": "🐾 Div",
 	"description": "コンテンツを枠で囲んだりレイアウト調整をするためのコンテナです。",
-	"providesContext": { "catpow/color": "color" },
-	"usesContext": ["catpow/color"],
+	"providesContext": {
+		"catpow/color": "color"
+	},
+	"usesContext": [
+		"catpow/color"
+	],
 	"supports": {
 		"anchor": true,
 		"className": false,
-		"color": false,
-		"spacing": {
-			"margin": true,
-			"padding": true
-		}
+		"color": true,
+		"spacing": true,
+		"background": true,
+		"level": true
 	}
 }

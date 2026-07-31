@@ -152,13 +152,6 @@
       } = attributes;
       const selectiveClasses = useMemo(() => {
         var selectiveClasses2 = [
-          "headingTag",
-          "level",
-          "hasContentWidth",
-          "hasMargin",
-          "hasPadding",
-          "color",
-          "colorScheme",
           {
             name: "type",
             type: "buttons",

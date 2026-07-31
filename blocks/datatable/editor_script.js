@@ -100,9 +100,6 @@
       ];
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
-          "level",
-          "hasContentWidth",
-          "hasMargin",
           {
             name: "type",
             type: "buttons",
@@ -113,7 +110,6 @@
               isStylePlan: "plan"
             }
           },
-          "color",
           {
             name: "loop",
             input: "bool",

@@ -69,12 +69,6 @@
       const sliderStates = CP.classNamesToFlags(sliderClasses);
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
-          "headingTag",
-          "level",
-          "color",
-          "colorScheme",
-          "hasContentWidth",
-          "hasMargin",
           {
             name: "type",
             type: "buttons",

@@ -109,9 +109,6 @@
       }
       const selectiveClasses = useMemo(() => {
         var selectiveClasses2 = [
-          "level",
-          "hasContentWidth",
-          "hasMargin",
           {
             name: "type",
             type: "gridbuttons",
@@ -122,8 +119,7 @@
               isStyleSheet: "sheet",
               isStylePlan: "plan"
             }
-          },
-          "color"
+          }
         ];
         wp.hooks.applyFilters("catpow.blocks.layouttable.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;

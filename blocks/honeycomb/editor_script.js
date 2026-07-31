@@ -71,7 +71,7 @@
         };
       });
       const selectiveClasses = useMemo(() => {
-        const selectiveClasses2 = ["hasContentWidth", "hasMargin", "color", "colorScheme", "backgroundColor", "backgroundImage"];
+        const selectiveClasses2 = [];
         wp.hooks.applyFilters("catpow.blocks.honeycomb.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);

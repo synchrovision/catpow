@@ -91,8 +91,6 @@ wp.blocks.registerBlockType("catpow/comparetable", {
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
-				"level",
-				"color",
 				{
 					name: "type",
 					type: "buttons",
