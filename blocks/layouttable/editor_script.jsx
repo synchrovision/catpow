@@ -38,6 +38,7 @@ wp.blocks.registerBlockType("catpow/layouttable", {
 		],
 	},
 	attributes: {
+		vars: { type: "object", default: {} },
 		classes: { source: "attribute", selector: "table", attribute: "class", default: "wp-block-catpow-layouttable is-level3 is-style-spec" },
 		rows: {
 			source: "query",
@@ -87,7 +88,7 @@ wp.blocks.registerBlockType("catpow/layouttable", {
 		const { useState, useMemo, createElement: el } = wp.element;
 		const { AlignmentToolbar, InnerBlocks, BlockControls, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
 		const { PanelBody, Button, SelectControl, TreeSelect, TextareaControl, TextControl } = wp.components;
-		const { classes = "", rows } = attributes;
+		const { classes = "", vars, rows } = attributes;
 
 		if (attributes.file) {
 			var reader = new FileReader();
@@ -491,7 +492,7 @@ wp.blocks.registerBlockType("catpow/layouttable", {
 					/>
 				</BlockControls>
 				<CP.Bem prefix="wp-block-catpow">
-					<table {...useBlockProps({ className: classes })}>
+					<table {...useBlockProps({ className: classes, style: vars })}>
 						<tbody>
 							{rowsCopy.map((row, r) => {
 								return (
@@ -606,12 +607,12 @@ wp.blocks.registerBlockType("catpow/layouttable", {
 
 	save({ attributes, className }) {
 		const { createElement: el } = wp.element;
-		const { RichText } = wp.blockEditor;
-		const { classes, rows } = attributes;
+		const { RichText, useBlockProps } = wp.blockEditor;
+		const { classes, vars, rows } = attributes;
 
 		return (
 			<CP.Bem prefix="wp-block-catpow">
-				<table className={classes}>
+				<table {...useBlockProps.save({ className: classes, style: vars })}>
 					<tbody>
 						{rows.map((row, r) => {
 							return (

@@ -22,7 +22,7 @@ wp.blocks.registerBlockType("catpow/definition", {
 		const { useMemo } = wp.element;
 		const { InnerBlocks, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
 		const { PanelBody, TextareaControl } = wp.components;
-		const { items = [], classes = "", loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
+		const { items = [], classes = "", vars, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
 
 		var states = CP.classNamesToFlags(classes);
 
@@ -45,7 +45,7 @@ wp.blocks.registerBlockType("catpow/definition", {
 			setAttributes({ items: JSON.parse(JSON.stringify(items)) });
 		};
 
-		const blockProps = useBlockProps({ className: EditMode || (AltMode && doLoop) ? "cp-altcontent" : classes });
+		const blockProps = useBlockProps({ className: EditMode || (AltMode && doLoop) ? "cp-altcontent" : classes, style: vars });
 
 		return (
 			<>
@@ -119,12 +119,12 @@ wp.blocks.registerBlockType("catpow/definition", {
 	},
 	save({ attributes, className }) {
 		const { InnerBlocks, RichText, useBlockProps } = wp.blockEditor;
-		const { items = [], classes = "", loopCount, doLoop } = attributes;
+		const { items = [], classes = "", vars, loopCount, doLoop } = attributes;
 
 		return (
 			<>
 				<CP.Bem prefix="wp-block-catpow">
-					<div {...useBlockProps.save({ className: classes })}>
+					<div {...useBlockProps.save({ className: classes, style: vars })}>
 						{items.map((item, index) => (
 							<dl className="_item" key={index}>
 								<RichText.Content tagName="dt" className="_title" value={item.title} />

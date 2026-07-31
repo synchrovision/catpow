@@ -17,6 +17,7 @@ wp.blocks.registerBlockType("catpow/pricecard", {
 		const {
 			items = [],
 			classes = "",
+			vars,
 			headerClasses,
 			contentsClasses = "",
 			HeadingTag,
@@ -90,7 +91,7 @@ wp.blocks.registerBlockType("catpow/pricecard", {
 			setAttributes({ items: JSON.parse(JSON.stringify(items)) });
 		};
 
-		const blockProps = useBlockProps({ className: EditMode || (AltMode && doLoop) ? "cp-altcontent" : classes });
+		const blockProps = useBlockProps({ className: EditMode || (AltMode && doLoop) ? "cp-altcontent" : classes, style: vars });
 
 		return (
 			<>
@@ -303,7 +304,7 @@ wp.blocks.registerBlockType("catpow/pricecard", {
 	save({ attributes, className }) {
 		const { Fragment } = wp.element;
 		const { InnerBlocks, RichText, useBlockProps } = wp.blockEditor;
-		const { items = [], classes = "", headerClasses, contentsClasses = "", HeadingTag, SubHeadingTag, priceUnit, priceCaption, linkText, loopCount, doLoop } = attributes;
+		const { items = [], classes = "", vars, headerClasses, contentsClasses = "", HeadingTag, SubHeadingTag, priceUnit, priceCaption, linkText, loopCount, doLoop } = attributes;
 		const { imageKeys } = CP.config.pricecard;
 
 		const states = CP.classNamesToFlags(classes);
@@ -311,7 +312,7 @@ wp.blocks.registerBlockType("catpow/pricecard", {
 		return (
 			<>
 				<CP.Bem prefix="wp-block-catpow">
-					<ul {...useBlockProps.save({ className: classes })}>
+					<ul {...useBlockProps.save({ className: classes, style: vars })}>
 						{items.map((item, index) => {
 							const itemStates = CP.classNamesToFlags(item.classes);
 							return (

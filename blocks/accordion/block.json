@@ -3,9 +3,10 @@
 	"apiVersion": 3,
 	"name": "catpow/accordion",
 	"supports": {
+		"level": true,
 		"headingLevel": true,
 		"color": true,
 		"spacing": true,
-		"level": true
+		"background": true
 	}
 }

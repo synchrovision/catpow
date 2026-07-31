@@ -1,6 +1,7 @@
 <?php
 $block_class="wp-block-catpow-pricecard";
 $attributes=[
+	"vars"=>["type"=>"object","default"=>[]],
 	"classes"=>["source"=>"attribute","selector"=>"ul","attribute"=>"class","default"=>"{$block_class} is-level3 has-content-width has-item-size-medium has-image has-title has-spec has-unit-before"],
 	"headerClasses"=>["source"=>"attribute","selector"=>".{$block_class}__item-header","attribute"=>"class","default"=>"{$block_class}__item-header"],
 	"contentsClasses"=>["source"=>"attribute","selector"=>".{$block_class}__item-contents","attribute"=>"class","default"=>"{$block_class}__item-contents is-level4"],

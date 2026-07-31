@@ -16,6 +16,7 @@
 		],
 	},
 	attributes: {
+		vars: { type: "object", default: {} },
 		version: { type: "number", default: 0 },
 		classes: { source: "attribute", selector: "ul", attribute: "class", default: "wp-block-catpow-icons" },
 		items: {
@@ -42,7 +43,7 @@
 		const { useMemo } = wp.element;
 		const { BlockControls, InspectorControls, useBlockProps } = wp.blockEditor;
 		const { PanelBody, TextareaControl, ToolbarGroup } = wp.components;
-		const { items = [], classes, EditMode = false } = attributes;
+		const { items = [], classes, vars, EditMode = false } = attributes;
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
@@ -62,7 +63,7 @@
 			return selectiveItemClasses;
 		}, []);
 
-		const blockProps = useBlockProps({ className: EditMode ? "cp-altcontent" : classes });
+		const blockProps = useBlockProps({ className: EditMode ? "cp-altcontent" : classes, style: vars });
 
 		return (
 			<>
@@ -123,11 +124,11 @@
 	},
 	save({ attributes, className }) {
 		const { useBlockProps } = wp.blockEditor;
-		const { items = [], classes } = attributes;
+		const { items = [], classes, vars } = attributes;
 
 		return (
 			<CP.Bem prefix="wp-block-catpow">
-				<ul {...useBlockProps.save({ className: classes })}>
+				<ul {...useBlockProps.save({ className: classes, style: vars })}>
 					{items.map((item, index) => (
 						<li className={item.classes} key={index}>
 							<a className="_link" href={item.href}>

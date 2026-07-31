@@ -18,6 +18,7 @@
       ]
     },
     attributes: {
+      vars: { type: "object", default: {} },
       version: { type: "number", default: 0 },
       classes: { source: "attribute", selector: "ul", attribute: "class", default: "wp-block-catpow-icons" },
       items: {
@@ -44,7 +45,7 @@
       const { useMemo } = wp.element;
       const { BlockControls, InspectorControls, useBlockProps } = wp.blockEditor;
       const { PanelBody, TextareaControl, ToolbarGroup } = wp.components;
-      const { items = [], classes, EditMode = false } = attributes;
+      const { items = [], classes, vars, EditMode = false } = attributes;
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
           { name: "size", type: "buttons", label: "\u30B5\u30A4\u30BA", values: { isSizeSmall: "\u5C0F", isSizeMedium: "\u4E2D", isSizeLarge: "\u5927" } },
@@ -62,7 +63,7 @@
         wp.hooks.applyFilters("catpow.blocks.icons.selectiveItemClasses", CP.finderProxy(selectiveItemClasses2));
         return selectiveItemClasses2;
       }, []);
-      const blockProps = useBlockProps({ className: EditMode ? "cp-altcontent" : classes });
+      const blockProps = useBlockProps({ className: EditMode ? "cp-altcontent" : classes, style: vars });
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(
         ToolbarGroup,
         {
@@ -95,8 +96,8 @@
     },
     save({ attributes, className }) {
       const { useBlockProps } = wp.blockEditor;
-      const { items = [], classes } = attributes;
-      return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("ul", { ...useBlockProps.save({ className: classes }) }, items.map((item, index) => /* @__PURE__ */ wp.element.createElement("li", { className: item.classes, key: index }, /* @__PURE__ */ wp.element.createElement("a", { className: "_link", href: item.href }, /* @__PURE__ */ wp.element.createElement("img", { className: "_icon", src: item.src, alt: item.alt }))))));
+      const { items = [], classes, vars } = attributes;
+      return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("ul", { ...useBlockProps.save({ className: classes, style: vars }) }, items.map((item, index) => /* @__PURE__ */ wp.element.createElement("li", { className: item.classes, key: index }, /* @__PURE__ */ wp.element.createElement("a", { className: "_link", href: item.href }, /* @__PURE__ */ wp.element.createElement("img", { className: "_icon", src: item.src, alt: item.alt }))))));
     }
   });
 })();

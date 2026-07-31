@@ -1,7 +1,9 @@
 <?php
 namespace Catpow;
 HTML::render([
-	'.wp-block-catpow-postlink--.'.strtr($attr['classes'],' ','.'),
+	'.wp-block-catpow-postlink--',
+	'class'=>$attr['classes'],
+	'style'=>$attr['vars'],
 	[
 		'ul._links',
 		'children'=>!$attr['preview']?[

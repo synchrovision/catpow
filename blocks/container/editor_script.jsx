@@ -17,6 +17,7 @@ wp.blocks.registerBlockType("catpow/container", {
 		],
 	},
 	attributes: {
+		vars: { type: "object", default: {} },
 		boxSizeVars: { type: "object", default: { "--cp-inner-content-width": 960, "--cp-container-height": 400 } },
 		classes: { source: "attribute", selector: ".wp-block-catpow-container", attribute: "class", default: "wp-block-catpow-container" },
 	},
@@ -26,7 +27,7 @@ wp.blocks.registerBlockType("catpow/container", {
 		const { InnerBlocks, InspectorControls, useBlockProps } = wp.blockEditor;
 		const { PanelBody, TextareaControl } = wp.components;
 		const { attributes, className, setAttributes, context } = props;
-		const { boxSizeVars, classes = "" } = attributes;
+		const { vars, boxSizeVars, classes = "" } = attributes;
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
@@ -47,7 +48,7 @@ wp.blocks.registerBlockType("catpow/container", {
 			return selectiveClasses;
 		}, []);
 
-		const blockProps = useBlockProps({ className: classes, style: boxSizeVars });
+		const blockProps = useBlockProps({ className: classes, style: { ...vars, ...boxSizeVars } });
 
 		return (
 			<>
@@ -65,9 +66,9 @@ wp.blocks.registerBlockType("catpow/container", {
 
 	save({ attributes, className, setAttributes }) {
 		const { InnerBlocks, useBlockProps } = wp.blockEditor;
-		const { boxSizeVars, classes = "" } = attributes;
+		const { vars, boxSizeVars, classes = "" } = attributes;
 
-		const blockProps = useBlockProps.save({ className: classes, style: boxSizeVars });
+		const blockProps = useBlockProps.save({ className: classes, style: { ...vars, ...boxSizeVars } });
 
 		return (
 			<div {...blockProps}>

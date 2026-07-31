@@ -16,7 +16,7 @@
       const { useMemo } = wp.element;
       const { BlockControls, InspectorControls, useBlockProps } = wp.blockEditor;
       const { Icon, PanelBody, TextareaControl } = wp.components;
-      const { items = [], classes = "", EditMode = false } = attributes;
+      const { items = [], classes = "", vars, EditMode = false } = attributes;
       const { linkKeys } = blockConfig;
       const states = CP.classNamesToFlags(classes);
       const selectiveClasses = useMemo(() => {
@@ -45,7 +45,7 @@
       const saveItems = () => {
         setAttributes({ items: JSON.parse(JSON.stringify(items)) });
       };
-      const blockProps = useBlockProps({ className: EditMode ? "cp-altcontent" : classes });
+      const blockProps = useBlockProps({ className: EditMode ? "cp-altcontent" : classes, style: vars });
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { setAttributes, attributes }), EditMode ? /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(CP.Label, { icon: "edit" }), /* @__PURE__ */ wp.element.createElement(
         CP.EditItemsTable,
         {
@@ -108,10 +108,11 @@
       }))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30DC\u30BF\u30F3", icon: "edit", ...{ setAttributes, attributes }, itemKeys: ["items", attributes.currentItemIndex], selectiveClasses: selectiveItemClasses }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: "\u30AF\u30E9\u30B9", onChange: (classes2) => setAttributes({ classes: classes2 }), value: classes })), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(CP.AlignClassToolbar, { setAttributes, attributes })));
     },
     save({ attributes }) {
-      const { items = [], classes = "" } = attributes;
+      const { useBlockProps } = wp.blockEditor;
+      const { items = [], classes = "", vars } = attributes;
       const blockType = wp.data.select("core/blocks").getBlockType("catpow/formbuttons");
       const states = CP.classNamesToFlags(classes);
-      return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("ul", { className: classes }, items.map((item, index) => {
+      return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("ul", { ...useBlockProps.save({ className: classes, style: vars }) }, items.map((item, index) => {
         const itemStates = CP.classNamesToFlags(item.classes);
         const eventDispatcherAttributes = {};
         if (blockType.attributes.items.eventDispatcherAttributes) {

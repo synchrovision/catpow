@@ -15,7 +15,7 @@ wp.blocks.registerBlockType("catpow/formbuttons", {
 		const { useMemo } = wp.element;
 		const { BlockControls, InspectorControls, useBlockProps } = wp.blockEditor;
 		const { Icon, PanelBody, TextareaControl } = wp.components;
-		const { items = [], classes = "", EditMode = false } = attributes;
+		const { items = [], classes = "", vars, EditMode = false } = attributes;
 		const { linkKeys } = blockConfig;
 
 		const states = CP.classNamesToFlags(classes);
@@ -48,7 +48,7 @@ wp.blocks.registerBlockType("catpow/formbuttons", {
 			setAttributes({ items: JSON.parse(JSON.stringify(items)) });
 		};
 
-		const blockProps = useBlockProps({ className: EditMode ? "cp-altcontent" : classes });
+		const blockProps = useBlockProps({ className: EditMode ? "cp-altcontent" : classes, style: vars });
 
 		return (
 			<>
@@ -143,14 +143,15 @@ wp.blocks.registerBlockType("catpow/formbuttons", {
 		);
 	},
 	save({ attributes }) {
-		const { items = [], classes = "" } = attributes;
+		const { useBlockProps } = wp.blockEditor;
+		const { items = [], classes = "", vars } = attributes;
 		const blockType = wp.data.select("core/blocks").getBlockType("catpow/formbuttons");
 
 		const states = CP.classNamesToFlags(classes);
 
 		return (
 			<CP.Bem prefix="wp-block-catpow">
-				<ul className={classes}>
+				<ul {...useBlockProps.save({ className: classes, style: vars })}>
 					{items.map((item, index) => {
 						const itemStates = CP.classNamesToFlags(item.classes);
 						const eventDispatcherAttributes = {};

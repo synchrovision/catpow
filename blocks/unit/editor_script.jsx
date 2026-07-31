@@ -21,6 +21,7 @@ wp.blocks.registerBlockType("catpow/unit", {
 		],
 	},
 	attributes: {
+		vars: { type: "object", default: {} },
 		classes: { source: "attribute", selector: ".wp-block-catpow-unit", attribute: "class", default: "wp-block-catpow-unit" },
 
 		sources: CP.getPictureSoucesAttributesForDevices(CP.config.unit.devices),
@@ -32,9 +33,9 @@ wp.blocks.registerBlockType("catpow/unit", {
 	},
 	example: CP.example,
 	edit({ attributes, className, setAttributes }) {
-		const { InnerBlocks, InspectorControls } = wp.blockEditor;
+		const { InnerBlocks, InspectorControls, useBlockProps } = wp.blockEditor;
 		const { PanelBody, TextareaControl } = wp.components;
-		const { classes } = attributes;
+		const { classes, vars } = attributes;
 
 		const states = CP.classNamesToFlags(classes);
 		const { devices, imageKeys } = CP.config.unit;
@@ -62,7 +63,7 @@ wp.blocks.registerBlockType("catpow/unit", {
 
 		return (
 			<>
-				<div className={classes}>
+				<div {...useBlockProps({ className: classes, style: vars })}>
 					<figure className="image">
 						<CP.ResponsiveImage attributes={attributes} keys={imageKeys.image} />
 					</figure>
@@ -78,14 +79,14 @@ wp.blocks.registerBlockType("catpow/unit", {
 	},
 
 	save({ attributes, className, setAttributes }) {
-		const { InnerBlocks } = wp.blockEditor;
-		const { classes = "" } = attributes;
+		const { InnerBlocks, useBlockProps } = wp.blockEditor;
+		const { classes = "", vars } = attributes;
 
 		const states = CP.classNamesToFlags(classes);
 		const { devices, imageKeys } = CP.config.unit;
 
 		return (
-			<div className={classes}>
+			<div {...useBlockProps.save({ className: classes, style: vars })}>
 				<figure className="image">
 					<CP.ResponsiveImage attributes={attributes} keys={imageKeys.image} />
 				</figure>

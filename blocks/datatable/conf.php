@@ -1,5 +1,6 @@
 <?php
 $attributes=[
+	"vars"=>["type"=>"object","default"=>[]],
 	"classes"=>["source"=>'attribute',"selector"=>'table',"attribute"=>'class',"default"=>'wp-block-catpow-datatable is-style-spec is-level3 has-header-row has-header-column'],
 
 	"rows"=>[

@@ -16,6 +16,7 @@ wp.blocks.registerBlockType("catpow/accordion", {
 	icon: "insert",
 	category: "catpow",
 	attributes: {
+		vars: { type: "object", default: {} },
 		classes: { source: "attribute", selector: ".wp-block-catpow-accordion", attribute: "class", default: "wp-block-catpow-accordion is-level3" },
 		HeadingTag: { type: "string", default: "h3" },
 
@@ -31,7 +32,7 @@ wp.blocks.registerBlockType("catpow/accordion", {
 		const { useMemo } = wp.element;
 		const { InnerBlocks, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
 		const { PanelBody, TextareaControl } = wp.components;
-		const { classes, HeadingTag, title, imageCode, isOpen = true } = attributes;
+		const { classes, vars, HeadingTag, title, imageCode, isOpen = true } = attributes;
 
 		const states = CP.classNamesToFlags(classes);
 		const { imageKeys, imageSizes } = CP.config.accordion;
@@ -62,7 +63,7 @@ wp.blocks.registerBlockType("catpow/accordion", {
 		return (
 			<>
 				<CP.Bem prefix="wp-block-catpow">
-					<div {...useBlockProps({ className: clsx(classes, { "is-open": isOpen }) })}>
+					<div {...useBlockProps({ className: clsx(classes, { "is-open": isOpen }), style: vars })}>
 						<div className="_header" role="button">
 							{states.hasImage && (
 								<div className="_image">
@@ -93,7 +94,7 @@ wp.blocks.registerBlockType("catpow/accordion", {
 		);
 	},
 	save({ attributes }) {
-		const { classes, HeadingTag, title, imageCode } = attributes;
+		const { classes, vars, HeadingTag, title, imageCode } = attributes;
 		const states = CP.classNamesToFlags(classes);
 		const { imageKeys } = CP.config.accordion;
 		const { InnerBlocks, RichText, useBlockProps } = wp.blockEditor;
@@ -101,6 +102,7 @@ wp.blocks.registerBlockType("catpow/accordion", {
 		const blockProps = useBlockProps.save({
 			id: "{$uid}",
 			className: classes,
+			style: vars,
 			"data-wp-interactive": "catpow/accordion",
 			"data-wp-context": JSON.stringify({
 				accordionId: "{$uid}",

@@ -12,7 +12,7 @@ wp.blocks.registerBlockType("catpow/contactinfo", {
 		const { useMemo, useEffect } = wp.element;
 		const { InnerBlocks, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
 		const { Icon, PanelBody, TextareaControl } = wp.components;
-		const { classes, HeadingTag = "h3", itemsClasses, items = [], title, lead, caption, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
+		const { classes, vars, HeadingTag = "h3", itemsClasses, items = [], title, lead, caption, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
 		const { classNamesToFlags, flagsToClassNames } = Catpow.util;
 
 		const states = useMemo(() => classNamesToFlags(classes), [classes]);
@@ -59,7 +59,7 @@ wp.blocks.registerBlockType("catpow/contactinfo", {
 			setAttributes({ classes: flagsToClassNames(states) });
 		}, [len > 1]);
 
-		const blockProps = useBlockProps({ className: classes });
+		const blockProps = useBlockProps({ className: classes, style: vars });
 
 		return (
 			<>
@@ -201,7 +201,7 @@ wp.blocks.registerBlockType("catpow/contactinfo", {
 	},
 	save({ attributes }) {
 		const { InnerBlocks, RichText, useBlockProps } = wp.blockEditor;
-		const { classes, HeadingTag = "h3", itemsClasses, items = [], title, lead, caption, doLoop } = attributes;
+		const { classes, vars, HeadingTag = "h3", itemsClasses, items = [], title, lead, caption, doLoop } = attributes;
 		const states = Catpow.util.classNamesToFlags(classes);
 
 		const { linkKeys } = CP.config.contactinfo;
@@ -211,7 +211,7 @@ wp.blocks.registerBlockType("catpow/contactinfo", {
 		return (
 			<>
 				<CP.Bem prefix="wp-block-catpow">
-					<div {...useBlockProps.save({ className: classes })}>
+					<div {...useBlockProps.save({ className: classes, style: vars })}>
 						{states.hasTitle && <RichText.Content tagName={HeadingTag} className="_title" value={title} />}
 						{states.hasLead && <RichText.Content tagName="p" className="_lead" value={lead} />}
 						<ul className={itemsClasses}>

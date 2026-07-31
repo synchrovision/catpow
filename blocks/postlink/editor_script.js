@@ -12,7 +12,7 @@
       const { InspectorControls, useBlockProps } = wp.blockEditor;
       const { PanelBody } = wp.components;
       const { serverSideRender: ServerSideRender } = wp;
-      const { func, param } = attributes;
+      const { classes, vars, func, param } = attributes;
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
           {
@@ -25,7 +25,7 @@
         wp.hooks.applyFilters("catpow.blocks.postlink.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps() }, /* @__PURE__ */ wp.element.createElement(ServerSideRender, { block: "catpow/postlink", attributes: Object.assign({}, attributes, { preview: true }) })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30AF\u30E9\u30B9", "catpow"), icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "Path" })));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps({ className: classes, style: vars }) }, /* @__PURE__ */ wp.element.createElement(ServerSideRender, { block: "catpow/postlink", attributes: Object.assign({}, attributes, { preview: true }) })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30AF\u30E9\u30B9", "catpow"), icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "Path" })));
     },
     save({ attributes, className, setAttributes }) {
       return "null";

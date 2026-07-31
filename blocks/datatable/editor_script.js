@@ -71,7 +71,7 @@
       const { useState, useMemo } = wp.element;
       const { InnerBlocks, InspectorControls, RichText: RichText2, useBlockProps } = wp.blockEditor;
       const { Icon, PanelBody, TextareaControl } = wp.components;
-      const { classes: classes2, rows = [], doLoop, AltMode = false } = attributes;
+      const { classes: classes2, vars, rows = [], doLoop, AltMode = false } = attributes;
       var states = CP.classNamesToFlags(classes2);
       if (attributes.file) {
         var reader = new FileReader();
@@ -168,7 +168,7 @@
         });
         saveItems();
       };
-      const blockProps = useBlockProps({ className: classes2 });
+      const blockProps = useBlockProps({ className: classes2, style: vars });
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { setAttributes, attributes, modes: ["AltMode"] }), /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { ...blockProps, className: "cp-altcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("table", { ...blockProps }, states.hasHeaderRow && /* @__PURE__ */ wp.element.createElement("thead", null, /* @__PURE__ */ wp.element.createElement("tr", null, rows[0].cells.map((cell, index) => {
         return /* @__PURE__ */ wp.element.createElement("th", { className: clsx("_th", { "is-spacer": index === 0 && states.hasHeaderColumn && cell.text.length === 0 }), key: index }, /* @__PURE__ */ wp.element.createElement(
           RichText2,
@@ -236,9 +236,9 @@
     },
     save({ attributes, className }) {
       const { InnerBlocks, RichText: RichText2, useBlockProps } = wp.blockEditor;
-      const { classes: classes2 = "", rows = [], loopParam, doLoop } = attributes;
+      const { classes: classes2 = "", vars, rows = [], loopParam, doLoop } = attributes;
       var states = CP.classNamesToFlags(classes2);
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("table", { ...useBlockProps.save({ className: classes2 }) }, states.hasHeaderRow && /* @__PURE__ */ wp.element.createElement("thead", null, /* @__PURE__ */ wp.element.createElement("tr", null, rows[0].cells.map((cell, index) => {
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("table", { ...useBlockProps.save({ className: classes2, style: vars }) }, states.hasHeaderRow && /* @__PURE__ */ wp.element.createElement("thead", null, /* @__PURE__ */ wp.element.createElement("tr", null, rows[0].cells.map((cell, index) => {
         return /* @__PURE__ */ wp.element.createElement("th", { className: clsx("_th", { "is-spacer": index === 0 && states.hasHeaderColumn && cell.text.length === 0 }), key: index }, /* @__PURE__ */ wp.element.createElement(RichText2.Content, { value: cell.text }));
       }))), /* @__PURE__ */ wp.element.createElement("tbody", null, rows.map((row, index) => {
         if (states.hasHeaderRow && index == 0) {

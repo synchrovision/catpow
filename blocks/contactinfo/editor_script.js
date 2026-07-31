@@ -12,7 +12,7 @@
       const { useMemo, useEffect } = wp.element;
       const { InnerBlocks, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
       const { Icon, PanelBody, TextareaControl } = wp.components;
-      const { classes, HeadingTag = "h3", itemsClasses, items = [], title, lead, caption, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
+      const { classes, vars, HeadingTag = "h3", itemsClasses, items = [], title, lead, caption, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
       const { classNamesToFlags, flagsToClassNames } = Catpow.util;
       const states = useMemo(() => classNamesToFlags(classes), [classes]);
       const { linkKeys } = CP.config.contactinfo;
@@ -52,7 +52,7 @@
         states.hasMultipleItems = len > 1;
         setAttributes({ classes: flagsToClassNames(states) });
       }, [len > 1]);
-      const blockProps = useBlockProps({ className: classes });
+      const blockProps = useBlockProps({ className: classes, style: vars });
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { setAttributes, attributes }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30B9\u30BF\u30A4\u30EB", icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30A2\u30A4\u30C6\u30E0", icon: "edit", ...{ setAttributes, attributes }, itemKeys: ["items", attributes.currentItemIndex], selectiveClasses: selectiveItemClasses }), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), EditMode ? /* @__PURE__ */ wp.element.createElement("div", { ...blockProps, className: "cp-altcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(
         CP.EditItemsTable,
         {
@@ -156,11 +156,11 @@
     },
     save({ attributes }) {
       const { InnerBlocks, RichText, useBlockProps } = wp.blockEditor;
-      const { classes, HeadingTag = "h3", itemsClasses, items = [], title, lead, caption, doLoop } = attributes;
+      const { classes, vars, HeadingTag = "h3", itemsClasses, items = [], title, lead, caption, doLoop } = attributes;
       const states = Catpow.util.classNamesToFlags(classes);
       const { linkKeys } = CP.config.contactinfo;
       let rtn = [];
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps.save({ className: classes }) }, states.hasTitle && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: HeadingTag, className: "_title", value: title }), states.hasLead && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "p", className: "_lead", value: lead }), /* @__PURE__ */ wp.element.createElement("ul", { className: itemsClasses }, items.map((item, index) => {
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps.save({ className: classes, style: vars }) }, states.hasTitle && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: HeadingTag, className: "_title", value: title }), states.hasLead && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "p", className: "_lead", value: lead }), /* @__PURE__ */ wp.element.createElement("ul", { className: itemsClasses }, items.map((item, index) => {
         return /* @__PURE__ */ wp.element.createElement("li", { className: "_item", key: index }, states.hasItemTitle && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: getSubHeadingTag(HeadingTag), className: "_title", value: item.title }), states.hasItemLead && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "p", className: "_lead", value: item.lead }), /* @__PURE__ */ wp.element.createElement(CP.Link, { className: "_link", attributes, keys: linkKeys.link, itemKeys: ["items", index], ...CP.extractEventDispatcherAttributes("catpow/contactinfo", item) }, states.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { className: "_icon", item: attributes }), /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "span", className: "_text", value: item.link })), states.hasItemCaption && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "small", className: "_caption", value: item.caption }));
       })), states.hasLead && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "small", className: "_caption", value: caption }))), doLoop && /* @__PURE__ */ wp.element.createElement("on-empty", null, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));
     }

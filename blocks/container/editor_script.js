@@ -18,6 +18,7 @@
       ]
     },
     attributes: {
+      vars: { type: "object", default: {} },
       boxSizeVars: { type: "object", default: { "--cp-inner-content-width": 960, "--cp-container-height": 400 } },
       classes: { source: "attribute", selector: ".wp-block-catpow-container", attribute: "class", default: "wp-block-catpow-container" }
     },
@@ -27,7 +28,7 @@
       const { InnerBlocks, InspectorControls, useBlockProps } = wp.blockEditor;
       const { PanelBody, TextareaControl } = wp.components;
       const { attributes, className, setAttributes, context } = props;
-      const { boxSizeVars, classes = "" } = attributes;
+      const { vars, boxSizeVars, classes = "" } = attributes;
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
           {
@@ -46,13 +47,13 @@
         wp.hooks.applyFilters("catpow.blocks.container.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);
-      const blockProps = useBlockProps({ className: classes, style: boxSizeVars });
+      const blockProps = useBlockProps({ className: classes, style: { ...vars, ...boxSizeVars } });
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement("div", { className: "wp-block-catpow-container__body" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: [["core/paragraph", { content: CP.dummyText.text }]], templateLock: false }))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30B9\u30BF\u30A4\u30EB", icon: "art", ...{ setAttributes, attributes }, selectiveClasses })));
     },
     save({ attributes, className, setAttributes }) {
       const { InnerBlocks, useBlockProps } = wp.blockEditor;
-      const { boxSizeVars, classes = "" } = attributes;
-      const blockProps = useBlockProps.save({ className: classes, style: boxSizeVars });
+      const { vars, boxSizeVars, classes = "" } = attributes;
+      const blockProps = useBlockProps.save({ className: classes, style: { ...vars, ...boxSizeVars } });
       return /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement("div", { className: "wp-block-catpow-container__body" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));
     }
   });

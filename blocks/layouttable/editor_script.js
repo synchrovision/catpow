@@ -36,6 +36,7 @@
       ]
     },
     attributes: {
+      vars: { type: "object", default: {} },
       classes: { source: "attribute", selector: "table", attribute: "class", default: "wp-block-catpow-layouttable is-level3 is-style-spec" },
       rows: {
         source: "query",
@@ -85,7 +86,7 @@
       const { useState, useMemo, createElement: el } = wp.element;
       const { AlignmentToolbar, InnerBlocks, BlockControls, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
       const { PanelBody, Button, SelectControl, TreeSelect, TextareaControl, TextControl } = wp.components;
-      const { classes = "", rows } = attributes;
+      const { classes = "", vars, rows } = attributes;
       if (attributes.file) {
         var reader = new FileReader();
         reader.addEventListener("loadend", () => {
@@ -454,7 +455,7 @@
             }
           }
         }
-      )), /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("table", { ...useBlockProps({ className: classes }) }, /* @__PURE__ */ wp.element.createElement("tbody", null, rowsCopy.map((row, r) => {
+      )), /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("table", { ...useBlockProps({ className: classes, style: vars }) }, /* @__PURE__ */ wp.element.createElement("tbody", null, rowsCopy.map((row, r) => {
         return /* @__PURE__ */ wp.element.createElement("tr", { key: r }, row.cells.map((cell, c) => {
           if (cell.mergedTo) {
             return false;
@@ -525,9 +526,9 @@
     },
     save({ attributes, className }) {
       const { createElement: el } = wp.element;
-      const { RichText } = wp.blockEditor;
-      const { classes, rows } = attributes;
-      return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("table", { className: classes }, /* @__PURE__ */ wp.element.createElement("tbody", null, rows.map((row, r) => {
+      const { RichText, useBlockProps } = wp.blockEditor;
+      const { classes, vars, rows } = attributes;
+      return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("table", { ...useBlockProps.save({ className: classes, style: vars }) }, /* @__PURE__ */ wp.element.createElement("tbody", null, rows.map((row, r) => {
         return /* @__PURE__ */ wp.element.createElement("tr", { key: r }, row.cells.map((cell, c) => {
           cell.style = CP.parseStyleString(cell.style);
           return el(

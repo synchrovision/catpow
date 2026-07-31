@@ -57,7 +57,7 @@ wp.blocks.registerBlockType("catpow/datatable", {
 		const { useState, useMemo } = wp.element;
 		const { InnerBlocks, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
 		const { Icon, PanelBody, TextareaControl } = wp.components;
-		const { classes, rows = [], doLoop, AltMode = false } = attributes;
+		const { classes, vars, rows = [], doLoop, AltMode = false } = attributes;
 
 		var states = CP.classNamesToFlags(classes);
 
@@ -161,7 +161,7 @@ wp.blocks.registerBlockType("catpow/datatable", {
 			saveItems();
 		};
 
-		const blockProps = useBlockProps({ className: classes });
+		const blockProps = useBlockProps({ className: classes, style: vars });
 
 		return (
 			<>
@@ -263,14 +263,14 @@ wp.blocks.registerBlockType("catpow/datatable", {
 
 	save({ attributes, className }) {
 		const { InnerBlocks, RichText, useBlockProps } = wp.blockEditor;
-		const { classes = "", rows = [], loopParam, doLoop } = attributes;
+		const { classes = "", vars, rows = [], loopParam, doLoop } = attributes;
 
 		var states = CP.classNamesToFlags(classes);
 
 		return (
 			<>
 				<CP.Bem prefix="wp-block-catpow">
-					<table {...useBlockProps.save({ className: classes })}>
+					<table {...useBlockProps.save({ className: classes, style: vars })}>
 						{states.hasHeaderRow && (
 							<thead>
 								<tr>

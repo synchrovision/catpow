@@ -22,7 +22,7 @@ wp.blocks.registerBlockType("catpow/dialog", {
 		const { useState, useMemo, useEffect } = wp.element;
 		const { InnerBlocks, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
 		const { PanelBody, TextareaControl } = wp.components;
-		const { items = [], classes = "", loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
+		const { items = [], classes = "", vars, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
 		var states = CP.classNamesToFlags(classes);
 
 		const selectiveClasses = useMemo(() => {
@@ -46,7 +46,7 @@ wp.blocks.registerBlockType("catpow/dialog", {
 			},
 		};
 
-		const blockProps = useBlockProps({ className: EditMode || (AltMode && doLoop) ? "cp-altcontent" : classes });
+		const blockProps = useBlockProps({ className: EditMode || (AltMode && doLoop) ? "cp-altcontent" : classes, style: vars });
 
 		return (
 			<>
@@ -151,7 +151,7 @@ wp.blocks.registerBlockType("catpow/dialog", {
 	},
 	save({ attributes }) {
 		const { InnerBlocks, RichText, useBlockProps } = wp.blockEditor;
-		const { items = [], classes = "", doLoop } = attributes;
+		const { items = [], classes = "", vars, doLoop } = attributes;
 
 		var states = CP.classNamesToFlags(classes);
 		const imageKeys = {
@@ -167,7 +167,7 @@ wp.blocks.registerBlockType("catpow/dialog", {
 		return (
 			<>
 				<CP.Bem prefix="wp-block-catpow">
-					<ul {...useBlockProps.save({ className: classes })}>
+					<ul {...useBlockProps.save({ className: classes, style: vars })}>
 						{items.map((item, index) => {
 							return (
 								<li className={item.classes} key={index}>

@@ -11,7 +11,7 @@ wp.blocks.registerBlockType("catpow/postlink", {
 		const { InspectorControls, useBlockProps } = wp.blockEditor;
 		const { PanelBody } = wp.components;
 		const { serverSideRender: ServerSideRender } = wp;
-		const { func, param } = attributes;
+		const { classes, vars, func, param } = attributes;
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
@@ -28,7 +28,7 @@ wp.blocks.registerBlockType("catpow/postlink", {
 
 		return (
 			<>
-				<div {...useBlockProps()}>
+				<div {...useBlockProps({ className: classes, style: vars })}>
 					<ServerSideRender block="catpow/postlink" attributes={Object.assign({}, attributes, { preview: true })} />
 				</div>
 				<InspectorControls>

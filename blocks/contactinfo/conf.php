@@ -4,6 +4,7 @@ $filters=[
 	"iconHolder"=>["selector"=>".{$block_class}__items-item-link-icon"]
 ];
 $attributes=[
+	"vars"=>["type"=>"object","default"=>[]],
 	"classes"=>["source"=>"attribute","selector"=>".{$block_class}","attribute"=>"class","default"=>"{$block_class} is-level3 is-size-medium has-title has-lead has-caption"],
 	'HeadingTag'=>['type'=>'string','default'=>'h3'],
 

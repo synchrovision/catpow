@@ -3,8 +3,9 @@
 	"apiVersion": 3,
 	"name": "catpow/container",
 	"supports": {
+		"level": true,
 		"spacing": true,
-		"background": true,
-		"level": true
+		"color": true,
+		"background": true
 	}
 }
