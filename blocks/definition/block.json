@@ -4,6 +4,7 @@
 	"name": "catpow/definition",
 	"supports": {
 		"level": true,
+		"color": true,
 		"spacing": true,
 		"background": true
 	}
