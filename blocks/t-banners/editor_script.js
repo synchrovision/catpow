@@ -44,6 +44,7 @@
     category: "catpow-mail",
     parent: CP.mailContensContainer,
     attributes: {
+      isTemplate: { type: "boolean", default: false },
       classes: { source: "attribute", selector: "table", attribute: "class", default: "wp-block-catpow-t-banners" },
       items: {
         source: "query",
@@ -69,7 +70,7 @@
       const { useState: useState2, useMemo: useMemo2 } = wp.element;
       const { InspectorControls } = wp.blockEditor;
       const { PanelBody, TextareaControl } = wp.components;
-      const { classes, width, gapX, gapY, align, marginTop, marginBottom, items, columns } = attributes;
+      const { isTemplate, classes, width, gapX, gapY, align, marginTop, marginBottom, items, columns } = attributes;
       var states = CP.classNamesToFlags(classes);
       const selectiveClasses = useMemo2(() => {
         const selectiveClasses2 = [
@@ -82,8 +83,8 @@
           { name: "columns", input: "range", label: __("\u5217\u6570", "catpow"), key: "columns", min: 1, max: 5 },
           {
             name: "template",
-            label: "\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8",
-            values: "isTemplate",
+            input: "bool",
+            key: "isTemplate",
             sub: [{ name: "loopImage", label: "\u753B\u50CF\u51FA\u529B\u30B3\u30FC\u30C9", input: "text", key: "loopImage" }]
           }
         ];
@@ -99,14 +100,14 @@
           keys: { items: "items", src: "src", alt: "alt", code: "loopImage" },
           itemKeys: ["items", gIndex * columns + index],
           size: "medium",
-          isTemplate: states.isTemplate
+          isTemplate
         }
       ))))), [...Array(columns - itemGroup.length)].map((_, index) => /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-spacer-cell", key: "spacer_" + index }))))), marginBottom > 0 && /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-spacer-cell", style: { height: `${marginBottom}rem` }, colSpan: columns * 2 - 1 }))))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", ...{ setAttributes, attributes }, selectiveClasses, initialOpen: true }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: "\u30AF\u30E9\u30B9", onChange: (classes2) => setAttributes({ classes: classes2 }), value: classes }))));
     },
     save({ attributes }) {
-      const { classes, width, gapX, gapY, align, marginTop, marginBottom, items, columns } = attributes;
+      const { isTemplate, classes, width, gapX, gapY, align, marginTop, marginBottom, items, columns } = attributes;
       var states = CP.classNamesToFlags(classes);
-      return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("table", { className: classes, width, align }, /* @__PURE__ */ wp.element.createElement("tbody", null, marginTop > 0 && /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-spacer-cell", style: { height: `${marginTop}rem` }, colSpan: columns * 2 - 1 })), [...chunk(items, columns)].map((itemGroup, gIndex) => /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, gIndex > 0 && /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-spacer-cell", style: { height: `${gapY}px` }, colSpan: columns * 2 - 1 })), /* @__PURE__ */ wp.element.createElement("tr", null, itemGroup.map((item, index) => /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, index > 0 && /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-spacer-cell", style: { width: `${gapX}px` } }), /* @__PURE__ */ wp.element.createElement("td", { key: index }, /* @__PURE__ */ wp.element.createElement("a", { className: "_link", href: item.url }, states.isTemplate ? loopImage : /* @__PURE__ */ wp.element.createElement("img", { width: "100%", height: "auto", src: item.src, alt: item.alt }))))), [...Array(columns - itemGroup.length)].map((_, index) => /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-spacer-cell", key: "spacer_" + index }))))), marginBottom > 0 && /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-spacer-cell", style: { height: `${marginBottom}rem` }, colSpan: columns * 2 - 1 })))));
+      return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("table", { className: classes, width, align }, /* @__PURE__ */ wp.element.createElement("tbody", null, marginTop > 0 && /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-spacer-cell", style: { height: `${marginTop}rem` }, colSpan: columns * 2 - 1 })), [...chunk(items, columns)].map((itemGroup, gIndex) => /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, gIndex > 0 && /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-spacer-cell", style: { height: `${gapY}px` }, colSpan: columns * 2 - 1 })), /* @__PURE__ */ wp.element.createElement("tr", null, itemGroup.map((item, index) => /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, index > 0 && /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-spacer-cell", style: { width: `${gapX}px` } }), /* @__PURE__ */ wp.element.createElement("td", { key: index }, /* @__PURE__ */ wp.element.createElement("a", { className: "_link", href: item.url }, isTemplate ? loopImage : /* @__PURE__ */ wp.element.createElement("img", { width: "100%", height: "auto", src: item.src, alt: item.alt }))))), [...Array(columns - itemGroup.length)].map((_, index) => /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-spacer-cell", key: "spacer_" + index }))))), marginBottom > 0 && /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-spacer-cell", style: { height: `${marginBottom}rem` }, colSpan: columns * 2 - 1 })))));
     }
   });
 })();

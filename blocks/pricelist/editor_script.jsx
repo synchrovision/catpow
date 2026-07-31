@@ -8,7 +8,7 @@
 		const { useState, useMemo } = wp.element;
 		const { InnerBlocks, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
 		const { Icon, PanelBody, TextareaControl } = wp.components;
-		const { items = [], classes, HeadingTag, vars, loopParam, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
+		const { isTemplate, items = [], classes, HeadingTag, vars, loopParam, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
 		const primaryClass = "wp-block-catpow-pricelist";
 
 		var states = CP.classNamesToFlags(classes);
@@ -71,13 +71,13 @@
 									{
 										type: "text",
 										key: "imageCode",
-										cond: states.isTemplate && states.hasImage,
+										cond: isTemplate && states.hasImage,
 									},
 									{ type: "text", key: "title", cond: true },
 									{ type: "text", key: "caption", cond: true },
 									{ type: "text", key: "price", cond: true },
 								]}
-								isTemplate={states.isTemplate}
+								isTemplate={isTemplate}
 							/>
 						</div>
 					) : (

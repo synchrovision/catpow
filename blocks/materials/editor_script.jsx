@@ -8,7 +8,7 @@
 		const { useState, useMemo } = wp.element;
 		const { InnerBlocks, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
 		const { Icon, PanelBody, TextareaControl } = wp.components;
-		const { items = [], classes, HeadingTag, SubHeadingTag, loopParam, loopCount, doLoop, EditMode = false, AltMode = false, currentItemIndex } = attributes;
+		const { isTemplate, items = [], classes, HeadingTag, SubHeadingTag, loopParam, loopCount, doLoop, EditMode = false, AltMode = false, currentItemIndex } = attributes;
 		const primaryClass = "wp-block-catpow-materials";
 
 		var states = CP.classNamesToFlags(classes);
@@ -70,7 +70,7 @@
 										cond: true,
 									},
 								]}
-								isTemplate={states.isTemplate}
+								isTemplate={isTemplate}
 							/>
 						</div>
 					) : (

@@ -16,7 +16,7 @@
       const { useMemo } = wp.element;
       const { BlockControls, InspectorControls, useBlockProps } = wp.blockEditor;
       const { Icon, PanelBody, TextareaControl } = wp.components;
-      const { items = [], classes = "", vars, EditMode = false } = attributes;
+      const { isTemplate, items = [], classes = "", vars, EditMode = false } = attributes;
       const { linkKeys } = blockConfig;
       const states = CP.classNamesToFlags(classes);
       const selectiveClasses = useMemo(() => {
@@ -57,7 +57,7 @@
             { type: "text", key: "caption", cond: states.hasCaption },
             { type: "text", key: "action", cond: true }
           ],
-          isTemplate: states.isTemplate
+          isTemplate
         }
       )) : /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("ul", { ...blockProps }, items.map((item, index) => {
         if (!item.controlClasses) {

@@ -78,7 +78,7 @@
       const { useMemo, useCallback } = wp.element;
       const { InnerBlocks, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
       const { Icon, PanelBody, TextareaControl } = wp.components;
-      const { rows = [], cols = [], doLoop, AltMode = false, r: r2 = 0, c = 0, vars, headerColClasses, firstCellClasses } = attributes;
+      const { isTemplate, rows = [], cols = [], doLoop, AltMode = false, r: r2 = 0, c = 0, vars, headerColClasses, firstCellClasses } = attributes;
       const { imageKeys } = CP.config.comparetable;
       var states = CP.classNamesToFlags(attributes.classes);
       if (attributes.file) {
@@ -490,7 +490,7 @@
                   keys: imageKeys.image,
                   itemKeys: ["rows", rowIndex, "cells", columnIndex],
                   size: "large",
-                  isTemplate: states.isTemplate
+                  isTemplate
                 }
               )) : /* @__PURE__ */ wp.element.createElement(
                 RichText,
@@ -521,7 +521,7 @@
     },
     save({ attributes }) {
       const { InnerBlocks, RichText, useBlockProps } = wp.blockEditor;
-      const { rows = [], cols = [], loopParam, doLoop, vars, headerColClasses, firstCellClasses } = attributes;
+      const { isTemplate, rows = [], cols = [], loopParam, doLoop, vars, headerColClasses, firstCellClasses } = attributes;
       const { imageKeys } = CP.config.comparetable;
       const getCssVarsForCell = (r2, c) => {
         return { "--cp-row-index": `${r2 + 1}`, "--cp-column-index": `${c + 1}` };
@@ -625,7 +625,7 @@
                   attributes,
                   keys: imageKeys.image,
                   itemKeys: ["rows", rowIndex, "cells", columnIndex],
-                  isTemplate: states.isTemplate
+                  isTemplate
                 }
               )) : /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "div", className: "_contents", value: cell.text, "data-role": "contents" })
             );

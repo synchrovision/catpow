@@ -21,6 +21,7 @@ wp.blocks.registerBlockType("catpow/unit", {
 		],
 	},
 	attributes: {
+		isTemplate: { type: "boolean", default: false },
 		vars: { type: "object", default: {} },
 		classes: { source: "attribute", selector: ".wp-block-catpow-unit", attribute: "class", default: "wp-block-catpow-unit" },
 
@@ -35,7 +36,7 @@ wp.blocks.registerBlockType("catpow/unit", {
 	edit({ attributes, className, setAttributes }) {
 		const { InnerBlocks, InspectorControls, useBlockProps } = wp.blockEditor;
 		const { PanelBody, TextareaControl } = wp.components;
-		const { classes, vars } = attributes;
+		const { isTemplate, classes, vars } = attributes;
 
 		const states = CP.classNamesToFlags(classes);
 		const { devices, imageKeys } = CP.config.unit;
@@ -46,7 +47,7 @@ wp.blocks.registerBlockType("catpow/unit", {
 				type: "buttons",
 				values: ["snap", "panel"],
 			},
-			{ input: "picture", label: "画像", keys: imageKeys.image, devices, isTemplate: states.isTemplate },
+			{ input: "picture", label: "画像", keys: imageKeys.image, devices, isTemplate: isTemplate },
 			{
 				label: "テンプレート",
 				values: "isTemplate",

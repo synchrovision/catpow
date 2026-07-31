@@ -31,7 +31,7 @@ wp.blocks.registerBlockType("catpow/panes", {
 	edit({ attributes, className, setAttributes, isSelected }) {
 		const { InnerBlocks, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
 		const { Icon, PanelBody, TextareaControl } = wp.components;
-		const { items = [], classes = "", HeadingTag, vars, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
+		const { isTemplate, items = [], classes = "", HeadingTag, vars, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
 		var states = CP.classNamesToFlags(classes);
 		const { imageKeys } = CP.config.panes;
 
@@ -68,7 +68,7 @@ wp.blocks.registerBlockType("catpow/panes", {
 									keys: imageKeys.image,
 									cond: true,
 								},
-								{ type: "text", key: "imageCode", cond: states.isTemplate },
+								{ type: "text", key: "imageCode", cond: isTemplate },
 								{ type: "text", key: "title", cond: states.hasTitle },
 								{
 									type: "text",
@@ -77,7 +77,7 @@ wp.blocks.registerBlockType("catpow/panes", {
 								},
 								{ type: "text", key: "linkUrl", cond: states.hasLink },
 							]}
-							isTemplate={states.isTemplate}
+							isTemplate={isTemplate}
 						/>
 					</div>
 				) : (
@@ -103,7 +103,7 @@ wp.blocks.registerBlockType("catpow/panes", {
 														keys={imageKeys.image}
 														itemKeys={["items", index]}
 														size="large"
-														isTemplate={states.isTemplate}
+														isTemplate={isTemplate}
 													/>
 												</div>
 												<div className="_contents">
@@ -153,7 +153,7 @@ wp.blocks.registerBlockType("catpow/panes", {
 	},
 	save({ attributes, className }) {
 		const { InnerBlocks, RichText } = wp.blockEditor;
-		const { items = [], classes = "", HeadingTag, vars, linkUrl, loopParam, doLoop } = attributes;
+		const { isTemplate, items = [], classes = "", HeadingTag, vars, linkUrl, loopParam, doLoop } = attributes;
 		const states = CP.classNamesToFlags(classes);
 		const { imageKeys } = CP.config.panes;
 
@@ -164,7 +164,7 @@ wp.blocks.registerBlockType("catpow/panes", {
 						{items.map((item, index) => (
 							<li className={item.classes} key={index}>
 								<div className="_image">
-									<CP.ResponsiveImage className="_img" attributes={attributes} keys={imageKeys.image} itemKeys={["items", index]} isTemplate={states.isTemplate} />
+									<CP.ResponsiveImage className="_img" attributes={attributes} keys={imageKeys.image} itemKeys={["items", index]} isTemplate={isTemplate} />
 								</div>
 								<div className="_contents">
 									<div className="_text">

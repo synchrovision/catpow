@@ -1,6 +1,7 @@
 <?php
 $block_class="wp-block-catpow-panes";
 $attributes=[
+	"isTemplate"=>["type"=>"boolean","default"=>false],
 	"classes"=>["source"=>"attribute","selector"=>".{$block_class}","attribute"=>"class","default"=>"{$block_class} is-level3"],
 	"vars"=>["type"=>"object"],
 	"HeadingTag"=>["type"=>"string","default"=>"h3"],

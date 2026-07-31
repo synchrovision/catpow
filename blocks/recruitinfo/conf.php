@@ -1,6 +1,7 @@
 <?php
 $block_class="wp-block-catpow-recruitinfo";
 $attributes=[
+	"isTemplate"=>["type"=>"boolean","default"=>false],
 	"classes"=>["type"=>"string","default"=>"{$block_class} is-level3 is-type-card"],
 	"vars"=>["type"=>"object"],
 	"HeadingTag"=>["type"=>"string","default"=>"h3"],

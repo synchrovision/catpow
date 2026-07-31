@@ -15,6 +15,7 @@ wp.blocks.registerBlockType("catpow/pricecard", {
 		const { InnerBlocks, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
 		const { Icon, PanelBody, TextareaControl } = wp.components;
 		const {
+			isTemplate,
 			items = [],
 			classes = "",
 			vars,
@@ -80,7 +81,7 @@ wp.blocks.registerBlockType("catpow/pricecard", {
 					label: "画像コード",
 					input: "text",
 					key: "imageCode",
-					cond: states.isTemplate,
+					cond: isTemplate,
 				},
 			];
 			wp.hooks.applyFilters("catpow.blocks.pricecard.selectiveItemClasses", CP.finderProxy(itemSelectiveClasses));
@@ -121,7 +122,7 @@ wp.blocks.registerBlockType("catpow/pricecard", {
 								{
 									type: "text",
 									key: "imageCode",
-									cond: states.hasImage && states.isTemplate,
+									cond: states.hasImage && isTemplate,
 								},
 								{ type: "text", key: "subTitle", cond: states.hasSubTitle },
 								{ type: "text", key: "text", cond: states.hasText },
@@ -129,7 +130,7 @@ wp.blocks.registerBlockType("catpow/pricecard", {
 								{ type: "text", key: "salePrice", cond: true },
 								{ type: "text", key: "linkUrl", cond: states.hasLink },
 							]}
-							isTemplate={states.isTemplate}
+							isTemplate={isTemplate}
 						/>
 					</div>
 				) : (
@@ -156,7 +157,7 @@ wp.blocks.registerBlockType("catpow/pricecard", {
 															keys={imageKeys.image}
 															itemKeys={["items", index]}
 															size="vga"
-															isTemplate={states.isTemplate}
+															isTemplate={isTemplate}
 														/>
 													</div>
 												)}
@@ -304,7 +305,7 @@ wp.blocks.registerBlockType("catpow/pricecard", {
 	save({ attributes, className }) {
 		const { Fragment } = wp.element;
 		const { InnerBlocks, RichText, useBlockProps } = wp.blockEditor;
-		const { items = [], classes = "", vars, headerClasses, contentsClasses = "", HeadingTag, SubHeadingTag, priceUnit, priceCaption, linkText, loopCount, doLoop } = attributes;
+		const { isTemplate, items = [], classes = "", vars, headerClasses, contentsClasses = "", HeadingTag, SubHeadingTag, priceUnit, priceCaption, linkText, loopCount, doLoop } = attributes;
 		const { imageKeys } = CP.config.pricecard;
 
 		const states = CP.classNamesToFlags(classes);
@@ -319,7 +320,7 @@ wp.blocks.registerBlockType("catpow/pricecard", {
 								<li className={item.classes} key={index}>
 									{states.hasImage && (
 										<div className="_image">
-											<CP.ResponsiveImage attributes={attributes} keys={imageKeys.image} itemKeys={["items", index]} size="vga" isTemplate={states.isTemplate} />
+											<CP.ResponsiveImage attributes={attributes} keys={imageKeys.image} itemKeys={["items", index]} size="vga" isTemplate={isTemplate} />
 										</div>
 									)}
 									<header className={headerClasses}>

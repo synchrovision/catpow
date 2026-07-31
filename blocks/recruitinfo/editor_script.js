@@ -123,6 +123,7 @@
       const { InspectorControls, RichText, useBlockProps } = wp.blockEditor;
       const { CheckboxControl, PanelBody, SelectControl, TextControl, ToggleControl } = wp.components;
       const {
+        isTemplate,
         classes,
         vars,
         HeadingTag,

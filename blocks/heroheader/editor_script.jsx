@@ -13,7 +13,7 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 	category: "catpow-parts",
 	example: CP.example,
 	edit({ attributes, setAttributes }) {
-		const { classes, bodyClasses, vars, params, HeadingTag, title, text, buttons, images, element: Element = "div", EditMode = false } = attributes;
+		const { isTemplate, classes, bodyClasses, vars, params, HeadingTag, title, text, buttons, images, element: Element = "div", EditMode = false } = attributes;
 		const { useState, useMemo, useEffect, useRef } = wp.element;
 		const { InspectorControls, RichText, useBlockProps } = wp.blockEditor;
 		const states = CP.classNamesToFlags(attributes.classes);
@@ -89,7 +89,7 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 								{ type: "icon", label: "icon" },
 								{ type: "text", key: "text" },
 							]}
-							isTemplate={states.isTemplate}
+							isTemplate={isTemplate}
 						/>
 					</div>
 				) : (

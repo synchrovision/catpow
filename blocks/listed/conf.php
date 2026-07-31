@@ -1,6 +1,7 @@
 <?php
 $block_class="wp-block-catpow-listed";
 $attributes=[
+	"isTemplate"=>["type"=>"boolean","default"=>false],
 	"classes"=>["source"=>"attribute","selector"=>"ul","attribute"=>"class","default"=>"wp-block-catpow-listed is-level3 is-type-menu has-item-size-medium has-header has-title has-title-caption has-image has-text has-link"],
 	"commonItemClasses"=>["type"=>"string"],
 	"vars"=>['type'=>'object'],

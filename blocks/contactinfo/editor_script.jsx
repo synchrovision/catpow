@@ -12,7 +12,7 @@ wp.blocks.registerBlockType("catpow/contactinfo", {
 		const { useMemo, useEffect } = wp.element;
 		const { InnerBlocks, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
 		const { Icon, PanelBody, TextareaControl } = wp.components;
-		const { classes, vars, HeadingTag = "h3", itemsClasses, items = [], title, lead, caption, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
+		const { isTemplate, classes, vars, HeadingTag = "h3", itemsClasses, items = [], title, lead, caption, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
 		const { classNamesToFlags, flagsToClassNames } = Catpow.util;
 
 		const states = useMemo(() => classNamesToFlags(classes), [classes]);
@@ -84,7 +84,7 @@ wp.blocks.registerBlockType("catpow/contactinfo", {
 								{ type: "text", key: "href" },
 								{ type: "text", key: "caption", cond: states.hasItemCaption },
 							]}
-							isTemplate={states.isTemplate}
+							isTemplate={isTemplate}
 						/>
 					</div>
 				) : (

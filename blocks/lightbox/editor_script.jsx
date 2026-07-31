@@ -35,6 +35,7 @@ wp.blocks.registerBlockType("catpow/lightbox", {
 		const { InnerBlocks, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
 		const { Icon, PanelBody, TextareaControl } = wp.components;
 		const {
+			isTemplate,
 			items = [],
 			classes,
 			vars,
@@ -90,28 +91,28 @@ wp.blocks.registerBlockType("catpow/lightbox", {
 					input: "image",
 					label: "画像",
 					keys: imageKeys.sliderIimage,
-					isTemplate: states.isTemplate,
+					isTemplate,
 				},
 				{
 					name: "imageCode",
 					input: "text",
 					label: "画像コード",
 					key: "imageCode",
-					cond: states.isTemplate,
+					cond: isTemplate,
 				},
 				{
 					name: "",
 					input: "image",
 					label: "サムネール画像",
 					keys: imageKeys.thumbnail,
-					isTemplate: states.isTemplate,
+					isTemplate,
 				},
 				{
 					name: "thumbnailCode",
 					input: "text",
 					label: "サムネール画像コード",
 					key: "thumbnailCode",
-					cond: states.isTemplate,
+					cond: isTemplate,
 				},
 			];
 			wp.hooks.applyFilters("catpow.blocks.lightbox.selectiveItemClasses", CP.finderProxy(selectiveItemClasses));
@@ -158,7 +159,7 @@ wp.blocks.registerBlockType("catpow/lightbox", {
 										{
 											type: "text",
 											key: "thumbnailCode",
-											cond: states.isTemplate,
+											cond: isTemplate,
 										},
 										{ type: "text", key: "title", cond: states.hasTitle },
 										{
@@ -175,12 +176,12 @@ wp.blocks.registerBlockType("catpow/lightbox", {
 										{
 											type: "text",
 											key: "imageCode",
-											cond: states.isTemplate && sliderStates.hasImage,
+											cond: isTemplate && sliderStates.hasImage,
 										},
 										{ type: "text", key: "sliderTitle", cond: sliderStates.hasTitle },
 										{ type: "text", key: "sliderText", cond: sliderStates.hasText },
 									]}
-									isTemplate={states.isTemplate}
+									isTemplate={isTemplate}
 								/>
 							</div>
 						) : (
@@ -212,7 +213,7 @@ wp.blocks.registerBlockType("catpow/lightbox", {
 																	keys={imageKeys.thumbnail}
 																	itemKeys={["items", index]}
 																	size="vga"
-																	isTemplate={states.isTemplate}
+																	isTemplate={isTemplate}
 																/>
 															</div>
 															{states.hasTitle && (
@@ -280,7 +281,7 @@ wp.blocks.registerBlockType("catpow/lightbox", {
 																keys={imageKeys.sliderImage}
 																itemKeys={["items", index]}
 																size="full"
-																isTemplate={states.isTemplate}
+																isTemplate={isTemplate}
 															/>
 														</div>
 													)}
@@ -319,7 +320,7 @@ wp.blocks.registerBlockType("catpow/lightbox", {
 	},
 	save({ attributes, className }) {
 		const { InnerBlocks, RichText } = wp.blockEditor;
-		const { items = [], classes = "", vars, sliderVars, HeadingTag, SliderHeadingTag, sliderClasses, blockState, doLoop } = attributes;
+		const { isTemplate, items = [], classes = "", vars, sliderVars, HeadingTag, SliderHeadingTag, sliderClasses, blockState, doLoop } = attributes;
 
 		var states = CP.classNamesToFlags(classes);
 		var sliderStates = CP.classNamesToFlags(sliderClasses);
@@ -354,7 +355,7 @@ wp.blocks.registerBlockType("catpow/lightbox", {
 										key={index}
 									>
 										<div className="_image">
-											<CP.ResponsiveImage className="_img" attributes={attributes} keys={imageKeys.thumbnail} itemKeys={["items", index]} isTemplate={states.isTemplate} />
+											<CP.ResponsiveImage className="_img" attributes={attributes} keys={imageKeys.thumbnail} itemKeys={["items", index]} isTemplate={isTemplate} />
 										</div>
 										{states.hasTitle && (
 											<div className="_text">
@@ -366,7 +367,7 @@ wp.blocks.registerBlockType("catpow/lightbox", {
 											{sliderStates.hasTitle && <RichText.Content tagName={SliderHeadingTag} className="_title" value={item.subTitle} />}
 											{sliderStates.hasImage && (
 												<div className="_image">
-													<CP.ResponsiveImage className="_img" attributes={attributes} keys={imageKeys.sliderImage} itemKeys={["items", index]} isTemplate={states.isTemplate} />
+													<CP.ResponsiveImage className="_img" attributes={attributes} keys={imageKeys.sliderImage} itemKeys={["items", index]} isTemplate={isTemplate} />
 												</div>
 											)}
 											{sliderStates.hasText && <RichText.Content tagName="div" className="_text" value={item.text} />}

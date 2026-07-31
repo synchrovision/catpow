@@ -1,6 +1,7 @@
 <?php
 $block_class="wp-block-catpow-accessmap";
 $attributes=[
+	"isTemplate"=>["type"=>"boolean","default"=>false],
 	"classes"=>["source"=>"attribute","selector"=>".{$block_class}","attribute"=>"class","default"=>"{$block_class} is-level3 is-type-card has-item-size-medium"],
 	'vars'=>['type'=>'object'],
 	

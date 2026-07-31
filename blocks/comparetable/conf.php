@@ -1,6 +1,7 @@
 <?php
 $block_class="wp-block-catpow-comparetable";
 $attributes=[
+	"isTemplate"=>["type"=>"boolean","default"=>false],
 	"classes"=>["source"=>"attribute","selector"=>".{$block_class}","attribute"=>"class","default"=>"{$block_class} is-style-spec has-tags has-header-column do-transposition"],
 	"vars"=>["type"=>"object","default"=>["--cp-table-width"=>"960","--cp-column-width"=>"200","--cp-header-column-width"=>"120"]],
 	

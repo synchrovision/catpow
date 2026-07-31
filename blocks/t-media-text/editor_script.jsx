@@ -7,6 +7,7 @@ wp.blocks.registerBlockType("catpow/t-media-text", {
 	category: "catpow-mail",
 	parent: CP.mailContensContainer,
 	attributes: {
+		isTemplate: { type: "boolean", default: false },
 		classes: { source: "attribute", selector: "table", attribute: "class", default: "wp-block-catpow-t-media-text has-vertical-align-top has-image-left" },
 		src: { source: "attribute", selector: "[src]", attribute: "src", default: wpinfo.theme_url + "/images/dummy.jpg" },
 		alt: { source: "attribute", selector: "[src]", attribute: "alt" },
@@ -21,7 +22,7 @@ wp.blocks.registerBlockType("catpow/t-media-text", {
 		const { useState, useMemo } = wp.element;
 		const { InnerBlocks, BlockControls, InspectorControls } = wp.blockEditor;
 		const { PanelBody, TextareaControl } = wp.components;
-		const { classes, marginTop, marginBottom, src, alt, imageCode, width, gap } = attributes;
+		const { isTemplate, classes, marginTop, marginBottom, src, alt, imageCode, width, gap } = attributes;
 		var states = CP.classNamesToFlags(classes);
 
 		const selectiveClasses = useMemo(() => {
@@ -35,7 +36,8 @@ wp.blocks.registerBlockType("catpow/t-media-text", {
 				{
 					name: "template",
 					label: "テンプレート",
-					values: "isTemplate",
+					input: "bool",
+					key: "isTemplate",
 					sub: [{ name: "imageCode", label: "画像出力コード", input: "text", key: "imageCode" }],
 				},
 			];
@@ -63,7 +65,7 @@ wp.blocks.registerBlockType("catpow/t-media-text", {
 											size="large"
 											width="100%"
 											height="auto"
-											isTemplate={states.isTemplate}
+											isTemplate={isTemplate}
 										/>
 									</td>
 									<td className="_td is-spacer-cell" style={{ width: `${gap}px` }} width={gap}></td>
@@ -85,7 +87,7 @@ wp.blocks.registerBlockType("catpow/t-media-text", {
 											size="large"
 											width="100%"
 											height="auto"
-											isTemplate={states.isTemplate}
+											isTemplate={isTemplate}
 										/>
 									</td>
 								</tr>
@@ -114,7 +116,7 @@ wp.blocks.registerBlockType("catpow/t-media-text", {
 
 	save({ attributes, className, setAttributes }) {
 		const { InnerBlocks } = wp.blockEditor;
-		const { classes, marginTop, marginBottom, src, alt, imageCode, width, gap } = attributes;
+		const { isTemplate, classes, marginTop, marginBottom, src, alt, imageCode, width, gap } = attributes;
 		var states = CP.classNamesToFlags(classes);
 		return (
 			<CP.Bem prefix="wp-block-catpow">
@@ -128,7 +130,7 @@ wp.blocks.registerBlockType("catpow/t-media-text", {
 						{states.hasImageLeft ? (
 							<tr>
 								<td className="_td is-image-cell" width={width}>
-									<CP.ResponsiveImage attributes={attributes} keys={{ src: "src", alt: "alt", code: "imageCode" }} size="large" width="100%" height="auto" isTemplate={states.isTemplate} />
+									<CP.ResponsiveImage attributes={attributes} keys={{ src: "src", alt: "alt", code: "imageCode" }} size="large" width="100%" height="auto" isTemplate={isTemplate} />
 								</td>
 								<td className="_td is-spacer-cell" style={{ width: `${gap}px` }} width={gap}></td>
 								<td className="_td is-text-cell">
@@ -142,7 +144,7 @@ wp.blocks.registerBlockType("catpow/t-media-text", {
 								</td>
 								<td className="_td is-spacer-cell" style={{ width: `${gap}px` }} width={gap}></td>
 								<td className="_td is-image-cell" width={width}>
-									<CP.ResponsiveImage attributes={attributes} keys={{ src: "src", alt: "alt", code: "imageCode" }} size="large" width="100%" height="auto" isTemplate={states.isTemplate} />
+									<CP.ResponsiveImage attributes={attributes} keys={{ src: "src", alt: "alt", code: "imageCode" }} size="large" width="100%" height="auto" isTemplate={isTemplate} />
 								</td>
 							</tr>
 						)}

@@ -17,7 +17,7 @@ wp.blocks.registerBlockType("catpow/section", {
 		const { PanelBody, TextareaControl, TextControl } = wp.components;
 		const { attributes, setAttributes } = props;
 		const { useMemo, useState } = wp.element;
-		const { SectionTag, HeadingTag, color, anchor, classes, bodyClasses, headerClasses, titleClasses, vars, clipVars, headerVars, bodyVars, title, lead, titleImageCode, headerImageCode } = attributes;
+		const { isTemplate, SectionTag, HeadingTag, color, anchor, classes, bodyClasses, headerClasses, titleClasses, vars, clipVars, headerVars, bodyVars, title, lead, titleImageCode, headerImageCode } = attributes;
 
 		const states = CP.classNamesToFlags(classes);
 		const { devices, imageKeys } = CP.config.section;
@@ -112,7 +112,7 @@ wp.blocks.registerBlockType("catpow/section", {
 							<header className={headerClasses} style={headerVars}>
 								{states.hasHeaderImage && (
 									<div className="_image">
-										{states.isTemplate && headerImageCode ? (
+										{isTemplate && headerImageCode ? (
 											<CP.DummyImage text={headerImageCode} />
 										) : (
 											<CP.SelectResponsiveImage className="_picture" setAttributes={setAttributes} attributes={attributes} keys={imageKeys.headerImage} />
@@ -123,7 +123,7 @@ wp.blocks.registerBlockType("catpow/section", {
 									{states.hasIcon && <CP.OutputIcon className="_icon" item={attributes} />}
 									{states.hasTitleImage ? (
 										<HeadingTag className="_titleimage">
-											{states.isTemplate && titleImageCode ? (
+											{isTemplate && titleImageCode ? (
 												<CP.DummyImage text={titleImageCode} />
 											) : (
 												<CP.SelectResponsiveImage className="_image" setAttributes={setAttributes} attributes={attributes} keys={imageKeys.titleImage} devices={devices} />
@@ -163,7 +163,7 @@ wp.blocks.registerBlockType("catpow/section", {
 	},
 	save({ attributes }) {
 		const { InnerBlocks, RichText, useBlockProps } = wp.blockEditor;
-		const { SectionTag, HeadingTag, anchor, navIcon, classes, bodyClasses, headerClasses, titleClasses, vars, clipVars, headerVars, bodyVars, title, lead, titleImageCode, headerImageCode } =
+		const { isTemplate, SectionTag, HeadingTag, anchor, navIcon, classes, bodyClasses, headerClasses, titleClasses, vars, clipVars, headerVars, bodyVars, title, lead, titleImageCode, headerImageCode } =
 			attributes;
 
 		const states = CP.classNamesToFlags(classes);
@@ -183,14 +183,14 @@ wp.blocks.registerBlockType("catpow/section", {
 						<header className={headerClasses} style={headerVars}>
 							{states.hasHeaderImage && (
 								<div className="_image">
-									{states.isTemplate && headerImageCode ? headerImageCode : <CP.ResponsiveImage className="_picture" attributes={attributes} keys={imageKeys.headerImage} />}
+									{isTemplate && headerImageCode ? headerImageCode : <CP.ResponsiveImage className="_picture" attributes={attributes} keys={imageKeys.headerImage} />}
 								</div>
 							)}
 							<div className={titleClasses}>
 								{states.hasIcon && <CP.OutputIcon className="_icon" item={attributes} />}
 								{states.hasTitleImage ? (
 									<HeadingTag className="_titleimage">
-										{states.isTemplate && titleImageCode ? titleImageCode : <CP.ResponsiveImage className="_image" attributes={attributes} keys={imageKeys.titleImage} devices={devices} />}
+										{isTemplate && titleImageCode ? titleImageCode : <CP.ResponsiveImage className="_image" attributes={attributes} keys={imageKeys.titleImage} devices={devices} />}
 									</HeadingTag>
 								) : (
 									<HeadingTag className="_heading">

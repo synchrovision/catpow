@@ -49,6 +49,7 @@
       const { InnerBlocks, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
       const { Icon, PanelBody, TextareaControl } = wp.components;
       const {
+        isTemplate,
         items = [],
         classes,
         vars,
@@ -102,28 +103,28 @@
             input: "image",
             label: "\u753B\u50CF",
             keys: imageKeys.sliderIimage,
-            isTemplate: states.isTemplate
+            isTemplate
           },
           {
             name: "imageCode",
             input: "text",
             label: "\u753B\u50CF\u30B3\u30FC\u30C9",
             key: "imageCode",
-            cond: states.isTemplate
+            cond: isTemplate
           },
           {
             name: "",
             input: "image",
             label: "\u30B5\u30E0\u30CD\u30FC\u30EB\u753B\u50CF",
             keys: imageKeys.thumbnail,
-            isTemplate: states.isTemplate
+            isTemplate
           },
           {
             name: "thumbnailCode",
             input: "text",
             label: "\u30B5\u30E0\u30CD\u30FC\u30EB\u753B\u50CF\u30B3\u30FC\u30C9",
             key: "thumbnailCode",
-            cond: states.isTemplate
+            cond: isTemplate
           }
         ];
         wp.hooks.applyFilters("catpow.blocks.lightbox.selectiveItemClasses", CP.finderProxy(selectiveItemClasses2));
@@ -150,7 +151,7 @@
             {
               type: "text",
               key: "thumbnailCode",
-              cond: states.isTemplate
+              cond: isTemplate
             },
             { type: "text", key: "title", cond: states.hasTitle },
             {
@@ -167,12 +168,12 @@
             {
               type: "text",
               key: "imageCode",
-              cond: states.isTemplate && sliderStates.hasImage
+              cond: isTemplate && sliderStates.hasImage
             },
             { type: "text", key: "sliderTitle", cond: sliderStates.hasTitle },
             { type: "text", key: "sliderText", cond: sliderStates.hasText }
           ],
-          isTemplate: states.isTemplate
+          isTemplate
         }
       )) : /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement("ul", { className: "_items" }, [...Array(Math.max(items.length, loopCount)).keys()].map((i) => {
         const index = i % items.length;
@@ -189,7 +190,7 @@
             keys: imageKeys.thumbnail,
             itemKeys: ["items", index],
             size: "vga",
-            isTemplate: states.isTemplate
+            isTemplate
           }
         )), states.hasTitle && /* @__PURE__ */ wp.element.createElement("div", { className: "_text" }, /* @__PURE__ */ wp.element.createElement(
           RichText,
@@ -237,7 +238,7 @@
             keys: imageKeys.sliderImage,
             itemKeys: ["items", index],
             size: "full",
-            isTemplate: states.isTemplate
+            isTemplate
           }
         )), sliderStates.hasText && /* @__PURE__ */ wp.element.createElement(
           RichText,
@@ -255,7 +256,7 @@
     },
     save({ attributes, className }) {
       const { InnerBlocks, RichText } = wp.blockEditor;
-      const { items = [], classes = "", vars, sliderVars, HeadingTag, SliderHeadingTag, sliderClasses, blockState, doLoop } = attributes;
+      const { isTemplate, items = [], classes = "", vars, sliderVars, HeadingTag, SliderHeadingTag, sliderClasses, blockState, doLoop } = attributes;
       var states = CP.classNamesToFlags(classes);
       var sliderStates = CP.classNamesToFlags(sliderClasses);
       const { imageKeys } = CP.config.lightbox;
@@ -285,9 +286,9 @@
               "data-wp-bind--aria-selected": "callbacks.isCurrent",
               key: index
             },
-            /* @__PURE__ */ wp.element.createElement("div", { className: "_image" }, /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImage, { className: "_img", attributes, keys: imageKeys.thumbnail, itemKeys: ["items", index], isTemplate: states.isTemplate })),
+            /* @__PURE__ */ wp.element.createElement("div", { className: "_image" }, /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImage, { className: "_img", attributes, keys: imageKeys.thumbnail, itemKeys: ["items", index], isTemplate })),
             states.hasTitle && /* @__PURE__ */ wp.element.createElement("div", { className: "_text" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: HeadingTag, className: "_title", value: item.title }), states.hasCaption && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "p", className: "_caption", value: item.caption })),
-            /* @__PURE__ */ wp.element.createElement("div", { className: "contents_" }, sliderStates.hasTitle && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: SliderHeadingTag, className: "_title", value: item.subTitle }), sliderStates.hasImage && /* @__PURE__ */ wp.element.createElement("div", { className: "_image" }, /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImage, { className: "_img", attributes, keys: imageKeys.sliderImage, itemKeys: ["items", index], isTemplate: states.isTemplate })), sliderStates.hasText && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "div", className: "_text", value: item.text }))
+            /* @__PURE__ */ wp.element.createElement("div", { className: "contents_" }, sliderStates.hasTitle && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: SliderHeadingTag, className: "_title", value: item.subTitle }), sliderStates.hasImage && /* @__PURE__ */ wp.element.createElement("div", { className: "_image" }, /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImage, { className: "_img", attributes, keys: imageKeys.sliderImage, itemKeys: ["items", index], isTemplate })), sliderStates.hasText && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "div", className: "_text", value: item.text }))
           );
         })),
         /* @__PURE__ */ wp.element.createElement("div", { id: "{$uid}", className: sliderClasses, style: sliderVars }, /* @__PURE__ */ wp.element.createElement("ul", { className: "_items" }, items.map((item, index) => {

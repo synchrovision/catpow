@@ -1,6 +1,7 @@
 <?php
 $block_class="wp-block-catpow-showcase";
 $attributes=[
+	"isTemplate"=>["type"=>"boolean","default"=>false],
 	"classes"=>["source"=>"attribute","selector"=>".{$block_class}","attribute"=>"class","default"=>"{$block_class} is-type-card is-level3 has-content-width has-content-width-medium has-title-caption has-counter has-link"],
 	"vars"=>["type"=>"object"],
 	

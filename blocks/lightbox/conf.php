@@ -1,6 +1,7 @@
 <?php
 $block_class="wp-block-catpow-lightbox";
 $attributes=[
+	"isTemplate"=>["type"=>"boolean","default"=>false],
 	"classes"=>["source"=>"attribute","selector"=>".{$block_class}","attribute"=>"class","default"=>"{$block_class} is-level4 is-type-card has-item-size-medium has-image has-title has-caption"],
 	"sliderClasses"=>["source"=>"attribute","selector"=>".{$block_class}__slider","attribute"=>"class","default"=>"{$block_class}__slider is-level4 has-image has-title has-text"],
 	"vars"=>["type"=>"object"],

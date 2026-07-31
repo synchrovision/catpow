@@ -28,6 +28,7 @@ wp.blocks.registerBlockType("catpow/flow", {
 		],
 	},
 	attributes: {
+		isTemplate: { type: "boolean", default: false },
 		version: { type: "number", default: 0 },
 		classes: {
 			source: "attribute",
@@ -85,7 +86,7 @@ wp.blocks.registerBlockType("catpow/flow", {
 		const { useMemo } = wp.element;
 		const { BlockControls, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
 		const { PanelBody, TextareaControl, ToolbarGroup } = wp.components;
-		const { HeadingTag, SubHeadingTag, items = [], classes, vars, contentsClasses, countPrefix, countSuffix, EditMode } = attributes;
+		const { isTemplate, HeadingTag, SubHeadingTag, items = [], classes, vars, contentsClasses, countPrefix, countSuffix, EditMode } = attributes;
 
 		const states = CP.classNamesToFlags(classes);
 		const { imageKeys, linkKeys } = CP.config.flow;
@@ -186,7 +187,7 @@ wp.blocks.registerBlockType("catpow/flow", {
 								{ type: "text", key: "text" },
 								{ type: "text", key: "linkUrl", cond: states.hasLink },
 							]}
-							isTemplate={states.isTemplate}
+							isTemplate={isTemplate}
 						/>
 					</div>
 				) : (

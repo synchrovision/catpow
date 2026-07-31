@@ -11,7 +11,7 @@ wp.blocks.registerBlockType("catpow/accessmap", {
 		const { useMemo } = wp.element;
 		const { InnerBlocks, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
 		const { Icon, PanelBody, TextareaControl } = wp.components;
-		const { classes, vars, HeadingTag, items = [], z, t, hl, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
+		const { isTemplate, classes, vars, HeadingTag, items = [], z, t, hl, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
 
 		var states = useMemo(() => CP.classNamesToFlags(classes), [classes]);
 
@@ -129,7 +129,7 @@ wp.blocks.registerBlockType("catpow/accessmap", {
 				<InspectorControls>
 					<CP.SelectClassPanel title="スタイル" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 					<CP.SelectClassPanel title="リストアイテム" icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={selectiveItemClasses} />
-					{states.isTemplate && (
+					{isTemplate && (
 						<CP.SelectClassPanel
 							title="テンプレート"
 							icon="edit"
@@ -157,7 +157,7 @@ wp.blocks.registerBlockType("catpow/accessmap", {
 								{ type: "text", key: "site" },
 								{ type: "text", key: "info" },
 							]}
-							isTemplate={states.isTemplate}
+							isTemplate={isTemplate}
 						/>
 					</div>
 				) : (
@@ -191,7 +191,7 @@ wp.blocks.registerBlockType("catpow/accessmap", {
 										return (
 											<CP.Item tag="div" className={item.classes} {...{ setAttributes, attributes }} itemKeys={["items", index]} key={i}>
 												<div className="_map">
-													{states.isTemplate ? (
+													{isTemplate ? (
 														<CP.DummyImage className="_gmap" text={item.q || item.address.replace(/<br\/?>|\n/, " ")} />
 													) : (
 														<iframe src={url} className="_gmap" data-ll={item.ll || false} data-q={item.q || false}></iframe>

@@ -3,6 +3,7 @@ $block_class="wp-block-catpow-formbuttons";
 $buttons_class="cp-buttons";
 $button_class="cp-button";
 $attributes=[
+	"isTemplate"=>["type"=>"boolean","default"=>false],
 	"vars"=>["type"=>"object","default"=>[]],
 	"classes"=>["source"=>"attribute","selector"=>".{$block_class}","attribute"=>"class","default"=>"{$block_class} {$buttons_class} is-level3 has-item-size-medium"],
 	"items"=>[

@@ -38,7 +38,7 @@ wp.blocks.registerBlockType("catpow/banners", {
 		const { useMemo } = wp.element;
 		const { InnerBlocks, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
 		const { Icon, PanelBody, TextareaControl } = wp.components;
-		const { classes, HeadingTag, vars, items = [], loopCount, imageCode, doLoop, device, EditMode = false, AltMode = false } = attributes;
+		const { isTemplate, classes, HeadingTag, vars, items = [], loopCount, imageCode, doLoop, device, EditMode = false, AltMode = false } = attributes;
 
 		const states = CP.classNamesToFlags(classes);
 		const { devices, imageKeys, linkKeys } = CP.config.banners;
@@ -82,7 +82,7 @@ wp.blocks.registerBlockType("catpow/banners", {
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
 						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
 					</PanelBody>
-					{states.isTemplate ? (
+					{isTemplate ? (
 						<CP.SelectClassPanel
 							title="テンプレート"
 							icon="edit"
@@ -110,12 +110,12 @@ wp.blocks.registerBlockType("catpow/banners", {
 									keys: imageKeys.image,
 									cond: true,
 								},
-								{ type: "text", key: "imageCode", cond: states.isTemplate },
+								{ type: "text", key: "imageCode", cond: isTemplate },
 								{ type: "text", key: "alt", cond: true },
 								{ type: "text", key: "linkUrl", cond: true },
 								{ type: "text", key: "target", cond: true },
 							]}
-							isTemplate={states.isTemplate}
+							isTemplate={isTemplate}
 						/>
 					</div>
 				) : (
@@ -156,7 +156,7 @@ wp.blocks.registerBlockType("catpow/banners", {
 														itemKeys={["items", index]}
 														devices={devices}
 														device={device === "pc" ? null : device}
-														isTemplate={states.isTemplate}
+														isTemplate={isTemplate}
 													/>
 												</CP.Link.Edit>
 											</CP.Item>
@@ -172,7 +172,7 @@ wp.blocks.registerBlockType("catpow/banners", {
 	},
 	save({ attributes }) {
 		const { InnerBlocks, RichText, useBlockProps } = wp.blockEditor;
-		const { classes, HeadingTag, vars, items = [], loopParam, doLoop } = attributes;
+		const { isTemplate, classes, HeadingTag, vars, items = [], loopParam, doLoop } = attributes;
 
 		const states = CP.classNamesToFlags(classes);
 		const { devices, imageKeys, linkKeys } = CP.config.banners;
@@ -198,7 +198,7 @@ wp.blocks.registerBlockType("catpow/banners", {
 											keys={imageKeys.image}
 											itemKeys={["items", index]}
 											devices={devices}
-											isTemplate={states.isTemplate}
+											isTemplate={isTemplate}
 										/>
 									</CP.Link>
 								</li>
@@ -217,7 +217,7 @@ wp.blocks.registerBlockType("catpow/banners", {
 	deprecated: [
 		{
 			save({ attributes, className }) {
-				const { items = [], classes, loopParam } = attributes;
+				const { isTemplate, items = [], classes, loopParam } = attributes;
 
 				var states = CP.classNamesToFlags(classes);
 				const imageKeys = {
@@ -242,7 +242,7 @@ wp.blocks.registerBlockType("catpow/banners", {
 										</h3>
 									)}
 									<a href={item.linkUrl} target={item.target} data-event={item.event} rel={item.target ? "noopener noreferrer" : ""}>
-										<CP.ResponsiveImage attributes={attributes} keys={imageKeys.image} itemKeys={["items", index]} isTemplate={states.isTemplate} />
+										<CP.ResponsiveImage attributes={attributes} keys={imageKeys.image} itemKeys={["items", index]} isTemplate={isTemplate} />
 									</a>
 								</li>
 							);

@@ -16,6 +16,7 @@ wp.blocks.registerBlockType("catpow/accordion", {
 	icon: "insert",
 	category: "catpow",
 	attributes: {
+		isTemplate: { type: "boolean", default: false },
 		vars: { type: "object", default: {} },
 		classes: { source: "attribute", selector: ".wp-block-catpow-accordion", attribute: "class", default: "wp-block-catpow-accordion is-level3" },
 		HeadingTag: { type: "string", default: "h3" },
@@ -32,7 +33,7 @@ wp.blocks.registerBlockType("catpow/accordion", {
 		const { useMemo } = wp.element;
 		const { InnerBlocks, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
 		const { PanelBody, TextareaControl } = wp.components;
-		const { classes, vars, HeadingTag, title, imageCode, isOpen = true } = attributes;
+		const { isTemplate, classes, vars, HeadingTag, title, imageCode, isOpen = true } = attributes;
 
 		const states = CP.classNamesToFlags(classes);
 		const { imageKeys, imageSizes } = CP.config.accordion;
@@ -44,7 +45,8 @@ wp.blocks.registerBlockType("catpow/accordion", {
 				{
 					name: "template",
 					label: "テンプレート",
-					values: "isTemplate",
+					input: "bool",
+					key: "isTemplate",
 					sub: [
 						{
 							name: "imageCode",
@@ -67,7 +69,7 @@ wp.blocks.registerBlockType("catpow/accordion", {
 						<div className="_header" role="button">
 							{states.hasImage && (
 								<div className="_image">
-									{states.isTemplate && imageCode ? (
+									{isTemplate && imageCode ? (
 										<CP.DummyImage text={imageCode} />
 									) : (
 										<CP.SelectResponsiveImage setAttributes={setAttributes} attributes={attributes} keys={imageKeys.image} size={imageSizes.image} />
@@ -94,7 +96,7 @@ wp.blocks.registerBlockType("catpow/accordion", {
 		);
 	},
 	save({ attributes }) {
-		const { classes, vars, HeadingTag, title, imageCode } = attributes;
+		const { isTemplate, classes, vars, HeadingTag, title, imageCode } = attributes;
 		const states = CP.classNamesToFlags(classes);
 		const { imageKeys } = CP.config.accordion;
 		const { InnerBlocks, RichText, useBlockProps } = wp.blockEditor;
@@ -123,7 +125,7 @@ wp.blocks.registerBlockType("catpow/accordion", {
 						aria-controls="{$uid}-contents"
 						tabindex="0"
 					>
-						{states.hasImage && <div className="_image">{states.isTemplate && imageCode ? imageCode : <CP.ResponsiveImage attributes={attributes} keys={imageKeys.image} size="medium_large" />}</div>}
+						{states.hasImage && <div className="_image">{isTemplate && imageCode ? imageCode : <CP.ResponsiveImage attributes={attributes} keys={imageKeys.image} size="medium_large" />}</div>}
 						<RichText.Content tagName={HeadingTag} className="_title" value={title} />
 						<span className="_icon"></span>
 					</div>

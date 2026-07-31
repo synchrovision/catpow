@@ -23,7 +23,7 @@ wp.blocks.registerBlockType("catpow/buttons", {
 		const { BlockControls, InnerBlocks, InspectorControls, useBlockProps } = wp.blockEditor;
 		const { Icon, PanelBody, TextareaControl } = wp.components;
 		const { attributes, setAttributes, isSelected } = props;
-		const { items = [], classes, vars, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
+		const { isTemplate, items = [], classes, vars, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
 		const { linkKeys } = blockConfig;
 
 		const states = CP.classNamesToFlags(classes);
@@ -88,7 +88,7 @@ wp.blocks.registerBlockType("catpow/buttons", {
 									{ type: "text", key: "caption", cond: states.hasCaption },
 									{ type: "text", key: "url", cond: true },
 								]}
-								isTemplate={states.isTemplate}
+								isTemplate={isTemplate}
 							/>
 						</div>
 					) : (

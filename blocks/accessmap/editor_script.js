@@ -12,7 +12,7 @@
       const { useMemo } = wp.element;
       const { InnerBlocks, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
       const { Icon, PanelBody, TextareaControl } = wp.components;
-      const { classes, vars, HeadingTag, items = [], z, t, hl, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
+      const { isTemplate, classes, vars, HeadingTag, items = [], z, t, hl, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
       var states = useMemo(() => CP.classNamesToFlags(classes), [classes]);
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
@@ -119,7 +119,7 @@
         setAttributes({ items: JSON.parse(JSON.stringify(items)) });
       };
       const blockProps = useBlockProps({ className: EditMode || AltMode && doLoop ? "cp-altcontent" : classes, style: vars });
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { setAttributes, attributes }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30B9\u30BF\u30A4\u30EB", icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30EA\u30B9\u30C8\u30A2\u30A4\u30C6\u30E0", icon: "edit", ...{ setAttributes, attributes }, itemKeys: ["items", attributes.currentItemIndex], selectiveClasses: selectiveItemClasses }), states.isTemplate && /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { setAttributes, attributes }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30B9\u30BF\u30A4\u30EB", icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30EA\u30B9\u30C8\u30A2\u30A4\u30C6\u30E0", icon: "edit", ...{ setAttributes, attributes }, itemKeys: ["items", attributes.currentItemIndex], selectiveClasses: selectiveItemClasses }), isTemplate && /* @__PURE__ */ wp.element.createElement(
         CP.SelectClassPanel,
         {
           title: "\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8",
@@ -144,7 +144,7 @@
             { type: "text", key: "site" },
             { type: "text", key: "info" }
           ],
-          isTemplate: states.isTemplate
+          isTemplate
         }
       )) : /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(CP.Label, { icon: "welcome-comments" }, "\u4EE3\u66FF\u30B3\u30F3\u30C6\u30F3\u30C4"), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, [...Array(Math.max(items.length, loopCount)).keys()].map((i) => {
         let url;
@@ -163,7 +163,7 @@
         if (!item.controlClasses) {
           item.controlClasses = "control";
         }
-        return /* @__PURE__ */ wp.element.createElement(CP.Item, { tag: "div", className: item.classes, ...{ setAttributes, attributes }, itemKeys: ["items", index], key: i }, /* @__PURE__ */ wp.element.createElement("div", { className: "_map" }, states.isTemplate ? /* @__PURE__ */ wp.element.createElement(CP.DummyImage, { className: "_gmap", text: item.q || item.address.replace(/<br\/?>|\n/, " ") }) : /* @__PURE__ */ wp.element.createElement("iframe", { src: url, className: "_gmap", "data-ll": item.ll || false, "data-q": item.q || false })), /* @__PURE__ */ wp.element.createElement("div", { className: "_access" }, /* @__PURE__ */ wp.element.createElement(
+        return /* @__PURE__ */ wp.element.createElement(CP.Item, { tag: "div", className: item.classes, ...{ setAttributes, attributes }, itemKeys: ["items", index], key: i }, /* @__PURE__ */ wp.element.createElement("div", { className: "_map" }, isTemplate ? /* @__PURE__ */ wp.element.createElement(CP.DummyImage, { className: "_gmap", text: item.q || item.address.replace(/<br\/?>|\n/, " ") }) : /* @__PURE__ */ wp.element.createElement("iframe", { src: url, className: "_gmap", "data-ll": item.ll || false, "data-q": item.q || false })), /* @__PURE__ */ wp.element.createElement("div", { className: "_access" }, /* @__PURE__ */ wp.element.createElement(
           RichText,
           {
             tagName: HeadingTag,

@@ -15,7 +15,7 @@ wp.blocks.registerBlockType("catpow/formbuttons", {
 		const { useMemo } = wp.element;
 		const { BlockControls, InspectorControls, useBlockProps } = wp.blockEditor;
 		const { Icon, PanelBody, TextareaControl } = wp.components;
-		const { items = [], classes = "", vars, EditMode = false } = attributes;
+		const { isTemplate, items = [], classes = "", vars, EditMode = false } = attributes;
 		const { linkKeys } = blockConfig;
 
 		const states = CP.classNamesToFlags(classes);
@@ -65,7 +65,7 @@ wp.blocks.registerBlockType("catpow/formbuttons", {
 								{ type: "text", key: "caption", cond: states.hasCaption },
 								{ type: "text", key: "action", cond: true },
 							]}
-							isTemplate={states.isTemplate}
+							isTemplate={isTemplate}
 						/>
 					</div>
 				) : (

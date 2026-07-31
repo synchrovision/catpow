@@ -1,5 +1,6 @@
 <?php
 $attributes=[
+	"isTemplate"=>["type"=>"boolean","default"=>false],
 	"classes"=>["source"=>'attribute',"attribute"=>'class','selector'=>'.wp-block-catpow-slidablemenu',"default"=>'wp-block-catpow-slidablemenu medium'],
 	
 	'TitleTag'=>['type'=>'string','default'=>'h4'],

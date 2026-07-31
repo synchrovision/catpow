@@ -25,7 +25,7 @@ wp.blocks.registerBlockType("catpow/slidablemenu", {
 		const { useState, useMemo } = wp.element;
 		const { BlockControls, InnerBlocks, InspectorControls, RichText } = wp.blockEditor;
 		const { Icon, PanelBody, TextareaControl, TextControl, ToolbarGroup } = wp.components;
-		const { items = [], classes, columnsCount, loopCount, doLoop, AltMode = false } = attributes;
+		const { isTemplate, items = [], classes, columnsCount, loopCount, doLoop, AltMode = false } = attributes;
 		const primaryClassName = "wp-block-catpow-slidablemenu";
 		var classArray = _.uniq((className + " " + classes).split(" "));
 
@@ -52,7 +52,8 @@ wp.blocks.registerBlockType("catpow/slidablemenu", {
 				{
 					name: "template",
 					label: "テンプレート",
-					values: "isTemplate",
+					input: "bool",
+					key: "isTemplate",
 					sub: [
 						{
 							name: "loop",
@@ -104,7 +105,7 @@ wp.blocks.registerBlockType("catpow/slidablemenu", {
 				<CP.Item tag="li" {...{ setAttributes, attributes }} itemKeys={["items", index]} key={i}>
 					<div className="contents">
 						<div className="image">
-							<CP.SelectResponsiveImage attributes={attributes} setAttributes={setAttributes} keys={imageKeys.image} itemKeys={["items", index]} size="vga" isTemplate={states.isTemplate} />
+							<CP.SelectResponsiveImage attributes={attributes} setAttributes={setAttributes} keys={imageKeys.image} itemKeys={["items", index]} size="vga" isTemplate={isTemplate} />
 						</div>
 						<div className="texts">
 							<RichText
@@ -177,12 +178,12 @@ wp.blocks.registerBlockType("catpow/slidablemenu", {
 							attributes={attributes}
 							columns={[
 								{ type: "image", label: "image", keys: imageKeys.image },
-								{ type: "text", key: "imageCode", cond: states.isTemplate },
+								{ type: "text", key: "imageCode", cond: isTemplate },
 								{ type: "text", key: "title" },
 								{ type: "text", key: "text" },
 								{ type: "text", key: "linkUrl" },
 							]}
-							isTemplate={states.isTemplate}
+							isTemplate={isTemplate}
 						/>
 					</div>
 				) : (
@@ -206,7 +207,7 @@ wp.blocks.registerBlockType("catpow/slidablemenu", {
 	},
 	save({ attributes, className }) {
 		const { InnerBlocks, RichText } = wp.blockEditor;
-		const { items = [], classes = "", columnsCount, doLoop } = attributes;
+		const { isTemplate, items = [], classes = "", columnsCount, doLoop } = attributes;
 		var classArray = _.uniq(classes.split(" "));
 
 		const states = CP.classNamesToFlags(classes);
@@ -218,7 +219,7 @@ wp.blocks.registerBlockType("catpow/slidablemenu", {
 				<li className={item.classes} key={index}>
 					<div className="contents">
 						<div className="image">
-							<CP.ResponsiveImage attributes={attributes} keys={imageKeys.image} itemKeys={["items", index]} size="vga" isTemplate={states.isTemplate} />
+							<CP.ResponsiveImage attributes={attributes} keys={imageKeys.image} itemKeys={["items", index]} size="vga" isTemplate={isTemplate} />
 						</div>
 						<div className="texts">
 							<RichText.Content tagName="h4" className="title" value={item.title} />

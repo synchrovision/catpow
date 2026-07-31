@@ -1,6 +1,7 @@
 <?php
 $block_class="wp-block-catpow-dialog";
 $attributes=[
+	"isTemplate"=>["type"=>"boolean","default"=>false],
 	"vars"=>["type"=>"object","default"=>[]],
 	"classes"=>["source"=>"attribute","selector"=>".{$block_class}","attribute"=>"class","default"=>"{$block_class} is-level3 "],
 	"items"=>[

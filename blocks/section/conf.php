@@ -5,6 +5,7 @@ $filters=[
 	'iconHolder'=>['selector'=>'.icon']
 ];
 $attributes=[
+	"isTemplate"=>["type"=>"boolean","default"=>false],
 	'color'=>['type'=>'string','default'=>"0"],
 	'classes'=>["source"=>'attribute',"selector"=>".{$block_class}","attribute"=>'class','default'=>"{$block_class} is-type-article is-level3 is-align-center has-heading-type-catch"],
 	'bodyClasses'=>["source"=>'attribute',"selector"=>".{$block_class}__body","attribute"=>'class','default'=>"{$block_class}__body has-content-width"],

@@ -1,6 +1,7 @@
 <?php
 $block_class="wp-block-catpow-pricelist";
 $attributes=[
+	"isTemplate"=>["type"=>"boolean","default"=>false],
 	"classes"=>["source"=>"attribute","selector"=>".{$block_class}","attribute"=>"class","default"=>"wp-block-catpow-pricelist is-level3 has-content-width"],
 	"vars"=>["type"=>"object"],
 	"HeadingTag"=>["type"=>"string","default"=>"h3"],

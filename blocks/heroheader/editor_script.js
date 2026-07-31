@@ -44,7 +44,7 @@
     category: "catpow-parts",
     example: CP.example,
     edit({ attributes, setAttributes }) {
-      const { classes, bodyClasses, vars, params, HeadingTag, title, text, buttons, images, element: Element = "div", EditMode = false } = attributes;
+      const { isTemplate, classes, bodyClasses, vars, params, HeadingTag, title, text, buttons, images, element: Element = "div", EditMode = false } = attributes;
       const { useState: useState2, useMemo: useMemo2, useEffect: useEffect2, useRef: useRef2 } = wp.element;
       const { InspectorControls, RichText, useBlockProps } = wp.blockEditor;
       const states = CP.classNamesToFlags(attributes.classes);
@@ -108,7 +108,7 @@
             { type: "icon", label: "icon" },
             { type: "text", key: "text" }
           ],
-          isTemplate: states.isTemplate
+          isTemplate
         }
       )) : /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { ...blockProps, ref: setRef }, /* @__PURE__ */ wp.element.createElement("div", { className: bodyClasses }, /* @__PURE__ */ wp.element.createElement("div", { className: "_texts" }, /* @__PURE__ */ wp.element.createElement(
         RichText,

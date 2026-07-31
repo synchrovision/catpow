@@ -44,7 +44,7 @@ wp.blocks.registerBlockType("catpow/showcase", {
 		const { useState, useMemo } = wp.element;
 		const { BlockControls, InnerBlocks, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
 		const { Icon, PanelBody, TextareaControl, TextControl, ToolbarGroup } = wp.components;
-		const { items = [], classes, vars, HeadingTag, countPrefix, countSuffix, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
+		const { isTemplate, items = [], classes, vars, HeadingTag, countPrefix, countSuffix, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
 		const primaryClass = "wp-block-catpow-showcase";
 		var classArray = _.uniq((className + " " + classes).split(" "));
 
@@ -134,7 +134,7 @@ wp.blocks.registerBlockType("catpow/showcase", {
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
 						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
 					</PanelBody>
-					{states.isTemplate ? (
+					{isTemplate ? (
 						<CP.SelectClassPanel
 							title="テンプレート"
 							icon="edit"
@@ -155,7 +155,7 @@ wp.blocks.registerBlockType("catpow/showcase", {
 							attributes={attributes}
 							columns={[
 								{ type: "image", label: "image", keys: imageKeys.image },
-								{ type: "text", key: "imageCode", cond: states.isTemplate },
+								{ type: "text", key: "imageCode", cond: isTemplate },
 								{ type: "text", key: "title" },
 								{
 									type: "text",
@@ -166,7 +166,7 @@ wp.blocks.registerBlockType("catpow/showcase", {
 								{ type: "text", key: "linkText", cond: states.hasLink },
 								{ type: "text", key: "linkUrl", cond: states.hasLink },
 							]}
-							isTemplate={states.isTemplate}
+							isTemplate={isTemplate}
 						/>
 					</div>
 				) : (
@@ -196,7 +196,7 @@ wp.blocks.registerBlockType("catpow/showcase", {
 														keys={imageKeys.image}
 														itemKeys={["items", index]}
 														size="full"
-														isTemplate={states.isTemplate}
+														isTemplate={isTemplate}
 													/>
 												</div>
 												<div className="_texts">
@@ -266,7 +266,7 @@ wp.blocks.registerBlockType("catpow/showcase", {
 	},
 	save({ attributes, className }) {
 		const { InnerBlocks, RichText, useBlockProps } = wp.blockEditor;
-		const { items = [], classes = "", vars, HeadingTag, countPrefix, countSuffix, doLoop } = attributes;
+		const { isTemplate, items = [], classes = "", vars, HeadingTag, countPrefix, countSuffix, doLoop } = attributes;
 		var classArray = _.uniq(classes.split(" "));
 
 		const states = CP.classNamesToFlags(classes);
@@ -279,7 +279,7 @@ wp.blocks.registerBlockType("catpow/showcase", {
 						{items.map((item, index) => (
 							<li className={item.classes} key={index}>
 								<div className="_image">
-									<CP.ResponsiveImage attributes={attributes} keys={imageKeys.image} itemKeys={["items", index]} isTemplate={states.isTemplate} />
+									<CP.ResponsiveImage attributes={attributes} keys={imageKeys.image} itemKeys={["items", index]} isTemplate={isTemplate} />
 								</div>
 								<div className="_texts">
 									{states.hasCounter && (

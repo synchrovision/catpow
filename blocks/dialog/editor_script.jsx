@@ -22,7 +22,7 @@ wp.blocks.registerBlockType("catpow/dialog", {
 		const { useState, useMemo, useEffect } = wp.element;
 		const { InnerBlocks, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
 		const { PanelBody, TextareaControl } = wp.components;
-		const { items = [], classes = "", vars, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
+		const { isTemplate, items = [], classes = "", vars, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
 		var states = CP.classNamesToFlags(classes);
 
 		const selectiveClasses = useMemo(() => {
@@ -76,12 +76,12 @@ wp.blocks.registerBlockType("catpow/dialog", {
 									{
 										type: "text",
 										key: "headerImageCode",
-										cond: states.isTemplate,
+										cond: isTemplate,
 									},
 									{ type: "text", key: "title", cond: true },
 									{ type: "text", key: "text", cond: true },
 								]}
-								isTemplate={states.isTemplate}
+								isTemplate={isTemplate}
 							/>
 						</div>
 					) : (
@@ -111,7 +111,7 @@ wp.blocks.registerBlockType("catpow/dialog", {
 																keys={imageKeys.headerImage}
 																itemKeys={["items", index]}
 																size="thumbnail"
-																isTemplate={states.isTemplate}
+																isTemplate={isTemplate}
 															/>
 														</div>
 														<div className="_text">
@@ -151,7 +151,7 @@ wp.blocks.registerBlockType("catpow/dialog", {
 	},
 	save({ attributes }) {
 		const { InnerBlocks, RichText, useBlockProps } = wp.blockEditor;
-		const { items = [], classes = "", vars, doLoop } = attributes;
+		const { isTemplate, items = [], classes = "", vars, doLoop } = attributes;
 
 		var states = CP.classNamesToFlags(classes);
 		const imageKeys = {
@@ -173,7 +173,7 @@ wp.blocks.registerBlockType("catpow/dialog", {
 								<li className={item.classes} key={index}>
 									<header className="_header">
 										<div className="_image">
-											<CP.ResponsiveImage className="_img" attributes={attributes} keys={imageKeys.headerImage} itemKeys={["items", index]} isTemplate={states.isTemplate} />
+											<CP.ResponsiveImage className="_img" attributes={attributes} keys={imageKeys.headerImage} itemKeys={["items", index]} isTemplate={isTemplate} />
 										</div>
 										<div className="_text">
 											<RichText.Content tagName="h3" className="_heading" value={item.title} />

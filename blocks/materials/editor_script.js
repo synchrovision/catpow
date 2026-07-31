@@ -10,7 +10,7 @@
       const { useState, useMemo } = wp.element;
       const { InnerBlocks, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
       const { Icon, PanelBody, TextareaControl } = wp.components;
-      const { items = [], classes, HeadingTag, SubHeadingTag, loopParam, loopCount, doLoop, EditMode = false, AltMode = false, currentItemIndex } = attributes;
+      const { isTemplate, items = [], classes, HeadingTag, SubHeadingTag, loopParam, loopCount, doLoop, EditMode = false, AltMode = false, currentItemIndex } = attributes;
       const primaryClass = "wp-block-catpow-materials";
       var states = CP.classNamesToFlags(classes);
       const selectiveClasses = useMemo(() => {
@@ -54,7 +54,7 @@
               cond: true
             }
           ],
-          isTemplate: states.isTemplate
+          isTemplate
         }
       )) : /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(CP.Label, { icon: "welcome-comments" }), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("ul", { ...blockProps }, [...Array(Math.max(items.length, loopCount)).keys()].map((i) => {
         const index = i % items.length;

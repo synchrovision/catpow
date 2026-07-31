@@ -22,7 +22,7 @@ wp.blocks.registerBlockType("catpow/definition", {
 		const { useMemo } = wp.element;
 		const { InnerBlocks, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
 		const { PanelBody, TextareaControl } = wp.components;
-		const { items = [], classes = "", vars, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
+		const { isTemplate, items = [], classes = "", vars, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
 
 		var states = CP.classNamesToFlags(classes);
 
@@ -64,7 +64,7 @@ wp.blocks.registerBlockType("catpow/definition", {
 								{ type: "text", key: "title", cond: states.hasTitle },
 								{ type: "text", key: "text", cond: states.hasText },
 							]}
-							isTemplate={states.isTemplate}
+							isTemplate={isTemplate}
 						/>
 					</div>
 				) : (

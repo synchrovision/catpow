@@ -23,6 +23,7 @@
       ]
     },
     attributes: {
+      isTemplate: { type: "boolean", default: false },
       vars: { type: "object", default: {} },
       classes: { source: "attribute", selector: ".wp-block-catpow-unit", attribute: "class", default: "wp-block-catpow-unit" },
       sources: CP.getPictureSoucesAttributesForDevices(CP.config.unit.devices),
@@ -35,7 +36,7 @@
     edit({ attributes, className, setAttributes }) {
       const { InnerBlocks, InspectorControls, useBlockProps } = wp.blockEditor;
       const { PanelBody, TextareaControl } = wp.components;
-      const { classes, vars } = attributes;
+      const { isTemplate, classes, vars } = attributes;
       const states = CP.classNamesToFlags(classes);
       const { devices, imageKeys } = CP.config.unit;
       var selectiveClasses = [
@@ -44,7 +45,7 @@
           type: "buttons",
           values: ["snap", "panel"]
         },
-        { input: "picture", label: "\u753B\u50CF", keys: imageKeys.image, devices, isTemplate: states.isTemplate },
+        { input: "picture", label: "\u753B\u50CF", keys: imageKeys.image, devices, isTemplate },
         {
           label: "\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8",
           values: "isTemplate",

@@ -1,6 +1,7 @@
 <?php
 $block_class="wp-block-catpow-materials";
 $attributes=[
+	"isTemplate"=>["type"=>"boolean","default"=>false],
 	"classes"=>["source"=>"attribute","selector"=>".wp-block-catpow-materials","attribute"=>"class","default"=>"wp-block-catpow-materials is-level3"],
 	"vars"=>["type"=>"object"],
 	"HeadingTag"=>["type"=>"string","default"=>"h3"],

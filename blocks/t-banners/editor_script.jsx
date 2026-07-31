@@ -9,6 +9,7 @@ wp.blocks.registerBlockType("catpow/t-banners", {
 	category: "catpow-mail",
 	parent: CP.mailContensContainer,
 	attributes: {
+		isTemplate: { type: "boolean", default: false },
 		classes: { source: "attribute", selector: "table", attribute: "class", default: "wp-block-catpow-t-banners" },
 		items: {
 			source: "query",
@@ -34,7 +35,7 @@ wp.blocks.registerBlockType("catpow/t-banners", {
 		const { useState, useMemo } = wp.element;
 		const { InspectorControls } = wp.blockEditor;
 		const { PanelBody, TextareaControl } = wp.components;
-		const { classes, width, gapX, gapY, align, marginTop, marginBottom, items, columns } = attributes;
+		const { isTemplate, classes, width, gapX, gapY, align, marginTop, marginBottom, items, columns } = attributes;
 		var states = CP.classNamesToFlags(classes);
 
 		const selectiveClasses = useMemo(() => {
@@ -48,8 +49,8 @@ wp.blocks.registerBlockType("catpow/t-banners", {
 				{ name: "columns", input: "range", label: __("列数", "catpow"), key: "columns", min: 1, max: 5 },
 				{
 					name: "template",
-					label: "テンプレート",
-					values: "isTemplate",
+					input: "bool",
+					key: "isTemplate",
 					sub: [{ name: "loopImage", label: "画像出力コード", input: "text", key: "loopImage" }],
 				},
 			];
@@ -87,7 +88,7 @@ wp.blocks.registerBlockType("catpow/t-banners", {
 															keys={{ items: "items", src: "src", alt: "alt", code: "loopImage" }}
 															itemKeys={["items", gIndex * columns + index]}
 															size="medium"
-															isTemplate={states.isTemplate}
+															isTemplate={isTemplate}
 														/>
 													</CP.Link.Edit>
 												</CP.Item>
@@ -118,7 +119,7 @@ wp.blocks.registerBlockType("catpow/t-banners", {
 	},
 
 	save({ attributes }) {
-		const { classes, width, gapX, gapY, align, marginTop, marginBottom, items, columns } = attributes;
+		const { isTemplate, classes, width, gapX, gapY, align, marginTop, marginBottom, items, columns } = attributes;
 		var states = CP.classNamesToFlags(classes);
 		return (
 			<CP.Bem prefix="wp-block-catpow">
@@ -142,7 +143,7 @@ wp.blocks.registerBlockType("catpow/t-banners", {
 											{index > 0 && <td className="_td is-spacer-cell" style={{ width: `${gapX}px` }}></td>}
 											<td key={index}>
 												<a className="_link" href={item.url}>
-													{states.isTemplate ? loopImage : <img width="100%" height="auto" src={item.src} alt={item.alt} />}
+													{isTemplate ? loopImage : <img width="100%" height="auto" src={item.src} alt={item.alt} />}
 												</a>
 											</td>
 										</>

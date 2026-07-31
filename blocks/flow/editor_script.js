@@ -29,6 +29,7 @@
       ]
     },
     attributes: {
+      isTemplate: { type: "boolean", default: false },
       version: { type: "number", default: 0 },
       classes: {
         source: "attribute",
@@ -86,7 +87,7 @@
       const { useMemo } = wp.element;
       const { BlockControls, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
       const { PanelBody, TextareaControl, ToolbarGroup } = wp.components;
-      const { HeadingTag, SubHeadingTag, items = [], classes, vars, contentsClasses, countPrefix, countSuffix, EditMode } = attributes;
+      const { isTemplate, HeadingTag, SubHeadingTag, items = [], classes, vars, contentsClasses, countPrefix, countSuffix, EditMode } = attributes;
       const states = CP.classNamesToFlags(classes);
       const { imageKeys, linkKeys: linkKeys2 } = CP.config.flow;
       const selectiveClasses = useMemo(() => {
@@ -172,7 +173,7 @@
             { type: "text", key: "text" },
             { type: "text", key: "linkUrl", cond: states.hasLink }
           ],
-          isTemplate: states.isTemplate
+          isTemplate
         }
       )) : /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("ul", { ...blockProps }, items.map((item, index) => {
         if (!item.controlClasses) {

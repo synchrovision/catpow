@@ -63,7 +63,7 @@ wp.blocks.registerBlockType("catpow/comparetable", {
 		const { useMemo, useCallback } = wp.element;
 		const { InnerBlocks, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
 		const { Icon, PanelBody, TextareaControl } = wp.components;
-		const { rows = [], cols = [], doLoop, AltMode = false, r = 0, c = 0, vars, headerColClasses, firstCellClasses } = attributes;
+		const { isTemplate, rows = [], cols = [], doLoop, AltMode = false, r = 0, c = 0, vars, headerColClasses, firstCellClasses } = attributes;
 		const { imageKeys } = CP.config.comparetable;
 		var states = CP.classNamesToFlags(attributes.classes);
 
@@ -508,7 +508,7 @@ wp.blocks.registerBlockType("catpow/comparetable", {
 																					keys={imageKeys.image}
 																					itemKeys={["rows", rowIndex, "cells", columnIndex]}
 																					size="large"
-																					isTemplate={states.isTemplate}
+																					isTemplate={isTemplate}
 																				/>
 																			</div>
 																		) : (
@@ -567,7 +567,7 @@ wp.blocks.registerBlockType("catpow/comparetable", {
 
 	save({ attributes }) {
 		const { InnerBlocks, RichText, useBlockProps } = wp.blockEditor;
-		const { rows = [], cols = [], loopParam, doLoop, vars, headerColClasses, firstCellClasses } = attributes;
+		const { isTemplate, rows = [], cols = [], loopParam, doLoop, vars, headerColClasses, firstCellClasses } = attributes;
 		const { imageKeys } = CP.config.comparetable;
 
 		const getCssVarsForCell = (r, c) => {
@@ -701,7 +701,7 @@ wp.blocks.registerBlockType("catpow/comparetable", {
 																			attributes={attributes}
 																			keys={imageKeys.image}
 																			itemKeys={["rows", rowIndex, "cells", columnIndex]}
-																			isTemplate={states.isTemplate}
+																			isTemplate={isTemplate}
 																		/>
 																	</div>
 																) : (

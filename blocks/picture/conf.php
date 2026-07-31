@@ -2,6 +2,7 @@
 use Catpow\util\BlockConfig;
 $block_class="wp-block-catpow-picture";
 $attributes=[
+	"isTemplate"=>["type"=>"boolean","default"=>false],
 	'classes'=>["source"=>'attribute',"selector"=>".{$block_class}","attribute"=>'class','default'=>"{$block_class}"],
 	'vars'=>['type'=>'object','default'=>[]],
 

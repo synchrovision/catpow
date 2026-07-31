@@ -22,7 +22,7 @@
       const { BlockControls, InnerBlocks, InspectorControls, useBlockProps } = wp.blockEditor;
       const { Icon, PanelBody, TextareaControl } = wp.components;
       const { attributes, setAttributes, isSelected } = props;
-      const { items = [], classes: classes2, vars, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
+      const { isTemplate, items = [], classes: classes2, vars, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
       const { linkKeys } = blockConfig;
       const states = CP.classNamesToFlags(classes2);
       const selectiveClasses = useMemo(() => {
@@ -63,7 +63,7 @@
             { type: "text", key: "caption", cond: states.hasCaption },
             { type: "text", key: "url", cond: true }
           ],
-          isTemplate: states.isTemplate
+          isTemplate
         }
       )) : /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { className: "cp-altcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("ul", { ...blockProps }, [...Array(Math.max(items.length, loopCount)).keys()].map((i) => {
         const index = i % items.length;

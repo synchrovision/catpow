@@ -12,7 +12,7 @@
       const { useMemo, useEffect } = wp.element;
       const { InnerBlocks, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
       const { Icon, PanelBody, TextareaControl } = wp.components;
-      const { classes, vars, HeadingTag = "h3", itemsClasses, items = [], title, lead, caption, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
+      const { isTemplate, classes, vars, HeadingTag = "h3", itemsClasses, items = [], title, lead, caption, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
       const { classNamesToFlags, flagsToClassNames } = Catpow.util;
       const states = useMemo(() => classNamesToFlags(classes), [classes]);
       const { linkKeys } = CP.config.contactinfo;
@@ -65,7 +65,7 @@
             { type: "text", key: "href" },
             { type: "text", key: "caption", cond: states.hasItemCaption }
           ],
-          isTemplate: states.isTemplate
+          isTemplate
         }
       )) : /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { ...blockProps, className: "cp-altcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, states.hasTitle && /* @__PURE__ */ wp.element.createElement(
         RichText,

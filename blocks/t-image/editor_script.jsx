@@ -7,6 +7,7 @@ wp.blocks.registerBlockType("catpow/t-image", {
 	category: "catpow-mail",
 	parent: CP.mailContensContainer,
 	attributes: {
+		isTemplate: { type: "boolean", default: false },
 		classes: { source: "attribute", selector: "table", attribute: "class", default: "wp-block-catpow-t-image" },
 		src: { source: "attribute", selector: "[src]", attribute: "src", default: wpinfo.theme_url + "/images/dummy.jpg" },
 		alt: { source: "attribute", selector: "[src]", attribute: "alt" },
@@ -20,7 +21,7 @@ wp.blocks.registerBlockType("catpow/t-image", {
 		const { useState, useMemo } = wp.element;
 		const { InspectorControls } = wp.blockEditor;
 		const { PanelBody, TextareaControl } = wp.components;
-		const { classes, width, align, marginTop, marginBottom, src, alt, loopImage } = attributes;
+		const { isTemplate, classes, width, align, marginTop, marginBottom, src, alt, loopImage } = attributes;
 		var states = CP.classNamesToFlags(classes);
 
 		const selectiveClasses = useMemo(() => {
@@ -32,7 +33,8 @@ wp.blocks.registerBlockType("catpow/t-image", {
 				{
 					name: "template",
 					label: "テンプレート",
-					values: "isTemplate",
+					input: "bool",
+					key: "isTemplate",
 					sub: [{ name: "loopImage", label: "画像出力コード", input: "text", key: "loopImage" }],
 				},
 			];
@@ -52,7 +54,7 @@ wp.blocks.registerBlockType("catpow/t-image", {
 							)}
 							<tr>
 								<td>
-									{states.isTemplate ? (
+									{isTemplate ? (
 										<img src={wpinfo.plugins_url + "/catpow/callee/dummy_image.php?text=" + loopImage} width="100%" height="auto" />
 									) : (
 										<CP.SelectResponsiveImage className="_img" setAttributes={setAttributes} attributes={attributes} keys={{ src: "src", alt: "alt" }} size="large" width="100%" height="auto" />
@@ -78,7 +80,7 @@ wp.blocks.registerBlockType("catpow/t-image", {
 	},
 
 	save({ attributes, className, setAttributes }) {
-		const { classes, width, align, marginTop, marginBottom, src, alt, loopImage } = attributes;
+		const { isTemplate, classes, width, align, marginTop, marginBottom, src, alt, loopImage } = attributes;
 		var states = CP.classNamesToFlags(classes);
 		return (
 			<CP.Bem prefix="wp-block-catpow">
@@ -90,7 +92,7 @@ wp.blocks.registerBlockType("catpow/t-image", {
 							</tr>
 						)}
 						<tr>
-							<td>{states.isTemplate ? loopImage : <img width="100%" height="auto" src={src} alt={alt} />}</td>
+							<td>{isTemplate ? loopImage : <img width="100%" height="auto" src={src} alt={alt} />}</td>
 						</tr>
 						{marginBottom > 0 && (
 							<tr>

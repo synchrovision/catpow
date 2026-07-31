@@ -20,7 +20,7 @@ wp.blocks.registerBlockType("catpow/picture", {
 	edit({ attributes, setAttributes, isSelected }) {
 		const { InspectorControls, useBlockProps } = wp.blockEditor;
 		const { Icon } = wp.components;
-		const { classes, vars, sources, src, srcset, alt, code, device } = attributes;
+		const { isTemplate, classes, vars, sources, src, srcset, alt, code, device } = attributes;
 
 		const states = CP.classNamesToFlags(classes);
 		const { devices, imageKeys } = blockConfig;
@@ -31,11 +31,12 @@ wp.blocks.registerBlockType("catpow/picture", {
 				label: "画像",
 				keys: imageKeys?.image,
 				devices,
-				isTemplate: states.isTemplate,
+				isTemplate,
 			},
 			{
 				label: "テンプレート",
-				values: "isTemplate",
+				input: "bool",
+				key: "isTemplate",
 				sub: [
 					{
 						input: "text",
@@ -57,15 +58,7 @@ wp.blocks.registerBlockType("catpow/picture", {
 				<CP.SelectDeviceToolbar {...panelProps} devices={devices} />
 				<CP.Bem prefix="wp-block-catpow">
 					<div {...blockProps}>
-						<CP.SelectResponsiveImage
-							className="_picture"
-							{...panelProps}
-							keys={imageKeys?.image}
-							device={device}
-							devices={devices}
-							isTemplate={states.isTemplate}
-							showSelectPictureSources={isSelected}
-						/>
+						<CP.SelectResponsiveImage className="_picture" {...panelProps} keys={imageKeys?.image} device={device} devices={devices} isTemplate={isTemplate} showSelectPictureSources={isSelected} />
 					</div>
 				</CP.Bem>
 				<InspectorControls>
@@ -76,7 +69,7 @@ wp.blocks.registerBlockType("catpow/picture", {
 	},
 	save({ attributes }) {
 		const { useBlockProps } = wp.blockEditor;
-		const { classes, vars, srouces, src, srcset, alt, code } = attributes;
+		const { isTemplate, classes, vars, srouces, src, srcset, alt, code } = attributes;
 
 		const states = CP.classNamesToFlags(classes);
 		const { devices, imageKeys } = CP.config.picture;
@@ -89,7 +82,7 @@ wp.blocks.registerBlockType("catpow/picture", {
 			<>
 				<CP.Bem prefix="wp-block-catpow">
 					<div {...blockProps}>
-						<CP.ResponsiveImage className="_picture" attributes={attributes} keys={imageKeys.image} devices={devices} isTemplate={states.isTemplate} />
+						<CP.ResponsiveImage className="_picture" attributes={attributes} keys={imageKeys.image} devices={devices} isTemplate={isTemplate} />
 					</div>
 				</CP.Bem>
 			</>
