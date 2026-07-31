@@ -42,6 +42,7 @@ $attributes=[
 	"loopParam"=>["type"=>"text","default"=>""],
 	"loopCount"=>["type"=>"number","default"=>1],
 	
+	"isTemplate"=>["type"=>"boolean","default"=>false],
 	"doLoop"=>["type"=>"boolean","default"=>false],
 	"content_path"=>["type"=>"string","default"=>"post/post"],
 	"query"=>["type"=>"string","default"=>""],

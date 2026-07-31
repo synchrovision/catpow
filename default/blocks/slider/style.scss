@@ -17,7 +17,7 @@
 			&-body{
 				@include grd((tr:s));
 				&-image{
-					&-img{
+					&-img,img{
 						@include bnd((d:b,w:f,h:f a,op:c,of:c));
 					}
 				}

@@ -2,7 +2,7 @@
 if($attr['doLoop']){
 	$id=uniqid();
 	preg_match(
-		'|(?P<before_loop><div class=".+?">\s*<ul class="contents">)(?P<content>.*?)(?P<after_loop></ul>.+</div>)<on-empty>(?P<on_empty>.*)</on-empty>|s',
+		'|(?P<before_loop><div class=".+?">\s*<ul class="wp-block-catpow-slider__contents">)(?P<content>.*?)(?P<after_loop></ul>.+</div>)<on-empty>(?P<on_empty>.*)</on-empty>|s',
 		$content,
 		$matches
 	);

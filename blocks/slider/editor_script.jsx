@@ -55,7 +55,7 @@ wp.blocks.registerBlockType("catpow/slider", {
 		const { useState, useMemo, useEffect } = wp.element;
 		const { InnerBlocks, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
 		const { Icon, PanelBody, TextControl, TextareaControl } = wp.components;
-		const { classes = "", vars, controlClasses = "", HeadingTag, config, items, doLoop, EditMode = false, AltMode = false, device } = attributes;
+		const { classes = "", vars, controlClasses = "", HeadingTag, config, items, isTemplate, doLoop, EditMode = false, AltMode = false, device } = attributes;
 
 		const [blockEl, setBlockEl] = useState(false);
 
@@ -195,11 +195,8 @@ wp.blocks.registerBlockType("catpow/slider", {
 			<>
 				<CP.SelectModeToolbar setAttributes={setAttributes} attributes={attributes} />
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title="スタイル" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 					<CP.SelectClassPanel title="アニメーション設定" icon="video-alt3" {...{ setAttributes, attributes }} selectiveClasses={animateClasses} />
-					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
-					</PanelBody>
 					<CP.SelectClassPanel
 						title="スライド"
 						icon="edit"
@@ -217,18 +214,16 @@ wp.blocks.registerBlockType("catpow/slider", {
 							attributes={attributes}
 							columns={[
 								{ type: "picture", label: "slide", keys: imageKeys.slide, devices, cond: states.hasSlide },
-								{ type: "text", key: "slideCode", cond: states.isTemplate && states.hasSlide },
+								{ type: "text", key: "slideCode", cond: isTemplate && states.hasSlide },
 								{ type: "image", label: "image", keys: imageKeys.image, cond: states.hasImage },
-								{ type: "text", key: "imageCode", cond: states.isTemplate && states.hasImage },
-								{ type: "picture", label: "bg", keys: imageKeys.backgroundImage, devices, cond: states.hasBackgroundImage },
-								{ type: "text", key: "backgroundImageCode", cond: states.isTemplate && states.hasBackgroundImage },
+								{ type: "text", key: "imageCode", cond: isTemplate && states.hasImage },
 								{ type: "text", key: "title", cond: states.hasTitle },
 								{ type: "text", key: "caption", cond: states.hasCaption },
 								{ type: "text", key: "text", cond: states.hasText },
 								{ type: "text", key: "linkText", cond: states.hasLink },
 								{ type: "text", key: "linkUrl", cond: states.hasLink },
 							]}
-							isTemplate={states.isTemplate}
+							isTemplate={isTemplate}
 						/>
 					</div>
 				) : (
@@ -256,7 +251,7 @@ wp.blocks.registerBlockType("catpow/slider", {
 																		keys={imageKeys.image}
 																		itemKeys={["items", index]}
 																		devices={["tb", "sp"]}
-																		isTemplate={states.isTemplate}
+																		isTemplate={isTemplate}
 																	/>
 																</div>
 															)}
@@ -339,7 +334,7 @@ wp.blocks.registerBlockType("catpow/slider", {
 	},
 	save({ attributes, className }) {
 		const { InnerBlocks, RichText, useBlockProps } = wp.blockEditor;
-		const { vars, classes = "", controlClasses = "", HeadingTag, config, items = [], doLoop } = attributes;
+		const { vars, classes = "", controlClasses = "", HeadingTag, config, items = [], isTemplate, doLoop } = attributes;
 
 		const states = CP.classNamesToFlags(classes);
 		const { devices, imageKeys, imageSizes, linkKeys } = CP.config.slider;
@@ -362,7 +357,7 @@ wp.blocks.registerBlockType("catpow/slider", {
 									<div className="_body">
 										{states.hasImage && (
 											<div className="_image">
-												<CP.ResponsiveImage className="_img" attributes={attributes} keys={imageKeys.image} itemKeys={["items", index]} isTemplate={states.isTemplate} />
+												<CP.ResponsiveImage className="_img" attributes={attributes} keys={imageKeys.image} itemKeys={["items", index]} isTemplate={isTemplate} />
 											</div>
 										)}
 										{states.hasTexts && (

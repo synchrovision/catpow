@@ -99,7 +99,7 @@
   -ms-grid-rows: subgrid;
   grid-template-rows: subgrid;
 }
-.wp-block-catpow-slider__contents-item-body-image-img {
+.wp-block-catpow-slider__contents-item-body-image-img, .wp-block-catpow-slider__contents-item-body-image img {
   display: block;
   width: 100%;
   min-height: 100%;
