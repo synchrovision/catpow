@@ -53,7 +53,7 @@ wp.blocks.registerBlockType("catpow/switcher", {
 					label: "フィールド",
 					input: "text",
 					key: "field",
-					cond: (states, { attr }) => factorFlags[attr.factor] & flagValues["field"],
+					cond: (states, { attributes: { factor } }) => factorFlags[factor] & flagValues["field"],
 				},
 				{
 					name: "compare",
@@ -61,14 +61,14 @@ wp.blocks.registerBlockType("catpow/switcher", {
 					input: "buttons",
 					key: "compare",
 					values: ["=", "IN", "BETWEEN"],
-					cond: (states, { attr }) => factorFlags[attr.factor] & flagValues["compare"],
+					cond: (states, { attributes: { factor } }) => factorFlags[factor] & flagValues["compare"],
 				},
 				{
 					name: "values",
 					label: "値",
 					input: "textarea",
 					key: "values",
-					cond: (states, { attr }) => factorFlags[attr.factor] & flagValues["values"],
+					cond: (states, { attributes: { factor } }) => factorFlags[factor] & flagValues["values"],
 				},
 			];
 			wp.hooks.applyFilters("catpow.blocks.switcher.selectiveClasses", CP.finderProxy(selectiveClasses));

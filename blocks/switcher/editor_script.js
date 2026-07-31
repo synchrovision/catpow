@@ -54,7 +54,7 @@
             label: "\u30D5\u30A3\u30FC\u30EB\u30C9",
             input: "text",
             key: "field",
-            cond: (states, { attr }) => factorFlags2[attr.factor] & flagValues2["field"]
+            cond: (states, { attributes: { factor } }) => factorFlags2[factor] & flagValues2["field"]
           },
           {
             name: "compare",
@@ -62,14 +62,14 @@
             input: "buttons",
             key: "compare",
             values: ["=", "IN", "BETWEEN"],
-            cond: (states, { attr }) => factorFlags2[attr.factor] & flagValues2["compare"]
+            cond: (states, { attributes: { factor } }) => factorFlags2[factor] & flagValues2["compare"]
           },
           {
             name: "values",
             label: "\u5024",
             input: "textarea",
             key: "values",
-            cond: (states, { attr }) => factorFlags2[attr.factor] & flagValues2["values"]
+            cond: (states, { attributes: { factor } }) => factorFlags2[factor] & flagValues2["values"]
           }
         ];
         wp.hooks.applyFilters("catpow.blocks.switcher.selectiveClasses", CP.finderProxy(selectiveClasses2));
