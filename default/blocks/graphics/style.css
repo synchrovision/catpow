@@ -127,9 +127,6 @@
 .wp-block-catpow-graphics__item.is-hover-jump:hover {
   animation: "slideUpBit" 1s cubic-bezier(0.2, 10, 0.8, 10) both infinite;
 }
-.wp-block-catpow-graphics__item.has-box-shadow {
-  box-shadow: 0 5px 11px oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
-}
 .wp-block-catpow-graphics__item.is-ellipse {
   overflow: hidden;
   border-radius: 50%;

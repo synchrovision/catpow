@@ -72,12 +72,6 @@
 				@include trn((a:'slideUpBit' 1s ease(j) b i));
 			}
 		}
-		&.has-box-shadow{
-			@include shd((b:5));
-		}
-		&.has-text-shadow{
-			@include bg((t:2));
-		}
 		&.is-ellipse{
 			@include bnd((o:h));
 			@include bdr((r:50%));
