@@ -24,7 +24,7 @@
       const { InnerBlocks, InspectorControls, useBlockProps } = wp.blockEditor;
       const { PanelBody, TextareaControl } = wp.components;
       const { attributes, className, setAttributes, context } = props;
-      const { classes, vars, clipVars, color, frameImageCss, borderImageCss } = attributes;
+      const { classes, vars, color, frameImageCss, borderImageCss } = attributes;
       const states = CP.classNamesToFlags(classes);
       const { devices, imageKeys } = CP.config.div;
       const selectiveClasses = useMemo(() => {
