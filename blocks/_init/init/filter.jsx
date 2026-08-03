@@ -73,6 +73,7 @@ wp.hooks.addFilter("blocks.registerBlockType", "catpow/editor", (settings, name,
 			spacing: !!settings.supports.spacing,
 			typography: settings.supports.typography,
 			background: !!settings.supports.background,
+			backgroundImage: !!settings.supports.backgroundImage,
 		};
 		if (Object.values(panelSupports).some((v) => v)) {
 			if (name.slice(0, 5) === "core/") coreBlocksToAddPanel.add(name);
@@ -89,6 +90,7 @@ wp.hooks.addFilter("blocks.registerBlockType", "catpow/editor", (settings, name,
 					spacing: false,
 					typography: false,
 					background: false,
+					backgroundImage: false,
 					shadow: false,
 				},
 			};
@@ -112,25 +114,31 @@ wp.hooks.addFilter("editor.BlockEdit", "catpow/editor", (BlockEdit) => (props) =
 					{panelSupports.color && <CP.SelectClassPanel title={__("色")} icon="pets" classKey={classKey} {...props} selectiveClasses={["color", "colorScheme"]} />}
 					{panelSupports.spacing &&
 						(panelSupports.background ? (
-							<>
-								<CP.SelectClassPanel
-									title={__("サイズ・間隔・余白")}
-									icon="pets"
-									classKey={classKey}
-									{...props}
-									selectiveClasses={["hasContentWidth", "hasMargin", "hasPadding", panelSupports.itemSize && "itemSize"]}
-								/>
-								<CP.SelectClassPanel title={__("背景")} icon="pets" classKey={classKey} {...props} selectiveClasses={["backgroundColor", "backgroundPattern"]} />
-								<CP.SelectClassPanel title={__("影")} icon="pets" classKey={classKey} {...props} selectiveClasses={["boxShadow"]} />
-								<CP.SelectClassPanel title={__("ボーダー")} icon="pets" classKey={classKey} {...props} selectiveClasses={["hasBorder", "borderColor", "hasBorderRadius", "hasBorderImage"]} />
-								<CP.SelectClassPanel title={__("切り抜き")} icon="pets" classKey={classKey} {...props} selectiveClasses={["clipPath"]} />
-							</>
+							<CP.SelectClassPanel
+								title={__("サイズ・間隔・余白")}
+								icon="pets"
+								classKey={classKey}
+								{...props}
+								selectiveClasses={["hasContentWidth", "hasMargin", "hasPadding", panelSupports.itemSize && "itemSize"]}
+							/>
 						) : (
-							<>
-								<CP.SelectClassPanel title={__("サイズ・間隔")} icon="pets" classKey={classKey} {...props} selectiveClasses={["hasContentWidth", "hasMargin", panelSupports.itemSize && "itemSize"]} />
-							</>
+							<CP.SelectClassPanel title={__("サイズ・間隔")} icon="pets" classKey={classKey} {...props} selectiveClasses={["hasContentWidth", "hasMargin", panelSupports.itemSize && "itemSize"]} />
 						))}
 					{panelSupports.bodySize && <CP.SelectClassPanel title={__("内容サイズ・余白")} icon="pets" classKey="bodyClasses" {...props} selectiveClasses={["hasContentWidth", "hasPadding"]} />}
+					{panelSupports.background && (
+						<>
+							<CP.SelectClassPanel
+								title={__("背景")}
+								icon="pets"
+								classKey={classKey}
+								{...props}
+								selectiveClasses={["backgroundColor", "backgroundPattern", panelSupports.backgroundImage && "backgroundImage"]}
+							/>
+							<CP.SelectClassPanel title={__("影")} icon="pets" classKey={classKey} {...props} selectiveClasses={["boxShadow"]} />
+							<CP.SelectClassPanel title={__("ボーダー")} icon="pets" classKey={classKey} {...props} selectiveClasses={["hasBorder", "borderColor", "hasBorderRadius", "hasBorderImage"]} />
+							<CP.SelectClassPanel title={__("切り抜き")} icon="pets" classKey={classKey} {...props} selectiveClasses={["clipPath"]} />
+						</>
+					)}
 				</InspectorControls>
 			</>
 		);
