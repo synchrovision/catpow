@@ -17,7 +17,8 @@ wp.blocks.registerBlockType("catpow/section", {
 		const { PanelBody, TextareaControl, TextControl } = wp.components;
 		const { attributes, setAttributes } = props;
 		const { useMemo, useState } = wp.element;
-		const { isTemplate, SectionTag, HeadingTag, color, anchor, classes, bodyClasses, headerClasses, titleClasses, vars, clipVars, headerVars, bodyVars, title, lead, titleImageCode, headerImageCode } = attributes;
+		const { isTemplate, SectionTag, HeadingTag, color, anchor, classes, bodyClasses, headerClasses, titleClasses, vars, headerVars, bodyVars, title, lead, titleImageCode, headerImageCode } =
+			attributes;
 
 		const states = CP.classNamesToFlags(classes);
 		const { devices, imageKeys } = CP.config.section;
@@ -57,7 +58,6 @@ wp.blocks.registerBlockType("catpow/section", {
 						isTypeColumn: [
 							{ preset: "itemSize", label: __("ヘッダサイズ", "catpow"), name: "headerSize", classKey: "headerClasses", vars: "headerVars" },
 							{ preset: "hasBorderImage", classKey: "bodyClasses" },
-							{ preset: "hasPadding", classKey: "bodyClasses" },
 						],
 					},
 					bind: {
@@ -69,8 +69,6 @@ wp.blocks.registerBlockType("catpow/section", {
 						},
 					},
 				},
-				"contentWidth",
-				{ preset: "clipPath", vars: "clipVars" },
 				"align",
 				{ preset: "textAlign", classKey: "headerClasses" },
 
@@ -97,7 +95,7 @@ wp.blocks.registerBlockType("catpow/section", {
 		const blockProps = useBlockProps({
 			id: anchor,
 			className: classes,
-			style: states.hasClipPath ? { ...vars, ...clipVars } : vars,
+			style: vars,
 		});
 
 		return (
@@ -143,19 +141,7 @@ wp.blocks.registerBlockType("catpow/section", {
 				</CP.Bem>
 				<InspectorControls>
 					<CP.ColorVarTracer target={mainBlock}>
-						<CP.SelectClassPanel title={__("クラス", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} initialOpen={true} />
-						<PanelBody title="ID" icon="admin-links" initialOpen={false}>
-							<TextControl
-								label="ID"
-								onChange={(anchor) => {
-									setAttributes({ anchor });
-								}}
-								value={anchor}
-							/>
-						</PanelBody>
-						<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-							<TextareaControl label={__("クラス", "catpow")} onChange={(classes) => setAttributes({ classes })} value={classes} />
-						</PanelBody>
+						<CP.SelectClassPanel title={__("スタイル", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} initialOpen={true} />
 					</CP.ColorVarTracer>
 				</InspectorControls>
 			</>
@@ -163,7 +149,7 @@ wp.blocks.registerBlockType("catpow/section", {
 	},
 	save({ attributes }) {
 		const { InnerBlocks, RichText, useBlockProps } = wp.blockEditor;
-		const { isTemplate, SectionTag, HeadingTag, anchor, navIcon, classes, bodyClasses, headerClasses, titleClasses, vars, clipVars, headerVars, bodyVars, title, lead, titleImageCode, headerImageCode } =
+		const { isTemplate, SectionTag, HeadingTag, anchor, navIcon, classes, bodyClasses, headerClasses, titleClasses, vars, headerVars, bodyVars, title, lead, titleImageCode, headerImageCode } =
 			attributes;
 
 		const states = CP.classNamesToFlags(classes);
@@ -172,7 +158,7 @@ wp.blocks.registerBlockType("catpow/section", {
 		const blockProps = useBlockProps.save({
 			id: anchor,
 			className: classes,
-			style: states.hasClipPath ? { ...vars, ...clipVars } : vars,
+			style: vars,
 		});
 
 		return (
@@ -182,9 +168,7 @@ wp.blocks.registerBlockType("catpow/section", {
 						{states.hasDecoration && <CP.PlacedPictures className="decoration_" attributes={attributes} keys={imageKeys.decoration} />}
 						<header className={headerClasses} style={headerVars}>
 							{states.hasHeaderImage && (
-								<div className="_image">
-									{isTemplate && headerImageCode ? headerImageCode : <CP.ResponsiveImage className="_picture" attributes={attributes} keys={imageKeys.headerImage} />}
-								</div>
+								<div className="_image">{isTemplate && headerImageCode ? headerImageCode : <CP.ResponsiveImage className="_picture" attributes={attributes} keys={imageKeys.headerImage} />}</div>
 							)}
 							<div className={titleClasses}>
 								{states.hasIcon && <CP.OutputIcon className="_icon" item={attributes} />}

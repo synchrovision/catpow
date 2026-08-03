@@ -10,16 +10,16 @@
 	"providesContext": {
 		"catpow/color": "color"
 	},
-	"usesContext": [
-		"catpow/color"
-	],
+	"usesContext": ["catpow/color"],
 	"supports": {
+		"level": true,
 		"anchor": true,
 		"className": false,
 		"color": true,
 		"spacing": true,
+		"bodySize": true,
 		"headingLevel": true,
 		"background": true,
-		"level": true
+		"backgroundImage": true
 	}
 }

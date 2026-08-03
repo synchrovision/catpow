@@ -13,8 +13,6 @@ $attributes=[
 	'titleClasses'=>["source"=>'attribute',"selector"=>".{$block_class}__header-title","attribute"=>'class','default'=>"{$block_class}__header-title"],
 	'navIcon'=>['source'=>'attribute','selector'=>".{$block_class}",'attribute'=>'data-icon'],
 	'vars'=>['type'=>'object'],
-	'clipVars'=>['type'=>'object','default'=>['--cp-clip-shape-amount'=>'40','--cp-clip-shape-upper-width'=>'40','--cp-clip-shape-upper-height'=>'40',
-	'--cp-clip-shape-below-width'=>'40','--cp-clip-shape-below-height'=>'40']],
 	'headerVars'=>['type'=>'object'],
 	'bodyVars'=>['type'=>'object'],
 

@@ -17,7 +17,7 @@
       const { PanelBody, TextareaControl, TextControl } = wp.components;
       const { attributes, setAttributes } = props;
       const { useMemo, useState } = wp.element;
-      const { isTemplate, SectionTag, HeadingTag, color, anchor, classes, bodyClasses, headerClasses, titleClasses, vars, clipVars, headerVars, bodyVars, title, lead, titleImageCode, headerImageCode } = attributes;
+      const { isTemplate, SectionTag, HeadingTag, color, anchor, classes, bodyClasses, headerClasses, titleClasses, vars, headerVars, bodyVars, title, lead, titleImageCode, headerImageCode } = attributes;
       const states = CP.classNamesToFlags(classes);
       const { devices, imageKeys } = CP.config.section;
       const [mainBlock, setMainBlock] = useState();
@@ -54,8 +54,7 @@
               isTypeArticle: ["headingType"],
               isTypeColumn: [
                 { preset: "itemSize", label: __("\u30D8\u30C3\u30C0\u30B5\u30A4\u30BA", "catpow"), name: "headerSize", classKey: "headerClasses", vars: "headerVars" },
-                { preset: "hasBorderImage", classKey: "bodyClasses" },
-                { preset: "hasPadding", classKey: "bodyClasses" }
+                { preset: "hasBorderImage", classKey: "bodyClasses" }
               ]
             },
             bind: {
@@ -67,8 +66,6 @@
               }
             }
           },
-          "contentWidth",
-          { preset: "clipPath", vars: "clipVars" },
           "align",
           { preset: "textAlign", classKey: "headerClasses" },
           { preset: "colorScheme", label: __("\u30D8\u30C3\u30C0\u914D\u8272", "catpow"), classKey: "headerClasses" },
@@ -92,28 +89,19 @@
       const blockProps = useBlockProps({
         id: anchor,
         className: classes,
-        style: states.hasClipPath ? { ...vars, ...clipVars } : vars
+        style: vars
       });
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(CP.AlignClassToolbar, { setAttributes, attributes })), /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement(SectionTag, { ref: setMainBlock, ...blockProps }, /* @__PURE__ */ wp.element.createElement("div", { className: bodyClasses, style: bodyVars }, states.hasDecoration && /* @__PURE__ */ wp.element.createElement(CP.PlacedPictures.Edit, { className: "decoration_", setAttributes, attributes, devices, keys: imageKeys.decoration }), /* @__PURE__ */ wp.element.createElement("header", { className: headerClasses, style: headerVars }, states.hasHeaderImage && /* @__PURE__ */ wp.element.createElement("div", { className: "_image" }, isTemplate && headerImageCode ? /* @__PURE__ */ wp.element.createElement(CP.DummyImage, { text: headerImageCode }) : /* @__PURE__ */ wp.element.createElement(CP.SelectResponsiveImage, { className: "_picture", setAttributes, attributes, keys: imageKeys.headerImage })), /* @__PURE__ */ wp.element.createElement("div", { className: titleClasses }, states.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { className: "_icon", item: attributes }), states.hasTitleImage ? /* @__PURE__ */ wp.element.createElement(HeadingTag, { className: "_titleimage" }, isTemplate && titleImageCode ? /* @__PURE__ */ wp.element.createElement(CP.DummyImage, { text: titleImageCode }) : /* @__PURE__ */ wp.element.createElement(CP.SelectResponsiveImage, { className: "_image", setAttributes, attributes, keys: imageKeys.titleImage, devices })) : /* @__PURE__ */ wp.element.createElement(RichText, { tagName: HeadingTag, className: "_heading", value: title, placeholder: "Title", onChange: (title2) => setAttributes({ title: title2 }) }), states.hasLead && /* @__PURE__ */ wp.element.createElement(RichText, { tagName: "div", className: "_lead", value: lead, placeholder: "Lead", onChange: (lead2) => setAttributes({ lead: lead2 }) }))), /* @__PURE__ */ wp.element.createElement("div", { className: "contents_" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, null))))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.ColorVarTracer, { target: mainBlock }, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30AF\u30E9\u30B9", "catpow"), icon: "art", ...{ setAttributes, attributes }, selectiveClasses, initialOpen: true }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "ID", icon: "admin-links", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
-        TextControl,
-        {
-          label: "ID",
-          onChange: (anchor2) => {
-            setAttributes({ anchor: anchor2 });
-          },
-          value: anchor
-        }
-      )), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: __("\u30AF\u30E9\u30B9", "catpow"), onChange: (classes2) => setAttributes({ classes: classes2 }), value: classes })))));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(CP.AlignClassToolbar, { setAttributes, attributes })), /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement(SectionTag, { ref: setMainBlock, ...blockProps }, /* @__PURE__ */ wp.element.createElement("div", { className: bodyClasses, style: bodyVars }, states.hasDecoration && /* @__PURE__ */ wp.element.createElement(CP.PlacedPictures.Edit, { className: "decoration_", setAttributes, attributes, devices, keys: imageKeys.decoration }), /* @__PURE__ */ wp.element.createElement("header", { className: headerClasses, style: headerVars }, states.hasHeaderImage && /* @__PURE__ */ wp.element.createElement("div", { className: "_image" }, isTemplate && headerImageCode ? /* @__PURE__ */ wp.element.createElement(CP.DummyImage, { text: headerImageCode }) : /* @__PURE__ */ wp.element.createElement(CP.SelectResponsiveImage, { className: "_picture", setAttributes, attributes, keys: imageKeys.headerImage })), /* @__PURE__ */ wp.element.createElement("div", { className: titleClasses }, states.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { className: "_icon", item: attributes }), states.hasTitleImage ? /* @__PURE__ */ wp.element.createElement(HeadingTag, { className: "_titleimage" }, isTemplate && titleImageCode ? /* @__PURE__ */ wp.element.createElement(CP.DummyImage, { text: titleImageCode }) : /* @__PURE__ */ wp.element.createElement(CP.SelectResponsiveImage, { className: "_image", setAttributes, attributes, keys: imageKeys.titleImage, devices })) : /* @__PURE__ */ wp.element.createElement(RichText, { tagName: HeadingTag, className: "_heading", value: title, placeholder: "Title", onChange: (title2) => setAttributes({ title: title2 }) }), states.hasLead && /* @__PURE__ */ wp.element.createElement(RichText, { tagName: "div", className: "_lead", value: lead, placeholder: "Lead", onChange: (lead2) => setAttributes({ lead: lead2 }) }))), /* @__PURE__ */ wp.element.createElement("div", { className: "contents_" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, null))))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.ColorVarTracer, { target: mainBlock }, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30B9\u30BF\u30A4\u30EB", "catpow"), icon: "art", ...{ setAttributes, attributes }, selectiveClasses, initialOpen: true }))));
     },
     save({ attributes }) {
       const { InnerBlocks, RichText, useBlockProps } = wp.blockEditor;
-      const { isTemplate, SectionTag, HeadingTag, anchor, navIcon, classes, bodyClasses, headerClasses, titleClasses, vars, clipVars, headerVars, bodyVars, title, lead, titleImageCode, headerImageCode } = attributes;
+      const { isTemplate, SectionTag, HeadingTag, anchor, navIcon, classes, bodyClasses, headerClasses, titleClasses, vars, headerVars, bodyVars, title, lead, titleImageCode, headerImageCode } = attributes;
       const states = CP.classNamesToFlags(classes);
       const { devices, imageKeys } = CP.config.section;
       const blockProps = useBlockProps.save({
         id: anchor,
         className: classes,
-        style: states.hasClipPath ? { ...vars, ...clipVars } : vars
+        style: vars
       });
       return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement(SectionTag, { "data-icon": navIcon, ...blockProps }, /* @__PURE__ */ wp.element.createElement("div", { className: bodyClasses, style: bodyVars }, states.hasDecoration && /* @__PURE__ */ wp.element.createElement(CP.PlacedPictures, { className: "decoration_", attributes, keys: imageKeys.decoration }), /* @__PURE__ */ wp.element.createElement("header", { className: headerClasses, style: headerVars }, states.hasHeaderImage && /* @__PURE__ */ wp.element.createElement("div", { className: "_image" }, isTemplate && headerImageCode ? headerImageCode : /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImage, { className: "_picture", attributes, keys: imageKeys.headerImage })), /* @__PURE__ */ wp.element.createElement("div", { className: titleClasses }, states.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { className: "_icon", item: attributes }), states.hasTitleImage ? /* @__PURE__ */ wp.element.createElement(HeadingTag, { className: "_titleimage" }, isTemplate && titleImageCode ? titleImageCode : /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImage, { className: "_image", attributes, keys: imageKeys.titleImage, devices })) : /* @__PURE__ */ wp.element.createElement(HeadingTag, { className: "_heading" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: title })), states.hasLead && /* @__PURE__ */ wp.element.createElement("div", { className: "_lead" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { value: lead })))), /* @__PURE__ */ wp.element.createElement("div", { className: "contents_" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)))));
     }
