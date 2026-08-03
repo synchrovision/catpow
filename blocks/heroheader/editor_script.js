@@ -52,7 +52,10 @@
       const { devices, imageKeys } = CP.config.heroheader;
       const selectiveClasses = useMemo2(() => {
         const selectiveClasses2 = [
-          { name: "hasButtons", label: __("\u30DC\u30BF\u30F3", "catow"), values: "hasButtons" },
+          { name: "hasTextBackground", label: __("\u30C6\u30AD\u30B9\u30C8\u80CC\u666F", "catpow"), values: "hasTextBackground", classKey: "bodyClasses" },
+          { preset: "textAlign", classKey: "bodyClasses" },
+          { preset: "alignContent", classKey: "bodyClasses" },
+          { name: "hasButtons", label: __("\u30DC\u30BF\u30F3", "catow"), values: "hasButtons", sub: [{ preset: "itemSize", label: "\u30DC\u30BF\u30F3\u30B5\u30A4\u30BA", classKey: "bodyClasses" }] },
           {
             name: "blendmode",
             label: __("\u30B9\u30E9\u30A4\u30C0\u30FC\u30D6\u30EC\u30F3\u30C9\u30E2\u30FC\u30C9", "catpow"),
@@ -70,12 +73,6 @@
             max: 1,
             step: 0.1
           },
-          { preset: "hasContentWidth", classKey: "bodyClasses" },
-          { name: "hasTextBackground", label: __("\u30C6\u30AD\u30B9\u30C8\u80CC\u666F", "catpow"), values: "hasTextBackground", classKey: "bodyClasses" },
-          { preset: "hasPadding", classKey: "bodyClasses" },
-          { preset: "textAlign", classKey: "bodyClasses" },
-          { preset: "alignContent", classKey: "bodyClasses" },
-          { preset: "itemSize", label: "\u30DC\u30BF\u30F3\u30B5\u30A4\u30BA", classKey: "bodyClasses" },
           heroheaderSelectiveClasses,
           { input: "pictures", label: __("\u30B9\u30E9\u30A4\u30C9\u30B7\u30E7\u30FC\u753B\u50CF", "catpow"), key: "images", keys: imageKeys.bgImages }
         ];
@@ -98,7 +95,7 @@
         setAttributes({ params: { ...heroheaderSelectiveClasses.sub[Element][0].default, ...params } });
       }, [Element]);
       const blockProps = useBlockProps({ className: EditMode ? "cp-altcontent" : attributes.classes, style: CP.convertCssVarsForPreview(vars) });
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", ...{ setAttributes, attributes }, selectiveClasses })), /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { setAttributes, attributes }), EditMode ? /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(CP.Label, { icon: "edit" }), /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30B9\u30BF\u30A4\u30EB", icon: "art", ...{ setAttributes, attributes }, selectiveClasses })), /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { setAttributes, attributes }), EditMode ? /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(CP.Label, { icon: "edit" }), /* @__PURE__ */ wp.element.createElement(
         CP.EditItemsTable,
         {
           setAttributes,

@@ -6,6 +6,7 @@
 		"level": true,
 		"headingLevel": true,
 		"color": true,
-		"spacing": true
+		"spacing": true,
+		"bodySize": true
 	}
 }

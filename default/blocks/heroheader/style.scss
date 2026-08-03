@@ -31,12 +31,18 @@
 						@include bg((g:l 90deg bx bx n));
 					}
 				}
+				&-buttons{
+					@include flx((j:s));
+				}
 			}
 		}
 		&.has-text-align-center{
 			#{$body}{
 				&-texts{
 					@include bnd((mgi:a));
+				}
+				&-buttons{
+					@include flx((j:c));
 				}
 			}
 		}
@@ -47,6 +53,9 @@
 					&::before{
 						@include bg((g:l 90deg n bx bx));
 					}
+				}
+				&-buttons{
+					@include flx((j:e));
 				}
 			}
 		}
@@ -68,10 +77,10 @@
 			}
 		}
 		&-buttons{
-			@include grd((rc:i,g:c-b));
+			@include flx((w:w,g:c-b));
 			@include txt((l:n));
 			&-button{
-				@include bnd((f:1 1 300));
+				@include bnd((f:0 1 i));
 				&-link{
 					@extend %button-component;
 					@extend %ui;

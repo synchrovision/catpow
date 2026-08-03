@@ -22,7 +22,10 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
-				{ name: "hasButtons", label: __("ボタン", "catow"), values: "hasButtons" },
+				{ name: "hasTextBackground", label: __("テキスト背景", "catpow"), values: "hasTextBackground", classKey: "bodyClasses" },
+				{ preset: "textAlign", classKey: "bodyClasses" },
+				{ preset: "alignContent", classKey: "bodyClasses" },
+				{ name: "hasButtons", label: __("ボタン", "catow"), values: "hasButtons", sub: [{ preset: "itemSize", label: "ボタンサイズ", classKey: "bodyClasses" }] },
 				{
 					name: "blendmode",
 					label: __("スライダーブレンドモード", "catpow"),
@@ -40,12 +43,6 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 					max: 1,
 					step: 0.1,
 				},
-				{ preset: "hasContentWidth", classKey: "bodyClasses" },
-				{ name: "hasTextBackground", label: __("テキスト背景", "catpow"), values: "hasTextBackground", classKey: "bodyClasses" },
-				{ preset: "hasPadding", classKey: "bodyClasses" },
-				{ preset: "textAlign", classKey: "bodyClasses" },
-				{ preset: "alignContent", classKey: "bodyClasses" },
-				{ preset: "itemSize", label: "ボタンサイズ", classKey: "bodyClasses" },
 				heroheaderSelectiveClasses,
 				{ input: "pictures", label: __("スライドショー画像", "catpow"), key: "images", keys: imageKeys.bgImages },
 			];
@@ -75,7 +72,7 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 		return (
 			<>
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title="スタイル" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 				</InspectorControls>
 				<CP.SelectModeToolbar setAttributes={setAttributes} attributes={attributes} />
 				{EditMode ? (
