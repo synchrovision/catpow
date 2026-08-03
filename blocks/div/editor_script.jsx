@@ -37,15 +37,8 @@ wp.blocks.registerBlockType("catpow/div", {
 					type: "buttons",
 					values: { isTypeBlock: "block", isTypeFrame: "frame", isTypeColumns: "columns" },
 					sub: {
-						isTypeBlock: [{ preset: "clipPath", vars: "clipVars" }],
-						isTypeFrame: [{ label: "アイコン", values: "hasIcon", sub: [{ input: "icon", label: "アイコン", color }] }, "hasBorder"],
-						isTypeColumns: [
-							{ preset: "clipPath", vars: "clipVars" },
-							{ preset: "itemSize", label: "カラム幅" },
-						],
-					},
-					bind: {
-						isTypeFrame: ["hasContentWidth"],
+						isTypeFrame: ["hasIcon"],
+						isTypeColumns: [{ preset: "itemSize", label: "カラム幅" }],
 					},
 				},
 			];
@@ -53,21 +46,16 @@ wp.blocks.registerBlockType("catpow/div", {
 			return selectiveClasses;
 		}, []);
 
-		const blockProps = useBlockProps({ className: classes, style: states.hasClipPath ? { ...vars, ...clipVars } : vars });
+		const blockProps = useBlockProps({ className: classes, style: vars });
 
 		return (
 			<>
 				<div {...blockProps}>
 					{states.hasIcon && <CP.OutputIcon item={attributes} />}
 					<InnerBlocks template={[["core/paragraph", { content: CP.dummyText.text }]]} templateLock={false} />
-					{states.hasBorderImage && <style className="borderImageCss">{borderImageCss}</style>}
-					{states.hasFrameImage && <style className="frameImageCss">{frameImageCss}</style>}
 				</div>
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
-					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
-					</PanelBody>
+					<CP.SelectClassPanel title="スタイル" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 				</InspectorControls>
 			</>
 		);
@@ -75,11 +63,11 @@ wp.blocks.registerBlockType("catpow/div", {
 
 	save({ attributes, className, setAttributes }) {
 		const { InnerBlocks, useBlockProps } = wp.blockEditor;
-		const { classes = "", vars, clipVars, frameImageCss, borderImageCss } = attributes;
+		const { classes = "", vars, frameImageCss, borderImageCss } = attributes;
 
 		const states = CP.classNamesToFlags(classes);
 
-		const blockProps = useBlockProps.save({ className: classes, style: states.hasClipPath ? { ...vars, ...clipVars } : vars });
+		const blockProps = useBlockProps.save({ className: classes, style: vars });
 
 		return (
 			<div {...blockProps}>

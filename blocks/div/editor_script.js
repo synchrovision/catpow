@@ -37,29 +37,22 @@
             type: "buttons",
             values: { isTypeBlock: "block", isTypeFrame: "frame", isTypeColumns: "columns" },
             sub: {
-              isTypeBlock: [{ preset: "clipPath", vars: "clipVars" }],
-              isTypeFrame: [{ label: "\u30A2\u30A4\u30B3\u30F3", values: "hasIcon", sub: [{ input: "icon", label: "\u30A2\u30A4\u30B3\u30F3", color }] }, "hasBorder"],
-              isTypeColumns: [
-                { preset: "clipPath", vars: "clipVars" },
-                { preset: "itemSize", label: "\u30AB\u30E9\u30E0\u5E45" }
-              ]
-            },
-            bind: {
-              isTypeFrame: ["hasContentWidth"]
+              isTypeFrame: ["hasIcon"],
+              isTypeColumns: [{ preset: "itemSize", label: "\u30AB\u30E9\u30E0\u5E45" }]
             }
           }
         ];
         wp.hooks.applyFilters("catpow.blocks.div.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);
-      const blockProps = useBlockProps({ className: classes, style: states.hasClipPath ? { ...vars, ...clipVars } : vars });
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, states.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { item: attributes }), /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: [["core/paragraph", { content: CP.dummyText.text }]], templateLock: false }), states.hasBorderImage && /* @__PURE__ */ wp.element.createElement("style", { className: "borderImageCss" }, borderImageCss), states.hasFrameImage && /* @__PURE__ */ wp.element.createElement("style", { className: "frameImageCss" }, frameImageCss)), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: "\u30AF\u30E9\u30B9", onChange: (classes2) => setAttributes({ classes: classes2 }), value: classes }))));
+      const blockProps = useBlockProps({ className: classes, style: vars });
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, states.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { item: attributes }), /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: [["core/paragraph", { content: CP.dummyText.text }]], templateLock: false })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30B9\u30BF\u30A4\u30EB", icon: "art", ...{ setAttributes, attributes }, selectiveClasses })));
     },
     save({ attributes, className, setAttributes }) {
       const { InnerBlocks, useBlockProps } = wp.blockEditor;
-      const { classes = "", vars, clipVars, frameImageCss, borderImageCss } = attributes;
+      const { classes = "", vars, frameImageCss, borderImageCss } = attributes;
       const states = CP.classNamesToFlags(classes);
-      const blockProps = useBlockProps.save({ className: classes, style: states.hasClipPath ? { ...vars, ...clipVars } : vars });
+      const blockProps = useBlockProps.save({ className: classes, style: vars });
       return /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, states.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { item: attributes }), /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null));
     }
   });
