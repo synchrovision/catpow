@@ -1,4 +1,5 @@
 <?php
+use Catpow\util\BlockConfig;
 $block_class='wp-block-catpow-buttons';
 $buttons_class='cp-buttons';
 $button_class='cp-button';
@@ -6,30 +7,7 @@ $attributes=[
 	"isTemplate"=>["type"=>"boolean","default"=>false],
 	"classes"=>["source"=>'attribute',"selector"=>".{$block_class}","attribute"=>'class',"default"=>"{$block_class} {$buttons_class} is-level3 has-item-size-medium"],
 	'vars'=>['type'=>'object','default'=>[]],
-	"items"=>[
-		"source"=>'query',
-		"selector"=>".{$block_class}__item",
-		'filters'=>[
-			'iconHolder'=>['selector'=>".{$block_class}-button__icon"],
-			'eventDispatcher'=>['selector'=>".{$block_class}-button"]
-		],
-		"query"=>[
-			"classes"=>["source"=>'attribute',"attribute"=>'class'],
-			"copy"=>["source"=>'html',"selector"=>".{$block_class}__item-copy"],
-			"text"=>["source"=>'html',"selector"=>".{$block_class}-button__text"],
-			"caption"=>["source"=>'html',"selector"=>".{$block_class}__item-caption"],
-			"url"=>["source"=>'attribute',"selector"=>".{$block_class}-button","attribute"=>'href'],
-			"iconSrc"=>["source"=>'attribute',"selector"=>".{$block_class}-button__icon-img","attribute"=>'src'],
-			"iconAlt"=>["source"=>'attribute',"selector"=>".{$block_class}-button__icon-img","attribute"=>'alt'],
-		],
-		"default"=>[
-			[
-				"classes"=>"{$block_class}__item {$button_class} is-rank-primary",
-				"text"=>'お問合せ',
-				"url"=>'[home_url]/contact'
-			]
-		]
-	],
+	"items"=>BlockConfig::getButtonsAttributes("{$block_class}__item"),
 	"loopParam"=>["type"=>'text'],
 	"loopCount"=>["type"=>'number',"default"=>1],
 	

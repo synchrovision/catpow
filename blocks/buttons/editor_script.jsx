@@ -1,6 +1,6 @@
 ﻿const blockConfig = {
 	linkKeys: {
-		link: { href: "url", items: "items" },
+		link: { href: "href", items: "items" },
 	},
 };
 CP.config.buttons = blockConfig;
@@ -175,13 +175,13 @@ wp.blocks.registerBlockType("catpow/buttons", {
 					<ul className={classes} style={vars}>
 						{items.map((item, index) => {
 							const itemStates = CP.classNamesToFlags(item.classes);
-							const shouldOpenWithOtherWindow = /^\w+:\/\//.test(item.url);
+							const shouldOpenWithOtherWindow = /^\w+:\/\//.test(item.href);
 							return (
 								<li className={item.classes} key={index}>
 									{states.hasMicroCopy && <span className="_copy cp-button__copy">{item.copy}</span>}
 									<a
-										href={item.url}
-										className="-button"
+										href={item.href}
+										className="-button cp-button__link"
 										target={shouldOpenWithOtherWindow ? "_blank" : null}
 										rel={shouldOpenWithOtherWindow ? "noopener" : null}
 										{...CP.extractEventDispatcherAttributes("catpow/buttons", item)}

@@ -2,7 +2,7 @@
   // ../blocks/buttons/editor_script.jsx
   var blockConfig = {
     linkKeys: {
-      link: { href: "url", items: "items" }
+      link: { href: "href", items: "items" }
     }
   };
   CP.config.buttons = blockConfig;
@@ -121,12 +121,12 @@
       const states = CP.classNamesToFlags(classes2);
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("ul", { className: classes2, style: vars }, items.map((item, index) => {
         const itemStates = CP.classNamesToFlags(item.classes);
-        const shouldOpenWithOtherWindow = /^\w+:\/\//.test(item.url);
+        const shouldOpenWithOtherWindow = /^\w+:\/\//.test(item.href);
         return /* @__PURE__ */ wp.element.createElement("li", { className: item.classes, key: index }, states.hasMicroCopy && /* @__PURE__ */ wp.element.createElement("span", { className: "_copy cp-button__copy" }, item.copy), /* @__PURE__ */ wp.element.createElement(
           "a",
           {
-            href: item.url,
-            className: "-button",
+            href: item.href,
+            className: "-button cp-button__link",
             target: shouldOpenWithOtherWindow ? "_blank" : null,
             rel: shouldOpenWithOtherWindow ? "noopener" : null,
             ...CP.extractEventDispatcherAttributes("catpow/buttons", item)
