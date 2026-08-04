@@ -1,4 +1,5 @@
 <?php
+use Catpow\util\BlockConfig;
 $block_class="wp-block-catpow-formbuttons";
 $buttons_class="cp-buttons";
 $button_class="cp-button";
@@ -6,27 +7,16 @@ $attributes=[
 	"isTemplate"=>["type"=>"boolean","default"=>false],
 	"vars"=>["type"=>"object","default"=>[]],
 	"classes"=>["source"=>"attribute","selector"=>".{$block_class}","attribute"=>"class","default"=>"{$block_class} {$buttons_class} is-level3 has-item-size-medium"],
-	"items"=>[
-		"source"=>"query",
-		"selector"=>".{$block_class}__item",
-		"filters"=>[
-			"iconHolder"=>["selector"=>".{$block_class}-button__icon"],
-			"eventDispatcher"=>["selector"=>".{$block_class}-button"]
-		],
-		"query"=>[
-			"classes"=>["source"=>"attribute","attribute"=>"class"],
+	"items"=>BlockConfig::getButtonsAttributes(
+		"{$block_class}__item",
+		[
 			"action"=>["source"=>"attribute","selector"=>".{$block_class}-button","attribute"=>"data-action"],
 			"callback"=>["source"=>"attribute","selector"=>".{$block_class}-button","attribute"=>"data-callback"],
 			"target"=>["source"=>"attribute","selector"=>".{$block_class}-button","attribute"=>"data-target"],
 			"ignoreMessage"=>["source"=>"attribute","selector"=>".{$block_class}-button","attribute"=>"ignore-message"],
-			"copy"=>["source"=>"html","selector"=>".{$block_class}__item-copy"],
-			"text"=>["source"=>"html","selector"=>".{$block_class}-button__text"],
-			"caption"=>["source"=>"html","selector"=>".{$block_class}__item-caption"],
-			"iconSrc"=>["source"=>"attribute","selector"=>".{$block_class}-button__icon-img","attribute"=>"src"],
-			"iconAlt"=>["source"=>"attribute","selector"=>".{$block_class}-button__icon-img","attribute"=>"alt"],
 		],
-		"default"=>[
-			["classes"=>"{$block_class}__item {$button_class}","action"=>"send","text"=>"送信"]
+		[
+			["action"=>"send","text"=>"送信"]
 		]
-	]
+	)
 ];
