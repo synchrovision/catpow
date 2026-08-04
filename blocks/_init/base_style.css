@@ -646,7 +646,14 @@
   object-position: center;
 }
 .cp-pictures__item {
+  position: relative;
   padding-top: 1rem;
+  margin-bottom: 1rem;
+}
+.cp-pictures__item .cp-itemcontrol.is-position-absolute {
+  position: absolute;
+  bottom: 100%;
+  right: 0rem;
 }
 .cp-customcolorvars-items {
   padding: 1rem;

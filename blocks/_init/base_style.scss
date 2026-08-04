@@ -368,7 +368,10 @@ $colors:(
 	}
 	&-pictures{
 		&__item{
-			@include bnd((pdt:16));
+			@include bnd((p:r,pdt:16,mgb:16));
+			.cp-itemcontrol.is-position-absolute{
+				@include bnd((p:a,b:f,r:0));
+			}
 		}
 	}
 	&-customcolorvars{
