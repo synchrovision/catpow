@@ -4717,7 +4717,16 @@
               ));
             }
             case "image": {
-              return /* @__PURE__ */ wp.element.createElement("td", { key: c }, /* @__PURE__ */ wp.element.createElement(CP.SelectResponsiveImage, { ...{ attributes, setAttributes }, itemKeys: [...itemKeys, index], keys: { src: col.key, ...col.keys }, size: col.size || "vga", isTemplate }));
+              return /* @__PURE__ */ wp.element.createElement("td", { key: c }, /* @__PURE__ */ wp.element.createElement(
+                CP.SelectResponsiveImage,
+                {
+                  ...{ attributes, setAttributes },
+                  itemKeys: [...itemKeys, index],
+                  keys: { src: col.key, ...col.keys },
+                  size: col.size || "vga",
+                  isTemplate
+                }
+              ));
             }
             case "picture": {
               return /* @__PURE__ */ wp.element.createElement("td", { key: c }, /* @__PURE__ */ wp.element.createElement(CP.SelectPictureSources, { ...{ attributes, setAttributes }, itemKeys: [...itemKeys, index], keys: col.keys, sizes: col.sizes, devices: col.devices, isTemplate }));
@@ -4729,6 +4738,7 @@
                   prm: col,
                   item,
                   save: (values) => {
+                    console.log(values);
                     Object.assign(item, values);
                     save();
                   }
@@ -4741,15 +4751,7 @@
                   subCol.keys.subItems = col.key;
                 }
               });
-              return /* @__PURE__ */ wp.element.createElement("td", { key: c }, /* @__PURE__ */ wp.element.createElement(
-                CP.EditItemsTable,
-                {
-                  ...{ attributes, setAttributes },
-                  itemKeys: [...itemKeys, index, col.itemsKey],
-                  columns: col.columns,
-                  isTemplate
-                }
-              ));
+              return /* @__PURE__ */ wp.element.createElement("td", { key: c }, /* @__PURE__ */ wp.element.createElement(CP.EditItemsTable, { ...{ attributes, setAttributes }, itemKeys: [...itemKeys, index, col.itemsKey], columns: col.columns, isTemplate }));
             }
             default: {
               return /* @__PURE__ */ wp.element.createElement("td", { key: c }, item[col.key]);

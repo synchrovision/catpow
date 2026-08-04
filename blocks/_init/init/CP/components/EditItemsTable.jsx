@@ -132,14 +132,20 @@ export const EditItemsTable = (props) => {
 										case "image": {
 											return (
 												<td key={c}>
-												<CP.SelectResponsiveImage {...{ attributes, setAttributes }} itemKeys={[...itemKeys, index]} keys={{ src: col.key, ...col.keys }} size={col.size || "vga"} isTemplate={isTemplate} />
+													<CP.SelectResponsiveImage
+														{...{ attributes, setAttributes }}
+														itemKeys={[...itemKeys, index]}
+														keys={{ src: col.key, ...col.keys }}
+														size={col.size || "vga"}
+														isTemplate={isTemplate}
+													/>
 												</td>
 											);
 										}
 										case "picture": {
 											return (
 												<td key={c}>
-												<CP.SelectPictureSources {...{ attributes, setAttributes }} itemKeys={[...itemKeys, index]} keys={col.keys} sizes={col.sizes} devices={col.devices} isTemplate={isTemplate} />
+													<CP.SelectPictureSources {...{ attributes, setAttributes }} itemKeys={[...itemKeys, index]} keys={col.keys} sizes={col.sizes} devices={col.devices} isTemplate={isTemplate} />
 												</td>
 											);
 										}
@@ -150,6 +156,7 @@ export const EditItemsTable = (props) => {
 														prm={col}
 														item={item}
 														save={(values) => {
+															console.log(values);
 															Object.assign(item, values);
 															save();
 														}}
@@ -165,12 +172,7 @@ export const EditItemsTable = (props) => {
 											});
 											return (
 												<td key={c}>
-												<CP.EditItemsTable
-													{...{ attributes, setAttributes }}
-													itemKeys={[...itemKeys, index, col.itemsKey]}
-														columns={col.columns}
-														isTemplate={isTemplate}
-													/>
+													<CP.EditItemsTable {...{ attributes, setAttributes }} itemKeys={[...itemKeys, index, col.itemsKey]} columns={col.columns} isTemplate={isTemplate} />
 												</td>
 											);
 										}
