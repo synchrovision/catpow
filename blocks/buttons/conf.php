@@ -24,7 +24,7 @@ $attributes=[
 		],
 		"default"=>[
 			[
-				"classes"=>"{$block_class}__item is-rank-primary",
+				"classes"=>"{$block_class}__item {$button_class} is-rank-primary",
 				"text"=>'お問合せ',
 				"url"=>'[home_url]/contact'
 			]

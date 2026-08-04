@@ -68,10 +68,6 @@ wp.blocks.registerBlockType("catpow/buttons", {
 				<InspectorControls>
 					<CP.SelectClassPanel title="スタイル" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 					<CP.SelectClassPanel title="ボタン" icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={selectiveItemClasses} />
-					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
-					</PanelBody>
-					<CP.ItemControlInfoPanel />
 				</InspectorControls>
 				<>
 					{EditMode ? (
@@ -111,7 +107,7 @@ wp.blocks.registerBlockType("catpow/buttons", {
 												<CP.Item tag="li" className={item.classes} {...{ setAttributes, attributes }} itemKeys={["items", index]} key={index}>
 													{states.hasMicroCopy && (
 														<span
-															className="_copy"
+															className="_copy cp-button__copy"
 															onInput={(e) => {
 																item.copy = e.target.innerText;
 															}}
@@ -124,10 +120,10 @@ wp.blocks.registerBlockType("catpow/buttons", {
 															{item.copy}
 														</span>
 													)}
-													<CP.Link.Edit className="-button" attributes={attributes} setAttributes={setAttributes} keys={linkKeys.link} itemKeys={["items", index]}>
-														{itemStates.hasIcon && <CP.OutputIcon className="_icon" item={item} />}
+													<CP.Link.Edit className="-button cp-button__link" attributes={attributes} setAttributes={setAttributes} keys={linkKeys.link} itemKeys={["items", index]}>
+														{itemStates.hasIcon && <CP.OutputIcon className="_icon cp-button__link-icon" item={item} />}
 														<span
-															className="_text"
+															className="_text cp-button__link-text"
 															onInput={(e) => {
 																item.text = e.target.innerText;
 															}}
@@ -142,7 +138,7 @@ wp.blocks.registerBlockType("catpow/buttons", {
 													</CP.Link.Edit>
 													{states.hasCaption && (
 														<span
-															className="_caption"
+															className="_caption cp-button__caption"
 															onInput={(e) => {
 																item.caption = e.target.innerText;
 															}}
@@ -172,33 +168,31 @@ wp.blocks.registerBlockType("catpow/buttons", {
 		const { attributes } = props;
 		const { items = [], classes, vars, doLoop } = attributes;
 		const states = CP.classNamesToFlags(classes);
-		const blockType = wp.data.select("core/blocks").getBlockType("catpow/buttons");
-		let rtn = [];
-		items.map((item, index) => {
-			const itemStates = CP.classNamesToFlags(item.classes);
-			const eventDispatcherAttributes = {};
-			if (blockType.attributes.items.eventDispatcherAttributes) {
-				blockType.attributes.items.eventDispatcherAttributes.map((attr_name) => {
-					eventDispatcherAttributes[blockType.attributes.items.query[attr_name].attribute] = item[attr_name];
-				});
-			}
-			const shouldOpenWithOtherWindow = /^\w+:\/\//.test(item.url);
-			rtn.push(
-				<li className={item.classes} key={index}>
-					{states.hasMicroCopy && <span className="_copy">{item.copy}</span>}
-					<a href={item.url} className="-button" target={shouldOpenWithOtherWindow ? "_blank" : null} rel={shouldOpenWithOtherWindow ? "noopener" : null} {...eventDispatcherAttributes}>
-						{itemStates.hasIcon && <CP.OutputIcon className="_icon" item={item} />}
-						<span className="_text">{item.text}</span>
-					</a>
-					{states.hasCaption && <span className="_caption">{item.caption}</span>}
-				</li>,
-			);
-		});
+
 		return (
 			<>
 				<CP.Bem prefix="wp-block-catpow">
 					<ul className={classes} style={vars}>
-						{rtn}
+						{items.map((item, index) => {
+							const itemStates = CP.classNamesToFlags(item.classes);
+							const shouldOpenWithOtherWindow = /^\w+:\/\//.test(item.url);
+							return (
+								<li className={item.classes} key={index}>
+									{states.hasMicroCopy && <span className="_copy cp-button__copy">{item.copy}</span>}
+									<a
+										href={item.url}
+										className="-button"
+										target={shouldOpenWithOtherWindow ? "_blank" : null}
+										rel={shouldOpenWithOtherWindow ? "noopener" : null}
+										{...CP.extractEventDispatcherAttributes("catpow/buttons", item)}
+									>
+										{itemStates.hasIcon && <CP.OutputIcon className="_icon cp-button__link-icon" item={item} />}
+										<span className="_text cp-button__link-text">{item.text}</span>
+									</a>
+									{states.hasCaption && <span className="_caption cp-button__caption">{item.caption}</span>}
+								</li>
+							);
+						})}
 					</ul>
 				</CP.Bem>
 				{doLoop && (
