@@ -1,0 +1,3 @@
+{
+	"component": ["JsonEditor", "JsonEditor/Image", "SelectPreparedImage", "SelectPreparedImageSet"]
+}
