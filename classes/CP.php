@@ -708,6 +708,40 @@ class CP{
 		}
 		return $cache[$name]=$deps;
 	}
+	public static function resolve_deps_data($deps_data){
+		$deps=['js'=>[],'css'=>[]];
+		if(!empty($deps_data['script'])){
+			foreach($deps_data['script'] as $dep){
+				$handle=is_array($dep)?$dep[0]:$dep;
+				$deps['js'][$handle]=$dep;
+			}
+		}
+		if(!empty($deps_data['style'])){
+			foreach($deps_data['style'] as $dep){
+				$handle=is_array($dep)?$dep[0]:$dep;
+				$deps['css'][$handle]=$dep;
+			}
+		}
+		if(!empty($deps_data['component'])){
+			$sub_deps=self::get_components_deps($deps_data['component']);
+			$deps['js']=array_merge($deps['js'],$sub_deps['js']);
+			$deps['css']=array_merge($deps['css'],$sub_deps['css']);
+		}
+		if(!empty($deps_data['element'])){
+			$sub_deps=self::get_elements_deps($deps_data['element']);
+			$deps['js']=array_merge($deps['js'],$sub_deps['js']);
+			$deps['css']=array_merge($deps['css'],$sub_deps['css']);
+		}
+		foreach($deps as $type=>$items){
+			foreach($items as $handle=>$args){
+				if(is_array($args)){
+					call_user_func_array(['js'=>'wp_enqueue_script','css'=>'wp_enqueue_style'][$type],$args);
+					$deps[$type][$handle]=$args[0];
+				}
+			}
+		}
+		return $deps;
+	}
 	
 	/*post*/
 	public static function get_post($path){
