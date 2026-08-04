@@ -106,8 +106,8 @@ Catpow.SelectPreparedImage = (props) => {
 									<ul className="items_">
 										{pageImages.map((image) => {
 											return (
-												<li className={clsx("_item", { "is-active": value == image.url })} key={image.url}>
-													<img className="_img" src={image.url} alt={image.alt} onClick={() => dispatch({ type: "update", image })} />
+												<li className={clsx("_item", { "is-active": value == image.url })} onClick={() => dispatch({ type: "update", image })} key={image.url}>
+													<img className="_img" src={image.url} alt={image.alt} />
 												</li>
 											);
 										})}
