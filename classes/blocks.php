@@ -144,6 +144,11 @@ class blocks{
 				CP::scss_compile(substr($format_style,0,-3).'scss');
 				self::$deps['editor_style'][]=$code_name;
 			}
+			if(file_exists($deps_json=$block_init_dir.'/deps.json')){
+				$deps=CP::resolve_deps_data(json_decode(file_get_contents($deps_json),true));
+				self::$deps['editor_script']+=$deps['js'];
+				self::$deps['editor_style']+=$deps['css'];
+			}
 		}
 		if(is_dir(get_stylesheet_directory().'/blocks')){
 			foreach(scandir(get_stylesheet_directory().'/blocks') as $block_name){
