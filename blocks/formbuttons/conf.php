@@ -26,7 +26,7 @@ $attributes=[
 			"iconAlt"=>["source"=>"attribute","selector"=>".{$block_class}-button__icon-img","attribute"=>"alt"],
 		],
 		"default"=>[
-			["classes"=>"{$block_class}__item","action"=>"send","text"=>"送信"]
+			["classes"=>"{$block_class}__item {$button_class}","action"=>"send","text"=>"送信"]
 		]
 	]
 ];

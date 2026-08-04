@@ -80,7 +80,7 @@ wp.blocks.registerBlockType("catpow/formbuttons", {
 									<CP.Item className={item.classes} tag="li" {...{ setAttributes, attributes }} itemKeys={["items", index]} key={index}>
 										{states.hasMicroCopy && (
 											<span
-												className="_copy"
+												className="_copy cp-button__copy"
 												onInput={(e) => {
 													item.copy = e.target.innerText;
 												}}
@@ -93,10 +93,10 @@ wp.blocks.registerBlockType("catpow/formbuttons", {
 												{item.copy}
 											</span>
 										)}
-										<CP.Link.Edit className="-button" attributes={attributes} setAttributes={setAttributes} keys={linkKeys.link} itemKeys={["items", index]}>
-											{itemStates.hasIcon && <CP.OutputIcon className="_icon" item={item} />}
+										<CP.Link.Edit className="-button cp-button__link" attributes={attributes} setAttributes={setAttributes} keys={linkKeys.link} itemKeys={["items", index]}>
+											{itemStates.hasIcon && <CP.OutputIcon className="_icon cp-button__link-icon" item={item} />}
 											<span
-												className="_text"
+												className="_text cp-button__link-text"
 												onInput={(e) => {
 													item.text = e.target.innerText;
 												}}
@@ -109,7 +109,7 @@ wp.blocks.registerBlockType("catpow/formbuttons", {
 										</CP.Link.Edit>
 										{states.hasCaption && (
 											<span
-												className="_caption"
+												className="_caption cp-button__caption"
 												onInput={(e) => {
 													item.caption = e.target.innerText;
 												}}
@@ -154,28 +154,22 @@ wp.blocks.registerBlockType("catpow/formbuttons", {
 				<ul {...useBlockProps.save({ className: classes, style: vars })}>
 					{items.map((item, index) => {
 						const itemStates = CP.classNamesToFlags(item.classes);
-						const eventDispatcherAttributes = {};
-						if (blockType.attributes.items.eventDispatcherAttributes) {
-							blockType.attributes.items.eventDispatcherAttributes.map((attr_name) => {
-								eventDispatcherAttributes[blockType.attributes.items.query[attr_name].attribute] = item[attr_name];
-							});
-						}
 						return (
 							<li className={item.classes} key={index}>
-								{states.hasMicroCopy && <span className="_copy">{item.copy}</span>}
+								{states.hasMicroCopy && <span className="_copy cp-button__copy">{item.copy}</span>}
 								<div
-									className="-button"
+									className="-button cp-button__link"
 									role="button"
 									data-action={item.action}
 									data-callback={item.callback}
 									data-target={item.target}
 									ignore-message={item.ignoreMessage}
-									{...eventDispatcherAttributes}
+									{...CP.extractEventDispatcherAttributes("catpow/formbuttons", item)}
 								>
-									{itemStates.hasIcon && <CP.OutputIcon className="_icon" item={item} />}
-									<span className="_text">{item.text}</span>
+									{itemStates.hasIcon && <CP.OutputIcon className="_icon cp-button__link-icon" item={item} />}
+									<span className="_text cp-button__link-text">{item.text}</span>
 								</div>
-								{states.hasCaption && <span className="_caption">{item.caption}</span>}
+								{states.hasCaption && <span className="_caption cp-button__caption">{item.caption}</span>}
 							</li>
 						);
 					})}

@@ -67,7 +67,7 @@
         return /* @__PURE__ */ wp.element.createElement(CP.Item, { className: item.classes, tag: "li", ...{ setAttributes, attributes }, itemKeys: ["items", index], key: index }, states.hasMicroCopy && /* @__PURE__ */ wp.element.createElement(
           "span",
           {
-            className: "_copy",
+            className: "_copy cp-button__copy",
             onInput: (e) => {
               item.copy = e.target.innerText;
             },
@@ -78,10 +78,10 @@
             suppressContentEditableWarning: true
           },
           item.copy
-        ), /* @__PURE__ */ wp.element.createElement(CP.Link.Edit, { className: "-button", attributes, setAttributes, keys: linkKeys.link, itemKeys: ["items", index] }, itemStates.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { className: "_icon", item }), /* @__PURE__ */ wp.element.createElement(
+        ), /* @__PURE__ */ wp.element.createElement(CP.Link.Edit, { className: "-button cp-button__link", attributes, setAttributes, keys: linkKeys.link, itemKeys: ["items", index] }, itemStates.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { className: "_icon cp-button__link-icon", item }), /* @__PURE__ */ wp.element.createElement(
           "span",
           {
-            className: "_text",
+            className: "_text cp-button__link-text",
             onInput: (e) => {
               item.text = e.target.innerText;
             },
@@ -93,7 +93,7 @@
         )), states.hasCaption && /* @__PURE__ */ wp.element.createElement(
           "span",
           {
-            className: "_caption",
+            className: "_caption cp-button__caption",
             onInput: (e) => {
               item.caption = e.target.innerText;
             },
@@ -114,26 +114,20 @@
       const states = CP.classNamesToFlags(classes);
       return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("ul", { ...useBlockProps.save({ className: classes, style: vars }) }, items.map((item, index) => {
         const itemStates = CP.classNamesToFlags(item.classes);
-        const eventDispatcherAttributes = {};
-        if (blockType.attributes.items.eventDispatcherAttributes) {
-          blockType.attributes.items.eventDispatcherAttributes.map((attr_name) => {
-            eventDispatcherAttributes[blockType.attributes.items.query[attr_name].attribute] = item[attr_name];
-          });
-        }
-        return /* @__PURE__ */ wp.element.createElement("li", { className: item.classes, key: index }, states.hasMicroCopy && /* @__PURE__ */ wp.element.createElement("span", { className: "_copy" }, item.copy), /* @__PURE__ */ wp.element.createElement(
+        return /* @__PURE__ */ wp.element.createElement("li", { className: item.classes, key: index }, states.hasMicroCopy && /* @__PURE__ */ wp.element.createElement("span", { className: "_copy cp-button__copy" }, item.copy), /* @__PURE__ */ wp.element.createElement(
           "div",
           {
-            className: "-button",
+            className: "-button cp-button__link",
             role: "button",
             "data-action": item.action,
             "data-callback": item.callback,
             "data-target": item.target,
             "ignore-message": item.ignoreMessage,
-            ...eventDispatcherAttributes
+            ...CP.extractEventDispatcherAttributes("catpow/formbuttons", item)
           },
-          itemStates.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { className: "_icon", item }),
-          /* @__PURE__ */ wp.element.createElement("span", { className: "_text" }, item.text)
-        ), states.hasCaption && /* @__PURE__ */ wp.element.createElement("span", { className: "_caption" }, item.caption));
+          itemStates.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { className: "_icon cp-button__link-icon", item }),
+          /* @__PURE__ */ wp.element.createElement("span", { className: "_text cp-button__link-text" }, item.text)
+        ), states.hasCaption && /* @__PURE__ */ wp.element.createElement("span", { className: "_caption cp-button__caption" }, item.caption));
       })));
     },
     deprecated: [
