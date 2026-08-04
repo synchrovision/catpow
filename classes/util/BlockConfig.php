@@ -88,6 +88,33 @@ class BlockConfig{
 			]
 		];
 	}
+	//button
+	public static function getButtonsAttributes($block_button_class,$button_query=null,$default=null){
+		if(is_null($button_query)){$button_query=["href"=>["source"=>"attribute","attribute"=>"href"]];}
+		foreach($button_query as $i=>$item){
+			$button_query[$i]+=["source"=>"attribute",'selector'=>".cp-button__link"];
+		}
+		if(is_null($default)){$default=[["text"=>"Text","href"=>""]];}
+		foreach($default as $i=>$item){
+			$default[$i]['classes']="{$block_button_class} cp-button".(empty($default[$i]['classes'])?'':' '.$default[$i]['classes']);
+		}
+		return [
+			"source"=>"query",
+			"selector"=>".cp-button",
+			"filters"=>[
+				"iconHolder"=>["selector"=>".cp-button__link-icon"],
+				'eventDispatcher'=>['selector'=>".cp-button__link"]
+			],
+			"query"=>[
+				"classes"=>["source"=>"attribute","attribute"=>"class"],
+				"copy"=>["source"=>"html","selector"=>".cp-button__copy"],
+				"text"=>["source"=>"html","selector"=>".cp-button__link-text"],
+				"caption"=>["source"=>"html","selector"=>".cp-button__caption"],
+				...$button_query
+			],
+			"default"=>$default
+		];
+	}
 	//json
 	public static function initAsJsonAttribute($confs,$json='props'){
 		foreach($confs as $i=>$conf){
