@@ -44,7 +44,7 @@ wp.blocks.registerBlockType("catpow/banners", {
 		const { devices, imageKeys, linkKeys } = CP.config.banners;
 
 		const selectiveClasses = useMemo(() => {
-			var selectiveClasses = [ "hasItemGap", { label: "タイトル", values: "hasTitle" }, "isTemplate"];
+			var selectiveClasses = ["hasItemGap", { label: "タイトル", values: "hasTitle" }, "isTemplate"];
 			wp.hooks.applyFilters("catpow.blocks.banners.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
 		}, []);
@@ -191,15 +191,7 @@ wp.blocks.registerBlockType("catpow/banners", {
 									{states.hasTitle && <RichText.Content tagName={HeadingTag} className="_title" value={item.title} />}
 
 									<CP.Link className="_link" attributes={attributes} keys={linkKeys.link} itemKeys={["items", index]} {...CP.extractEventDispatcherAttributes("catpow/banners", item)}>
-										<CP.ResponsiveImage
-											className="_image"
-											size="regular_banner"
-											attributes={attributes}
-											keys={imageKeys.image}
-											itemKeys={["items", index]}
-											devices={devices}
-											isTemplate={isTemplate}
-										/>
+										<CP.ResponsiveImage className="_image" size="regular_banner" attributes={attributes} keys={imageKeys.image} itemKeys={["items", index]} devices={devices} isTemplate={isTemplate} />
 									</CP.Link>
 								</li>
 							);
