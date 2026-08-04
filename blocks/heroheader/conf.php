@@ -1,6 +1,7 @@
 <?php
 use Catpow\util\BlockConfig;
 $block_class="wp-block-catpow-heroheader";
+$button_class="cp-button";
 $attributes=[
 	"isTemplate"=>["type"=>"boolean","default"=>false],
 	"classes"=>["source"=>"attribute","selector"=>".{$block_class}","attribute"=>"class","default"=>"{$block_class} is-size-medium is-level1 has-color-scheme-inverted has-text has-buttons"],
@@ -9,23 +10,7 @@ $attributes=[
 	"HeadingTag"=>["type"=>"string","default"=>"h1"],
 	"title"=>["source"=>"html","selector"=>".{$block_class}__body-texts-title","default"=>"[post title]"],
 	"text"=>["source"=>"html","selector"=>".{$block_class}__body-texts-text","default"=>"[post excerpt]"],
-	"buttons"=>[
-		"source"=>"query",
-		"selector"=>".{$block_class}__body-buttons-button",
-		"filters"=>[
-			"iconHolder"=>["selector"=>".{$block_class}__body-buttons-button-link-icon"]
-		],
-		"query"=>[
-			"classes"=>["source"=>"attribute","attribute"=>"class"],
-			"text"=>["source"=>"html","selector"=>".{$block_class}__body-buttons-button-link-text"],
-			"linkUrl"=>["source"=>"attribute","selector"=>".{$block_class}__body-buttons-button-link","attribute"=>"href"],
-		],
-		"default"=>array_map(fn($n)=>[
-			"classes"=>"{$block_class}__body-buttons-button",
-			"text"=>["Text"],
-			"linkUrl"=>""
-		],range(1,2))
-	],
+	"buttons"=>BlockConfig::getButtonsAttributes("{$block_class}__body-buttons-button"),
 	"images"=>[
 		"source"=>"query",
 		"selector"=>".{$block_class}__bg-picture",

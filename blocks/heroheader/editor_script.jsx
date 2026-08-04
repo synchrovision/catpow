@@ -73,6 +73,15 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 			<>
 				<InspectorControls>
 					<CP.SelectClassPanel title="スタイル" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
+					{states.hasButtons && (
+						<CP.SelectClassPanel
+							title="ボタン"
+							icon="edit"
+							{...{ setAttributes, attributes }}
+							itemKeys={["buttons", attributes.currentItemIndex]}
+							selectiveClasses={["color", "rank", "icon", "event"]}
+						/>
+					)}
 				</InspectorControls>
 				<CP.SelectModeToolbar setAttributes={setAttributes} attributes={attributes} />
 				{EditMode ? (
@@ -114,14 +123,32 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 									/>
 								</div>
 								{states.hasButtons && (
-									<div className="_buttons">
+									<div className="_buttons cp-buttons">
 										{buttons.map((button, index) => (
-											<CP.Item tag="li" className="_button" {...{ setAttributes, attributes }} itemKeys={["buttons", index]} key={index}>
-												<CP.Link.Edit className="_link" setAttributes={setAttributes} attributes={attributes} keys={{ items: "buttons", href: "linkUrl" }} itemKeys={["buttons", index]}>
-													<CP.OutputIcon className="_icon" item={button} />
+											<CP.Item tag="li" className={button.classes} {...{ setAttributes, attributes }} itemKeys={["buttons", index]} key={index}>
+												{states.hasMicroCopy && (
 													<RichText
 														tagName="span"
-														className="_text"
+														className="_copy cp-button__copy"
+														placeholder={__("テキストを入力", "catpow")}
+														onChange={(copy) => {
+															button.copy = copy;
+															setAttributes({ buttons: [...buttons] });
+														}}
+														value={button.copy}
+													/>
+												)}
+												<CP.Link.Edit
+													className="_link cp-button__link"
+													setAttributes={setAttributes}
+													attributes={attributes}
+													keys={{ items: "buttons", href: "linkUrl" }}
+													itemKeys={["buttons", index]}
+												>
+													<CP.OutputIcon className="_icon cp-button__link-icon" item={button} />
+													<RichText
+														tagName="span"
+														className="_text cp-button__link-text"
 														placeholder={__("テキストを入力", "catpow")}
 														onChange={(text) => {
 															button.text = text;
@@ -130,6 +157,18 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 														value={button.text}
 													/>
 												</CP.Link.Edit>
+												{states.hasCaption && (
+													<RichText
+														tagName="span"
+														className="_caption cp-button__caption"
+														placeholder={__("テキストを入力", "catpow")}
+														onChange={(caption) => {
+															button.caption = caption;
+															setAttributes({ buttons: [...buttons] });
+														}}
+														value={button.caption}
+													/>
+												)}
 											</CP.Item>
 										))}
 									</div>
@@ -166,11 +205,19 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 							{states.hasButtons && (
 								<ul className="_buttons">
 									{buttons.map((button, index) => (
-										<li className="_button" key={index}>
-											<CP.Link className="_link" attributes={attributes} keys={{ items: "buttons", href: "linkUrl" }} itemKeys={["buttons", index]}>
-												<CP.OutputIcon className="_icon" item={button} />
-												<RichText.Content tagName="span" className="_text" value={button.text} />
+										<li className={button.classes} key={index}>
+											{states.hasMicroCopy && <span className="_copy cp-button__copy">{button.copy}</span>}
+											<CP.Link
+												className="_link cp-button__link"
+												attributes={attributes}
+												keys={{ items: "buttons", href: "href" }}
+												itemKeys={["buttons", index]}
+												{...CP.extractEventDispatcherAttributes("catpow/heroheader", button, ["buttons"])}
+											>
+												<CP.OutputIcon className="_icon cp-button__link-icon" item={button} />
+												<RichText.Content tagName="span" className="_text cp-button__link-text" value={button.text} />
 											</CP.Link>
+											{states.hasCaption && <span className="_caption cp-button__caption">{button.caption}</span>}
 										</li>
 									))}
 								</ul>

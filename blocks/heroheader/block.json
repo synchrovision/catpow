@@ -7,6 +7,8 @@
 		"headingLevel": true,
 		"color": true,
 		"spacing": true,
-		"bodySize": true
+		"bodySize": true,
+		"background": true,
+		"backgroundImage": true
 	}
 }
