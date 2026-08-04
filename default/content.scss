@@ -418,6 +418,103 @@ html{
 			@include bnd((d:ib));
 		}
 	}
+	&-buttons{
+		
+	}
+	&-button{
+		$block:&;
+		&__copy{
+			@extend %label-component;
+			@include bnd((d:b,p:r,i:0,mg:a,mgb:-.8em,pd:.4em 1em,w:fit,h:fit,z:1));
+			@include bg((c:bx));
+			@include bdr((s:s,w:2));
+			@include txt((p:.6em,h:1em,c:mx));
+		}
+		&__caption{
+			@extend %caption;
+			@include bnd((d:b,w:fit,mgi:a,z:1));
+			@include txt((a:l,c:tx));
+		}
+		&__link{
+			@extend %button-component;
+			@extend %ui;
+			@include bnd((d:b,p:r,pd:ipd));
+			@include bg((c:bx));
+			@include bdr((s:s));
+			@include txt((a:c,c:mx,td:n,b:k));
+			@include trn((t:.2s));
+			@include usr((c:p));
+			&-icon{
+				@include bnd((p:a,w:1em,h:1em,t:0,b:0,l:.5em,mg:a));
+				@include txt((t:0,p:1.8em,l:1em));
+				svg{
+					@include svg((f:crr));
+				}
+				img{
+					@include bnd((d:b,w:f,h:a));
+				}
+			}
+			&-text{
+				@include bnd((d:b,p:r,z:1));
+			}
+			&:active{
+				@include shd((b:0 0 0 clr(mx 1 .2)));
+			}
+			&::after{
+				content:'';
+				@include bnd((d:b,p:a,i:0,mg:a,mgr:1em,w:.8em,h:.8em));
+				@include bdr((p:r b,s:s,w:2));
+				@include trn((r:-45deg));
+			}
+		}
+		&.is-rank-primary{
+			#{$block}{
+				&__link{
+					@include bnd((d:b,p:r,o:h));
+					@include txt((c:i));
+					@include bg((g:l 60deg m oklch(from clr(m) l c calc(h + var(--cp-tones-hr) * 2))));
+					@include shd((t:t-u));
+					&::before{
+						content:'';
+						@include bnd((d:b,p:a,i:0,r:f));
+						@include bdr((r:calc(#{sz(r-b)} - #{sz(2)})));
+						@include bg((c:m 90));
+						@include trn((t:.3s,bm:o,o:.5));
+					}
+					&:hover{
+						&::before{
+							@include bnd((r:0));
+						}
+					}
+					.icon{
+						svg{
+							@include svg((f:i));
+						}
+					}
+				}
+			}
+		}
+		&.is-rank-secondary{
+			#{$block}{
+				&__link{
+					@include bg((c:mx));
+					@include txt((c:bx));
+				}
+			}
+		}
+		&.is-rank-tertiary{
+			@include trn((o:.8));
+			#{$block}{
+				&__copy{
+					@include shd((b:n));
+				}
+				&__link{
+					@include bg((c:n));
+					@include shd((b:n));
+				}
+			}
+		}
+	}
 }
 .cpform{
 	div.cpform_nav{
@@ -432,17 +529,11 @@ html{
 		}
 	}
 }
-@for $i from 1 through 5{
-	.bgPattern#{$i}{@include bg((i:"images/pattern/pattern_0"+$i+".png"));}
-}
 .wp-block-template-part{
 	@include bnd((d:c));
 	&.block-editor-block-list__block{
 		@include bnd((d:b));
 	}
-}
-span{
-	&.ib{@include bnd((d:ib));}
 }
 table{
 	&.wp-list-table{
