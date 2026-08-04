@@ -18,7 +18,7 @@
 			"url": "./schema/editor.json"
 		},
 		{
-			"fileMatch": ["components/**/deps.json", "default/components/**/deps.json"],
+			"fileMatch": ["components/**/deps.json", "default/components/**/deps.json", "blocks/_init/deps.json"],
 			"url": "./schema/component.deps.json"
 		},
 		{
