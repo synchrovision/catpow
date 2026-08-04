@@ -80,12 +80,7 @@
 		return () => clearTimeout(timer);
 	}, [state]);
 	useEffect(() => {
-		const events = parseEventValue(props.value);
-		if (events) {
-			if (state.events.length < 1) {
-				dispatch({ type: "UPDATE_ALL", events });
-			}
-		}
+		dispatch({ type: "UPDATE_ALL", events: parseEventValue(props.value) });
 	}, [props.value]);
 
 	const EventInputCard = useCallback((props) => {

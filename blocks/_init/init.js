@@ -4872,12 +4872,7 @@
       return () => clearTimeout(timer);
     }, [state]);
     useEffect6(() => {
-      const events = parseEventValue(props.value);
-      if (events) {
-        if (state.events.length < 1) {
-          dispatch({ type: "UPDATE_ALL", events });
-        }
-      }
+      dispatch({ type: "UPDATE_ALL", events: parseEventValue(props.value) });
     }, [props.value]);
     const EventInputCard = useCallback3((props2) => {
       const { event, index, canRemove } = props2;
