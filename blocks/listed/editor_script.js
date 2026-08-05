@@ -84,7 +84,7 @@
         AltMode = false
       } = attributes;
       var classArray = _.uniq((className + " " + classes).split(" "));
-      var states = CP.classNamesToFlags(classes);
+      const states = CP.classNamesToFlags(classes);
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
           {
@@ -158,11 +158,6 @@
               isTypeNews: ["hasText", "hasSubTitle"],
               isTypeIndex: ["hasHeader", "hasTitle", "hasText"],
               isTypeMenu: ["hasHeader", "hasTitle"]
-            },
-            item: {
-              isTypeNews: [{ preset: "event", cond: (states2, { attributes: { classes: classes2 } }) => CP.classNamesToFlags(classes2).hasLink }],
-              isTypeIndex: [{ preset: "event", cond: (states2, { attributes: { classes: classes2 } }) => CP.classNamesToFlags(classes2).hasLink }],
-              isTypeMenu: ["color", { preset: "event", cond: (states2, { attributes: { classes: classes2 } }) => CP.classNamesToFlags(classes2).hasLink }]
             }
           },
           "isTemplate"
@@ -203,7 +198,7 @@
       };
       const { imageKeys, linkKeys } = CP.config.listed;
       const blockProps = useBlockProps({ className: EditMode || AltMode && doLoop ? "cp-altcontent" : classes, style: vars });
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { setAttributes, attributes }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30B9\u30BF\u30A4\u30EB", icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30EA\u30B9\u30C8\u30A2\u30A4\u30C6\u30E0", icon: "edit", ...{ setAttributes, attributes }, itemKeys: ["items", attributes.currentItemIndex], triggerClasses: selectiveClasses[0] }), isTemplate && /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { setAttributes, attributes }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30B9\u30BF\u30A4\u30EB", icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30EA\u30B9\u30C8\u30A2\u30A4\u30C6\u30E0", icon: "edit", ...{ setAttributes, attributes }, itemKeys: ["items", attributes.currentItemIndex], selectiveClasses: ["color"] }), states.hasLink && /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30A4\u30D9\u30F3\u30C8", icon: "flag", ...{ setAttributes, attributes }, itemKeys: ["items", attributes.currentItemIndex], selectiveClasses: ["event"] }), isTemplate && /* @__PURE__ */ wp.element.createElement(
         CP.SelectClassPanel,
         {
           title: "\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8",

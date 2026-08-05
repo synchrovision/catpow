@@ -71,7 +71,7 @@ wp.blocks.registerBlockType("catpow/listed", {
 		} = attributes;
 		var classArray = _.uniq((className + " " + classes).split(" "));
 
-		var states = CP.classNamesToFlags(classes);
+		const states = CP.classNamesToFlags(classes);
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
@@ -147,11 +147,6 @@ wp.blocks.registerBlockType("catpow/listed", {
 						isTypeIndex: ["hasHeader", "hasTitle", "hasText"],
 						isTypeMenu: ["hasHeader", "hasTitle"],
 					},
-					item: {
-						isTypeNews: [{ preset: "event", cond: (states, { attributes: { classes } }) => CP.classNamesToFlags(classes).hasLink }],
-						isTypeIndex: [{ preset: "event", cond: (states, { attributes: { classes } }) => CP.classNamesToFlags(classes).hasLink }],
-						isTypeMenu: ["color", { preset: "event", cond: (states, { attributes: { classes } }) => CP.classNamesToFlags(classes).hasLink }],
-					},
 				},
 				"isTemplate",
 			];
@@ -200,7 +195,8 @@ wp.blocks.registerBlockType("catpow/listed", {
 				<CP.SelectModeToolbar setAttributes={setAttributes} attributes={attributes} />
 				<InspectorControls>
 					<CP.SelectClassPanel title="スタイル" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
-					<CP.SelectClassPanel title="リストアイテム" icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} triggerClasses={selectiveClasses[0]} />
+					<CP.SelectClassPanel title="リストアイテム" icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={["color"]} />
+					{states.hasLink && <CP.SelectClassPanel title="イベント" icon="flag" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={["event"]} />}
 					{isTemplate && (
 						<CP.SelectClassPanel
 							title="テンプレート"
