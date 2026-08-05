@@ -11,6 +11,9 @@ $attributes=[
 	"items"=>[
 		"source"=>"query",
 		"selector"=>".{$block_class}__item",
+		"filters"=>[
+			'eventDispatcher'=>['selector'=>".{$block_class}__item-contents-link"]
+		],
 		"query"=>[
 			"classes"=>["source"=>"attribute","attribute"=>"data-class"],
 			"title"=>["source"=>"html","selector"=>".{$block_class}__item-header-text-title"],

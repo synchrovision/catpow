@@ -148,47 +148,12 @@ wp.blocks.registerBlockType("catpow/listed", {
 						isTypeMenu: ["hasHeader", "hasTitle"],
 					},
 					item: {
-						isTypeNews: [],
-						isTypeIndex: [],
-						isTypeMenu: ["color"],
+						isTypeNews: [{ preset: "event", cond: (states, { attributes: { classes } }) => CP.classNamesToFlags(classes).hasLink }],
+						isTypeIndex: [{ preset: "event", cond: (states, { attributes: { classes } }) => CP.classNamesToFlags(classes).hasLink }],
+						isTypeMenu: ["color", { preset: "event", cond: (states, { attributes: { classes } }) => CP.classNamesToFlags(classes).hasLink }],
 					},
 				},
-				{
-					name: "template",
-					label: "テンプレート",
-					input: "bool",
-					key: "isTemplate",
-					sub: [
-						{
-							name: "loop",
-							input: "bool",
-							label: "ループ",
-							key: "doLoop",
-							sub: [
-								{
-									name: "contentPath",
-									label: "content path",
-									input: "text",
-									key: "content_path",
-								},
-								{
-									name: "query",
-									label: "query",
-									input: "textarea",
-									key: "query",
-								},
-								{
-									name: "loopCount",
-									label: "プレビューループ数",
-									input: "range",
-									key: "loopCount",
-									min: 1,
-									max: 16,
-								},
-							],
-						},
-					],
-				},
+				"isTemplate",
 			];
 			wp.hooks.applyFilters("catpow.blocks.listed.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
@@ -234,11 +199,8 @@ wp.blocks.registerBlockType("catpow/listed", {
 			<>
 				<CP.SelectModeToolbar setAttributes={setAttributes} attributes={attributes} />
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
-					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-						<TextareaControl label="クラス" onChange={(clss) => setAttributes({ classes: clss })} value={classArray.join(" ")} />
-					</PanelBody>
-					<CP.SelectClassPanel title="リストアイテム" icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} triggerClasses={selectiveClasses[6]} />
+					<CP.SelectClassPanel title="スタイル" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title="リストアイテム" icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} triggerClasses={selectiveClasses[0]} />
 					{isTemplate && (
 						<CP.SelectClassPanel
 							title="テンプレート"
@@ -248,7 +210,6 @@ wp.blocks.registerBlockType("catpow/listed", {
 							selectiveClasses={selectiveItemTemplateClasses}
 						/>
 					)}
-					<CP.ItemControlInfoPanel />
 				</InspectorControls>
 				{EditMode ? (
 					<div {...blockProps}>
@@ -496,7 +457,7 @@ wp.blocks.registerBlockType("catpow/listed", {
 										{states.hasSubTitle && <RichText.Content tagName="p" className="_subtitle" value={item.subTitle} />}
 										{states.hasText && <RichText.Content tagName="p" className="_text" value={item.text} />}
 										{states.hasLink && (
-											<CP.Link className="_link" attributes={attributes} keys={linkKeys.link} itemKeys={["items", index]}>
+											<CP.Link className="_link" attributes={attributes} keys={linkKeys.link} itemKeys={["items", index]} {...CP.extractEventDispatcherAttributes("catpow/listed", item)}>
 												<RichText.Content value={item.linkText} />
 											</CP.Link>
 										)}
