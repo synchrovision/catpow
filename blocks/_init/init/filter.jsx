@@ -119,10 +119,16 @@ wp.hooks.addFilter("editor.BlockEdit", "catpow/editor", (BlockEdit) => (props) =
 								icon="pets"
 								classKey={classKey}
 								{...props}
-								selectiveClasses={["hasContentWidth", "hasMargin", "hasPadding", panelSupports.itemSize && "itemSize"]}
+								selectiveClasses={["hasContentWidth", "hasSpacingType", panelSupports.itemSize && "itemSize"]}
 							/>
 						) : (
-							<CP.SelectClassPanel title={__("サイズ・間隔")} icon="pets" classKey={classKey} {...props} selectiveClasses={["hasContentWidth", "hasMargin", panelSupports.itemSize && "itemSize"]} />
+							<CP.SelectClassPanel
+								title={__("サイズ・間隔")}
+								icon="pets"
+								classKey={classKey}
+								{...props}
+								selectiveClasses={["hasContentWidth", "hasMarginType", panelSupports.itemSize && "itemSize"]}
+							/>
 						))}
 					{panelSupports.bodySize && <CP.SelectClassPanel title={__("内容サイズ・余白")} icon="pets" classKey="bodyClasses" {...props} selectiveClasses={["hasContentWidth", "hasPadding"]} />}
 					{panelSupports.background && (

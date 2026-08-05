@@ -917,6 +917,28 @@ export const selectiveClassesPresets = {
 			...otherParams,
 		};
 	},
+	hasSpacingType({ preset, classKey, vars = "vars", ...otherParams }) {
+		return {
+			name: "hasSpacingType",
+			label: __("間隔・余白タイプ", "catpow"),
+			type: "buttons",
+			values: { hasSpacingTypeBlock: __("ブロック", "catpow"), hasSpacingTypeFrame: __("フレーム", "catpow"), hasSpacingTypeCustom: __("カスタム", "catpow") },
+			classKey,
+			sub: { hasSpacingTypeCustom: ["hasMargin", "hasPadding"] },
+			...otherParams,
+		};
+	},
+	hasMarginType({ preset, classKey, vars = "vars", ...otherParams }) {
+		return {
+			name: "hasMarginType",
+			label: __("間隔タイプ", "catpow"),
+			type: "buttons",
+			values: { hasMarginTypeBlock: __("ブロック", "catpow"), hasMarginTypeFrame: __("フレーム", "catpow"), hasMarginTypeCustom: __("カスタム", "catpow") },
+			classKey,
+			sub: { hasMarginTypeCustom: ["hasMargin"] },
+			...otherParams,
+		};
+	},
 	hasPadding({ preset, classKey, vars = "vars", ...otherParams }) {
 		return {
 			name: "hasPadding",
