@@ -21,25 +21,12 @@ wp.blocks.registerBlockType("catpow/formbuttons", {
 		const states = CP.classNamesToFlags(classes);
 
 		const selectiveClasses = useMemo(() => {
-			var selectiveClasses = [
-				{ name: "microcopy", label: "マイクロコピー", values: "hasMicroCopy" },
-				{ name: "caption", label: "キャプション", values: "hasCaption" },
-			];
+			var selectiveClasses = ["buttonsOptions"];
 			wp.hooks.applyFilters("catpow.blocks.formbuttons.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
 		}, []);
 		const selectiveItemClasses = useMemo(() => {
-			const selectiveItemClasses = [
-				"color",
-				"rank",
-				{
-					name: "icon",
-					label: "アイコン",
-					values: "hasIcon",
-					sub: [{ input: "icon" }],
-				},
-				"event",
-			];
+			const selectiveItemClasses = ["buttonParams"];
 			wp.hooks.applyFilters("catpow.blocks.formbuttons.selectiveItemClasses", CP.finderProxy(selectiveItemClasses));
 			return selectiveItemClasses;
 		}, []);
@@ -131,9 +118,6 @@ wp.blocks.registerBlockType("catpow/formbuttons", {
 				<InspectorControls>
 					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 					<CP.SelectClassPanel title="ボタン" icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={selectiveItemClasses} />
-					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
-					</PanelBody>
 					<CP.ItemControlInfoPanel />
 				</InspectorControls>
 				<BlockControls>
