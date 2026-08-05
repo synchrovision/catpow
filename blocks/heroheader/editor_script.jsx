@@ -25,7 +25,8 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 				{ name: "hasTextBackground", label: __("テキスト背景", "catpow"), values: "hasTextBackground", classKey: "bodyClasses" },
 				{ preset: "textAlign", classKey: "bodyClasses" },
 				{ preset: "alignContent", classKey: "bodyClasses" },
-				{ name: "hasButtons", label: __("ボタン", "catow"), values: "hasButtons", sub: [{ preset: "itemSize", label: "ボタンサイズ", classKey: "bodyClasses" }] },
+				"hasButtons",
+				{ preset: "itemSize", cond: ({ hasButtons }) => hasButtons, classKey: "bodyClasses" },
 				{
 					name: "blendmode",
 					label: __("スライダーブレンドモード", "catpow"),
@@ -74,13 +75,7 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 				<InspectorControls>
 					<CP.SelectClassPanel title="スタイル" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 					{states.hasButtons && (
-						<CP.SelectClassPanel
-							title="ボタン"
-							icon="edit"
-							{...{ setAttributes, attributes }}
-							itemKeys={["buttons", attributes.currentItemIndex]}
-							selectiveClasses={["color", "rank", "icon", "event"]}
-						/>
+						<CP.SelectClassPanel title="ボタン" icon="edit" {...{ setAttributes, attributes }} itemKeys={["buttons", attributes.currentItemIndex]} selectiveClasses={["buttonParams"]} />
 					)}
 				</InspectorControls>
 				<CP.SelectModeToolbar setAttributes={setAttributes} attributes={attributes} />
@@ -124,53 +119,56 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 								</div>
 								{states.hasButtons && (
 									<div className="_buttons cp-buttons">
-										{buttons.map((button, index) => (
-											<CP.Item tag="li" className={button.classes} {...{ setAttributes, attributes }} itemKeys={["buttons", index]} key={index}>
-												{states.hasMicroCopy && (
-													<RichText
-														tagName="span"
-														className="_copy cp-button__copy"
-														placeholder={__("テキストを入力", "catpow")}
-														onChange={(copy) => {
-															button.copy = copy;
-															setAttributes({ buttons: [...buttons] });
-														}}
-														value={button.copy}
-													/>
-												)}
-												<CP.Link.Edit
-													className="_link cp-button__link"
-													setAttributes={setAttributes}
-													attributes={attributes}
-													keys={{ items: "buttons", href: "linkUrl" }}
-													itemKeys={["buttons", index]}
-												>
-													<CP.OutputIcon className="_icon cp-button__link-icon" item={button} />
-													<RichText
-														tagName="span"
-														className="_text cp-button__link-text"
-														placeholder={__("テキストを入力", "catpow")}
-														onChange={(text) => {
-															button.text = text;
-															setAttributes({ buttons: [...buttons] });
-														}}
-														value={button.text}
-													/>
-												</CP.Link.Edit>
-												{states.hasCaption && (
-													<RichText
-														tagName="span"
-														className="_caption cp-button__caption"
-														placeholder={__("テキストを入力", "catpow")}
-														onChange={(caption) => {
-															button.caption = caption;
-															setAttributes({ buttons: [...buttons] });
-														}}
-														value={button.caption}
-													/>
-												)}
-											</CP.Item>
-										))}
+										{buttons.map((button, index) => {
+											const itemStates = CP.classNamesToFlags(button.classes);
+											return (
+												<CP.Item tag="li" className={button.classes} {...{ setAttributes, attributes }} itemKeys={["buttons", index]} key={index}>
+													{states.hasMicroCopy && (
+														<RichText
+															tagName="span"
+															className="_copy cp-button__copy"
+															placeholder={__("テキストを入力", "catpow")}
+															onChange={(copy) => {
+																button.copy = copy;
+																setAttributes({ buttons: [...buttons] });
+															}}
+															value={button.copy}
+														/>
+													)}
+													<CP.Link.Edit
+														className="_link cp-button__link"
+														setAttributes={setAttributes}
+														attributes={attributes}
+														keys={{ items: "buttons", href: "linkUrl" }}
+														itemKeys={["buttons", index]}
+													>
+														{itemStates.hasIcon && <CP.OutputIcon className="_icon cp-button__link-icon" item={button} />}
+														<RichText
+															tagName="span"
+															className="_text cp-button__link-text"
+															placeholder={__("テキストを入力", "catpow")}
+															onChange={(text) => {
+																button.text = text;
+																setAttributes({ buttons: [...buttons] });
+															}}
+															value={button.text}
+														/>
+													</CP.Link.Edit>
+													{states.hasCaption && (
+														<RichText
+															tagName="span"
+															className="_caption cp-button__caption"
+															placeholder={__("テキストを入力", "catpow")}
+															onChange={(caption) => {
+																button.caption = caption;
+																setAttributes({ buttons: [...buttons] });
+															}}
+															value={button.caption}
+														/>
+													)}
+												</CP.Item>
+											);
+										})}
 									</div>
 								)}
 							</div>
