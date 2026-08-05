@@ -195,6 +195,20 @@ export const selectiveClassesPresets = {
 			hasImageRight: __("右", "catpow"),
 		},
 	},
+	hasButtons: {
+		label: __("ボタン", "catpow"),
+		values: "hasButtons",
+		sub: ["buttonsOptions"],
+	},
+	buttonsOptions: {
+		sub: [
+			{ name: "microcopy", label: "マイクロコピー", values: "hasMicroCopy" },
+			{ name: "caption", label: "キャプション", values: "hasCaption" },
+		],
+	},
+	buttonParams: {
+		sub: ["color", "rank", "hasIcon", "event"],
+	},
 	hasIcon: { label: "アイコン", values: "hasIcon", sub: ["icon"] },
 	icon: { input: "icon", label: "アイコン" },
 	hasFontSize({ preset, classKey, vars = "vars", ...otherParams }) {
@@ -663,6 +677,16 @@ export const selectiveClassesPresets = {
 			},
 			...otherParams,
 		};
+	},
+	cond: {
+		name: "cond",
+		input: "cond",
+		label: __("表示条件", "catpow"),
+	},
+	event: {
+		name: "event",
+		input: "event",
+		label: __("イベント", "catpow"),
 	},
 	color: {
 		name: "color",

@@ -3889,16 +3889,20 @@
         );
       }
     } else {
-      if (prm === "cond") {
-        rtn.push(/* @__PURE__ */ wp.element.createElement(TextareaControl, { label: __11("\u8868\u793A\u6761\u4EF6", "catpow"), value: item["cond"], onChange: (cond) => save({ cond }) }));
-      } else if (prm === "event") {
-        const EventInputs = useMemo11(() => wp.hooks.applyFilters("catpow.EventInputs", [], { item, save }), [item, save]);
-        rtn.push(...EventInputs);
-      } else if (prm.input) {
+      if (prm.input) {
         if (item[prm.key] === void 0 && prm.default != null) {
           save({ [prm.key]: prm.default });
         }
         switch (prm.input) {
+          case "cond": {
+            rtn.push(/* @__PURE__ */ wp.element.createElement(TextareaControl, { label: __11("\u8868\u793A\u6761\u4EF6", "catpow"), value: item["cond"], onChange: (cond) => save({ cond }) }));
+            break;
+          }
+          case "event": {
+            const EventInputs = useMemo11(() => wp.hooks.applyFilters("catpow.EventInputs", [], { item, save }), [item, save]);
+            rtn.push(...EventInputs);
+            break;
+          }
           case "color": {
             rtn.push(
               /* @__PURE__ */ wp.element.createElement(
@@ -4126,7 +4130,11 @@
         const allClassFlags = CP.getAllClassFlags(prm, primaryClassKey);
         const classFlagsByValue = CP.getClassFlagsByValue(prm, primaryClassKey);
         const bindClasseFlagsByValue = CP.getBindClassFlagsByValue(prm, primaryClassKey);
-        if (_.isObject(prm.values)) {
+        if (prm.values == null) {
+          if (prm.sub) {
+            rtn.push(...prm.sub.map((prm2) => /* @__PURE__ */ wp.element.createElement(SelectClassPanelBlock, { prm: prm2 })));
+          }
+        } else if (_.isObject(prm.values)) {
           var { options: options3, values } = CP.parseSelections(prm.values);
           const currentClass2 = values.find((value2) => targetStates[kebabToCamel(value2)]);
           const onChangeCB = (value2) => {
@@ -5851,6 +5859,20 @@
         hasImageRight: __13("\u53F3", "catpow")
       }
     },
+    hasButtons: {
+      label: __13("\u30DC\u30BF\u30F3", "catpow"),
+      values: "hasButtons",
+      sub: ["buttonsOptions"]
+    },
+    buttonsOptions: {
+      sub: [
+        { name: "microcopy", label: "\u30DE\u30A4\u30AF\u30ED\u30B3\u30D4\u30FC", values: "hasMicroCopy" },
+        { name: "caption", label: "\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3", values: "hasCaption" }
+      ]
+    },
+    buttonParams: {
+      sub: ["color", "rank", "hasIcon", "event"]
+    },
     hasIcon: { label: "\u30A2\u30A4\u30B3\u30F3", values: "hasIcon", sub: ["icon"] },
     icon: { input: "icon", label: "\u30A2\u30A4\u30B3\u30F3" },
     hasFontSize({ preset, classKey, vars = "vars", ...otherParams }) {
@@ -6319,6 +6341,16 @@
         },
         ...otherParams
       };
+    },
+    cond: {
+      name: "cond",
+      input: "cond",
+      label: __13("\u8868\u793A\u6761\u4EF6", "catpow")
+    },
+    event: {
+      name: "event",
+      input: "event",
+      label: __13("\u30A4\u30D9\u30F3\u30C8", "catpow")
     },
     color: {
       name: "color",

@@ -449,16 +449,20 @@ export const SelectClassPanelBlock = ({ prm }) => {
 			);
 		}
 	} else {
-		if (prm === "cond") {
-			rtn.push(<TextareaControl label={__("表示条件", "catpow")} value={item["cond"]} onChange={(cond) => save({ cond })} />);
-		} else if (prm === "event") {
-			const EventInputs = useMemo(() => wp.hooks.applyFilters("catpow.EventInputs", [], { item, save }), [item, save]);
-			rtn.push(...EventInputs);
-		} else if (prm.input) {
+		if (prm.input) {
 			if (item[prm.key] === undefined && prm.default != null) {
 				save({ [prm.key]: prm.default });
 			}
 			switch (prm.input) {
+				case "cond": {
+					rtn.push(<TextareaControl label={__("表示条件", "catpow")} value={item["cond"]} onChange={(cond) => save({ cond })} />);
+					break;
+				}
+				case "event": {
+					const EventInputs = useMemo(() => wp.hooks.applyFilters("catpow.EventInputs", [], { item, save }), [item, save]);
+					rtn.push(...EventInputs);
+					break;
+				}
 				case "color": {
 					rtn.push(
 						<CP.SelectColorClass
@@ -674,7 +678,11 @@ export const SelectClassPanelBlock = ({ prm }) => {
 			const allClassFlags = CP.getAllClassFlags(prm, primaryClassKey);
 			const classFlagsByValue = CP.getClassFlagsByValue(prm, primaryClassKey);
 			const bindClasseFlagsByValue = CP.getBindClassFlagsByValue(prm, primaryClassKey);
-			if (_.isObject(prm.values)) {
+			if (prm.values == null) {
+				if (prm.sub) {
+					rtn.push(...prm.sub.map((prm) => <SelectClassPanelBlock prm={prm} />));
+				}
+			} else if (_.isObject(prm.values)) {
 				var { options, values } = CP.parseSelections(prm.values);
 				const currentClass = values.find((value) => targetStates[kebabToCamel(value)]);
 
