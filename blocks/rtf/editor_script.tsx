@@ -1,17 +1,19 @@
-﻿declare var wp: any, CP: any, React: any;
+﻿const { __ } = wp.i18n;
+
+declare var wp: any, CP: any, React: any;
 
 import { SelectiveClassConfig } from "cpdev/type";
 
 wp.blocks.registerBlockType("catpow/rtf", {
 	title: "🐾 RTF",
-	description: "MarkDownに似た記法でHTMLを書けるブロック",
+	description: __("MarkDownに似た記法でHTMLを書けるブロック", "catpow"),
 	icon: "editor-code",
 	category: "catpow",
 	attributes: {
 		classes: { type: "string", source: "attribute", attribute: "class", default: "wp-block-catpow-rtf" },
 		level: { type: "number", default: 3 },
 		vars: { type: "object", default: [] },
-		text: { type: "string", default: "■ 見出し\n\nテキスト[リンク](example.com)**強調**" },
+		text: { type: "string", default: __("■ 見出し\n\nテキスト[リンク](example.com)**強調**", "catpow") },
 	},
 	example: CP.example,
 	edit({ attributes, setAttributes, isSelected }) {
@@ -31,7 +33,7 @@ wp.blocks.registerBlockType("catpow/rtf", {
 					<CP.RTF.Edit className={classes} level={level} {...{ setAttributes, attributes }} isSelected={isSelected} style={vars} />
 				</div>
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title={__("クラス", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 				</InspectorControls>
 			</>
 		);

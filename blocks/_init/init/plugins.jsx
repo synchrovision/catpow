@@ -1,4 +1,6 @@
-﻿wp.plugins.registerPlugin("catpow-sidebar", {
+﻿const { __ } = wp.i18n;
+
+wp.plugins.registerPlugin("catpow-sidebar", {
 	render: (props) => {
 		const { useState, useMemo, useCallback } = wp.element;
 		const { PluginSidebarMoreMenuItem, PluginSidebar } = wp.editor;
@@ -96,7 +98,7 @@
 						</svg>
 					}
 				>
-					<PanelBody title="データ構造" initialOpen={false}>
+					<PanelBody title={__("データ構造", "catpow")} initialOpen={false}>
 						<DataStructure>
 							{structure &&
 								Object.keys(structure).map((data_type) => {

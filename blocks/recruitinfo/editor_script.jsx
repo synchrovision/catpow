@@ -1,3 +1,5 @@
+const { __, sprintf } = wp.i18n;
+
 const { useMemo } = wp.element;
 
 const getPlainText = (html) => wp.richText.getTextContent(wp.richText.create({ html: String(html || "") }));
@@ -24,20 +26,20 @@ const compact = (value) => {
 };
 
 const employmentTypeOptions = [
-	{ label: "正社員（フルタイム）", value: "FULL_TIME" },
-	{ label: "パート・アルバイト", value: "PART_TIME" },
-	{ label: "業務委託", value: "CONTRACTOR" },
-	{ label: "派遣社員", value: "TEMPORARY" },
-	{ label: "インターン", value: "INTERN" },
-	{ label: "その他", value: "OTHER" },
+	{ label: __("正社員（フルタイム）", "catpow"), value: "FULL_TIME" },
+	{ label: __("パート・アルバイト", "catpow"), value: "PART_TIME" },
+	{ label: __("業務委託", "catpow"), value: "CONTRACTOR" },
+	{ label: __("派遣社員", "catpow"), value: "TEMPORARY" },
+	{ label: __("インターン", "catpow"), value: "INTERN" },
+	{ label: __("その他", "catpow"), value: "OTHER" },
 ];
 
 const salaryUnitOptions = [
-	{ label: "時給", value: "HOUR" },
-	{ label: "日給", value: "DAY" },
-	{ label: "週給", value: "WEEK" },
-	{ label: "月給", value: "MONTH" },
-	{ label: "年俸", value: "YEAR" },
+	{ label: __("時給", "catpow"), value: "HOUR" },
+	{ label: __("日給", "catpow"), value: "DAY" },
+	{ label: __("週給", "catpow"), value: "WEEK" },
+	{ label: __("月給", "catpow"), value: "MONTH" },
+	{ label: __("年俸", "catpow"), value: "YEAR" },
 ];
 
 const getEmploymentTypeLabel = (values = []) =>
@@ -48,7 +50,7 @@ const getEmploymentTypeLabel = (values = []) =>
 
 const getSalaryLabel = ({ salaryValue, salaryMinValue, salaryMaxValue, salaryCurrency, salaryUnitText }) => {
 	const unit = salaryUnitOptions.find(({ value }) => value === salaryUnitText)?.label || "";
-	const currency = salaryCurrency === "JPY" ? "円" : ` ${salaryCurrency}`;
+	const currency = salaryCurrency === "JPY" ? __("円", "catpow") : ` ${salaryCurrency}`;
 	if (salaryValue) {
 		return `${unit} ${salaryValue}${currency}`;
 	}
@@ -177,8 +179,8 @@ wp.blocks.registerBlockType("catpow/recruitinfo", {
 				{
 					name: "type",
 					type: "buttons",
-					label: "タイプ",
-					values: { isTypeFlat: "フラット", isTypeCard: "カード", isTypeFrame: "フーレム" },
+					label: __("タイプ", "catpow"),
+					values: { isTypeFlat: __("フラット", "catpow"), isTypeCard: __("カード", "catpow"), isTypeFrame: __("フーレム", "catpow") },
 				},
 				"isTemplate",
 			];
@@ -190,104 +192,104 @@ wp.blocks.registerBlockType("catpow/recruitinfo", {
 			setAttributes({
 				employmentType: checked ? [...new Set([...employmentType, value])] : employmentType.filter((item) => item !== value),
 			});
-		const location = jobLocationType === "TELECOMMUTE" ? `リモート（${applicantLocationRequirements || "地域未指定"}）` : [addressRegion, addressLocality, streetAddress].filter(Boolean).join("");
+		const location = jobLocationType === "TELECOMMUTE" ? sprintf(__("リモート（%s）", "catpow"), applicantLocationRequirements || __("地域未指定", "catpow")) : [addressRegion, addressLocality, streetAddress].filter(Boolean).join("");
 		const salary = getSalaryLabel(attributes);
 
 		return (
 			<>
 				<InspectorControls>
-					<CP.SelectClassPanel title="設定" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
-					<PanelBody title="掲載情報" initialOpen={true}>
-						<TextControl label="掲載日" type="date" value={datePosted} onChange={(datePosted) => setAttributes({ datePosted })} />
-						<TextControl label="掲載終了日" type="date" value={validThrough} onChange={(validThrough) => setAttributes({ validThrough })} />
-						<TextControl label="求人ID" value={identifier} onChange={(identifier) => setAttributes({ identifier })} />
+					<CP.SelectClassPanel title={__("設定", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
+					<PanelBody title={__("掲載情報", "catpow")} initialOpen={true}>
+						<TextControl label={__("掲載日", "catpow")} type="date" value={datePosted} onChange={(datePosted) => setAttributes({ datePosted })} />
+						<TextControl label={__("掲載終了日", "catpow")} type="date" value={validThrough} onChange={(validThrough) => setAttributes({ validThrough })} />
+						<TextControl label={__("求人ID", "catpow")} value={identifier} onChange={(identifier) => setAttributes({ identifier })} />
 					</PanelBody>
-					<PanelBody title="雇用形態" initialOpen={false}>
+					<PanelBody title={__("雇用形態", "catpow")} initialOpen={false}>
 						{employmentTypeOptions.map((option) => (
 							<CheckboxControl key={option.value} label={option.label} checked={employmentType.includes(option.value)} onChange={(checked) => updateEmploymentType(option.value, checked)} />
 						))}
 					</PanelBody>
-					<PanelBody title="雇用主" initialOpen={false}>
-						<TextControl label="組織名" value={hiringOrganizationName} onChange={(hiringOrganizationName) => setAttributes({ hiringOrganizationName })} />
-						<TextControl label="組織URL" type="url" value={hiringOrganizationSameAs} onChange={(hiringOrganizationSameAs) => setAttributes({ hiringOrganizationSameAs })} />
-						<TextControl label="ロゴ画像URL" type="url" value={hiringOrganizationLogo} onChange={(hiringOrganizationLogo) => setAttributes({ hiringOrganizationLogo })} />
+					<PanelBody title={__("雇用主", "catpow")} initialOpen={false}>
+						<TextControl label={__("組織名", "catpow")} value={hiringOrganizationName} onChange={(hiringOrganizationName) => setAttributes({ hiringOrganizationName })} />
+						<TextControl label={__("組織URL", "catpow")} type="url" value={hiringOrganizationSameAs} onChange={(hiringOrganizationSameAs) => setAttributes({ hiringOrganizationSameAs })} />
+						<TextControl label={__("ロゴ画像URL", "catpow")} type="url" value={hiringOrganizationLogo} onChange={(hiringOrganizationLogo) => setAttributes({ hiringOrganizationLogo })} />
 					</PanelBody>
-					<PanelBody title="勤務地" initialOpen={false}>
+					<PanelBody title={__("勤務地", "catpow")} initialOpen={false}>
 						<SelectControl
-							label="勤務形態"
+							label={__("勤務形態", "catpow")}
 							value={jobLocationType}
 							options={[
-								{ label: "勤務地へ出勤", value: "" },
-								{ label: "完全リモート", value: "TELECOMMUTE" },
+								{ label: __("勤務地へ出勤", "catpow"), value: "" },
+								{ label: __("完全リモート", "catpow"), value: "TELECOMMUTE" },
 							]}
 							onChange={(jobLocationType) => setAttributes({ jobLocationType })}
 						/>
 						{jobLocationType === "TELECOMMUTE" ? (
-							<TextControl label="応募可能地域（国名）" value={applicantLocationRequirements} onChange={(applicantLocationRequirements) => setAttributes({ applicantLocationRequirements })} />
+							<TextControl label={__("応募可能地域（国名）", "catpow")} value={applicantLocationRequirements} onChange={(applicantLocationRequirements) => setAttributes({ applicantLocationRequirements })} />
 						) : (
 							<>
-								<TextControl label="国コード" value={addressCountry} onChange={(addressCountry) => setAttributes({ addressCountry })} />
-								<TextControl label="都道府県" value={addressRegion} onChange={(addressRegion) => setAttributes({ addressRegion })} />
-								<TextControl label="市区町村" value={addressLocality} onChange={(addressLocality) => setAttributes({ addressLocality })} />
-								<TextControl label="町名・番地・建物名" value={streetAddress} onChange={(streetAddress) => setAttributes({ streetAddress })} />
-								<TextControl label="郵便番号" value={postalCode} onChange={(postalCode) => setAttributes({ postalCode })} />
+								<TextControl label={__("国コード", "catpow")} value={addressCountry} onChange={(addressCountry) => setAttributes({ addressCountry })} />
+								<TextControl label={__("都道府県", "catpow")} value={addressRegion} onChange={(addressRegion) => setAttributes({ addressRegion })} />
+								<TextControl label={__("市区町村", "catpow")} value={addressLocality} onChange={(addressLocality) => setAttributes({ addressLocality })} />
+								<TextControl label={__("町名・番地・建物名", "catpow")} value={streetAddress} onChange={(streetAddress) => setAttributes({ streetAddress })} />
+								<TextControl label={__("郵便番号", "catpow")} value={postalCode} onChange={(postalCode) => setAttributes({ postalCode })} />
 							</>
 						)}
 					</PanelBody>
-					<PanelBody title="給与" initialOpen={false}>
-						<SelectControl label="単位" value={salaryUnitText} options={salaryUnitOptions} onChange={(salaryUnitText) => setAttributes({ salaryUnitText })} />
-						<TextControl label="固定額" type="number" value={salaryValue} onChange={(salaryValue) => setAttributes({ salaryValue })} />
-						<TextControl label="下限額" type="number" value={salaryMinValue} onChange={(salaryMinValue) => setAttributes({ salaryMinValue })} />
-						<TextControl label="上限額" type="number" value={salaryMaxValue} onChange={(salaryMaxValue) => setAttributes({ salaryMaxValue })} />
-						<TextControl label="通貨コード" value={salaryCurrency} onChange={(salaryCurrency) => setAttributes({ salaryCurrency })} />
+					<PanelBody title={__("給与", "catpow")} initialOpen={false}>
+						<SelectControl label={__("単位", "catpow")} value={salaryUnitText} options={salaryUnitOptions} onChange={(salaryUnitText) => setAttributes({ salaryUnitText })} />
+						<TextControl label={__("固定額", "catpow")} type="number" value={salaryValue} onChange={(salaryValue) => setAttributes({ salaryValue })} />
+						<TextControl label={__("下限額", "catpow")} type="number" value={salaryMinValue} onChange={(salaryMinValue) => setAttributes({ salaryMinValue })} />
+						<TextControl label={__("上限額", "catpow")} type="number" value={salaryMaxValue} onChange={(salaryMaxValue) => setAttributes({ salaryMaxValue })} />
+						<TextControl label={__("通貨コード", "catpow")} value={salaryCurrency} onChange={(salaryCurrency) => setAttributes({ salaryCurrency })} />
 					</PanelBody>
-					<PanelBody title="応募" initialOpen={false}>
-						<TextControl label="応募先URL" type="url" value={applicationUrl} onChange={(applicationUrl) => setAttributes({ applicationUrl })} />
-						<ToggleControl label="応募先URLから直接応募できる" checked={directApply} onChange={(directApply) => setAttributes({ directApply })} />
+					<PanelBody title={__("応募", "catpow")} initialOpen={false}>
+						<TextControl label={__("応募先URL", "catpow")} type="url" value={applicationUrl} onChange={(applicationUrl) => setAttributes({ applicationUrl })} />
+						<ToggleControl label={__("応募先URLから直接応募できる", "catpow")} checked={directApply} onChange={(directApply) => setAttributes({ directApply })} />
 					</PanelBody>
 				</InspectorControls>
 				<CP.Bem prefix="wp-block-catpow">
 					<article {...useBlockProps({ className: classes, style: vars })}>
 						<header className="_header">
-							<RichText tagName={HeadingTag} className="_title" value={title} onChange={(title) => setAttributes({ title })} placeholder="募集職種" />
+							<RichText tagName={HeadingTag} className="_title" value={title} onChange={(title) => setAttributes({ title })} placeholder={__("募集職種", "catpow")} />
 							{hiringOrganizationName && <p className="_organization">{hiringOrganizationName}</p>}
 						</header>
-						<RichText tagName="div" className="_description" value={description} onChange={(description) => setAttributes({ description })} placeholder="仕事内容を入力" />
+						<RichText tagName="div" className="_description" value={description} onChange={(description) => setAttributes({ description })} placeholder={__("仕事内容を入力", "catpow")} />
 						<dl className="_details">
 							{getEmploymentTypeLabel(employmentType) && (
 								<div className="_item">
-									<dt>雇用形態</dt>
+									<dt>{__("雇用形態", "catpow")}</dt>
 									<dd>{getEmploymentTypeLabel(employmentType)}</dd>
 								</div>
 							)}
 							{location && (
 								<div className="_item">
-									<dt>勤務地</dt>
+									<dt>{__("勤務地", "catpow")}</dt>
 									<dd>{location}</dd>
 								</div>
 							)}
 							{salary && (
 								<div className="_item">
-									<dt>給与</dt>
+									<dt>{__("給与", "catpow")}</dt>
 									<dd>{salary}</dd>
 								</div>
 							)}
 							{datePosted && (
 								<div className="_item">
-									<dt>掲載日</dt>
+									<dt>{__("掲載日", "catpow")}</dt>
 									<dd>{datePosted}</dd>
 								</div>
 							)}
 							{validThrough && (
 								<div className="_item">
-									<dt>掲載終了日</dt>
+									<dt>{__("掲載終了日", "catpow")}</dt>
 									<dd>{validThrough}</dd>
 								</div>
 							)}
 						</dl>
 						{applicationUrl && (
 							<p className="_apply">
-								<span className="_button">応募する</span>
+								<span className="_button">{__("応募する", "catpow")}</span>
 							</p>
 						)}
 					</article>
@@ -300,7 +302,7 @@ wp.blocks.registerBlockType("catpow/recruitinfo", {
 		const { classes, vars, HeadingTag, title, description, hiringOrganizationName, employmentType = [], datePosted, validThrough, applicationUrl } = attributes;
 		const location =
 			attributes.jobLocationType === "TELECOMMUTE"
-				? `リモート（${attributes.applicantLocationRequirements || "地域未指定"}）`
+				? sprintf(__("リモート（%s）", "catpow"), attributes.applicantLocationRequirements || __("地域未指定", "catpow"))
 				: [attributes.addressRegion, attributes.addressLocality, attributes.streetAddress].filter(Boolean).join("");
 		const salary = getSalaryLabel(attributes);
 		const structuredData = createStructuredData(attributes);
@@ -317,31 +319,31 @@ wp.blocks.registerBlockType("catpow/recruitinfo", {
 						<dl className="_details">
 							{getEmploymentTypeLabel(employmentType) && (
 								<div className="_item">
-									<dt>雇用形態</dt>
+									<dt>{__("雇用形態", "catpow")}</dt>
 									<dd>{getEmploymentTypeLabel(employmentType)}</dd>
 								</div>
 							)}
 							{location && (
 								<div className="_item">
-									<dt>勤務地</dt>
+									<dt>{__("勤務地", "catpow")}</dt>
 									<dd>{location}</dd>
 								</div>
 							)}
 							{salary && (
 								<div className="_item">
-									<dt>給与</dt>
+									<dt>{__("給与", "catpow")}</dt>
 									<dd>{salary}</dd>
 								</div>
 							)}
 							{datePosted && (
 								<div className="_item">
-									<dt>掲載日</dt>
+									<dt>{__("掲載日", "catpow")}</dt>
 									<dd>{datePosted}</dd>
 								</div>
 							)}
 							{validThrough && (
 								<div className="_item">
-									<dt>掲載終了日</dt>
+									<dt>{__("掲載終了日", "catpow")}</dt>
 									<dd>{validThrough}</dd>
 								</div>
 							)}
@@ -349,7 +351,7 @@ wp.blocks.registerBlockType("catpow/recruitinfo", {
 						{applicationUrl && (
 							<p className="_apply">
 								<a className="_button" href={applicationUrl}>
-									応募する
+									{__("応募する", "catpow")}
 								</a>
 							</p>
 						)}

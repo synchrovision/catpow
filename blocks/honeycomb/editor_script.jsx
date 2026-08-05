@@ -1,4 +1,6 @@
-﻿CP.config.honeycomb = {
+﻿const { __ } = wp.i18n;
+
+CP.config.honeycomb = {
 	imageKeys: {
 		image: { src: "src", items: "items" },
 	},
@@ -6,7 +8,7 @@
 
 wp.blocks.registerBlockType("catpow/honeycomb", {
 	title: "🐾 honeycomb",
-	description: "六角形のパネルをレイアウトします。",
+	description: __("六角形のパネルをレイアウトします。", "catpow"),
 	icon: (
 		<svg viewBox="0 0 512 512">
 			<path
@@ -91,9 +93,9 @@ wp.blocks.registerBlockType("catpow/honeycomb", {
 				"level",
 				"color",
 				"colorScheme",
-				{ name: "image", label: "画像", values: "hasImage", sub: [{ input: "image", keys: imageKeys.image }] },
-				{ name: "title", label: "タイトル", values: "hasTitle" },
-				{ name: "text", label: "テキスト", values: "hasText" },
+				{ name: "image", label: __("画像", "catpow"), values: "hasImage", sub: [{ input: "image", keys: imageKeys.image }] },
+				{ name: "title", label: __("タイトル", "catpow"), values: "hasTitle" },
+				{ name: "text", label: __("テキスト", "catpow"), values: "hasText" },
 			];
 			wp.hooks.applyFilters("catpow.blocks.honeycomb.selectiveItemClasses", CP.finderProxy(selectiveItemClasses));
 			return selectiveItemClasses;
@@ -230,12 +232,12 @@ wp.blocks.registerBlockType("catpow/honeycomb", {
 							value={attributes.grid}
 						/>
 					</PanelBody>
-					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
-					<CP.SelectClassPanel title="アイテム" icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={selectiveItemClasses} />
+					<CP.SelectClassPanel title={__("クラス", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title={__("アイテム", "catpow")} icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={selectiveItemClasses} />
 					{items[attributes.currentItemIndex] && (
 						<PanelBody title="ITEM CLASS" icon="admin-generic" initialOpen={false}>
 							<TextareaControl
-								label="クラス"
+								label={__("クラス", "catpow")}
 								onChange={(classes) => {
 									items[attributes.currentItemIndex].classes = classes;
 									save();

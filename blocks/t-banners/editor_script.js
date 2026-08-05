@@ -39,7 +39,7 @@
   var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/t-banners", {
     title: "\u{1F43E} T-Banners",
-    description: "HTML\u30E1\u30FC\u30EB\u7528\u306E\u8907\u6570\u30D0\u30CA\u30FC\u306E\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002",
+    description: __("HTML\u30E1\u30FC\u30EB\u7528\u306E\u8907\u6570\u30D0\u30CA\u30FC\u306E\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002", "catpow"),
     icon: "editor-code",
     category: "catpow-mail",
     parent: CP.mailContensContainer,
@@ -76,8 +76,8 @@
         const selectiveClasses2 = [
           { name: "align", input: "buttons", label: __("\u914D\u7F6E", "catpow"), key: "align", options: ["left", "center", "right"] },
           { name: "range", input: "range", label: __("\u5E45", "catpow"), key: "width", min: 10, max: 100, step: 5, unit: "%" },
-          { name: "marginTop", input: "range", label: "\u4E0A\u4F59\u767D", key: "marginTop", min: 0, max: 10 },
-          { name: "marginBottom", input: "range", label: "\u4E0B\u4F59\u767D", key: "marginBottom", min: 0, max: 10 },
+          { name: "marginTop", input: "range", label: __("\u4E0A\u4F59\u767D", "catpow"), key: "marginTop", min: 0, max: 10 },
+          { name: "marginBottom", input: "range", label: __("\u4E0B\u4F59\u767D", "catpow"), key: "marginBottom", min: 0, max: 10 },
           { name: "gapX", input: "range", label: __("\u6A2A\u9593\u9694", "catpow"), key: "gapX", min: 0, max: 20 },
           { name: "gapY", input: "range", label: __("\u7E26\u9593\u9694", "catpow"), key: "gapY", min: 0, max: 20 },
           { name: "columns", input: "range", label: __("\u5217\u6570", "catpow"), key: "columns", min: 1, max: 5 },
@@ -85,7 +85,7 @@
             name: "template",
             input: "bool",
             key: "isTemplate",
-            sub: [{ name: "loopImage", label: "\u753B\u50CF\u51FA\u529B\u30B3\u30FC\u30C9", input: "text", key: "loopImage" }]
+            sub: [{ name: "loopImage", label: __("\u753B\u50CF\u51FA\u529B\u30B3\u30FC\u30C9", "catpow"), input: "text", key: "loopImage" }]
           }
         ];
         wp.hooks.applyFilters("catpow.blocks.t-banners.selectiveClasses", CP.finderProxy(selectiveClasses2));
@@ -102,7 +102,7 @@
           size: "medium",
           isTemplate
         }
-      ))))), [...Array(columns - itemGroup.length)].map((_, index) => /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-spacer-cell", key: "spacer_" + index }))))), marginBottom > 0 && /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-spacer-cell", style: { height: `${marginBottom}rem` }, colSpan: columns * 2 - 1 }))))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", ...{ setAttributes, attributes }, selectiveClasses, initialOpen: true }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: "\u30AF\u30E9\u30B9", onChange: (classes2) => setAttributes({ classes: classes2 }), value: classes }))));
+      ))))), [...Array(columns - itemGroup.length)].map((_, index) => /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-spacer-cell", key: "spacer_" + index }))))), marginBottom > 0 && /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-spacer-cell", style: { height: `${marginBottom}rem` }, colSpan: columns * 2 - 1 }))))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30AF\u30E9\u30B9", "catpow"), icon: "art", ...{ setAttributes, attributes }, selectiveClasses, initialOpen: true }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: __("\u30AF\u30E9\u30B9", "catpow"), onChange: (classes2) => setAttributes({ classes: classes2 }), value: classes }))));
     },
     save({ attributes }) {
       const { useBlockProps } = wp.blockEditor;

@@ -1,10 +1,12 @@
-﻿export const SelectBreakPointToolbar = (props) => {
+﻿const { __ } = wp.i18n;
+
+export const SelectBreakPointToolbar = (props) => {
 	const { ToolbarGroup } = wp.components;
 
 	return (
 		<ToolbarGroup
 			controls={props.breakpoints.map((bp) => {
-				let title = bp == "0" ? "ー" : bp;
+				let title = bp == "0" ? __("ー", "catpow") : bp;
 				return {
 					icon: (
 						<svg viewBox="0 0 100 100">

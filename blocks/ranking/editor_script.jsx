@@ -1,4 +1,6 @@
-﻿const blockClass = "wp-block-catpow-ranking";
+﻿const { __ } = wp.i18n;
+
+const blockClass = "wp-block-catpow-ranking";
 
 const config = (CP.config.ranking = {
 	imageKeys: {
@@ -10,7 +12,7 @@ const config = (CP.config.ranking = {
 });
 wp.blocks.registerBlockType("catpow/ranking", {
 	title: "🐾 Ranking",
-	description: "ランキングの一覧ブロックです。",
+	description: __("ランキングの一覧ブロックです。", "catpow"),
 	icon: "awards",
 	category: "catpow",
 	transforms: {
@@ -66,10 +68,10 @@ wp.blocks.registerBlockType("catpow/ranking", {
 				};
 			}),
 		},
-		rankPrefix: { source: "text", selector: `.${blockClass}__item-header-rank-prefix`, default: "第" },
+		rankPrefix: { source: "text", selector: `.${blockClass}__item-header-rank-prefix`, default: __("第", "catpow") },
 		rankStart: { source: "attribute", attribute: "value", selector: `.${blockClass}__item-header-rank-number`, default: "1" },
-		rankSuffix: { source: "text", selector: `.${blockClass}__item-header-rank-suffix`, default: "位" },
-		rateLabel: { source: "text", selector: `.${blockClass}__item-header-rate-label`, default: "評価" },
+		rankSuffix: { source: "text", selector: `.${blockClass}__item-header-rank-suffix`, default: __("位", "catpow") },
+		rateLabel: { source: "text", selector: `.${blockClass}__item-header-rate-label`, default: __("評価", "catpow") },
 	},
 	example: CP.example,
 	edit({ attributes, className, setAttributes, isSelected }) {
@@ -84,33 +86,33 @@ wp.blocks.registerBlockType("catpow/ranking", {
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
-				{ name: "subHeadingTag", preset: "headingTag", key: "SubHeadingTag", label: "副見出しタグ", classKey: "contentsClasses", cond: "hasLead" },
-				{ name: "contentsLevel", preset: "level", label: "コンテンツレベル", classKey: "contentsClasses" },
+				{ name: "subHeadingTag", preset: "headingTag", key: "SubHeadingTag", label: __("副見出しタグ", "catpow"), classKey: "contentsClasses", cond: "hasLead" },
+				{ name: "contentsLevel", preset: "level", label: __("コンテンツレベル", "catpow"), classKey: "contentsClasses" },
 				{
 					name: "type",
 					type: "buttons",
-					label: "タイプ",
-					values: { isTypeFlat: "フラット", isTypeCard: "カード" },
+					label: __("タイプ", "catpow"),
+					values: { isTypeFlat: __("フラット", "catpow"), isTypeCard: __("カード", "catpow") },
 				},
 				{
-					label: "ランク",
+					label: __("ランク", "catpow"),
 					values: "hasRank",
 					sub: [
-						{ label: "前置テキスト", input: "text", key: "rankPrefix" },
-						{ label: "開始ランク", input: "text", key: "rankStart" },
-						{ label: "後置テキスト", input: "text", key: "rankSuffix" },
+						{ label: __("前置テキスト", "catpow"), input: "text", key: "rankPrefix" },
+						{ label: __("開始ランク", "catpow"), input: "text", key: "rankStart" },
+						{ label: __("後置テキスト", "catpow"), input: "text", key: "rankSuffix" },
 					],
 				},
-				{ label: "レート", values: "hasRate", sub: [{ label: "ラベル", input: "text", key: "rateLabel" }] },
-				{ label: "タイトルキャプション", values: "hasTitleCaption" },
-				{ label: "リード文", values: "hasLead" },
-				{ label: "リンク", values: "hasLink" },
+				{ label: __("レート", "catpow"), values: "hasRate", sub: [{ label: __("ラベル", "catpow"), input: "text", key: "rateLabel" }] },
+				{ label: __("タイトルキャプション", "catpow"), values: "hasTitleCaption" },
+				{ label: __("リード文", "catpow"), values: "hasLead" },
+				{ label: __("リンク", "catpow"), values: "hasLink" },
 			];
 			wp.hooks.applyFilters("catpow.blocks.ranking.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
 		}, []);
 		const selectiveItemClasses = useMemo(() => {
-			const selectiveItemClasses = ["color", { name: "rate", label: "レート", input: "range", key: "rate", min: 0, max: 5, step: 0.1 }];
+			const selectiveItemClasses = ["color", { name: "rate", label: __("レート", "catpow"), input: "range", key: "rate", min: 0, max: 5, step: 0.1 }];
 			wp.hooks.applyFilters("catpow.blocks.ranking.selectiveItemClasses", CP.finderProxy(selectiveItemClasses));
 			return selectiveItemClasses;
 		}, []);
@@ -134,8 +136,8 @@ wp.blocks.registerBlockType("catpow/ranking", {
 					/>
 				</BlockControls>
 				<InspectorControls>
-					<CP.SelectClassPanel title="スタイル" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
-					<CP.SelectClassPanel title="アイテム" icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={selectiveItemClasses} />
+					<CP.SelectClassPanel title={__("スタイル", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title={__("アイテム", "catpow")} icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={selectiveItemClasses} />
 					<CP.ItemControlInfoPanel />
 				</InspectorControls>
 				<CP.Bem prefix="wp-block-catpow">

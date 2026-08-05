@@ -1,8 +1,9 @@
 (() => {
   // ../blocks/layouttable/editor_script.jsx
+  var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/layouttable", {
     title: "\u{1F43E} LayoutTable",
-    description: "\u30BB\u30EB\u306E\u7D50\u5408\u3068\u5E45\u306E\u6307\u5B9A\u304C\u3067\u304D\u308B\u30C6\u30FC\u30D6\u30EB\u3067\u3059\u3002",
+    description: __("\u30BB\u30EB\u306E\u7D50\u5408\u3068\u5E45\u306E\u6307\u5B9A\u304C\u3067\u304D\u308B\u30C6\u30FC\u30D6\u30EB\u3067\u3059\u3002", "catpow"),
     icon: "editor-table",
     category: "catpow",
     transforms: {
@@ -113,7 +114,7 @@
           {
             name: "type",
             type: "gridbuttons",
-            label: "\u30BF\u30A4\u30D7",
+            label: __("\u30BF\u30A4\u30D7", "catpow"),
             filter: "type",
             values: {
               isStyleSpec: "spec",
@@ -485,9 +486,9 @@
             ), isSelected && c == colLen - parseInt(cell.colspan ? cell.colspan : 1) && /* @__PURE__ */ wp.element.createElement("div", { className: "itemControl rowControl" }, /* @__PURE__ */ wp.element.createElement("div", { className: "btn up", onClick: () => downRow(r) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn delete", onClick: () => deleteRow(r) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn clone", onClick: () => addRow(r) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn down", onClick: () => upRow(r) })), isSelected && r == rowLen - parseInt(cell.rowspan ? cell.rowspan : 1) && /* @__PURE__ */ wp.element.createElement("div", { className: "itemControl columnControl" }, /* @__PURE__ */ wp.element.createElement("div", { className: "btn left", onClick: () => downColumn(c) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn delete", onClick: () => deleteColumn(c) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn clone", onClick: () => addColumn(c) }), /* @__PURE__ */ wp.element.createElement("div", { className: "btn right", onClick: () => upColumn(c) })), isSelected && cell.isSelected && /* @__PURE__ */ wp.element.createElement("div", { className: "selectBox" }))
           );
         }));
-      })))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "\u30BB\u30EB" }, selectCellClasses({
+      })))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30AF\u30E9\u30B9", "catpow"), icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: __("\u30BB\u30EB", "catpow") }, selectCellClasses({
         type: "gridbuttons",
-        label: "\u30BF\u30B0",
+        label: __("\u30BF\u30B0", "catpow"),
         values: {
           "wp-block-catpow-layouttable__tbody-tr-th": "th",
           "wp-block-catpow-layouttable__tbody-tr-td": "td"
@@ -495,24 +496,24 @@
         required: true
       }), selectCellClasses({
         type: "gridbuttons",
-        label: "\u30BF\u30A4\u30D7",
+        label: __("\u30BF\u30A4\u30D7", "catpow"),
         values: {
-          "is-cell-spacer": "\u7A7A\u767D",
-          "is-cell-primary": "\u63A8\u5968",
-          "is-cell-deprecated": "\u975E\u63A8\u5968"
+          "is-cell-spacer": __("\u7A7A\u767D", "catpow"),
+          "is-cell-primary": __("\u63A8\u5968", "catpow"),
+          "is-cell-deprecated": __("\u975E\u63A8\u5968", "catpow")
         }
       }), selectCellClasses({
         type: "gridbuttons",
-        label: "\u6587\u5B57",
+        label: __("\u6587\u5B57", "catpow"),
         values: {
-          "is-size-large": "\u5927",
-          "is-size-medium": "\u4E2D",
-          "is-size-small": "\u5C0F"
+          "is-size-large": __("\u5927", "catpow"),
+          "is-size-medium": __("\u4E2D", "catpow"),
+          "is-size-small": __("\u5C0F", "catpow")
         }
       }), /* @__PURE__ */ wp.element.createElement(
         TextControl,
         {
-          label: "\u5E45",
+          label: __("\u5E45", "catpow"),
           value: getCellAttr("style").width || "",
           onChange: (val) => {
             if (val) {
@@ -522,7 +523,7 @@
             }
           }
         }
-      ), isRectSelection() && /* @__PURE__ */ wp.element.createElement(Button, { isDefault: true, onClick: () => mergeCells() }, "\u30BB\u30EB\u3092\u7D50\u5408"), selectedCells.some((cell) => cell.rowspan > 1 || cell.colspan > 1) && /* @__PURE__ */ wp.element.createElement(Button, { isDefault: true, onClick: () => breakCells() }, "\u7D50\u5408\u3092\u89E3\u9664"))));
+      ), isRectSelection() && /* @__PURE__ */ wp.element.createElement(Button, { isDefault: true, onClick: () => mergeCells() }, __("\u30BB\u30EB\u3092\u7D50\u5408", "catpow")), selectedCells.some((cell) => cell.rowspan > 1 || cell.colspan > 1) && /* @__PURE__ */ wp.element.createElement(Button, { isDefault: true, onClick: () => breakCells() }, __("\u7D50\u5408\u3092\u89E3\u9664", "catpow")))));
     },
     save({ attributes, className }) {
       const { createElement: el } = wp.element;

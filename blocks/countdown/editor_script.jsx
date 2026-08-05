@@ -1,4 +1,6 @@
-﻿/*
+﻿const { __ } = wp.i18n;
+
+/*
  * 指定の日時までのカウントダウンを表示します
  */
 wp.blocks.registerBlockType("catpow/countdown", {
@@ -15,7 +17,7 @@ wp.blocks.registerBlockType("catpow/countdown", {
 		const { classes, vars, target } = attributes;
 
 		const selectiveClasses = useMemo(() => {
-			const selectiveClasses = ["hasFontSize", { name: "target", label: "目標日時", key: "target", input: "text", placeholder: "2099-12-31 23:59:59" }];
+			const selectiveClasses = ["hasFontSize", { name: "target", label: __("目標日時", "catpow"), key: "target", input: "text", placeholder: "2099-12-31 23:59:59" }];
 			wp.hooks.applyFilters("catpow.blocks.countdown.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
 		}, []);
@@ -26,7 +28,7 @@ wp.blocks.registerBlockType("catpow/countdown", {
 					<Catpow.CountDown target={target} />
 				</div>
 				<InspectorControls>
-					{selectiveClasses && <CP.SelectClassPanel title="設定" icon="edit" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} initialOpen={true} />}
+					{selectiveClasses && <CP.SelectClassPanel title={__("設定", "catpow")} icon="edit" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} initialOpen={true} />}
 				</InspectorControls>
 			</>
 		);

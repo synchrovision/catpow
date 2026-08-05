@@ -1,8 +1,9 @@
 (() => {
   // ../blocks/t-heading/editor_script.jsx
+  var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/t-heading", {
     title: "\u{1F43E} T-Heading",
-    description: "HTML\u30E1\u30FC\u30EB\u7528\u306E\u898B\u51FA\u3057\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002",
+    description: __("HTML\u30E1\u30FC\u30EB\u7528\u306E\u898B\u51FA\u3057\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002", "catpow"),
     icon: "editor-code",
     category: "catpow-mail",
     parent: CP.mailContensContainer,
@@ -60,8 +61,8 @@
           "textAlign",
           "fontSize",
           "fontWeight",
-          { name: "marginTop", input: "range", label: "\u4E0A\u4F59\u767D", key: "marginTop", min: 0, max: 2, step: 0.25 },
-          { name: "marginBottom", input: "range", label: "\u4E0B\u4F59\u767D", key: "marginBottom", min: 0, max: 2, step: 0.25 }
+          { name: "marginTop", input: "range", label: __("\u4E0A\u4F59\u767D", "catpow"), key: "marginTop", min: 0, max: 2, step: 0.25 },
+          { name: "marginBottom", input: "range", label: __("\u4E0B\u4F59\u767D", "catpow"), key: "marginBottom", min: 0, max: 2, step: 0.25 }
         ];
         wp.hooks.applyFilters("catpow.blocks.t-heading.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
@@ -90,7 +91,7 @@
           },
           value: title
         }
-      ))), marginBottom > 0 && /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-spacer-cell", style: { height: `${marginBottom}em` } }))))), /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(CP.AlignClassToolbar, { setAttributes, attributes })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", ...{ setAttributes, attributes }, selectiveClasses, initialOpen: true }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: "\u30AF\u30E9\u30B9", onChange: (classes2) => setAttributes({ classes: classes2 }), value: classes }))));
+      ))), marginBottom > 0 && /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-spacer-cell", style: { height: `${marginBottom}em` } }))))), /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(CP.AlignClassToolbar, { setAttributes, attributes })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30AF\u30E9\u30B9", "catpow"), icon: "art", ...{ setAttributes, attributes }, selectiveClasses, initialOpen: true }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: __("\u30AF\u30E9\u30B9", "catpow"), onChange: (classes2) => setAttributes({ classes: classes2 }), value: classes }))));
     },
     save({ attributes, className, setAttributes }) {
       const { RichText, useBlockProps } = wp.blockEditor;

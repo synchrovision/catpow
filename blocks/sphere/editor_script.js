@@ -1,5 +1,6 @@
 (() => {
   // ../blocks/sphere/editor_script.jsx
+  var { __ } = wp.i18n;
   CP.config.sphere = {
     imageKeys: {
       image: { src: "src", alt: "alt", items: "items" }
@@ -7,7 +8,7 @@
   };
   wp.blocks.registerBlockType("catpow/sphere", {
     title: "\u{1F43E} Sphere",
-    description: "\u4E38\u578B\u306E\u30A2\u30A4\u30C6\u30E0\u30EA\u30B9\u30C8\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002",
+    description: __("\u4E38\u578B\u306E\u30A2\u30A4\u30C6\u30E0\u30EA\u30B9\u30C8\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002", "catpow"),
     icon: "image-filter",
     category: "catpow",
     transforms: {
@@ -33,10 +34,10 @@
       const { imageKeys } = CP.config.sphere;
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
-          { name: "image", label: "\u753B\u50CF", values: "hasImage" },
-          { name: "icon", label: "\u30A2\u30A4\u30B3\u30F3", values: "hasIcon" },
-          { name: "catpion", label: "\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3", values: "hasCaption" },
-          { name: "text", label: "\u30C6\u30AD\u30B9\u30C8", values: "hasText" }
+          { name: "image", label: __("\u753B\u50CF", "catpow"), values: "hasImage" },
+          { name: "icon", label: __("\u30A2\u30A4\u30B3\u30F3", "catpow"), values: "hasIcon" },
+          { name: "catpion", label: __("\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3", "catpow"), values: "hasCaption" },
+          { name: "text", label: __("\u30C6\u30AD\u30B9\u30C8", "catpow"), values: "hasText" }
         ];
         wp.hooks.applyFilters("catpow.blocks.sphere.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
@@ -67,10 +68,10 @@
             }
           ]
         }
-      )), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", ...{ setAttributes, attributes }, selectiveClasses, initialOpen: true }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: "\u30AF\u30E9\u30B9", onChange: (classes2) => setAttributes({ classes: classes2 }), value: classes })), /* @__PURE__ */ wp.element.createElement(
+      )), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30AF\u30E9\u30B9", "catpow"), icon: "art", ...{ setAttributes, attributes }, selectiveClasses, initialOpen: true }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: __("\u30AF\u30E9\u30B9", "catpow"), onChange: (classes2) => setAttributes({ classes: classes2 }), value: classes })), /* @__PURE__ */ wp.element.createElement(
         CP.SelectClassPanel,
         {
-          title: "\u30A2\u30A4\u30C6\u30E0",
+          title: __("\u30A2\u30A4\u30C6\u30E0", "catpow"),
           icon: "edit",
           ...{ setAttributes, attributes },
           itemKeys: ["items", attributes.currentItemIndex],

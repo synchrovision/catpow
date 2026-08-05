@@ -1,15 +1,16 @@
 (() => {
   // ../blocks/rtf/editor_script.tsx
+  var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/rtf", {
     title: "\u{1F43E} RTF",
-    description: "MarkDown\u306B\u4F3C\u305F\u8A18\u6CD5\u3067HTML\u3092\u66F8\u3051\u308B\u30D6\u30ED\u30C3\u30AF",
+    description: __("MarkDown\u306B\u4F3C\u305F\u8A18\u6CD5\u3067HTML\u3092\u66F8\u3051\u308B\u30D6\u30ED\u30C3\u30AF", "catpow"),
     icon: "editor-code",
     category: "catpow",
     attributes: {
       classes: { type: "string", source: "attribute", attribute: "class", default: "wp-block-catpow-rtf" },
       level: { type: "number", default: 3 },
       vars: { type: "object", default: [] },
-      text: { type: "string", default: "\u25A0 \u898B\u51FA\u3057\n\n\u30C6\u30AD\u30B9\u30C8[\u30EA\u30F3\u30AF](example.com)**\u5F37\u8ABF**" }
+      text: { type: "string", default: __("\u25A0 \u898B\u51FA\u3057\n\n\u30C6\u30AD\u30B9\u30C8[\u30EA\u30F3\u30AF](example.com)**\u5F37\u8ABF**", "catpow") }
     },
     example: CP.example,
     edit({ attributes, setAttributes, isSelected }) {
@@ -21,7 +22,7 @@
         wp.hooks.applyFilters("catpow.blocks.rtf.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps() }, /* @__PURE__ */ wp.element.createElement(CP.RTF.Edit, { className: classes, level, ...{ setAttributes, attributes }, isSelected, style: vars })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", ...{ setAttributes, attributes }, selectiveClasses })));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps() }, /* @__PURE__ */ wp.element.createElement(CP.RTF.Edit, { className: classes, level, ...{ setAttributes, attributes }, isSelected, style: vars })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30AF\u30E9\u30B9", "catpow"), icon: "art", ...{ setAttributes, attributes }, selectiveClasses })));
     },
     save({ attributes }) {
       const { classes, vars, level } = attributes;

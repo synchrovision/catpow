@@ -1,8 +1,10 @@
-﻿import { clsx } from "clsx";
+﻿const { __ } = wp.i18n;
+
+import { clsx } from "clsx";
 
 wp.blocks.registerBlockType("catpow/datatable", {
 	title: "🐾 DataTable",
-	description: "一行または１列の見出しを持つテーブルです。",
+	description: __("一行または１列の見出しを持つテーブルです。", "catpow"),
 	icon: "editor-table",
 	category: "catpow",
 
@@ -84,15 +86,15 @@ wp.blocks.registerBlockType("catpow/datatable", {
 		}
 
 		var statesClasses = [
-			{ label: "ヘッダ行", values: "hasHeaderRow" },
-			{ label: "ヘッダ列", values: "hasHeaderColumn" },
+			{ label: __("ヘッダ行", "catpow"), values: "hasHeaderRow" },
+			{ label: __("ヘッダ列", "catpow"), values: "hasHeaderColumn" },
 		];
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
 				{
 					name: "type",
 					type: "buttons",
-					label: "タイプ",
+					label: __("タイプ", "catpow"),
 					values: {
 						isStyleSpec: "spec",
 						isStyleSheet: "sheet",
@@ -102,7 +104,7 @@ wp.blocks.registerBlockType("catpow/datatable", {
 				{
 					name: "loop",
 					input: "bool",
-					label: "ループ",
+					label: __("ループ", "catpow"),
 					key: "doLoop",
 					sub: [
 						{
@@ -251,10 +253,10 @@ wp.blocks.registerBlockType("catpow/datatable", {
 					)}
 				</>
 				<InspectorControls>
-					<CP.SelectClassPanel title="表示設定" icon="admin-appearance" {...{ setAttributes, attributes }} selectiveClasses={statesClasses} />
-					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title={__("表示設定", "catpow")} icon="admin-appearance" {...{ setAttributes, attributes }} selectiveClasses={statesClasses} />
+					<CP.SelectClassPanel title={__("クラス", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
+						<TextareaControl label={__("クラス", "catpow")} onChange={(classes) => setAttributes({ classes })} value={classes} />
 					</PanelBody>
 				</InspectorControls>
 			</>

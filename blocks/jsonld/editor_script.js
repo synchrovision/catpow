@@ -201,7 +201,7 @@
   };
   wp.blocks.registerBlockType("catpow/jsonld", {
     title: "\u{1F43E} JsonLD",
-    description: "\u5404\u7A2E\u306E\u69CB\u9020\u5316\u30C7\u30FC\u30BF\u3092\u8A18\u8FF0\u3002",
+    description: __("\u5404\u7A2E\u306E\u69CB\u9020\u5316\u30C7\u30FC\u30BF\u3092\u8A18\u8FF0\u3002", "catpow"),
     icon: "analytics",
     category: "catpow",
     edit({ attributes, className, setAttributes }) {

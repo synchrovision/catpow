@@ -10,7 +10,7 @@ wp.blocks.registerBlockType("catpow/leavepopup", {
 		const states = classNamesToFlags(classes);
 
 		const selectiveClasses = useMemo(() => {
-			const selectiveClasses = [{ input: "buttons", name: "target", label: "表示条件", values: { site: "サイト離脱時", page: "ページ離脱時" }, key: "target" }, "contentWidth"];
+			const selectiveClasses = [{ input: "buttons", name: "target", label: __("表示条件", "catpow"), values: { site: __("サイト離脱時", "catpow"), page: __("ページ離脱時", "catpow") }, key: "target" }, "contentWidth"];
 			return selectiveClasses;
 		}, []);
 

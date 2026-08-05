@@ -2,7 +2,7 @@
 
 wp.blocks.registerBlockType("catpow/dialog", {
 	title: "🐾 Dialog",
-	description: "フキダシで会話を表現するブロックです。",
+	description: __("フキダシで会話を表現するブロックです。", "catpow"),
 	icon: "format-chat",
 	category: "catpow",
 	transforms: {
@@ -32,7 +32,7 @@ wp.blocks.registerBlockType("catpow/dialog", {
 		}, []);
 
 		const selectiveItemClasses = useMemo(() => {
-			const selectiveItemClasses = [{ name: "type", label: "タイプ", type: "buttons", values: { isTypeTalk: "talk", isTypeShout: "shout", isTypeThink: "think" } }, "itemAlign", "color"];
+			const selectiveItemClasses = [{ name: "type", label: __("タイプ", "catpow"), type: "buttons", values: { isTypeTalk: "talk", isTypeShout: "shout", isTypeThink: "think" } }, "itemAlign", "color"];
 			wp.hooks.applyFilters("catpow.blocks.dialog.selectiveItemClasses", CP.finderProxy(selectiveItemClasses));
 			return selectiveItemClasses;
 		}, []);
@@ -53,10 +53,10 @@ wp.blocks.registerBlockType("catpow/dialog", {
 				<CP.SelectModeToolbar setAttributes={setAttributes} attributes={attributes} />
 				<InspectorControls>
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
+						<TextareaControl label={__("クラス", "catpow")} onChange={(classes) => setAttributes({ classes })} value={classes} />
 					</PanelBody>
-					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
-					<CP.SelectClassPanel title="リストアイテム" icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={selectiveItemClasses} />
+					<CP.SelectClassPanel title={__("クラス", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title={__("リストアイテム", "catpow")} icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={selectiveItemClasses} />
 					<CP.ItemControlInfoPanel />
 				</InspectorControls>
 				<>

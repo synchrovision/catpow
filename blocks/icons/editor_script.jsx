@@ -1,6 +1,8 @@
-﻿wp.blocks.registerBlockType("catpow/icons", {
+﻿const { __ } = wp.i18n;
+
+wp.blocks.registerBlockType("catpow/icons", {
 	title: "🐾 Icons",
-	description: "リンク付きのアイコン画像を並べて表示するブロックです。",
+	description: __("リンク付きのアイコン画像を並べて表示するブロックです。", "catpow"),
 	icon: "image-filter",
 	category: "catpow",
 	transforms: {
@@ -47,8 +49,8 @@
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
-				{ name: "size", type: "buttons", label: "サイズ", values: { isSizeSmall: "小", isSizeMedium: "中", isSizeLarge: "大" } },
-				{ name: "filled", label: "塗り", values: "isFilled", sub: [{ name: "shape", type: "buttons", label: "形状", values: { isShapeCircle: "丸", isShapeSquare: "四角" } }] },
+				{ name: "size", type: "buttons", label: __("サイズ", "catpow"), values: { isSizeSmall: __("小", "catpow"), isSizeMedium: __("中", "catpow"), isSizeLarge: __("大", "catpow") } },
+				{ name: "filled", label: __("塗り", "catpow"), values: "isFilled", sub: [{ name: "shape", type: "buttons", label: __("形状", "catpow"), values: { isShapeCircle: __("丸", "catpow"), isShapeSquare: __("四角", "catpow") } }] },
 			];
 			wp.hooks.applyFilters("catpow.blocks.icons.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
@@ -56,7 +58,7 @@
 		const selectiveItemClasses = useMemo(() => {
 			const selectiveItemClasses = [
 				{ name: "image", input: "image", keys: { src: "src", alt: "alt", items: "items" }, size: "thumbnail" },
-				{ name: "link", input: "text", key: "href", label: "リンク" },
+				{ name: "link", input: "text", key: "href", label: __("リンク", "catpow") },
 				"color",
 			];
 			wp.hooks.applyFilters("catpow.blocks.icons.selectiveItemClasses", CP.finderProxy(selectiveItemClasses));
@@ -81,11 +83,11 @@
 					<CP.AlignClassToolbar setAttributes={setAttributes} attributes={attributes} />
 				</BlockControls>
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title={__("クラス", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
+						<TextareaControl label={__("クラス", "catpow")} onChange={(classes) => setAttributes({ classes })} value={classes} />
 					</PanelBody>
-					<CP.SelectClassPanel title="アイテム" icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={selectiveItemClasses} />
+					<CP.SelectClassPanel title={__("アイテム", "catpow")} icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={selectiveItemClasses} />
 					<CP.ItemControlInfoPanel />
 				</InspectorControls>
 				{EditMode ? (

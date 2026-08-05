@@ -15,6 +15,7 @@
   }
 
   // ../blocks/accordion/editor_script.jsx
+  var { __ } = wp.i18n;
   CP.config.accordion = {
     devices: ["tb", "sp"],
     imageKeys: {
@@ -26,7 +27,7 @@
   };
   wp.blocks.registerBlockType("catpow/accordion", {
     title: "\u{1F43E} Accordion",
-    description: "\u30AF\u30EA\u30C3\u30AF\u3067\u6298\u308A\u7573\u307F\u3067\u304D\u308B\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002",
+    description: __("\u30AF\u30EA\u30C3\u30AF\u3067\u6298\u308A\u7573\u307F\u3067\u304D\u308B\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002", "catpow"),
     icon: "insert",
     category: "catpow",
     attributes: {
@@ -51,17 +52,17 @@
       const selectiveClasses = useMemo(() => {
         const { imageKeys: imageKeys2, imageSizes: imageSizes2 } = CP.config.accordion;
         const selectiveClasses2 = [
-          { name: "image", label: "\u753B\u50CF", values: "hasImage", sub: [{ input: "image", keys: imageKeys2.image, size: imageSizes2.image }] },
+          { name: "image", label: __("\u753B\u50CF", "catpow"), values: "hasImage", sub: [{ input: "image", keys: imageKeys2.image, size: imageSizes2.image }] },
           {
             name: "template",
-            label: "\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8",
+            label: __("\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8", "catpow"),
             input: "bool",
             key: "isTemplate",
             sub: [
               {
                 name: "imageCode",
                 input: "text",
-                label: "\u753B\u50CF\u30B3\u30FC\u30C9",
+                label: __("\u753B\u50CF\u30B3\u30FC\u30C9", "catpow"),
                 key: "imageCode",
                 cond: "hasImage"
               }
@@ -71,7 +72,7 @@
         wp.hooks.applyFilters("catpow.blocks.accordion.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps({ className: clsx(classes, { "is-open": isOpen }), style: vars }) }, /* @__PURE__ */ wp.element.createElement("div", { className: "_header", role: "button" }, states.hasImage && /* @__PURE__ */ wp.element.createElement("div", { className: "_image" }, isTemplate && imageCode ? /* @__PURE__ */ wp.element.createElement(CP.DummyImage, { text: imageCode }) : /* @__PURE__ */ wp.element.createElement(CP.SelectResponsiveImage, { setAttributes, attributes, keys: imageKeys.image, size: imageSizes.image })), /* @__PURE__ */ wp.element.createElement(RichText, { tagName: HeadingTag, className: "_title", value: title, onChange: (title2) => setAttributes({ title: title2 }) }), /* @__PURE__ */ wp.element.createElement("span", { className: "_icon", onClick: () => setAttributes({ isOpen: !isOpen }) })), /* @__PURE__ */ wp.element.createElement("div", { className: "_contents" }, /* @__PURE__ */ wp.element.createElement("div", { className: "_body" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, null))))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: "\u30AF\u30E9\u30B9", onChange: (classes2) => setAttributes({ classes: classes2 }), value: classes }))));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps({ className: clsx(classes, { "is-open": isOpen }), style: vars }) }, /* @__PURE__ */ wp.element.createElement("div", { className: "_header", role: "button" }, states.hasImage && /* @__PURE__ */ wp.element.createElement("div", { className: "_image" }, isTemplate && imageCode ? /* @__PURE__ */ wp.element.createElement(CP.DummyImage, { text: imageCode }) : /* @__PURE__ */ wp.element.createElement(CP.SelectResponsiveImage, { setAttributes, attributes, keys: imageKeys.image, size: imageSizes.image })), /* @__PURE__ */ wp.element.createElement(RichText, { tagName: HeadingTag, className: "_title", value: title, onChange: (title2) => setAttributes({ title: title2 }) }), /* @__PURE__ */ wp.element.createElement("span", { className: "_icon", onClick: () => setAttributes({ isOpen: !isOpen }) })), /* @__PURE__ */ wp.element.createElement("div", { className: "_contents" }, /* @__PURE__ */ wp.element.createElement("div", { className: "_body" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, null))))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30AF\u30E9\u30B9", "catpow"), icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: __("\u30AF\u30E9\u30B9", "catpow"), onChange: (classes2) => setAttributes({ classes: classes2 }), value: classes }))));
     },
     save({ attributes }) {
       const { isTemplate, classes, vars, HeadingTag, title, imageCode } = attributes;
@@ -109,7 +110,7 @@
   wp.blocks.registerBlockType("catpow/accordiongroup", {
     apiVersion: 3,
     title: "\u{1F43E} AccordionGroup",
-    description: "\u540C\u6642\u306B\u958B\u304B\u308C\u308B\u30A2\u30B3\u30FC\u30C7\u30A3\u30AA\u30F3\u3092\u5236\u9650\u3059\u308B\u30B3\u30F3\u30C6\u30CA\u3067\u3059\u3002",
+    description: __("\u540C\u6642\u306B\u958B\u304B\u308C\u308B\u30A2\u30B3\u30FC\u30C7\u30A3\u30AA\u30F3\u3092\u5236\u9650\u3059\u308B\u30B3\u30F3\u30C6\u30CA\u3067\u3059\u3002", "catpow"),
     icon: "insert",
     category: "catpow",
     attributes: {

@@ -3,7 +3,7 @@
   var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/postlink", {
     title: "\u{1F43E} PostLink",
-    description: "\u524D\u306E\u6295\u7A3F\u30FB\u6B21\u306E\u6295\u7A3F\u3078\u306E\u30EA\u30F3\u30AF\u3092\u8868\u793A\u3057\u307E\u3059\u3002",
+    description: __("\u524D\u306E\u6295\u7A3F\u30FB\u6B21\u306E\u6295\u7A3F\u3078\u306E\u30EA\u30F3\u30AF\u3092\u8868\u793A\u3057\u307E\u3059\u3002", "catpow"),
     icon: "editor-code",
     category: "catpow",
     example: CP.example,
@@ -17,9 +17,9 @@
         const selectiveClasses2 = [
           {
             name: "type",
-            label: "\u30BF\u30A4\u30D7",
+            label: __("\u30BF\u30A4\u30D7", "catpow"),
             type: "buttons",
-            values: { isTypeText: "\u30C6\u30AD\u30B9\u30C8", isTypeButton: "\u30DC\u30BF\u30F3" }
+            values: { isTypeText: __("\u30C6\u30AD\u30B9\u30C8", "catpow"), isTypeButton: __("\u30DC\u30BF\u30F3", "catpow") }
           }
         ];
         wp.hooks.applyFilters("catpow.blocks.postlink.selectiveClasses", CP.finderProxy(selectiveClasses2));

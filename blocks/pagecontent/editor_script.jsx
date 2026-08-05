@@ -2,7 +2,7 @@
 
 wp.blocks.registerBlockType("catpow/pagecontent", {
 	title: "🐾 pagecontent",
-	description: "現在のURLに応じたコンテンツを表示します。",
+	description: __("現在のURLに応じたコンテンツを表示します。", "catpow"),
 	icon: "editor-code",
 	category: "catpow-embed",
 	example: CP.example,
@@ -17,6 +17,7 @@ wp.blocks.registerBlockType("catpow/pagecontent", {
 				<CP.Message>
 					{__(
 						"表示中のURLに対応したコンテンツを表示します。テーマにURLに対応したコンテンツのテンプレートが定義されている場合はそのテンプレートが利用されます。定義がない場合は個別ページにおいては投稿されたコンテンツが表示されます。",
+						"catpow",
 					)}
 				</CP.Message>
 			</div>

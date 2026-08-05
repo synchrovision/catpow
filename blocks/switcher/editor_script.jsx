@@ -1,12 +1,14 @@
-﻿CP.config.switcher = {
+﻿const { __ } = wp.i18n;
+
+CP.config.switcher = {
 	factors: {
-		schedule: "日時",
-		is_user_logged_in: "ログイン",
-		current_user_can: "ユーザー権限",
-		user_value: "ユーザー情報",
-		input_value: "フォーム入力値",
-		content_value: "コンテンツ情報",
-		ab_test: "ABテスト",
+		schedule: __("日時", "catpow"),
+		is_user_logged_in: __("ログイン", "catpow"),
+		current_user_can: __("ユーザー権限", "catpow"),
+		user_value: __("ユーザー情報", "catpow"),
+		input_value: __("フォーム入力値", "catpow"),
+		content_value: __("コンテンツ情報", "catpow"),
+		ab_test: __("ABテスト", "catpow"),
 	},
 	factorFlags: {
 		schedule: 4,
@@ -25,7 +27,7 @@
 };
 wp.blocks.registerBlockType("catpow/switcher", {
 	title: "🐾 Switcher",
-	description: "日時やログインユーザーによってコンテンツの内容が切り替わるコンテナです。",
+	description: __("日時やログインユーザーによってコンテンツの内容が切り替わるコンテナです。", "catpow"),
 	icon: "networking",
 	category: "catpow-functional",
 	example: CP.example,
@@ -43,21 +45,21 @@ wp.blocks.registerBlockType("catpow/switcher", {
 			const selectiveClasses = [
 				{
 					name: "factor",
-					label: "ファクター",
+					label: __("ファクター", "catpow"),
 					input: "select",
 					key: "factor",
 					values: factors,
 				},
 				{
 					name: "field",
-					label: "フィールド",
+					label: __("フィールド", "catpow"),
 					input: "text",
 					key: "field",
 					cond: (states, { attributes: { factor } }) => factorFlags[factor] & flagValues["field"],
 				},
 				{
 					name: "compare",
-					label: "比較",
+					label: __("比較", "catpow"),
 					input: "buttons",
 					key: "compare",
 					values: ["=", "IN", "BETWEEN"],
@@ -65,7 +67,7 @@ wp.blocks.registerBlockType("catpow/switcher", {
 				},
 				{
 					name: "values",
-					label: "値",
+					label: __("値", "catpow"),
 					input: "textarea",
 					key: "values",
 					cond: (states, { attributes: { factor } }) => factorFlags[factor] & flagValues["values"],
@@ -157,7 +159,7 @@ wp.blocks.registerBlockType("catpow/switcher", {
 				</div>
 				{currentBlockId && <style>{CP.createStyleCode({ ["#" + currentBlockId]: { display: "block" } })}</style>}
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" classKey="factor" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} initialOpen={true} />
+					<CP.SelectClassPanel title={__("クラス", "catpow")} icon="art" classKey="factor" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} initialOpen={true} />
 				</InspectorControls>
 			</>
 		);
@@ -175,7 +177,7 @@ wp.blocks.registerBlockType("catpow/switchercontent", {
 	category: "catpow",
 	parent: ["catpow/switcher"],
 	attributes: {
-		cond: { source: "attribute", label: "条件", selector: "switcher-content", attribute: "cond", default: "content" },
+		cond: { source: "attribute", label: __("条件", "catpow"), selector: "switcher-content", attribute: "cond", default: "content" },
 	},
 	edit({ attributes, setAttributes, clientId }) {
 		const { InnerBlocks, useBlockProps } = wp.blockEditor;

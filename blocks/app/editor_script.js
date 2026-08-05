@@ -1,8 +1,9 @@
 (() => {
   // ../blocks/app/editor_script.jsx
+  var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/app", {
     title: "\u{1F43E} App",
-    description: "\u30C6\u30FC\u30DE\u306B\u5B9A\u7FA9\u3055\u308C\u305F\u30A2\u30D7\u30EA\u3092\u8868\u793A\u3057\u307E\u3059\u3002",
+    description: __("\u30C6\u30FC\u30DE\u306B\u5B9A\u7FA9\u3055\u308C\u305F\u30A2\u30D7\u30EA\u3092\u8868\u793A\u3057\u307E\u3059\u3002", "catpow"),
     icon: "editor-code",
     category: "catpow-embed",
     example: CP.example,
@@ -54,7 +55,7 @@
             });
           }
         }
-      )), options && /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u8A2D\u5B9A", icon: "edit", ...{ setAttributes, attributes }, selectiveClasses: options, initialOpen: true })));
+      )), options && /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u8A2D\u5B9A", "catpow"), icon: "edit", ...{ setAttributes, attributes }, selectiveClasses: options, initialOpen: true })));
     },
     save({ attributes, className, setAttributes }) {
       return false;

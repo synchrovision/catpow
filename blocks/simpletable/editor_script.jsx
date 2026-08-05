@@ -1,6 +1,8 @@
-﻿wp.blocks.registerBlockType("catpow/simpletable", {
+﻿const { __ } = wp.i18n;
+
+wp.blocks.registerBlockType("catpow/simpletable", {
 	title: "🐾 SimpleTable",
-	description: "見出しと本文の２列で構成されるシンプルなテーブルです。",
+	description: __("見出しと本文の２列で構成されるシンプルなテーブルです。", "catpow"),
 	icon: "editor-table",
 	category: "catpow",
 
@@ -82,7 +84,7 @@
 				{
 					name: "type",
 					type: "gridbuttons",
-					label: "タイプ",
+					label: __("タイプ", "catpow"),
 					filter: "type",
 					values: { isTypeSpec: "Spec", isTypeInfo: "Information", isTypeHistory: "History", isTypeInputs: "Inputs" },
 					item: {
@@ -90,25 +92,25 @@
 							{
 								name: "type",
 								type: "buttons",
-								label: "種別",
+								label: __("種別", "catpow"),
 								values: {
-									isNormal: "なし",
-									isImportant: "重要",
-									isCaution: "注意",
+									isNormal: __("なし", "catpow"),
+									isImportant: __("重要", "catpow"),
+									isCaution: __("注意", "catpow"),
 								},
 							},
 						],
 						isTypeInputs: [
 							{
 								name: "type",
-								label: "種別",
+								label: __("種別", "catpow"),
 								type: "buttons",
 								values: {
-									isNormal: "なし",
-									isRequired: "必須",
-									isRecommended: "推奨",
-									isOptional: "任意",
-									isReadonly: "固定",
+									isNormal: __("なし", "catpow"),
+									isRequired: __("必須", "catpow"),
+									isRecommended: __("推奨", "catpow"),
+									isOptional: __("任意", "catpow"),
+									isReadonly: __("固定", "catpow"),
 								},
 							},
 							"cond",
@@ -126,8 +128,8 @@
 		return (
 			<>
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
-					<CP.SelectClassPanel title="行" icon="edit" {...{ setAttributes, attributes }} itemKeys={["rows", attributes.currentItemIndex]} triggerClasses={selectiveClasses[0]} />
+					<CP.SelectClassPanel title={__("クラス", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title={__("行", "catpow")} icon="edit" {...{ setAttributes, attributes }} itemKeys={["rows", attributes.currentItemIndex]} triggerClasses={selectiveClasses[0]} />
 					<CP.ItemControlInfoPanel />
 				</InspectorControls>
 				<CP.Bem prefix="wp-block-catpow">

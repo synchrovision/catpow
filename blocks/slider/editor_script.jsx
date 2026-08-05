@@ -74,8 +74,8 @@ wp.blocks.registerBlockType("catpow/slider", {
 			const selectiveClasses = [
 				{
 					name: "type",
-					label: "タイプ",
-					values: { isTypeCarousel: "カルーセル", isTypeCard: "カード", isTypeFlat: "フラット" },
+					label: __("タイプ", "catpow"),
+					values: { isTypeCarousel: __("カルーセル", "catpow"), isTypeCard: __("カード", "catpow"), isTypeFlat: __("フラット", "catpow") },
 					filter: "type",
 					type: "gridbuttons",
 				},
@@ -83,9 +83,9 @@ wp.blocks.registerBlockType("catpow/slider", {
 				{ label: __("キャプション", "catpow"), values: "hasCaption" },
 				{ label: __("テキスト", "catpow"), values: "hasText" },
 				{ label: __("リンク", "catpow"), values: "hasLink" },
-				{ label: "アロー", values: "hasArrows" },
-				{ label: "ドット", values: "hasDots" },
-				{ input: "range", label: "初期スライド", json: "config", key: "current", min: 0, max: items.length - 1 },
+				{ label: __("アロー", "catpow"), values: "hasArrows" },
+				{ label: __("ドット", "catpow"), values: "hasDots" },
+				{ input: "range", label: __("初期スライド", "catpow"), json: "config", key: "current", min: 0, max: items.length - 1 },
 				"isTemplate",
 			];
 			wp.hooks.applyFilters("catpow.blocks.slider.selectiveClasses", CP.finderProxy(selectiveClasses));
@@ -94,12 +94,12 @@ wp.blocks.registerBlockType("catpow/slider", {
 		const animateClasses = [
 			{
 				input: "bool",
-				label: "自動再生",
+				label: __("自動再生", "catpow"),
 				json: "config",
 				key: "autoPlay",
 				sub: [
-					{ input: "range", label: "自動再生間隔（秒）", json: "config", key: "interval", coef: 1000, min: 0.5, max: 10, step: 0.1 },
-					{ input: "range", label: "手動操作後停止時間（秒）", json: "config", key: "wait", coef: 1000, min: 0, max: 60, step: 1 },
+					{ input: "range", label: __("自動再生間隔（秒）", "catpow"), json: "config", key: "interval", coef: 1000, min: 0.5, max: 10, step: 0.1 },
+					{ input: "range", label: __("手動操作後停止時間（秒）", "catpow"), json: "config", key: "wait", coef: 1000, min: 0, max: 60, step: 1 },
 				],
 			},
 		];
@@ -195,10 +195,10 @@ wp.blocks.registerBlockType("catpow/slider", {
 			<>
 				<CP.SelectModeToolbar setAttributes={setAttributes} attributes={attributes} />
 				<InspectorControls>
-					<CP.SelectClassPanel title="スタイル" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
-					<CP.SelectClassPanel title="アニメーション設定" icon="video-alt3" {...{ setAttributes, attributes }} selectiveClasses={animateClasses} />
-					<CP.SelectClassPanel title="スライド" icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={["color"]} />
-					{states.hasLink && <CP.SelectClassPanel title="イベント" icon="flag" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={["event"]} />}
+					<CP.SelectClassPanel title={__("スタイル", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title={__("アニメーション設定", "catpow")} icon="video-alt3" {...{ setAttributes, attributes }} selectiveClasses={animateClasses} />
+					<CP.SelectClassPanel title={__("スライド", "catpow")} icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={["color"]} />
+					{states.hasLink && <CP.SelectClassPanel title={__("イベント", "catpow")} icon="flag" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={["event"]} />}
 				</InspectorControls>
 				{attributes.EditMode ? (
 					<div {...blockProps}>

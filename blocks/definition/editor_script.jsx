@@ -2,7 +2,7 @@
 
 wp.blocks.registerBlockType("catpow/definition", {
 	title: "🐾 Definition",
-	description: "定義リストのブロックです",
+	description: __("定義リストのブロックです", "catpow"),
 	icon: "editor-ul",
 	category: "catpow",
 	transforms: {
@@ -51,7 +51,7 @@ wp.blocks.registerBlockType("catpow/definition", {
 			<>
 				<CP.SelectModeToolbar setAttributes={setAttributes} attributes={attributes} />
 				<InspectorControls>
-					<CP.SelectClassPanel title="スタイル" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title={__("スタイル", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 					<CP.ItemControlInfoPanel />
 				</InspectorControls>
 				{EditMode ? (

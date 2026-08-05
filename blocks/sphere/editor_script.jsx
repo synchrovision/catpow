@@ -1,11 +1,13 @@
-﻿CP.config.sphere = {
+﻿const { __ } = wp.i18n;
+
+CP.config.sphere = {
 	imageKeys: {
 		image: { src: "src", alt: "alt", items: "items" },
 	},
 };
 wp.blocks.registerBlockType("catpow/sphere", {
 	title: "🐾 Sphere",
-	description: "丸型のアイテムリストブロックです。",
+	description: __("丸型のアイテムリストブロックです。", "catpow"),
 	icon: "image-filter",
 	category: "catpow",
 	transforms: {
@@ -33,10 +35,10 @@ wp.blocks.registerBlockType("catpow/sphere", {
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
-				{ name: "image", label: "画像", values: "hasImage" },
-				{ name: "icon", label: "アイコン", values: "hasIcon" },
-				{ name: "catpion", label: "キャプション", values: "hasCaption" },
-				{ name: "text", label: "テキスト", values: "hasText" },
+				{ name: "image", label: __("画像", "catpow"), values: "hasImage" },
+				{ name: "icon", label: __("アイコン", "catpow"), values: "hasIcon" },
+				{ name: "catpion", label: __("キャプション", "catpow"), values: "hasCaption" },
+				{ name: "text", label: __("テキスト", "catpow"), values: "hasText" },
 			];
 			wp.hooks.applyFilters("catpow.blocks.sphere.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
@@ -72,12 +74,12 @@ wp.blocks.registerBlockType("catpow/sphere", {
 					/>
 				</BlockControls>
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} initialOpen={true} />
+					<CP.SelectClassPanel title={__("クラス", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} initialOpen={true} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
+						<TextareaControl label={__("クラス", "catpow")} onChange={(classes) => setAttributes({ classes })} value={classes} />
 					</PanelBody>
 					<CP.SelectClassPanel
-						title="アイテム"
+						title={__("アイテム", "catpow")}
 						icon="edit"
 						{...{ setAttributes, attributes }}
 						itemKeys={["items", attributes.currentItemIndex]}

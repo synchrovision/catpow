@@ -2,7 +2,7 @@
 
 wp.blocks.registerBlockType("catpow/t-image", {
 	title: "🐾 T-Image",
-	description: "HTMLメール用の画像ブロックです。",
+	description: __("HTMLメール用の画像ブロックです。", "catpow"),
 	icon: "editor-code",
 	category: "catpow-mail",
 	parent: CP.mailContensContainer,
@@ -28,14 +28,14 @@ wp.blocks.registerBlockType("catpow/t-image", {
 			const selectiveClasses = [
 				{ name: "align", input: "buttons", label: __("配置", "catpow"), key: "align", options: ["left", "center", "right"] },
 				{ name: "range", input: "range", label: __("幅", "catpow"), key: "width", min: 10, max: 100, step: 5, unit: "%" },
-				{ name: "marginTop", input: "range", label: "上余白", key: "marginTop", min: 0, max: 10 },
-				{ name: "marginBottom", input: "range", label: "下余白", key: "marginBottom", min: 0, max: 10 },
+				{ name: "marginTop", input: "range", label: __("上余白", "catpow"), key: "marginTop", min: 0, max: 10 },
+				{ name: "marginBottom", input: "range", label: __("下余白", "catpow"), key: "marginBottom", min: 0, max: 10 },
 				{
 					name: "template",
-					label: "テンプレート",
+					label: __("テンプレート", "catpow"),
 					input: "bool",
 					key: "isTemplate",
-					sub: [{ name: "loopImage", label: "画像出力コード", input: "text", key: "loopImage" }],
+					sub: [{ name: "loopImage", label: __("画像出力コード", "catpow"), input: "text", key: "loopImage" }],
 				},
 			];
 			wp.hooks.applyFilters("catpow.blocks.t-image.selectiveClasses", CP.finderProxy(selectiveClasses));
@@ -70,9 +70,9 @@ wp.blocks.registerBlockType("catpow/t-image", {
 					</table>
 				</CP.Bem>
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} initialOpen={true} />
+					<CP.SelectClassPanel title={__("クラス", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} initialOpen={true} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
+						<TextareaControl label={__("クラス", "catpow")} onChange={(classes) => setAttributes({ classes })} value={classes} />
 					</PanelBody>
 				</InspectorControls>
 			</>

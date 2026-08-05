@@ -1,5 +1,6 @@
 (() => {
   // ../blocks/countdown/editor_script.jsx
+  var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/countdown", {
     title: "\u{1F43E} CountDown",
     icon: "clock",
@@ -13,11 +14,11 @@
       const { InspectorControls, useBlockProps } = wp.blockEditor;
       const { classes, vars, target } = attributes;
       const selectiveClasses = useMemo(() => {
-        const selectiveClasses2 = ["hasFontSize", { name: "target", label: "\u76EE\u6A19\u65E5\u6642", key: "target", input: "text", placeholder: "2099-12-31 23:59:59" }];
+        const selectiveClasses2 = ["hasFontSize", { name: "target", label: __("\u76EE\u6A19\u65E5\u6642", "catpow"), key: "target", input: "text", placeholder: "2099-12-31 23:59:59" }];
         wp.hooks.applyFilters("catpow.blocks.countdown.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps({ className: classes, style: vars }) }, /* @__PURE__ */ wp.element.createElement(Catpow.CountDown, { target })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, selectiveClasses && /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u8A2D\u5B9A", icon: "edit", ...{ setAttributes, attributes }, selectiveClasses, initialOpen: true })));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps({ className: classes, style: vars }) }, /* @__PURE__ */ wp.element.createElement(Catpow.CountDown, { target })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, selectiveClasses && /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u8A2D\u5B9A", "catpow"), icon: "edit", ...{ setAttributes, attributes }, selectiveClasses, initialOpen: true })));
     },
     save({ attributes, className, setAttributes }) {
       const { classes = "", vars, target } = attributes;

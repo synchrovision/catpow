@@ -1,6 +1,8 @@
-﻿wp.blocks.registerBlockType("catpow/materials", {
+﻿const { __ } = wp.i18n;
+
+wp.blocks.registerBlockType("catpow/materials", {
 	title: "🐾 Materials",
-	description: "材料・成分一覧のブロックです。",
+	description: __("材料・成分一覧のブロックです。", "catpow"),
 	icon: "editor-ul",
 	category: "catpow",
 	example: CP.example,
@@ -19,7 +21,7 @@
 			return selectiveClasses;
 		}, []);
 		const selectiveItemClasses = useMemo(() => {
-			const selectiveItemClasses = ["color", { name: "label", label: "ラベル", values: "hasLabel" }];
+			const selectiveItemClasses = ["color", { name: "label", label: __("ラベル", "catpow"), values: "hasLabel" }];
 			wp.hooks.applyFilters("catpow.blocks.materials.selectiveItemClasses", CP.finderProxy(selectiveItemClasses));
 			return selectiveItemClasses;
 		}, []);
@@ -43,11 +45,11 @@
 			<>
 				<CP.SelectModeToolbar setAttributes={setAttributes} attributes={attributes} />
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title={__("クラス", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
+						<TextareaControl label={__("クラス", "catpow")} onChange={(classes) => setAttributes({ classes })} value={classes} />
 					</PanelBody>
-					<CP.SelectClassPanel title="グループ" icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={selectiveItemClasses} />
+					<CP.SelectClassPanel title={__("グループ", "catpow")} icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={selectiveItemClasses} />
 					<CP.ItemControlInfoPanel />
 				</InspectorControls>
 				<>

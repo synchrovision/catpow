@@ -1,4 +1,6 @@
-﻿import { clsx } from "clsx";
+﻿const { __ } = wp.i18n;
+
+import { clsx } from "clsx";
 
 wp.blocks.registerBlockType("catpow/tabs", {
 	attributes: {
@@ -30,14 +32,14 @@ wp.blocks.registerBlockType("catpow/tabs", {
 				{
 					name: "type",
 					type: "buttons",
-					label: "タイプ",
-					values: { isTypeLabel: "ラベル", isTypeBar: "バー", isTypePanel: "パネル" },
+					label: __("タイプ", "catpow"),
+					values: { isTypeLabel: __("ラベル", "catpow"), isTypeBar: __("バー", "catpow"), isTypePanel: __("パネル", "catpow") },
 				},
 				{
 					name: "style",
 					type: "buttons",
-					label: "スタイル",
-					values: { isStyleTable: "テーブル", isStyleFlat: "フラット" },
+					label: __("スタイル", "catpow"),
+					values: { isStyleTable: __("テーブル", "catpow"), isStyleFlat: __("フラット", "catpow") },
 				},
 			];
 			wp.hooks.applyFilters("catpow.blocks.tabs.selectiveClasses", CP.finderProxy(selectiveClasses));
@@ -57,7 +59,7 @@ wp.blocks.registerBlockType("catpow/tabs", {
 		return (
 			<>
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" initialOpen={true} icon="admin-generic" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title={__("クラス", "catpow")} initialOpen={true} icon="admin-generic" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 				</InspectorControls>
 				<CP.Bem prefix="wp-block-catpow">
 					<div {...useBlockProps({ className: classes, style: { ...vars, "--current-index": currentIndex, "--length": items.length } })} data-current-index={currentIndex}>

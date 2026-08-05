@@ -16,7 +16,7 @@ $attributes=[
 			"ignoreMessage"=>["source"=>"attribute","selector"=>".{$block_class}-button","attribute"=>"ignore-message"],
 		],
 		[
-			["action"=>"send","text"=>"送信"]
+			["action"=>"send","text"=>__("送信",'catpow')]
 		]
 	)
 ];

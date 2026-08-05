@@ -1,4 +1,6 @@
-﻿CP.config.sticky = {
+﻿const { __ } = wp.i18n;
+
+CP.config.sticky = {
 	imageKeys: {
 		openButtonImage: { src: "openButtonImageSrc" },
 		closeButtonImage: { src: "closeButtonImageSrc" },
@@ -9,13 +11,13 @@
 };
 wp.blocks.registerBlockType("catpow/sticky", {
 	title: "🐾 Sticky",
-	description: "スクロールに追従するコンテンツを配置します。",
+	description: __("スクロールに追従するコンテンツを配置します。", "catpow"),
 	icon: "menu",
 	category: "catpow",
 	attributes: {
 		classes: { source: "attribute", selector: "div", attribute: "class", default: "wp-block-catpow-sticky topLeft small label" },
 
-		labelText: { source: "html", selector: ".content>.label", defalt: "ラベル" },
+		labelText: { source: "html", selector: ".content>.label", defalt: __("ラベル", "catpow") },
 
 		openButtonImageSrc: { source: "attribute", selector: ".wp-block-catpow-sticky>.stickyButton [src].open", attribute: "src", default: wpinfo.theme_url + "/images/dummy_icon.svg" },
 		closeButtonImageSrc: { source: "attribute", selector: ".wp-block-catpow-sticky>.stickyButton [src].close", attribute: "src", default: wpinfo.theme_url + "/images/dummy_icon.svg" },
@@ -33,21 +35,21 @@ wp.blocks.registerBlockType("catpow/sticky", {
 		const selectiveClasses = useMemo(() => {
 			const { imageKeys } = CP.config.sticky;
 			const selectiveClasses = [
-				{ name: "position", label: "位置", input: "position", disable: ["left", "center", "right"] },
-				{ name: "size", label: "サイズ", filter: "size", values: { full: "全面", large: "大", medium: "中", small: "小" } },
+				{ name: "position", label: __("位置", "catpow"), input: "position", disable: ["left", "center", "right"] },
+				{ name: "size", label: __("サイズ", "catpow"), filter: "size", values: { full: __("全面", "catpow"), large: __("大", "catpow"), medium: __("中", "catpow"), small: __("小", "catpow") } },
 				{
 					name: "type",
-					label: "タイプ",
+					label: __("タイプ", "catpow"),
 					filter: "type",
-					values: { label: "ラベル", container: "コンテナ", collapsible: "折り畳み" },
+					values: { label: __("ラベル", "catpow"), container: __("コンテナ", "catpow"), collapsible: __("折り畳み", "catpow") },
 					sub: {
 						label: ["color"],
 						collapsible: [
 							"color",
 							{
 								name: "button",
-								label: "ボタン",
-								values: { pullButton: "引き出し", menuButton: "メニュー", labelButton: "ラベル", imageButton: "画像" },
+								label: __("ボタン", "catpow"),
+								values: { pullButton: __("引き出し", "catpow"), menuButton: __("メニュー", "catpow"), labelButton: __("ラベル", "catpow"), imageButton: __("画像", "catpow") },
 								sub: {
 									imageButton: [
 										{ label: "open", input: "image", keys: imageKeys.openButtonImage, size: "thumbnail" },
@@ -101,9 +103,9 @@ wp.blocks.registerBlockType("catpow/sticky", {
 					</div>
 				</div>
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title={__("クラス", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
+						<TextareaControl label={__("クラス", "catpow")} onChange={(classes) => setAttributes({ classes })} value={classes} />
 					</PanelBody>
 				</InspectorControls>
 			</>

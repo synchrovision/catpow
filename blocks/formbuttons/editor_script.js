@@ -1,5 +1,6 @@
 (() => {
   // ../blocks/formbuttons/editor_script.jsx
+  var { __ } = wp.i18n;
   var blockConfig = {
     linkKeys: {
       link: { href: "action", items: "items" }
@@ -8,7 +9,7 @@
   CP.config.formbuttons = blockConfig;
   wp.blocks.registerBlockType("catpow/formbuttons", {
     title: "\u{1F43E} FormButtons",
-    description: "\u30D5\u30A9\u30FC\u30E0\u7528\u306E\u30DC\u30BF\u30F3\u3067\u3059\u3002",
+    description: __("\u30D5\u30A9\u30FC\u30E0\u7528\u306E\u30DC\u30BF\u30F3\u3067\u3059\u3002", "catpow"),
     icon: "upload",
     category: "catpow",
     example: CP.example,
@@ -92,7 +93,7 @@
           },
           item.caption
         ));
-      }))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30DC\u30BF\u30F3", icon: "edit", ...{ setAttributes, attributes }, itemKeys: ["items", attributes.currentItemIndex], selectiveClasses: selectiveItemClasses }), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(CP.AlignClassToolbar, { setAttributes, attributes })));
+      }))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30AF\u30E9\u30B9", "catpow"), icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30DC\u30BF\u30F3", "catpow"), icon: "edit", ...{ setAttributes, attributes }, itemKeys: ["items", attributes.currentItemIndex], selectiveClasses: selectiveItemClasses }), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(CP.AlignClassToolbar, { setAttributes, attributes })));
     },
     save({ attributes }) {
       const { useBlockProps } = wp.blockEditor;
@@ -135,7 +136,7 @@
               event: { source: "attribute", attribute: "data-event" },
               button: { source: "text" }
             },
-            default: [{ classes: "item", button: "[button \u9001\u4FE1 send]" }]
+            default: [{ classes: "item", button: __("[button \u9001\u4FE1 send]", "catpow") }]
           }
         },
         save({ attributes, className }) {
@@ -160,7 +161,7 @@
               }
               return rtn;
             }
-            return { content: "\u9001\u4FE1" };
+            return { content: __("\u9001\u4FE1", "catpow") };
           };
           items.map((item) => {
             const buttonData = parseButtonShortCode(item.button);

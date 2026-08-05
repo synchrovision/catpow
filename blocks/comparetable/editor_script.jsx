@@ -94,15 +94,15 @@ wp.blocks.registerBlockType("catpow/comparetable", {
 				{
 					name: "type",
 					type: "buttons",
-					label: "タイプ",
+					label: __("タイプ", "catpow"),
 					values: {
 						isStyleSpec: "spec",
 						isStyleSheet: "sheet",
 						isStylePlan: "plan",
 					},
 				},
-				{ name: "transposiiton", label: "転置", values: "doTransposition" },
-				{ name: "tags", label: "タグ", values: "hasTags" },
+				{ name: "transposiiton", label: __("転置", "catpow"), values: "doTransposition" },
+				{ name: "tags", label: __("タグ", "catpow"), values: "hasTags" },
 				{
 					name: "headerColumn",
 					label: __("見出し列", "catpow"),
@@ -158,12 +158,12 @@ wp.blocks.registerBlockType("catpow/comparetable", {
 				{
 					name: "type",
 					type: "buttons",
-					label: "タイプ",
+					label: __("タイプ", "catpow"),
 					values: {
-						isStandard: "通常",
-						isPremium: "高品質",
-						isRecommended: "推奨",
-						isDeprecated: "非推奨",
+						isStandard: __("通常", "catpow"),
+						isPremium: __("高品質", "catpow"),
+						isRecommended: __("推奨", "catpow"),
+						isDeprecated: __("非推奨", "catpow"),
 					},
 				},
 			];
@@ -190,11 +190,11 @@ wp.blocks.registerBlockType("catpow/comparetable", {
 				{
 					name: "type",
 					type: "buttons",
-					label: "タイプ",
+					label: __("タイプ", "catpow"),
 					values: {
-						isEqual: "等",
-						isPositive: "正",
-						isNegative: "負",
+						isEqual: __("等", "catpow"),
+						isPositive: __("正", "catpow"),
+						isNegative: __("負", "catpow"),
 					},
 				},
 			];
@@ -206,7 +206,7 @@ wp.blocks.registerBlockType("catpow/comparetable", {
 				{
 					name: "label",
 					type: "buttons",
-					label: "ラベル",
+					label: __("ラベル", "catpow"),
 					values: "hasLabel",
 				},
 			];
@@ -218,11 +218,11 @@ wp.blocks.registerBlockType("catpow/comparetable", {
 				{
 					name: "type",
 					type: "buttons",
-					label: "タイプ",
+					label: __("タイプ", "catpow"),
 					values: {
-						isSpacer: "空白",
-						isLabel: "ラベル",
-						isTitle: "タイトル",
+						isSpacer: __("空白", "catpow"),
+						isLabel: __("ラベル", "catpow"),
+						isTitle: __("タイトル", "catpow"),
 					},
 				},
 			];
@@ -538,22 +538,22 @@ wp.blocks.registerBlockType("catpow/comparetable", {
 					)}
 				</>
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title={__("クラス", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 					{r === 0 ? (
-						<CP.SelectClassPanel title="行" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveHeaderRowClasses} itemKeys={["rows", r]} />
+						<CP.SelectClassPanel title={__("行", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveHeaderRowClasses} itemKeys={["rows", r]} />
 					) : (
-						<CP.SelectClassPanel title="行" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveRowClasses} itemKeys={["rows", r]} />
+						<CP.SelectClassPanel title={__("行", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveRowClasses} itemKeys={["rows", r]} />
 					)}
 					{states.hasHeaderColumn && c === 0 ? (
-						<CP.SelectClassPanel title="列" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveHeaderColClasses} classKey="headerColClasses" />
+						<CP.SelectClassPanel title={__("列", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveHeaderColClasses} classKey="headerColClasses" />
 					) : (
-						<CP.SelectClassPanel title="列" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveColClasses} itemKeys={["cols", c]} />
+						<CP.SelectClassPanel title={__("列", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveColClasses} itemKeys={["cols", c]} />
 					)}
 					{states.hasHeaderColumn && r === 0 && c === 0 ? (
-						<CP.SelectClassPanel title="セル" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveFirstCellClasses} classKey="firstCellClasses" />
+						<CP.SelectClassPanel title={__("セル", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveFirstCellClasses} classKey="firstCellClasses" />
 					) : (
 						<CP.SelectClassPanel
-							title="セル"
+							title={__("セル", "catpow")}
 							icon="art"
 							{...{ setAttributes, attributes }}
 							selectiveClasses={c === 0 ? selectiveHeaderColCellClasses : selectiveCellClasses}

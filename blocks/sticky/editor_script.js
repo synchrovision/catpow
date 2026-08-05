@@ -1,5 +1,6 @@
 (() => {
   // ../blocks/sticky/editor_script.jsx
+  var { __ } = wp.i18n;
   CP.config.sticky = {
     imageKeys: {
       openButtonImage: { src: "openButtonImageSrc" },
@@ -11,12 +12,12 @@
   };
   wp.blocks.registerBlockType("catpow/sticky", {
     title: "\u{1F43E} Sticky",
-    description: "\u30B9\u30AF\u30ED\u30FC\u30EB\u306B\u8FFD\u5F93\u3059\u308B\u30B3\u30F3\u30C6\u30F3\u30C4\u3092\u914D\u7F6E\u3057\u307E\u3059\u3002",
+    description: __("\u30B9\u30AF\u30ED\u30FC\u30EB\u306B\u8FFD\u5F93\u3059\u308B\u30B3\u30F3\u30C6\u30F3\u30C4\u3092\u914D\u7F6E\u3057\u307E\u3059\u3002", "catpow"),
     icon: "menu",
     category: "catpow",
     attributes: {
       classes: { source: "attribute", selector: "div", attribute: "class", default: "wp-block-catpow-sticky topLeft small label" },
-      labelText: { source: "html", selector: ".content>.label", defalt: "\u30E9\u30D9\u30EB" },
+      labelText: { source: "html", selector: ".content>.label", defalt: __("\u30E9\u30D9\u30EB", "catpow") },
       openButtonImageSrc: { source: "attribute", selector: ".wp-block-catpow-sticky>.stickyButton [src].open", attribute: "src", default: wpinfo.theme_url + "/images/dummy_icon.svg" },
       closeButtonImageSrc: { source: "attribute", selector: ".wp-block-catpow-sticky>.stickyButton [src].close", attribute: "src", default: wpinfo.theme_url + "/images/dummy_icon.svg" }
     },
@@ -31,21 +32,21 @@
       const selectiveClasses = useMemo(() => {
         const { imageKeys: imageKeys2 } = CP.config.sticky;
         const selectiveClasses2 = [
-          { name: "position", label: "\u4F4D\u7F6E", input: "position", disable: ["left", "center", "right"] },
-          { name: "size", label: "\u30B5\u30A4\u30BA", filter: "size", values: { full: "\u5168\u9762", large: "\u5927", medium: "\u4E2D", small: "\u5C0F" } },
+          { name: "position", label: __("\u4F4D\u7F6E", "catpow"), input: "position", disable: ["left", "center", "right"] },
+          { name: "size", label: __("\u30B5\u30A4\u30BA", "catpow"), filter: "size", values: { full: __("\u5168\u9762", "catpow"), large: __("\u5927", "catpow"), medium: __("\u4E2D", "catpow"), small: __("\u5C0F", "catpow") } },
           {
             name: "type",
-            label: "\u30BF\u30A4\u30D7",
+            label: __("\u30BF\u30A4\u30D7", "catpow"),
             filter: "type",
-            values: { label: "\u30E9\u30D9\u30EB", container: "\u30B3\u30F3\u30C6\u30CA", collapsible: "\u6298\u308A\u7573\u307F" },
+            values: { label: __("\u30E9\u30D9\u30EB", "catpow"), container: __("\u30B3\u30F3\u30C6\u30CA", "catpow"), collapsible: __("\u6298\u308A\u7573\u307F", "catpow") },
             sub: {
               label: ["color"],
               collapsible: [
                 "color",
                 {
                   name: "button",
-                  label: "\u30DC\u30BF\u30F3",
-                  values: { pullButton: "\u5F15\u304D\u51FA\u3057", menuButton: "\u30E1\u30CB\u30E5\u30FC", labelButton: "\u30E9\u30D9\u30EB", imageButton: "\u753B\u50CF" },
+                  label: __("\u30DC\u30BF\u30F3", "catpow"),
+                  values: { pullButton: __("\u5F15\u304D\u51FA\u3057", "catpow"), menuButton: __("\u30E1\u30CB\u30E5\u30FC", "catpow"), labelButton: __("\u30E9\u30D9\u30EB", "catpow"), imageButton: __("\u753B\u50CF", "catpow") },
                   sub: {
                     imageButton: [
                       { label: "open", input: "image", keys: imageKeys2.openButtonImage, size: "thumbnail" },
@@ -79,7 +80,7 @@
           },
           value: labelText
         }
-      )), (states.container || states.collapsible) && /* @__PURE__ */ wp.element.createElement(InnerBlocks2, null))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: "\u30AF\u30E9\u30B9", onChange: (classes2) => setAttributes({ classes: classes2 }), value: classes }))));
+      )), (states.container || states.collapsible) && /* @__PURE__ */ wp.element.createElement(InnerBlocks2, null))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30AF\u30E9\u30B9", "catpow"), icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: __("\u30AF\u30E9\u30B9", "catpow"), onChange: (classes2) => setAttributes({ classes: classes2 }), value: classes }))));
     },
     save({ attributes, className, setAttributes }) {
       const { InnerBlocks: InnerBlocks2, RichText: RichText2, useBlockProps } = wp.blockEditor;

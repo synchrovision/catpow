@@ -1,4 +1,6 @@
-﻿CP.config.flow = {
+﻿const { __ } = wp.i18n;
+
+CP.config.flow = {
 	imageKeys: {
 		image: { src: "src", alt: "alt", items: "items" },
 	},
@@ -9,7 +11,7 @@
 
 wp.blocks.registerBlockType("catpow/flow", {
 	title: "🐾 Flow",
-	description: "手順や順番の一覧ブロックです。",
+	description: __("手順や順番の一覧ブロックです。", "catpow"),
 	icon: "editor-ol",
 	category: "catpow",
 	transforms: {
@@ -96,39 +98,39 @@ wp.blocks.registerBlockType("catpow/flow", {
 				{
 					name: "type",
 					type: "buttons",
-					label: "タイプ",
-					values: { isTypeFlat: "フラット", isTypeCard: "カード", isTypeTimeline: "タイムライン" },
+					label: __("タイプ", "catpow"),
+					values: { isTypeFlat: __("フラット", "catpow"), isTypeCard: __("カード", "catpow"), isTypeTimeline: __("タイムライン", "catpow") },
 				},
 				{ preset: "itemSize", cond: (states) => states.isTypeFlat || states.isTypeTimeline },
-				{ name: "subHeadingTag", preset: "headingTag", key: "SubHeadingTag", label: "副見出しタグ", classKey: "contentsClasses", cond: "hasSubTitle" },
-				{ name: "contentsLevel", preset: "level", label: "コンテンツレベル", classKey: "contentsClasses" },
+				{ name: "subHeadingTag", preset: "headingTag", key: "SubHeadingTag", label: __("副見出しタグ", "catpow"), classKey: "contentsClasses", cond: "hasSubTitle" },
+				{ name: "contentsLevel", preset: "level", label: __("コンテンツレベル", "catpow"), classKey: "contentsClasses" },
 				{
 					name: "counter",
-					label: "番号",
+					label: __("番号", "catpow"),
 					values: "hasCounter",
 					sub: [
 						{
 							name: "countPrefix",
 							input: "text",
-							label: "番号前置テキスト",
+							label: __("番号前置テキスト", "catpow"),
 							key: "countPrefix",
 						},
 						{
 							name: "countSuffix",
 							input: "text",
-							label: "番号後置テキスト",
+							label: __("番号後置テキスト", "catpow"),
 							key: "countSuffix",
 						},
 					],
 				},
-				{ name: "image", label: "画像", values: "hasImage" },
+				{ name: "image", label: __("画像", "catpow"), values: "hasImage" },
 				{
 					name: "titleCaption",
-					label: "タイトルキャプション",
+					label: __("タイトルキャプション", "catpow"),
 					values: "hasTitleCaption",
 				},
-				{ name: "subTitle", label: "サブタイトル", values: "hasSubTitle" },
-				{ name: "link", label: "リンク", values: "hasLink" },
+				{ name: "subTitle", label: __("サブタイトル", "catpow"), values: "hasSubTitle" },
+				{ name: "link", label: __("リンク", "catpow"), values: "hasLink" },
 			];
 			wp.hooks.applyFilters("catpow.blocks.flow.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
@@ -158,9 +160,9 @@ wp.blocks.registerBlockType("catpow/flow", {
 					/>
 				</BlockControls>
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title={__("クラス", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
+						<TextareaControl label={__("クラス", "catpow")} onChange={(classes) => setAttributes({ classes })} value={classes} />
 					</PanelBody>
 					<CP.ItemControlInfoPanel />
 				</InspectorControls>

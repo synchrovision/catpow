@@ -15,9 +15,10 @@
   }
 
   // ../blocks/loopblock/editor_script.jsx
+  var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/loopblock", {
     title: "\u{1F43E} Loopblock",
-    description: "\u30AF\u30A8\u30EA\u306E\u6295\u7A3F\u306E\u60C5\u5831\u3092\u8868\u793A\u3059\u308B\u305F\u3081\u306E\u30B3\u30F3\u30C6\u30CA\u3067\u3059\u3002",
+    description: __("\u30AF\u30A8\u30EA\u306E\u6295\u7A3F\u306E\u60C5\u5831\u3092\u8868\u793A\u3059\u308B\u305F\u3081\u306E\u30B3\u30F3\u30C6\u30CA\u3067\u3059\u3002", "catpow"),
     icon: "editor-code",
     category: "catpow-functional",
     example: CP.example,
@@ -74,7 +75,7 @@
     attributes: {
       name: {
         type: "attribute",
-        label: "\u540D\u524D",
+        label: __("\u540D\u524D", "catpow"),
         selector: "loop-block-content",
         attribute: "name",
         default: "content"

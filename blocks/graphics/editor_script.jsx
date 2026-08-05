@@ -1,4 +1,6 @@
-﻿import { clsx } from "clsx";
+﻿const { __ } = wp.i18n;
+
+import { clsx } from "clsx";
 
 CP.config.graphics = {
 	devices: ["tb", "sp"],
@@ -60,7 +62,7 @@ CP.config.graphics = {
 
 wp.blocks.registerBlockType("catpow/graphics", {
 	title: "🐾 graphics",
-	description: "画像を自由にレイアウトします。",
+	description: __("画像を自由にレイアウトします。", "catpow"),
 	icon: "format-image",
 	category: "catpow",
 	example: CP.example,
@@ -89,7 +91,7 @@ wp.blocks.registerBlockType("catpow/graphics", {
 			const selectiveClasses = [
 				{
 					name: "baseImage",
-					label: "ベース画像",
+					label: __("ベース画像", "catpow"),
 					values: "hasBaseImage",
 					sub: [
 						{
@@ -110,8 +112,8 @@ wp.blocks.registerBlockType("catpow/graphics", {
 				{
 					name: "type",
 					type: "buttons",
-					label: "タイプ",
-					values: { isImage: "画像", isText: "テキスト" },
+					label: __("タイプ", "catpow"),
+					values: { isImage: __("画像", "catpow"), isText: __("テキスト", "catpow") },
 					sub: {
 						isImage: [
 							{
@@ -119,12 +121,12 @@ wp.blocks.registerBlockType("catpow/graphics", {
 								type: "buttons",
 								values: ["isType1", "isType2", "isType3"],
 							},
-							{ name: "alt", input: "text", label: "代替テキスト", key: "alt" },
-							{ name: "link", input: "text", label: "リンク", key: "link" },
+							{ name: "alt", input: "text", label: __("代替テキスト", "catpow"), key: "alt" },
+							{ name: "link", input: "text", label: __("リンク", "catpow"), key: "link" },
 							{
 								name: "image",
 								input: "picture",
-								label: "画像",
+								label: __("画像", "catpow"),
 								keys: imageKeys.image,
 								devices,
 							},
@@ -139,70 +141,70 @@ wp.blocks.registerBlockType("catpow/graphics", {
 							"color",
 							"colorScheme",
 							"backgroundColor",
-							{ name: "title", label: "見出し", values: "hasTitle" },
-							{ name: "lead", label: "リード", values: "hasLead" },
-							{ name: "text", label: "テキスト", values: "hasText" },
+							{ name: "title", label: __("見出し", "catpow"), values: "hasTitle" },
+							{ name: "lead", label: __("リード", "catpow"), values: "hasLead" },
+							{ name: "text", label: __("テキスト", "catpow"), values: "hasText" },
 						],
 					},
 				},
 				"boxShadow",
 				"hasTextShadow",
-				{ name: "isEllipse", label: "円形", values: "isEllipse" },
-				{ name: "isfadeIn", label: "フェードイン", values: "isfadeIn" },
+				{ name: "isEllipse", label: __("円形", "catpow"), values: "isEllipse" },
+				{ name: "isfadeIn", label: __("フェードイン", "catpow"), values: "isfadeIn" },
 				{
 					name: "isSlideIn",
-					label: "スライドイン",
+					label: __("スライドイン", "catpow"),
 					values: "isSlideIn",
 					sub: [
 						{
 							name: "direction",
 							type: "radio",
-							label: "方向",
+							label: __("方向", "catpow"),
 							values: {
-								slideInLeft: "左",
-								slideInRight: "右",
-								slideInUp: "上",
-								slideInDown: "下",
-								slideInFront: "前",
-								slideInBack: "後",
+								slideInLeft: __("左", "catpow"),
+								slideInRight: __("右", "catpow"),
+								slideInUp: __("上", "catpow"),
+								slideInDown: __("下", "catpow"),
+								slideInFront: __("前", "catpow"),
+								slideInBack: __("後", "catpow"),
 							},
 						},
 					],
 				},
 				{
 					name: "isRoll",
-					label: "回転",
+					label: __("回転", "catpow"),
 					values: "isRoll",
 					sub: [
 						{
 							name: "direction",
 							type: "radio",
-							label: "方向",
-							values: { isRollLeft: "左", isRollRight: "右" },
+							label: __("方向", "catpow"),
+							values: { isRollLeft: __("左", "catpow"), isRollRight: __("右", "catpow") },
 						},
 						{
 							name: "speed",
 							type: "radio",
-							label: "速度",
-							values: { isRollSlow: "遅い", isRollFast: "速い" },
+							label: __("速度", "catpow"),
+							values: { isRollSlow: __("遅い", "catpow"), isRollFast: __("速い", "catpow") },
 						},
 					],
 				},
 				{
 					name: "isHover",
-					label: "ホバー",
+					label: __("ホバー", "catpow"),
 					values: "isHover",
 					sub: [
-						{ name: "fade", label: "フェード", values: "isHoverFade" },
+						{ name: "fade", label: __("フェード", "catpow"), values: "isHoverFade" },
 						{
 							name: "motion",
 							type: "radio",
-							label: "動き",
+							label: __("動き", "catpow"),
 							values: {
-								isHoverNoMove: "なし",
-								isHoverZoom: "ズーム",
-								isHoverLift: "リフト",
-								isHoverJump: "ジャンプ",
+								isHoverNoMove: __("なし", "catpow"),
+								isHoverZoom: __("ズーム", "catpow"),
+								isHoverLift: __("リフト", "catpow"),
+								isHoverJump: __("ジャンプ", "catpow"),
 							},
 						},
 					],
@@ -615,7 +617,7 @@ wp.blocks.registerBlockType("catpow/graphics", {
 					</CP.Bem>
 				</div>
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} initialOpen={true}>
+					<CP.SelectClassPanel title={__("クラス", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} initialOpen={true}>
 						{!states.hasBaseImage && (
 							<InputHeights
 								value={heights}
@@ -634,7 +636,7 @@ wp.blocks.registerBlockType("catpow/graphics", {
 					</CP.SelectClassPanel>
 					{currentItemIndexes.length === 1 && (
 						<CP.SelectClassPanel
-							title="アイテム"
+							title={__("アイテム", "catpow")}
 							icon="edit"
 							{...{ setAttributes, attributes }}
 							itemKeys={["items", currentItemIndexes[0]]}
@@ -645,7 +647,7 @@ wp.blocks.registerBlockType("catpow/graphics", {
 					{currentItemIndexes.length === 1 && (
 						<PanelBody title="ITEM CLASS" icon="admin-generic" initialOpen={false}>
 							<TextareaControl
-								label="クラス"
+								label={__("クラス", "catpow")}
 								onChange={(classes) => {
 									items[currentItemIndexes[0]].classes = classes;
 									save();

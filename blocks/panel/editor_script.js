@@ -1,5 +1,6 @@
 (() => {
   // ../blocks/panel/editor_script.jsx
+  var { __ } = wp.i18n;
   CP.config.panel = {
     imageKeys: {
       icon: { src: "iconSrc", alt: "iconAlt", items: "items" },
@@ -8,7 +9,7 @@
   };
   wp.blocks.registerBlockType("catpow/panel", {
     title: "\u{1F43E} Panel",
-    description: "\u5927\u5C0F\u306E\u77E9\u5F62\u30D1\u30CD\u30EB\u3092\u30EC\u30A4\u30A2\u30A6\u30C8\u3057\u307E\u3059\u3002",
+    description: __("\u5927\u5C0F\u306E\u77E9\u5F62\u30D1\u30CD\u30EB\u3092\u30EC\u30A4\u30A2\u30A6\u30C8\u3057\u307E\u3059\u3002", "catpow"),
     icon: "grid-view",
     category: "catpow",
     example: CP.example,
@@ -23,44 +24,44 @@
         const selectiveClasses2 = [
           {
             name: "type",
-            label: "\u30BF\u30A4\u30D7",
+            label: __("\u30BF\u30A4\u30D7", "catpow"),
             type: "buttons",
-            values: { isTypeTile: "\u30BF\u30A4\u30EB", isTypeMenu: "\u30E1\u30CB\u30E5\u30FC" },
+            values: { isTypeTile: __("\u30BF\u30A4\u30EB", "catpow"), isTypeMenu: __("\u30E1\u30CB\u30E5\u30FC", "catpow") },
             item: {
               isTypeTile: [
                 "color",
                 "colorScheme",
-                { name: "icon", label: "\u30A2\u30A4\u30B3\u30F3", values: "hasIcon", sub: [{ input: "icon" }] },
-                { name: "title", label: "\u30BF\u30A4\u30C8\u30EB", values: "hasTitle" },
-                { name: "text", label: "\u6587\u7AE0", values: "hasText" },
+                { name: "icon", label: __("\u30A2\u30A4\u30B3\u30F3", "catpow"), values: "hasIcon", sub: [{ input: "icon" }] },
+                { name: "title", label: __("\u30BF\u30A4\u30C8\u30EB", "catpow"), values: "hasTitle" },
+                { name: "text", label: __("\u6587\u7AE0", "catpow"), values: "hasText" },
                 {
                   name: "image",
-                  label: "\u753B\u50CF",
+                  label: __("\u753B\u50CF", "catpow"),
                   values: "hasImage",
                   sub: [
-                    { name: "paleImage", label: "\u753B\u50CF\u3092\u8584\u304F", values: "paleImage" },
-                    { name: "image", label: "\u753B\u50CF", input: "image", keys: imageKeys.image, size: "vga" }
+                    { name: "paleImage", label: __("\u753B\u50CF\u3092\u8584\u304F", "catpow"), values: "paleImage" },
+                    { name: "image", label: __("\u753B\u50CF", "catpow"), input: "image", keys: imageKeys.image, size: "vga" }
                   ]
                 },
-                { name: "link", label: "\u30EA\u30F3\u30AF", values: "hasLink", sub: [{ name: "external", label: "\u5916\u90E8\u30EA\u30F3\u30AF", values: "linkExternal" }] },
-                { name: "rowSpan", type: "buttons", label: "\u7E26\u30B5\u30A4\u30BA", values: { hasRspan1: "1", hasRspan2: "2", hasRspan3: "3" } },
-                { name: "colSpan", type: "buttons", label: "\u6A2A\u30B5\u30A4\u30BA", values: { hasCspan1: "1", hasCspan2: "2", hasCspan3: "3" } }
+                { name: "link", label: __("\u30EA\u30F3\u30AF", "catpow"), values: "hasLink", sub: [{ name: "external", label: __("\u5916\u90E8\u30EA\u30F3\u30AF", "catpow"), values: "linkExternal" }] },
+                { name: "rowSpan", type: "buttons", label: __("\u7E26\u30B5\u30A4\u30BA", "catpow"), values: { hasRspan1: "1", hasRspan2: "2", hasRspan3: "3" } },
+                { name: "colSpan", type: "buttons", label: __("\u6A2A\u30B5\u30A4\u30BA", "catpow"), values: { hasCspan1: "1", hasCspan2: "2", hasCspan3: "3" } }
               ],
               isTypeMenu: [
                 "color",
-                { name: "icon", label: "\u30A2\u30A4\u30B3\u30F3", values: "hasIcon", sub: [{ input: "icon" }] },
-                { name: "title", label: "\u30BF\u30A4\u30C8\u30EB", values: "hasTitle" },
-                { name: "text", label: "\u6587\u7AE0", values: "hasText" },
-                { name: "image", label: "\u753B\u50CF", values: "hasImage", sub: [{ name: "image", label: "\u753B\u50CF", input: "image", keys: imageKeys.image, size: "vga" }] },
-                { name: "link", label: "\u30EA\u30F3\u30AF", values: "hasLink", sub: [{ name: "external", label: "\u5916\u90E8\u30EA\u30F3\u30AF", values: "linkExternal" }] },
-                { name: "rowSpan", type: "buttons", label: "\u7E26\u30B5\u30A4\u30BA", values: { hasRspan1: "1", hasRspan2: "2", hasRspan3: "3" } },
-                { name: "colSpan", type: "buttons", label: "\u6A2A\u30B5\u30A4\u30BA", values: { hasCspan1: "1", hasCspan2: "2", hasCspan3: "3" } }
+                { name: "icon", label: __("\u30A2\u30A4\u30B3\u30F3", "catpow"), values: "hasIcon", sub: [{ input: "icon" }] },
+                { name: "title", label: __("\u30BF\u30A4\u30C8\u30EB", "catpow"), values: "hasTitle" },
+                { name: "text", label: __("\u6587\u7AE0", "catpow"), values: "hasText" },
+                { name: "image", label: __("\u753B\u50CF", "catpow"), values: "hasImage", sub: [{ name: "image", label: __("\u753B\u50CF", "catpow"), input: "image", keys: imageKeys.image, size: "vga" }] },
+                { name: "link", label: __("\u30EA\u30F3\u30AF", "catpow"), values: "hasLink", sub: [{ name: "external", label: __("\u5916\u90E8\u30EA\u30F3\u30AF", "catpow"), values: "linkExternal" }] },
+                { name: "rowSpan", type: "buttons", label: __("\u7E26\u30B5\u30A4\u30BA", "catpow"), values: { hasRspan1: "1", hasRspan2: "2", hasRspan3: "3" } },
+                { name: "colSpan", type: "buttons", label: __("\u6A2A\u30B5\u30A4\u30BA", "catpow"), values: { hasCspan1: "1", hasCspan2: "2", hasCspan3: "3" } }
               ]
             }
           },
           {
             name: "size",
-            label: "\u30B0\u30EA\u30C3\u30C9\u30B5\u30A4\u30BA",
+            label: __("\u30B0\u30EA\u30C3\u30C9\u30B5\u30A4\u30BA", "catpow"),
             type: "buttons",
             values: {
               hasGridSize1: "1",
@@ -70,7 +71,7 @@
             }
           },
           {
-            label: "\u30AB\u30E9\u30E0\u7D04\u6570\uFF082^n\uFF09",
+            label: __("\u30AB\u30E9\u30E0\u7D04\u6570\uFF082^n\uFF09", "catpow"),
             type: "buttons",
             values: {
               hasGrid2n: "2",
@@ -81,7 +82,7 @@
             }
           },
           {
-            label: "\u30AB\u30E9\u30E0\u7D04\u6570\uFF083^n\uFF09",
+            label: __("\u30AB\u30E9\u30E0\u7D04\u6570\uFF083^n\uFF09", "catpow"),
             type: "buttons",
             values: {
               hasGrid3n: "3",
@@ -90,7 +91,7 @@
             }
           },
           {
-            label: "\u30AB\u30E9\u30E0\u7D04\u6570\uFF085^n\uFF09",
+            label: __("\u30AB\u30E9\u30E0\u7D04\u6570\uFF085^n\uFF09", "catpow"),
             type: "buttons",
             values: {
               hasGrid5n: "5",
@@ -155,7 +156,7 @@
             value: item.linkUrl
           }
         ))));
-      })))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "info", icon: "admin-generic", initialOpen: true }, /* @__PURE__ */ wp.element.createElement("p", null, "\u5408\u8A08\u30B0\u30EA\u30C3\u30C9\u6570\uFF1A", totalGrid), /* @__PURE__ */ wp.element.createElement("p", null, "\u671F\u5F85\u30B0\u30EA\u30C3\u30C9\u6570\uFF1A", expectedGrid)), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30D1\u30CD\u30EB", icon: "edit", ...{ setAttributes, attributes }, itemKeys: ["items", attributes.currentItemIndex], triggerClasses: selectiveClasses[4] }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: "\u30AF\u30E9\u30B9", onChange: (classes2) => setAttributes({ classes: classes2 }), value: classes })), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)));
+      })))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "info", icon: "admin-generic", initialOpen: true }, /* @__PURE__ */ wp.element.createElement("p", null, __("\u5408\u8A08\u30B0\u30EA\u30C3\u30C9\u6570\uFF1A", "catpow"), totalGrid), /* @__PURE__ */ wp.element.createElement("p", null, __("\u671F\u5F85\u30B0\u30EA\u30C3\u30C9\u6570\uFF1A", "catpow"), expectedGrid)), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30AF\u30E9\u30B9", "catpow"), icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30D1\u30CD\u30EB", "catpow"), icon: "edit", ...{ setAttributes, attributes }, itemKeys: ["items", attributes.currentItemIndex], triggerClasses: selectiveClasses[4] }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: __("\u30AF\u30E9\u30B9", "catpow"), onChange: (classes2) => setAttributes({ classes: classes2 }), value: classes })), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)));
     },
     save({ attributes, className }) {
       const { RichText } = wp.blockEditor;

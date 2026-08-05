@@ -1,8 +1,9 @@
 (() => {
   // ../blocks/cond/editor_script.jsx
+  var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/cond", {
     title: "\u{1F43E} Cond",
-    description: "\u65E5\u6642\u3084\u30ED\u30B0\u30A4\u30F3\u30E6\u30FC\u30B6\u30FC\u306B\u3088\u3063\u3066\u30B3\u30F3\u30C6\u30F3\u30C4\u306E\u8868\u793A\u304C\u5207\u308A\u66FF\u308F\u308B\u30B3\u30F3\u30C6\u30CA\u3067\u3059\u3002",
+    description: __("\u65E5\u6642\u3084\u30ED\u30B0\u30A4\u30F3\u30E6\u30FC\u30B6\u30FC\u306B\u3088\u3063\u3066\u30B3\u30F3\u30C6\u30F3\u30C4\u306E\u8868\u793A\u304C\u5207\u308A\u66FF\u308F\u308B\u30B3\u30F3\u30C6\u30CA\u3067\u3059\u3002", "catpow"),
     icon: "editor-code",
     category: "catpow-functional",
     transforms: {
@@ -20,21 +21,21 @@
     edit({ attributes, setAttributes }) {
       const { InnerBlocks, InspectorControls, useBlockProps } = wp.blockEditor;
       const { Icon, PanelBody, SelectControl, TextareaControl } = wp.components;
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps({ className: "wp-block-catpow-cond" }) }, /* @__PURE__ */ wp.element.createElement(CP.Label, { icon: "admin-generic" }, "\u8868\u793A\u6761\u4EF6\uFF1A", attributes.schedule, attributes.is_user_logged_in != 0 && "\u30ED\u30B0\u30A4\u30F3" + (attributes.is_user_logged_in == 1 ? "\u3057\u3066\u3044\u308B" : "\u3057\u3066\u3044\u306A\u3044"), attributes.input_value, attributes.content_value), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "\u8868\u793A\u6761\u4EF6", icon: "admin-generic" }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: "\u30B9\u30B1\u30B8\u30E5\u30FC\u30EB", onChange: (schedule) => setAttributes({ schedule }), value: attributes.schedule }), /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps({ className: "wp-block-catpow-cond" }) }, /* @__PURE__ */ wp.element.createElement(CP.Label, { icon: "admin-generic" }, __("\u8868\u793A\u6761\u4EF6\uFF1A", "catpow"), attributes.schedule, attributes.is_user_logged_in != 0 && __("\u30ED\u30B0\u30A4\u30F3", "catpow") + (attributes.is_user_logged_in == 1 ? __("\u3057\u3066\u3044\u308B", "catpow") : __("\u3057\u3066\u3044\u306A\u3044", "catpow")), attributes.input_value, attributes.content_value), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: __("\u8868\u793A\u6761\u4EF6", "catpow"), icon: "admin-generic" }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: __("\u30B9\u30B1\u30B8\u30E5\u30FC\u30EB", "catpow"), onChange: (schedule) => setAttributes({ schedule }), value: attributes.schedule }), /* @__PURE__ */ wp.element.createElement(
         SelectControl,
         {
-          label: "\u30ED\u30B0\u30A4\u30F3",
+          label: __("\u30ED\u30B0\u30A4\u30F3", "catpow"),
           onChange: (is_user_logged_in) => {
             setAttributes({ is_user_logged_in });
           },
           value: attributes.is_user_logged_in,
           options: [
-            { label: "\u3057\u3066\u3044\u306A\u3044", value: "-1" },
-            { label: "\u3069\u3061\u3089\u3067\u3082", value: "0" },
-            { label: "\u3057\u3066\u3044\u308B", value: "1" }
+            { label: __("\u3057\u3066\u3044\u306A\u3044", "catpow"), value: "-1" },
+            { label: __("\u3069\u3061\u3089\u3067\u3082", "catpow"), value: "0" },
+            { label: __("\u3057\u3066\u3044\u308B", "catpow"), value: "1" }
           ]
         }
-      ), attributes.is_user_logged_in == "1" && /* @__PURE__ */ wp.element.createElement("div", { className: "sub" }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: "\u6A29\u9650", onChange: (current_user_can) => setAttributes({ current_user_can }), value: attributes.current_user_can }), /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: "\u30E6\u30FC\u30B6\u30FC\u60C5\u5831", onChange: (user_value) => setAttributes({ user_value }), value: attributes.user_value })), /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: "\u30D5\u30A9\u30FC\u30E0\u5165\u529B\u5024", onChange: (input_value) => setAttributes({ input_value }), value: attributes.input_value }), /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: "\u30B3\u30F3\u30C6\u30F3\u30C4\u60C5\u5831", onChange: (content_value) => setAttributes({ content_value }), value: attributes.content_value }))));
+      ), attributes.is_user_logged_in == "1" && /* @__PURE__ */ wp.element.createElement("div", { className: "sub" }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: __("\u6A29\u9650", "catpow"), onChange: (current_user_can) => setAttributes({ current_user_can }), value: attributes.current_user_can }), /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: __("\u30E6\u30FC\u30B6\u30FC\u60C5\u5831", "catpow"), onChange: (user_value) => setAttributes({ user_value }), value: attributes.user_value })), /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: __("\u30D5\u30A9\u30FC\u30E0\u5165\u529B\u5024", "catpow"), onChange: (input_value) => setAttributes({ input_value }), value: attributes.input_value }), /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: __("\u30B3\u30F3\u30C6\u30F3\u30C4\u60C5\u5831", "catpow"), onChange: (content_value) => setAttributes({ content_value }), value: attributes.content_value }))));
     },
     save({}) {
       const { InnerBlocks } = wp.blockEditor;

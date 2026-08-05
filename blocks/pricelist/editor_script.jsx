@@ -1,6 +1,8 @@
-﻿wp.blocks.registerBlockType("catpow/pricelist", {
+﻿const { __ } = wp.i18n;
+
+wp.blocks.registerBlockType("catpow/pricelist", {
 	title: "🐾 PriceList",
-	description: "価格表のブロックです。",
+	description: __("価格表のブロックです。", "catpow"),
 	icon: "editor-ul",
 	category: "catpow",
 	example: CP.example,
@@ -20,11 +22,11 @@
 		}, []);
 		const selectiveItemClasses = useMemo(() => {
 			const selectiveItemClasses = [
-				{ name: "heading", label: "見出し", values: "isHeading" },
+				{ name: "heading", label: __("見出し", "catpow"), values: "isHeading" },
 				"level",
-				{ name: "indent", label: "インデント", type: "buttons", values: { hasIndent1: "1", hasIndent2: "2", hasIndent3: "3" } },
-				{ name: "image", label: "画像", values: "hasImage" },
-				{ name: "caption", label: "キャプション", values: "hasCaption" },
+				{ name: "indent", label: __("インデント", "catpow"), type: "buttons", values: { hasIndent1: "1", hasIndent2: "2", hasIndent3: "3" } },
+				{ name: "image", label: __("画像", "catpow"), values: "hasImage" },
+				{ name: "caption", label: __("キャプション", "catpow"), values: "hasCaption" },
 			];
 			wp.hooks.applyFilters("catpow.blocks.pricelist.selectiveItemClasses", CP.finderProxy(selectiveItemClasses));
 			return selectiveItemClasses;
@@ -47,11 +49,11 @@
 			<>
 				<CP.SelectModeToolbar setAttributes={setAttributes} attributes={attributes} />
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title={__("クラス", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
+						<TextareaControl label={__("クラス", "catpow")} onChange={(classes) => setAttributes({ classes })} value={classes} />
 					</PanelBody>
-					<CP.SelectClassPanel title="リストアイテム" icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={selectiveItemClasses} />
+					<CP.SelectClassPanel title={__("リストアイテム", "catpow")} icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={selectiveItemClasses} />
 					<CP.ItemControlInfoPanel />
 				</InspectorControls>
 				<>

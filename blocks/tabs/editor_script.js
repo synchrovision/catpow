@@ -15,6 +15,7 @@
   }
 
   // ../blocks/tabs/editor_script.jsx
+  var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/tabs", {
     attributes: {
       classes: { source: "attribute", selector: "div", attribute: "class", default: "wp-block-catpow-tabs is-level3 is-type-panel is-style-flat" },
@@ -43,14 +44,14 @@
           {
             name: "type",
             type: "buttons",
-            label: "\u30BF\u30A4\u30D7",
-            values: { isTypeLabel: "\u30E9\u30D9\u30EB", isTypeBar: "\u30D0\u30FC", isTypePanel: "\u30D1\u30CD\u30EB" }
+            label: __("\u30BF\u30A4\u30D7", "catpow"),
+            values: { isTypeLabel: __("\u30E9\u30D9\u30EB", "catpow"), isTypeBar: __("\u30D0\u30FC", "catpow"), isTypePanel: __("\u30D1\u30CD\u30EB", "catpow") }
           },
           {
             name: "style",
             type: "buttons",
-            label: "\u30B9\u30BF\u30A4\u30EB",
-            values: { isStyleTable: "\u30C6\u30FC\u30D6\u30EB", isStyleFlat: "\u30D5\u30E9\u30C3\u30C8" }
+            label: __("\u30B9\u30BF\u30A4\u30EB", "catpow"),
+            values: { isStyleTable: __("\u30C6\u30FC\u30D6\u30EB", "catpow"), isStyleFlat: __("\u30D5\u30E9\u30C3\u30C8", "catpow") }
           }
         ];
         wp.hooks.applyFilters("catpow.blocks.tabs.selectiveClasses", CP.finderProxy(selectiveClasses2));
@@ -65,7 +66,7 @@
           }
         });
       }, [items.length]);
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", initialOpen: true, icon: "admin-generic", ...{ setAttributes, attributes }, selectiveClasses })), /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps({ className: classes, style: { ...vars, "--current-index": currentIndex, "--length": items.length } }), "data-current-index": currentIndex }, /* @__PURE__ */ wp.element.createElement("ul", { className: "_tab" }, items.map((item, index) => {
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30AF\u30E9\u30B9", "catpow"), initialOpen: true, icon: "admin-generic", ...{ setAttributes, attributes }, selectiveClasses })), /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps({ className: classes, style: { ...vars, "--current-index": currentIndex, "--length": items.length } }), "data-current-index": currentIndex }, /* @__PURE__ */ wp.element.createElement("ul", { className: "_tab" }, items.map((item, index) => {
         return /* @__PURE__ */ wp.element.createElement(
           CP.Item,
           {

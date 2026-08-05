@@ -1,8 +1,9 @@
 (() => {
   // ../blocks/chart/editor_script.jsx
+  var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/chart", {
     title: "\u{1F43E} Chart",
-    description: "\u30B0\u30E9\u30D5\u3092\u8868\u793A\u3057\u307E\u3059\u3002",
+    description: __("\u30B0\u30E9\u30D5\u3092\u8868\u793A\u3057\u307E\u3059\u3002", "catpow"),
     icon: "chart-bar",
     category: "catpow",
     attributes: {
@@ -42,10 +43,10 @@
         },
         default: [
           {
-            title: "\u30B9\u30C6\u30FC\u30BF\u30B9",
+            title: __("\u30B9\u30C6\u30FC\u30BF\u30B9", "catpow"),
             unit: "pt",
-            rowTitle: "\u65E5\u6570",
-            rowUnit: "\u65E5",
+            rowTitle: __("\u65E5\u6570", "catpow"),
+            rowUnit: __("\u65E5", "catpow"),
             rows: [
               { classes: "row weak", label: "1", vals: [{ value: 30 }, { value: 40 }, { value: 40 }, { value: 40 }, { value: 40 }] },
               { classes: "row normal", label: "2", vals: [{ value: 40 }, { value: 60 }, { value: 30 }, { value: 20 }, { value: 50 }] },
@@ -73,18 +74,18 @@
         const selectiveClasses2 = [
           {
             name: "type",
-            label: "\u30BF\u30A4\u30D7",
+            label: __("\u30BF\u30A4\u30D7", "catpow"),
             filter: "type",
             values: {
-              BarChart: "\u68D2\u30B0\u30E9\u30D5",
-              PieChart: "\u5186\u30B0\u30E9\u30D5",
-              LineChart: "\u6298\u308C\u7DDA\u30B0\u30E9\u30D5",
-              RadarChart: "\u30EC\u30FC\u30C0\u30FC\u30C1\u30E3\u30FC\u30C8"
+              BarChart: __("\u68D2\u30B0\u30E9\u30D5", "catpow"),
+              PieChart: __("\u5186\u30B0\u30E9\u30D5", "catpow"),
+              LineChart: __("\u6298\u308C\u7DDA\u30B0\u30E9\u30D5", "catpow"),
+              RadarChart: __("\u30EC\u30FC\u30C0\u30FC\u30C1\u30E3\u30FC\u30C8", "catpow")
             }
           },
-          { name: "value", label: "\u5024\u3092\u8868\u793A", values: "hasValue", sub: [{ label: "\u5358\u4F4D\u3092\u8868\u793A", values: "hasUnit" }] },
-          { name: "frame", label: "\u67A0\u7DDA\u3092\u8868\u793A", values: "hasFrame" },
-          { name: "grid", label: "\u7F6B\u7DDA\u3092\u8868\u793A", values: "hasGrid" }
+          { name: "value", label: __("\u5024\u3092\u8868\u793A", "catpow"), values: "hasValue", sub: [{ label: __("\u5358\u4F4D\u3092\u8868\u793A", "catpow"), values: "hasUnit" }] },
+          { name: "frame", label: __("\u67A0\u7DDA\u3092\u8868\u793A", "catpow"), values: "hasFrame" },
+          { name: "grid", label: __("\u7F6B\u7DDA\u3092\u8868\u793A", "catpow"), values: "hasGrid" }
         ];
         wp.hooks.applyFilters("catpow.blocks.chart.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
@@ -166,7 +167,7 @@
             }
           ]
         }
-      )), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: "\u30AF\u30E9\u30B9", onChange: (classes2) => setAttributes({ classes: classes2 }), value: classes }))), EditMode ? DataTable() : /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, Catpow[type + "Output"] ? el(Catpow[type + "Output"], { ...states, ...graph[0] }) : /* @__PURE__ */ wp.element.createElement("div", { className: "alert" }, "Invalid Chart Type")));
+      )), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30AF\u30E9\u30B9", "catpow"), icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: __("\u30AF\u30E9\u30B9", "catpow"), onChange: (classes2) => setAttributes({ classes: classes2 }), value: classes }))), EditMode ? DataTable() : /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, Catpow[type + "Output"] ? el(Catpow[type + "Output"], { ...states, ...graph[0] }) : /* @__PURE__ */ wp.element.createElement("div", { className: "alert" }, "Invalid Chart Type")));
     },
     save({ attributes }) {
       const { createElement: el } = wp.element;
@@ -174,12 +175,12 @@
       const { classes, graph } = attributes;
       var selectiveClasses = [
         {
-          label: "\u30BF\u30A4\u30D7",
+          label: __("\u30BF\u30A4\u30D7", "catpow"),
           values: {
-            BarChart: "\u68D2\u30B0\u30E9\u30D5",
-            PieChat: "\u5186\u30B0\u30E9\u30D5",
-            LineChart: "\u6298\u308C\u7DDA\u30B0\u30E9\u30D5",
-            RadarChart: "\u30EC\u30FC\u30C0\u30FC\u30C1\u30E3\u30FC\u30C8"
+            BarChart: __("\u68D2\u30B0\u30E9\u30D5", "catpow"),
+            PieChat: __("\u5186\u30B0\u30E9\u30D5", "catpow"),
+            LineChart: __("\u6298\u308C\u7DDA\u30B0\u30E9\u30D5", "catpow"),
+            RadarChart: __("\u30EC\u30FC\u30C0\u30FC\u30C1\u30E3\u30FC\u30C8", "catpow")
           }
         }
       ];

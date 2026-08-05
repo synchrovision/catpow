@@ -15,6 +15,7 @@
   }
 
   // ../blocks/listed/editor_script.jsx
+  var { __ } = wp.i18n;
   CP.config.listed = {
     imageKeys: {
       image: { src: "src", alt: "alt", code: "imageCode", items: "items" },
@@ -89,43 +90,43 @@
         const selectiveClasses2 = [
           {
             name: "type",
-            label: "\u30BF\u30A4\u30D7",
+            label: __("\u30BF\u30A4\u30D7", "catpow"),
             filter: "type",
             type: "gridbuttons",
             values: {
-              isTypeOrderd: "\u9023\u756A\u30EA\u30B9\u30C8",
-              isTypeNews: "\u304A\u77E5\u3089\u305B",
-              isTypeIndex: "\u76EE\u6B21",
-              isTypeMenu: "\u30E1\u30CB\u30E5\u30FC"
+              isTypeOrderd: __("\u9023\u756A\u30EA\u30B9\u30C8", "catpow"),
+              isTypeNews: __("\u304A\u77E5\u3089\u305B", "catpow"),
+              isTypeIndex: __("\u76EE\u6B21", "catpow"),
+              isTypeMenu: __("\u30E1\u30CB\u30E5\u30FC", "catpow")
             },
             sub: {
               isTypeOrderd: [
-                { name: "image", label: "\u753B\u50CF", values: "hasImage" },
+                { name: "image", label: __("\u753B\u50CF", "catpow"), values: "hasImage" },
                 {
                   name: "countPrefix",
                   input: "text",
-                  label: "\u756A\u53F7\u524D\u7F6E\u30C6\u30AD\u30B9\u30C8",
+                  label: __("\u756A\u53F7\u524D\u7F6E\u30C6\u30AD\u30B9\u30C8", "catpow"),
                   key: "countPrefix"
                 },
                 {
                   name: "countSuffix",
                   input: "text",
-                  label: "\u756A\u53F7\u5F8C\u7F6E\u30C6\u30AD\u30B9\u30C8",
+                  label: __("\u756A\u53F7\u5F8C\u7F6E\u30C6\u30AD\u30B9\u30C8", "catpow"),
                   key: "countSuffix"
                 },
                 {
                   name: "titleCaption",
-                  label: "\u30BF\u30A4\u30C8\u30EB\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3",
+                  label: __("\u30BF\u30A4\u30C8\u30EB\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3", "catpow"),
                   values: "hasTitleCaption"
                 },
                 {
                   name: "subTitle",
-                  label: "\u30B5\u30D6\u30BF\u30A4\u30C8\u30EB",
+                  label: __("\u30B5\u30D6\u30BF\u30A4\u30C8\u30EB", "catpow"),
                   values: "hasSubTitle"
                 },
-                { name: "link", label: "\u30EA\u30F3\u30AF", values: "hasLink" }
+                { name: "link", label: __("\u30EA\u30F3\u30AF", "catpow"), values: "hasLink" }
               ],
-              isTypeNews: [{ name: "link", label: "\u30EA\u30F3\u30AF", values: "hasLink" }],
+              isTypeNews: [{ name: "link", label: __("\u30EA\u30F3\u30AF", "catpow"), values: "hasLink" }],
               isTypeIndex: ["itemSize"],
               isTypeMenu: [
                 "itemSize",
@@ -137,20 +138,20 @@
                 {
                   name: "image",
                   type: "buttons",
-                  label: "\u753B\u50CF",
+                  label: __("\u753B\u50CF", "catpow"),
                   values: {
-                    noImage: "\u306A\u3057",
-                    hasImage: "\u5927",
-                    hasHeaderImage: "\u5C0F"
+                    noImage: __("\u306A\u3057", "catpow"),
+                    hasImage: __("\u5927", "catpow"),
+                    hasHeaderImage: __("\u5C0F", "catpow")
                   }
                 },
                 {
                   name: "titleCaption",
-                  label: "\u30BF\u30A4\u30C8\u30EB\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3",
+                  label: __("\u30BF\u30A4\u30C8\u30EB\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3", "catpow"),
                   values: "hasTitleCaption"
                 },
-                { name: "text", label: "\u30C6\u30AD\u30B9\u30C8", values: "hasText" },
-                { name: "link", label: "\u30EA\u30F3\u30AF", values: "hasLink" }
+                { name: "text", label: __("\u30C6\u30AD\u30B9\u30C8", "catpow"), values: "hasText" },
+                { name: "link", label: __("\u30EA\u30F3\u30AF", "catpow"), values: "hasLink" }
               ]
             },
             bind: {
@@ -171,21 +172,21 @@
           {
             name: "imageCode",
             input: "text",
-            label: "\u753B\u50CF\u30B3\u30FC\u30C9",
+            label: __("\u753B\u50CF\u30B3\u30FC\u30C9", "catpow"),
             key: "imageCode",
             cond: "hasImage"
           },
           {
             name: "headerImageCode",
             input: "text",
-            label: "\u30D8\u30C3\u30C0\u753B\u50CF\u30B3\u30FC\u30C9",
+            label: __("\u30D8\u30C3\u30C0\u753B\u50CF\u30B3\u30FC\u30C9", "catpow"),
             key: "headerImageCode",
             cond: "hasHeaderImage"
           },
           {
             name: "subImageCode",
             input: "text",
-            label: "\u30B5\u30D6\u753B\u50CF\u30B3\u30FC\u30C9",
+            label: __("\u30B5\u30D6\u753B\u50CF\u30B3\u30FC\u30C9", "catpow"),
             key: "subImageCode",
             cond: "hasSubImage"
           }
@@ -198,10 +199,10 @@
       };
       const { imageKeys, linkKeys } = CP.config.listed;
       const blockProps = useBlockProps({ className: EditMode || AltMode && doLoop ? "cp-altcontent" : classes, style: vars });
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { setAttributes, attributes }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30B9\u30BF\u30A4\u30EB", icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30EA\u30B9\u30C8\u30A2\u30A4\u30C6\u30E0", icon: "edit", ...{ setAttributes, attributes }, itemKeys: ["items", attributes.currentItemIndex], selectiveClasses: ["color"] }), states.hasLink && /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30A4\u30D9\u30F3\u30C8", icon: "flag", ...{ setAttributes, attributes }, itemKeys: ["items", attributes.currentItemIndex], selectiveClasses: ["event"] }), isTemplate && /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { setAttributes, attributes }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30B9\u30BF\u30A4\u30EB", "catpow"), icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30EA\u30B9\u30C8\u30A2\u30A4\u30C6\u30E0", "catpow"), icon: "edit", ...{ setAttributes, attributes }, itemKeys: ["items", attributes.currentItemIndex], selectiveClasses: ["color"] }), states.hasLink && /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30A4\u30D9\u30F3\u30C8", "catpow"), icon: "flag", ...{ setAttributes, attributes }, itemKeys: ["items", attributes.currentItemIndex], selectiveClasses: ["event"] }), isTemplate && /* @__PURE__ */ wp.element.createElement(
         CP.SelectClassPanel,
         {
-          title: "\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8",
+          title: __("\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8", "catpow"),
           icon: "edit",
           ...{ setAttributes, attributes },
           itemKeys: ["items", attributes.currentItemIndex],

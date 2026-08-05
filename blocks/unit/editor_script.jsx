@@ -1,4 +1,6 @@
-﻿CP.config.unit = {
+﻿const { __ } = wp.i18n;
+
+CP.config.unit = {
 	devices: ["tb", "sp"],
 	imageKeys: {
 		image: { sources: "sources", src: "src", alt: "alt", code: "code" },
@@ -6,7 +8,7 @@
 };
 wp.blocks.registerBlockType("catpow/unit", {
 	title: "🐾 Unit",
-	description: "画像とテキストを並べてレイアウトするためのブロックです。",
+	description: __("画像とテキストを並べてレイアウトするためのブロックです。", "catpow"),
 	icon: "align-pull-left",
 	category: "catpow",
 	transforms: {
@@ -43,18 +45,18 @@ wp.blocks.registerBlockType("catpow/unit", {
 
 		var selectiveClasses = [
 			{
-				label: "タイプ",
+				label: __("タイプ", "catpow"),
 				type: "buttons",
 				values: ["snap", "panel"],
 			},
-			{ input: "picture", label: "画像", keys: imageKeys.image, devices, isTemplate: isTemplate },
+			{ input: "picture", label: __("画像", "catpow"), keys: imageKeys.image, devices, isTemplate: isTemplate },
 			{
-				label: "テンプレート",
+				label: __("テンプレート", "catpow"),
 				values: "isTemplate",
 				sub: [
 					{
 						input: "text",
-						label: "画像コード",
+						label: __("画像コード", "catpow"),
 						key: "code",
 						cond: true,
 					},
@@ -73,7 +75,7 @@ wp.blocks.registerBlockType("catpow/unit", {
 					</div>
 				</div>
 				<InspectorControls>
-					<CP.SelectClassPanel title="スタイル" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title={__("スタイル", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 				</InspectorControls>
 			</>
 		);

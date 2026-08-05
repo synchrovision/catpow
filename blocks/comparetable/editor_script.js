@@ -107,15 +107,15 @@
           {
             name: "type",
             type: "buttons",
-            label: "\u30BF\u30A4\u30D7",
+            label: __("\u30BF\u30A4\u30D7", "catpow"),
             values: {
               isStyleSpec: "spec",
               isStyleSheet: "sheet",
               isStylePlan: "plan"
             }
           },
-          { name: "transposiiton", label: "\u8EE2\u7F6E", values: "doTransposition" },
-          { name: "tags", label: "\u30BF\u30B0", values: "hasTags" },
+          { name: "transposiiton", label: __("\u8EE2\u7F6E", "catpow"), values: "doTransposition" },
+          { name: "tags", label: __("\u30BF\u30B0", "catpow"), values: "hasTags" },
           {
             name: "headerColumn",
             label: __("\u898B\u51FA\u3057\u5217", "catpow"),
@@ -171,12 +171,12 @@
           {
             name: "type",
             type: "buttons",
-            label: "\u30BF\u30A4\u30D7",
+            label: __("\u30BF\u30A4\u30D7", "catpow"),
             values: {
-              isStandard: "\u901A\u5E38",
-              isPremium: "\u9AD8\u54C1\u8CEA",
-              isRecommended: "\u63A8\u5968",
-              isDeprecated: "\u975E\u63A8\u5968"
+              isStandard: __("\u901A\u5E38", "catpow"),
+              isPremium: __("\u9AD8\u54C1\u8CEA", "catpow"),
+              isRecommended: __("\u63A8\u5968", "catpow"),
+              isDeprecated: __("\u975E\u63A8\u5968", "catpow")
             }
           }
         ];
@@ -203,11 +203,11 @@
           {
             name: "type",
             type: "buttons",
-            label: "\u30BF\u30A4\u30D7",
+            label: __("\u30BF\u30A4\u30D7", "catpow"),
             values: {
-              isEqual: "\u7B49",
-              isPositive: "\u6B63",
-              isNegative: "\u8CA0"
+              isEqual: __("\u7B49", "catpow"),
+              isPositive: __("\u6B63", "catpow"),
+              isNegative: __("\u8CA0", "catpow")
             }
           }
         ];
@@ -219,7 +219,7 @@
           {
             name: "label",
             type: "buttons",
-            label: "\u30E9\u30D9\u30EB",
+            label: __("\u30E9\u30D9\u30EB", "catpow"),
             values: "hasLabel"
           }
         ];
@@ -231,11 +231,11 @@
           {
             name: "type",
             type: "buttons",
-            label: "\u30BF\u30A4\u30D7",
+            label: __("\u30BF\u30A4\u30D7", "catpow"),
             values: {
-              isSpacer: "\u7A7A\u767D",
-              isLabel: "\u30E9\u30D9\u30EB",
-              isTitle: "\u30BF\u30A4\u30C8\u30EB"
+              isSpacer: __("\u7A7A\u767D", "catpow"),
+              isLabel: __("\u30E9\u30D9\u30EB", "catpow"),
+              isTitle: __("\u30BF\u30A4\u30C8\u30EB", "catpow")
             }
           }
         ];
@@ -508,10 +508,10 @@
             );
           }));
         }))
-      )))))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), r2 === 0 ? /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u884C", icon: "art", ...{ setAttributes, attributes }, selectiveClasses: selectiveHeaderRowClasses, itemKeys: ["rows", r2] }) : /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u884C", icon: "art", ...{ setAttributes, attributes }, selectiveClasses: selectiveRowClasses, itemKeys: ["rows", r2] }), states.hasHeaderColumn && c === 0 ? /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u5217", icon: "art", ...{ setAttributes, attributes }, selectiveClasses: selectiveHeaderColClasses, classKey: "headerColClasses" }) : /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u5217", icon: "art", ...{ setAttributes, attributes }, selectiveClasses: selectiveColClasses, itemKeys: ["cols", c] }), states.hasHeaderColumn && r2 === 0 && c === 0 ? /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30BB\u30EB", icon: "art", ...{ setAttributes, attributes }, selectiveClasses: selectiveFirstCellClasses, classKey: "firstCellClasses" }) : /* @__PURE__ */ wp.element.createElement(
+      )))))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30AF\u30E9\u30B9", "catpow"), icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), r2 === 0 ? /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u884C", "catpow"), icon: "art", ...{ setAttributes, attributes }, selectiveClasses: selectiveHeaderRowClasses, itemKeys: ["rows", r2] }) : /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u884C", "catpow"), icon: "art", ...{ setAttributes, attributes }, selectiveClasses: selectiveRowClasses, itemKeys: ["rows", r2] }), states.hasHeaderColumn && c === 0 ? /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u5217", "catpow"), icon: "art", ...{ setAttributes, attributes }, selectiveClasses: selectiveHeaderColClasses, classKey: "headerColClasses" }) : /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u5217", "catpow"), icon: "art", ...{ setAttributes, attributes }, selectiveClasses: selectiveColClasses, itemKeys: ["cols", c] }), states.hasHeaderColumn && r2 === 0 && c === 0 ? /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30BB\u30EB", "catpow"), icon: "art", ...{ setAttributes, attributes }, selectiveClasses: selectiveFirstCellClasses, classKey: "firstCellClasses" }) : /* @__PURE__ */ wp.element.createElement(
         CP.SelectClassPanel,
         {
-          title: "\u30BB\u30EB",
+          title: __("\u30BB\u30EB", "catpow"),
           icon: "art",
           ...{ setAttributes, attributes },
           selectiveClasses: c === 0 ? selectiveHeaderColCellClasses : selectiveCellClasses,

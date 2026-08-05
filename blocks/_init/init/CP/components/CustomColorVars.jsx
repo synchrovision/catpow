@@ -1,20 +1,22 @@
-﻿import { bem, classNamesToFlags, flagsToClassNames } from "catpow/util";
+﻿const { __ } = wp.i18n;
+
+import { bem, classNamesToFlags, flagsToClassNames } from "catpow/util";
 
 export const CustomColorVars = (props) => {
 	const { useState, useRef, useMemo, useCallback } = wp.element;
 	const { ColorPicker, CheckboxControl, Flex, FlexItem, FlexBlock, Button, Popover } = wp.components;
-	const { label = "カスタムカラー", value, onChange } = props;
+	const { label = __("カスタムカラー", "catpow"), value, onChange } = props;
 	const cache = useRef(value);
 	const [index, setIndex] = useState(-1);
 	const [useCustomColor, setUseCustomColor] = useState(Object.keys(value).length > 0);
 	const classes = bem("cp-customcolorvars");
 	const roles = [
-		{ key: "b", label: "背景色" },
-		{ key: "s", label: "強調背景色" },
-		{ key: "t", label: "文字色" },
-		{ key: "m", label: "基本色" },
-		{ key: "a", label: "強調色" },
-		{ key: "i", label: "反転文字色" },
+		{ key: "b", label: __("背景色", "catpow") },
+		{ key: "s", label: __("強調背景色", "catpow") },
+		{ key: "t", label: __("文字色", "catpow") },
+		{ key: "m", label: __("基本色", "catpow") },
+		{ key: "a", label: __("強調色", "catpow") },
+		{ key: "i", label: __("反転文字色", "catpow") },
 	];
 	const keys = ["h", "s", "l"];
 

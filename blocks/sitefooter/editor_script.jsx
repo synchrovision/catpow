@@ -22,10 +22,10 @@ wp.blocks.registerBlockType("catpow/sitefooter", {
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
-				{ preset: "colorScheme", label: "コンテンツ配色", classKey: "contentsClasses" },
-				{ preset: "backgroundColor", label: "コンテンツ背景色", classKey: "contentsClasses" },
-				{ preset: "colorScheme", label: "コピーライト配色", classKey: "copyrightClasses" },
-				{ preset: "backgroundColor", label: "コピーライト背景色", classKey: "copyrightClasses" },
+				{ preset: "colorScheme", label: __("コンテンツ配色", "catpow"), classKey: "contentsClasses" },
+				{ preset: "backgroundColor", label: __("コンテンツ背景色", "catpow"), classKey: "contentsClasses" },
+				{ preset: "colorScheme", label: __("コピーライト配色", "catpow"), classKey: "copyrightClasses" },
+				{ preset: "backgroundColor", label: __("コピーライト背景色", "catpow"), classKey: "copyrightClasses" },
 			];
 			wp.hooks.applyFilters("catpow.blocks.sitefooter.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
@@ -42,7 +42,7 @@ wp.blocks.registerBlockType("catpow/sitefooter", {
 					</div>
 				</CP.Bem>
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title={__("クラス", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 				</InspectorControls>
 			</>
 		);

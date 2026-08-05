@@ -3,7 +3,7 @@
 wp.blocks.registerBlockType("catpow/accessmap", {
 	apiVersion: 3,
 	title: "🐾 Access Map",
-	description: "地図とアクセス情報を表示",
+	description: __("地図とアクセス情報を表示", "catpow"),
 	icon: "location-alt",
 	category: "catpow",
 	example: CP.example,
@@ -20,32 +20,32 @@ wp.blocks.registerBlockType("catpow/accessmap", {
 				{
 					name: "type",
 					type: "buttons",
-					label: "タイプ",
-					values: { isTypeFlat: "フラット", isTypeCard: "カード", isTypeFrame: "フーレム" },
+					label: __("タイプ", "catpow"),
+					values: { isTypeFlat: __("フラット", "catpow"), isTypeCard: __("カード", "catpow"), isTypeFrame: __("フーレム", "catpow") },
 				},
 				{
 					name: "mapColor",
 					type: "buttons",
-					label: "地図の色",
+					label: __("地図の色", "catpow"),
 					values: {
-						hasMapColorNone: "通常",
-						hasMapColorGray: "グレー",
-						hasMapColorSync: "同色",
+						hasMapColorNone: __("通常", "catpow"),
+						hasMapColorGray: __("グレー", "catpow"),
+						hasMapColorSync: __("同色", "catpow"),
 					},
 				},
-				{ name: "hasTel", values: "hasTel", label: "電話番号" },
-				{ name: "hasMail", values: "hasMail", label: "メール" },
-				{ name: "hasSite", values: "hasSite", label: "サイト" },
+				{ name: "hasTel", values: "hasTel", label: __("電話番号", "catpow") },
+				{ name: "hasMail", values: "hasMail", label: __("メール", "catpow") },
+				{ name: "hasSite", values: "hasSite", label: __("サイト", "catpow") },
 				{
 					name: "t",
 					key: "t",
 					input: "select",
-					label: "地図タイプ",
+					label: __("地図タイプ", "catpow"),
 					values: {
-						m: "地図",
-						k: "航空写真",
-						h: "地図 + 航空写真",
-						p: "地形図",
+						m: __("地図", "catpow"),
+						k: __("航空写真", "catpow"),
+						h: __("地図 + 航空写真", "catpow"),
+						p: __("地形図", "catpow"),
 						e: "Google Earth",
 					},
 				},
@@ -53,7 +53,7 @@ wp.blocks.registerBlockType("catpow/accessmap", {
 					name: "z",
 					key: "z",
 					input: "range",
-					label: "ズーム",
+					label: __("ズーム", "catpow"),
 					min: 0,
 					max: 23,
 				},
@@ -61,7 +61,7 @@ wp.blocks.registerBlockType("catpow/accessmap", {
 					name: "hl",
 					key: "hl",
 					input: "buttons",
-					label: "言語",
+					label: __("言語", "catpow"),
 					values: ["ja", "us", "zh-CN", "zh-TW"],
 				},
 				"isTemplate",
@@ -75,18 +75,18 @@ wp.blocks.registerBlockType("catpow/accessmap", {
 				{
 					name: "source",
 					type: "gridbuttons",
-					values: { useQuery: "検索", useEmbedUrl: "埋め込みURL" },
+					values: { useQuery: __("検索", "catpow"), useEmbedUrl: __("埋め込みURL", "catpow") },
 					sub: {
 						useQuery: [
-							{ name: "q", key: "q", input: "text", label: "検索ワード" },
-							{ name: "ll", key: "ll", input: "text", label: "中心座標" },
+							{ name: "q", key: "q", input: "text", label: __("検索ワード", "catpow") },
+							{ name: "ll", key: "ll", input: "text", label: __("中心座標", "catpow") },
 						],
 						useEmbedUrl: [
 							{
 								name: "src",
 								key: "src",
 								input: "textarea",
-								label: "埋め込みURL",
+								label: __("埋め込みURL", "catpow"),
 								rows: 10,
 								filter: (value, state, props) => {
 									const matches = value.match(/src="(.+?)"/);
@@ -108,7 +108,7 @@ wp.blocks.registerBlockType("catpow/accessmap", {
 				{
 					name: "imageMapCode",
 					input: "text",
-					label: "地図画像コード",
+					label: __("地図画像コード", "catpow"),
 					key: "imageCode",
 					cond: "hasImage",
 				},
@@ -127,11 +127,11 @@ wp.blocks.registerBlockType("catpow/accessmap", {
 			<>
 				<CP.SelectModeToolbar setAttributes={setAttributes} attributes={attributes} />
 				<InspectorControls>
-					<CP.SelectClassPanel title="スタイル" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
-					<CP.SelectClassPanel title="リストアイテム" icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={selectiveItemClasses} />
+					<CP.SelectClassPanel title={__("スタイル", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title={__("リストアイテム", "catpow")} icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={selectiveItemClasses} />
 					{isTemplate && (
 						<CP.SelectClassPanel
-							title="テンプレート"
+							title={__("テンプレート", "catpow")}
 							icon="edit"
 							{...{ setAttributes, attributes }}
 							itemKeys={["items", attributes.currentItemIndex]}
@@ -142,7 +142,7 @@ wp.blocks.registerBlockType("catpow/accessmap", {
 				</InspectorControls>
 				{EditMode ? (
 					<div {...blockProps}>
-						<CP.Label icon="welcome-comments">アクセス情報</CP.Label>
+						<CP.Label icon="welcome-comments">{__("アクセス情報", "catpow")}</CP.Label>
 						<CP.EditItemsTable
 							setAttributes={setAttributes}
 							attributes={attributes}
@@ -164,7 +164,7 @@ wp.blocks.registerBlockType("catpow/accessmap", {
 					<>
 						{AltMode && doLoop ? (
 							<div {...blockProps}>
-								<CP.Label icon="welcome-comments">代替コンテンツ</CP.Label>
+								<CP.Label icon="welcome-comments">{__("代替コンテンツ", "catpow")}</CP.Label>
 								<InnerBlocks />
 							</div>
 						) : (

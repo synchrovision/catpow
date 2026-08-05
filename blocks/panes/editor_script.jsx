@@ -1,4 +1,6 @@
-﻿CP.config.panes = {
+﻿const { __ } = wp.i18n;
+
+CP.config.panes = {
 	imageKeys: {
 		image: { src: "src", alt: "alt", code: "imageCode", items: "items" },
 		symbol: {
@@ -12,7 +14,7 @@
 
 wp.blocks.registerBlockType("catpow/panes", {
 	title: "🐾 Panes",
-	description: "矩形の画像とテキストのペアのリスト。",
+	description: __("矩形の画像とテキストのペアのリスト。", "catpow"),
 	icon: "editor-ul",
 	category: "catpow",
 	transforms: {
@@ -35,7 +37,7 @@ wp.blocks.registerBlockType("catpow/panes", {
 		var states = CP.classNamesToFlags(classes);
 		const { imageKeys } = CP.config.panes;
 
-		var selectiveClasses = [ { label: "シンボル", values: "hasSymbol" }, "isTemplate"];
+		var selectiveClasses = [ { label: __("シンボル", "catpow"), values: "hasSymbol" }, "isTemplate"];
 		const itemSelectiveClasses = ["color", { input: "icon" }];
 
 		const save = () => {
@@ -48,11 +50,11 @@ wp.blocks.registerBlockType("catpow/panes", {
 			<>
 				<CP.SelectModeToolbar setAttributes={setAttributes} attributes={attributes} />
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title={__("クラス", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
+						<TextareaControl label={__("クラス", "catpow")} onChange={(classes) => setAttributes({ classes })} value={classes} />
 					</PanelBody>
-					<CP.SelectClassPanel title="アイテム" icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={itemSelectiveClasses} />
+					<CP.SelectClassPanel title={__("アイテム", "catpow")} icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={itemSelectiveClasses} />
 					<CP.ItemControlInfoPanel />
 				</InspectorControls>
 				{EditMode ? (

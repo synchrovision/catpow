@@ -1,11 +1,13 @@
-﻿/*
+﻿const { __ } = wp.i18n;
+
+/*
  * $use_functionsで有効化されている機能が提供するウィジェットを埋め込み
  * Catpow\[funciton]\widget::render();を実行
  */
 
 wp.blocks.registerBlockType("catpow/widget", {
 	title: "🐾 Widget",
-	description: "拡張機能に定義された埋め込みコンテンツを表示します。",
+	description: __("拡張機能に定義された埋め込みコンテンツを表示します。", "catpow"),
 	icon: "editor-code",
 	category: "catpow-embed",
 	example: CP.example,
@@ -33,7 +35,7 @@ wp.blocks.registerBlockType("catpow/widget", {
 							}}
 						/>
 					</PanelBody>
-					{statesClasses && <CP.SelectClassPanel initialOpen={true} title="設定" icon="admin-appearance" {...{ setAttributes, attributes }} selectiveClasses={statesClasses} />}
+					{statesClasses && <CP.SelectClassPanel initialOpen={true} title={__("設定", "catpow")} icon="admin-appearance" {...{ setAttributes, attributes }} selectiveClasses={statesClasses} />}
 				</InspectorControls>
 			</>
 		);

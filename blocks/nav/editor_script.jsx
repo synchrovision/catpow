@@ -24,7 +24,7 @@ wp.blocks.registerBlockType("catpow/nav", {
 					<CP.ServerSideRender block="catpow/nav" attributes={attributes} />
 				</div>
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" initialOpen={true} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title={__("クラス", "catpow")} initialOpen={true} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 				</InspectorControls>
 			</>
 		);

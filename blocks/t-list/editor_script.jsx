@@ -2,7 +2,7 @@
 
 wp.blocks.registerBlockType("catpow/t-list", {
 	title: "🐾 T-List",
-	description: "HTMLメール用のリストです。",
+	description: __("HTMLメール用のリストです。", "catpow"),
 	icon: "editor-code",
 	category: "catpow-mail",
 	parent: CP.mailContensContainer,
@@ -51,9 +51,9 @@ wp.blocks.registerBlockType("catpow/t-list", {
 			const selectiveClasses = [
 				"fontSize",
 				"fontWeight",
-				{ name: "marginTop", input: "range", label: "上間隔", key: "marginTop", min: 0, max: 4, step: 0.25 },
-				{ name: "marginBetween", input: "range", label: "間隔", key: "marginBetween", min: 0, max: 4, step: 0.25 },
-				{ name: "marginBottom", input: "range", label: "下間隔", key: "marginBottom", min: 0, max: 4, step: 0.25 },
+				{ name: "marginTop", input: "range", label: __("上間隔", "catpow"), key: "marginTop", min: 0, max: 4, step: 0.25 },
+				{ name: "marginBetween", input: "range", label: __("間隔", "catpow"), key: "marginBetween", min: 0, max: 4, step: 0.25 },
+				{ name: "marginBottom", input: "range", label: __("下間隔", "catpow"), key: "marginBottom", min: 0, max: 4, step: 0.25 },
 				{
 					name: "isOrdered",
 					label: __("番号付きリスト", "catpow"),
@@ -66,7 +66,7 @@ wp.blocks.registerBlockType("catpow/t-list", {
 				{
 					name: "markerColor",
 					type: "buttons",
-					label: "マーカー色",
+					label: __("マーカー色", "catpow"),
 					values: {
 						hasMarkerColorText: __("文字", "catpow"),
 						hasMarkerColorMain: __("基本", "catpow"),
@@ -74,11 +74,11 @@ wp.blocks.registerBlockType("catpow/t-list", {
 						hasMarkerColorHighlight: __("強調文字", "catpow"),
 					},
 				},
-				{ name: "markerWeigth", preset: "fontWeight", label: "マーカー太さ", classKey: "markerClasses" },
-				{ name: "markerSize", input: "range", label: "マーカーサイズ", key: "markerSize", min: 1, max: 4, step: 0.1, unit: "em" },
-				{ name: "markerWidth", input: "range", label: "マーカー幅", key: "markerWidth", min: 1, max: 8, step: 0.25, unit: "em" },
-				{ name: "markerMargin", input: "range", label: "マーカー間隔", key: "markerMargin", min: 0.1, max: 2, step: 0.1, unit: "em" },
-				{ name: "markerAlign", input: "buttons", label: "マーカー位置", key: "markerAlign", options: ["left", "center", "right"] },
+				{ name: "markerWeigth", preset: "fontWeight", label: __("マーカー太さ", "catpow"), classKey: "markerClasses" },
+				{ name: "markerSize", input: "range", label: __("マーカーサイズ", "catpow"), key: "markerSize", min: 1, max: 4, step: 0.1, unit: "em" },
+				{ name: "markerWidth", input: "range", label: __("マーカー幅", "catpow"), key: "markerWidth", min: 1, max: 8, step: 0.25, unit: "em" },
+				{ name: "markerMargin", input: "range", label: __("マーカー間隔", "catpow"), key: "markerMargin", min: 0.1, max: 2, step: 0.1, unit: "em" },
+				{ name: "markerAlign", input: "buttons", label: __("マーカー位置", "catpow"), key: "markerAlign", options: ["left", "center", "right"] },
 			];
 			wp.hooks.applyFilters("catpow.blocks.t-list.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
@@ -149,9 +149,9 @@ wp.blocks.registerBlockType("catpow/t-list", {
 					</table>
 				</CP.Bem>
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} initialOpen={true} />
+					<CP.SelectClassPanel title={__("クラス", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} initialOpen={true} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
+						<TextareaControl label={__("クラス", "catpow")} onChange={(classes) => setAttributes({ classes })} value={classes} />
 					</PanelBody>
 				</InspectorControls>
 			</>

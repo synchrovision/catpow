@@ -3,7 +3,7 @@
   var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/definition", {
     title: "\u{1F43E} Definition",
-    description: "\u5B9A\u7FA9\u30EA\u30B9\u30C8\u306E\u30D6\u30ED\u30C3\u30AF\u3067\u3059",
+    description: __("\u5B9A\u7FA9\u30EA\u30B9\u30C8\u306E\u30D6\u30ED\u30C3\u30AF\u3067\u3059", "catpow"),
     icon: "editor-ul",
     category: "catpow",
     transforms: {
@@ -43,7 +43,7 @@
         setAttributes({ items: JSON.parse(JSON.stringify(items)) });
       };
       const blockProps = useBlockProps({ className: EditMode || AltMode && doLoop ? "cp-altcontent" : classes, style: vars });
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { setAttributes, attributes }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30B9\u30BF\u30A4\u30EB", icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), EditMode ? /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(CP.Label, { icon: "edit" }), /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { setAttributes, attributes }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30B9\u30BF\u30A4\u30EB", "catpow"), icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), EditMode ? /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(CP.Label, { icon: "edit" }), /* @__PURE__ */ wp.element.createElement(
         CP.EditItemsTable,
         {
           setAttributes,

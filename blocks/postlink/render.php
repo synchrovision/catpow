@@ -10,8 +10,8 @@ HTML::render([
 			['li._prev',get_previous_post_link('%link')],
 			['li._next',get_next_post_link('%link')],
 		]:[
-			['li._prev',['a','前の記事']],
-			['li._next',['a','次の記事']],
+			['li._prev',['a',__('前の記事','catpow')]],
+			['li._next',['a',__('次の記事','catpow')]],
 		]
 	]
 ]);

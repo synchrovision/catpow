@@ -2,7 +2,7 @@
 
 wp.blocks.registerBlockType("catpow/t-box", {
 	title: "🐾 T-Box",
-	description: "HTMLメール用のレイアウト調整用コンテナブロックです。",
+	description: __("HTMLメール用のレイアウト調整用コンテナブロックです。", "catpow"),
 	icon: "editor-code",
 	category: "catpow-mail",
 	parent: CP.mailContensContainer,
@@ -23,7 +23,7 @@ wp.blocks.registerBlockType("catpow/t-box", {
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
-				{ name: "body", type: "buttons", label: __("背景色", "catpow"), values: { hasBgNone: "なし", hasBgNormal: "通常", hasBgStrong: "強調", hasBgAchromatic: "白黒" } },
+				{ name: "body", type: "buttons", label: __("背景色", "catpow"), values: { hasBgNone: __("なし", "catpow"), hasBgNormal: __("通常", "catpow"), hasBgStrong: __("強調", "catpow"), hasBgAchromatic: __("白黒", "catpow") } },
 				{ name: "range", input: "range", label: __("幅", "catpow"), key: "width", min: 400, max: 800, step: 10 },
 				{ name: "range", input: "range", label: __("上余白", "catpow"), key: "paddingTop", min: 0, max: 10 },
 				{ name: "range", input: "range", label: __("横余白", "catpow"), key: "paddingInline", min: 0, max: 10 },
@@ -61,9 +61,9 @@ wp.blocks.registerBlockType("catpow/t-box", {
 					</div>
 				</CP.Bem>
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} initialOpen={true} />
+					<CP.SelectClassPanel title={__("クラス", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} initialOpen={true} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
+						<TextareaControl label={__("クラス", "catpow")} onChange={(classes) => setAttributes({ classes })} value={classes} />
 					</PanelBody>
 				</InspectorControls>
 			</>

@@ -21,7 +21,7 @@
       const { InnerBlocks, InspectorControls, useBlockProps } = wp.blockEditor;
       const states = classNamesToFlags(classes);
       const selectiveClasses = useMemo(() => {
-        const selectiveClasses2 = [{ input: "buttons", name: "target", label: "\u8868\u793A\u6761\u4EF6", values: { site: "\u30B5\u30A4\u30C8\u3067\u4E00\u56DE", page: "\u30DA\u30FC\u30B8\u3067\u4E00\u56DE", every: "\u6BCE\u56DE\u8868\u793A" }, key: "target" }, "contentWidth"];
+        const selectiveClasses2 = [{ input: "buttons", name: "target", label: __("\u8868\u793A\u6761\u4EF6", "catpow"), values: { site: __("\u30B5\u30A4\u30C8\u3067\u4E00\u56DE", "catpow"), page: __("\u30DA\u30FC\u30B8\u3067\u4E00\u56DE", "catpow"), every: __("\u6BCE\u56DE\u8868\u793A", "catpow") }, key: "target" }, "contentWidth"];
         wp.hooks.applyFilters("catpow.blocks.entrypopup.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);

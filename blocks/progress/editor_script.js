@@ -1,8 +1,9 @@
 (() => {
   // ../blocks/progress/editor_script.jsx
+  var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/progress", {
     title: "\u{1F43E} Progress",
-    description: "\u9032\u6357\u306E\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002",
+    description: __("\u9032\u6357\u306E\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002", "catpow"),
     icon: "editor-ul",
     category: "catpow",
     example: CP.example,
@@ -13,8 +14,8 @@
       const { post, settings, selections, activeLabel, progress, isWaiting = false } = attributes;
       const selectiveClasses = useMemo(
         () => [
-          { input: "select", label: "\u30BB\u30C3\u30C8", key: "post", values: selections },
-          { input: "range", label: "\u30B9\u30C6\u30C3\u30D7", key: "step", min: 0, max: settings ? settings.items.length - 1 : 0 }
+          { input: "select", label: __("\u30BB\u30C3\u30C8", "catpow"), key: "post", values: selections },
+          { input: "range", label: __("\u30B9\u30C6\u30C3\u30D7", "catpow"), key: "step", min: 0, max: settings ? settings.items.length - 1 : 0 }
         ],
         [selections, settings]
       );
@@ -24,11 +25,11 @@
           "hasContentWidth",
           "hasMargin",
           {
-            label: "\u756A\u53F7",
+            label: __("\u756A\u53F7", "catpow"),
             values: "hasCounter",
             sub: [
-              { input: "text", label: "\u756A\u53F7\u524D\u30C6\u30AD\u30B9\u30C8", key: "countPrefix" },
-              { input: "text", label: "\u756A\u53F7\u5F8C\u30C6\u30AD\u30B9\u30C8", key: "countSuffix" }
+              { input: "text", label: __("\u756A\u53F7\u524D\u30C6\u30AD\u30B9\u30C8", "catpow"), key: "countPrefix" },
+              { input: "text", label: __("\u756A\u53F7\u5F8C\u30C6\u30AD\u30B9\u30C8", "catpow"), key: "countSuffix" }
             ]
           }
         ],
@@ -91,7 +92,7 @@
       const states = settings && settings.classes ? CP.classNamesToFlags(settings.classes) : {};
       const { countPrefix, countSuffix } = settings ?? {};
       const blockProps = useBlockProps({ className: "wp-block-catpow-progress " + settings?.classes });
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", initialOpen: true, icon: "admin-generic", ...{ setAttributes, attributes }, selectiveClasses }), settings ? /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30BB\u30C3\u30C8\u8A2D\u5B9A", initialOpen: false, icon: "admin-generic", setAttributes: setSettings, attributes: settings, selectiveClasses: settingsSelectiveClasses }, /* @__PURE__ */ wp.element.createElement(CP.EditItemsTable, { setAttributes: setSettings, attributes: settings, columns: [{ type: "text", key: "label" }] }), !isWaiting ? post === "default" ? /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(Flex, { justify: "center" }, /* @__PURE__ */ wp.element.createElement(FlexItem, null, /* @__PURE__ */ wp.element.createElement(Button, { isPrimary: true, onClick: registerSettings }, "\u65B0\u898F\u767B\u9332")))) : /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(Flex, { justify: "center" }, /* @__PURE__ */ wp.element.createElement(FlexItem, null, /* @__PURE__ */ wp.element.createElement(Button, { isPrimary: true, onClick: updateSettings }, "\u8A2D\u5B9A\u3092\u66F4\u65B0"))), /* @__PURE__ */ wp.element.createElement(Flex, { justify: "center" }, /* @__PURE__ */ wp.element.createElement(FlexItem, null, /* @__PURE__ */ wp.element.createElement(Button, { isLink: true, onClick: registerSettings }, "\u65B0\u898F\u767B\u9332"), "\uFF5C", /* @__PURE__ */ wp.element.createElement(Button, { isLink: true, isDestructive: true, onClick: deleteSettings }, "\u524A\u9664")))) : /* @__PURE__ */ wp.element.createElement(CenterSpinner, null)) : /* @__PURE__ */ wp.element.createElement(CenterSpinner, null), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, settings ? /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement("ul", { className: "_items" }, settings.items.map((item, index) => /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30AF\u30E9\u30B9", "catpow"), initialOpen: true, icon: "admin-generic", ...{ setAttributes, attributes }, selectiveClasses }), settings ? /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30BB\u30C3\u30C8\u8A2D\u5B9A", "catpow"), initialOpen: false, icon: "admin-generic", setAttributes: setSettings, attributes: settings, selectiveClasses: settingsSelectiveClasses }, /* @__PURE__ */ wp.element.createElement(CP.EditItemsTable, { setAttributes: setSettings, attributes: settings, columns: [{ type: "text", key: "label" }] }), !isWaiting ? post === "default" ? /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(Flex, { justify: "center" }, /* @__PURE__ */ wp.element.createElement(FlexItem, null, /* @__PURE__ */ wp.element.createElement(Button, { isPrimary: true, onClick: registerSettings }, __("\u65B0\u898F\u767B\u9332", "catpow"))))) : /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(Flex, { justify: "center" }, /* @__PURE__ */ wp.element.createElement(FlexItem, null, /* @__PURE__ */ wp.element.createElement(Button, { isPrimary: true, onClick: updateSettings }, __("\u8A2D\u5B9A\u3092\u66F4\u65B0", "catpow")))), /* @__PURE__ */ wp.element.createElement(Flex, { justify: "center" }, /* @__PURE__ */ wp.element.createElement(FlexItem, null, /* @__PURE__ */ wp.element.createElement(Button, { isLink: true, onClick: registerSettings }, __("\u65B0\u898F\u767B\u9332", "catpow")), "\uFF5C", /* @__PURE__ */ wp.element.createElement(Button, { isLink: true, isDestructive: true, onClick: deleteSettings }, __("\u524A\u9664", "catpow"))))) : /* @__PURE__ */ wp.element.createElement(CenterSpinner, null)) : /* @__PURE__ */ wp.element.createElement(CenterSpinner, null), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, settings ? /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement("ul", { className: "_items" }, settings.items.map((item, index) => /* @__PURE__ */ wp.element.createElement(
         "li",
         {
           className: "_item " + (index == attributes.step ? "is-active" : ""),

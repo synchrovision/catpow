@@ -1,5 +1,6 @@
 (() => {
   // ../blocks/pricecard/editor_script.jsx
+  var { __ } = wp.i18n;
   CP.config.pricecard = {
     imageKeys: {
       image: { src: "src", alt: "alt", code: "imageCode", items: "items" }
@@ -7,7 +8,7 @@
   };
   wp.blocks.registerBlockType("catpow/pricecard", {
     title: "\u{1F43E} PriceCard",
-    description: "\u30B5\u30FC\u30D3\u30B9\u30FB\u5546\u54C1\u60C5\u5831\u306E\u4E00\u89A7\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002",
+    description: __("\u30B5\u30FC\u30D3\u30B9\u30FB\u5546\u54C1\u60C5\u5831\u306E\u4E00\u89A7\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002", "catpow"),
     icon: "index-card",
     category: "catpow",
     example: CP.example,
@@ -36,27 +37,27 @@
       const states = CP.classNamesToFlags(classes);
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
-          { name: "subHeadingTag", preset: "headingTag", key: "SubHeadingTag", label: "\u526F\u898B\u51FA\u3057\u30BF\u30B0", classKey: "contentsClasses", cond: "hasSubTitle" },
-          { name: "contentsLevel", preset: "level", label: "\u30B3\u30F3\u30C6\u30F3\u30C4\u30EC\u30D9\u30EB", classKey: "contentsClasses" },
-          { name: "headerColorScheme", preset: "colorScheme", label: "\u30D8\u30C3\u30C0\u914D\u8272", classKey: "headerClasses" },
-          { name: "contentsColorScheme", preset: "colorScheme", label: "\u30B3\u30F3\u30C6\u30F3\u30C4\u914D\u8272", classKey: "contentsClasses" },
-          { input: "text", label: "\u4FA1\u683C\u5358\u4F4D", key: "priceUnit" },
+          { name: "subHeadingTag", preset: "headingTag", key: "SubHeadingTag", label: __("\u526F\u898B\u51FA\u3057\u30BF\u30B0", "catpow"), classKey: "contentsClasses", cond: "hasSubTitle" },
+          { name: "contentsLevel", preset: "level", label: __("\u30B3\u30F3\u30C6\u30F3\u30C4\u30EC\u30D9\u30EB", "catpow"), classKey: "contentsClasses" },
+          { name: "headerColorScheme", preset: "colorScheme", label: __("\u30D8\u30C3\u30C0\u914D\u8272", "catpow"), classKey: "headerClasses" },
+          { name: "contentsColorScheme", preset: "colorScheme", label: __("\u30B3\u30F3\u30C6\u30F3\u30C4\u914D\u8272", "catpow"), classKey: "contentsClasses" },
+          { input: "text", label: __("\u4FA1\u683C\u5358\u4F4D", "catpow"), key: "priceUnit" },
           {
             type: "radio",
-            label: "\u5358\u4F4D\u306E\u4F4D\u7F6E",
-            values: { hasUnitBefore: "\u524D", hasUnitAfter: "\u5F8C" }
+            label: __("\u5358\u4F4D\u306E\u4F4D\u7F6E", "catpow"),
+            values: { hasUnitBefore: __("\u524D", "catpow"), hasUnitAfter: __("\u5F8C", "catpow") }
           },
-          { label: "\u30BF\u30A4\u30C8\u30EB", values: "hasTitle" },
-          { label: "\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3", values: "hasTitleCaption" },
+          { label: __("\u30BF\u30A4\u30C8\u30EB", "catpow"), values: "hasTitle" },
+          { label: __("\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3", "catpow"), values: "hasTitleCaption" },
           {
-            label: "\u30EA\u30F3\u30AF",
+            label: __("\u30EA\u30F3\u30AF", "catpow"),
             values: "hasLink",
-            sub: [{ input: "text", label: "\u30EA\u30F3\u30AF\u6587\u5B57\u5217", key: "linkText" }]
+            sub: [{ input: "text", label: __("\u30EA\u30F3\u30AF\u6587\u5B57\u5217", "catpow"), key: "linkText" }]
           },
-          { label: "\u753B\u50CF", values: "hasImage" },
-          { label: "\u30B5\u30D6\u30BF\u30A4\u30C8\u30EB", values: "hasSubTitle" },
-          { label: "\u30C6\u30AD\u30B9\u30C8", values: "hasText" },
-          { label: "\u30B9\u30DA\u30C3\u30AF", values: "hasSpec" },
+          { label: __("\u753B\u50CF", "catpow"), values: "hasImage" },
+          { label: __("\u30B5\u30D6\u30BF\u30A4\u30C8\u30EB", "catpow"), values: "hasSubTitle" },
+          { label: __("\u30C6\u30AD\u30B9\u30C8", "catpow"), values: "hasText" },
+          { label: __("\u30B9\u30DA\u30C3\u30AF", "catpow"), values: "hasSpec" },
           "isTemplate"
         ];
         wp.hooks.applyFilters("catpow.blocks.pricecard.selectiveClasses", CP.finderProxy(selectiveClasses2));
@@ -66,18 +67,18 @@
         const itemSelectiveClasses2 = [
           "color",
           {
-            label: "\u30BF\u30A4\u30D7",
+            label: __("\u30BF\u30A4\u30D7", "catpow"),
             values: {
-              isTypeNormal: "\u901A\u5E38",
-              isTypeRecommended: "\u304A\u3059\u3059\u3081",
-              isTypeDeprecated: "\u975E\u63A8\u5968",
-              isTypeCheap: "\u5B89\u4FA1",
-              isTypeExpensive: "\u9AD8\u7D1A"
+              isTypeNormal: __("\u901A\u5E38", "catpow"),
+              isTypeRecommended: __("\u304A\u3059\u3059\u3081", "catpow"),
+              isTypeDeprecated: __("\u975E\u63A8\u5968", "catpow"),
+              isTypeCheap: __("\u5B89\u4FA1", "catpow"),
+              isTypeExpensive: __("\u9AD8\u7D1A", "catpow")
             }
           },
-          { label: "\u5024\u5F15\u304D", values: "isDiscount" },
+          { label: __("\u5024\u5F15\u304D", "catpow"), values: "isDiscount" },
           {
-            label: "\u753B\u50CF\u30B3\u30FC\u30C9",
+            label: __("\u753B\u50CF\u30B3\u30FC\u30C9", "catpow"),
             input: "text",
             key: "imageCode",
             cond: isTemplate
@@ -90,7 +91,7 @@
         setAttributes({ items: JSON.parse(JSON.stringify(items)) });
       };
       const blockProps = useBlockProps({ className: EditMode || AltMode && doLoop ? "cp-altcontent" : classes, style: vars });
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { setAttributes, attributes }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30A2\u30A4\u30C6\u30E0", icon: "edit", ...{ setAttributes, attributes }, itemKeys: ["items", attributes.currentItemIndex], selectiveClasses: itemSelectiveClasses }), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: "\u30AF\u30E9\u30B9", onChange: (classes2) => setAttributes({ classes: classes2 }), value: classes }))), attributes.EditMode ? /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(CP.Label, { icon: "edit" }), /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { setAttributes, attributes }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30AF\u30E9\u30B9", "catpow"), icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30A2\u30A4\u30C6\u30E0", "catpow"), icon: "edit", ...{ setAttributes, attributes }, itemKeys: ["items", attributes.currentItemIndex], selectiveClasses: itemSelectiveClasses }), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: __("\u30AF\u30E9\u30B9", "catpow"), onChange: (classes2) => setAttributes({ classes: classes2 }), value: classes }))), attributes.EditMode ? /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(CP.Label, { icon: "edit" }), /* @__PURE__ */ wp.element.createElement(
         CP.EditItemsTable,
         {
           setAttributes,

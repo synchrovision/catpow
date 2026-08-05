@@ -1,4 +1,6 @@
-﻿declare var wp: any, CP: any, React: any;
+﻿const { __ } = wp.i18n;
+
+declare var wp: any, CP: any, React: any;
 
 import { SelectiveClassConfig, CatpowBlockConfig } from "cpdev/type";
 import { clsx } from "clsx";
@@ -13,7 +15,7 @@ CP.config.picture = blockConfig;
 
 wp.blocks.registerBlockType("catpow/picture", {
 	title: "🐾 Picture",
-	description: "画面サイズに応じて切り替わる画像。",
+	description: __("画面サイズに応じて切り替わる画像。", "catpow"),
 	icon: "id-alt",
 	category: "catpow",
 	example: CP.example,
@@ -28,19 +30,19 @@ wp.blocks.registerBlockType("catpow/picture", {
 		const selectiveClasses: SelectiveClassConfig[] = [
 			{
 				input: "picture",
-				label: "画像",
+				label: __("画像", "catpow"),
 				keys: imageKeys?.image,
 				devices,
 				isTemplate,
 			},
 			{
-				label: "テンプレート",
+				label: __("テンプレート", "catpow"),
 				input: "bool",
 				key: "isTemplate",
 				sub: [
 					{
 						input: "text",
-						label: "画像コード",
+						label: __("画像コード", "catpow"),
 						key: "code",
 						cond: true,
 					},
@@ -62,7 +64,7 @@ wp.blocks.registerBlockType("catpow/picture", {
 					</div>
 				</CP.Bem>
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" {...panelProps} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title={__("クラス", "catpow")} icon="art" {...panelProps} selectiveClasses={selectiveClasses} />
 				</InspectorControls>
 			</>
 		);

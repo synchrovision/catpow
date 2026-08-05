@@ -1,4 +1,6 @@
-﻿CP.config.div = {
+﻿const { __ } = wp.i18n;
+
+CP.config.div = {
 	devices: ["tb", "sp"],
 	imageKeys: {
 		iconImage: { src: "iconImageSrc", alt: "iconImageAlt" },
@@ -32,13 +34,13 @@ wp.blocks.registerBlockType("catpow/div", {
 			const selectiveClasses = [
 				{
 					name: "type",
-					label: "タイプ",
+					label: __("タイプ", "catpow"),
 					filter: "type",
 					type: "buttons",
 					values: { isTypeBlock: "block", isTypeFrame: "frame", isTypeColumns: "columns" },
 					sub: {
 						isTypeFrame: ["hasIcon"],
-						isTypeColumns: [{ preset: "itemSize", label: "カラム幅" }],
+						isTypeColumns: [{ preset: "itemSize", label: __("カラム幅", "catpow") }],
 					},
 				},
 			];
@@ -55,7 +57,7 @@ wp.blocks.registerBlockType("catpow/div", {
 					<InnerBlocks template={[["core/paragraph", { content: CP.dummyText.text }]]} templateLock={false} />
 				</div>
 				<InspectorControls>
-					<CP.SelectClassPanel title="スタイル" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title={__("スタイル", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 				</InspectorControls>
 			</>
 		);

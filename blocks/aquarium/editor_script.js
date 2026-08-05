@@ -1,8 +1,9 @@
 (() => {
   // ../blocks/aquarium/editor_script.jsx
+  var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/aquarium", {
     title: "\u{1F43E} aquarium",
-    description: "\u753B\u50CF\u3068\u30C6\u30AD\u30B9\u30C8\u3092\uFF13\u6B21\u5143\u306B\u30EC\u30A4\u30A2\u30A6\u30C8\u3057\u307E\u3059\u3002",
+    description: __("\u753B\u50CF\u3068\u30C6\u30AD\u30B9\u30C8\u3092\uFF13\u6B21\u5143\u306B\u30EC\u30A4\u30A2\u30A6\u30C8\u3057\u307E\u3059\u3002", "catpow"),
     icon: /* @__PURE__ */ wp.element.createElement("svg", { role: "img", focusable: "false", xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", viewBox: "0 0 20 20", "aria-hidden": "true" }, /* @__PURE__ */ wp.element.createElement(
       "path",
       {
@@ -81,7 +82,7 @@
             return /* @__PURE__ */ wp.element.createElement("div", { className: text.classes }, /* @__PURE__ */ wp.element.createElement("h3", null, text.title), /* @__PURE__ */ wp.element.createElement("p", null, text.text));
           }));
         }));
-      }), /* @__PURE__ */ wp.element.createElement("div", { className: "contents" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, null))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", ...{ setAttributes, attributes }, selectiveClasses })));
+      }), /* @__PURE__ */ wp.element.createElement("div", { className: "contents" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, null))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30AF\u30E9\u30B9", "catpow"), icon: "art", ...{ setAttributes, attributes }, selectiveClasses })));
     },
     save({ attributes, className, setAttributes }) {
       const { classes, layers = [] } = attributes;

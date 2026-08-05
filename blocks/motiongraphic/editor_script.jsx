@@ -1,4 +1,6 @@
-﻿/*
+﻿const { __ } = wp.i18n;
+
+/*
  * 現在の投稿を規定のテンプレートを用いて表示する
  * APIを用いて様々な操作を行うcomponentを表示する
  */
@@ -67,7 +69,7 @@ wp.blocks.registerBlockType("catpow/motiongraphic", {
 					</div>
 				</div>
 				<InspectorControls>
-					{selections && <CP.SelectClassPanel classKey="component" title="設定" icon="edit" {...{ setAttributes, attributes }} selectiveClasses={selections} initialOpen={true} />}
+					{selections && <CP.SelectClassPanel classKey="component" title={__("設定", "catpow")} icon="edit" {...{ setAttributes, attributes }} selectiveClasses={selections} initialOpen={true} />}
 				</InspectorControls>
 			</>
 		);

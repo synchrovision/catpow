@@ -22,7 +22,7 @@
       const [open, setOpen] = useState(false);
       const states = classNamesToFlags(classes);
       const selectiveClasses = useMemo(() => {
-        const selectiveClasses2 = [{ input: "text", name: "anchor", label: "\u30A2\u30F3\u30AB\u30FC\u540D", key: "anchor" }, "contentWidth"];
+        const selectiveClasses2 = [{ input: "text", name: "anchor", label: __("\u30A2\u30F3\u30AB\u30FC\u540D", "catpow"), key: "anchor" }, "contentWidth"];
         wp.hooks.applyFilters("catpow.blocks.popup.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);

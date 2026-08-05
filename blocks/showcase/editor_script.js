@@ -1,5 +1,6 @@
 (() => {
   // ../blocks/showcase/editor_script.jsx
+  var { __ } = wp.i18n;
   var blockConfig = {
     imageKeys: {
       image: { src: "src", alt: "alt", code: "imageCode", items: "items" }
@@ -11,7 +12,7 @@
   CP.config.showcase = blockConfig;
   wp.blocks.registerBlockType("catpow/showcase", {
     title: "\u{1F43E} showcase",
-    description: "\u753B\u50CF\u3068\u30C6\u30AD\u30B9\u30C8\u3092\u4E26\u3079\u3066\u8868\u793A\u3057\u307E\u3059\u3002",
+    description: __("\u753B\u50CF\u3068\u30C6\u30AD\u30B9\u30C8\u3092\u4E26\u3079\u3066\u8868\u793A\u3057\u307E\u3059\u3002", "catpow"),
     icon: "columns",
     category: "catpow",
     transforms: {
@@ -56,34 +57,34 @@
           {
             name: "type",
             type: "buttons",
-            label: "\u30BF\u30A4\u30D7",
-            values: { isTypeFlat: "\u30D5\u30E9\u30C3\u30C8", isTypeCard: "\u30AB\u30FC\u30C9", isTypeFrame: "\u30D5\u30FC\u30EC\u30E0" }
+            label: __("\u30BF\u30A4\u30D7", "catpow"),
+            values: { isTypeFlat: __("\u30D5\u30E9\u30C3\u30C8", "catpow"), isTypeCard: __("\u30AB\u30FC\u30C9", "catpow"), isTypeFrame: __("\u30D5\u30FC\u30EC\u30E0", "catpow") }
           },
           {
             name: "counter",
-            label: "\u756A\u53F7",
+            label: __("\u756A\u53F7", "catpow"),
             values: "hasCounter",
             sub: [
               {
                 name: "countPrefix",
                 input: "text",
-                label: "\u756A\u53F7\u524D\u7F6E\u30C6\u30AD\u30B9\u30C8",
+                label: __("\u756A\u53F7\u524D\u7F6E\u30C6\u30AD\u30B9\u30C8", "catpow"),
                 key: "countPrefix"
               },
               {
                 name: "countSuffix",
                 input: "text",
-                label: "\u756A\u53F7\u5F8C\u7F6E\u30C6\u30AD\u30B9\u30C8",
+                label: __("\u756A\u53F7\u5F8C\u7F6E\u30C6\u30AD\u30B9\u30C8", "catpow"),
                 key: "countSuffix"
               }
             ]
           },
           {
             name: "titleCaption",
-            label: "\u30BF\u30A4\u30C8\u30EB\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3",
+            label: __("\u30BF\u30A4\u30C8\u30EB\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3", "catpow"),
             values: "hasTitleCaption"
           },
-          { name: "link", label: "\u30EA\u30F3\u30AF", values: "hasLink" },
+          { name: "link", label: __("\u30EA\u30F3\u30AF", "catpow"), values: "hasLink" },
           "isTemplate"
         ];
         wp.hooks.applyFilters("catpow.blocks.showcase.selectiveClasses", CP.finderProxy(selectiveClasses2));
@@ -91,7 +92,7 @@
       }, []);
       const selectiveItemClasses = useMemo(() => {
         const { imageKeys: imageKeys2 } = CP.config.showcase;
-        const selectiveItemClasses2 = ["color", { name: "image", input: "image", label: "\u753B\u50CF", keys: imageKeys2.image }, "event"];
+        const selectiveItemClasses2 = ["color", { name: "image", input: "image", label: __("\u753B\u50CF", "catpow"), keys: imageKeys2.image }, "event"];
         wp.hooks.applyFilters("catpow.blocks.showcase.selectiveItemClasses", CP.finderProxy(selectiveItemClasses2));
         return selectiveItemClasses2;
       }, []);
@@ -100,7 +101,7 @@
           {
             name: "imageCode",
             input: "text",
-            label: "\u753B\u50CF\u30B3\u30FC\u30C9",
+            label: __("\u753B\u50CF\u30B3\u30FC\u30C9", "catpow"),
             key: "imageCode"
           }
         ];
@@ -123,16 +124,16 @@
             }
           ]
         }
-      )), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: "\u30AF\u30E9\u30B9", onChange: (classes2) => setAttributes({ classes: classes2 }), value: classes })), isTemplate ? /* @__PURE__ */ wp.element.createElement(
+      )), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30AF\u30E9\u30B9", "catpow"), icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: __("\u30AF\u30E9\u30B9", "catpow"), onChange: (classes2) => setAttributes({ classes: classes2 }), value: classes })), isTemplate ? /* @__PURE__ */ wp.element.createElement(
         CP.SelectClassPanel,
         {
-          title: "\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8",
+          title: __("\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8", "catpow"),
           icon: "edit",
           ...{ setAttributes, attributes },
           itemKeys: ["items", attributes.currentItemIndex],
           selectiveClasses: selectiveItemTemplateClasses
         }
-      ) : /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30A2\u30A4\u30C6\u30E0", icon: "edit", ...{ setAttributes, attributes }, itemKeys: ["items", attributes.currentItemIndex], selectiveClasses: selectiveItemClasses }), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), EditMode ? /* @__PURE__ */ wp.element.createElement("div", { className: "cp-altcontent" }, /* @__PURE__ */ wp.element.createElement(CP.Label, { icon: "edit" }), /* @__PURE__ */ wp.element.createElement(
+      ) : /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30A2\u30A4\u30C6\u30E0", "catpow"), icon: "edit", ...{ setAttributes, attributes }, itemKeys: ["items", attributes.currentItemIndex], selectiveClasses: selectiveItemClasses }), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), EditMode ? /* @__PURE__ */ wp.element.createElement("div", { className: "cp-altcontent" }, /* @__PURE__ */ wp.element.createElement(CP.Label, { icon: "edit" }), /* @__PURE__ */ wp.element.createElement(
         CP.EditItemsTable,
         {
           setAttributes,

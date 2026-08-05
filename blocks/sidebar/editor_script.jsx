@@ -8,7 +8,7 @@ const { PanelBody, TextareaControl } = wp.components;
 
 wp.blocks.registerBlockType("catpow/sidebar", {
 	title: "🐾 Sidebar",
-	description: "サイドバーのあるコンテンツ領域のコンテナです。",
+	description: __("サイドバーのあるコンテンツ領域のコンテナです。", "catpow"),
 	icon: "editor-code",
 	category: "catpow",
 	attributes: {
@@ -27,7 +27,7 @@ wp.blocks.registerBlockType("catpow/sidebar", {
 					name: "mobileLayout",
 					type: "buttons",
 					label: __("SPレイアウト", "catpow"),
-					values: { isStuck: __("積上", "ctapow"), isSticky: __("追従", "ctapow") },
+					values: { isStuck: __("積上", "catpow"), isSticky: __("追従", "catpow") },
 					sub: {
 						isStuck: [{ name: "stuckDirection", type: "buttons", values: { isStuckTop: __("上", "catpow"), isStuckBottom: __("下", "catpow") } }],
 					},
@@ -48,9 +48,9 @@ wp.blocks.registerBlockType("catpow/sidebar", {
 					<CP.AlignClassToolbar setAttributes={setAttributes} attributes={attributes} />
 				</BlockControls>
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} initialOpen={true} />
+					<CP.SelectClassPanel title={__("クラス", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} initialOpen={true} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
+						<TextareaControl label={__("クラス", "catpow")} onChange={(classes) => setAttributes({ classes })} value={classes} />
 					</PanelBody>
 				</InspectorControls>
 			</>
@@ -111,9 +111,9 @@ wp.blocks.registerBlockType("catpow/sidecolumn", {
 					</div>
 				</CP.Bem>
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} initialOpen={true} />
+					<CP.SelectClassPanel title={__("クラス", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} initialOpen={true} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
+						<TextareaControl label={__("クラス", "catpow")} onChange={(classes) => setAttributes({ classes })} value={classes} />
 					</PanelBody>
 				</InspectorControls>
 			</>
@@ -202,9 +202,9 @@ wp.blocks.registerBlockType("catpow/sidebar-section", {
 					</div>
 				</CP.Bem>
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} initialOpen={true} />
+					<CP.SelectClassPanel title={__("クラス", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} initialOpen={true} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
+						<TextareaControl label={__("クラス", "catpow")} onChange={(classes) => setAttributes({ classes })} value={classes} />
 					</PanelBody>
 				</InspectorControls>
 			</>

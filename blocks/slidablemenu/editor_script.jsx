@@ -1,11 +1,13 @@
-﻿CP.config.slidablemenu = {
+﻿const { __ } = wp.i18n;
+
+CP.config.slidablemenu = {
 	imageKeys: {
 		image: { src: "src", alt: "alt", code: "imageCode", items: "items" },
 	},
 };
 wp.blocks.registerBlockType("catpow/slidablemenu", {
 	title: "🐾 Slidable Menu",
-	description: "スクロール可能なメニュー。",
+	description: __("スクロール可能なメニュー。", "catpow"),
 	icon: "list-view",
 	category: "catpow",
 	transforms: {
@@ -38,27 +40,27 @@ wp.blocks.registerBlockType("catpow/slidablemenu", {
 				{
 					name: "size",
 					type: "buttons",
-					label: "サイズ",
+					label: __("サイズ", "catpow"),
 					values: ["small", "medium", "large"],
 				},
 				{
 					name: "columnsCount",
 					input: "range",
-					label: "カラム数",
+					label: __("カラム数", "catpow"),
 					key: "columnsCount",
 					min: 2,
 					max: 10,
 				},
 				{
 					name: "template",
-					label: "テンプレート",
+					label: __("テンプレート", "catpow"),
 					input: "bool",
 					key: "isTemplate",
 					sub: [
 						{
 							name: "loop",
 							input: "bool",
-							label: "ループ",
+							label: __("ループ", "catpow"),
 							key: "doLoop",
 							sub: [
 								{
@@ -75,7 +77,7 @@ wp.blocks.registerBlockType("catpow/slidablemenu", {
 								},
 								{
 									name: "loopCount",
-									label: "プレビューループ数",
+									label: __("プレビューループ数", "catpow"),
 									input: "range",
 									key: "loopCount",
 									min: 1,
@@ -166,9 +168,9 @@ wp.blocks.registerBlockType("catpow/slidablemenu", {
 			<>
 				<CP.SelectModeToolbar setAttributes={setAttributes} attributes={attributes} />
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title={__("クラス", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
+						<TextareaControl label={__("クラス", "catpow")} onChange={(classes) => setAttributes({ classes })} value={classes} />
 					</PanelBody>
 					<CP.ItemControlInfoPanel />
 				</InspectorControls>

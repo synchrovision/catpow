@@ -12,7 +12,7 @@ wp.blocks.registerBlockType("catpow/popup", {
 		const states = classNamesToFlags(classes);
 
 		const selectiveClasses = useMemo(() => {
-			const selectiveClasses = [{ input: "text", name: "anchor", label: "アンカー名", key: "anchor" }, "contentWidth"];
+			const selectiveClasses = [{ input: "text", name: "anchor", label: __("アンカー名", "catpow"), key: "anchor" }, "contentWidth"];
 			wp.hooks.applyFilters("catpow.blocks.popup.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
 		}, []);

@@ -1,9 +1,11 @@
-﻿/*
+﻿const { __ } = wp.i18n;
+
+/*
  * 規定のテンプレートを埋め込む
  */
 wp.blocks.registerBlockType("catpow/embed", {
 	title: "🐾 Embed",
-	description: "テーマに定義された埋め込みコンテンツを表示します。",
+	description: __("テーマに定義された埋め込みコンテンツを表示します。", "catpow"),
 	icon: "editor-code",
 	category: "catpow-embed",
 	example: CP.example,
@@ -62,7 +64,7 @@ wp.blocks.registerBlockType("catpow/embed", {
 							}}
 						/>
 					</PanelBody>
-					{options && <CP.SelectClassPanel title="設定" icon="edit" {...{ setAttributes, attributes }} selectiveClasses={options} initialOpen={true} />}
+					{options && <CP.SelectClassPanel title={__("設定", "catpow")} icon="edit" {...{ setAttributes, attributes }} selectiveClasses={options} initialOpen={true} />}
 				</InspectorControls>
 			</>
 		);

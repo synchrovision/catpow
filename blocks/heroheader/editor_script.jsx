@@ -73,9 +73,9 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 		return (
 			<>
 				<InspectorControls>
-					<CP.SelectClassPanel title="スタイル" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title={__("スタイル", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 					{states.hasButtons && (
-						<CP.SelectClassPanel title="ボタン" icon="edit" {...{ setAttributes, attributes }} itemKeys={["buttons", attributes.currentItemIndex]} selectiveClasses={["buttonParams"]} />
+						<CP.SelectClassPanel title={__("ボタン", "catpow")} icon="edit" {...{ setAttributes, attributes }} itemKeys={["buttons", attributes.currentItemIndex]} selectiveClasses={["buttonParams"]} />
 					)}
 				</InspectorControls>
 				<CP.SelectModeToolbar setAttributes={setAttributes} attributes={attributes} />

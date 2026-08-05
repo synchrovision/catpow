@@ -1,4 +1,6 @@
-﻿import { clsx } from "clsx";
+﻿const { __ } = wp.i18n;
+
+import { clsx } from "clsx";
 
 const getPlainText = (html) => wp.richText.getTextContent(wp.richText.create({ html: String(html || "") }));
 
@@ -63,29 +65,29 @@ wp.blocks.registerBlockType("catpow/faq", {
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
-				{ name: "titleCaption", label: "Qにキャプション", values: "hasTitleCaption" },
-				{ name: "subTitle", label: "Aに見出し", values: "hasSubTitle" },
-				{ name: "hasImage", label: "画像", values: "hasImage" },
+				{ name: "titleCaption", label: __("Qにキャプション", "catpow"), values: "hasTitleCaption" },
+				{ name: "subTitle", label: __("Aに見出し", "catpow"), values: "hasSubTitle" },
+				{ name: "hasImage", label: __("画像", "catpow"), values: "hasImage" },
 				{
 					name: "counter",
-					label: "番号",
+					label: __("番号", "catpow"),
 					values: "hasCounter",
 					sub: [
 						{
 							name: "counterPrefix",
 							input: "text",
-							label: "番号前置テキスト",
+							label: __("番号前置テキスト", "catpow"),
 							key: "counterPrefix",
 						},
 						{
 							name: "counterSuffix",
 							input: "text",
-							label: "番号後置テキスト",
+							label: __("番号後置テキスト", "catpow"),
 							key: "counterSuffix",
 						},
 					],
 				},
-				{ name: "accordion", label: "アコーディオン", values: "isAccordion" },
+				{ name: "accordion", label: __("アコーディオン", "catpow"), values: "isAccordion" },
 			];
 			wp.hooks.applyFilters("catpow.blocks.faq.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
@@ -115,9 +117,9 @@ wp.blocks.registerBlockType("catpow/faq", {
 					/>
 				</BlockControls>
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title={__("クラス", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
+						<TextareaControl label={__("クラス", "catpow")} onChange={(classes) => setAttributes({ classes })} value={classes} />
 					</PanelBody>
 					<CP.ItemControlInfoPanel />
 				</InspectorControls>

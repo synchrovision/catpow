@@ -1,5 +1,6 @@
 (() => {
   // ../blocks/buttons/editor_script.jsx
+  var { __ } = wp.i18n;
   var blockConfig = {
     linkKeys: {
       link: { href: "href", items: "items" }
@@ -8,7 +9,7 @@
   CP.config.buttons = blockConfig;
   wp.blocks.registerBlockType("catpow/buttons", {
     title: "\u{1F43E} Buttons",
-    description: "\u30DC\u30BF\u30F3\u306E\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002",
+    description: __("\u30DC\u30BF\u30F3\u306E\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002", "catpow"),
     icon: /* @__PURE__ */ wp.element.createElement("svg", { role: "img", focusable: "false", xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", viewBox: "0 0 20 20", "aria-hidden": "true" }, /* @__PURE__ */ wp.element.createElement(
       "path",
       {
@@ -26,7 +27,7 @@
       const { linkKeys } = blockConfig;
       const states = CP.classNamesToFlags(classes2);
       const selectiveClasses = useMemo(() => {
-        const selectiveClasses2 = [{ name: "microcopy", label: "\u30DE\u30A4\u30AF\u30ED\u30B3\u30D4\u30FC", values: "hasMicroCopy" }, { name: "caption", label: "\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3", values: "hasCaption" }, "isTemplate"];
+        const selectiveClasses2 = [{ name: "microcopy", label: __("\u30DE\u30A4\u30AF\u30ED\u30B3\u30D4\u30FC", "catpow"), values: "hasMicroCopy" }, { name: "caption", label: __("\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3", "catpow"), values: "hasCaption" }, "isTemplate"];
         wp.hooks.applyFilters("catpow.blocks.buttons.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);
@@ -36,7 +37,7 @@
           "rank",
           {
             name: "icon",
-            label: "\u30A2\u30A4\u30B3\u30F3",
+            label: __("\u30A2\u30A4\u30B3\u30F3", "catpow"),
             values: "hasIcon",
             sub: [{ input: "icon" }]
           },
@@ -52,7 +53,7 @@
         className: classes2,
         style: vars
       });
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(CP.AlignClassToolbar, { setAttributes, attributes })), /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { setAttributes, attributes }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30B9\u30BF\u30A4\u30EB", icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30DC\u30BF\u30F3", icon: "edit", ...{ setAttributes, attributes }, itemKeys: ["items", attributes.currentItemIndex], selectiveClasses: selectiveItemClasses })), /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, EditMode ? /* @__PURE__ */ wp.element.createElement("div", { ...blockProps, className: "cp-altcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(CP.AlignClassToolbar, { setAttributes, attributes })), /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { setAttributes, attributes }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30B9\u30BF\u30A4\u30EB", "catpow"), icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30DC\u30BF\u30F3", "catpow"), icon: "edit", ...{ setAttributes, attributes }, itemKeys: ["items", attributes.currentItemIndex], selectiveClasses: selectiveItemClasses })), /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, EditMode ? /* @__PURE__ */ wp.element.createElement("div", { ...blockProps, className: "cp-altcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(
         CP.EditItemsTable,
         {
           setAttributes,

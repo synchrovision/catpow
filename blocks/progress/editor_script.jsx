@@ -1,6 +1,8 @@
-﻿wp.blocks.registerBlockType("catpow/progress", {
+﻿const { __ } = wp.i18n;
+
+wp.blocks.registerBlockType("catpow/progress", {
 	title: "🐾 Progress",
-	description: "進捗のブロックです。",
+	description: __("進捗のブロックです。", "catpow"),
 	icon: "editor-ul",
 	category: "catpow",
 	example: CP.example,
@@ -12,8 +14,8 @@
 
 		const selectiveClasses = useMemo(
 			() => [
-				{ input: "select", label: "セット", key: "post", values: selections },
-				{ input: "range", label: "ステップ", key: "step", min: 0, max: settings ? settings.items.length - 1 : 0 },
+				{ input: "select", label: __("セット", "catpow"), key: "post", values: selections },
+				{ input: "range", label: __("ステップ", "catpow"), key: "step", min: 0, max: settings ? settings.items.length - 1 : 0 },
 			],
 			[selections, settings],
 		);
@@ -23,11 +25,11 @@
 				"hasContentWidth",
 				"hasMargin",
 				{
-					label: "番号",
+					label: __("番号", "catpow"),
 					values: "hasCounter",
 					sub: [
-						{ input: "text", label: "番号前テキスト", key: "countPrefix" },
-						{ input: "text", label: "番号後テキスト", key: "countSuffix" },
+						{ input: "text", label: __("番号前テキスト", "catpow"), key: "countPrefix" },
+						{ input: "text", label: __("番号後テキスト", "catpow"), key: "countSuffix" },
 					],
 				},
 			],
@@ -105,9 +107,9 @@
 		return (
 			<>
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" initialOpen={true} icon="admin-generic" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title={__("クラス", "catpow")} initialOpen={true} icon="admin-generic" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 					{settings ? (
-						<CP.SelectClassPanel title="セット設定" initialOpen={false} icon="admin-generic" setAttributes={setSettings} attributes={settings} selectiveClasses={settingsSelectiveClasses}>
+						<CP.SelectClassPanel title={__("セット設定", "catpow")} initialOpen={false} icon="admin-generic" setAttributes={setSettings} attributes={settings} selectiveClasses={settingsSelectiveClasses}>
 							<CP.EditItemsTable setAttributes={setSettings} attributes={settings} columns={[{ type: "text", key: "label" }]} />
 							{!isWaiting ? (
 								post === "default" ? (
@@ -115,7 +117,7 @@
 										<Flex justify="center">
 											<FlexItem>
 												<Button isPrimary onClick={registerSettings}>
-													新規登録
+													{__("新規登録", "catpow")}
 												</Button>
 											</FlexItem>
 										</Flex>
@@ -125,18 +127,18 @@
 										<Flex justify="center">
 											<FlexItem>
 												<Button isPrimary onClick={updateSettings}>
-													設定を更新
+													{__("設定を更新", "catpow")}
 												</Button>
 											</FlexItem>
 										</Flex>
 										<Flex justify="center">
 											<FlexItem>
 												<Button isLink onClick={registerSettings}>
-													新規登録
+													{__("新規登録", "catpow")}
 												</Button>
 												｜
 												<Button isLink isDestructive onClick={deleteSettings}>
-													削除
+													{__("削除", "catpow")}
 												</Button>
 											</FlexItem>
 										</Flex>

@@ -2,7 +2,7 @@
 
 wp.blocks.registerBlockType("catpow/t-body", {
 	title: "🐾 T-Body",
-	description: "HTMLメールのベースとなるヘッダ・フッタのブロックです。",
+	description: __("HTMLメールのベースとなるヘッダ・フッタのブロックです。", "catpow"),
 	icon: "editor-code",
 	category: "catpow-mail",
 	supports: {
@@ -56,22 +56,22 @@ wp.blocks.registerBlockType("catpow/t-body", {
 				{
 					name: "type",
 					input: "buttons",
-					label: "メールタイプ",
+					label: __("メールタイプ", "catpow"),
 					key: "type",
 					values: ["plain", "html"],
 					sub: {
 						html: [
-							{ name: "textMode", input: "bool", label: "テキストメール編集モード", key: "TextMode" },
+							{ name: "textMode", input: "bool", label: __("テキストメール編集モード", "catpow"), key: "TextMode" },
 							{
 								name: "body",
 								type: "gridbuttons",
-								label: "背景色",
-								values: { hasBgWhite: "白", hasBgB: "背景色", hasBgS: "強調背景色", hasBgBlack: "黒", hasBgM: "基本色", hasBgA: "強調色" },
+								label: __("背景色", "catpow"),
+								values: { hasBgWhite: __("白", "catpow"), hasBgB: __("背景色", "catpow"), hasBgS: __("強調背景色", "catpow"), hasBgBlack: __("黒", "catpow"), hasBgM: __("基本色", "catpow"), hasBgA: __("強調色", "catpow") },
 								classKey: "body_class",
 							},
 							{
 								name: "header",
-								label: "ヘッダ",
+								label: __("ヘッダ", "catpow"),
 								values: "hasHeader",
 								sub: [
 									{ preset: "colorScheme", classKey: "headerClasses" },
@@ -79,7 +79,7 @@ wp.blocks.registerBlockType("catpow/t-body", {
 										name: "headerBackgroundColor",
 										type: "buttons",
 										label: __("ヘッダ背景色", "catpow"),
-										values: { hasBgNone: "なし", hasBgNormal: "通常", hasBgStrong: "強調", hasBgAchromatic: "白黒" },
+										values: { hasBgNone: __("なし", "catpow"), hasBgNormal: __("通常", "catpow"), hasBgStrong: __("強調", "catpow"), hasBgAchromatic: __("白黒", "catpow") },
 										classKey: "headerClasses",
 									},
 									{ name: "range", input: "range", label: __("上余白", "catpow"), key: "headerPaddingTop", min: 0, max: 10 },
@@ -88,7 +88,7 @@ wp.blocks.registerBlockType("catpow/t-body", {
 							},
 							{
 								name: "footer",
-								label: "フッタ",
+								label: __("フッタ", "catpow"),
 								values: "hasFooter",
 								sub: [
 									{ preset: "colorScheme", classKey: "footerClasses" },
@@ -96,7 +96,7 @@ wp.blocks.registerBlockType("catpow/t-body", {
 										name: "footerBackgroundColor",
 										type: "buttons",
 										label: __("フッタ背景色", "catpow"),
-										values: { hasBgNone: "なし", hasBgNormal: "通常", hasBgStrong: "強調", hasBgAchromatic: "白黒" },
+										values: { hasBgNone: __("なし", "catpow"), hasBgNormal: __("通常", "catpow"), hasBgStrong: __("強調", "catpow"), hasBgAchromatic: __("白黒", "catpow") },
 										classKey: "footerClasses",
 									},
 									{ name: "range", input: "range", label: __("上余白", "catpow"), key: "footerPaddingTop", min: 0, max: 10 },
@@ -202,16 +202,16 @@ wp.blocks.registerBlockType("catpow/t-body", {
 							controls={[
 								{
 									icon: "media-text",
-									label: "テキストメール",
+									label: __("テキストメール", "catpow"),
 									isActive: TextMode,
 									onClick: () => setAttributes({ TextMode: !TextMode }),
 								},
 							]}
 						/>
 					</BlockControls>
-					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} initialOpen={true} />
+					<CP.SelectClassPanel title={__("クラス", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} initialOpen={true} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
+						<TextareaControl label={__("クラス", "catpow")} onChange={(classes) => setAttributes({ classes })} value={classes} />
 					</PanelBody>
 				</InspectorControls>
 			</>

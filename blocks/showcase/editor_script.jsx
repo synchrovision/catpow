@@ -1,4 +1,6 @@
-﻿const blockConfig = {
+﻿const { __ } = wp.i18n;
+
+const blockConfig = {
 	imageKeys: {
 		image: { src: "src", alt: "alt", code: "imageCode", items: "items" },
 	},
@@ -10,7 +12,7 @@ CP.config.showcase = blockConfig;
 
 wp.blocks.registerBlockType("catpow/showcase", {
 	title: "🐾 showcase",
-	description: "画像とテキストを並べて表示します。",
+	description: __("画像とテキストを並べて表示します。", "catpow"),
 	icon: "columns",
 	category: "catpow",
 	transforms: {
@@ -57,34 +59,34 @@ wp.blocks.registerBlockType("catpow/showcase", {
 				{
 					name: "type",
 					type: "buttons",
-					label: "タイプ",
-					values: { isTypeFlat: "フラット", isTypeCard: "カード", isTypeFrame: "フーレム" },
+					label: __("タイプ", "catpow"),
+					values: { isTypeFlat: __("フラット", "catpow"), isTypeCard: __("カード", "catpow"), isTypeFrame: __("フーレム", "catpow") },
 				},
 				{
 					name: "counter",
-					label: "番号",
+					label: __("番号", "catpow"),
 					values: "hasCounter",
 					sub: [
 						{
 							name: "countPrefix",
 							input: "text",
-							label: "番号前置テキスト",
+							label: __("番号前置テキスト", "catpow"),
 							key: "countPrefix",
 						},
 						{
 							name: "countSuffix",
 							input: "text",
-							label: "番号後置テキスト",
+							label: __("番号後置テキスト", "catpow"),
 							key: "countSuffix",
 						},
 					],
 				},
 				{
 					name: "titleCaption",
-					label: "タイトルキャプション",
+					label: __("タイトルキャプション", "catpow"),
 					values: "hasTitleCaption",
 				},
-				{ name: "link", label: "リンク", values: "hasLink" },
+				{ name: "link", label: __("リンク", "catpow"), values: "hasLink" },
 				"isTemplate",
 			];
 			wp.hooks.applyFilters("catpow.blocks.showcase.selectiveClasses", CP.finderProxy(selectiveClasses));
@@ -92,7 +94,7 @@ wp.blocks.registerBlockType("catpow/showcase", {
 		}, []);
 		const selectiveItemClasses = useMemo(() => {
 			const { imageKeys } = CP.config.showcase;
-			const selectiveItemClasses = ["color", { name: "image", input: "image", label: "画像", keys: imageKeys.image }, "event"];
+			const selectiveItemClasses = ["color", { name: "image", input: "image", label: __("画像", "catpow"), keys: imageKeys.image }, "event"];
 			wp.hooks.applyFilters("catpow.blocks.showcase.selectiveItemClasses", CP.finderProxy(selectiveItemClasses));
 			return selectiveItemClasses;
 		}, []);
@@ -101,7 +103,7 @@ wp.blocks.registerBlockType("catpow/showcase", {
 				{
 					name: "imageCode",
 					input: "text",
-					label: "画像コード",
+					label: __("画像コード", "catpow"),
 					key: "imageCode",
 				},
 			];
@@ -130,20 +132,20 @@ wp.blocks.registerBlockType("catpow/showcase", {
 					/>
 				</BlockControls>
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title={__("クラス", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
+						<TextareaControl label={__("クラス", "catpow")} onChange={(classes) => setAttributes({ classes })} value={classes} />
 					</PanelBody>
 					{isTemplate ? (
 						<CP.SelectClassPanel
-							title="テンプレート"
+							title={__("テンプレート", "catpow")}
 							icon="edit"
 							{...{ setAttributes, attributes }}
 							itemKeys={["items", attributes.currentItemIndex]}
 							selectiveClasses={selectiveItemTemplateClasses}
 						/>
 					) : (
-						<CP.SelectClassPanel title="アイテム" icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={selectiveItemClasses} />
+						<CP.SelectClassPanel title={__("アイテム", "catpow")} icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={selectiveItemClasses} />
 					)}
 					<CP.ItemControlInfoPanel />
 				</InspectorControls>

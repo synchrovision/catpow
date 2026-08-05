@@ -1,5 +1,6 @@
 (() => {
   // ../blocks/panes/editor_script.jsx
+  var { __ } = wp.i18n;
   CP.config.panes = {
     imageKeys: {
       image: { src: "src", alt: "alt", code: "imageCode", items: "items" },
@@ -13,7 +14,7 @@
   };
   wp.blocks.registerBlockType("catpow/panes", {
     title: "\u{1F43E} Panes",
-    description: "\u77E9\u5F62\u306E\u753B\u50CF\u3068\u30C6\u30AD\u30B9\u30C8\u306E\u30DA\u30A2\u306E\u30EA\u30B9\u30C8\u3002",
+    description: __("\u77E9\u5F62\u306E\u753B\u50CF\u3068\u30C6\u30AD\u30B9\u30C8\u306E\u30DA\u30A2\u306E\u30EA\u30B9\u30C8\u3002", "catpow"),
     icon: "editor-ul",
     category: "catpow",
     transforms: {
@@ -35,13 +36,13 @@
       const { isTemplate, items = [], classes = "", HeadingTag, vars, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
       var states = CP.classNamesToFlags(classes);
       const { imageKeys } = CP.config.panes;
-      var selectiveClasses = [{ label: "\u30B7\u30F3\u30DC\u30EB", values: "hasSymbol" }, "isTemplate"];
+      var selectiveClasses = [{ label: __("\u30B7\u30F3\u30DC\u30EB", "catpow"), values: "hasSymbol" }, "isTemplate"];
       const itemSelectiveClasses = ["color", { input: "icon" }];
       const save = () => {
         setAttributes({ items: JSON.parse(JSON.stringify(items)) });
       };
       const blockProps = useBlockProps({ className: EditMode ? "cp-altcontent" : classes, style: vars });
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { setAttributes, attributes }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: "\u30AF\u30E9\u30B9", onChange: (classes2) => setAttributes({ classes: classes2 }), value: classes })), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30A2\u30A4\u30C6\u30E0", icon: "edit", ...{ setAttributes, attributes }, itemKeys: ["items", attributes.currentItemIndex], selectiveClasses: itemSelectiveClasses }), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), EditMode ? /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(CP.Label, { icon: "edit" }), /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { setAttributes, attributes }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30AF\u30E9\u30B9", "catpow"), icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: __("\u30AF\u30E9\u30B9", "catpow"), onChange: (classes2) => setAttributes({ classes: classes2 }), value: classes })), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30A2\u30A4\u30C6\u30E0", "catpow"), icon: "edit", ...{ setAttributes, attributes }, itemKeys: ["items", attributes.currentItemIndex], selectiveClasses: itemSelectiveClasses }), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), EditMode ? /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(CP.Label, { icon: "edit" }), /* @__PURE__ */ wp.element.createElement(
         CP.EditItemsTable,
         {
           setAttributes,

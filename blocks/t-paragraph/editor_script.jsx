@@ -1,6 +1,8 @@
-﻿wp.blocks.registerBlockType("catpow/t-paragraph", {
+﻿const { __ } = wp.i18n;
+
+wp.blocks.registerBlockType("catpow/t-paragraph", {
 	title: "🐾 T-Paragraph",
-	description: "HTMLメール用の段落ブロックです。",
+	description: __("HTMLメール用の段落ブロックです。", "catpow"),
 	icon: "editor-code",
 	category: "catpow-mail",
 	parent: CP.mailContensContainer,
@@ -53,8 +55,8 @@
 				"textAlign",
 				"fontSize",
 				"fontWeight",
-				{ name: "marginTop", input: "range", label: "上余白", key: "marginTop", min: 0, max: 2, step: 0.25 },
-				{ name: "marginBottom", input: "range", label: "下余白", key: "marginBottom", min: 0, max: 2, step: 0.25 },
+				{ name: "marginTop", input: "range", label: __("上余白", "catpow"), key: "marginTop", min: 0, max: 2, step: 0.25 },
+				{ name: "marginBottom", input: "range", label: __("下余白", "catpow"), key: "marginBottom", min: 0, max: 2, step: 0.25 },
 			];
 			wp.hooks.applyFilters("catpow.blocks.t-paragraph.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
@@ -107,9 +109,9 @@
 					<CP.AlignClassToolbar setAttributes={setAttributes} attributes={attributes} />
 				</BlockControls>
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} initialOpen={true} />
+					<CP.SelectClassPanel title={__("クラス", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} initialOpen={true} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
+						<TextareaControl label={__("クラス", "catpow")} onChange={(classes) => setAttributes({ classes })} value={classes} />
 					</PanelBody>
 				</InspectorControls>
 			</>

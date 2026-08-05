@@ -1,4 +1,6 @@
-﻿import { clsx } from "clsx";
+﻿const { __ } = wp.i18n;
+
+import { clsx } from "clsx";
 
 CP.config.accordion = {
 	devices: ["tb", "sp"],
@@ -12,7 +14,7 @@ CP.config.accordion = {
 
 wp.blocks.registerBlockType("catpow/accordion", {
 	title: "🐾 Accordion",
-	description: "クリックで折り畳みできるブロックです。",
+	description: __("クリックで折り畳みできるブロックです。", "catpow"),
 	icon: "insert",
 	category: "catpow",
 	attributes: {
@@ -41,17 +43,17 @@ wp.blocks.registerBlockType("catpow/accordion", {
 		const selectiveClasses = useMemo(() => {
 			const { imageKeys, imageSizes } = CP.config.accordion;
 			const selectiveClasses = [
-				{ name: "image", label: "画像", values: "hasImage", sub: [{ input: "image", keys: imageKeys.image, size: imageSizes.image }] },
+				{ name: "image", label: __("画像", "catpow"), values: "hasImage", sub: [{ input: "image", keys: imageKeys.image, size: imageSizes.image }] },
 				{
 					name: "template",
-					label: "テンプレート",
+					label: __("テンプレート", "catpow"),
 					input: "bool",
 					key: "isTemplate",
 					sub: [
 						{
 							name: "imageCode",
 							input: "text",
-							label: "画像コード",
+							label: __("画像コード", "catpow"),
 							key: "imageCode",
 							cond: "hasImage",
 						},
@@ -87,9 +89,9 @@ wp.blocks.registerBlockType("catpow/accordion", {
 					</div>
 				</CP.Bem>
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title={__("クラス", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
+						<TextareaControl label={__("クラス", "catpow")} onChange={(classes) => setAttributes({ classes })} value={classes} />
 					</PanelBody>
 				</InspectorControls>
 			</>
@@ -143,7 +145,7 @@ wp.blocks.registerBlockType("catpow/accordion", {
 wp.blocks.registerBlockType("catpow/accordiongroup", {
 	apiVersion: 3,
 	title: "🐾 AccordionGroup",
-	description: "同時に開かれるアコーディオンを制限するコンテナです。",
+	description: __("同時に開かれるアコーディオンを制限するコンテナです。", "catpow"),
 	icon: "insert",
 	category: "catpow",
 	attributes: {

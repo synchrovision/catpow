@@ -1,4 +1,6 @@
-﻿CP.config.contactinfo = {
+﻿const { __ } = wp.i18n;
+
+CP.config.contactinfo = {
 	linkKeys: {
 		link: { href: "href", items: "items" },
 	},
@@ -21,20 +23,20 @@ wp.blocks.registerBlockType("catpow/contactinfo", {
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
-				{ name: "title", label: "タイトル", values: "hasTitle" },
-				{ name: "lead", label: "リード", values: "hasLead" },
-				{ name: "caption", label: "キャプション", values: "hasCaption" },
+				{ name: "title", label: __("タイトル", "catpow"), values: "hasTitle" },
+				{ name: "lead", label: __("リード", "catpow"), values: "hasLead" },
+				{ name: "caption", label: __("キャプション", "catpow"), values: "hasCaption" },
 				{
 					name: "icon",
-					label: "アイコン",
+					label: __("アイコン", "catpow"),
 					values: "hasIcon",
 					sub: [{ input: "icon" }],
 				},
-				{ name: "itemTitle", label: "個別タイトル", values: "hasItemTitle", sub: [{ name: "itemsLevel", preset: "level", classKey: "itemsClasses" }] },
-				{ name: "itemLead", label: "個別リード", values: "hasItemLead" },
+				{ name: "itemTitle", label: __("個別タイトル", "catpow"), values: "hasItemTitle", sub: [{ name: "itemsLevel", preset: "level", classKey: "itemsClasses" }] },
+				{ name: "itemLead", label: __("個別リード", "catpow"), values: "hasItemLead" },
 				{
 					name: "itemCaption",
-					label: "個別キャプション",
+					label: __("個別キャプション", "catpow"),
 					values: "hasItemCaption",
 				},
 				"isTemplate",
@@ -65,8 +67,8 @@ wp.blocks.registerBlockType("catpow/contactinfo", {
 			<>
 				<CP.SelectModeToolbar setAttributes={setAttributes} attributes={attributes} />
 				<InspectorControls>
-					<CP.SelectClassPanel title="スタイル" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
-					<CP.SelectClassPanel title="アイテム" icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={selectiveItemClasses} />
+					<CP.SelectClassPanel title={__("スタイル", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title={__("アイテム", "catpow")} icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={selectiveItemClasses} />
 					<CP.ItemControlInfoPanel />
 				</InspectorControls>
 				{EditMode ? (

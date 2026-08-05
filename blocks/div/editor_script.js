@@ -1,5 +1,6 @@
 (() => {
   // ../blocks/div/editor_script.jsx
+  var { __ } = wp.i18n;
   CP.config.div = {
     devices: ["tb", "sp"],
     imageKeys: {
@@ -32,13 +33,13 @@
         const selectiveClasses2 = [
           {
             name: "type",
-            label: "\u30BF\u30A4\u30D7",
+            label: __("\u30BF\u30A4\u30D7", "catpow"),
             filter: "type",
             type: "buttons",
             values: { isTypeBlock: "block", isTypeFrame: "frame", isTypeColumns: "columns" },
             sub: {
               isTypeFrame: ["hasIcon"],
-              isTypeColumns: [{ preset: "itemSize", label: "\u30AB\u30E9\u30E0\u5E45" }]
+              isTypeColumns: [{ preset: "itemSize", label: __("\u30AB\u30E9\u30E0\u5E45", "catpow") }]
             }
           }
         ];
@@ -46,7 +47,7 @@
         return selectiveClasses2;
       }, []);
       const blockProps = useBlockProps({ className: classes, style: vars });
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, states.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { item: attributes }), /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: [["core/paragraph", { content: CP.dummyText.text }]], templateLock: false })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30B9\u30BF\u30A4\u30EB", icon: "art", ...{ setAttributes, attributes }, selectiveClasses })));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, states.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { item: attributes }), /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: [["core/paragraph", { content: CP.dummyText.text }]], templateLock: false })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30B9\u30BF\u30A4\u30EB", "catpow"), icon: "art", ...{ setAttributes, attributes }, selectiveClasses })));
     },
     save({ attributes, className, setAttributes }) {
       const { InnerBlocks, useBlockProps } = wp.blockEditor;

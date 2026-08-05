@@ -3,7 +3,7 @@
   var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/t-body", {
     title: "\u{1F43E} T-Body",
-    description: "HTML\u30E1\u30FC\u30EB\u306E\u30D9\u30FC\u30B9\u3068\u306A\u308B\u30D8\u30C3\u30C0\u30FB\u30D5\u30C3\u30BF\u306E\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002",
+    description: __("HTML\u30E1\u30FC\u30EB\u306E\u30D9\u30FC\u30B9\u3068\u306A\u308B\u30D8\u30C3\u30C0\u30FB\u30D5\u30C3\u30BF\u306E\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002", "catpow"),
     icon: "editor-code",
     category: "catpow-mail",
     supports: {
@@ -54,22 +54,22 @@
           {
             name: "type",
             input: "buttons",
-            label: "\u30E1\u30FC\u30EB\u30BF\u30A4\u30D7",
+            label: __("\u30E1\u30FC\u30EB\u30BF\u30A4\u30D7", "catpow"),
             key: "type",
             values: ["plain", "html"],
             sub: {
               html: [
-                { name: "textMode", input: "bool", label: "\u30C6\u30AD\u30B9\u30C8\u30E1\u30FC\u30EB\u7DE8\u96C6\u30E2\u30FC\u30C9", key: "TextMode" },
+                { name: "textMode", input: "bool", label: __("\u30C6\u30AD\u30B9\u30C8\u30E1\u30FC\u30EB\u7DE8\u96C6\u30E2\u30FC\u30C9", "catpow"), key: "TextMode" },
                 {
                   name: "body",
                   type: "gridbuttons",
-                  label: "\u80CC\u666F\u8272",
-                  values: { hasBgWhite: "\u767D", hasBgB: "\u80CC\u666F\u8272", hasBgS: "\u5F37\u8ABF\u80CC\u666F\u8272", hasBgBlack: "\u9ED2", hasBgM: "\u57FA\u672C\u8272", hasBgA: "\u5F37\u8ABF\u8272" },
+                  label: __("\u80CC\u666F\u8272", "catpow"),
+                  values: { hasBgWhite: __("\u767D", "catpow"), hasBgB: __("\u80CC\u666F\u8272", "catpow"), hasBgS: __("\u5F37\u8ABF\u80CC\u666F\u8272", "catpow"), hasBgBlack: __("\u9ED2", "catpow"), hasBgM: __("\u57FA\u672C\u8272", "catpow"), hasBgA: __("\u5F37\u8ABF\u8272", "catpow") },
                   classKey: "body_class"
                 },
                 {
                   name: "header",
-                  label: "\u30D8\u30C3\u30C0",
+                  label: __("\u30D8\u30C3\u30C0", "catpow"),
                   values: "hasHeader",
                   sub: [
                     { preset: "colorScheme", classKey: "headerClasses" },
@@ -77,7 +77,7 @@
                       name: "headerBackgroundColor",
                       type: "buttons",
                       label: __("\u30D8\u30C3\u30C0\u80CC\u666F\u8272", "catpow"),
-                      values: { hasBgNone: "\u306A\u3057", hasBgNormal: "\u901A\u5E38", hasBgStrong: "\u5F37\u8ABF", hasBgAchromatic: "\u767D\u9ED2" },
+                      values: { hasBgNone: __("\u306A\u3057", "catpow"), hasBgNormal: __("\u901A\u5E38", "catpow"), hasBgStrong: __("\u5F37\u8ABF", "catpow"), hasBgAchromatic: __("\u767D\u9ED2", "catpow") },
                       classKey: "headerClasses"
                     },
                     { name: "range", input: "range", label: __("\u4E0A\u4F59\u767D", "catpow"), key: "headerPaddingTop", min: 0, max: 10 },
@@ -86,7 +86,7 @@
                 },
                 {
                   name: "footer",
-                  label: "\u30D5\u30C3\u30BF",
+                  label: __("\u30D5\u30C3\u30BF", "catpow"),
                   values: "hasFooter",
                   sub: [
                     { preset: "colorScheme", classKey: "footerClasses" },
@@ -94,7 +94,7 @@
                       name: "footerBackgroundColor",
                       type: "buttons",
                       label: __("\u30D5\u30C3\u30BF\u80CC\u666F\u8272", "catpow"),
-                      values: { hasBgNone: "\u306A\u3057", hasBgNormal: "\u901A\u5E38", hasBgStrong: "\u5F37\u8ABF", hasBgAchromatic: "\u767D\u9ED2" },
+                      values: { hasBgNone: __("\u306A\u3057", "catpow"), hasBgNormal: __("\u901A\u5E38", "catpow"), hasBgStrong: __("\u5F37\u8ABF", "catpow"), hasBgAchromatic: __("\u767D\u9ED2", "catpow") },
                       classKey: "footerClasses"
                     },
                     { name: "range", input: "range", label: __("\u4E0A\u4F59\u767D", "catpow"), key: "footerPaddingTop", min: 0, max: 10 },
@@ -141,13 +141,13 @@
           controls: [
             {
               icon: "media-text",
-              label: "\u30C6\u30AD\u30B9\u30C8\u30E1\u30FC\u30EB",
+              label: __("\u30C6\u30AD\u30B9\u30C8\u30E1\u30FC\u30EB", "catpow"),
               isActive: TextMode,
               onClick: () => setAttributes({ TextMode: !TextMode })
             }
           ]
         }
-      )), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", ...{ setAttributes, attributes }, selectiveClasses, initialOpen: true }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: "\u30AF\u30E9\u30B9", onChange: (classes2) => setAttributes({ classes: classes2 }), value: classes }))));
+      )), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30AF\u30E9\u30B9", "catpow"), icon: "art", ...{ setAttributes, attributes }, selectiveClasses, initialOpen: true }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: __("\u30AF\u30E9\u30B9", "catpow"), onChange: (classes2) => setAttributes({ classes: classes2 }), value: classes }))));
     },
     save({ attributes, className, setAttributes }) {
       const { InnerBlocks, RichText } = wp.blockEditor;

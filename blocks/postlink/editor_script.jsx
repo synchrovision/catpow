@@ -2,7 +2,7 @@
 
 wp.blocks.registerBlockType("catpow/postlink", {
 	title: "🐾 PostLink",
-	description: "前の投稿・次の投稿へのリンクを表示します。",
+	description: __("前の投稿・次の投稿へのリンクを表示します。", "catpow"),
 	icon: "editor-code",
 	category: "catpow",
 	example: CP.example,
@@ -17,9 +17,9 @@ wp.blocks.registerBlockType("catpow/postlink", {
 			const selectiveClasses = [
 				{
 					name: "type",
-					label: "タイプ",
+					label: __("タイプ", "catpow"),
 					type: "buttons",
-					values: { isTypeText: "テキスト", isTypeButton: "ボタン" },
+					values: { isTypeText: __("テキスト", "catpow"), isTypeButton: __("ボタン", "catpow") },
 				},
 			];
 			wp.hooks.applyFilters("catpow.blocks.postlink.selectiveClasses", CP.finderProxy(selectiveClasses));

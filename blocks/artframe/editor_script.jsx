@@ -1,4 +1,6 @@
-﻿import { useChangeEffect } from "catpow/hooks";
+﻿const { __ } = wp.i18n;
+
+import { useChangeEffect } from "catpow/hooks";
 
 wp.blocks.registerBlockType("catpow/artframe", {
 	transforms: {
@@ -65,7 +67,7 @@ wp.blocks.registerBlockType("catpow/artframe", {
 					</Element>
 				</div>
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" initialOpen={true} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title={__("クラス", "catpow")} initialOpen={true} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 				</InspectorControls>
 			</>
 		);

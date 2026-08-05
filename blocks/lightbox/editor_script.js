@@ -15,6 +15,7 @@
   }
 
   // ../blocks/lightbox/editor_script.jsx
+  var { __ } = wp.i18n;
   CP.config.lightbox = {
     imageKeys: {
       thumbnail: {
@@ -28,7 +29,7 @@
   };
   wp.blocks.registerBlockType("catpow/lightbox", {
     title: "\u{1F43E} Lightbox",
-    description: "\u30AF\u30EA\u30C3\u30AF\u3067\u30DD\u30C3\u30D7\u30A2\u30C3\u30D7\u8868\u793A\u3059\u308B\u753B\u50CF\u3067\u3059\u3002",
+    description: __("\u30AF\u30EA\u30C3\u30AF\u3067\u30DD\u30C3\u30D7\u30A2\u30C3\u30D7\u8868\u793A\u3059\u308B\u753B\u50CF\u3067\u3059\u3002", "catpow"),
     icon: "editor-ul",
     category: "catpow",
     transforms: {
@@ -73,24 +74,24 @@
           {
             name: "type",
             type: "buttons",
-            label: "\u30BF\u30A4\u30D7",
-            values: { isTypeThumbnail: "\u30B5\u30E0\u30CD\u30FC\u30EB", isTypeFlat: "\u30D5\u30E9\u30C3\u30C8", isTypeCard: "\u30AB\u30FC\u30C9" },
+            label: __("\u30BF\u30A4\u30D7", "catpow"),
+            values: { isTypeThumbnail: __("\u30B5\u30E0\u30CD\u30FC\u30EB", "catpow"), isTypeFlat: __("\u30D5\u30E9\u30C3\u30C8", "catpow"), isTypeCard: __("\u30AB\u30FC\u30C9", "catpow") },
             sub: {
               isTypeFlat: ["itemSize"],
               isTypeCard: ["itemSize"]
             }
           },
-          { name: "title", label: "\u30BF\u30A4\u30C8\u30EB", values: "hasTitle" },
+          { name: "title", label: __("\u30BF\u30A4\u30C8\u30EB", "catpow"), values: "hasTitle" },
           {
             name: "hasCaption",
-            label: "\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3",
+            label: __("\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3", "catpow"),
             values: "hasCaption"
           },
-          { preset: "hasContentWidth", label: "\u30B9\u30E9\u30A4\u30C0\u30FC\u5E45", classKey: "sliderClasses", vars: "sliderVars" },
-          { preset: "level", label: "\u30B9\u30E9\u30A4\u30C0\u30FC\u30EC\u30D9\u30EB", classKey: "sliderClasses" },
-          { name: "sliderTitle", label: "\u30B9\u30E9\u30A4\u30C0\u30FC\u30BF\u30A4\u30C8\u30EB", classKey: "sliderClasses", values: "hasTitle", sub: [{ preset: "headingTag", key: "SliderHeadingTag", classKey: "sliderClasses" }] },
-          { name: "sliderImage", label: "\u30B9\u30E9\u30A4\u30C0\u30FC\u753B\u50CF", classKey: "sliderClasses", values: "hasImage" },
-          { name: "sliderText", label: "\u30B9\u30E9\u30A4\u30C0\u30FC\u30C6\u30AD\u30B9\u30C8", classKey: "sliderClasses", values: "hasText" },
+          { preset: "hasContentWidth", label: __("\u30B9\u30E9\u30A4\u30C0\u30FC\u5E45", "catpow"), classKey: "sliderClasses", vars: "sliderVars" },
+          { preset: "level", label: __("\u30B9\u30E9\u30A4\u30C0\u30FC\u30EC\u30D9\u30EB", "catpow"), classKey: "sliderClasses" },
+          { name: "sliderTitle", label: __("\u30B9\u30E9\u30A4\u30C0\u30FC\u30BF\u30A4\u30C8\u30EB", "catpow"), classKey: "sliderClasses", values: "hasTitle", sub: [{ preset: "headingTag", key: "SliderHeadingTag", classKey: "sliderClasses" }] },
+          { name: "sliderImage", label: __("\u30B9\u30E9\u30A4\u30C0\u30FC\u753B\u50CF", "catpow"), classKey: "sliderClasses", values: "hasImage" },
+          { name: "sliderText", label: __("\u30B9\u30E9\u30A4\u30C0\u30FC\u30C6\u30AD\u30B9\u30C8", "catpow"), classKey: "sliderClasses", values: "hasText" },
           "isTemplate"
         ];
         wp.hooks.applyFilters("catpow.blocks.lightbox.selectiveClasses", CP.finderProxy(selectiveClasses2));
@@ -101,28 +102,28 @@
           {
             name: "image",
             input: "image",
-            label: "\u753B\u50CF",
+            label: __("\u753B\u50CF", "catpow"),
             keys: imageKeys.sliderIimage,
             isTemplate
           },
           {
             name: "imageCode",
             input: "text",
-            label: "\u753B\u50CF\u30B3\u30FC\u30C9",
+            label: __("\u753B\u50CF\u30B3\u30FC\u30C9", "catpow"),
             key: "imageCode",
             cond: isTemplate
           },
           {
             name: "",
             input: "image",
-            label: "\u30B5\u30E0\u30CD\u30FC\u30EB\u753B\u50CF",
+            label: __("\u30B5\u30E0\u30CD\u30FC\u30EB\u753B\u50CF", "catpow"),
             keys: imageKeys.thumbnail,
             isTemplate
           },
           {
             name: "thumbnailCode",
             input: "text",
-            label: "\u30B5\u30E0\u30CD\u30FC\u30EB\u753B\u50CF\u30B3\u30FC\u30C9",
+            label: __("\u30B5\u30E0\u30CD\u30FC\u30EB\u753B\u50CF\u30B3\u30FC\u30C9", "catpow"),
             key: "thumbnailCode",
             cond: isTemplate
           }
@@ -137,7 +138,7 @@
         setAttributes({ currentItemIndex: Math.max(0, Math.min(index, items.length - 1)) });
       };
       const blockProps = useBlockProps({ className: OpenMode ? "cp-lightbox-preview" : EditMode || AltMode && doLoop ? "cp-altcontent" : classes });
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { setAttributes, attributes, modes: ["EditMode", "AltMode", "OpenMode"] }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: "\u30AF\u30E9\u30B9", onChange: (classes2) => setAttributes({ classes: classes2 }), value: classes }), /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: "\u30DC\u30C3\u30AF\u30B9\u30AF\u30E9\u30B9", onChange: (sliderClasses2) => setAttributes({ sliderClasses: sliderClasses2 }), value: sliderClasses })), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30EA\u30B9\u30C8\u30A2\u30A4\u30C6\u30E0", icon: "edit", ...{ setAttributes, attributes }, itemKeys: ["items", attributes.currentItemIndex], selectiveClasses: selectiveItemClasses }), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), !OpenMode ? /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, EditMode ? /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { setAttributes, attributes, modes: ["EditMode", "AltMode", "OpenMode"] }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30AF\u30E9\u30B9", "catpow"), icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: __("\u30AF\u30E9\u30B9", "catpow"), onChange: (classes2) => setAttributes({ classes: classes2 }), value: classes }), /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: __("\u30DC\u30C3\u30AF\u30B9\u30AF\u30E9\u30B9", "catpow"), onChange: (sliderClasses2) => setAttributes({ sliderClasses: sliderClasses2 }), value: sliderClasses })), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30EA\u30B9\u30C8\u30A2\u30A4\u30C6\u30E0", "catpow"), icon: "edit", ...{ setAttributes, attributes }, itemKeys: ["items", attributes.currentItemIndex], selectiveClasses: selectiveItemClasses }), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), !OpenMode ? /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, EditMode ? /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(
         CP.EditItemsTable,
         {
           setAttributes,

@@ -1,8 +1,9 @@
 (() => {
   // ../blocks/form/editor_script.jsx
+  var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/form", {
     title: "\u{1F43E} Form",
-    description: "\u30C6\u30FC\u30DE\u306B\u5B9A\u7FA9\u3055\u308C\u305F\u30D5\u30A9\u30FC\u30E0\u3092\u8868\u793A\u3057\u307E\u3059\u3002",
+    description: __("\u30C6\u30FC\u30DE\u306B\u5B9A\u7FA9\u3055\u308C\u305F\u30D5\u30A9\u30FC\u30E0\u3092\u8868\u793A\u3057\u307E\u3059\u3002", "catpow"),
     icon: "editor-code",
     category: "catpow-embed",
     example: CP.example,
@@ -34,7 +35,7 @@
           setAttributes({ post_data_path: postDataSelection[0]["id"] });
         }
       }
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps() }, /* @__PURE__ */ wp.element.createElement(CP.Label, { icon: "feedback" }, content_path), /* @__PURE__ */ wp.element.createElement(ServerSideRender, { block: "catpow/form", attributes, httpMethod: "POST" })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "\u30D5\u30A9\u30FC\u30E0" }, /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps() }, /* @__PURE__ */ wp.element.createElement(CP.Label, { icon: "feedback" }, content_path), /* @__PURE__ */ wp.element.createElement(ServerSideRender, { block: "catpow/form", attributes, httpMethod: "POST" })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: __("\u30D5\u30A9\u30FC\u30E0", "catpow") }, /* @__PURE__ */ wp.element.createElement(
         TreeSelect,
         {
           label: "path",
@@ -54,10 +55,10 @@
             setAttributes({ post_data_path: post_data_path2 });
           }
         }
-      )), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "\u5165\u529B\u5024", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
+      )), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: __("\u5165\u529B\u5024", "catpow"), initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
         TextControl,
         {
-          label: "\u5165\u529B\u540D",
+          label: __("\u5165\u529B\u540D", "catpow"),
           value: inputs,
           onChange: (inputs2) => {
             setAttributes({ inputs: inputs2 });
@@ -66,7 +67,7 @@
       ), /* @__PURE__ */ wp.element.createElement(
         TextControl,
         {
-          label: "\u30C7\u30FC\u30BFID",
+          label: __("\u30C7\u30FC\u30BFID", "catpow"),
           value: data_id,
           onChange: (data_id2) => {
             setAttributes({ data_id: data_id2 });
@@ -75,7 +76,7 @@
       ), /* @__PURE__ */ wp.element.createElement(
         TextareaControl,
         {
-          label: "\u521D\u671F\u5024",
+          label: __("\u521D\u671F\u5024", "catpow"),
           value: values,
           onChange: (values2) => {
             setAttributes({ values: values2 });

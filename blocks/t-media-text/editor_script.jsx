@@ -2,7 +2,7 @@
 
 wp.blocks.registerBlockType("catpow/t-media-text", {
 	title: "🐾 T-media-text",
-	description: "HTMLメール用の画像・テキストのセットのブロックです。",
+	description: __("HTMLメール用の画像・テキストのセットのブロックです。", "catpow"),
 	icon: "editor-code",
 	category: "catpow-mail",
 	parent: CP.mailContensContainer,
@@ -29,16 +29,16 @@ wp.blocks.registerBlockType("catpow/t-media-text", {
 			const selectiveClasses = [
 				"imagePosition",
 				"verticalAlign",
-				{ name: "range", input: "range", label: "画像の幅", key: "width", min: 50, max: 400, step: 10 },
-				{ name: "range", input: "range", label: "間隔", key: "gap", min: 0, max: 100, step: 5 },
-				{ name: "marginTop", input: "range", label: "上余白", key: "marginTop", min: 0, max: 10 },
-				{ name: "marginBottom", input: "range", label: "下余白", key: "marginBottom", min: 0, max: 10 },
+				{ name: "range", input: "range", label: __("画像の幅", "catpow"), key: "width", min: 50, max: 400, step: 10 },
+				{ name: "range", input: "range", label: __("間隔", "catpow"), key: "gap", min: 0, max: 100, step: 5 },
+				{ name: "marginTop", input: "range", label: __("上余白", "catpow"), key: "marginTop", min: 0, max: 10 },
+				{ name: "marginBottom", input: "range", label: __("下余白", "catpow"), key: "marginBottom", min: 0, max: 10 },
 				{
 					name: "template",
-					label: "テンプレート",
+					label: __("テンプレート", "catpow"),
 					input: "bool",
 					key: "isTemplate",
-					sub: [{ name: "imageCode", label: "画像出力コード", input: "text", key: "imageCode" }],
+					sub: [{ name: "imageCode", label: __("画像出力コード", "catpow"), input: "text", key: "imageCode" }],
 				},
 			];
 			wp.hooks.applyFilters("catpow.blocks.t-media-text.selectiveClasses", CP.finderProxy(selectiveClasses));
@@ -105,9 +105,9 @@ wp.blocks.registerBlockType("catpow/t-media-text", {
 					<CP.VerticalAlignClassToolbar setAttributes={setAttributes} attributes={attributes} />
 				</BlockControls>
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} initialOpen={true} />
+					<CP.SelectClassPanel title={__("クラス", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} initialOpen={true} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
+						<TextareaControl label={__("クラス", "catpow")} onChange={(classes) => setAttributes({ classes })} value={classes} />
 					</PanelBody>
 				</InspectorControls>
 			</>

@@ -1,6 +1,8 @@
-﻿wp.blocks.registerBlockType("catpow/app", {
+﻿const { __ } = wp.i18n;
+
+wp.blocks.registerBlockType("catpow/app", {
 	title: "🐾 App",
-	description: "テーマに定義されたアプリを表示します。",
+	description: __("テーマに定義されたアプリを表示します。", "catpow"),
 	icon: "editor-code",
 	category: "catpow-embed",
 	example: CP.example,
@@ -63,7 +65,7 @@
 							}}
 						/>
 					</PanelBody>
-					{options && <CP.SelectClassPanel title="設定" icon="edit" {...{ setAttributes, attributes }} selectiveClasses={options} initialOpen={true} />}
+					{options && <CP.SelectClassPanel title={__("設定", "catpow")} icon="edit" {...{ setAttributes, attributes }} selectiveClasses={options} initialOpen={true} />}
 				</InspectorControls>
 			</>
 		);

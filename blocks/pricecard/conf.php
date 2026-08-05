@@ -9,7 +9,7 @@ $attributes=[
 	"HeadingTag"=>["type"=>"string","default"=>"h3"],
 	"SubHeadingTag"=>["type"=>"string","default"=>"h4"],
 	"priceUnit"=>["source"=>"text","selector"=>".{$block_class}__item-header-text-price-saleprice-unit","default"=>"¥"],
-	"priceCaption"=>["source"=>"html","selector"=>".{$block_class}__item-header-text-price-caption","default"=>["（税込）"]],
+	"priceCaption"=>["source"=>"html","selector"=>".{$block_class}__item-header-text-price-caption","default"=>[__("（税込）",'catpow')]],
 	"linkText"=>["source"=>"text","selector"=>".{$block_class}__item-contents-link","default"=>"more info"],
 	"items"=>[
 		"source"=>"query",

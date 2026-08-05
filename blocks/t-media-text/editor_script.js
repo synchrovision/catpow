@@ -3,7 +3,7 @@
   var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/t-media-text", {
     title: "\u{1F43E} T-media-text",
-    description: "HTML\u30E1\u30FC\u30EB\u7528\u306E\u753B\u50CF\u30FB\u30C6\u30AD\u30B9\u30C8\u306E\u30BB\u30C3\u30C8\u306E\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002",
+    description: __("HTML\u30E1\u30FC\u30EB\u7528\u306E\u753B\u50CF\u30FB\u30C6\u30AD\u30B9\u30C8\u306E\u30BB\u30C3\u30C8\u306E\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002", "catpow"),
     icon: "editor-code",
     category: "catpow-mail",
     parent: CP.mailContensContainer,
@@ -29,16 +29,16 @@
         const selectiveClasses2 = [
           "imagePosition",
           "verticalAlign",
-          { name: "range", input: "range", label: "\u753B\u50CF\u306E\u5E45", key: "width", min: 50, max: 400, step: 10 },
-          { name: "range", input: "range", label: "\u9593\u9694", key: "gap", min: 0, max: 100, step: 5 },
-          { name: "marginTop", input: "range", label: "\u4E0A\u4F59\u767D", key: "marginTop", min: 0, max: 10 },
-          { name: "marginBottom", input: "range", label: "\u4E0B\u4F59\u767D", key: "marginBottom", min: 0, max: 10 },
+          { name: "range", input: "range", label: __("\u753B\u50CF\u306E\u5E45", "catpow"), key: "width", min: 50, max: 400, step: 10 },
+          { name: "range", input: "range", label: __("\u9593\u9694", "catpow"), key: "gap", min: 0, max: 100, step: 5 },
+          { name: "marginTop", input: "range", label: __("\u4E0A\u4F59\u767D", "catpow"), key: "marginTop", min: 0, max: 10 },
+          { name: "marginBottom", input: "range", label: __("\u4E0B\u4F59\u767D", "catpow"), key: "marginBottom", min: 0, max: 10 },
           {
             name: "template",
-            label: "\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8",
+            label: __("\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8", "catpow"),
             input: "bool",
             key: "isTemplate",
-            sub: [{ name: "imageCode", label: "\u753B\u50CF\u51FA\u529B\u30B3\u30FC\u30C9", input: "text", key: "imageCode" }]
+            sub: [{ name: "imageCode", label: __("\u753B\u50CF\u51FA\u529B\u30B3\u30FC\u30C9", "catpow"), input: "text", key: "imageCode" }]
           }
         ];
         wp.hooks.applyFilters("catpow.blocks.t-media-text.selectiveClasses", CP.finderProxy(selectiveClasses2));
@@ -66,7 +66,7 @@
           height: "auto",
           isTemplate
         }
-      ))), marginBottom > 0 && /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-spacer-cell", style: { height: `${marginBottom}rem` }, colSpan: "3" }))))), /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(CP.ImagePositionClassToolbar, { setAttributes, attributes }), /* @__PURE__ */ wp.element.createElement(CP.VerticalAlignClassToolbar, { setAttributes, attributes })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", ...{ setAttributes, attributes }, selectiveClasses, initialOpen: true }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: "\u30AF\u30E9\u30B9", onChange: (classes2) => setAttributes({ classes: classes2 }), value: classes }))));
+      ))), marginBottom > 0 && /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-spacer-cell", style: { height: `${marginBottom}rem` }, colSpan: "3" }))))), /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(CP.ImagePositionClassToolbar, { setAttributes, attributes }), /* @__PURE__ */ wp.element.createElement(CP.VerticalAlignClassToolbar, { setAttributes, attributes })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30AF\u30E9\u30B9", "catpow"), icon: "art", ...{ setAttributes, attributes }, selectiveClasses, initialOpen: true }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: __("\u30AF\u30E9\u30B9", "catpow"), onChange: (classes2) => setAttributes({ classes: classes2 }), value: classes }))));
     },
     save({ attributes, className, setAttributes }) {
       const { InnerBlocks, useBlockProps } = wp.blockEditor;

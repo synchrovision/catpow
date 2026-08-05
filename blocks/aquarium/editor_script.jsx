@@ -1,6 +1,8 @@
-﻿wp.blocks.registerBlockType("catpow/aquarium", {
+﻿const { __ } = wp.i18n;
+
+wp.blocks.registerBlockType("catpow/aquarium", {
 	title: "🐾 aquarium",
-	description: "画像とテキストを３次元にレイアウトします。",
+	description: __("画像とテキストを３次元にレイアウトします。", "catpow"),
 	icon: (
 		<svg role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" aria-hidden="true">
 			<path
@@ -118,7 +120,7 @@
 					</div>
 				</div>
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title={__("クラス", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 				</InspectorControls>
 			</>
 		);

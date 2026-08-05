@@ -4,7 +4,7 @@
   wp.blocks.registerBlockType("catpow/accessmap", {
     apiVersion: 3,
     title: "\u{1F43E} Access Map",
-    description: "\u5730\u56F3\u3068\u30A2\u30AF\u30BB\u30B9\u60C5\u5831\u3092\u8868\u793A",
+    description: __("\u5730\u56F3\u3068\u30A2\u30AF\u30BB\u30B9\u60C5\u5831\u3092\u8868\u793A", "catpow"),
     icon: "location-alt",
     category: "catpow",
     example: CP.example,
@@ -19,32 +19,32 @@
           {
             name: "type",
             type: "buttons",
-            label: "\u30BF\u30A4\u30D7",
-            values: { isTypeFlat: "\u30D5\u30E9\u30C3\u30C8", isTypeCard: "\u30AB\u30FC\u30C9", isTypeFrame: "\u30D5\u30FC\u30EC\u30E0" }
+            label: __("\u30BF\u30A4\u30D7", "catpow"),
+            values: { isTypeFlat: __("\u30D5\u30E9\u30C3\u30C8", "catpow"), isTypeCard: __("\u30AB\u30FC\u30C9", "catpow"), isTypeFrame: __("\u30D5\u30FC\u30EC\u30E0", "catpow") }
           },
           {
             name: "mapColor",
             type: "buttons",
-            label: "\u5730\u56F3\u306E\u8272",
+            label: __("\u5730\u56F3\u306E\u8272", "catpow"),
             values: {
-              hasMapColorNone: "\u901A\u5E38",
-              hasMapColorGray: "\u30B0\u30EC\u30FC",
-              hasMapColorSync: "\u540C\u8272"
+              hasMapColorNone: __("\u901A\u5E38", "catpow"),
+              hasMapColorGray: __("\u30B0\u30EC\u30FC", "catpow"),
+              hasMapColorSync: __("\u540C\u8272", "catpow")
             }
           },
-          { name: "hasTel", values: "hasTel", label: "\u96FB\u8A71\u756A\u53F7" },
-          { name: "hasMail", values: "hasMail", label: "\u30E1\u30FC\u30EB" },
-          { name: "hasSite", values: "hasSite", label: "\u30B5\u30A4\u30C8" },
+          { name: "hasTel", values: "hasTel", label: __("\u96FB\u8A71\u756A\u53F7", "catpow") },
+          { name: "hasMail", values: "hasMail", label: __("\u30E1\u30FC\u30EB", "catpow") },
+          { name: "hasSite", values: "hasSite", label: __("\u30B5\u30A4\u30C8", "catpow") },
           {
             name: "t",
             key: "t",
             input: "select",
-            label: "\u5730\u56F3\u30BF\u30A4\u30D7",
+            label: __("\u5730\u56F3\u30BF\u30A4\u30D7", "catpow"),
             values: {
-              m: "\u5730\u56F3",
-              k: "\u822A\u7A7A\u5199\u771F",
-              h: "\u5730\u56F3 + \u822A\u7A7A\u5199\u771F",
-              p: "\u5730\u5F62\u56F3",
+              m: __("\u5730\u56F3", "catpow"),
+              k: __("\u822A\u7A7A\u5199\u771F", "catpow"),
+              h: __("\u5730\u56F3 + \u822A\u7A7A\u5199\u771F", "catpow"),
+              p: __("\u5730\u5F62\u56F3", "catpow"),
               e: "Google Earth"
             }
           },
@@ -52,7 +52,7 @@
             name: "z",
             key: "z",
             input: "range",
-            label: "\u30BA\u30FC\u30E0",
+            label: __("\u30BA\u30FC\u30E0", "catpow"),
             min: 0,
             max: 23
           },
@@ -60,7 +60,7 @@
             name: "hl",
             key: "hl",
             input: "buttons",
-            label: "\u8A00\u8A9E",
+            label: __("\u8A00\u8A9E", "catpow"),
             values: ["ja", "us", "zh-CN", "zh-TW"]
           },
           "isTemplate"
@@ -74,18 +74,18 @@
           {
             name: "source",
             type: "gridbuttons",
-            values: { useQuery: "\u691C\u7D22", useEmbedUrl: "\u57CB\u3081\u8FBC\u307FURL" },
+            values: { useQuery: __("\u691C\u7D22", "catpow"), useEmbedUrl: __("\u57CB\u3081\u8FBC\u307FURL", "catpow") },
             sub: {
               useQuery: [
-                { name: "q", key: "q", input: "text", label: "\u691C\u7D22\u30EF\u30FC\u30C9" },
-                { name: "ll", key: "ll", input: "text", label: "\u4E2D\u5FC3\u5EA7\u6A19" }
+                { name: "q", key: "q", input: "text", label: __("\u691C\u7D22\u30EF\u30FC\u30C9", "catpow") },
+                { name: "ll", key: "ll", input: "text", label: __("\u4E2D\u5FC3\u5EA7\u6A19", "catpow") }
               ],
               useEmbedUrl: [
                 {
                   name: "src",
                   key: "src",
                   input: "textarea",
-                  label: "\u57CB\u3081\u8FBC\u307FURL",
+                  label: __("\u57CB\u3081\u8FBC\u307FURL", "catpow"),
                   rows: 10,
                   filter: (value, state, props) => {
                     const matches = value.match(/src="(.+?)"/);
@@ -107,7 +107,7 @@
           {
             name: "imageMapCode",
             input: "text",
-            label: "\u5730\u56F3\u753B\u50CF\u30B3\u30FC\u30C9",
+            label: __("\u5730\u56F3\u753B\u50CF\u30B3\u30FC\u30C9", "catpow"),
             key: "imageCode",
             cond: "hasImage"
           }
@@ -119,16 +119,16 @@
         setAttributes({ items: JSON.parse(JSON.stringify(items)) });
       };
       const blockProps = useBlockProps({ className: EditMode || AltMode && doLoop ? "cp-altcontent" : classes, style: vars });
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { setAttributes, attributes }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30B9\u30BF\u30A4\u30EB", icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30EA\u30B9\u30C8\u30A2\u30A4\u30C6\u30E0", icon: "edit", ...{ setAttributes, attributes }, itemKeys: ["items", attributes.currentItemIndex], selectiveClasses: selectiveItemClasses }), isTemplate && /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { setAttributes, attributes }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30B9\u30BF\u30A4\u30EB", "catpow"), icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30EA\u30B9\u30C8\u30A2\u30A4\u30C6\u30E0", "catpow"), icon: "edit", ...{ setAttributes, attributes }, itemKeys: ["items", attributes.currentItemIndex], selectiveClasses: selectiveItemClasses }), isTemplate && /* @__PURE__ */ wp.element.createElement(
         CP.SelectClassPanel,
         {
-          title: "\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8",
+          title: __("\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8", "catpow"),
           icon: "edit",
           ...{ setAttributes, attributes },
           itemKeys: ["items", attributes.currentItemIndex],
           selectiveClasses: selectiveItemTemplateClasses
         }
-      ), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), EditMode ? /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(CP.Label, { icon: "welcome-comments" }, "\u30A2\u30AF\u30BB\u30B9\u60C5\u5831"), /* @__PURE__ */ wp.element.createElement(
+      ), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), EditMode ? /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(CP.Label, { icon: "welcome-comments" }, __("\u30A2\u30AF\u30BB\u30B9\u60C5\u5831", "catpow")), /* @__PURE__ */ wp.element.createElement(
         CP.EditItemsTable,
         {
           setAttributes,
@@ -146,7 +146,7 @@
           ],
           isTemplate
         }
-      )) : /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(CP.Label, { icon: "welcome-comments" }, "\u4EE3\u66FF\u30B3\u30F3\u30C6\u30F3\u30C4"), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, [...Array(Math.max(items.length, loopCount)).keys()].map((i) => {
+      )) : /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(CP.Label, { icon: "welcome-comments" }, __("\u4EE3\u66FF\u30B3\u30F3\u30C6\u30F3\u30C4", "catpow")), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, [...Array(Math.max(items.length, loopCount)).keys()].map((i) => {
         let url;
         const index = i % items.length;
         const item = items[index];

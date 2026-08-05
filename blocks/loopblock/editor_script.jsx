@@ -1,8 +1,10 @@
-﻿import { clsx } from "clsx";
+﻿const { __ } = wp.i18n;
+
+import { clsx } from "clsx";
 
 wp.blocks.registerBlockType("catpow/loopblock", {
 	title: "🐾 Loopblock",
-	description: "クエリの投稿の情報を表示するためのコンテナです。",
+	description: __("クエリの投稿の情報を表示するためのコンテナです。", "catpow"),
 	icon: "editor-code",
 	category: "catpow-functional",
 	example: CP.example,
@@ -70,7 +72,7 @@ wp.blocks.registerBlockType("catpow/loopblockcontent", {
 	attributes: {
 		name: {
 			type: "attribute",
-			label: "名前",
+			label: __("名前", "catpow"),
 			selector: "loop-block-content",
 			attribute: "name",
 			default: "content",

@@ -1,4 +1,6 @@
-﻿CP.config.pricecard = {
+﻿const { __ } = wp.i18n;
+
+CP.config.pricecard = {
 	imageKeys: {
 		image: { src: "src", alt: "alt", code: "imageCode", items: "items" },
 	},
@@ -6,7 +8,7 @@
 
 wp.blocks.registerBlockType("catpow/pricecard", {
 	title: "🐾 PriceCard",
-	description: "サービス・商品情報の一覧ブロックです。",
+	description: __("サービス・商品情報の一覧ブロックです。", "catpow"),
 	icon: "index-card",
 	category: "catpow",
 	example: CP.example,
@@ -37,27 +39,27 @@ wp.blocks.registerBlockType("catpow/pricecard", {
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
-				{ name: "subHeadingTag", preset: "headingTag", key: "SubHeadingTag", label: "副見出しタグ", classKey: "contentsClasses", cond: "hasSubTitle" },
-				{ name: "contentsLevel", preset: "level", label: "コンテンツレベル", classKey: "contentsClasses" },
-				{ name: "headerColorScheme", preset: "colorScheme", label: "ヘッダ配色", classKey: "headerClasses" },
-				{ name: "contentsColorScheme", preset: "colorScheme", label: "コンテンツ配色", classKey: "contentsClasses" },
-				{ input: "text", label: "価格単位", key: "priceUnit" },
+				{ name: "subHeadingTag", preset: "headingTag", key: "SubHeadingTag", label: __("副見出しタグ", "catpow"), classKey: "contentsClasses", cond: "hasSubTitle" },
+				{ name: "contentsLevel", preset: "level", label: __("コンテンツレベル", "catpow"), classKey: "contentsClasses" },
+				{ name: "headerColorScheme", preset: "colorScheme", label: __("ヘッダ配色", "catpow"), classKey: "headerClasses" },
+				{ name: "contentsColorScheme", preset: "colorScheme", label: __("コンテンツ配色", "catpow"), classKey: "contentsClasses" },
+				{ input: "text", label: __("価格単位", "catpow"), key: "priceUnit" },
 				{
 					type: "radio",
-					label: "単位の位置",
-					values: { hasUnitBefore: "前", hasUnitAfter: "後" },
+					label: __("単位の位置", "catpow"),
+					values: { hasUnitBefore: __("前", "catpow"), hasUnitAfter: __("後", "catpow") },
 				},
-				{ label: "タイトル", values: "hasTitle" },
-				{ label: "キャプション", values: "hasTitleCaption" },
+				{ label: __("タイトル", "catpow"), values: "hasTitle" },
+				{ label: __("キャプション", "catpow"), values: "hasTitleCaption" },
 				{
-					label: "リンク",
+					label: __("リンク", "catpow"),
 					values: "hasLink",
-					sub: [{ input: "text", label: "リンク文字列", key: "linkText" }],
+					sub: [{ input: "text", label: __("リンク文字列", "catpow"), key: "linkText" }],
 				},
-				{ label: "画像", values: "hasImage" },
-				{ label: "サブタイトル", values: "hasSubTitle" },
-				{ label: "テキスト", values: "hasText" },
-				{ label: "スペック", values: "hasSpec" },
+				{ label: __("画像", "catpow"), values: "hasImage" },
+				{ label: __("サブタイトル", "catpow"), values: "hasSubTitle" },
+				{ label: __("テキスト", "catpow"), values: "hasText" },
+				{ label: __("スペック", "catpow"), values: "hasSpec" },
 				"isTemplate",
 			];
 			wp.hooks.applyFilters("catpow.blocks.pricecard.selectiveClasses", CP.finderProxy(selectiveClasses));
@@ -67,18 +69,18 @@ wp.blocks.registerBlockType("catpow/pricecard", {
 			const itemSelectiveClasses = [
 				"color",
 				{
-					label: "タイプ",
+					label: __("タイプ", "catpow"),
 					values: {
-						isTypeNormal: "通常",
-						isTypeRecommended: "おすすめ",
-						isTypeDeprecated: "非推奨",
-						isTypeCheap: "安価",
-						isTypeExpensive: "高級",
+						isTypeNormal: __("通常", "catpow"),
+						isTypeRecommended: __("おすすめ", "catpow"),
+						isTypeDeprecated: __("非推奨", "catpow"),
+						isTypeCheap: __("安価", "catpow"),
+						isTypeExpensive: __("高級", "catpow"),
 					},
 				},
-				{ label: "値引き", values: "isDiscount" },
+				{ label: __("値引き", "catpow"), values: "isDiscount" },
 				{
-					label: "画像コード",
+					label: __("画像コード", "catpow"),
 					input: "text",
 					key: "imageCode",
 					cond: isTemplate,
@@ -98,11 +100,11 @@ wp.blocks.registerBlockType("catpow/pricecard", {
 			<>
 				<CP.SelectModeToolbar setAttributes={setAttributes} attributes={attributes} />
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
-					<CP.SelectClassPanel title="アイテム" icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={itemSelectiveClasses} />
+					<CP.SelectClassPanel title={__("クラス", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title={__("アイテム", "catpow")} icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={itemSelectiveClasses} />
 					<CP.ItemControlInfoPanel />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
+						<TextareaControl label={__("クラス", "catpow")} onChange={(classes) => setAttributes({ classes })} value={classes} />
 					</PanelBody>
 				</InspectorControls>
 				{attributes.EditMode ? (

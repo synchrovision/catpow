@@ -1,10 +1,12 @@
-﻿import { useState, useEffect } from "react";
+﻿const { __ } = wp.i18n;
+
+import { useState, useEffect } from "react";
 
 const options = [
-	{ value: "cover", label: "外接" },
-	{ value: "contain", label: "内接" },
-	{ value: "auto", label: "自動" },
-	{ value: "custom", label: "カスタム" },
+	{ value: "cover", label: __("外接", "catpow") },
+	{ value: "contain", label: __("内接", "catpow") },
+	{ value: "auto", label: __("自動", "catpow") },
+	{ value: "custom", label: __("カスタム", "catpow") },
 ];
 const regularTypes = ["cover", "contain", "auto"];
 

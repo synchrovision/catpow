@@ -1,20 +1,22 @@
-﻿const options = [
-	{ value: "normal", label: "通常" },
-	{ value: "multiply", label: "乗算" },
-	{ value: "screen", label: "スクリーン" },
-	{ value: "overlay", label: "オーバーレイ" },
-	{ value: "darken", label: "比較（暗）" },
-	{ value: "lighten", label: "比較（明）" },
-	{ value: "color-dodge", label: "覆い焼き" },
-	{ value: "color-burn", label: "焼き込み" },
-	{ value: "hard-light", label: "ハードライト" },
-	{ value: "soft-light", label: "ソフトライト" },
-	{ value: "difference", label: "差の絶対値" },
-	{ value: "exclusion", label: "除外" },
-	{ value: "hue", label: "色相" },
-	{ value: "saturation", label: "彩度" },
-	{ value: "color", label: "カラー" },
-	{ value: "luminosity", label: "明度" },
+﻿const { __ } = wp.i18n;
+
+const options = [
+	{ value: "normal", label: __("通常", "catpow") },
+	{ value: "multiply", label: __("乗算", "catpow") },
+	{ value: "screen", label: __("スクリーン", "catpow") },
+	{ value: "overlay", label: __("オーバーレイ", "catpow") },
+	{ value: "darken", label: __("比較（暗）", "catpow") },
+	{ value: "lighten", label: __("比較（明）", "catpow") },
+	{ value: "color-dodge", label: __("覆い焼き", "catpow") },
+	{ value: "color-burn", label: __("焼き込み", "catpow") },
+	{ value: "hard-light", label: __("ハードライト", "catpow") },
+	{ value: "soft-light", label: __("ソフトライト", "catpow") },
+	{ value: "difference", label: __("差の絶対値", "catpow") },
+	{ value: "exclusion", label: __("除外", "catpow") },
+	{ value: "hue", label: __("色相", "catpow") },
+	{ value: "saturation", label: __("彩度", "catpow") },
+	{ value: "color", label: __("カラー", "catpow") },
+	{ value: "luminosity", label: __("明度", "catpow") },
 ];
 
 export const SelectBlendMode = (props) => {

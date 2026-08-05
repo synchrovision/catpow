@@ -7,43 +7,43 @@ const { useState, useMemo, useCallback, useReducer, useEffect } = wp.element;
 const { removeFormat, applyFormat, toggleFormat, insert, create, slice } = wp.richText;
 
 const textColorClasses = {
-	"has-text-color-text": "通常",
-	"has-text-color-highlight": "強調",
-	"has-text-color-gradient": "グラデーション",
+	"has-text-color-text": __("通常", "catpow"),
+	"has-text-color-highlight": __("強調", "catpow"),
+	"has-text-color-gradient": __("グラデーション", "catpow"),
 };
 const textColorClassSet = new Set(Object.keys(textColorClasses));
 
 const textEffectClasses = {
-	"has-text-effect-glow": "光彩",
-	"has-text-effect-stroke": "袋",
-	"has-text-effect-double-stroke": "二重袋",
-	"has-text-effect-emboss": "立体",
+	"has-text-effect-glow": __("光彩", "catpow"),
+	"has-text-effect-stroke": __("袋", "catpow"),
+	"has-text-effect-double-stroke": __("二重袋", "catpow"),
+	"has-text-effect-emboss": __("立体", "catpow"),
 };
 const textEffectClassSet = new Set(Object.keys(textEffectClasses));
 
 const fontSizeClasses = {
-	"has-font-size-relative-x-small": "極小",
-	"has-font-size-relative-small": "小",
-	"has-font-size-relative-medium": "中",
-	"has-font-size-relative-large": "大",
-	"has-font-size-relative-x-large": "極大",
+	"has-font-size-relative-x-small": __("極小", "catpow"),
+	"has-font-size-relative-small": __("小", "catpow"),
+	"has-font-size-relative-medium": __("中", "catpow"),
+	"has-font-size-relative-large": __("大", "catpow"),
+	"has-font-size-relative-x-large": __("極大", "catpow"),
 };
 const fontSizeClassSet = new Set(Object.keys(fontSizeClasses));
 const fontWeightClasses = {
-	"has-font-weight-specific-x-light": "極細",
-	"has-font-weight-specific-light": "細",
-	"has-font-weight-specific-regular": "中",
-	"has-font-weight-specific-bold": "太",
-	"has-font-weight-specific-x-bold": "極太",
+	"has-font-weight-specific-x-light": __("極細", "catpow"),
+	"has-font-weight-specific-light": __("細", "catpow"),
+	"has-font-weight-specific-regular": __("中", "catpow"),
+	"has-font-weight-specific-bold": __("太", "catpow"),
+	"has-font-weight-specific-x-bold": __("極太", "catpow"),
 };
 const fontWeightClassSet = new Set(Object.keys(fontWeightClasses));
 const fontFamilyClasses = {
-	"has-font-family-gothic": "ゴシック",
-	"has-font-family-mincho": "明朝",
-	"has-font-family-english": "英数",
-	"has-font-family-code": "コード",
-	"has-font-family-decoration": "装飾",
-	"has-font-family-script": "筆記",
+	"has-font-family-gothic": __("ゴシック", "catpow"),
+	"has-font-family-mincho": __("明朝", "catpow"),
+	"has-font-family-english": __("英数", "catpow"),
+	"has-font-family-code": __("コード", "catpow"),
+	"has-font-family-decoration": __("装飾", "catpow"),
+	"has-font-family-script": __("筆記", "catpow"),
 };
 const fontFamilyClassSet = new Set(Object.keys(fontFamilyClasses));
 
@@ -336,10 +336,10 @@ wp.richText.registerFormatType("catpow/ruby", {
 				return onChange(toggleFormat(value, { type: "catpow/ruby" }));
 			}
 			if (wp.richText.isCollapsed(value)) {
-				alert(__("ルビをつけたいテキストを選択してください"));
+				alert(__("ルビをつけたいテキストを選択してください", "catpow"));
 				return;
 			}
-			let rt = prompt(__("ルビを入力"));
+			let rt = prompt(__("ルビを入力", "catpow"));
 			if (rt === null) {
 				return;
 			}
@@ -423,9 +423,9 @@ wp.richText.registerFormatType("catpow/strong", {
 		const { options } = useMemo(
 			() =>
 				CP.parseSelections({
-					"cp-rtf-strong": "小強",
-					"cp-rtf-stronger": "中強",
-					"cp-rtf-strongest": "大強",
+					"cp-rtf-strong": __("小強", "catpow"),
+					"cp-rtf-stronger": __("中強", "catpow"),
+					"cp-rtf-strongest": __("大強", "catpow"),
 				}),
 
 			[],
@@ -617,7 +617,7 @@ wp.richText.registerFormatType("catpow/inlineblock", {
 					<Popover anchor={contentRef.current} position="bottom center" focusOnMount={false}>
 						<Card size="medium">
 							<CardBody>
-								<BaseControl label="ブロック番号">
+								<BaseControl label={__("ブロック番号", "catpow")}>
 									<CP.SelectButtons
 										onChange={(targetClass) => setAttributes({ classes: toggleClass(activeAttributes.classes, targetClass, blockNumberClassSet) })}
 										selected={getClassInSet(activeAttributes.classes, blockNumberClassSet)}
@@ -674,14 +674,14 @@ wp.richText.registerFormatType("catpow/compose", {
 						<Card size="medium">
 							<CardBody>
 								<CP.ColorVarTracer target={contentRef.current}>
-									<BaseControl label="色">
+									<BaseControl label={__("色", "catpow")}>
 										<CP.SelectButtons
 											onChange={(targetClass) => setAttributes({ classes: toggleClass(activeAttributes.classes, targetClass, textColorClassSet) })}
 											selected={getClassInSet(activeAttributes.classes, textColorClassSet)}
 											options={CP.parseSelections(textColorClasses).options}
 										/>
 									</BaseControl>
-									<BaseControl label="効果">
+									<BaseControl label={__("効果", "catpow")}>
 										<CP.SelectButtons
 											onChange={(targetClass) => setAttributes({ classes: toggleClass(activeAttributes.classes, targetClass, textEffectClassSet) })}
 											selected={getClassInSet(activeAttributes.classes, textEffectClassSet)}
@@ -691,21 +691,21 @@ wp.richText.registerFormatType("catpow/compose", {
 									<BaseControl>
 										<Catpow.SelectColorToneClass onChange={({ classes }) => setAttributes({ classes })} selected={activeAttributes.classes} />
 									</BaseControl>
-									<BaseControl label="フォント">
+									<BaseControl label={__("フォント", "catpow")}>
 										<CP.SelectButtons
 											onChange={(targetClass) => setAttributes({ classes: toggleClass(activeAttributes.classes, targetClass, fontFamilyClassSet) })}
 											selected={getClassInSet(activeAttributes.classes, fontFamilyClassSet)}
 											options={CP.parseSelections(fontFamilyClasses).options}
 										/>
 									</BaseControl>
-									<BaseControl label="ウェイト">
+									<BaseControl label={__("ウェイト", "catpow")}>
 										<CP.SelectButtons
 											onChange={(targetClass) => setAttributes({ classes: toggleClass(activeAttributes.classes, targetClass, fontWeightClassSet) })}
 											selected={getClassInSet(activeAttributes.classes, fontWeightClassSet)}
 											options={CP.parseSelections(fontWeightClasses).options}
 										/>
 									</BaseControl>
-									<BaseControl label="サイズ">
+									<BaseControl label={__("サイズ", "catpow")}>
 										<CP.SelectButtons
 											onChange={(targetClass) => setAttributes({ classes: toggleClass(activeAttributes.classes, targetClass, fontSizeClassSet) })}
 											selected={getClassInSet(activeAttributes.classes, fontSizeClassSet)}
@@ -824,10 +824,10 @@ wp.richText.registerFormatType("catpow/custom", {
 					<Popover anchor={contentRef.current} position="bottom center" focusOnMount={false}>
 						<Card>
 							<CardBody style={{ width: "20rem" }}>
-								<TextControl label="色" onChange={(color) => update({ color })} value={state.color || ""} />
-								<TextControl label="背景色" onChange={(bgcolor) => update({ bgcolor })} value={state.bgcolor || ""} />
-								<RangeControl label="サイズ" onChange={(size) => update({ size })} value={parseFloat(state.size || 1)} min={0.1} max={10} step={0.1} />
-								<RangeControl label="太さ" onChange={(weight) => update({ weight })} value={parseFloat(state.weight || 400)} min={100} max={1000} step={100} />
+								<TextControl label={__("色", "catpow")} onChange={(color) => update({ color })} value={state.color || ""} />
+								<TextControl label={__("背景色", "catpow")} onChange={(bgcolor) => update({ bgcolor })} value={state.bgcolor || ""} />
+								<RangeControl label={__("サイズ", "catpow")} onChange={(size) => update({ size })} value={parseFloat(state.size || 1)} min={0.1} max={10} step={0.1} />
+								<RangeControl label={__("太さ", "catpow")} onChange={(weight) => update({ weight })} value={parseFloat(state.weight || 400)} min={100} max={1000} step={100} />
 							</CardBody>
 						</Card>
 					</Popover>
@@ -845,6 +845,6 @@ wp.richText.registerFormatType("catpow/clear", {
 	tagName: "div",
 	className: null,
 	edit({ isActive, value, onChange }) {
-		return <RichTextToolbarButton icon={"dismiss"} title={"🧹全てのスタイルをクリア"} onClick={() => onChange(create({ html: value.text }))} isActive={false} />;
+		return <RichTextToolbarButton icon={"dismiss"} title={__("🧹全てのスタイルをクリア", "catpow")} onClick={() => onChange(create({ html: value.text }))} isActive={false} />;
 	},
 });

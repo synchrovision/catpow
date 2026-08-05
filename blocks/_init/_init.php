@@ -38,7 +38,7 @@ $data=[];
 	}
 });
 $data['widget']['none']=[
-	'name'=>'ブロックを選択',
+	'name'=>__('ブロックを選択','catpow'),
 	'id'=>'',
 	'conf'=>[],
 ];

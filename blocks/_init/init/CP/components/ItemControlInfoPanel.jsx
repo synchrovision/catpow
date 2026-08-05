@@ -1,28 +1,30 @@
-﻿export const ItemControlInfoPanel = () => {
+﻿const { __ } = wp.i18n;
+
+export const ItemControlInfoPanel = () => {
 	const { PanelBody } = wp.components;
 	return (
-		<PanelBody title="操作" initialOpen={false} icon="info">
+		<PanelBody title={__("操作", "catpow")} initialOpen={false} icon="info">
 			<table>
 				<tbody>
 					<tr>
 						<th>⌘/Ctrl + S</th>
-						<td>保存</td>
+						<td>{__("保存", "catpow")}</td>
 					</tr>
 					<tr>
 						<th>⌘/Ctrl + D</th>
-						<td>複製</td>
+						<td>{__("複製", "catpow")}</td>
 					</tr>
 					<tr>
 						<th>⌘/Ctrl + delete</th>
-						<td>削除</td>
+						<td>{__("削除", "catpow")}</td>
 					</tr>
 					<tr>
 						<th>⌘/Ctrl + ↑</th>
-						<td>前のアイテムと入れ替え</td>
+						<td>{__("前のアイテムと入れ替え", "catpow")}</td>
 					</tr>
 					<tr>
 						<th>⌘/Ctrl + ↓</th>
-						<td>次のアイテムと入れ替え</td>
+						<td>{__("次のアイテムと入れ替え", "catpow")}</td>
 					</tr>
 				</tbody>
 			</table>

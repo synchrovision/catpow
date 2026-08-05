@@ -1,6 +1,8 @@
-﻿wp.blocks.registerBlockType("catpow/form", {
+﻿const { __ } = wp.i18n;
+
+wp.blocks.registerBlockType("catpow/form", {
 	title: "🐾 Form",
-	description: "テーマに定義されたフォームを表示します。",
+	description: __("テーマに定義されたフォームを表示します。", "catpow"),
 	icon: "editor-code",
 	category: "catpow-embed",
 	example: CP.example,
@@ -42,7 +44,7 @@
 					<ServerSideRender block="catpow/form" attributes={attributes} httpMethod="POST" />
 				</div>
 				<InspectorControls>
-					<PanelBody title="フォーム">
+					<PanelBody title={__("フォーム", "catpow")}>
 						<TreeSelect
 							label="path"
 							selectedId={content_path}
@@ -62,23 +64,23 @@
 							/>
 						)}
 					</PanelBody>
-					<PanelBody title="入力値" initialOpen={false}>
+					<PanelBody title={__("入力値", "catpow")} initialOpen={false}>
 						<TextControl
-							label="入力名"
+							label={__("入力名", "catpow")}
 							value={inputs}
 							onChange={(inputs) => {
 								setAttributes({ inputs });
 							}}
 						/>
 						<TextControl
-							label="データID"
+							label={__("データID", "catpow")}
 							value={data_id}
 							onChange={(data_id) => {
 								setAttributes({ data_id });
 							}}
 						/>
 						<TextareaControl
-							label="初期値"
+							label={__("初期値", "catpow")}
 							value={values}
 							onChange={(values) => {
 								setAttributes({ values });

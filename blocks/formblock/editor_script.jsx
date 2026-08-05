@@ -1,7 +1,9 @@
-﻿wp.blocks.registerBlockType("catpow/formblock", {
+﻿const { __ } = wp.i18n;
+
+wp.blocks.registerBlockType("catpow/formblock", {
 	apiVersion: 3,
 	title: "🐾 FormBlock",
-	description: "テーマに定義された編集可能なフォームを表示します。",
+	description: __("テーマに定義された編集可能なフォームを表示します。", "catpow"),
 	icon: "editor-code",
 	category: "catpow-embed",
 	example: CP.example,
@@ -37,7 +39,7 @@
 					<InnerBlocks allowedBlocks={["catpow/formblockcontent"]} />
 				</div>
 				<InspectorControls>
-					<PanelBody title="フォーム">
+					<PanelBody title={__("フォーム", "catpow")}>
 						<TreeSelect
 							label="path"
 							selectedId={content_path}
@@ -51,23 +53,23 @@
 							}}
 						/>
 					</PanelBody>
-					<PanelBody title="入力値" initialOpen={false}>
+					<PanelBody title={__("入力値", "catpow")} initialOpen={false}>
 						<TextControl
-							label="入力名"
+							label={__("入力名", "catpow")}
 							value={inputs}
 							onChange={(inputs) => {
 								setAttributes({ inputs });
 							}}
 						/>
 						<TextControl
-							label="データID"
+							label={__("データID", "catpow")}
 							value={data_id}
 							onChange={(data_id) => {
 								setAttributes({ data_id });
 							}}
 						/>
 						<TextareaControl
-							label="初期値"
+							label={__("初期値", "catpow")}
 							value={values}
 							onChange={(values) => {
 								setAttributes({ values });
@@ -94,14 +96,14 @@ wp.blocks.registerBlockType("catpow/formblockcontent", {
 	attributes: {
 		name: {
 			type: "attribute",
-			label: "名前",
+			label: __("名前", "catpow"),
 			selector: "form-block-content",
 			attribute: "name",
 			default: "edit",
 		},
 		action: {
 			type: "attribute",
-			label: "アクション",
+			label: __("アクション", "catpow"),
 			selector: "form-block-content",
 			attribute: "action",
 			default: "{}",
@@ -123,16 +125,16 @@ wp.blocks.registerBlockType("catpow/formblockcontent", {
 					<InnerBlocks template={[["catpow/section"]]} templateLock={false} />
 				</div>
 				<InspectorControls>
-					<PanelBody title="設定" initialOpen={true}>
+					<PanelBody title={__("設定", "catpow")} initialOpen={true}>
 						<TextControl
-							label="名前"
+							label={__("名前", "catpow")}
 							value={name}
 							onChange={(name) => {
 								setAttributes({ name });
 							}}
 						/>
 					</PanelBody>
-					{actions && <CP.SelectClassPanel title="アクション" icon="edit" {...{ setAttributes, attributes }} selectiveClasses={actions} initialOpen={true} />}
+					{actions && <CP.SelectClassPanel title={__("アクション", "catpow")} icon="edit" {...{ setAttributes, attributes }} selectiveClasses={actions} initialOpen={true} />}
 				</InspectorControls>
 			</>
 		);

@@ -1,4 +1,6 @@
-﻿const blockConfig = {
+﻿const { __ } = wp.i18n;
+
+const blockConfig = {
 	linkKeys: {
 		link: { href: "action", items: "items" },
 	},
@@ -7,7 +9,7 @@ CP.config.formbuttons = blockConfig;
 
 wp.blocks.registerBlockType("catpow/formbuttons", {
 	title: "🐾 FormButtons",
-	description: "フォーム用のボタンです。",
+	description: __("フォーム用のボタンです。", "catpow"),
 	icon: "upload",
 	category: "catpow",
 	example: CP.example,
@@ -116,8 +118,8 @@ wp.blocks.registerBlockType("catpow/formbuttons", {
 					</CP.Bem>
 				)}
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
-					<CP.SelectClassPanel title="ボタン" icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={selectiveItemClasses} />
+					<CP.SelectClassPanel title={__("クラス", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title={__("ボタン", "catpow")} icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={selectiveItemClasses} />
 					<CP.ItemControlInfoPanel />
 				</InspectorControls>
 				<BlockControls>
@@ -179,7 +181,7 @@ wp.blocks.registerBlockType("catpow/formbuttons", {
 						event: { source: "attribute", attribute: "data-event" },
 						button: { source: "text" },
 					},
-					default: [{ classes: "item", button: "[button 送信 send]" }],
+					default: [{ classes: "item", button: __("[button 送信 send]", "catpow") }],
 				},
 			},
 			save({ attributes, className }) {
@@ -207,7 +209,7 @@ wp.blocks.registerBlockType("catpow/formbuttons", {
 						}
 						return rtn;
 					}
-					return { content: "送信" };
+					return { content: __("送信", "catpow") };
 				};
 				items.map((item) => {
 					const buttonData = parseButtonShortCode(item.button);

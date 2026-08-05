@@ -2,7 +2,7 @@
 
 wp.blocks.registerBlockType("catpow/container", {
 	title: "🐾 Container",
-	description: "スクロール可能領域を作成できるコンテナです。",
+	description: __("スクロール可能領域を作成できるコンテナです。", "catpow"),
 	icon: "editor-code",
 	category: "catpow",
 	transforms: {
@@ -58,7 +58,7 @@ wp.blocks.registerBlockType("catpow/container", {
 					</div>
 				</div>
 				<InspectorControls>
-					<CP.SelectClassPanel title="スタイル" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title={__("スタイル", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 				</InspectorControls>
 			</>
 		);

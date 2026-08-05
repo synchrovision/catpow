@@ -1,5 +1,6 @@
 (() => {
   // ../blocks/honeycomb/editor_script.jsx
+  var { __ } = wp.i18n;
   CP.config.honeycomb = {
     imageKeys: {
       image: { src: "src", items: "items" }
@@ -7,7 +8,7 @@
   };
   wp.blocks.registerBlockType("catpow/honeycomb", {
     title: "\u{1F43E} honeycomb",
-    description: "\u516D\u89D2\u5F62\u306E\u30D1\u30CD\u30EB\u3092\u30EC\u30A4\u30A2\u30A6\u30C8\u3057\u307E\u3059\u3002",
+    description: __("\u516D\u89D2\u5F62\u306E\u30D1\u30CD\u30EB\u3092\u30EC\u30A4\u30A2\u30A6\u30C8\u3057\u307E\u3059\u3002", "catpow"),
     icon: /* @__PURE__ */ wp.element.createElement("svg", { viewBox: "0 0 512 512" }, /* @__PURE__ */ wp.element.createElement(
       "path",
       {
@@ -81,9 +82,9 @@
           "level",
           "color",
           "colorScheme",
-          { name: "image", label: "\u753B\u50CF", values: "hasImage", sub: [{ input: "image", keys: imageKeys.image }] },
-          { name: "title", label: "\u30BF\u30A4\u30C8\u30EB", values: "hasTitle" },
-          { name: "text", label: "\u30C6\u30AD\u30B9\u30C8", values: "hasText" }
+          { name: "image", label: __("\u753B\u50CF", "catpow"), values: "hasImage", sub: [{ input: "image", keys: imageKeys.image }] },
+          { name: "title", label: __("\u30BF\u30A4\u30C8\u30EB", "catpow"), values: "hasTitle" },
+          { name: "text", label: __("\u30C6\u30AD\u30B9\u30C8", "catpow"), values: "hasText" }
         ];
         wp.hooks.applyFilters("catpow.blocks.honeycomb.selectiveItemClasses", CP.finderProxy(selectiveItemClasses2));
         return selectiveItemClasses2;
@@ -197,10 +198,10 @@
           },
           value: attributes.grid
         }
-      )), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30A2\u30A4\u30C6\u30E0", icon: "edit", ...{ setAttributes, attributes }, itemKeys: ["items", attributes.currentItemIndex], selectiveClasses: selectiveItemClasses }), items[attributes.currentItemIndex] && /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "ITEM CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
+      )), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30AF\u30E9\u30B9", "catpow"), icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30A2\u30A4\u30C6\u30E0", "catpow"), icon: "edit", ...{ setAttributes, attributes }, itemKeys: ["items", attributes.currentItemIndex], selectiveClasses: selectiveItemClasses }), items[attributes.currentItemIndex] && /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "ITEM CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
         TextareaControl,
         {
-          label: "\u30AF\u30E9\u30B9",
+          label: __("\u30AF\u30E9\u30B9", "catpow"),
           onChange: (classes2) => {
             items[attributes.currentItemIndex].classes = classes2;
             save();

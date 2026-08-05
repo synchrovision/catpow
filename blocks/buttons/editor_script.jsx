@@ -1,4 +1,6 @@
-﻿const blockConfig = {
+﻿const { __ } = wp.i18n;
+
+const blockConfig = {
 	linkKeys: {
 		link: { href: "href", items: "items" },
 	},
@@ -7,7 +9,7 @@ CP.config.buttons = blockConfig;
 
 wp.blocks.registerBlockType("catpow/buttons", {
 	title: "🐾 Buttons",
-	description: "ボタンのブロックです。",
+	description: __("ボタンのブロックです。", "catpow"),
 	icon: (
 		<svg role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" aria-hidden="true">
 			<path
@@ -29,7 +31,7 @@ wp.blocks.registerBlockType("catpow/buttons", {
 		const states = CP.classNamesToFlags(classes);
 
 		const selectiveClasses = useMemo(() => {
-			const selectiveClasses = [{ name: "microcopy", label: "マイクロコピー", values: "hasMicroCopy" }, { name: "caption", label: "キャプション", values: "hasCaption" }, "isTemplate"];
+			const selectiveClasses = [{ name: "microcopy", label: __("マイクロコピー", "catpow"), values: "hasMicroCopy" }, { name: "caption", label: __("キャプション", "catpow"), values: "hasCaption" }, "isTemplate"];
 			wp.hooks.applyFilters("catpow.blocks.buttons.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
 		}, []);
@@ -40,7 +42,7 @@ wp.blocks.registerBlockType("catpow/buttons", {
 				"rank",
 				{
 					name: "icon",
-					label: "アイコン",
+					label: __("アイコン", "catpow"),
 					values: "hasIcon",
 					sub: [{ input: "icon" }],
 				},
@@ -66,8 +68,8 @@ wp.blocks.registerBlockType("catpow/buttons", {
 				</BlockControls>
 				<CP.SelectModeToolbar setAttributes={setAttributes} attributes={attributes} />
 				<InspectorControls>
-					<CP.SelectClassPanel title="スタイル" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
-					<CP.SelectClassPanel title="ボタン" icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={selectiveItemClasses} />
+					<CP.SelectClassPanel title={__("スタイル", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title={__("ボタン", "catpow")} icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={selectiveItemClasses} />
 				</InspectorControls>
 				<>
 					{EditMode ? (

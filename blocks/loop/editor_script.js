@@ -1,10 +1,11 @@
 (() => {
   // ../blocks/loop/editor_script.jsx
+  var { __ } = wp.i18n;
   var { InnerBlocks, BlockControls, InspectorControls, useBlockProps } = wp.blockEditor;
   var { Icon, PanelBody, TreeSelect, TextareaControl, ToolbarGroup } = wp.components;
   wp.blocks.registerBlockType("catpow/loop", {
     title: "\u{1F43E} Loop",
-    description: "\u30C6\u30FC\u30DE\u306B\u5B9A\u7FA9\u3055\u308C\u305F\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\u3067\u6295\u7A3F\u3092\u8868\u793A\u3057\u307E\u3059\u3002",
+    description: __("\u30C6\u30FC\u30DE\u306B\u5B9A\u7FA9\u3055\u308C\u305F\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8\u3067\u6295\u7A3F\u3092\u8868\u793A\u3057\u307E\u3059\u3002", "catpow"),
     icon: "editor-code",
     category: "catpow-embed",
     example: CP.example,
@@ -111,7 +112,7 @@
     attributes: {
       name: {
         type: "attribute",
-        label: "\u540D\u524D",
+        label: __("\u540D\u524D", "catpow"),
         selector: "loop-content",
         attribute: "name",
         default: "content"

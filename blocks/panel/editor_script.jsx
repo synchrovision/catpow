@@ -1,4 +1,6 @@
-﻿CP.config.panel = {
+﻿const { __ } = wp.i18n;
+
+CP.config.panel = {
 	imageKeys: {
 		icon: { src: "iconSrc", alt: "iconAlt", items: "items" },
 		image: { src: "src", alt: "alt", items: "items" },
@@ -6,7 +8,7 @@
 };
 wp.blocks.registerBlockType("catpow/panel", {
 	title: "🐾 Panel",
-	description: "大小の矩形パネルをレイアウトします。",
+	description: __("大小の矩形パネルをレイアウトします。", "catpow"),
 	icon: "grid-view",
 	category: "catpow",
 	example: CP.example,
@@ -23,44 +25,44 @@ wp.blocks.registerBlockType("catpow/panel", {
 			const selectiveClasses = [
 				{
 					name: "type",
-					label: "タイプ",
+					label: __("タイプ", "catpow"),
 					type: "buttons",
-					values: { isTypeTile: "タイル", isTypeMenu: "メニュー" },
+					values: { isTypeTile: __("タイル", "catpow"), isTypeMenu: __("メニュー", "catpow") },
 					item: {
 						isTypeTile: [
 							"color",
 							"colorScheme",
-							{ name: "icon", label: "アイコン", values: "hasIcon", sub: [{ input: "icon" }] },
-							{ name: "title", label: "タイトル", values: "hasTitle" },
-							{ name: "text", label: "文章", values: "hasText" },
+							{ name: "icon", label: __("アイコン", "catpow"), values: "hasIcon", sub: [{ input: "icon" }] },
+							{ name: "title", label: __("タイトル", "catpow"), values: "hasTitle" },
+							{ name: "text", label: __("文章", "catpow"), values: "hasText" },
 							{
 								name: "image",
-								label: "画像",
+								label: __("画像", "catpow"),
 								values: "hasImage",
 								sub: [
-									{ name: "paleImage", label: "画像を薄く", values: "paleImage" },
-									{ name: "image", label: "画像", input: "image", keys: imageKeys.image, size: "vga" },
+									{ name: "paleImage", label: __("画像を薄く", "catpow"), values: "paleImage" },
+									{ name: "image", label: __("画像", "catpow"), input: "image", keys: imageKeys.image, size: "vga" },
 								],
 							},
-							{ name: "link", label: "リンク", values: "hasLink", sub: [{ name: "external", label: "外部リンク", values: "linkExternal" }] },
-							{ name: "rowSpan", type: "buttons", label: "縦サイズ", values: { hasRspan1: "1", hasRspan2: "2", hasRspan3: "3" } },
-							{ name: "colSpan", type: "buttons", label: "横サイズ", values: { hasCspan1: "1", hasCspan2: "2", hasCspan3: "3" } },
+							{ name: "link", label: __("リンク", "catpow"), values: "hasLink", sub: [{ name: "external", label: __("外部リンク", "catpow"), values: "linkExternal" }] },
+							{ name: "rowSpan", type: "buttons", label: __("縦サイズ", "catpow"), values: { hasRspan1: "1", hasRspan2: "2", hasRspan3: "3" } },
+							{ name: "colSpan", type: "buttons", label: __("横サイズ", "catpow"), values: { hasCspan1: "1", hasCspan2: "2", hasCspan3: "3" } },
 						],
 						isTypeMenu: [
 							"color",
-							{ name: "icon", label: "アイコン", values: "hasIcon", sub: [{ input: "icon" }] },
-							{ name: "title", label: "タイトル", values: "hasTitle" },
-							{ name: "text", label: "文章", values: "hasText" },
-							{ name: "image", label: "画像", values: "hasImage", sub: [{ name: "image", label: "画像", input: "image", keys: imageKeys.image, size: "vga" }] },
-							{ name: "link", label: "リンク", values: "hasLink", sub: [{ name: "external", label: "外部リンク", values: "linkExternal" }] },
-							{ name: "rowSpan", type: "buttons", label: "縦サイズ", values: { hasRspan1: "1", hasRspan2: "2", hasRspan3: "3" } },
-							{ name: "colSpan", type: "buttons", label: "横サイズ", values: { hasCspan1: "1", hasCspan2: "2", hasCspan3: "3" } },
+							{ name: "icon", label: __("アイコン", "catpow"), values: "hasIcon", sub: [{ input: "icon" }] },
+							{ name: "title", label: __("タイトル", "catpow"), values: "hasTitle" },
+							{ name: "text", label: __("文章", "catpow"), values: "hasText" },
+							{ name: "image", label: __("画像", "catpow"), values: "hasImage", sub: [{ name: "image", label: __("画像", "catpow"), input: "image", keys: imageKeys.image, size: "vga" }] },
+							{ name: "link", label: __("リンク", "catpow"), values: "hasLink", sub: [{ name: "external", label: __("外部リンク", "catpow"), values: "linkExternal" }] },
+							{ name: "rowSpan", type: "buttons", label: __("縦サイズ", "catpow"), values: { hasRspan1: "1", hasRspan2: "2", hasRspan3: "3" } },
+							{ name: "colSpan", type: "buttons", label: __("横サイズ", "catpow"), values: { hasCspan1: "1", hasCspan2: "2", hasCspan3: "3" } },
 						],
 					},
 				},
 				{
 					name: "size",
-					label: "グリッドサイズ",
+					label: __("グリッドサイズ", "catpow"),
 					type: "buttons",
 					values: {
 						hasGridSize1: "1",
@@ -70,7 +72,7 @@ wp.blocks.registerBlockType("catpow/panel", {
 					},
 				},
 				{
-					label: "カラム約数（2^n）",
+					label: __("カラム約数（2^n）", "catpow"),
 					type: "buttons",
 					values: {
 						hasGrid2n: "2",
@@ -81,7 +83,7 @@ wp.blocks.registerBlockType("catpow/panel", {
 					},
 				},
 				{
-					label: "カラム約数（3^n）",
+					label: __("カラム約数（3^n）", "catpow"),
 					type: "buttons",
 					values: {
 						hasGrid3n: "3",
@@ -90,7 +92,7 @@ wp.blocks.registerBlockType("catpow/panel", {
 					},
 				},
 				{
-					label: "カラム約数（5^n）",
+					label: __("カラム約数（5^n）", "catpow"),
 					type: "buttons",
 					values: {
 						hasGrid5n: "5",
@@ -182,13 +184,13 @@ wp.blocks.registerBlockType("catpow/panel", {
 				</CP.Bem>
 				<InspectorControls>
 					<PanelBody title="info" icon="admin-generic" initialOpen={true}>
-						<p>合計グリッド数：{totalGrid}</p>
-						<p>期待グリッド数：{expectedGrid}</p>
+						<p>{__("合計グリッド数：", "catpow")}{totalGrid}</p>
+						<p>{__("期待グリッド数：", "catpow")}{expectedGrid}</p>
 					</PanelBody>
-					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
-					<CP.SelectClassPanel title="パネル" icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} triggerClasses={selectiveClasses[4]} />
+					<CP.SelectClassPanel title={__("クラス", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title={__("パネル", "catpow")} icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} triggerClasses={selectiveClasses[4]} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
+						<TextareaControl label={__("クラス", "catpow")} onChange={(classes) => setAttributes({ classes })} value={classes} />
 					</PanelBody>
 					<CP.ItemControlInfoPanel />
 				</InspectorControls>

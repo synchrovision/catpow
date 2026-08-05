@@ -192,7 +192,7 @@ const fillType = (type, { types }) => {
 
 wp.blocks.registerBlockType("catpow/jsonld", {
 	title: "🐾 JsonLD",
-	description: "各種の構造化データを記述。",
+	description: __("各種の構造化データを記述。", "catpow"),
 	icon: "analytics",
 	category: "catpow",
 	edit({ attributes, className, setAttributes }) {

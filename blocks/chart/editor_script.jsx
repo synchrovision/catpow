@@ -1,6 +1,8 @@
-﻿wp.blocks.registerBlockType("catpow/chart", {
+﻿const { __ } = wp.i18n;
+
+wp.blocks.registerBlockType("catpow/chart", {
 	title: "🐾 Chart",
-	description: "グラフを表示します。",
+	description: __("グラフを表示します。", "catpow"),
 	icon: "chart-bar",
 	category: "catpow",
 	attributes: {
@@ -40,10 +42,10 @@
 			},
 			default: [
 				{
-					title: "ステータス",
+					title: __("ステータス", "catpow"),
 					unit: "pt",
-					rowTitle: "日数",
-					rowUnit: "日",
+					rowTitle: __("日数", "catpow"),
+					rowUnit: __("日", "catpow"),
 					rows: [
 						{ classes: "row weak", label: "1", vals: [{ value: 30 }, { value: 40 }, { value: 40 }, { value: 40 }, { value: 40 }] },
 						{ classes: "row normal", label: "2", vals: [{ value: 40 }, { value: 60 }, { value: 30 }, { value: 20 }, { value: 50 }] },
@@ -72,18 +74,18 @@
 			const selectiveClasses = [
 				{
 					name: "type",
-					label: "タイプ",
+					label: __("タイプ", "catpow"),
 					filter: "type",
 					values: {
-						BarChart: "棒グラフ",
-						PieChart: "円グラフ",
-						LineChart: "折れ線グラフ",
-						RadarChart: "レーダーチャート",
+						BarChart: __("棒グラフ", "catpow"),
+						PieChart: __("円グラフ", "catpow"),
+						LineChart: __("折れ線グラフ", "catpow"),
+						RadarChart: __("レーダーチャート", "catpow"),
 					},
 				},
-				{ name: "value", label: "値を表示", values: "hasValue", sub: [{ label: "単位を表示", values: "hasUnit" }] },
-				{ name: "frame", label: "枠線を表示", values: "hasFrame" },
-				{ name: "grid", label: "罫線を表示", values: "hasGrid" },
+				{ name: "value", label: __("値を表示", "catpow"), values: "hasValue", sub: [{ label: __("単位を表示", "catpow"), values: "hasUnit" }] },
+				{ name: "frame", label: __("枠線を表示", "catpow"), values: "hasFrame" },
+				{ name: "grid", label: __("罫線を表示", "catpow"), values: "hasGrid" },
 			];
 			wp.hooks.applyFilters("catpow.blocks.chart.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
@@ -190,9 +192,9 @@
 					/>
 				</BlockControls>
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title={__("クラス", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
+						<TextareaControl label={__("クラス", "catpow")} onChange={(classes) => setAttributes({ classes })} value={classes} />
 					</PanelBody>
 				</InspectorControls>
 				{EditMode ? DataTable() : <div {...blockProps}>{Catpow[type + "Output"] ? el(Catpow[type + "Output"], { ...states, ...graph[0] }) : <div className="alert">Invalid Chart Type</div>}</div>}
@@ -206,12 +208,12 @@
 
 		var selectiveClasses = [
 			{
-				label: "タイプ",
+				label: __("タイプ", "catpow"),
 				values: {
-					BarChart: "棒グラフ",
-					PieChat: "円グラフ",
-					LineChart: "折れ線グラフ",
-					RadarChart: "レーダーチャート",
+					BarChart: __("棒グラフ", "catpow"),
+					PieChat: __("円グラフ", "catpow"),
+					LineChart: __("折れ線グラフ", "catpow"),
+					RadarChart: __("レーダーチャート", "catpow"),
 				},
 			},
 		];

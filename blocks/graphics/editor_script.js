@@ -15,6 +15,7 @@
   }
 
   // ../blocks/graphics/editor_script.jsx
+  var { __ } = wp.i18n;
   CP.config.graphics = {
     devices: ["tb", "sp"],
     devicesForCss: ["pc", "tb", "sp"],
@@ -72,12 +73,12 @@
   };
   wp.blocks.registerBlockType("catpow/graphics", {
     title: "\u{1F43E} graphics",
-    description: "\u753B\u50CF\u3092\u81EA\u7531\u306B\u30EC\u30A4\u30A2\u30A6\u30C8\u3057\u307E\u3059\u3002",
+    description: __("\u753B\u50CF\u3092\u81EA\u7531\u306B\u30EC\u30A4\u30A2\u30A6\u30C8\u3057\u307E\u3059\u3002", "catpow"),
     icon: "format-image",
     category: "catpow",
     example: CP.example,
     edit({ attributes, className, setAttributes, isSelected }) {
-      const { __ } = wp.i18n;
+      const { __: __2 } = wp.i18n;
       const { useState, useMemo, useCallback, useEffect, useReducer, useRef } = wp.element;
       const { BlockControls, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
       const { BaseControl, PanelBody, RangeControl, TextareaControl, TextControl, Toolbar, ToolbarGroup, ToolbarButton, ToolbarDropdownMenu } = wp.components;
@@ -97,7 +98,7 @@
         const selectiveClasses2 = [
           {
             name: "baseImage",
-            label: "\u30D9\u30FC\u30B9\u753B\u50CF",
+            label: __2("\u30D9\u30FC\u30B9\u753B\u50CF", "catpow"),
             values: "hasBaseImage",
             sub: [
               {
@@ -118,8 +119,8 @@
           {
             name: "type",
             type: "buttons",
-            label: "\u30BF\u30A4\u30D7",
-            values: { isImage: "\u753B\u50CF", isText: "\u30C6\u30AD\u30B9\u30C8" },
+            label: __2("\u30BF\u30A4\u30D7", "catpow"),
+            values: { isImage: __2("\u753B\u50CF", "catpow"), isText: __2("\u30C6\u30AD\u30B9\u30C8", "catpow") },
             sub: {
               isImage: [
                 {
@@ -127,12 +128,12 @@
                   type: "buttons",
                   values: ["isType1", "isType2", "isType3"]
                 },
-                { name: "alt", input: "text", label: "\u4EE3\u66FF\u30C6\u30AD\u30B9\u30C8", key: "alt" },
-                { name: "link", input: "text", label: "\u30EA\u30F3\u30AF", key: "link" },
+                { name: "alt", input: "text", label: __2("\u4EE3\u66FF\u30C6\u30AD\u30B9\u30C8", "catpow"), key: "alt" },
+                { name: "link", input: "text", label: __2("\u30EA\u30F3\u30AF", "catpow"), key: "link" },
                 {
                   name: "image",
                   input: "picture",
-                  label: "\u753B\u50CF",
+                  label: __2("\u753B\u50CF", "catpow"),
                   keys: imageKeys2.image,
                   devices: devices2
                 }
@@ -147,70 +148,70 @@
                 "color",
                 "colorScheme",
                 "backgroundColor",
-                { name: "title", label: "\u898B\u51FA\u3057", values: "hasTitle" },
-                { name: "lead", label: "\u30EA\u30FC\u30C9", values: "hasLead" },
-                { name: "text", label: "\u30C6\u30AD\u30B9\u30C8", values: "hasText" }
+                { name: "title", label: __2("\u898B\u51FA\u3057", "catpow"), values: "hasTitle" },
+                { name: "lead", label: __2("\u30EA\u30FC\u30C9", "catpow"), values: "hasLead" },
+                { name: "text", label: __2("\u30C6\u30AD\u30B9\u30C8", "catpow"), values: "hasText" }
               ]
             }
           },
           "boxShadow",
           "hasTextShadow",
-          { name: "isEllipse", label: "\u5186\u5F62", values: "isEllipse" },
-          { name: "isfadeIn", label: "\u30D5\u30A7\u30FC\u30C9\u30A4\u30F3", values: "isfadeIn" },
+          { name: "isEllipse", label: __2("\u5186\u5F62", "catpow"), values: "isEllipse" },
+          { name: "isfadeIn", label: __2("\u30D5\u30A7\u30FC\u30C9\u30A4\u30F3", "catpow"), values: "isfadeIn" },
           {
             name: "isSlideIn",
-            label: "\u30B9\u30E9\u30A4\u30C9\u30A4\u30F3",
+            label: __2("\u30B9\u30E9\u30A4\u30C9\u30A4\u30F3", "catpow"),
             values: "isSlideIn",
             sub: [
               {
                 name: "direction",
                 type: "radio",
-                label: "\u65B9\u5411",
+                label: __2("\u65B9\u5411", "catpow"),
                 values: {
-                  slideInLeft: "\u5DE6",
-                  slideInRight: "\u53F3",
-                  slideInUp: "\u4E0A",
-                  slideInDown: "\u4E0B",
-                  slideInFront: "\u524D",
-                  slideInBack: "\u5F8C"
+                  slideInLeft: __2("\u5DE6", "catpow"),
+                  slideInRight: __2("\u53F3", "catpow"),
+                  slideInUp: __2("\u4E0A", "catpow"),
+                  slideInDown: __2("\u4E0B", "catpow"),
+                  slideInFront: __2("\u524D", "catpow"),
+                  slideInBack: __2("\u5F8C", "catpow")
                 }
               }
             ]
           },
           {
             name: "isRoll",
-            label: "\u56DE\u8EE2",
+            label: __2("\u56DE\u8EE2", "catpow"),
             values: "isRoll",
             sub: [
               {
                 name: "direction",
                 type: "radio",
-                label: "\u65B9\u5411",
-                values: { isRollLeft: "\u5DE6", isRollRight: "\u53F3" }
+                label: __2("\u65B9\u5411", "catpow"),
+                values: { isRollLeft: __2("\u5DE6", "catpow"), isRollRight: __2("\u53F3", "catpow") }
               },
               {
                 name: "speed",
                 type: "radio",
-                label: "\u901F\u5EA6",
-                values: { isRollSlow: "\u9045\u3044", isRollFast: "\u901F\u3044" }
+                label: __2("\u901F\u5EA6", "catpow"),
+                values: { isRollSlow: __2("\u9045\u3044", "catpow"), isRollFast: __2("\u901F\u3044", "catpow") }
               }
             ]
           },
           {
             name: "isHover",
-            label: "\u30DB\u30D0\u30FC",
+            label: __2("\u30DB\u30D0\u30FC", "catpow"),
             values: "isHover",
             sub: [
-              { name: "fade", label: "\u30D5\u30A7\u30FC\u30C9", values: "isHoverFade" },
+              { name: "fade", label: __2("\u30D5\u30A7\u30FC\u30C9", "catpow"), values: "isHoverFade" },
               {
                 name: "motion",
                 type: "radio",
-                label: "\u52D5\u304D",
+                label: __2("\u52D5\u304D", "catpow"),
                 values: {
-                  isHoverNoMove: "\u306A\u3057",
-                  isHoverZoom: "\u30BA\u30FC\u30E0",
-                  isHoverLift: "\u30EA\u30D5\u30C8",
-                  isHoverJump: "\u30B8\u30E3\u30F3\u30D7"
+                  isHoverNoMove: __2("\u306A\u3057", "catpow"),
+                  isHoverZoom: __2("\u30BA\u30FC\u30E0", "catpow"),
+                  isHoverLift: __2("\u30EA\u30D5\u30C8", "catpow"),
+                  isHoverJump: __2("\u30B8\u30E3\u30F3\u30D7", "catpow")
                 }
               }
             ]
@@ -254,7 +255,7 @@
           return { value: value2, heights: heights2 };
         }, []);
         const [states2, dispatch] = useReducer(reducer, { value }, init);
-        return /* @__PURE__ */ wp.element.createElement(BaseControl, { label: __("\u9AD8\u3055", "catpow") }, devices2.map((device2, index) => /* @__PURE__ */ wp.element.createElement(
+        return /* @__PURE__ */ wp.element.createElement(BaseControl, { label: __2("\u9AD8\u3055", "catpow") }, devices2.map((device2, index) => /* @__PURE__ */ wp.element.createElement(
           RangeControl,
           {
             key: device2,
@@ -571,7 +572,7 @@
           return /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImage, { attributes, keys: imageKeys.image, devices, device: device === "pc" ? null : device, itemKeys: ["items", index] });
         };
         return /* @__PURE__ */ wp.element.createElement("span", { id: id + "_item_" + index, className: itemClasses, "data-index": index, "data-rect": item.rect, ref: (el) => targetRefs.current[index] = el, onClick: onClickItem, key: index }, itemBody());
-      }), /* @__PURE__ */ wp.element.createElement("style", null, device !== "pc" ? CP.createStyleCode(cssDatas[device]) : renderCssDatas(cssDatas))))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", ...{ setAttributes, attributes }, selectiveClasses, initialOpen: true }, !states.hasBaseImage && /* @__PURE__ */ wp.element.createElement(
+      }), /* @__PURE__ */ wp.element.createElement("style", null, device !== "pc" ? CP.createStyleCode(cssDatas[device]) : renderCssDatas(cssDatas))))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __2("\u30AF\u30E9\u30B9", "catpow"), icon: "art", ...{ setAttributes, attributes }, selectiveClasses, initialOpen: true }, !states.hasBaseImage && /* @__PURE__ */ wp.element.createElement(
         InputHeights,
         {
           value: heights,
@@ -591,7 +592,7 @@
       )), currentItemIndexes.length === 1 && /* @__PURE__ */ wp.element.createElement(
         CP.SelectClassPanel,
         {
-          title: "\u30A2\u30A4\u30C6\u30E0",
+          title: __2("\u30A2\u30A4\u30C6\u30E0", "catpow"),
           icon: "edit",
           ...{ setAttributes, attributes },
           itemKeys: ["items", currentItemIndexes[0]],
@@ -601,7 +602,7 @@
       ), currentItemIndexes.length === 1 && /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "ITEM CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(
         TextareaControl,
         {
-          label: "\u30AF\u30E9\u30B9",
+          label: __2("\u30AF\u30E9\u30B9", "catpow"),
           onChange: (classes2) => {
             items[currentItemIndexes[0]].classes = classes2;
             save();

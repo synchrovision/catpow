@@ -5,8 +5,8 @@ $default_settings=[
 	'countPrefix'=>'Step.',
 	'countSuffix'=>'',
 	'items'=>[
-		['label'=>'入力','classes'=>''],
-		['label'=>'確認','classes'=>''],
-		['label'=>'送信','classes'=>''],
+		['label'=>__('入力','catpow'),'classes'=>''],
+		['label'=>__('確認','catpow'),'classes'=>''],
+		['label'=>__('送信','catpow'),'classes'=>''],
 	]
 ];

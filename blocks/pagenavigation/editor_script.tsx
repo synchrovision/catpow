@@ -12,11 +12,11 @@ wp.blocks.registerBlockType("catpow/pagenavigation", {
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses: SelectiveClassConfig[] = [
-				{ preset: "headingTag", label: "メニュー見出し", classKey: "menuClasses", key: "MenuHeadingTag" },
-				{ preset: "level", label: "メニューレベル", classKey: "menuClasses" },
-				{ name: "type", type: "gridbuttons", label: "タイプ", values: { isStyleTree: "tree", isStyleList: "list", isStyleCard: "card", isStyleGrid: "grid" } },
-				{ name: "hasOwnTitle", input: "bool", label: "カスタムタイトル", key: "hasOwnTitle" },
-				{ name: "title", input: "text", label: "タイトル", key: "title", cond: (states, props) => props.attr.hasOwnTitle },
+				{ preset: "headingTag", label: __("メニュー見出し", "catpow"), classKey: "menuClasses", key: "MenuHeadingTag" },
+				{ preset: "level", label: __("メニューレベル", "catpow"), classKey: "menuClasses" },
+				{ name: "type", type: "gridbuttons", label: __("タイプ", "catpow"), values: { isStyleTree: "tree", isStyleList: "list", isStyleCard: "card", isStyleGrid: "grid" } },
+				{ name: "hasOwnTitle", input: "bool", label: __("カスタムタイトル", "catpow"), key: "hasOwnTitle" },
+				{ name: "title", input: "text", label: __("タイトル", "catpow"), key: "title", cond: (states, props) => props.attr.hasOwnTitle },
 				{ name: "level", label: "level", input: "range", key: "level", min: 0, max: 3 },
 				{ name: "depth", label: "depth", input: "range", key: "depth", min: 0, max: 2 },
 				{ name: "query", label: "query", input: "textarea", key: "query" },
@@ -31,7 +31,7 @@ wp.blocks.registerBlockType("catpow/pagenavigation", {
 					<ServerSideRender block="catpow/pagenavigation" attributes={attributes} />
 				</div>
 				<InspectorControls>
-					<CP.SelectClassPanel title="設定" icon="admin-generic" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title={__("設定", "catpow")} icon="admin-generic" set={setAttributes} attr={attributes} selectiveClasses={selectiveClasses} />
 				</InspectorControls>
 			</>
 		);

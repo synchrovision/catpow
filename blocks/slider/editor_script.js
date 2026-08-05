@@ -108,8 +108,8 @@
         const selectiveClasses2 = [
           {
             name: "type",
-            label: "\u30BF\u30A4\u30D7",
-            values: { isTypeCarousel: "\u30AB\u30EB\u30FC\u30BB\u30EB", isTypeCard: "\u30AB\u30FC\u30C9", isTypeFlat: "\u30D5\u30E9\u30C3\u30C8" },
+            label: __("\u30BF\u30A4\u30D7", "catpow"),
+            values: { isTypeCarousel: __("\u30AB\u30EB\u30FC\u30BB\u30EB", "catpow"), isTypeCard: __("\u30AB\u30FC\u30C9", "catpow"), isTypeFlat: __("\u30D5\u30E9\u30C3\u30C8", "catpow") },
             filter: "type",
             type: "gridbuttons"
           },
@@ -117,9 +117,9 @@
           { label: __("\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3", "catpow"), values: "hasCaption" },
           { label: __("\u30C6\u30AD\u30B9\u30C8", "catpow"), values: "hasText" },
           { label: __("\u30EA\u30F3\u30AF", "catpow"), values: "hasLink" },
-          { label: "\u30A2\u30ED\u30FC", values: "hasArrows" },
-          { label: "\u30C9\u30C3\u30C8", values: "hasDots" },
-          { input: "range", label: "\u521D\u671F\u30B9\u30E9\u30A4\u30C9", json: "config", key: "current", min: 0, max: items.length - 1 },
+          { label: __("\u30A2\u30ED\u30FC", "catpow"), values: "hasArrows" },
+          { label: __("\u30C9\u30C3\u30C8", "catpow"), values: "hasDots" },
+          { input: "range", label: __("\u521D\u671F\u30B9\u30E9\u30A4\u30C9", "catpow"), json: "config", key: "current", min: 0, max: items.length - 1 },
           "isTemplate"
         ];
         wp.hooks.applyFilters("catpow.blocks.slider.selectiveClasses", CP.finderProxy(selectiveClasses2));
@@ -128,12 +128,12 @@
       const animateClasses = [
         {
           input: "bool",
-          label: "\u81EA\u52D5\u518D\u751F",
+          label: __("\u81EA\u52D5\u518D\u751F", "catpow"),
           json: "config",
           key: "autoPlay",
           sub: [
-            { input: "range", label: "\u81EA\u52D5\u518D\u751F\u9593\u9694\uFF08\u79D2\uFF09", json: "config", key: "interval", coef: 1e3, min: 0.5, max: 10, step: 0.1 },
-            { input: "range", label: "\u624B\u52D5\u64CD\u4F5C\u5F8C\u505C\u6B62\u6642\u9593\uFF08\u79D2\uFF09", json: "config", key: "wait", coef: 1e3, min: 0, max: 60, step: 1 }
+            { input: "range", label: __("\u81EA\u52D5\u518D\u751F\u9593\u9694\uFF08\u79D2\uFF09", "catpow"), json: "config", key: "interval", coef: 1e3, min: 0.5, max: 10, step: 0.1 },
+            { input: "range", label: __("\u624B\u52D5\u64CD\u4F5C\u5F8C\u505C\u6B62\u6642\u9593\uFF08\u79D2\uFF09", "catpow"), json: "config", key: "wait", coef: 1e3, min: 0, max: 60, step: 1 }
           ]
         }
       ];
@@ -219,7 +219,7 @@
         };
       }, [blockEl, items, gotoItem]);
       const blockProps = useBlockProps({ className: EditMode || AltMode ? "cp-altcontent" : classes, style: vars });
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { setAttributes, attributes }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30B9\u30BF\u30A4\u30EB", icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30A2\u30CB\u30E1\u30FC\u30B7\u30E7\u30F3\u8A2D\u5B9A", icon: "video-alt3", ...{ setAttributes, attributes }, selectiveClasses: animateClasses }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30B9\u30E9\u30A4\u30C9", icon: "edit", ...{ setAttributes, attributes }, itemKeys: ["items", attributes.currentItemIndex], selectiveClasses: ["color"] }), states.hasLink && /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30A4\u30D9\u30F3\u30C8", icon: "flag", ...{ setAttributes, attributes }, itemKeys: ["items", attributes.currentItemIndex], selectiveClasses: ["event"] })), attributes.EditMode ? /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(CP.Label, { icon: "edit" }), /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { setAttributes, attributes }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30B9\u30BF\u30A4\u30EB", "catpow"), icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30A2\u30CB\u30E1\u30FC\u30B7\u30E7\u30F3\u8A2D\u5B9A", "catpow"), icon: "video-alt3", ...{ setAttributes, attributes }, selectiveClasses: animateClasses }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30B9\u30E9\u30A4\u30C9", "catpow"), icon: "edit", ...{ setAttributes, attributes }, itemKeys: ["items", attributes.currentItemIndex], selectiveClasses: ["color"] }), states.hasLink && /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30A4\u30D9\u30F3\u30C8", "catpow"), icon: "flag", ...{ setAttributes, attributes }, itemKeys: ["items", attributes.currentItemIndex], selectiveClasses: ["event"] })), attributes.EditMode ? /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(CP.Label, { icon: "edit" }), /* @__PURE__ */ wp.element.createElement(
         CP.EditItemsTable,
         {
           setAttributes,

@@ -1,5 +1,6 @@
 (() => {
   // ../blocks/slidablemenu/editor_script.jsx
+  var { __ } = wp.i18n;
   CP.config.slidablemenu = {
     imageKeys: {
       image: { src: "src", alt: "alt", code: "imageCode", items: "items" }
@@ -7,7 +8,7 @@
   };
   wp.blocks.registerBlockType("catpow/slidablemenu", {
     title: "\u{1F43E} Slidable Menu",
-    description: "\u30B9\u30AF\u30ED\u30FC\u30EB\u53EF\u80FD\u306A\u30E1\u30CB\u30E5\u30FC\u3002",
+    description: __("\u30B9\u30AF\u30ED\u30FC\u30EB\u53EF\u80FD\u306A\u30E1\u30CB\u30E5\u30FC\u3002", "catpow"),
     icon: "list-view",
     category: "catpow",
     transforms: {
@@ -38,27 +39,27 @@
           {
             name: "size",
             type: "buttons",
-            label: "\u30B5\u30A4\u30BA",
+            label: __("\u30B5\u30A4\u30BA", "catpow"),
             values: ["small", "medium", "large"]
           },
           {
             name: "columnsCount",
             input: "range",
-            label: "\u30AB\u30E9\u30E0\u6570",
+            label: __("\u30AB\u30E9\u30E0\u6570", "catpow"),
             key: "columnsCount",
             min: 2,
             max: 10
           },
           {
             name: "template",
-            label: "\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8",
+            label: __("\u30C6\u30F3\u30D7\u30EC\u30FC\u30C8", "catpow"),
             input: "bool",
             key: "isTemplate",
             sub: [
               {
                 name: "loop",
                 input: "bool",
-                label: "\u30EB\u30FC\u30D7",
+                label: __("\u30EB\u30FC\u30D7", "catpow"),
                 key: "doLoop",
                 sub: [
                   {
@@ -75,7 +76,7 @@
                   },
                   {
                     name: "loopCount",
-                    label: "\u30D7\u30EC\u30D3\u30E5\u30FC\u30EB\u30FC\u30D7\u6570",
+                    label: __("\u30D7\u30EC\u30D3\u30E5\u30FC\u30EB\u30FC\u30D7\u6570", "catpow"),
                     input: "range",
                     key: "loopCount",
                     min: 1,
@@ -151,7 +152,7 @@
         className: attributes.EditMode || AltMode && doLoop ? "cp-altcontent" : classes,
         style: attributes.EditMode || AltMode && doLoop ? void 0 : { "--columns": columnsCount }
       });
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { setAttributes, attributes }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: "\u30AF\u30E9\u30B9", onChange: (classes2) => setAttributes({ classes: classes2 }), value: classes })), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), attributes.EditMode ? /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { setAttributes, attributes }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30AF\u30E9\u30B9", "catpow"), icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: __("\u30AF\u30E9\u30B9", "catpow"), onChange: (classes2) => setAttributes({ classes: classes2 }), value: classes })), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), attributes.EditMode ? /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(
         CP.EditItemsTable,
         {
           setAttributes,

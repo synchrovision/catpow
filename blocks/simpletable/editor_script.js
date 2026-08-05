@@ -1,8 +1,9 @@
 (() => {
   // ../blocks/simpletable/editor_script.jsx
+  var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/simpletable", {
     title: "\u{1F43E} SimpleTable",
-    description: "\u898B\u51FA\u3057\u3068\u672C\u6587\u306E\uFF12\u5217\u3067\u69CB\u6210\u3055\u308C\u308B\u30B7\u30F3\u30D7\u30EB\u306A\u30C6\u30FC\u30D6\u30EB\u3067\u3059\u3002",
+    description: __("\u898B\u51FA\u3057\u3068\u672C\u6587\u306E\uFF12\u5217\u3067\u69CB\u6210\u3055\u308C\u308B\u30B7\u30F3\u30D7\u30EB\u306A\u30C6\u30FC\u30D6\u30EB\u3067\u3059\u3002", "catpow"),
     icon: "editor-table",
     category: "catpow",
     transforms: {
@@ -82,7 +83,7 @@
           {
             name: "type",
             type: "gridbuttons",
-            label: "\u30BF\u30A4\u30D7",
+            label: __("\u30BF\u30A4\u30D7", "catpow"),
             filter: "type",
             values: { isTypeSpec: "Spec", isTypeInfo: "Information", isTypeHistory: "History", isTypeInputs: "Inputs" },
             item: {
@@ -90,25 +91,25 @@
                 {
                   name: "type",
                   type: "buttons",
-                  label: "\u7A2E\u5225",
+                  label: __("\u7A2E\u5225", "catpow"),
                   values: {
-                    isNormal: "\u306A\u3057",
-                    isImportant: "\u91CD\u8981",
-                    isCaution: "\u6CE8\u610F"
+                    isNormal: __("\u306A\u3057", "catpow"),
+                    isImportant: __("\u91CD\u8981", "catpow"),
+                    isCaution: __("\u6CE8\u610F", "catpow")
                   }
                 }
               ],
               isTypeInputs: [
                 {
                   name: "type",
-                  label: "\u7A2E\u5225",
+                  label: __("\u7A2E\u5225", "catpow"),
                   type: "buttons",
                   values: {
-                    isNormal: "\u306A\u3057",
-                    isRequired: "\u5FC5\u9808",
-                    isRecommended: "\u63A8\u5968",
-                    isOptional: "\u4EFB\u610F",
-                    isReadonly: "\u56FA\u5B9A"
+                    isNormal: __("\u306A\u3057", "catpow"),
+                    isRequired: __("\u5FC5\u9808", "catpow"),
+                    isRecommended: __("\u63A8\u5968", "catpow"),
+                    isOptional: __("\u4EFB\u610F", "catpow"),
+                    isReadonly: __("\u56FA\u5B9A", "catpow")
                   }
                 },
                 "cond"
@@ -122,7 +123,7 @@
       const saveItems = () => {
         setAttributes({ rows: JSON.parse(JSON.stringify(rows)) });
       };
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u884C", icon: "edit", ...{ setAttributes, attributes }, itemKeys: ["rows", attributes.currentItemIndex], triggerClasses: selectiveClasses[0] }), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("table", { ...useBlockProps({ className: classes, style: vars }) }, /* @__PURE__ */ wp.element.createElement("tbody", null, rows.map((row, index) => {
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30AF\u30E9\u30B9", "catpow"), icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u884C", "catpow"), icon: "edit", ...{ setAttributes, attributes }, itemKeys: ["rows", attributes.currentItemIndex], triggerClasses: selectiveClasses[0] }), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("table", { ...useBlockProps({ className: classes, style: vars }) }, /* @__PURE__ */ wp.element.createElement("tbody", null, rows.map((row, index) => {
         return /* @__PURE__ */ wp.element.createElement(CP.Item, { tag: "tr", className: row.classes, ...{ setAttributes, attributes }, itemKeys: ["rows", index], key: index }, /* @__PURE__ */ wp.element.createElement(
           RichText,
           {

@@ -1,5 +1,6 @@
 (() => {
   // ../blocks/ranking/editor_script.jsx
+  var { __ } = wp.i18n;
   var blockClass = "wp-block-catpow-ranking";
   var config = CP.config.ranking = {
     imageKeys: {
@@ -11,7 +12,7 @@
   };
   wp.blocks.registerBlockType("catpow/ranking", {
     title: "\u{1F43E} Ranking",
-    description: "\u30E9\u30F3\u30AD\u30F3\u30B0\u306E\u4E00\u89A7\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002",
+    description: __("\u30E9\u30F3\u30AD\u30F3\u30B0\u306E\u4E00\u89A7\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002", "catpow"),
     icon: "awards",
     category: "catpow",
     transforms: {
@@ -66,10 +67,10 @@
           };
         })
       },
-      rankPrefix: { source: "text", selector: `.${blockClass}__item-header-rank-prefix`, default: "\u7B2C" },
+      rankPrefix: { source: "text", selector: `.${blockClass}__item-header-rank-prefix`, default: __("\u7B2C", "catpow") },
       rankStart: { source: "attribute", attribute: "value", selector: `.${blockClass}__item-header-rank-number`, default: "1" },
-      rankSuffix: { source: "text", selector: `.${blockClass}__item-header-rank-suffix`, default: "\u4F4D" },
-      rateLabel: { source: "text", selector: `.${blockClass}__item-header-rate-label`, default: "\u8A55\u4FA1" }
+      rankSuffix: { source: "text", selector: `.${blockClass}__item-header-rank-suffix`, default: __("\u4F4D", "catpow") },
+      rateLabel: { source: "text", selector: `.${blockClass}__item-header-rate-label`, default: __("\u8A55\u4FA1", "catpow") }
     },
     example: CP.example,
     edit({ attributes, className, setAttributes, isSelected }) {
@@ -82,33 +83,33 @@
       const { imageKeys } = CP.config.ranking;
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
-          { name: "subHeadingTag", preset: "headingTag", key: "SubHeadingTag", label: "\u526F\u898B\u51FA\u3057\u30BF\u30B0", classKey: "contentsClasses", cond: "hasLead" },
-          { name: "contentsLevel", preset: "level", label: "\u30B3\u30F3\u30C6\u30F3\u30C4\u30EC\u30D9\u30EB", classKey: "contentsClasses" },
+          { name: "subHeadingTag", preset: "headingTag", key: "SubHeadingTag", label: __("\u526F\u898B\u51FA\u3057\u30BF\u30B0", "catpow"), classKey: "contentsClasses", cond: "hasLead" },
+          { name: "contentsLevel", preset: "level", label: __("\u30B3\u30F3\u30C6\u30F3\u30C4\u30EC\u30D9\u30EB", "catpow"), classKey: "contentsClasses" },
           {
             name: "type",
             type: "buttons",
-            label: "\u30BF\u30A4\u30D7",
-            values: { isTypeFlat: "\u30D5\u30E9\u30C3\u30C8", isTypeCard: "\u30AB\u30FC\u30C9" }
+            label: __("\u30BF\u30A4\u30D7", "catpow"),
+            values: { isTypeFlat: __("\u30D5\u30E9\u30C3\u30C8", "catpow"), isTypeCard: __("\u30AB\u30FC\u30C9", "catpow") }
           },
           {
-            label: "\u30E9\u30F3\u30AF",
+            label: __("\u30E9\u30F3\u30AF", "catpow"),
             values: "hasRank",
             sub: [
-              { label: "\u524D\u7F6E\u30C6\u30AD\u30B9\u30C8", input: "text", key: "rankPrefix" },
-              { label: "\u958B\u59CB\u30E9\u30F3\u30AF", input: "text", key: "rankStart" },
-              { label: "\u5F8C\u7F6E\u30C6\u30AD\u30B9\u30C8", input: "text", key: "rankSuffix" }
+              { label: __("\u524D\u7F6E\u30C6\u30AD\u30B9\u30C8", "catpow"), input: "text", key: "rankPrefix" },
+              { label: __("\u958B\u59CB\u30E9\u30F3\u30AF", "catpow"), input: "text", key: "rankStart" },
+              { label: __("\u5F8C\u7F6E\u30C6\u30AD\u30B9\u30C8", "catpow"), input: "text", key: "rankSuffix" }
             ]
           },
-          { label: "\u30EC\u30FC\u30C8", values: "hasRate", sub: [{ label: "\u30E9\u30D9\u30EB", input: "text", key: "rateLabel" }] },
-          { label: "\u30BF\u30A4\u30C8\u30EB\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3", values: "hasTitleCaption" },
-          { label: "\u30EA\u30FC\u30C9\u6587", values: "hasLead" },
-          { label: "\u30EA\u30F3\u30AF", values: "hasLink" }
+          { label: __("\u30EC\u30FC\u30C8", "catpow"), values: "hasRate", sub: [{ label: __("\u30E9\u30D9\u30EB", "catpow"), input: "text", key: "rateLabel" }] },
+          { label: __("\u30BF\u30A4\u30C8\u30EB\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3", "catpow"), values: "hasTitleCaption" },
+          { label: __("\u30EA\u30FC\u30C9\u6587", "catpow"), values: "hasLead" },
+          { label: __("\u30EA\u30F3\u30AF", "catpow"), values: "hasLink" }
         ];
         wp.hooks.applyFilters("catpow.blocks.ranking.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);
       const selectiveItemClasses = useMemo(() => {
-        const selectiveItemClasses2 = ["color", { name: "rate", label: "\u30EC\u30FC\u30C8", input: "range", key: "rate", min: 0, max: 5, step: 0.1 }];
+        const selectiveItemClasses2 = ["color", { name: "rate", label: __("\u30EC\u30FC\u30C8", "catpow"), input: "range", key: "rate", min: 0, max: 5, step: 0.1 }];
         wp.hooks.applyFilters("catpow.blocks.ranking.selectiveItemClasses", CP.finderProxy(selectiveItemClasses2));
         return selectiveItemClasses2;
       }, []);
@@ -127,7 +128,7 @@
             }
           ]
         }
-      )), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30B9\u30BF\u30A4\u30EB", icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30A2\u30A4\u30C6\u30E0", icon: "edit", ...{ setAttributes, attributes }, itemKeys: ["items", attributes.currentItemIndex], selectiveClasses: selectiveItemClasses }), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("ul", { ...useBlockProps({ className: classes, style: vars }) }, items.map((item, index) => {
+      )), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30B9\u30BF\u30A4\u30EB", "catpow"), icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30A2\u30A4\u30C6\u30E0", "catpow"), icon: "edit", ...{ setAttributes, attributes }, itemKeys: ["items", attributes.currentItemIndex], selectiveClasses: selectiveItemClasses }), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("ul", { ...useBlockProps({ className: classes, style: vars }) }, items.map((item, index) => {
         return /* @__PURE__ */ wp.element.createElement(CP.Item, { tag: "li", className: item.classes, ...{ setAttributes, attributes }, itemKeys: ["items", index], key: index }, /* @__PURE__ */ wp.element.createElement("div", { className: "_image" }, /* @__PURE__ */ wp.element.createElement(CP.SelectResponsiveImage, { attributes, setAttributes, keys: imageKeys.image, itemKeys: ["items", index], size: "vga" })), /* @__PURE__ */ wp.element.createElement("header", { className: "_header" }, states.hasRank && /* @__PURE__ */ wp.element.createElement("div", { className: "_rank" }, rankPrefix && /* @__PURE__ */ wp.element.createElement("span", { className: "_prefix" }, rankPrefix), /* @__PURE__ */ wp.element.createElement("data", { className: "_number", value: index + parseInt(rankStart) }, index + parseInt(rankStart)), rankSuffix && /* @__PURE__ */ wp.element.createElement("span", { className: "_suffix" }, rankSuffix)), states.hasRate && /* @__PURE__ */ wp.element.createElement("div", { className: "_rate" }, rateLabel && /* @__PURE__ */ wp.element.createElement("span", { className: "_label" }, rateLabel), /* @__PURE__ */ wp.element.createElement("data", { className: "_data", value: item.rate, style: { "--rate": item.rate } }, /* @__PURE__ */ wp.element.createElement("span", { className: "_number" }, parseFloat(item.rate).toFixed(1)), /* @__PURE__ */ wp.element.createElement("span", { className: "_stars" }))), /* @__PURE__ */ wp.element.createElement("div", { className: "_text" }, /* @__PURE__ */ wp.element.createElement(
           RichText,
           {

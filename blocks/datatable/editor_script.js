@@ -15,9 +15,10 @@
   }
 
   // ../blocks/datatable/editor_script.jsx
+  var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/datatable", {
     title: "\u{1F43E} DataTable",
-    description: "\u4E00\u884C\u307E\u305F\u306F\uFF11\u5217\u306E\u898B\u51FA\u3057\u3092\u6301\u3064\u30C6\u30FC\u30D6\u30EB\u3067\u3059\u3002",
+    description: __("\u4E00\u884C\u307E\u305F\u306F\uFF11\u5217\u306E\u898B\u51FA\u3057\u3092\u6301\u3064\u30C6\u30FC\u30D6\u30EB\u3067\u3059\u3002", "catpow"),
     icon: "editor-table",
     category: "catpow",
     transforms: {
@@ -95,15 +96,15 @@
         reader.readAsText(attributes.file);
       }
       var statesClasses = [
-        { label: "\u30D8\u30C3\u30C0\u884C", values: "hasHeaderRow" },
-        { label: "\u30D8\u30C3\u30C0\u5217", values: "hasHeaderColumn" }
+        { label: __("\u30D8\u30C3\u30C0\u884C", "catpow"), values: "hasHeaderRow" },
+        { label: __("\u30D8\u30C3\u30C0\u5217", "catpow"), values: "hasHeaderColumn" }
       ];
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
           {
             name: "type",
             type: "buttons",
-            label: "\u30BF\u30A4\u30D7",
+            label: __("\u30BF\u30A4\u30D7", "catpow"),
             values: {
               isStyleSpec: "spec",
               isStyleSheet: "sheet",
@@ -113,7 +114,7 @@
           {
             name: "loop",
             input: "bool",
-            label: "\u30EB\u30FC\u30D7",
+            label: __("\u30EB\u30FC\u30D7", "catpow"),
             key: "doLoop",
             sub: [
               {
@@ -232,7 +233,7 @@
           }
           return wp.element.createElement(states.hasHeaderColumn && columnIndex == 0 ? "th" : "td", { key: columnIndex }, children);
         }));
-      }))))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u8868\u793A\u8A2D\u5B9A", icon: "admin-appearance", ...{ setAttributes, attributes }, selectiveClasses: statesClasses }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: "\u30AF\u30E9\u30B9", onChange: (classes3) => setAttributes({ classes: classes3 }), value: classes2 }))));
+      }))))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u8868\u793A\u8A2D\u5B9A", "catpow"), icon: "admin-appearance", ...{ setAttributes, attributes }, selectiveClasses: statesClasses }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30AF\u30E9\u30B9", "catpow"), icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: __("\u30AF\u30E9\u30B9", "catpow"), onChange: (classes3) => setAttributes({ classes: classes3 }), value: classes2 }))));
     },
     save({ attributes, className }) {
       const { InnerBlocks, RichText: RichText2, useBlockProps } = wp.blockEditor;

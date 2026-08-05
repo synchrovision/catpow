@@ -202,15 +202,15 @@ export const selectiveClassesPresets = {
 	},
 	buttonsOptions: {
 		sub: [
-			{ name: "microcopy", label: "マイクロコピー", values: "hasMicroCopy" },
-			{ name: "caption", label: "キャプション", values: "hasCaption" },
+			{ name: "microcopy", label: __("マイクロコピー", "catpow"), values: "hasMicroCopy" },
+			{ name: "caption", label: __("キャプション", "catpow"), values: "hasCaption" },
 		],
 	},
 	buttonParams: {
 		sub: ["color", "rank", "hasIcon", "event"],
 	},
-	hasIcon: { label: "アイコン", values: "hasIcon", sub: ["icon"] },
-	icon: { input: "icon", label: "アイコン" },
+	hasIcon: { label: __("アイコン", "catpow"), values: "hasIcon", sub: ["icon"] },
+	icon: { input: "icon", label: __("アイコン", "catpow") },
 	hasFontSize({ preset, classKey, vars = "vars", ...otherParams }) {
 		return {
 			name: "hasFontSize",
@@ -290,12 +290,12 @@ export const selectiveClassesPresets = {
 		type: "gridbuttons",
 		label: __("フォント", "catpow"),
 		values: {
-			hasFontFamilyGothic: "ゴシック",
-			hasFontFamilyMincho: "明朝",
-			hasFontFamilyEnglish: "英数",
-			hasFontFamilyCode: "コード",
-			hasFontFamilyDecoration: "装飾",
-			hasFontFamilyScript: "筆記",
+			hasFontFamilyGothic: __("ゴシック", "catpow"),
+			hasFontFamilyMincho: __("明朝", "catpow"),
+			hasFontFamilyEnglish: __("英数", "catpow"),
+			hasFontFamilyCode: __("コード", "catpow"),
+			hasFontFamilyDecoration: __("装飾", "catpow"),
+			hasFontFamilyScript: __("筆記", "catpow"),
 		},
 	},
 	safeFontFamily: {
@@ -483,7 +483,7 @@ export const selectiveClassesPresets = {
 			...otherParams,
 		};
 	},
-	headingTag({ preset, name = "headingTag", label = "見出しタグ", key = "HeadingTag", classKey, ...otherParams }) {
+	headingTag({ preset, name = "headingTag", label = __("見出しタグ", "catpow"), key = "HeadingTag", classKey, ...otherParams }) {
 		return {
 			name,
 			input: "buttons",
@@ -507,7 +507,7 @@ export const selectiveClassesPresets = {
 			...otherParams,
 		};
 	},
-	subHeadingTag({ preset, name = "headingTag", label = "副見出しタグ", key = "SubHeadingTag", ...otherParams }) {
+	subHeadingTag({ preset, name = "headingTag", label = __("副見出しタグ", "catpow"), key = "SubHeadingTag", ...otherParams }) {
 		return {
 			name,
 			input: "buttons",

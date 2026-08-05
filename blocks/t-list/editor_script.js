@@ -3,7 +3,7 @@
   var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/t-list", {
     title: "\u{1F43E} T-List",
-    description: "HTML\u30E1\u30FC\u30EB\u7528\u306E\u30EA\u30B9\u30C8\u3067\u3059\u3002",
+    description: __("HTML\u30E1\u30FC\u30EB\u7528\u306E\u30EA\u30B9\u30C8\u3067\u3059\u3002", "catpow"),
     icon: "editor-code",
     category: "catpow-mail",
     parent: CP.mailContensContainer,
@@ -51,9 +51,9 @@
         const selectiveClasses2 = [
           "fontSize",
           "fontWeight",
-          { name: "marginTop", input: "range", label: "\u4E0A\u9593\u9694", key: "marginTop", min: 0, max: 4, step: 0.25 },
-          { name: "marginBetween", input: "range", label: "\u9593\u9694", key: "marginBetween", min: 0, max: 4, step: 0.25 },
-          { name: "marginBottom", input: "range", label: "\u4E0B\u9593\u9694", key: "marginBottom", min: 0, max: 4, step: 0.25 },
+          { name: "marginTop", input: "range", label: __("\u4E0A\u9593\u9694", "catpow"), key: "marginTop", min: 0, max: 4, step: 0.25 },
+          { name: "marginBetween", input: "range", label: __("\u9593\u9694", "catpow"), key: "marginBetween", min: 0, max: 4, step: 0.25 },
+          { name: "marginBottom", input: "range", label: __("\u4E0B\u9593\u9694", "catpow"), key: "marginBottom", min: 0, max: 4, step: 0.25 },
           {
             name: "isOrdered",
             label: __("\u756A\u53F7\u4ED8\u304D\u30EA\u30B9\u30C8", "catpow"),
@@ -66,7 +66,7 @@
           {
             name: "markerColor",
             type: "buttons",
-            label: "\u30DE\u30FC\u30AB\u30FC\u8272",
+            label: __("\u30DE\u30FC\u30AB\u30FC\u8272", "catpow"),
             values: {
               hasMarkerColorText: __("\u6587\u5B57", "catpow"),
               hasMarkerColorMain: __("\u57FA\u672C", "catpow"),
@@ -74,11 +74,11 @@
               hasMarkerColorHighlight: __("\u5F37\u8ABF\u6587\u5B57", "catpow")
             }
           },
-          { name: "markerWeigth", preset: "fontWeight", label: "\u30DE\u30FC\u30AB\u30FC\u592A\u3055", classKey: "markerClasses" },
-          { name: "markerSize", input: "range", label: "\u30DE\u30FC\u30AB\u30FC\u30B5\u30A4\u30BA", key: "markerSize", min: 1, max: 4, step: 0.1, unit: "em" },
-          { name: "markerWidth", input: "range", label: "\u30DE\u30FC\u30AB\u30FC\u5E45", key: "markerWidth", min: 1, max: 8, step: 0.25, unit: "em" },
-          { name: "markerMargin", input: "range", label: "\u30DE\u30FC\u30AB\u30FC\u9593\u9694", key: "markerMargin", min: 0.1, max: 2, step: 0.1, unit: "em" },
-          { name: "markerAlign", input: "buttons", label: "\u30DE\u30FC\u30AB\u30FC\u4F4D\u7F6E", key: "markerAlign", options: ["left", "center", "right"] }
+          { name: "markerWeigth", preset: "fontWeight", label: __("\u30DE\u30FC\u30AB\u30FC\u592A\u3055", "catpow"), classKey: "markerClasses" },
+          { name: "markerSize", input: "range", label: __("\u30DE\u30FC\u30AB\u30FC\u30B5\u30A4\u30BA", "catpow"), key: "markerSize", min: 1, max: 4, step: 0.1, unit: "em" },
+          { name: "markerWidth", input: "range", label: __("\u30DE\u30FC\u30AB\u30FC\u5E45", "catpow"), key: "markerWidth", min: 1, max: 8, step: 0.25, unit: "em" },
+          { name: "markerMargin", input: "range", label: __("\u30DE\u30FC\u30AB\u30FC\u9593\u9694", "catpow"), key: "markerMargin", min: 0.1, max: 2, step: 0.1, unit: "em" },
+          { name: "markerAlign", input: "buttons", label: __("\u30DE\u30FC\u30AB\u30FC\u4F4D\u7F6E", "catpow"), key: "markerAlign", options: ["left", "center", "right"] }
         ];
         wp.hooks.applyFilters("catpow.blocks.t-list.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
@@ -114,7 +114,7 @@
           },
           value: item.text
         }
-      )))), marginBottom > 0 && /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-spacer-cell", style: { height: `${marginBottom}em` }, colspan: "3" }))))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", ...{ setAttributes, attributes }, selectiveClasses, initialOpen: true }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: "\u30AF\u30E9\u30B9", onChange: (classes2) => setAttributes({ classes: classes2 }), value: classes }))));
+      )))), marginBottom > 0 && /* @__PURE__ */ wp.element.createElement("tr", null, /* @__PURE__ */ wp.element.createElement("td", { className: "_td is-spacer-cell", style: { height: `${marginBottom}em` }, colspan: "3" }))))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30AF\u30E9\u30B9", "catpow"), icon: "art", ...{ setAttributes, attributes }, selectiveClasses, initialOpen: true }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: __("\u30AF\u30E9\u30B9", "catpow"), onChange: (classes2) => setAttributes({ classes: classes2 }), value: classes }))));
     },
     save({ attributes, className, setAttributes }) {
       const { RichText, useBlockProps } = wp.blockEditor;

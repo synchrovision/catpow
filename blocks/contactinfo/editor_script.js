@@ -1,5 +1,6 @@
 (() => {
   // ../blocks/contactinfo/editor_script.jsx
+  var { __ } = wp.i18n;
   CP.config.contactinfo = {
     linkKeys: {
       link: { href: "href", items: "items" }
@@ -18,20 +19,20 @@
       const { linkKeys } = CP.config.contactinfo;
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
-          { name: "title", label: "\u30BF\u30A4\u30C8\u30EB", values: "hasTitle" },
-          { name: "lead", label: "\u30EA\u30FC\u30C9", values: "hasLead" },
-          { name: "caption", label: "\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3", values: "hasCaption" },
+          { name: "title", label: __("\u30BF\u30A4\u30C8\u30EB", "catpow"), values: "hasTitle" },
+          { name: "lead", label: __("\u30EA\u30FC\u30C9", "catpow"), values: "hasLead" },
+          { name: "caption", label: __("\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3", "catpow"), values: "hasCaption" },
           {
             name: "icon",
-            label: "\u30A2\u30A4\u30B3\u30F3",
+            label: __("\u30A2\u30A4\u30B3\u30F3", "catpow"),
             values: "hasIcon",
             sub: [{ input: "icon" }]
           },
-          { name: "itemTitle", label: "\u500B\u5225\u30BF\u30A4\u30C8\u30EB", values: "hasItemTitle", sub: [{ name: "itemsLevel", preset: "level", classKey: "itemsClasses" }] },
-          { name: "itemLead", label: "\u500B\u5225\u30EA\u30FC\u30C9", values: "hasItemLead" },
+          { name: "itemTitle", label: __("\u500B\u5225\u30BF\u30A4\u30C8\u30EB", "catpow"), values: "hasItemTitle", sub: [{ name: "itemsLevel", preset: "level", classKey: "itemsClasses" }] },
+          { name: "itemLead", label: __("\u500B\u5225\u30EA\u30FC\u30C9", "catpow"), values: "hasItemLead" },
           {
             name: "itemCaption",
-            label: "\u500B\u5225\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3",
+            label: __("\u500B\u5225\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3", "catpow"),
             values: "hasItemCaption"
           },
           "isTemplate"
@@ -53,7 +54,7 @@
         setAttributes({ classes: flagsToClassNames(states) });
       }, [len > 1]);
       const blockProps = useBlockProps({ className: classes, style: vars });
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { setAttributes, attributes }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30B9\u30BF\u30A4\u30EB", icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30A2\u30A4\u30C6\u30E0", icon: "edit", ...{ setAttributes, attributes }, itemKeys: ["items", attributes.currentItemIndex], selectiveClasses: selectiveItemClasses }), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), EditMode ? /* @__PURE__ */ wp.element.createElement("div", { ...blockProps, className: "cp-altcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { setAttributes, attributes }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30B9\u30BF\u30A4\u30EB", "catpow"), icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30A2\u30A4\u30C6\u30E0", "catpow"), icon: "edit", ...{ setAttributes, attributes }, itemKeys: ["items", attributes.currentItemIndex], selectiveClasses: selectiveItemClasses }), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), EditMode ? /* @__PURE__ */ wp.element.createElement("div", { ...blockProps, className: "cp-altcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(
         CP.EditItemsTable,
         {
           setAttributes,

@@ -1,4 +1,6 @@
-﻿import { clsx } from "clsx";
+﻿const { __ } = wp.i18n;
+
+import { clsx } from "clsx";
 
 CP.config.listed = {
 	imageKeys: {
@@ -77,43 +79,43 @@ wp.blocks.registerBlockType("catpow/listed", {
 			const selectiveClasses = [
 				{
 					name: "type",
-					label: "タイプ",
+					label: __("タイプ", "catpow"),
 					filter: "type",
 					type: "gridbuttons",
 					values: {
-						isTypeOrderd: "連番リスト",
-						isTypeNews: "お知らせ",
-						isTypeIndex: "目次",
-						isTypeMenu: "メニュー",
+						isTypeOrderd: __("連番リスト", "catpow"),
+						isTypeNews: __("お知らせ", "catpow"),
+						isTypeIndex: __("目次", "catpow"),
+						isTypeMenu: __("メニュー", "catpow"),
 					},
 					sub: {
 						isTypeOrderd: [
-							{ name: "image", label: "画像", values: "hasImage" },
+							{ name: "image", label: __("画像", "catpow"), values: "hasImage" },
 							{
 								name: "countPrefix",
 								input: "text",
-								label: "番号前置テキスト",
+								label: __("番号前置テキスト", "catpow"),
 								key: "countPrefix",
 							},
 							{
 								name: "countSuffix",
 								input: "text",
-								label: "番号後置テキスト",
+								label: __("番号後置テキスト", "catpow"),
 								key: "countSuffix",
 							},
 							{
 								name: "titleCaption",
-								label: "タイトルキャプション",
+								label: __("タイトルキャプション", "catpow"),
 								values: "hasTitleCaption",
 							},
 							{
 								name: "subTitle",
-								label: "サブタイトル",
+								label: __("サブタイトル", "catpow"),
 								values: "hasSubTitle",
 							},
-							{ name: "link", label: "リンク", values: "hasLink" },
+							{ name: "link", label: __("リンク", "catpow"), values: "hasLink" },
 						],
-						isTypeNews: [{ name: "link", label: "リンク", values: "hasLink" }],
+						isTypeNews: [{ name: "link", label: __("リンク", "catpow"), values: "hasLink" }],
 						isTypeIndex: ["itemSize"],
 						isTypeMenu: [
 							"itemSize",
@@ -125,20 +127,20 @@ wp.blocks.registerBlockType("catpow/listed", {
 							{
 								name: "image",
 								type: "buttons",
-								label: "画像",
+								label: __("画像", "catpow"),
 								values: {
-									noImage: "なし",
-									hasImage: "大",
-									hasHeaderImage: "小",
+									noImage: __("なし", "catpow"),
+									hasImage: __("大", "catpow"),
+									hasHeaderImage: __("小", "catpow"),
 								},
 							},
 							{
 								name: "titleCaption",
-								label: "タイトルキャプション",
+								label: __("タイトルキャプション", "catpow"),
 								values: "hasTitleCaption",
 							},
-							{ name: "text", label: "テキスト", values: "hasText" },
-							{ name: "link", label: "リンク", values: "hasLink" },
+							{ name: "text", label: __("テキスト", "catpow"), values: "hasText" },
+							{ name: "link", label: __("リンク", "catpow"), values: "hasLink" },
 						],
 					},
 					bind: {
@@ -159,21 +161,21 @@ wp.blocks.registerBlockType("catpow/listed", {
 				{
 					name: "imageCode",
 					input: "text",
-					label: "画像コード",
+					label: __("画像コード", "catpow"),
 					key: "imageCode",
 					cond: "hasImage",
 				},
 				{
 					name: "headerImageCode",
 					input: "text",
-					label: "ヘッダ画像コード",
+					label: __("ヘッダ画像コード", "catpow"),
 					key: "headerImageCode",
 					cond: "hasHeaderImage",
 				},
 				{
 					name: "subImageCode",
 					input: "text",
-					label: "サブ画像コード",
+					label: __("サブ画像コード", "catpow"),
 					key: "subImageCode",
 					cond: "hasSubImage",
 				},
@@ -194,12 +196,12 @@ wp.blocks.registerBlockType("catpow/listed", {
 			<>
 				<CP.SelectModeToolbar setAttributes={setAttributes} attributes={attributes} />
 				<InspectorControls>
-					<CP.SelectClassPanel title="スタイル" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
-					<CP.SelectClassPanel title="リストアイテム" icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={["color"]} />
-					{states.hasLink && <CP.SelectClassPanel title="イベント" icon="flag" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={["event"]} />}
+					<CP.SelectClassPanel title={__("スタイル", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title={__("リストアイテム", "catpow")} icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={["color"]} />
+					{states.hasLink && <CP.SelectClassPanel title={__("イベント", "catpow")} icon="flag" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={["event"]} />}
 					{isTemplate && (
 						<CP.SelectClassPanel
-							title="テンプレート"
+							title={__("テンプレート", "catpow")}
 							icon="edit"
 							{...{ setAttributes, attributes }}
 							itemKeys={["items", attributes.currentItemIndex]}

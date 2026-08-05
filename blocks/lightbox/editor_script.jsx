@@ -1,4 +1,6 @@
-﻿import { clsx } from "clsx";
+﻿const { __ } = wp.i18n;
+
+import { clsx } from "clsx";
 
 CP.config.lightbox = {
 	imageKeys: {
@@ -14,7 +16,7 @@ CP.config.lightbox = {
 
 wp.blocks.registerBlockType("catpow/lightbox", {
 	title: "🐾 Lightbox",
-	description: "クリックでポップアップ表示する画像です。",
+	description: __("クリックでポップアップ表示する画像です。", "catpow"),
 	icon: "editor-ul",
 	category: "catpow",
 	transforms: {
@@ -61,24 +63,24 @@ wp.blocks.registerBlockType("catpow/lightbox", {
 				{
 					name: "type",
 					type: "buttons",
-					label: "タイプ",
-					values: { isTypeThumbnail: "サムネール", isTypeFlat: "フラット", isTypeCard: "カード" },
+					label: __("タイプ", "catpow"),
+					values: { isTypeThumbnail: __("サムネール", "catpow"), isTypeFlat: __("フラット", "catpow"), isTypeCard: __("カード", "catpow") },
 					sub: {
 						isTypeFlat: ["itemSize"],
 						isTypeCard: ["itemSize"],
 					},
 				},
-				{ name: "title", label: "タイトル", values: "hasTitle" },
+				{ name: "title", label: __("タイトル", "catpow"), values: "hasTitle" },
 				{
 					name: "hasCaption",
-					label: "キャプション",
+					label: __("キャプション", "catpow"),
 					values: "hasCaption",
 				},
-				{ preset: "hasContentWidth", label: "スライダー幅", classKey: "sliderClasses", vars: "sliderVars" },
-				{ preset: "level", label: "スライダーレベル", classKey: "sliderClasses" },
-				{ name: "sliderTitle", label: "スライダータイトル", classKey: "sliderClasses", values: "hasTitle", sub: [{ preset: "headingTag", key: "SliderHeadingTag", classKey: "sliderClasses" }] },
-				{ name: "sliderImage", label: "スライダー画像", classKey: "sliderClasses", values: "hasImage" },
-				{ name: "sliderText", label: "スライダーテキスト", classKey: "sliderClasses", values: "hasText" },
+				{ preset: "hasContentWidth", label: __("スライダー幅", "catpow"), classKey: "sliderClasses", vars: "sliderVars" },
+				{ preset: "level", label: __("スライダーレベル", "catpow"), classKey: "sliderClasses" },
+				{ name: "sliderTitle", label: __("スライダータイトル", "catpow"), classKey: "sliderClasses", values: "hasTitle", sub: [{ preset: "headingTag", key: "SliderHeadingTag", classKey: "sliderClasses" }] },
+				{ name: "sliderImage", label: __("スライダー画像", "catpow"), classKey: "sliderClasses", values: "hasImage" },
+				{ name: "sliderText", label: __("スライダーテキスト", "catpow"), classKey: "sliderClasses", values: "hasText" },
 				"isTemplate",
 			];
 			wp.hooks.applyFilters("catpow.blocks.lightbox.selectiveClasses", CP.finderProxy(selectiveClasses));
@@ -89,28 +91,28 @@ wp.blocks.registerBlockType("catpow/lightbox", {
 				{
 					name: "image",
 					input: "image",
-					label: "画像",
+					label: __("画像", "catpow"),
 					keys: imageKeys.sliderIimage,
 					isTemplate,
 				},
 				{
 					name: "imageCode",
 					input: "text",
-					label: "画像コード",
+					label: __("画像コード", "catpow"),
 					key: "imageCode",
 					cond: isTemplate,
 				},
 				{
 					name: "",
 					input: "image",
-					label: "サムネール画像",
+					label: __("サムネール画像", "catpow"),
 					keys: imageKeys.thumbnail,
 					isTemplate,
 				},
 				{
 					name: "thumbnailCode",
 					input: "text",
-					label: "サムネール画像コード",
+					label: __("サムネール画像コード", "catpow"),
 					key: "thumbnailCode",
 					cond: isTemplate,
 				},
@@ -132,12 +134,12 @@ wp.blocks.registerBlockType("catpow/lightbox", {
 			<>
 				<CP.SelectModeToolbar setAttributes={setAttributes} attributes={attributes} modes={["EditMode", "AltMode", "OpenMode"]} />
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title={__("クラス", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-						<TextareaControl label="クラス" onChange={(classes) => setAttributes({ classes })} value={classes} />
-						<TextareaControl label="ボックスクラス" onChange={(sliderClasses) => setAttributes({ sliderClasses })} value={sliderClasses} />
+						<TextareaControl label={__("クラス", "catpow")} onChange={(classes) => setAttributes({ classes })} value={classes} />
+						<TextareaControl label={__("ボックスクラス", "catpow")} onChange={(sliderClasses) => setAttributes({ sliderClasses })} value={sliderClasses} />
 					</PanelBody>
-					<CP.SelectClassPanel title="リストアイテム" icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={selectiveItemClasses} />
+					<CP.SelectClassPanel title={__("リストアイテム", "catpow")} icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={selectiveItemClasses} />
 					<CP.ItemControlInfoPanel />
 				</InspectorControls>
 				{!OpenMode ? (

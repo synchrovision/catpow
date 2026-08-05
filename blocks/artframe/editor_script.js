@@ -30,6 +30,7 @@
   };
 
   // ../blocks/artframe/editor_script.jsx
+  var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/artframe", {
     transforms: {
       from: [
@@ -78,7 +79,7 @@
         setAttributes({ params: { ...artframeSelectiveClasses.sub[Element][0].default, ...params } });
       }, [Element]);
       const blockProps = useBlockProps({ className: classes, style: vars });
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(Element, { ...params }, /* @__PURE__ */ wp.element.createElement("div", { className: contentsClasses, ref: setRef }, /* @__PURE__ */ wp.element.createElement("div", { className: contentsBodyClasses }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: [["core/paragraph", { content: CP.dummyText.text }]], templateLock: false }))))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", initialOpen: true, icon: "art", ...{ setAttributes, attributes }, selectiveClasses })));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(Element, { ...params }, /* @__PURE__ */ wp.element.createElement("div", { className: contentsClasses, ref: setRef }, /* @__PURE__ */ wp.element.createElement("div", { className: contentsBodyClasses }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: [["core/paragraph", { content: CP.dummyText.text }]], templateLock: false }))))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30AF\u30E9\u30B9", "catpow"), initialOpen: true, icon: "art", ...{ setAttributes, attributes }, selectiveClasses })));
     },
     save({ attributes }) {
       const { InnerBlocks, useBlockProps } = wp.blockEditor;

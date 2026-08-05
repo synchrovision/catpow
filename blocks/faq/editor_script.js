@@ -15,6 +15,7 @@
   }
 
   // ../blocks/faq/editor_script.jsx
+  var { __ } = wp.i18n;
   var getPlainText = (html) => wp.richText.getTextContent(wp.richText.create({ html: String(html || "") }));
   CP.config.faq = {
     imageKeys: {
@@ -75,29 +76,29 @@
       const { imageKeys } = CP.config.faq;
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
-          { name: "titleCaption", label: "Q\u306B\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3", values: "hasTitleCaption" },
-          { name: "subTitle", label: "A\u306B\u898B\u51FA\u3057", values: "hasSubTitle" },
-          { name: "hasImage", label: "\u753B\u50CF", values: "hasImage" },
+          { name: "titleCaption", label: __("Q\u306B\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3", "catpow"), values: "hasTitleCaption" },
+          { name: "subTitle", label: __("A\u306B\u898B\u51FA\u3057", "catpow"), values: "hasSubTitle" },
+          { name: "hasImage", label: __("\u753B\u50CF", "catpow"), values: "hasImage" },
           {
             name: "counter",
-            label: "\u756A\u53F7",
+            label: __("\u756A\u53F7", "catpow"),
             values: "hasCounter",
             sub: [
               {
                 name: "counterPrefix",
                 input: "text",
-                label: "\u756A\u53F7\u524D\u7F6E\u30C6\u30AD\u30B9\u30C8",
+                label: __("\u756A\u53F7\u524D\u7F6E\u30C6\u30AD\u30B9\u30C8", "catpow"),
                 key: "counterPrefix"
               },
               {
                 name: "counterSuffix",
                 input: "text",
-                label: "\u756A\u53F7\u5F8C\u7F6E\u30C6\u30AD\u30B9\u30C8",
+                label: __("\u756A\u53F7\u5F8C\u7F6E\u30C6\u30AD\u30B9\u30C8", "catpow"),
                 key: "counterSuffix"
               }
             ]
           },
-          { name: "accordion", label: "\u30A2\u30B3\u30FC\u30C7\u30A3\u30AA\u30F3", values: "isAccordion" }
+          { name: "accordion", label: __("\u30A2\u30B3\u30FC\u30C7\u30A3\u30AA\u30F3", "catpow"), values: "isAccordion" }
         ];
         wp.hooks.applyFilters("catpow.blocks.faq.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
@@ -121,7 +122,7 @@
             }
           ]
         }
-      )), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: "\u30AF\u30E9\u30B9", onChange: (classes2) => setAttributes({ classes: classes2 }), value: classes })), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("ul", { ...useBlockProps({ className: clsx(classes, { edit: attributes.EditMode }), style: vars }) }, items.map((item, index) => {
+      )), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30AF\u30E9\u30B9", "catpow"), icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: __("\u30AF\u30E9\u30B9", "catpow"), onChange: (classes2) => setAttributes({ classes: classes2 }), value: classes })), /* @__PURE__ */ wp.element.createElement(CP.ItemControlInfoPanel, null)), /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("ul", { ...useBlockProps({ className: clsx(classes, { edit: attributes.EditMode }), style: vars }) }, items.map((item, index) => {
         if (!item.controlClasses) {
           item.controlClasses = "control";
         }

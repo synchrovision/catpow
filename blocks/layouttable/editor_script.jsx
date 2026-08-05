@@ -1,9 +1,11 @@
-﻿/**
+﻿const { __ } = wp.i18n;
+
+/**
  * @todo BlockVerticalAlignmentToolbarが実装されたら対応
  */
 wp.blocks.registerBlockType("catpow/layouttable", {
 	title: "🐾 LayoutTable",
-	description: "セルの結合と幅の指定ができるテーブルです。",
+	description: __("セルの結合と幅の指定ができるテーブルです。", "catpow"),
 	icon: "editor-table",
 	category: "catpow",
 
@@ -117,7 +119,7 @@ wp.blocks.registerBlockType("catpow/layouttable", {
 				{
 					name: "type",
 					type: "gridbuttons",
-					label: "タイプ",
+					label: __("タイプ", "catpow"),
 					filter: "type",
 					values: {
 						isStyleSpec: "spec",
@@ -549,11 +551,11 @@ wp.blocks.registerBlockType("catpow/layouttable", {
 					</table>
 				</CP.Bem>
 				<InspectorControls>
-					<CP.SelectClassPanel title="クラス" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
-					<PanelBody title="セル">
+					<CP.SelectClassPanel title={__("クラス", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
+					<PanelBody title={__("セル", "catpow")}>
 						{selectCellClasses({
 							type: "gridbuttons",
-							label: "タグ",
+							label: __("タグ", "catpow"),
 							values: {
 								"wp-block-catpow-layouttable__tbody-tr-th": "th",
 								"wp-block-catpow-layouttable__tbody-tr-td": "td",
@@ -562,24 +564,24 @@ wp.blocks.registerBlockType("catpow/layouttable", {
 						})}
 						{selectCellClasses({
 							type: "gridbuttons",
-							label: "タイプ",
+							label: __("タイプ", "catpow"),
 							values: {
-								"is-cell-spacer": "空白",
-								"is-cell-primary": "推奨",
-								"is-cell-deprecated": "非推奨",
+								"is-cell-spacer": __("空白", "catpow"),
+								"is-cell-primary": __("推奨", "catpow"),
+								"is-cell-deprecated": __("非推奨", "catpow"),
 							},
 						})}
 						{selectCellClasses({
 							type: "gridbuttons",
-							label: "文字",
+							label: __("文字", "catpow"),
 							values: {
-								"is-size-large": "大",
-								"is-size-medium": "中",
-								"is-size-small": "小",
+								"is-size-large": __("大", "catpow"),
+								"is-size-medium": __("中", "catpow"),
+								"is-size-small": __("小", "catpow"),
 							},
 						})}
 						<TextControl
-							label="幅"
+							label={__("幅", "catpow")}
 							value={getCellAttr("style").width || ""}
 							onChange={(val) => {
 								if (val) {
@@ -591,12 +593,12 @@ wp.blocks.registerBlockType("catpow/layouttable", {
 						/>
 						{isRectSelection() && (
 							<Button isDefault onClick={() => mergeCells()}>
-								セルを結合
+								{__("セルを結合", "catpow")}
 							</Button>
 						)}
 						{selectedCells.some((cell) => cell.rowspan > 1 || cell.colspan > 1) && (
 							<Button isDefault onClick={() => breakCells()}>
-								結合を解除
+								{__("結合を解除", "catpow")}
 							</Button>
 						)}
 					</PanelBody>

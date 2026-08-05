@@ -10,7 +10,7 @@ wp.blocks.registerBlockType("catpow/entrypopup", {
 		const states = classNamesToFlags(classes);
 
 		const selectiveClasses = useMemo(() => {
-			const selectiveClasses = [{ input: "buttons", name: "target", label: "表示条件", values: { site: "サイトで一回", page: "ページで一回", every: "毎回表示" }, key: "target" }, "contentWidth"];
+			const selectiveClasses = [{ input: "buttons", name: "target", label: __("表示条件", "catpow"), values: { site: __("サイトで一回", "catpow"), page: __("ページで一回", "catpow"), every: __("毎回表示", "catpow") }, key: "target" }, "contentWidth"];
 			wp.hooks.applyFilters("catpow.blocks.entrypopup.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
 		}, []);

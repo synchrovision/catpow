@@ -1,14 +1,15 @@
 (() => {
   // ../blocks/switcher/editor_script.jsx
+  var { __ } = wp.i18n;
   CP.config.switcher = {
     factors: {
-      schedule: "\u65E5\u6642",
-      is_user_logged_in: "\u30ED\u30B0\u30A4\u30F3",
-      current_user_can: "\u30E6\u30FC\u30B6\u30FC\u6A29\u9650",
-      user_value: "\u30E6\u30FC\u30B6\u30FC\u60C5\u5831",
-      input_value: "\u30D5\u30A9\u30FC\u30E0\u5165\u529B\u5024",
-      content_value: "\u30B3\u30F3\u30C6\u30F3\u30C4\u60C5\u5831",
-      ab_test: "AB\u30C6\u30B9\u30C8"
+      schedule: __("\u65E5\u6642", "catpow"),
+      is_user_logged_in: __("\u30ED\u30B0\u30A4\u30F3", "catpow"),
+      current_user_can: __("\u30E6\u30FC\u30B6\u30FC\u6A29\u9650", "catpow"),
+      user_value: __("\u30E6\u30FC\u30B6\u30FC\u60C5\u5831", "catpow"),
+      input_value: __("\u30D5\u30A9\u30FC\u30E0\u5165\u529B\u5024", "catpow"),
+      content_value: __("\u30B3\u30F3\u30C6\u30F3\u30C4\u60C5\u5831", "catpow"),
+      ab_test: __("AB\u30C6\u30B9\u30C8", "catpow")
     },
     factorFlags: {
       schedule: 4,
@@ -27,7 +28,7 @@
   };
   wp.blocks.registerBlockType("catpow/switcher", {
     title: "\u{1F43E} Switcher",
-    description: "\u65E5\u6642\u3084\u30ED\u30B0\u30A4\u30F3\u30E6\u30FC\u30B6\u30FC\u306B\u3088\u3063\u3066\u30B3\u30F3\u30C6\u30F3\u30C4\u306E\u5185\u5BB9\u304C\u5207\u308A\u66FF\u308F\u308B\u30B3\u30F3\u30C6\u30CA\u3067\u3059\u3002",
+    description: __("\u65E5\u6642\u3084\u30ED\u30B0\u30A4\u30F3\u30E6\u30FC\u30B6\u30FC\u306B\u3088\u3063\u3066\u30B3\u30F3\u30C6\u30F3\u30C4\u306E\u5185\u5BB9\u304C\u5207\u308A\u66FF\u308F\u308B\u30B3\u30F3\u30C6\u30CA\u3067\u3059\u3002", "catpow"),
     icon: "networking",
     category: "catpow-functional",
     example: CP.example,
@@ -44,21 +45,21 @@
         const selectiveClasses2 = [
           {
             name: "factor",
-            label: "\u30D5\u30A1\u30AF\u30BF\u30FC",
+            label: __("\u30D5\u30A1\u30AF\u30BF\u30FC", "catpow"),
             input: "select",
             key: "factor",
             values: factors2
           },
           {
             name: "field",
-            label: "\u30D5\u30A3\u30FC\u30EB\u30C9",
+            label: __("\u30D5\u30A3\u30FC\u30EB\u30C9", "catpow"),
             input: "text",
             key: "field",
             cond: (states, { attributes: { factor } }) => factorFlags2[factor] & flagValues2["field"]
           },
           {
             name: "compare",
-            label: "\u6BD4\u8F03",
+            label: __("\u6BD4\u8F03", "catpow"),
             input: "buttons",
             key: "compare",
             values: ["=", "IN", "BETWEEN"],
@@ -66,7 +67,7 @@
           },
           {
             name: "values",
-            label: "\u5024",
+            label: __("\u5024", "catpow"),
             input: "textarea",
             key: "values",
             cond: (states, { attributes: { factor } }) => factorFlags2[factor] & flagValues2["values"]
@@ -131,7 +132,7 @@
           key: index
         },
         cond
-      )) : false), /* @__PURE__ */ wp.element.createElement("div", { className: "contents" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: values.map((cond) => ["catpow/switchercontent", { cond }]), allowedBlocks: ["catpow/switchercontent"] }))), currentBlockId && /* @__PURE__ */ wp.element.createElement("style", null, CP.createStyleCode({ ["#" + currentBlockId]: { display: "block" } })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: "\u30AF\u30E9\u30B9", icon: "art", classKey: "factor", ...{ setAttributes, attributes }, selectiveClasses, initialOpen: true })));
+      )) : false), /* @__PURE__ */ wp.element.createElement("div", { className: "contents" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: values.map((cond) => ["catpow/switchercontent", { cond }]), allowedBlocks: ["catpow/switchercontent"] }))), currentBlockId && /* @__PURE__ */ wp.element.createElement("style", null, CP.createStyleCode({ ["#" + currentBlockId]: { display: "block" } })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30AF\u30E9\u30B9", "catpow"), icon: "art", classKey: "factor", ...{ setAttributes, attributes }, selectiveClasses, initialOpen: true })));
     },
     save() {
       const { InnerBlocks } = wp.blockEditor;
@@ -145,7 +146,7 @@
     category: "catpow",
     parent: ["catpow/switcher"],
     attributes: {
-      cond: { source: "attribute", label: "\u6761\u4EF6", selector: "switcher-content", attribute: "cond", default: "content" }
+      cond: { source: "attribute", label: __("\u6761\u4EF6", "catpow"), selector: "switcher-content", attribute: "cond", default: "content" }
     },
     edit({ attributes, setAttributes, clientId }) {
       const { InnerBlocks, useBlockProps } = wp.blockEditor;
