@@ -62,6 +62,20 @@
 :root .has-text-shadow-large {
   text-shadow: var(--cp-shadow-s-ol-ns) oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
+:root .has-spacing-type-block {
+  padding: var(--cp-padding-b);
+  margin: var(--cp-margin-b);
+}
+:root .has-spacing-type-frame {
+  padding: var(--cp-padding-f);
+  margin: var(--cp-margin-f);
+}
+:root .has-margin-type-block {
+  margin: var(--cp-margin-b);
+}
+:root .has-margin-type-frame {
+  margin: var(--cp-margin-f);
+}
 :root .has-padding {
   --cp-padding:var(--cp-padding-top,0) var(--cp-padding-inline,0) var(--cp-padding-bottom,0);
   padding: var(--cp-padding);
