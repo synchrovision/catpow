@@ -2,6 +2,7 @@
 export * from "./custom.js";
 
 export * from "./stripe.js";
+export * from "./grid.js";
 export * from "./check.js";
 export * from "./ripple.js";
 
