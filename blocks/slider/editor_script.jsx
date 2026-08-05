@@ -111,7 +111,7 @@ wp.blocks.registerBlockType("catpow/slider", {
 		const gotoItem = useCallback(
 			(i) => {
 				configData.current = (i + items.length) % items.length;
-				setAttributes({ currentItemIndex: configData.current, config: JSON.stringify(configData) });
+				setAttributes({ config: JSON.stringify(configData) });
 			},
 			[configData],
 		);
@@ -197,14 +197,8 @@ wp.blocks.registerBlockType("catpow/slider", {
 				<InspectorControls>
 					<CP.SelectClassPanel title="スタイル" icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 					<CP.SelectClassPanel title="アニメーション設定" icon="video-alt3" {...{ setAttributes, attributes }} selectiveClasses={animateClasses} />
-					<CP.SelectClassPanel
-						title="スライド"
-						icon="edit"
-						{...{ setAttributes, attributes }}
-						itemKeys={["items", attributes.currentItemIndex]}
-						triggerClasses={selectiveClasses.find(({ item }) => !!item)}
-					/>
-					<CP.ItemControlInfoPanel />
+					<CP.SelectClassPanel title="スライド" icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={["color"]} />
+					{states.hasLink && <CP.SelectClassPanel title="イベント" icon="flag" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={["event"]} />}
 				</InspectorControls>
 				{attributes.EditMode ? (
 					<div {...blockProps}>
@@ -366,7 +360,7 @@ wp.blocks.registerBlockType("catpow/slider", {
 												{states.hasCaption && <RichText.Content tagName="p" className="_caption" value={item.caption} />}
 												{states.hasText && <RichText.Content tagName="p" className="_text" value={item.text} />}
 												{states.hasLink && (
-													<CP.Link className="_link" attributes={attributes} keys={linkKeys.link} itemKeys={["items", index]}>
+													<CP.Link className="_link" attributes={attributes} keys={linkKeys.link} itemKeys={["items", index]} {...CP.extractEventDispatcherAttributes("catpow/slider", item)}>
 														<RichText.Content value={item.linkText} />
 													</CP.Link>
 												)}
