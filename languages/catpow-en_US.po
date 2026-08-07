@@ -1,0 +1,3349 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: catpow\n"
+"POT-Creation-Date: 2026-08-06 08:37+0900\n"
+"PO-Revision-Date: 2026-08-07 20:27+0900\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.9\n"
+"X-Poedit-KeywordsList: _;_e;__\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: lib\n"
+"X-Poedit-SearchPathExcluded-1: jsx_compiler\n"
+"X-Poedit-SearchPathExcluded-2: **/node_modules\n"
+"X-Poedit-SearchPathExcluded-3: **/vendor\n"
+
+#: action/admin_init-edit.php:73 action/admin_init-users.php:47
+#: blocks/accessmap/editor_script.js:77
+msgid "検索"
+msgstr "Search"
+
+#: action/admin_init-edit.php:86 action/admin_init-edit.php:98
+msgid "変更日"
+msgstr "Modified Date"
+
+#: action/admin_init-plugins.php:5 blocks/app/editor_script.js:58
+#: blocks/countdown/editor_script.js:21 blocks/embed/editor_script.js:54
+#: blocks/formblock/editor_script.js:111 blocks/motiongraphic/editor_script.js:46
+#: blocks/pagenavigation/editor_script.js:23 blocks/pagenavigation/editor_script.tsx:34
+#: blocks/recruitinfo/editor_script.js:173 blocks/widget/editor_script.js:26
+msgid "設定"
+msgstr "Settings"
+
+#: action/admin_init-post.php:9
+msgid "複製"
+msgstr "Duplicate"
+
+#: action/admin_menu.php:107
+msgid "再利用可能ブロック"
+msgstr "Reusable Blocks"
+
+#: action/admin_notices.php:3
+msgid "設定ファイルが更新されています　サイトを更新してください"
+msgstr "The configuration file has been updated. Please update the site."
+
+#: action/customize_register.php:24 blocks/_init/init/CP/data/selectiveClasses.js:558
+#: blocks/icons/editor_script.js:52 blocks/slidablemenu/editor_script.js:42
+#: blocks/sticky/editor_script.js:36 functions/facebook/classes/facebook/Widget.php:18
+#: functions/facebook/classes/facebook/Widget.php:26
+msgid "サイズ"
+msgstr "Size"
+
+#: action/customize_register.php:41
+msgid "余白・間隔"
+msgstr "Padding / Margin"
+
+#: action/customize_register.php:75 blocks/honeycomb/editor_script.js:87
+#: blocks/listed/editor_script.js:153 blocks/postlink/editor_script.js:22
+#: blocks/pricecard/editor_script.js:59 blocks/slider/editor_script.js:118
+#: blocks/sphere/editor_script.js:40 classes/meta/link.php:12
+msgid "テキスト"
+msgstr "Text"
+
+#: action/customize_register.php:149
+msgid "線"
+msgstr "Stroke"
+
+#: action/customize_register.php:181 blocks/_init/init/CP/data/selectiveClasses.js:322
+msgid "影"
+msgstr "Shadow"
+
+#: action/rest_api_init.php:61 functions/hide_author/functions.php:6
+msgid "無効なリクエストです"
+msgstr "Invalid request."
+
+#: blocks/_init/_init.php:41
+msgid "ブロックを選択"
+msgstr "Select a block"
+
+#: blocks/_init/init.js:2100 blocks/_init/init/CP/data/selectiveClasses.js:47
+#: blocks/_init/init/CP/data/selectiveClasses.js:392
+#: blocks/_init/init/CP/data/selectiveClasses.js:701 blocks/accessmap/editor_script.js:30
+#: blocks/comparetable/editor_script.js:176 blocks/pricecard/editor_script.js:72
+#: blocks/t-body/editor_script.js:80 blocks/t-body/editor_script.js:97
+#: blocks/t-box/editor_script.js:26
+msgid "通常"
+msgstr "Normal"
+
+#: blocks/_init/init.js:2101
+msgid "乗算"
+msgstr "Multiply"
+
+#: blocks/_init/init.js:2102
+msgid "スクリーン"
+msgstr "Screen"
+
+#: blocks/_init/init.js:2103
+msgid "オーバーレイ"
+msgstr "Overlay"
+
+#: blocks/_init/init.js:2104
+msgid "比較（暗）"
+msgstr "Darken"
+
+#: blocks/_init/init.js:2105
+msgid "比較（明）"
+msgstr "Lighten"
+
+#: blocks/_init/init.js:2106
+msgid "覆い焼き"
+msgstr "Color Dodge"
+
+#: blocks/_init/init.js:2107
+msgid "焼き込み"
+msgstr "Color Burn"
+
+#: blocks/_init/init.js:2108
+msgid "ハードライト"
+msgstr "Hard Light"
+
+#: blocks/_init/init.js:2109
+msgid "ソフトライト"
+msgstr "Soft Light"
+
+#: blocks/_init/init.js:2110
+msgid "差の絶対値"
+msgstr "Difference"
+
+#: blocks/_init/init.js:2111
+msgid "除外"
+msgstr "Exclusion"
+
+#: blocks/_init/init.js:2112
+msgid "色相"
+msgstr "Hue"
+
+#: blocks/_init/init.js:2113
+msgid "彩度"
+msgstr "Saturation"
+
+#: blocks/_init/init.js:2114
+msgid "カラー"
+msgstr "Color"
+
+#: blocks/_init/init.js:2115
+msgid "明度"
+msgstr "Luminosity"
+
+#: blocks/_init/init/CP/components/InputBackgroundImage/BackgroundImageDataGenerators/air.js:6
+msgid "エア"
+msgstr "Air"
+
+#: blocks/_init/init/CP/components/InputBackgroundImage/BackgroundImageDataGenerators/bubble.js:6
+msgid "バブル"
+msgstr "Bubble"
+
+#: blocks/_init/init/CP/components/InputBackgroundImage/BackgroundImageDataGenerators/check.js:5
+msgid "チェック"
+msgstr "Check"
+
+#: blocks/_init/init/CP/components/InputBackgroundImage/BackgroundImageDataGenerators/custom.js:5
+msgid "アップロード画像"
+msgstr "Uploaded Image"
+
+#: blocks/_init/init/CP/components/InputBackgroundImage/BackgroundImageDataGenerators/dots.js:5
+#: blocks/slider/editor_script.js:121
+msgid "ドット"
+msgstr "Dot"
+
+#: blocks/_init/init/CP/components/InputBackgroundImage/BackgroundImageDataGenerators/grid.js:5
+msgid "グリッド"
+msgstr "Grid"
+
+#: blocks/_init/init/CP/components/InputBackgroundImage/BackgroundImageDataGenerators/ice.js:6
+msgid "アイス"
+msgstr "Ice"
+
+#: blocks/_init/init/CP/components/InputBackgroundImage/BackgroundImageDataGenerators/prepared.js:4
+msgid "既定画像"
+msgstr "Default Image"
+
+#: blocks/_init/init/CP/components/InputBackgroundImage/BackgroundImageDataGenerators/ripple.js:5
+msgid "リップル"
+msgstr "Ripple"
+
+#: blocks/_init/init/CP/components/InputBackgroundImage/BackgroundImageDataGenerators/stripe.js:5
+msgid "ストライプ"
+msgstr "Stripe"
+
+#: blocks/_init/init/CP/data/example.js:4
+msgid "吾輩は猫である。"
+msgstr "I Am a Cat."
+
+#: blocks/_init/init/CP/data/example.js:5
+msgid ""
+"名前はまだない。どこで生れたか頓と見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣"
+"いていた事だけは記憶している。"
+msgstr ""
+"I don't have a name yet. I have no idea where I was born. All I remember is that I was "
+"meowing in a dim and damp place."
+
+#: blocks/_init/init/CP/data/example.js:6
+msgid ""
+"名前はまだない。どこで生れたか頓と見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣"
+"いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。しかもあとで聞くとそ"
+"れは書生という人間中で一番獰悪な種族であったそうだ。この書生というのは時々我々を捕えて煮て"
+"食うという話である。しかしその当時は何という考もなかったから別段恐しいとも思わなかった。"
+msgstr ""
+"I don't have a name yet. I have no idea where I was born. All I remember is that I was "
+"meowing in a dim and damp place. It was there that I first saw a human. I later heard "
+"that this human was a student, the most ferocious kind of human. They say these students "
+"sometimes catch us, cook us, and eat us. At the time, however, I had no idea what was "
+"happening, so I was not particularly frightened."
+
+#: blocks/_init/init/CP/data/example.js:7
+msgid "『吾輩は猫である』（わがはいはねこである）　夏目漱石　著"
+msgstr "I Am a Cat by Natsume Soseki"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:7
+msgid "カスタムカラー"
+msgstr "Custom Color"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:14 blocks/accessmap/editor_script.js:125
+#: blocks/accordion/editor_script.js:58 blocks/banners/editor_script.js:74
+#: blocks/listed/editor_script.js:205 blocks/picture/editor_script.js:47
+#: blocks/picture/editor_script.tsx:39 blocks/showcase/editor_script.js:130
+#: blocks/slidablemenu/editor_script.js:55 blocks/t-banner/editor_script.js:38
+#: blocks/t-image/editor_script.js:35 blocks/t-media-text/editor_script.js:38
+#: blocks/unit/editor_script.js:51
+msgid "テンプレート"
+msgstr "Template"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:19 blocks/datatable/editor_script.js:117
+#: blocks/slidablemenu/editor_script.js:62
+msgid "ループ"
+msgstr "Loop"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:31 blocks/slidablemenu/editor_script.js:79
+msgid "プレビューループ数"
+msgstr "Preview Loop Count"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:44 blocks/t-body/editor_script.js:66
+#: blocks/t-body/editor_script.js:67 blocks/t-box/editor_script.js:26
+msgid "背景色"
+msgstr "Background Color"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:46
+#: blocks/_init/init/CP/data/selectiveClasses.js:391
+#: blocks/_init/init/CP/data/selectiveClasses.js:777
+#: blocks/_init/init/CP/data/selectiveClasses.js:788
+#: blocks/_init/init/CP/data/selectiveClasses.js:819
+#: blocks/_init/init/CP/data/selectiveClasses.js:830
+#: blocks/_init/init/CP/data/selectiveClasses.js:861
+#: blocks/_init/init/CP/data/selectiveClasses.js:872 blocks/listed/editor_script.js:143
+#: blocks/simpletable/editor_script.js:96 blocks/simpletable/editor_script.js:108
+#: blocks/t-body/editor_script.js:80 blocks/t-body/editor_script.js:97
+#: blocks/t-box/editor_script.js:26
+msgid "なし"
+msgstr "None"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:48
+#: blocks/_init/init/CP/data/selectiveClasses.js:393 blocks/t-body/editor_script.js:80
+#: blocks/t-body/editor_script.js:97 blocks/t-box/editor_script.js:26
+#: blocks/t-list/editor_script.js:73
+msgid "強調"
+msgstr "Emphasis"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:53
+msgid "z-index"
+msgstr "z-index"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:63
+#: blocks/_init/init/CP/data/selectiveClasses.js:92
+#: blocks/_init/init/CP/data/selectiveClasses.js:112
+msgid "背景画像"
+msgstr "Background Image"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:69 blocks/simpletable/editor_script.js:112
+msgid "固定"
+msgstr "Fixed"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:75
+msgid "モード"
+msgstr "Mode"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:82
+msgid "不透明度"
+msgstr "Opacity"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:107
+msgid "背景パターン"
+msgstr "Background Pattern"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:124
+msgid "横揃え"
+msgstr "Horizontal Alignment"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:127
+#: blocks/_init/init/CP/data/selectiveClasses.js:194
+#: blocks/_init/init/CP/data/selectiveClasses.js:601
+#: blocks/_init/init/CP/data/selectiveClasses.js:778
+#: blocks/_init/init/CP/data/selectiveClasses.js:789 blocks/sidebar/editor_script.js:23
+msgid "左"
+msgstr "Left"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:128
+#: blocks/_init/init/CP/data/selectiveClasses.js:233
+#: blocks/_init/init/CP/data/selectiveClasses.js:334
+#: blocks/_init/init/CP/data/selectiveClasses.js:345
+#: blocks/_init/init/CP/data/selectiveClasses.js:370
+#: blocks/_init/init/CP/data/selectiveClasses.js:404
+#: blocks/_init/init/CP/data/selectiveClasses.js:445
+#: blocks/_init/init/CP/data/selectiveClasses.js:562
+#: blocks/_init/init/CP/data/selectiveClasses.js:577
+#: blocks/_init/init/CP/data/selectiveClasses.js:626
+#: blocks/_init/init/CP/data/selectiveClasses.js:658
+#: blocks/_init/init/CP/data/selectiveClasses.js:965
+#: blocks/_init/init/CP/data/selectiveClasses.js:998
+#: blocks/_init/init/CP/data/selectiveClasses.js:1031
+#: blocks/_init/init/CP/data/selectiveClasses.js:1126
+#: blocks/_init/init/CP/data/selectiveClasses.js:1159
+#: blocks/_init/init/CP/data/selectiveClasses.js:1239 blocks/icons/editor_script.js:52
+#: blocks/layouttable/editor_script.js:510 blocks/sticky/editor_script.js:36
+msgid "中"
+msgstr "M"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:129
+#: blocks/_init/init/CP/data/selectiveClasses.js:195
+#: blocks/_init/init/CP/data/selectiveClasses.js:602
+#: blocks/_init/init/CP/data/selectiveClasses.js:779
+#: blocks/_init/init/CP/data/selectiveClasses.js:790 blocks/sidebar/editor_script.js:23
+msgid "右"
+msgstr "Right"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:135
+msgid "コンテンツ揃え"
+msgstr "Content Alignment"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:137
+#: blocks/_init/init/CP/data/selectiveClasses.js:756 blocks/sidebar/editor_script.js:30
+msgid "上"
+msgstr "Top"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:138
+#: blocks/_init/init/CP/data/selectiveClasses.js:150
+#: blocks/_init/init/CP/data/selectiveClasses.js:184
+msgid "中央"
+msgstr "Center"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:139
+msgid "両端"
+msgstr "Space Between"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:140
+#: blocks/_init/init/CP/data/selectiveClasses.js:757 blocks/sidebar/editor_script.js:30
+msgid "下"
+msgstr "Bottom"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:146
+msgid "テキスト揃え"
+msgstr "Text Alignment"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:149
+msgid "左揃え"
+msgstr "Align Left"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:151
+msgid "右揃え"
+msgstr "Align Right"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:157
+#: blocks/_init/init/CP/data/selectiveClasses.js:167
+msgid "テキストタイプ"
+msgstr "Text Type"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:170 blocks/pricelist/editor_script.js:24
+msgid "見出し"
+msgstr "Heading"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:171 blocks/contactinfo/editor_script.js:23
+#: blocks/section/editor_script.js:77
+msgid "リード"
+msgstr "Lead"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:172
+msgid "本文"
+msgstr "Body"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:173
+msgid "UI"
+msgstr "UI"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:174
+msgid "注釈"
+msgstr "Annotation"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:180
+msgid "垂直方向揃え"
+msgstr "Vertical Alignment"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:183
+msgid "上揃え"
+msgstr "Align Top"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:185
+msgid "下揃え"
+msgstr "Align Bottom"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:191
+msgid "画像位置"
+msgstr "Image Position"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:199 blocks/buttons/editor_script.js:56
+#: blocks/formbuttons/editor_script.js:96 blocks/heroheader/editor_script.js:99
+#: blocks/postlink/editor_script.js:22 blocks/sticky/editor_script.js:48
+msgid "ボタン"
+msgstr "Button"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:205 blocks/buttons/editor_script.js:30
+msgid "マイクロコピー"
+msgstr "Microcopy"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:206 blocks/buttons/editor_script.js:30
+#: blocks/contactinfo/editor_script.js:24 blocks/lightbox/editor_script.js:87
+#: blocks/pricecard/editor_script.js:51 blocks/pricelist/editor_script.js:28
+#: blocks/slider/editor_script.js:117 blocks/sphere/editor_script.js:39
+msgid "キャプション"
+msgstr "Caption"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:212
+#: blocks/_init/init/CP/data/selectiveClasses.js:213 blocks/buttons/editor_script.js:40
+#: blocks/contactinfo/editor_script.js:27 blocks/nav/editor_init.php:6
+#: blocks/panel/editor_script.js:34 blocks/panel/editor_script.js:52
+#: blocks/section/editor_script.js:83 blocks/sphere/editor_script.js:38
+msgid "アイコン"
+msgstr "Icon"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:217
+#: blocks/_init/init/CP/data/selectiveClasses.js:228
+#: blocks/_init/init/CP/data/selectiveClasses.js:242
+msgid "文字サイズ"
+msgstr "Font Size"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:231
+#: blocks/_init/init/CP/data/selectiveClasses.js:560
+#: blocks/_init/init/CP/data/selectiveClasses.js:579
+#: blocks/_init/init/CP/data/selectiveClasses.js:624
+#: blocks/_init/init/CP/data/selectiveClasses.js:656
+#: blocks/_init/init/CP/data/selectiveClasses.js:963
+#: blocks/_init/init/CP/data/selectiveClasses.js:996
+#: blocks/_init/init/CP/data/selectiveClasses.js:1029
+#: blocks/_init/init/CP/data/selectiveClasses.js:1124
+#: blocks/_init/init/CP/data/selectiveClasses.js:1157
+#: blocks/_init/init/CP/data/selectiveClasses.js:1241
+msgid "極大"
+msgstr "XL"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:232
+#: blocks/_init/init/CP/data/selectiveClasses.js:335
+#: blocks/_init/init/CP/data/selectiveClasses.js:346
+#: blocks/_init/init/CP/data/selectiveClasses.js:371
+#: blocks/_init/init/CP/data/selectiveClasses.js:446
+#: blocks/_init/init/CP/data/selectiveClasses.js:561
+#: blocks/_init/init/CP/data/selectiveClasses.js:578
+#: blocks/_init/init/CP/data/selectiveClasses.js:625
+#: blocks/_init/init/CP/data/selectiveClasses.js:657
+#: blocks/_init/init/CP/data/selectiveClasses.js:964
+#: blocks/_init/init/CP/data/selectiveClasses.js:997
+#: blocks/_init/init/CP/data/selectiveClasses.js:1030
+#: blocks/_init/init/CP/data/selectiveClasses.js:1125
+#: blocks/_init/init/CP/data/selectiveClasses.js:1158
+#: blocks/_init/init/CP/data/selectiveClasses.js:1240 blocks/icons/editor_script.js:52
+#: blocks/layouttable/editor_script.js:509 blocks/listed/editor_script.js:144
+#: blocks/sticky/editor_script.js:36
+msgid "大"
+msgstr "L"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:234
+#: blocks/_init/init/CP/data/selectiveClasses.js:333
+#: blocks/_init/init/CP/data/selectiveClasses.js:344
+#: blocks/_init/init/CP/data/selectiveClasses.js:369
+#: blocks/_init/init/CP/data/selectiveClasses.js:444
+#: blocks/_init/init/CP/data/selectiveClasses.js:563
+#: blocks/_init/init/CP/data/selectiveClasses.js:576
+#: blocks/_init/init/CP/data/selectiveClasses.js:627
+#: blocks/_init/init/CP/data/selectiveClasses.js:659
+#: blocks/_init/init/CP/data/selectiveClasses.js:966
+#: blocks/_init/init/CP/data/selectiveClasses.js:999
+#: blocks/_init/init/CP/data/selectiveClasses.js:1032
+#: blocks/_init/init/CP/data/selectiveClasses.js:1127
+#: blocks/_init/init/CP/data/selectiveClasses.js:1160
+#: blocks/_init/init/CP/data/selectiveClasses.js:1238 blocks/icons/editor_script.js:52
+#: blocks/layouttable/editor_script.js:511 blocks/listed/editor_script.js:145
+#: blocks/sticky/editor_script.js:36
+msgid "小"
+msgstr "S"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:235
+#: blocks/_init/init/CP/data/selectiveClasses.js:564
+#: blocks/_init/init/CP/data/selectiveClasses.js:575
+#: blocks/_init/init/CP/data/selectiveClasses.js:628
+#: blocks/_init/init/CP/data/selectiveClasses.js:660
+#: blocks/_init/init/CP/data/selectiveClasses.js:967
+#: blocks/_init/init/CP/data/selectiveClasses.js:1000
+#: blocks/_init/init/CP/data/selectiveClasses.js:1033
+#: blocks/_init/init/CP/data/selectiveClasses.js:1128
+#: blocks/_init/init/CP/data/selectiveClasses.js:1161
+#: blocks/_init/init/CP/data/selectiveClasses.js:1237
+msgid "極小"
+msgstr "XS"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:259
+#: blocks/_init/init/CP/data/selectiveClasses.js:269
+msgid "文字の太さ"
+msgstr "Font Weight"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:281
+#: blocks/_init/init/CP/data/selectiveClasses.js:291
+#: blocks/_init/init/CP/data/selectiveClasses.js:304
+msgid "フォント"
+msgstr "Font"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:293
+#: blocks/_init/init/CP/data/selectiveClasses.js:309
+msgid "ゴシック"
+msgstr "Gothic"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:294
+#: blocks/_init/init/CP/data/selectiveClasses.js:310
+msgid "明朝"
+msgstr "Mincho"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:295
+msgid "英数"
+msgstr "Latin"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:296
+msgid "コード"
+msgstr "Code"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:297
+msgid "装飾"
+msgstr "Decorative"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:298
+msgid "筆記"
+msgstr "Handwriting"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:306
+msgid "セリフ"
+msgstr "Serif"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:307
+msgid "サンセリフ"
+msgstr "Sans Serif"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:308
+msgid "等幅"
+msgstr "Monospace"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:316
+msgid "太字"
+msgstr "Bold"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:324
+#: blocks/_init/init/CP/data/selectiveClasses.js:820
+#: blocks/_init/init/CP/data/selectiveClasses.js:831
+#: blocks/_init/init/CP/data/selectiveClasses.js:862
+#: blocks/_init/init/CP/data/selectiveClasses.js:873
+msgid "内"
+msgstr "Inside"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:325
+#: blocks/_init/init/CP/data/selectiveClasses.js:821
+#: blocks/_init/init/CP/data/selectiveClasses.js:832
+#: blocks/_init/init/CP/data/selectiveClasses.js:863
+#: blocks/_init/init/CP/data/selectiveClasses.js:874
+msgid "外"
+msgstr "Outside"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:355
+#: blocks/_init/init/CP/data/selectiveClasses.js:366
+msgid "文字影"
+msgstr "Text Shadow"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:379
+#: blocks/_init/init/CP/data/selectiveClasses.js:400
+#: blocks/_init/init/CP/data/selectiveClasses.js:412
+msgid "枠線"
+msgstr "Stroke"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:389
+msgid "線色"
+msgstr "Line Color"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:403
+msgid "細"
+msgstr "Thin"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:405
+msgid "太"
+msgstr "Bold"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:430
+#: blocks/_init/init/CP/data/selectiveClasses.js:441
+#: blocks/_init/init/CP/data/selectiveClasses.js:453
+msgid "角丸"
+msgstr "Round"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:471
+msgid "ボーダー画像"
+msgstr "Border Image"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:486
+msgid "見出しタグ"
+msgstr "HeadingTag"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:510 blocks/flow/editor_script.js:103
+#: blocks/pricecard/editor_script.js:40 blocks/ranking/editor_script.js:86
+msgid "副見出しタグ"
+msgstr "Subheading Tag"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:521
+msgid "レベル"
+msgstr "Level"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:525
+#: blocks/_init/init/CP/data/selectiveClasses.js:535
+msgid "見出しタイプ"
+msgstr "Heading Type"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:538
+msgid "ヘッダー"
+msgstr "Header"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:539
+msgid "ヘッドライン"
+msgstr "Headline"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:540
+msgid "キャッチ"
+msgstr "Tagline"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:546
+#: blocks/_init/init/CP/data/selectiveClasses.js:1249
+#: blocks/comparetable/editor_script.js:126 blocks/comparetable/editor_script.js:143
+#: blocks/layouttable/editor_script.js:516 blocks/t-banner/editor_script.js:32
+#: blocks/t-banners/editor_script.js:78 blocks/t-box/editor_script.js:27
+#: blocks/t-button/editor_script.js:31 blocks/t-image/editor_script.js:30
+#: functions/facebook/classes/facebook/Widget.php:13
+#: functions/facebook/classes/facebook/Widget.php:31
+msgid "幅"
+msgstr "Width"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:548
+msgid "フル"
+msgstr "Full"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:549
+msgid "ワイド"
+msgstr "Wide"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:550
+msgid "レギュラー"
+msgstr "Regular"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:551
+msgid "コンパクト"
+msgstr "Compact"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:552
+msgid "ナロー"
+msgstr "Narrow"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:571
+#: blocks/_init/init/CP/data/selectiveClasses.js:586
+msgid "アイテムサイズ"
+msgstr "Item Size"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:599
+msgid "アイテム位置"
+msgstr "Item Position"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:608
+msgid "アイテム間隔"
+msgstr "Item Spacing"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:622 blocks/t-banners/editor_script.js:82
+msgid "縦間隔"
+msgstr "Vertical Spacing"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:653 blocks/t-banners/editor_script.js:81
+msgid "横間隔"
+msgstr "Horizontal Spacing"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:684 blocks/cond/editor_script.js:24
+#: blocks/entrypopup/editor_script.js:24 blocks/leavepopup/editor_script.js:24
+msgid "表示条件"
+msgstr "Display Conditions"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:689 blocks/listed/editor_script.js:202
+#: blocks/slider/editor_script.js:222
+msgid "イベント"
+msgstr "Event"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:694
+msgid "色"
+msgstr "Color"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:699
+msgid "配色"
+msgstr "Color Scheme"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:702
+msgid "反転"
+msgstr "Invert"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:708 blocks/ranking/editor_script.js:95
+msgid "ランク"
+msgstr "Rank"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:710
+msgid "優先"
+msgstr "Primary"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:711
+#: blocks/_init/init/CP/data/selectiveClasses.js:721
+msgid "標準"
+msgstr "Standard"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:712
+msgid "副次"
+msgstr "Secondary"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:718 blocks/ranking/editor_script.js:103
+#: blocks/ranking/editor_script.js:112
+msgid "レート"
+msgstr "Rating"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:720
+#: blocks/comparetable/editor_script.js:178 blocks/layouttable/editor_script.js:502
+#: blocks/simpletable/editor_script.js:110
+msgid "推奨"
+msgstr "Recommended"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:722
+#: blocks/comparetable/editor_script.js:179 blocks/layouttable/editor_script.js:503
+#: blocks/pricecard/editor_script.js:74
+msgid "非推奨"
+msgstr "Not Recommended"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:723
+msgid "安全"
+msgstr "Safe"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:724 blocks/simpletable/editor_script.js:98
+msgid "注意"
+msgstr "Caution"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:725
+msgid "危険"
+msgstr "Danger"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:731
+msgid "クリップ"
+msgstr "Clip"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:737 blocks/icons/editor_script.js:53
+msgid "形状"
+msgstr "Shape"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:742
+msgid "楕円"
+msgstr "Ellipse"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:743
+msgid "傾斜"
+msgstr "Slant"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:744 blocks/slider/editor_script.js:120
+msgid "アロー"
+msgstr "Arrow"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:745
+msgid "フキダシ"
+msgstr "Speech Bubble"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:755
+msgid "両方"
+msgstr "Both"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:762
+msgid "量"
+msgstr "Amount"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:795
+#: blocks/_init/init/CP/data/selectiveClasses.js:837
+#: blocks/_init/init/CP/data/selectiveClasses.js:888
+msgid "上高さ"
+msgstr "Top Height"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:804
+#: blocks/_init/init/CP/data/selectiveClasses.js:846
+#: blocks/_init/init/CP/data/selectiveClasses.js:906
+msgid "下高さ"
+msgstr "Bottom Height"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:879
+msgid "上幅"
+msgstr "Top Width"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:897
+msgid "下幅"
+msgstr "Bottom Width"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:923
+msgid "間隔・余白タイプ"
+msgstr "Spacing and Margin Type"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:925
+#: blocks/_init/init/CP/data/selectiveClasses.js:936
+msgid "ブロック"
+msgstr "Block"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:925
+#: blocks/_init/init/CP/data/selectiveClasses.js:936
+msgid "フレーム"
+msgstr "Frame"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:925
+#: blocks/_init/init/CP/data/selectiveClasses.js:936
+msgid "カスタム"
+msgstr "Custom"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:934
+msgid "間隔タイプ"
+msgstr "Spacing Type"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:945
+msgid "パディング"
+msgstr "Padding"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:960
+msgid "上パディング"
+msgstr "Top Padding"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:993
+msgid "横パディング"
+msgstr "Horizontal Padding"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:1026
+msgid "下パディング"
+msgstr "Bottom Padding"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:1058
+msgid "余白"
+msgstr "Space"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:1063 blocks/t-banner/editor_script.js:33
+#: blocks/t-banners/editor_script.js:79 blocks/t-body/editor_script.js:83
+#: blocks/t-body/editor_script.js:100 blocks/t-box/editor_script.js:28
+#: blocks/t-button/editor_script.js:32 blocks/t-heading/editor_script.js:64
+#: blocks/t-image/editor_script.js:31 blocks/t-media-text/editor_script.js:34
+#: blocks/t-paragraph/editor_script.js:58
+msgid "上余白"
+msgstr "Top Space"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:1076 blocks/t-banner/editor_script.js:34
+#: blocks/t-banners/editor_script.js:80 blocks/t-body/editor_script.js:84
+#: blocks/t-body/editor_script.js:101 blocks/t-box/editor_script.js:30
+#: blocks/t-button/editor_script.js:33 blocks/t-heading/editor_script.js:65
+#: blocks/t-image/editor_script.js:32 blocks/t-media-text/editor_script.js:35
+#: blocks/t-paragraph/editor_script.js:59
+msgid "下余白"
+msgstr "Bottom Space"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:1089 blocks/t-box/editor_script.js:29
+msgid "横余白"
+msgstr "Horizontal Space"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:1107
+msgid "マージン"
+msgstr "Margin"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:1121
+msgid "上マージン"
+msgstr "Top Margin"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:1154
+msgid "下マージン"
+msgstr "Bottom Margin"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:1186 blocks/t-list/editor_script.js:55
+#: blocks/t-media-text/editor_script.js:33
+msgid "間隔"
+msgstr "Spacing"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:1192 blocks/t-list/editor_script.js:54
+msgid "上間隔"
+msgstr "Top Spacing"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:1205 blocks/t-list/editor_script.js:56
+msgid "下間隔"
+msgstr "Bottom Spacing"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:1223
+#: blocks/_init/init/CP/data/selectiveClasses.js:1234
+msgid "コンテンツ幅"
+msgstr "Content Width"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:1236
+msgid "適"
+msgstr "Fit"
+
+#: blocks/_init/init/CP/data/selectiveClasses.js:1242
+msgid "全"
+msgstr "Full"
+
+#: blocks/accessmap/editor_script.js:7
+msgid "地図とアクセス情報を表示"
+msgstr "Display a map and access information"
+
+#: blocks/accessmap/editor_script.js:22 blocks/artframe/editor_init.php:3
+#: blocks/chart/editor_script.js:77 blocks/chart/editor_script.js:178
+#: blocks/comparetable/editor_script.js:110 blocks/comparetable/editor_script.js:174
+#: blocks/comparetable/editor_script.js:206 blocks/comparetable/editor_script.js:234
+#: blocks/datatable/editor_script.js:107 blocks/definition/editor_script.js:32
+#: blocks/dialog/editor_script.js:34 blocks/div/editor_script.js:36
+#: blocks/flow/editor_script.js:99 blocks/layouttable/editor_script.js:117
+#: blocks/layouttable/editor_script.js:499 blocks/lightbox/editor_script.js:77
+#: blocks/listed/editor_script.js:93 blocks/pagenavigation/editor_script.js:13
+#: blocks/pagenavigation/editor_script.tsx:17 blocks/panel/editor_script.js:27
+#: blocks/postlink/editor_script.js:20 blocks/pricecard/editor_script.js:70
+#: blocks/ranking/editor_script.js:91 blocks/recruitinfo/editor_script.js:160
+#: blocks/section/editor_script.js:30 blocks/showcase/editor_script.js:60
+#: blocks/simpletable/editor_script.js:86 blocks/slider/editor_script.js:111
+#: blocks/sticky/editor_script.js:39 blocks/tabs/editor_script.js:47
+#: blocks/unit/editor_script.js:45
+msgid "タイプ"
+msgstr "Type"
+
+#: blocks/accessmap/editor_script.js:23 blocks/flow/editor_script.js:100
+#: blocks/lightbox/editor_script.js:78 blocks/ranking/editor_script.js:92
+#: blocks/recruitinfo/editor_script.js:161 blocks/showcase/editor_script.js:61
+#: blocks/slider/editor_script.js:112 blocks/tabs/editor_script.js:54
+msgid "フラット"
+msgstr "Flat"
+
+#: blocks/accessmap/editor_script.js:23 blocks/flow/editor_script.js:100
+#: blocks/lightbox/editor_script.js:78 blocks/ranking/editor_script.js:92
+#: blocks/recruitinfo/editor_script.js:161 blocks/showcase/editor_script.js:61
+#: blocks/slider/editor_script.js:112
+msgid "カード"
+msgstr "Card"
+
+#: blocks/accessmap/editor_script.js:23 blocks/recruitinfo/editor_script.js:161
+#: blocks/showcase/editor_script.js:61
+msgid "フーレム"
+msgstr "Frame"
+
+#: blocks/accessmap/editor_script.js:28
+msgid "地図の色"
+msgstr "Map Color"
+
+#: blocks/accessmap/editor_script.js:31
+msgid "グレー"
+msgstr "Gray"
+
+#: blocks/accessmap/editor_script.js:32
+msgid "同色"
+msgstr "Same Color"
+
+#: blocks/accessmap/editor_script.js:35
+msgid "電話番号"
+msgstr "Phone Number"
+
+#: blocks/accessmap/editor_script.js:36
+msgid "メール"
+msgstr "Email"
+
+#: blocks/accessmap/editor_script.js:37
+msgid "サイト"
+msgstr "Site"
+
+#: blocks/accessmap/editor_script.js:42
+msgid "地図タイプ"
+msgstr "Map Type"
+
+#: blocks/accessmap/editor_script.js:44
+msgid "地図"
+msgstr "Map"
+
+#: blocks/accessmap/editor_script.js:45
+msgid "航空写真"
+msgstr "Satellite"
+
+#: blocks/accessmap/editor_script.js:46
+msgid "地図 + 航空写真"
+msgstr "Map + Satellite"
+
+#: blocks/accessmap/editor_script.js:47
+msgid "地形図"
+msgstr "Terrain"
+
+#: blocks/accessmap/editor_script.js:55
+msgid "ズーム"
+msgstr "Zoom"
+
+#: blocks/accessmap/editor_script.js:63 ui/GoogleMap/input.js:101
+msgid "言語"
+msgstr "Language"
+
+#: blocks/accessmap/editor_script.js:77 blocks/accessmap/editor_script.js:88
+#: ui/GoogleMap/input.js:109
+msgid "埋め込みURL"
+msgstr "Embed URL"
+
+#: blocks/accessmap/editor_script.js:80 ui/GoogleMap/input.js:64
+msgid "検索ワード"
+msgstr "Search Terms"
+
+#: blocks/accessmap/editor_script.js:81
+msgid "中心座標"
+msgstr "Center Coordinates"
+
+#: blocks/accessmap/editor_script.js:110
+msgid "地図画像コード"
+msgstr "Image Code"
+
+#: blocks/accessmap/editor_script.js:122 blocks/buttons/editor_script.js:56
+#: blocks/contactinfo/editor_script.js:57 blocks/container/editor_script.js:51
+#: blocks/definition/editor_script.js:46 blocks/div/editor_script.js:50
+#: blocks/heroheader/editor_script.js:99 blocks/listed/editor_script.js:202
+#: blocks/ranking/editor_script.js:131 blocks/section/editor_script.js:94
+#: blocks/slider/editor_script.js:222 blocks/tabs/editor_script.js:53
+#: blocks/unit/editor_script.js:63
+msgid "スタイル"
+msgstr "Style"
+
+#: blocks/accessmap/editor_script.js:122 blocks/dialog/editor_script.js:47
+#: blocks/lightbox/editor_script.js:141 blocks/listed/editor_script.js:202
+#: blocks/pricelist/editor_script.js:45
+msgid "リストアイテム"
+msgstr "List Item"
+
+#: blocks/accessmap/editor_script.js:131
+msgid "アクセス情報"
+msgstr "Access Information"
+
+#: blocks/accessmap/editor_script.js:149
+msgid "代替コンテンツ"
+msgstr "Fallback Content"
+
+#: blocks/accordion/editor_script.js:30
+msgid "クリックで折り畳みできるブロックです。"
+msgstr "A block that can be collapsed with a click."
+
+#: blocks/accordion/editor_script.js:55 blocks/banners/editor_script.js:55
+#: blocks/banners/editor_script.js:66 blocks/comparetable/editor_script.js:192
+#: blocks/faq/editor_script.js:81 blocks/flow/editor_script.js:124
+#: blocks/honeycomb/editor_script.js:85 blocks/lightbox/editor_script.js:105
+#: blocks/listed/editor_script.js:104 blocks/listed/editor_script.js:141
+#: blocks/nav/editor_init.php:7 blocks/panel/editor_script.js:39
+#: blocks/panel/editor_script.js:43 blocks/panel/editor_script.js:55
+#: blocks/picture/editor_script.js:41 blocks/picture/editor_script.tsx:33
+#: blocks/pricecard/editor_script.js:57 blocks/pricelist/editor_script.js:27
+#: blocks/showcase/editor_script.js:95 blocks/sphere/editor_script.js:37
+#: blocks/sticky/editor_script.js:49 blocks/unit/editor_script.js:49
+msgid "画像"
+msgstr "Image"
+
+#: blocks/accordion/editor_script.js:65 blocks/lightbox/editor_script.js:112
+#: blocks/listed/editor_script.js:175 blocks/picture/editor_script.js:53
+#: blocks/picture/editor_script.tsx:45 blocks/pricecard/editor_script.js:81
+#: blocks/showcase/editor_script.js:104 blocks/unit/editor_script.js:56
+msgid "画像コード"
+msgstr "Image Code"
+
+#: blocks/accordion/editor_script.js:75 blocks/aquarium/editor_script.js:85
+#: blocks/artframe/editor_script.js:82 blocks/banners/editor_script.js:71
+#: blocks/chart/editor_script.js:170 blocks/comparetable/editor_script.js:511
+#: blocks/datatable/editor_script.js:236 blocks/dialog/editor_script.js:47
+#: blocks/entrypopup/editor_script.js:28 blocks/faq/editor_script.js:125
+#: blocks/flow/editor_script.js:155 blocks/formbuttons/editor_script.js:96
+#: blocks/honeycomb/editor_script.js:201 blocks/honeycomb/editor_script.js:204
+#: blocks/icons/editor_script.js:80 blocks/layouttable/editor_script.js:489
+#: blocks/leavepopup/editor_script.js:27 blocks/lightbox/editor_script.js:141
+#: blocks/materials/editor_script.js:40 blocks/nav/editor_script.js:19
+#: blocks/pageheader/editor_script.js:26 blocks/panel/editor_script.js:159
+#: blocks/panes/editor_script.js:45 blocks/picture/editor_script.js:65
+#: blocks/picture/editor_script.tsx:67 blocks/popup/editor_script.js:29
+#: blocks/postlink/editor_script.js:28 blocks/pricecard/editor_script.js:94
+#: blocks/pricelist/editor_script.js:45 blocks/progress/editor_script.js:95
+#: blocks/rtf/editor_script.js:25 blocks/rtf/editor_script.tsx:36
+#: blocks/showcase/editor_script.js:127 blocks/sidebar/editor_script.js:38
+#: blocks/sidebar/editor_script.js:74 blocks/sidebar/editor_script.js:119
+#: blocks/simpletable/editor_script.js:126 blocks/sitefooter/editor_script.js:32
+#: blocks/slidablemenu/editor_script.js:155 blocks/sphere/editor_script.js:71
+#: blocks/sticky/editor_script.js:83 blocks/switcher/editor_script.js:135
+#: blocks/t-banner/editor_script.js:47 blocks/t-banners/editor_script.js:105
+#: blocks/t-body/editor_script.js:150 blocks/t-box/editor_script.js:35
+#: blocks/t-button/editor_script.js:47 blocks/t-heading/editor_script.js:94
+#: blocks/t-image/editor_script.js:44 blocks/t-list/editor_script.js:117
+#: blocks/t-media-text/editor_script.js:69 blocks/t-paragraph/editor_script.js:87
+#: blocks/tabs/editor_script.js:69
+msgid "クラス"
+msgstr "Class"
+
+#: blocks/accordion/editor_script.js:113
+msgid "同時に開かれるアコーディオンを制限するコンテナです。"
+msgstr "A container that limits which accordions can be open at the same time."
+
+#: blocks/app/editor_script.js:6
+msgid "テーマに定義されたアプリを表示します。"
+msgstr "Displays an app defined by the theme."
+
+#: blocks/aquarium/editor_script.js:6
+msgid "画像とテキストを３次元にレイアウトします。"
+msgstr "Arranges images and text in three dimensions."
+
+#: blocks/banners/editor_script.js:21
+msgid "リンク付きのバナー画像を並べて表示するブロックです。"
+msgstr "Displays a list of linked banner images."
+
+#: blocks/banners/editor_script.js:45 blocks/comparetable/editor_script.js:238
+#: blocks/contactinfo/editor_script.js:22 blocks/honeycomb/editor_script.js:86
+#: blocks/lightbox/editor_script.js:84 blocks/pagenavigation/editor_script.js:15
+#: blocks/pagenavigation/editor_script.tsx:19 blocks/panel/editor_script.js:35
+#: blocks/panel/editor_script.js:53 blocks/pricecard/editor_script.js:50
+#: blocks/slider/editor_script.js:116
+msgid "タイトル"
+msgstr "Title"
+
+#: blocks/banners/editor_script.js:80
+msgid "バナー"
+msgstr "Banner"
+
+#: blocks/breadcrumb/editor_script.js:6
+msgid "パンくずリストを表示します。"
+msgstr "Displays breadcrumbs."
+
+#: blocks/buttons/editor_script.js:12
+msgid "ボタンのブロックです。"
+msgstr "A button block."
+
+#: blocks/chart/editor_script.js:6
+msgid "グラフを表示します。"
+msgstr "Displays a chart."
+
+#: blocks/chart/editor_script.js:46
+msgid "ステータス"
+msgstr "Status"
+
+#: blocks/chart/editor_script.js:48
+msgid "日数"
+msgstr "Number of Days"
+
+#: blocks/chart/editor_script.js:49
+msgid "日"
+msgstr "Days"
+
+#: blocks/chart/editor_script.js:80 blocks/chart/editor_script.js:180
+msgid "棒グラフ"
+msgstr "Bar Chart"
+
+#: blocks/chart/editor_script.js:81 blocks/chart/editor_script.js:181
+msgid "円グラフ"
+msgstr "Pie Chart"
+
+#: blocks/chart/editor_script.js:82 blocks/chart/editor_script.js:182
+msgid "折れ線グラフ"
+msgstr "Line Chart"
+
+#: blocks/chart/editor_script.js:83 blocks/chart/editor_script.js:183
+msgid "レーダーチャート"
+msgstr "Radar Chart"
+
+#: blocks/chart/editor_script.js:86
+msgid "値を表示"
+msgstr "Show Values"
+
+#: blocks/chart/editor_script.js:86
+msgid "単位を表示"
+msgstr "Show Units"
+
+#: blocks/chart/editor_script.js:87
+msgid "枠線を表示"
+msgstr "Show Border"
+
+#: blocks/chart/editor_script.js:88
+msgid "罫線を表示"
+msgstr "Show Gridlines"
+
+#: blocks/comparetable/editor_script.js:117
+msgid "転置"
+msgstr "Transpose"
+
+#: blocks/comparetable/editor_script.js:118 blocks/layouttable/editor_script.js:491
+msgid "タグ"
+msgstr "Tag"
+
+#: blocks/comparetable/editor_script.js:121
+msgid "見出し列"
+msgstr "Header Column"
+
+#: blocks/comparetable/editor_script.js:138
+msgid "列幅固定"
+msgstr "Fixed Column Width"
+
+#: blocks/comparetable/editor_script.js:155
+msgid "表幅"
+msgstr "Table Width"
+
+#: blocks/comparetable/editor_script.js:177
+msgid "高品質"
+msgstr "High Quality"
+
+#: blocks/comparetable/editor_script.js:208
+msgid "等"
+msgstr "Equal"
+
+#: blocks/comparetable/editor_script.js:209
+msgid "正"
+msgstr "Positive"
+
+#: blocks/comparetable/editor_script.js:210
+msgid "負"
+msgstr "Negative"
+
+#: blocks/comparetable/editor_script.js:222 blocks/comparetable/editor_script.js:237
+#: blocks/materials/editor_script.js:23 blocks/ranking/editor_script.js:103
+#: blocks/sticky/editor_script.js:20 blocks/sticky/editor_script.js:41
+#: blocks/sticky/editor_script.js:49 blocks/tabs/editor_script.js:48
+msgid "ラベル"
+msgstr "Label"
+
+#: blocks/comparetable/editor_script.js:236 blocks/layouttable/editor_script.js:501
+msgid "空白"
+msgstr "Blank"
+
+#: blocks/comparetable/editor_script.js:511 blocks/simpletable/editor_script.js:126
+msgid "行"
+msgstr "Row"
+
+#: blocks/comparetable/editor_script.js:511
+msgid "列"
+msgstr "Column"
+
+#: blocks/comparetable/editor_script.js:511 blocks/comparetable/editor_script.js:514
+#: blocks/layouttable/editor_script.js:489
+msgid "セル"
+msgstr "Cell"
+
+#: blocks/cond/editor_script.js:6
+msgid "日時やログインユーザーによってコンテンツの表示が切り替わるコンテナです。"
+msgstr ""
+"A container that controls content visibility based on the date, time, or logged-in user."
+
+#: blocks/cond/editor_script.js:24
+msgid "表示条件："
+msgstr "Display conditions:"
+
+#: blocks/cond/editor_script.js:24 blocks/cond/editor_script.js:27
+#: blocks/switcher/editor_script.js:7
+msgid "ログイン"
+msgstr "Login"
+
+#: blocks/cond/editor_script.js:24 blocks/cond/editor_script.js:35
+msgid "している"
+msgstr "Is"
+
+#: blocks/cond/editor_script.js:24 blocks/cond/editor_script.js:33
+msgid "していない"
+msgstr "Is Not"
+
+#: blocks/cond/editor_script.js:24
+msgid "スケジュール"
+msgstr "Schedule"
+
+#: blocks/cond/editor_script.js:34
+msgid "どちらでも"
+msgstr "Either"
+
+#: blocks/cond/editor_script.js:38
+msgid "権限"
+msgstr "Role"
+
+#: blocks/cond/editor_script.js:38 blocks/switcher/editor_script.js:9
+msgid "ユーザー情報"
+msgstr "User Information"
+
+#: blocks/cond/editor_script.js:38 blocks/switcher/editor_script.js:10
+msgid "フォーム入力値"
+msgstr "Form Input Value"
+
+#: blocks/cond/editor_script.js:38 blocks/switcher/editor_script.js:11
+msgid "コンテンツ情報"
+msgstr "Content Information"
+
+#: blocks/contactinfo/editor_script.js:31
+msgid "個別タイトル"
+msgstr "Individual Title"
+
+#: blocks/contactinfo/editor_script.js:32
+msgid "個別リード"
+msgstr "Individual Lead"
+
+#: blocks/contactinfo/editor_script.js:35
+msgid "個別キャプション"
+msgstr "Individual Caption"
+
+#: blocks/contactinfo/editor_script.js:57 blocks/honeycomb/editor_script.js:201
+#: blocks/icons/editor_script.js:80 blocks/panes/editor_script.js:45
+#: blocks/pricecard/editor_script.js:94 blocks/ranking/editor_script.js:131
+#: blocks/showcase/editor_script.js:136 blocks/sphere/editor_script.js:74
+msgid "アイテム"
+msgstr "Item"
+
+#: blocks/container/editor_script.js:6
+msgid "スクロール可能領域を作成できるコンテナです。"
+msgstr "A container for creating a scrollable area."
+
+#: blocks/container/editor_script.js:36
+msgid "スクロールX"
+msgstr "ScrollX"
+
+#: blocks/container/editor_script.js:38
+msgid "コンテンツの幅"
+msgstr "Content Width"
+
+#: blocks/container/editor_script.js:42
+msgid "スクロールY"
+msgstr "ScrollY"
+
+#: blocks/container/editor_script.js:44
+msgid "コンテナの高さ"
+msgstr "Container Height"
+
+#: blocks/countdown/editor_script.js:17
+msgid "目標日時"
+msgstr "Target Date and Time"
+
+#: blocks/datatable/editor_script.js:21
+msgid "一行または１列の見出しを持つテーブルです。"
+msgstr "A table with a single header row or column."
+
+#: blocks/datatable/editor_script.js:99
+msgid "ヘッダ行"
+msgstr "Header Row"
+
+#: blocks/datatable/editor_script.js:100
+msgid "ヘッダ列"
+msgstr "Header Column"
+
+#: blocks/datatable/editor_script.js:236
+msgid "表示設定"
+msgstr "Display Settings"
+
+#: blocks/definition/editor_script.js:6
+msgid "定義リストのブロックです"
+msgstr "A definition list block."
+
+#: blocks/dialog/editor_script.js:6
+msgid "フキダシで会話を表現するブロックです。"
+msgstr "A block for presenting conversations with speech bubbles."
+
+#: blocks/div/editor_script.js:42
+msgid "カラム幅"
+msgstr "Column Width"
+
+#: blocks/embed/editor_script.js:6
+msgid "テーマに定義された埋め込みコンテンツを表示します。"
+msgstr "Displays embedded content defined by the theme."
+
+#: blocks/entrypopup/editor_script.js:24
+msgid "サイトで一回"
+msgstr "Once per Site"
+
+#: blocks/entrypopup/editor_script.js:24
+msgid "ページで一回"
+msgstr "Once per Page"
+
+#: blocks/entrypopup/editor_script.js:24
+msgid "毎回表示"
+msgstr "Always Show"
+
+#: blocks/faq/editor_script.js:79
+msgid "Qにキャプション"
+msgstr "Caption for Q"
+
+#: blocks/faq/editor_script.js:80
+msgid "Aに見出し"
+msgstr "Heading for A"
+
+#: blocks/faq/editor_script.js:84 blocks/flow/editor_script.js:107
+#: blocks/progress/editor_script.js:28 blocks/showcase/editor_script.js:65
+msgid "番号"
+msgstr "Number"
+
+#: blocks/faq/editor_script.js:90 blocks/flow/editor_script.js:113
+#: blocks/listed/editor_script.js:108 blocks/showcase/editor_script.js:71
+msgid "番号前置テキスト"
+msgstr "Text Before Number"
+
+#: blocks/faq/editor_script.js:96 blocks/flow/editor_script.js:119
+#: blocks/listed/editor_script.js:114 blocks/showcase/editor_script.js:77
+msgid "番号後置テキスト"
+msgstr "Text After Number"
+
+#: blocks/faq/editor_script.js:101
+msgid "アコーディオン"
+msgstr "Accordion"
+
+#: blocks/flow/editor_script.js:14
+msgid "手順や順番の一覧ブロックです。"
+msgstr "A block for listing steps or a sequence."
+
+#: blocks/flow/editor_script.js:100
+msgid "タイムライン"
+msgstr "Timeline"
+
+#: blocks/flow/editor_script.js:104 blocks/pricecard/editor_script.js:41
+#: blocks/ranking/editor_script.js:87
+msgid "コンテンツレベル"
+msgstr "Content Level"
+
+#: blocks/flow/editor_script.js:127 blocks/listed/editor_script.js:119
+#: blocks/listed/editor_script.js:150 blocks/ranking/editor_script.js:104
+#: blocks/showcase/editor_script.js:84
+msgid "タイトルキャプション"
+msgstr "Title Caption"
+
+#: blocks/flow/editor_script.js:130 blocks/listed/editor_script.js:124
+#: blocks/pricecard/editor_script.js:58
+msgid "サブタイトル"
+msgstr "Subtitle"
+
+#: blocks/flow/editor_script.js:131 blocks/icons/editor_script.js:61
+#: blocks/listed/editor_script.js:127 blocks/listed/editor_script.js:129
+#: blocks/listed/editor_script.js:154 blocks/panel/editor_script.js:46
+#: blocks/panel/editor_script.js:56 blocks/pricecard/editor_script.js:53
+#: blocks/ranking/editor_script.js:106 blocks/showcase/editor_script.js:87
+#: blocks/slider/editor_script.js:119
+msgid "リンク"
+msgstr "Link"
+
+#: blocks/form/editor_script.js:6
+msgid "テーマに定義されたフォームを表示します。"
+msgstr "Displays a form defined by the theme."
+
+#: blocks/form/editor_script.js:38 blocks/formblock/editor_script.js:34
+msgid "フォーム"
+msgstr "Form"
+
+#: blocks/form/editor_script.js:58 blocks/formblock/editor_script.js:48
+msgid "入力値"
+msgstr "Input Value"
+
+#: blocks/form/editor_script.js:61 blocks/formblock/editor_script.js:51
+msgid "入力名"
+msgstr "Input Name"
+
+#: blocks/form/editor_script.js:70 blocks/formblock/editor_script.js:60
+msgid "データID"
+msgstr "Data ID"
+
+#: blocks/form/editor_script.js:79 blocks/formblock/editor_script.js:69
+msgid "初期値"
+msgstr "Initial Value"
+
+#: blocks/formblock/editor_script.js:7
+msgid "テーマに定義された編集可能なフォームを表示します。"
+msgstr "Displays an editable form defined by the theme."
+
+#: blocks/formblock/editor_script.js:91 blocks/formblock/editor_script.js:114
+#: blocks/loop/editor_script.js:115 blocks/loopblock/editor_script.js:78
+#: blocks/t-loop/editor_script.js:61
+msgid "名前"
+msgstr "Name"
+
+#: blocks/formblock/editor_script.js:98 blocks/formblock/editor_script.js:120
+#: ui/TaskProcess/input.js:35
+msgid "アクション"
+msgstr "Action"
+
+#: blocks/formbuttons/conf.php:19 blocks/formbuttons/editor_script.js:164
+#: blocks/progress/default-settings.php:10 components/ModalForm/component.js:37
+#: default/config/template/config/sec_inputs.php:44
+#: default/post_data/contractform/form/confirm.php:26
+#: default/post_data/mailform/form/confirm.php:21
+msgid "送信"
+msgstr "Submit"
+
+#: blocks/formbuttons/editor_script.js:12
+msgid "フォーム用のボタンです。"
+msgstr "A button for forms."
+
+#: blocks/formbuttons/editor_script.js:139
+msgid "[button 送信 send]"
+msgstr "[button Submit send]"
+
+#: blocks/graphics/editor_script.js:76
+msgid "画像を自由にレイアウトします。"
+msgstr "Freely arranges images."
+
+#: blocks/heroheader/editor_init.php:3
+msgid "背景スライドショー"
+msgstr "Background Slideshow"
+
+#: blocks/heroheader/editor_script.js:42 blocks/pageheader/editor_script.js:9
+msgid "ページの最初に表示するヘッダのブロックです。"
+msgstr "A header block displayed at the top of the page."
+
+#: blocks/heroheader/editor_script.js:55
+msgid "テキスト背景"
+msgstr "Text Background"
+
+#: blocks/heroheader/editor_script.js:62
+msgid "スライダーブレンドモード"
+msgstr "Slider Blend Mode"
+
+#: blocks/heroheader/editor_script.js:69
+msgid "スライダー不透明度"
+msgstr "Slider Opacity"
+
+#: blocks/heroheader/editor_script.js:78
+msgid "スライドショー画像"
+msgstr "Slideshow Images"
+
+#: blocks/heroheader/editor_script.js:116 blocks/pageheader/editor_script.js:31
+msgid "タイトルを入力"
+msgstr "Enter a title"
+
+#: blocks/heroheader/editor_script.js:127 blocks/heroheader/editor_script.js:140
+#: blocks/heroheader/editor_script.js:162 blocks/heroheader/editor_script.js:175
+#, fuzzy
+#| msgid "テキスト"
+msgid "テキストを入力"
+msgstr "Enter text"
+
+#: blocks/honeycomb/editor_script.js:11
+msgid "六角形のパネルをレイアウトします。"
+msgstr "Arranges hexagonal panels."
+
+#: blocks/icons/editor_script.js:6
+msgid "リンク付きのアイコン画像を並べて表示するブロックです。"
+msgstr "Displays a list of linked icon images."
+
+#: blocks/icons/editor_script.js:53
+msgid "塗り"
+msgstr "Fill"
+
+#: blocks/icons/editor_script.js:53
+#, fuzzy
+#| msgid "角丸"
+msgid "丸"
+msgstr "Round"
+
+#: blocks/icons/editor_script.js:53
+msgid "四角"
+msgstr "Square"
+
+#: blocks/jsonld/editor_script.js:204
+msgid "各種の構造化データを記述。"
+msgstr "Defines various types of structured data."
+
+#: blocks/layouttable/editor_script.js:6
+msgid "セルの結合と幅の指定ができるテーブルです。"
+msgstr "A table that supports merged cells and custom widths."
+
+#: blocks/layouttable/editor_script.js:507 blocks/t-list/editor_script.js:71
+msgid "文字"
+msgstr "Text"
+
+#: blocks/layouttable/editor_script.js:526
+msgid "セルを結合"
+msgstr "Merge Cells"
+
+#: blocks/layouttable/editor_script.js:526
+msgid "結合を解除"
+msgstr "Unmerge Cells"
+
+#: blocks/leavepopup/editor_script.js:24
+msgid "サイト離脱時"
+msgstr "When Leaving the Site"
+
+#: blocks/leavepopup/editor_script.js:24
+msgid "ページ離脱時"
+msgstr "When Leaving the Page"
+
+#: blocks/lightbox/editor_script.js:32
+msgid "クリックでポップアップ表示する画像です。"
+msgstr "An image that opens in a popup when clicked."
+
+#: blocks/lightbox/editor_script.js:78
+msgid "サムネール"
+msgstr "Thumbnail"
+
+#: blocks/lightbox/editor_script.js:90
+msgid "スライダー幅"
+msgstr "Slider Width"
+
+#: blocks/lightbox/editor_script.js:91
+msgid "スライダーレベル"
+msgstr "Slider Level"
+
+#: blocks/lightbox/editor_script.js:92
+msgid "スライダータイトル"
+msgstr "Slider Title"
+
+#: blocks/lightbox/editor_script.js:93
+#, fuzzy
+#| msgid "ボーダー画像"
+msgid "スライダー画像"
+msgstr "Slider Image"
+
+#: blocks/lightbox/editor_script.js:94
+#, fuzzy
+#| msgid "テキスト"
+msgid "スライダーテキスト"
+msgstr "Slider Text"
+
+#: blocks/lightbox/editor_script.js:119
+msgid "サムネール画像"
+msgstr "Thumbnail Image"
+
+#: blocks/lightbox/editor_script.js:126
+#, fuzzy
+#| msgid "画像コード"
+msgid "サムネール画像コード"
+msgstr "Image Code"
+
+#: blocks/lightbox/editor_script.js:141
+msgid "ボックスクラス"
+msgstr "Box Class"
+
+#: blocks/listed/editor_script.js:97
+msgid "連番リスト"
+msgstr "Numbered List"
+
+#: blocks/listed/editor_script.js:98
+msgid "お知らせ"
+msgstr "Notice"
+
+#: blocks/listed/editor_script.js:99
+msgid "目次"
+msgstr "Table of Contents"
+
+#: blocks/listed/editor_script.js:100 blocks/nav/editor_init.php:2
+#: blocks/panel/editor_script.js:29 blocks/sticky/editor_script.js:49
+#, fuzzy
+#| msgid "メニューアイコン"
+msgid "メニュー"
+msgstr "Menu"
+
+#: blocks/listed/editor_script.js:182
+msgid "ヘッダ画像コード"
+msgstr "Header Image Code"
+
+#: blocks/listed/editor_script.js:189
+#, fuzzy
+#| msgid "画像コード"
+msgid "サブ画像コード"
+msgstr "Image Code"
+
+#: blocks/loop/editor_script.js:8
+msgid "テーマに定義されたテンプレートで投稿を表示します。"
+msgstr "Displays posts using a template defined by the theme."
+
+#: blocks/loopblock/editor_script.js:21 blocks/t-loop/editor_script.js:6
+msgid "クエリの投稿の情報を表示するためのコンテナです。"
+msgstr "A container for displaying information about posts in a query."
+
+#: blocks/loopvars/editor_script.js:6
+msgid ""
+"ブロックの内容を変数のテーブルをループして表示します。各変数はブロック内で[var 変数名]の"
+"ショートコードで利用できます。"
+msgstr ""
+"Loops through a table of variables to display the block content. Each variable can be "
+"used within the block with the [var variable_name] shortcode."
+
+#: blocks/loopvars/editor_script.js:16
+msgid "変数"
+msgstr "Variable"
+
+#: blocks/materials/editor_script.js:6
+msgid "材料・成分一覧のブロックです。"
+msgstr "A block for listing ingredients or materials."
+
+#: blocks/materials/editor_script.js:40
+msgid "グループ"
+msgstr "Group"
+
+#: blocks/nav/editor_script.js:6
+msgid "メニューを表示するブロックです。"
+msgstr "A block that displays a menu."
+
+#: blocks/pagecontent/editor_script.js:6
+#, fuzzy
+#| msgid "パンくずリストを表示します。"
+msgid "現在のURLに応じたコンテンツを表示します。"
+msgstr "Displays content based on the current URL."
+
+#: blocks/pagecontent/editor_script.js:16
+msgid ""
+"表示中のURLに対応したコンテンツを表示します。テーマにURLに対応したコンテンツのテンプレート"
+"が定義されている場合はそのテンプレートが利用されます。定義がない場合は個別ページにおいては"
+"投稿されたコンテンツが表示されます。"
+msgstr ""
+"Displays content corresponding to the current URL. If the theme defines a content "
+"template for the URL, that template is used. Otherwise, the submitted content is "
+"displayed on individual pages."
+
+#: blocks/pageheader/editor_script.js:21
+#, fuzzy
+#| msgid "パンくずリストを表示します。"
+msgid "パンくずリスト"
+msgstr "Breadcrumbs"
+
+#: blocks/pagenavigation/editor_script.js:11 blocks/pagenavigation/editor_script.tsx:15
+msgid "メニュー見出し"
+msgstr "Menu Heading"
+
+#: blocks/pagenavigation/editor_script.js:12 blocks/pagenavigation/editor_script.tsx:16
+#, fuzzy
+#| msgid "メニューアイコン"
+msgid "メニューレベル"
+msgstr "Menu Level"
+
+#: blocks/pagenavigation/editor_script.js:14 blocks/pagenavigation/editor_script.tsx:18
+msgid "カスタムタイトル"
+msgstr "Custom Title"
+
+#: blocks/panel/editor_script.js:12
+msgid "大小の矩形パネルをレイアウトします。"
+msgstr "Arranges rectangular panels of various sizes."
+
+#: blocks/panel/editor_script.js:29
+#, fuzzy
+#| msgid "タイプ"
+msgid "タイル"
+msgstr "Tile"
+
+#: blocks/panel/editor_script.js:36 blocks/panel/editor_script.js:54
+msgid "文章"
+msgstr "Content"
+
+#: blocks/panel/editor_script.js:42
+msgid "画像を薄く"
+msgstr "Fade Image"
+
+#: blocks/panel/editor_script.js:46 blocks/panel/editor_script.js:56
+msgid "外部リンク"
+msgstr "External Link"
+
+#: blocks/panel/editor_script.js:47 blocks/panel/editor_script.js:57
+msgid "縦サイズ"
+msgstr "Height"
+
+#: blocks/panel/editor_script.js:48 blocks/panel/editor_script.js:58
+msgid "横サイズ"
+msgstr "Width"
+
+#: blocks/panel/editor_script.js:64
+msgid "グリッドサイズ"
+msgstr "Grid Size"
+
+#: blocks/panel/editor_script.js:74
+msgid "カラム約数（2^n）"
+msgstr "Column Divisor (2^n)"
+
+#: blocks/panel/editor_script.js:85
+msgid "カラム約数（3^n）"
+msgstr "Column Divisor (3^n)"
+
+#: blocks/panel/editor_script.js:94
+msgid "カラム約数（5^n）"
+msgstr "Column Divisor (5^n)"
+
+#: blocks/panel/editor_script.js:159
+msgid "合計グリッド数："
+msgstr "Total grid count:"
+
+#: blocks/panel/editor_script.js:159
+msgid "期待グリッド数："
+msgstr "Expected grid count:"
+
+#: blocks/panel/editor_script.js:159 blocks/tabs/editor_script.js:48
+#, fuzzy
+#| msgid "レベル"
+msgid "パネル"
+msgstr "Panel"
+
+#: blocks/panes/editor_script.js:17
+msgid "矩形の画像とテキストのペアのリスト。"
+msgstr "A list of rectangular image-and-text pairs."
+
+#: blocks/panes/editor_script.js:39
+msgid "シンボル"
+msgstr "Symbol"
+
+#: blocks/picture/editor_script.js:28 blocks/picture/editor_script.tsx:18
+msgid "画面サイズに応じて切り替わる画像。"
+msgstr "An image that changes according to the screen size."
+
+#: blocks/popup/editor_script.js:25
+msgid "アンカー名"
+msgstr "Anchor Name"
+
+#: blocks/postlink/editor_script.js:6
+#, fuzzy
+#| msgid "パンくずリストを表示します。"
+msgid "前の投稿・次の投稿へのリンクを表示します。"
+msgstr "Displays links to the previous and next posts."
+
+#: blocks/postlink/render.php:13
+msgid "前の記事"
+msgstr "Previous Post"
+
+#: blocks/postlink/render.php:14
+msgid "次の記事"
+msgstr "Next Post"
+
+#: blocks/pricecard/conf.php:12
+msgid "（税込）"
+msgstr "(Tax Included)"
+
+#: blocks/pricecard/editor_script.js:11
+msgid "サービス・商品情報の一覧ブロックです。"
+msgstr "A block for listing service or product information."
+
+#: blocks/pricecard/editor_script.js:42 blocks/section/editor_script.js:71
+msgid "ヘッダ配色"
+msgstr "Header Color Scheme"
+
+#: blocks/pricecard/editor_script.js:43 blocks/sitefooter/editor_script.js:24
+#, fuzzy
+#| msgid "コンテンツの幅"
+msgid "コンテンツ配色"
+msgstr "Content Color Scheme"
+
+#: blocks/pricecard/editor_script.js:44
+msgid "価格単位"
+msgstr "Price Unit"
+
+#: blocks/pricecard/editor_script.js:47
+msgid "単位の位置"
+msgstr "Unit Position"
+
+#: blocks/pricecard/editor_script.js:48
+msgid "前"
+msgstr "Before"
+
+#: blocks/pricecard/editor_script.js:48
+msgid "後"
+msgstr "After"
+
+#: blocks/pricecard/editor_script.js:55
+msgid "リンク文字列"
+msgstr "Link Text"
+
+#: blocks/pricecard/editor_script.js:60
+msgid "スペック"
+msgstr "Specifications"
+
+#: blocks/pricecard/editor_script.js:73
+msgid "おすすめ"
+msgstr "Recommended"
+
+#: blocks/pricecard/editor_script.js:75
+msgid "安価"
+msgstr "Budget"
+
+#: blocks/pricecard/editor_script.js:76
+msgid "高級"
+msgstr "Premium"
+
+#: blocks/pricecard/editor_script.js:79
+msgid "値引き"
+msgstr "Discount"
+
+#: blocks/pricelist/editor_script.js:6
+msgid "価格表のブロックです。"
+msgstr "A pricing table block."
+
+#: blocks/pricelist/editor_script.js:26
+msgid "インデント"
+msgstr "Indent"
+
+#: blocks/progress/default-settings.php:8
+msgid "入力"
+msgstr "Input"
+
+#: blocks/progress/default-settings.php:9 default/post_data/contractform/form/input.php:25
+#: default/post_data/mailform/form.php:20
+msgid "確認"
+msgstr "Confirmation"
+
+#: blocks/progress/editor_script.js:6
+msgid "進捗のブロックです。"
+msgstr "A progress block."
+
+#: blocks/progress/editor_script.js:17
+#, fuzzy
+#| msgid "カート"
+msgid "セット"
+msgstr "Set"
+
+#: blocks/progress/editor_script.js:18
+msgid "ステップ"
+msgstr "Step"
+
+#: blocks/progress/editor_script.js:31
+#, fuzzy
+#| msgid "テキスト"
+msgid "番号前テキスト"
+msgstr "Text Before Number"
+
+#: blocks/progress/editor_script.js:32
+#, fuzzy
+#| msgid "テキスト"
+msgid "番号後テキスト"
+msgstr "Text After Number"
+
+#: blocks/progress/editor_script.js:95
+msgid "セット設定"
+msgstr "Set Settings"
+
+#: blocks/progress/editor_script.js:95
+msgid "新規登録"
+msgstr "Add New"
+
+#: blocks/progress/editor_script.js:95
+msgid "設定を更新"
+msgstr "Update Settings"
+
+#: blocks/progress/editor_script.js:95
+msgid "削除"
+msgstr "delete"
+
+#: blocks/ranking/editor_script.js:15
+msgid "ランキングの一覧ブロックです。"
+msgstr "A block for displaying rankings."
+
+#: blocks/ranking/editor_script.js:70
+msgid "第"
+msgstr "No."
+
+#: blocks/ranking/editor_script.js:72
+msgid "位"
+msgstr "Place"
+
+#: blocks/ranking/editor_script.js:73
+msgid "評価"
+msgstr "Rating"
+
+#: blocks/ranking/editor_script.js:98
+#, fuzzy
+#| msgid "テキスト"
+msgid "前置テキスト"
+msgstr "Prefix Text"
+
+#: blocks/ranking/editor_script.js:99
+msgid "開始ランク"
+msgstr "Starting Rank"
+
+#: blocks/ranking/editor_script.js:100
+#, fuzzy
+#| msgid "テキスト"
+msgid "後置テキスト"
+msgstr "Suffix Text"
+
+#: blocks/ranking/editor_script.js:105
+msgid "リード文"
+msgstr "Lead Text"
+
+#: blocks/recruitinfo/conf.php:8 blocks/recruitinfo/editor_script.js:184
+msgid "募集職種"
+msgstr "Job Title"
+
+#: blocks/recruitinfo/conf.php:9
+#, fuzzy
+#| msgid "%d文字以内で入力してください"
+msgid "仕事内容を入力してください。"
+msgstr "Enter the job description."
+
+#: blocks/recruitinfo/editor_script.js:27
+msgid "正社員（フルタイム）"
+msgstr "Full-time Employee"
+
+#: blocks/recruitinfo/editor_script.js:28
+msgid "パート・アルバイト"
+msgstr "Part-time Employee"
+
+#: blocks/recruitinfo/editor_script.js:29
+msgid "業務委託"
+msgstr "Contractor"
+
+#: blocks/recruitinfo/editor_script.js:30
+msgid "派遣社員"
+msgstr "Temporary Employee"
+
+#: blocks/recruitinfo/editor_script.js:31
+msgid "インターン"
+msgstr "Intern"
+
+#: blocks/recruitinfo/editor_script.js:32
+msgid "その他"
+msgstr "Other"
+
+#: blocks/recruitinfo/editor_script.js:35
+msgid "時給"
+msgstr "Hourly"
+
+#: blocks/recruitinfo/editor_script.js:36
+msgid "日給"
+msgstr "Daily"
+
+#: blocks/recruitinfo/editor_script.js:37
+msgid "週給"
+msgstr "Weekly"
+
+#: blocks/recruitinfo/editor_script.js:38
+msgid "月給"
+msgstr "Monthly"
+
+#: blocks/recruitinfo/editor_script.js:39
+msgid "年俸"
+msgstr "Yearly"
+
+#: blocks/recruitinfo/editor_script.js:44
+msgid "円"
+msgstr "JPY"
+
+#: blocks/recruitinfo/editor_script.js:171 blocks/recruitinfo/editor_script.js:189
+#, javascript-format
+msgid "リモート（%s）"
+msgstr "Remote (%s)"
+
+#: blocks/recruitinfo/editor_script.js:171 blocks/recruitinfo/editor_script.js:189
+msgid "地域未指定"
+msgstr "Region Not Specified"
+
+#: blocks/recruitinfo/editor_script.js:173
+msgid "掲載情報"
+msgstr "Posting Information"
+
+#: blocks/recruitinfo/editor_script.js:173 blocks/recruitinfo/editor_script.js:184
+#: blocks/recruitinfo/editor_script.js:192
+msgid "掲載日"
+msgstr "Date Posted"
+
+#: blocks/recruitinfo/editor_script.js:173 blocks/recruitinfo/editor_script.js:184
+#: blocks/recruitinfo/editor_script.js:192
+msgid "掲載終了日"
+msgstr "Valid Through"
+
+#: blocks/recruitinfo/editor_script.js:173
+msgid "求人ID"
+msgstr "Job ID"
+
+#: blocks/recruitinfo/editor_script.js:173 blocks/recruitinfo/editor_script.js:184
+#: blocks/recruitinfo/editor_script.js:192
+msgid "雇用形態"
+msgstr "Employment Type"
+
+#: blocks/recruitinfo/editor_script.js:173
+msgid "雇用主"
+msgstr "Employer"
+
+#: blocks/recruitinfo/editor_script.js:173
+msgid "組織名"
+msgstr "Organization Name"
+
+#: blocks/recruitinfo/editor_script.js:173
+msgid "組織URL"
+msgstr "Organization URL"
+
+#: blocks/recruitinfo/editor_script.js:173
+msgid "ロゴ画像URL"
+msgstr "Logo Image URL"
+
+#: blocks/recruitinfo/editor_script.js:173 blocks/recruitinfo/editor_script.js:184
+#: blocks/recruitinfo/editor_script.js:192
+msgid "勤務地"
+msgstr "Job Location"
+
+#: blocks/recruitinfo/editor_script.js:176
+msgid "勤務形態"
+msgstr "Work Arrangement"
+
+#: blocks/recruitinfo/editor_script.js:179
+msgid "勤務地へ出勤"
+msgstr "On-site"
+
+#: blocks/recruitinfo/editor_script.js:180
+msgid "完全リモート"
+msgstr "Fully Remote"
+
+#: blocks/recruitinfo/editor_script.js:184
+msgid "応募可能地域（国名）"
+msgstr "Eligible Region (Country)"
+
+#: blocks/recruitinfo/editor_script.js:184
+msgid "国コード"
+msgstr "Country Code"
+
+#: blocks/recruitinfo/editor_script.js:184
+msgid "都道府県"
+msgstr "State/Prefecture"
+
+#: blocks/recruitinfo/editor_script.js:184
+msgid "市区町村"
+msgstr "City"
+
+#: blocks/recruitinfo/editor_script.js:184
+msgid "町名・番地・建物名"
+msgstr "Street Address"
+
+#: blocks/recruitinfo/editor_script.js:184
+msgid "郵便番号"
+msgstr "Postal Code"
+
+#: blocks/recruitinfo/editor_script.js:184 blocks/recruitinfo/editor_script.js:192
+msgid "給与"
+msgstr "Salary"
+
+#: blocks/recruitinfo/editor_script.js:184
+msgid "単位"
+msgstr "Unit"
+
+#: blocks/recruitinfo/editor_script.js:184
+msgid "固定額"
+msgstr "Fixed Amount"
+
+#: blocks/recruitinfo/editor_script.js:184
+msgid "下限額"
+msgstr "Minimum Amount"
+
+#: blocks/recruitinfo/editor_script.js:184
+msgid "上限額"
+msgstr "Maximum Amount"
+
+#: blocks/recruitinfo/editor_script.js:184
+msgid "通貨コード"
+msgstr "Currency Code"
+
+#: blocks/recruitinfo/editor_script.js:184
+msgid "応募"
+msgstr "Application"
+
+#: blocks/recruitinfo/editor_script.js:184
+msgid "応募先URL"
+msgstr "Application URL"
+
+#: blocks/recruitinfo/editor_script.js:184
+msgid "応募先URLから直接応募できる"
+msgstr "Direct Application via URL"
+
+#: blocks/recruitinfo/editor_script.js:184
+msgid "仕事内容を入力"
+msgstr "Enter the job description"
+
+#: blocks/recruitinfo/editor_script.js:184 blocks/recruitinfo/editor_script.js:192
+msgid "応募する"
+msgstr "Apply"
+
+#: blocks/rtf/editor_script.js:6 blocks/rtf/editor_script.tsx:9
+msgid "MarkDownに似た記法でHTMLを書けるブロック"
+msgstr "A block for writing HTML using Markdown-like syntax"
+
+#: blocks/rtf/editor_script.js:13 blocks/rtf/editor_script.tsx:16
+msgid ""
+"■ 見出し\n"
+"\n"
+"テキスト[リンク](example.com)**強調**"
+msgstr ""
+"■ Heading\n"
+"\n"
+"Text[Link](example.com)**Emphasis**"
+
+#: blocks/section/editor_script.js:27
+msgid "セクションタグ"
+msgstr "Section Tag"
+
+#: blocks/section/editor_script.js:38
+#, fuzzy
+#| msgid "コンテンツの幅"
+msgid "ヘッダコンテンツ幅"
+msgstr "Header Content Width"
+
+#: blocks/section/editor_script.js:51
+msgid "タイトル画像"
+msgstr "Title Image"
+
+#: blocks/section/editor_script.js:52
+msgid "ヘッダクリップ"
+msgstr "Header Clip"
+
+#: blocks/section/editor_script.js:56
+msgid "ヘッダサイズ"
+msgstr "Header Size"
+
+#: blocks/section/editor_script.js:72 blocks/t-body/editor_script.js:79
+msgid "ヘッダ背景色"
+msgstr "Header Background Color"
+
+#: blocks/section/editor_script.js:73
+msgid "ヘッダ背景画像"
+msgstr "Header Background Image"
+
+#: blocks/section/editor_script.js:74
+#, fuzzy
+#| msgid "ヘッダ背景画像"
+msgid "ヘッダ背景パターン"
+msgstr "Header Background Pattern"
+
+#: blocks/section/editor_script.js:75
+msgid "ヘッダ画像"
+msgstr "Header Image"
+
+#: blocks/section/editor_script.js:78
+msgid "デコレーション"
+msgstr "Decoration"
+
+#: blocks/section/editor_script.js:81
+msgid "メニューアイコン"
+msgstr "Menu Icon"
+
+#: blocks/showcase/editor_script.js:15
+#, fuzzy
+#| msgid "パンくずリストを表示します。"
+msgid "画像とテキストを並べて表示します。"
+msgstr "Displays images and text side by side."
+
+#: blocks/sidebar/editor_script.js:9
+msgid "サイドバーのあるコンテンツ領域のコンテナです。"
+msgstr "A container for a content area with a sidebar."
+
+#: blocks/sidebar/editor_script.js:23
+msgid "PCレイアウト"
+msgstr "Desktop Layout"
+
+#: blocks/sidebar/editor_script.js:27
+msgid "SPレイアウト"
+msgstr "Mobile Layout"
+
+#: blocks/sidebar/editor_script.js:28
+msgid "積上"
+msgstr "Stack"
+
+#: blocks/sidebar/editor_script.js:28
+msgid "追従"
+msgstr "Sticky"
+
+#: blocks/simpletable/editor_script.js:6
+msgid "見出しと本文の２列で構成されるシンプルなテーブルです。"
+msgstr "A simple two-column table with headings and body text."
+
+#: blocks/simpletable/editor_script.js:94 blocks/simpletable/editor_script.js:105
+msgid "種別"
+msgstr "Type"
+
+#: blocks/simpletable/editor_script.js:97
+msgid "重要"
+msgstr "Important"
+
+#: blocks/simpletable/editor_script.js:109
+msgid "必須"
+msgstr "Required"
+
+#: blocks/simpletable/editor_script.js:111
+msgid "任意"
+msgstr "Optional"
+
+#: blocks/sitefooter/editor_script.js:6
+msgid "サイト共通フッタのブロックです。"
+msgstr "A site-wide footer block."
+
+#: blocks/sitefooter/editor_script.js:25
+#, fuzzy
+#| msgid "コンテンツの幅"
+msgid "コンテンツ背景色"
+msgstr "Content Background Color"
+
+#: blocks/sitefooter/editor_script.js:26
+msgid "コピーライト配色"
+msgstr "Copyright Color Scheme"
+
+#: blocks/sitefooter/editor_script.js:27
+msgid "コピーライト背景色"
+msgstr "Copyright Background Color"
+
+#: blocks/siteheader/editor_script.js:6
+msgid "サイト共通ヘッダのブロックです。"
+msgstr "A site-wide header block."
+
+#: blocks/slidablemenu/editor_script.js:11
+msgid "スクロール可能なメニュー。"
+msgstr "A scrollable menu."
+
+#: blocks/slidablemenu/editor_script.js:48
+msgid "カラム数"
+msgstr "Number of Columns"
+
+#: blocks/slider/editor_script.js:112
+msgid "カルーセル"
+msgstr "Carousel"
+
+#: blocks/slider/editor_script.js:122
+msgid "初期スライド"
+msgstr "Initial Slide"
+
+#: blocks/slider/editor_script.js:131
+msgid "自動再生"
+msgstr "Autoplay"
+
+#: blocks/slider/editor_script.js:135
+msgid "自動再生間隔（秒）"
+msgstr "Autoplay Interval (seconds)"
+
+#: blocks/slider/editor_script.js:136
+msgid "手動操作後停止時間（秒）"
+msgstr "Pause After Manual Interaction (seconds)"
+
+#: blocks/slider/editor_script.js:222
+msgid "アニメーション設定"
+msgstr "Animation Settings"
+
+#: blocks/slider/editor_script.js:222
+msgid "スライド"
+msgstr "Slide"
+
+#: blocks/sphere/editor_script.js:11
+msgid "丸型のアイテムリストブロックです。"
+msgstr "A circular item list block."
+
+#: blocks/sticky/editor_script.js:15
+msgid "スクロールに追従するコンテンツを配置します。"
+msgstr "Places content that remains visible while scrolling."
+
+#: blocks/sticky/editor_script.js:35
+msgid "位置"
+msgstr "Position"
+
+#: blocks/sticky/editor_script.js:36
+msgid "全面"
+msgstr "Full Screen"
+
+#: blocks/sticky/editor_script.js:41
+#, fuzzy
+#| msgid "コンテナの高さ"
+msgid "コンテナ"
+msgstr "Container"
+
+#: blocks/sticky/editor_script.js:41
+msgid "折り畳み"
+msgstr "Collapse"
+
+#: blocks/sticky/editor_script.js:49
+msgid "引き出し"
+msgstr "Drawer"
+
+#: blocks/switcher/editor_script.js:6
+msgid "日時"
+msgstr "Date and Time"
+
+#: blocks/switcher/editor_script.js:8
+msgid "ユーザー権限"
+msgstr "User Role"
+
+#: blocks/switcher/editor_script.js:12
+msgid "ABテスト"
+msgstr "A/B Test"
+
+#: blocks/switcher/editor_script.js:31
+msgid "日時やログインユーザーによってコンテンツの内容が切り替わるコンテナです。"
+msgstr "A container that switches content based on the date, time, or logged-in user."
+
+#: blocks/switcher/editor_script.js:48
+msgid "ファクター"
+msgstr "Factor"
+
+#: blocks/switcher/editor_script.js:55
+msgid "フィールド"
+msgstr "Field"
+
+#: blocks/switcher/editor_script.js:62
+msgid "比較"
+msgstr "Comparison"
+
+#: blocks/switcher/editor_script.js:70
+#, fuzzy
+#| msgid "太"
+msgid "値"
+msgstr "Value"
+
+#: blocks/switcher/editor_script.js:149
+msgid "条件"
+msgstr "Condition"
+
+#: blocks/t-banner/editor_script.js:6
+msgid "HTMLメール用のバナーブロックです。"
+msgstr "A banner block for HTML email."
+
+#: blocks/t-banner/editor_script.js:31 blocks/t-banners/editor_script.js:77
+#: blocks/t-button/editor_script.js:28 blocks/t-image/editor_script.js:29
+msgid "配置"
+msgstr "Alignment"
+
+#: blocks/t-banner/editor_script.js:41 blocks/t-banners/editor_script.js:88
+#: blocks/t-image/editor_script.js:38 blocks/t-media-text/editor_script.js:41
+msgid "画像出力コード"
+msgstr "Image Output Code"
+
+#: blocks/t-banners/editor_script.js:42
+msgid "HTMLメール用の複数バナーのブロックです。"
+msgstr "A multiple-banner block for HTML email."
+
+#: blocks/t-banners/editor_script.js:83
+msgid "列数"
+msgstr "Number of Columns"
+
+#: blocks/t-body/editor_script.js:6
+msgid "HTMLメールのベースとなるヘッダ・フッタのブロックです。"
+msgstr "A base header and footer block for HTML email."
+
+#: blocks/t-body/editor_script.js:57
+msgid "メールタイプ"
+msgstr "Email Type"
+
+#: blocks/t-body/editor_script.js:62
+msgid "テキストメール編集モード"
+msgstr "Plain-text Email Editing Mode"
+
+#: blocks/t-body/editor_script.js:67
+msgid "白"
+msgstr "White"
+
+#: blocks/t-body/editor_script.js:67
+msgid "強調背景色"
+msgstr "Accent Background Color"
+
+#: blocks/t-body/editor_script.js:67
+msgid "黒"
+msgstr "Black"
+
+#: blocks/t-body/editor_script.js:67
+msgid "基本色"
+msgstr "Base Color"
+
+#: blocks/t-body/editor_script.js:67
+msgid "強調色"
+msgstr "Accent Color"
+
+#: blocks/t-body/editor_script.js:72
+#, fuzzy
+#| msgid "ヘッダ画像"
+msgid "ヘッダ"
+msgstr "Header"
+
+#: blocks/t-body/editor_script.js:80 blocks/t-body/editor_script.js:97
+#: blocks/t-box/editor_script.js:26
+msgid "白黒"
+msgstr "Monochrome"
+
+#: blocks/t-body/editor_script.js:89
+#, fuzzy
+#| msgid "ニュース"
+msgid "フッタ"
+msgstr "Footer"
+
+#: blocks/t-body/editor_script.js:96
+msgid "フッタ背景色"
+msgstr "Footer Background Color"
+
+#: blocks/t-body/editor_script.js:144
+#, fuzzy
+#| msgid "テキスト"
+msgid "テキストメール"
+msgstr "Plain-text Email"
+
+#: blocks/t-box/editor_script.js:6
+msgid "HTMLメール用のレイアウト調整用コンテナブロックです。"
+msgstr "A layout container block for HTML email."
+
+#: blocks/t-button/editor_script.js:6
+msgid "HTMLメール用のテーブルレイアウトのボタンです。"
+msgstr "A table-layout button for HTML email."
+
+#: blocks/t-heading/editor_script.js:6
+msgid "HTMLメール用の見出しブロックです。"
+msgstr "A heading block for HTML email."
+
+#: blocks/t-image/editor_script.js:6
+msgid "HTMLメール用の画像ブロックです。"
+msgstr "An image block for HTML email."
+
+#: blocks/t-list/editor_script.js:6
+msgid "HTMLメール用のリストです。"
+msgstr "A list for HTML email."
+
+#: blocks/t-list/editor_script.js:59
+msgid "番号付きリスト"
+msgstr "Numbered List"
+
+#: blocks/t-list/editor_script.js:62
+msgid "番号サイズ"
+msgstr "Number Size"
+
+#: blocks/t-list/editor_script.js:63
+msgid "番号の桁数"
+msgstr "Number of Digits"
+
+#: blocks/t-list/editor_script.js:69
+msgid "マーカー色"
+msgstr "Marker Color"
+
+#: blocks/t-list/editor_script.js:72
+msgid "基本"
+msgstr "Basic"
+
+#: blocks/t-list/editor_script.js:74
+msgid "強調文字"
+msgstr "Emphasized Text"
+
+#: blocks/t-list/editor_script.js:77
+msgid "マーカー太さ"
+msgstr "Marker Weight"
+
+#: blocks/t-list/editor_script.js:78
+msgid "マーカーサイズ"
+msgstr "Marker Size"
+
+#: blocks/t-list/editor_script.js:79
+msgid "マーカー幅"
+msgstr "Marker Width"
+
+#: blocks/t-list/editor_script.js:80
+msgid "マーカー間隔"
+msgstr "Marker Spacing"
+
+#: blocks/t-list/editor_script.js:81
+msgid "マーカー位置"
+msgstr "Marker Position"
+
+#: blocks/t-media-text/editor_script.js:6
+msgid "HTMLメール用の画像・テキストのセットのブロックです。"
+msgstr "An image-and-text set block for HTML email."
+
+#: blocks/t-media-text/editor_script.js:32
+msgid "画像の幅"
+msgstr "Image Width"
+
+#: blocks/t-paragraph/editor_script.js:6
+msgid "HTMLメール用の段落ブロックです。"
+msgstr "A paragraph block for HTML email."
+
+#: blocks/tabs/editor_script.js:48
+#, fuzzy
+#| msgid "リード"
+msgid "バー"
+msgstr "Bar"
+
+#: blocks/tabs/editor_script.js:54
+msgid "テーブル"
+msgstr "Table"
+
+#: blocks/unit/editor_script.js:12
+msgid "画像とテキストを並べてレイアウトするためのブロックです。"
+msgstr "A block for arranging images and text side by side."
+
+#: blocks/userinfo/editor_script.js:6
+msgid ""
+"ログイン中のユーザーの情報を表示するためのコンテナです。ログインしていない場合はログイン"
+"フォームが表示されます。"
+msgstr ""
+"A container for displaying information about the logged-in user. If no user is logged in, "
+"a login form is displayed."
+
+#: blocks/widget/editor_script.js:6
+msgid "拡張機能に定義された埋め込みコンテンツを表示します。"
+msgstr "Displays embedded content defined by an extension."
+
+#: classes/BlockComponent.php:55
+msgid "ダミー画像"
+msgstr "Placeholder Image"
+
+#: classes/cpdb.php:236 classes/cpdb.php:304
+#, php-format
+msgid "%sへのinsertにparent_idは必須です"
+msgstr "Inserting into %s requires parent_id."
+
+#: classes/meta/gmap.php:21
+msgid "gmapを使うにはGoogleAPIキーが必要です"
+msgstr "A Google API key is required to use gmap."
+
+#: classes/meta/link.php:13
+msgid "URL"
+msgstr "URL"
+
+#: classes/meta/mail.php:14
+msgid "お名前"
+msgstr "name"
+
+#: classes/meta/mail.php:15 default/post_data/contractform/form.php:37
+msgid "メールアドレス"
+msgstr "mail address"
+
+#: classes/meta/media_set.php:60
+msgid "PC"
+msgstr "PC"
+
+#: classes/meta/media_set.php:61
+msgid "SP"
+msgstr "SP"
+
+#: classes/meta/orders.php:10
+msgid "購入者"
+msgstr "customer"
+
+#: classes/meta/orders.php:11
+msgid "金額"
+msgstr "price"
+
+#: classes/meta/orders.php:12
+msgid "支払い方法"
+msgstr "payment type"
+
+#: classes/meta/orders.php:13
+msgid "進捗"
+msgstr "phase"
+
+#: classes/meta/wares.php:15
+msgid "品名"
+msgstr "name"
+
+#: classes/meta/wares.php:16
+msgid "価格"
+msgstr "price"
+
+#: classes/meta/wares.php:18
+msgid "数量"
+msgstr "amount"
+
+#: classes/meta/wares.php:19
+msgid "販売期限"
+msgstr "expire"
+
+#: classes/meta/wares.php:20 classes/meta/wares.php:23
+msgid "保管場所"
+msgstr "storage"
+
+#: classes/meta/wares.php:22
+msgid "注文情報"
+msgstr "orders"
+
+#: classes/template_type/access.php:11
+msgid "アクセス"
+msgstr "access"
+
+#: classes/template_type/contact.php:11
+msgid "連絡先"
+msgstr "contact"
+
+#: classes/template_type/contents.php:13
+#, fuzzy
+#| msgid "コンテンツの幅"
+msgid "コンテンツ"
+msgstr "Content"
+
+#: classes/template_type/mainvisual.php:12
+msgid "メインビジュアル"
+msgstr "Hero Image"
+
+#: classes/validation/color.php:8
+msgid "色指定をHEX値で入力して下さい"
+msgstr "Enter a color as a hexadecimal value."
+
+#: classes/validation/date.php:13
+msgid "日付として読み取れませんでした"
+msgstr "The value could not be parsed as a date."
+
+#: classes/validation/email.php:8
+msgid "メールアドレスを入力してください"
+msgstr "Enter a valid email address."
+
+#: classes/validation/hankaku.php:8
+msgid "半角英数で入力してください"
+msgstr "Enter alphanumeric characters."
+
+#: classes/validation/hankaku_length.php:11
+#, php-format
+msgid "%d文字の半角英数で入力してください"
+msgstr "Enter exactly %d alphanumeric characters."
+
+#: classes/validation/hiragana.php:8
+msgid "ひらがなで入力してください"
+msgstr "Enter the value in hiragana."
+
+#: classes/validation/html.php:15
+msgid "HTML構文にエラーがあります"
+msgstr "The HTML contains a syntax error."
+
+#: classes/validation/katakana.php:8
+msgid "カタカナで入力してください"
+msgstr "Enter the value in katakana."
+
+#: classes/validation/number.php:8
+msgid "数字で入力してください"
+msgstr "Enter a number."
+
+#: classes/validation/number_length.php:12
+#, php-format
+msgid "%d桁の数字で入力してください"
+msgstr "Enter exactly %d digits."
+
+#: classes/validation/number_range.php:12
+#, php-format
+msgid "%d〜%dの数値で入力してください"
+msgstr "Enter a number from %d to %d."
+
+#: classes/validation/numeric.php:8
+msgid "数値で入力してください"
+msgstr "Enter a numeric value."
+
+#: classes/validation/pattern.php:10
+msgid "入力形式が正しくありません"
+msgstr "The input format is invalid."
+
+#: classes/validation/phone_number.php:8
+msgid "電話番号が正しくありません"
+msgstr "Enter a valid phone number."
+
+#: classes/validation/post_exists.php:10
+msgid "投稿が存在しません"
+msgstr "The post does not exist."
+
+#: classes/validation/required.php:9
+msgid "入力して下さい"
+msgstr "required"
+
+#: classes/validation/selection.php:19
+msgid "選択項目にない値です"
+msgstr "The value is not one of the available options."
+
+#: classes/validation/text.php:10
+msgid "不正な値です"
+msgstr "invalid input"
+
+#: classes/validation/text_length.php:11
+#, php-format
+msgid "%d文字で入力してください"
+msgstr "Enter exactly %d characters."
+
+#: classes/validation/text_maxlength.php:11
+#, php-format
+msgid "%d文字以内で入力してください"
+msgstr "Enter no more than %d characters."
+
+#: classes/validation/unique.php:16
+msgid "この値はすでに使われています"
+msgstr "This value is already in use."
+
+#: classes/validation/user_email.php:16
+msgid "このメールアドレスはすでに使われています"
+msgstr "This email address is already in use."
+
+#: classes/validation/validation.php:33
+#, php-format
+msgid "%sの入力が正しくありません"
+msgstr "%s is invalid"
+
+#: classes/validation/zip.php:7
+msgid "郵便番号を入力してください（半角数字）"
+msgstr "Enter a postal code using half-width digits."
+
+#: components/Finder/BulkControl/component.js:86
+msgid "キャンセル"
+msgstr "Cancel"
+
+#: components/Finder/BulkControl/component.js:86
+#: components/Finder/BulkControl/component.js:106
+msgid "実行"
+msgstr "Execute"
+
+#: components/Finder/BulkControl/component.js:96
+msgid "一括処理"
+msgstr "Bulk"
+
+#: components/Finder/PerPage/component.js:14
+msgid "件/頁"
+msgstr "items/page"
+
+#: components/Finder/SearchResults/component.js:41
+msgid "詳細を見る"
+msgstr "Show Detail"
+
+#: components/Finder/SearchResults/component.js:64
+msgid "検索結果なし"
+msgstr "Not Found"
+
+#: components/Finder/Status/component.js:9
+#, javascript-format
+msgid "%d件中%d件表示"
+msgstr "Showing %2$d of %1$d items"
+
+#: components/Finder/Status/component.js:9
+#, javascript-format
+msgid "%d件選択"
+msgstr "%d items selected"
+
+#: core/init.php:7
+msgid "Every Minutes"
+msgstr "Every Minute"
+
+#: core/user.php:58
+msgid "ゲスト"
+msgstr "guest"
+
+#: default/classes/template_type/mail.php:10
+msgid "メールフォーム"
+msgstr "mail form"
+
+#: default/classes/template_type/news.php:9
+msgid "ニュース"
+msgstr "News"
+
+#: default/classes/template_type/shop.php:13
+#: default/classes/template_type/simple_shop.php:16
+msgid "ショップ"
+msgstr "shop"
+
+#: default/classes/template_type/shop.php:14
+#: default/classes/template_type/simple_shop.php:16
+msgid "カート"
+msgstr "Cart"
+
+#: default/classes/template_type/simple_shop.php:15
+msgid "商品"
+msgstr "products"
+
+#: default/classes/template_type/thread.php:10
+msgid "スレッド"
+msgstr "thread"
+
+#: default/config/template/mailconf/admin.php:8
+msgid "送信・返信メール設定"
+msgstr "mail config"
+
+#: default/config/template/manage/api-bulk.php:9
+#, php-format
+msgid "%d件を削除しました"
+msgstr "Deleted %d items"
+
+#: default/config/template/manage/api-bulk.php:55
+#, php-format
+msgid "%d件のステータスを更新しました"
+msgstr "%d items status updated"
+
+#: default/post_data/contractconf/entry.php:2
+msgid "エントリー"
+msgstr "Entry"
+
+#: default/post_data/contractconf/entry.php:11
+#, php-format
+msgid ""
+"下記のURLにて必要事項を入力して申込を行ってください。\n"
+"%s"
+msgstr ""
+"Use the URL below to enter the required information and submit your application.\n"
+"%s"
+
+#: default/post_data/contractconf/entry.php:16
+msgid "申込フォーム"
+msgstr "Entry Form"
+
+#: default/post_data/contractconf/entry.php:20
+msgid "下記のボタンから必要事項を入力して申込を行ってください。"
+msgstr "Use the button below to enter the required information and submit your application."
+
+#: default/post_data/contractconf/entry.php:25
+msgid "申込フォームへ"
+msgstr "Go to Entry Form"
+
+#: default/post_data/contractconf/entry.php:29
+msgid ""
+"リンクの有効期限は15分です。有効期限が切れた場合はお手数ですが申込メール送信からやり直して"
+"ください。"
+msgstr ""
+"The link is valid for 15 minutes. If it expires, please start again by sending the "
+"application email."
+
+#: default/post_data/contractconf/notice.php:2
+#, php-format
+msgid "【お問い合わせ】%s様より"
+msgstr "[Inquiry] From %s"
+
+#: default/post_data/contractconf/thanks.php:2
+msgid "お問い合わせありがとうございます。"
+msgstr "Thank you for your inquiry."
+
+#: default/post_data/contractform/form.php:28
+msgid "送信先のメールアドレスを入力"
+msgstr "Input email to send"
+
+#: default/post_data/contractform/form.php:31
+msgid "入力したメールアドレスに申込フォームへのリンクを記載したメールを送信します"
+msgstr ""
+"An email containing a link to the application form will be sent to the email address you "
+"entered."
+
+#: default/post_data/contractform/form.php:45
+msgid "申込メールを送信"
+msgstr "Send Application Email"
+
+#: default/post_data/contractform/form/confirm.php:25
+#: default/post_data/mailform/form/confirm.php:20
+msgid "戻る"
+msgstr "Back"
+
+#: default/post_data/contractform/form/entry.php:19
+msgid "メールを送信しました"
+msgstr "Email sent"
+
+#: default/post_data/contractform/form/entry.php:22
+msgid ""
+"申込フォームへのリンクを記載したメールを送信しました。<br/>メールに記載されたリンクから必"
+"要事項を記入して申込を行ってください。"
+msgstr ""
+"An email containing a link to the application form has been sent.<br/>Use the link in the "
+"email to enter the required information and submit your application."
+
+#: functions/amazonpay/classes/amazonpay/PaymentException.php:14
+msgid "支払方法に問題があるようです"
+msgstr "There appears to be a problem with the payment method."
+
+#: functions/amazonpay/classes/amazonpay/PaymentException.php:15
+msgid "Amazonがオーソリを拒否しました"
+msgstr "Amazon rejected the authorization"
+
+#: functions/amazonpay/classes/amazonpay/PaymentException.php:16
+msgid "内部処理エラーです"
+msgstr "An internal processing error occurred."
+
+#: functions/amazonpay/classes/amazonpay/PaymentException.php:17
+msgid "処理がタイムアウトしました"
+msgstr "The operation timed out."
+
+#: functions/amazonpay/classes/amazonpay/PaymentException.php:19
+msgid "支払いに同意していません"
+msgstr "Payment has not been authorized."
+
+#: functions/amazonpay/classes/amazonpay/PaymentException.php:20
+msgid "金額がセットされていません"
+msgstr "The amount has not been set."
+
+#: functions/amazonpay/classes/amazonpay/PaymentException.php:21
+msgid "販売者は購入できません"
+msgstr "The seller cannot make a purchase."
+
+#: functions/amazonpay/classes/amazonpay/PaymentException.php:22
+#: functions/amazonpay/classes/amazonpay/PaymentException.php:28
+msgid "この支払い方法は選択できません"
+msgstr "invalid payment method"
+
+#: functions/amazonpay/classes/amazonpay/PaymentException.php:23
+msgid "この支払い方法は削除されました"
+msgstr "This payment method has been deleted."
+
+#: functions/amazonpay/classes/amazonpay/PaymentException.php:24
+msgid "この支払い方法は期限切れです"
+msgstr "This payment method has expired."
+
+#: functions/amazonpay/classes/amazonpay/PaymentException.php:25
+msgid "支払い方法を選択してください"
+msgstr "select payment method"
+
+#: functions/amazonpay/classes/amazonpay/PaymentException.php:26
+msgid "配送先がを選択してください"
+msgstr "Select a shipping address."
+
+#: functions/amazonpay/classes/amazonpay/PaymentException.php:27
+msgid "選択した配送先は削除されています"
+msgstr "The selected shipping address has been deleted."
+
+#: functions/amazonpay/classes/amazonpay/PaymentException.php:30
+msgid "注文IDがセットされていません"
+msgstr "OrderID was not set"
+
+#: functions/amazonpay/classes/amazonpay/PaymentException.php:31
+msgid "決済IDがセットされていません"
+msgstr "AuthorizationID was not set"
+
+#: functions/facebook/classes/facebook/Widget.php:19
+msgid "シェアボタンを表示"
+msgstr "Show Share Buttons"
+
+#: functions/facebook/classes/facebook/Widget.php:20
+msgid "子供向け"
+msgstr "For Children"
+
+#: functions/facebook/classes/facebook/Widget.php:21
+#: functions/facebook/classes/facebook/Widget.php:27
+msgid "対象URL"
+msgstr "Target URL"
+
+#: functions/facebook/classes/facebook/Widget.php:22
+msgid "リファララベル"
+msgstr "Referrer Label"
+
+#: functions/facebook/classes/facebook/Widget.php:30
+msgid "FaceBookページ URL"
+msgstr "Facebook Page URL"
+
+#: functions/facebook/classes/facebook/Widget.php:32
+msgid "高さ"
+msgstr "Height"
+
+#: functions/facebook/classes/facebook/Widget.php:34
+msgid "カバー写真を非表示"
+msgstr "Hide Cover Photo"
+
+#: functions/facebook/classes/facebook/Widget.php:35
+msgid "プロフィール写真を表示"
+msgstr "Show Profile Photo"
+
+#: functions/facebook/classes/facebook/Widget.php:36
+msgid "CTAボタンを非表示"
+msgstr "Hide CTA Button"
+
+#: functions/facebook/classes/facebook/Widget.php:37
+msgid "小さなヘッダーを使用"
+msgstr "Use Small Header"
+
+#: functions/facebook/classes/facebook/Widget.php:38
+msgid "サイズを調整"
+msgstr "Adapt Size"
+
+#: functions/facebook/classes/facebook/Widget.php:41
+msgid "遅延読み込み"
+msgstr "Lazy Loading"
+
+#: functions/facebook/functions.php:22
+msgid "Facebookでログイン"
+msgstr "Log in with Facebook"
+
+#: functions/gauth/desc.php:2
+msgid "Googleの各種APIを利用するための認証情報を登録します。gmap,gcalで必要になります。"
+msgstr "Register credentials to use Google's APIs. These are required by gmap and gcal."
+
+#: functions/gauth/functions.php:14
+msgid "Googleでログイン"
+msgstr "login with Google"
+
+#: functions/gtranslate/conf.php:5
+msgid "表示"
+msgstr "show"
+
+#: functions/gtranslate/conf.php:5
+msgid "非表示"
+msgstr "hide"
+
+#: ui/GoogleMap/input.js:73
+msgid "表示形式"
+msgstr "Display Format"
+
+#: ui/GoogleMap/input.js:81
+msgid "縮尺"
+msgstr "Scale"
+
+#: ui/TaskProcess/input.js:24
+msgid "セーブ"
+msgstr "Save"
+
+#: ui/TaskProcess/input.js:25
+msgid "ロード"
+msgstr "Load"
+
+#: ui/TaskProcess/input.js:26
+msgid "接続承認"
+msgstr "Approve Connection"
+
+#: ui/TaskProcess/input.js:27
+msgid "接続承認確認"
+msgstr "Confirm Connection Approval"
+
+#: ui/TaskProcess/input.js:28
+msgid "タスク完了"
+msgstr "Complete Task"
+
+#: ui/TaskProcess/input.js:29
+msgid "タスク完了確認"
+msgstr "Confirm Task Completion"
+
+#: ui/TaskProcess/input.js:32
+msgid "タスク発行"
+msgstr "Issue Task"
+
+#: ui/TaskProcess/input.js:38
+msgid "有効期限"
+msgstr "Expiration Date"
+
+#: ui/TaskProcess/input.js:41
+msgid "有効回数"
+msgstr "Usage Limit"
+
+#~ msgid "プレフィクス"
+#~ msgstr "Prefix"
+
+#~ msgid "クラスを入力"
+#~ msgstr "input class"
+
+#~ msgid "更新"
+#~ msgstr "update"
+
+#~ msgid "編集"
+#~ msgstr "edit"
+
+#~ msgid "不正なリクエストです"
+#~ msgstr "invalid request"
+
+#~ msgid "catpow"
+#~ msgstr "catpow"
+
+#: blocks/_init/init/format.jsx
+msgid "ウェイト"
+msgstr "Weight"
+
+#: blocks/_init/init/filter.jsx
+msgid "カバー"
+msgstr "Cover"
+
+#: blocks/_init/init/format.jsx
+msgid "グラデーション"
+msgstr "Gradient"
+
+#: blocks/_init/init/filter.jsx
+msgid "サイズ・間隔"
+msgstr "Size and Spacing"
+
+#: blocks/_init/init/filter.jsx
+msgid "サイズ・間隔・余白"
+msgstr "Size, Spacing, and Margin"
+
+#: blocks/_init/init/filter.jsx
+msgid "サムネイル"
+msgstr "Thumbnail"
+
+#: blocks/graphics/editor_script.jsx
+msgid "ジャンプ"
+msgstr "Jump"
+
+#: blocks/_init/init/filter.jsx
+msgid "スナップ"
+msgstr "Snap"
+
+#: blocks/graphics/editor_script.jsx
+msgid "スライドイン"
+msgstr "Slide In"
+
+#: blocks/_init/init/plugins.jsx
+msgid "データ構造"
+msgstr "Data Structure"
+
+#: blocks/graphics/editor_script.jsx
+msgid "フェード"
+msgstr "Fade"
+
+#: blocks/graphics/editor_script.jsx
+msgid "フェードイン"
+msgstr "Fade In"
+
+#: blocks/_init/init/format.jsx
+msgid "ブロック番号"
+msgstr "Block Number"
+
+#: blocks/graphics/editor_script.jsx
+msgid "ベース画像"
+msgstr "Base Image"
+
+#: blocks/graphics/editor_script.jsx
+msgid "ホバー"
+msgstr "Hover"
+
+#: blocks/_init/init/filter.jsx
+msgid "ボーダー"
+msgstr "Border"
+
+#: blocks/graphics/editor_script.jsx
+msgid "リフト"
+msgstr "Lift"
+
+#: blocks/_init/init/format.jsx
+msgid "ルビをつけたいテキストを選択してください"
+msgstr "Select the text to which you want to add ruby characters."
+
+#: blocks/_init/init/format.jsx
+msgid "ルビを入力"
+msgstr "Enter Ruby Text"
+
+#: blocks/_init/init/CP/components/SelectBreakPointToolbar.jsx
+msgid "ー"
+msgstr "—"
+
+#: blocks/_init/init/format.jsx
+msgid "中強"
+msgstr "Semi-bold"
+
+#: blocks/_init/init/format.jsx
+msgid "二重袋"
+msgstr "Double Box"
+
+#: blocks/graphics/editor_script.jsx
+msgid "代替テキスト"
+msgstr "Alternative Text"
+
+#: blocks/_init/init/CP/components/ItemControlInfoPanel.jsx
+msgid "保存"
+msgstr "Save"
+
+#: blocks/_init/init/format.jsx
+msgid "光彩"
+msgstr "Glow"
+
+#: blocks/_init/init/filter.jsx
+msgid "内容サイズ・余白"
+msgstr "Content Size and Margin"
+
+#: blocks/_init/init/CP/components/SelectSize.jsx
+msgid "内接"
+msgstr "Inscribed"
+
+#: blocks/graphics/editor_script.jsx
+msgid "円形"
+msgstr "Circle"
+
+#: blocks/_init/init/filter.jsx
+msgid "切り抜き"
+msgstr "Crop"
+
+#: blocks/_init/init/CP/components/ItemControlInfoPanel.jsx
+msgid "前のアイテムと入れ替え"
+msgstr "Swap with Previous Item"
+
+#: blocks/_init/init/format.jsx
+msgid "効果"
+msgstr "Effect"
+
+#: blocks/graphics/editor_script.jsx
+msgid "動き"
+msgstr "Motion"
+
+#: blocks/_init/init/CP/components/CustomColorVars.jsx
+msgid "反転文字色"
+msgstr "Inverted Text Color"
+
+#: blocks/graphics/editor_script.jsx
+msgid "回転"
+msgstr "Rotation"
+
+#: blocks/_init/init/CP/components/SelectSize.jsx
+msgid "外接"
+msgstr "Circumscribed"
+
+#: blocks/_init/init/format.jsx
+msgid "大強"
+msgstr "Extra-bold"
+
+#: blocks/_init/init/format.jsx
+msgid "太さ"
+msgstr "Weight"
+
+#: blocks/_init/init/format.jsx
+msgid "小強"
+msgstr "Medium"
+
+#: blocks/_init/init/CP/components/ItemControlInfoPanel.jsx
+msgid "操作"
+msgstr "Actions"
+
+#: blocks/_init/init/CP/components/CustomColorVars.jsx
+msgid "文字色"
+msgstr "Text Color"
+
+#: blocks/graphics/editor_script.jsx
+msgid "方向"
+msgstr "Direction"
+
+#: blocks/_init/init/filter.jsx
+msgid "星"
+msgstr "Star"
+
+#: blocks/_init/init/format.jsx
+msgid "極太"
+msgstr "Black"
+
+#: blocks/_init/init/format.jsx
+msgid "極細"
+msgstr "Thin"
+
+#: blocks/_init/init/CP/components/ItemControlInfoPanel.jsx
+msgid "次のアイテムと入れ替え"
+msgstr "Swap with Next Item"
+
+#: blocks/_init/init/filter.jsx
+msgid "矢印"
+msgstr "Arrow"
+
+#: blocks/_init/init/format.jsx
+msgid "立体"
+msgstr "Three-dimensional"
+
+#: blocks/_init/init/filter.jsx
+msgid "背景"
+msgstr "Background"
+
+#: blocks/_init/init/CP/components/SelectSize.jsx
+msgid "自動"
+msgstr "Auto"
+
+#: blocks/_init/init/format.jsx
+msgid "袋"
+msgstr "Box"
+
+#: blocks/_init/init/filter.jsx
+msgid "警告"
+msgstr "Warning"
+
+#: blocks/graphics/editor_script.jsx
+msgid "速い"
+msgstr "Fast"
+
+#: blocks/graphics/editor_script.jsx
+msgid "速度"
+msgstr "Speed"
+
+#: blocks/graphics/editor_script.jsx
+msgid "遅い"
+msgstr "Slow"
+
+#: blocks/_init/init/format.jsx
+msgid "🧹全てのスタイルをクリア"
+msgstr "🧹 Clear All Styles"

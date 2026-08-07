@@ -7,8 +7,8 @@ use Gettext\Loader\PoLoader;
 use Gettext\Generator\JsonGenerator;
 
 class i18n{
-	public static function make_json_for_script($handler){
-		$lang_dirs=\cp::get_file_paths(dirname($handler).'/languages');
+	public static function make_json_for_script($handler=null){
+		$lang_dirs=\cp::get_file_paths(empty($handle)?'languages':dirname($handler).'/languages');
 		foreach($lang_dirs as $lang_dir){
 			foreach(scandir($lang_dir)as $fname){
 				if(substr($fname,-3)==='.po'){

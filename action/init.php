@@ -98,6 +98,9 @@ add_filter('pre_load_script_translations',function($translations,$file,$handle,$
 		if($file=\cp::get_file_path(dirname($handle).'/languages/'.substr(basename($handle),0,-3).'-'.$locale.'.json')){
 			return file_get_contents($file);
 		}
+		else if($file=\cp::get_file_path('languages/catpow-'.$locale.'.json')){
+			return file_get_contents($file);
+		}
 	}
 	return $translations;
 },10,4);

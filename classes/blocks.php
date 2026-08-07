@@ -27,6 +27,8 @@ class blocks{
 		},10,2);
 		
 		$data=self::get_block_data_to_register();
+
+		util\i18n::make_json_for_script();
 		
 		if(!empty($data['js'])){
 			foreach($data['js'] as $args){

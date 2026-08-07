@@ -1,0 +1,2172 @@
+{
+    "domain": "catpow",
+    "locale_data": {
+        "catpow": {
+            "": {
+                "domain": "catpow",
+                "lang": "en_US",
+                "plural-forms": "nplurals=2; plural=(n != 1);"
+            },
+            "検索": [
+                "Search"
+            ],
+            "変更日": [
+                "Modified Date"
+            ],
+            "設定": [
+                "Settings"
+            ],
+            "複製": [
+                "Duplicate"
+            ],
+            "再利用可能ブロック": [
+                "Reusable Blocks"
+            ],
+            "設定ファイルが更新されています　サイトを更新してください": [
+                "The configuration file has been updated. Please update the site."
+            ],
+            "サイズ": [
+                "Size"
+            ],
+            "余白・間隔": [
+                "Padding / Margin"
+            ],
+            "テキスト": [
+                "Text"
+            ],
+            "線": [
+                "Stroke"
+            ],
+            "影": [
+                "Shadow"
+            ],
+            "無効なリクエストです": [
+                "Invalid request."
+            ],
+            "ブロックを選択": [
+                "Select a block"
+            ],
+            "通常": [
+                "Normal"
+            ],
+            "乗算": [
+                "Multiply"
+            ],
+            "スクリーン": [
+                "Screen"
+            ],
+            "オーバーレイ": [
+                "Overlay"
+            ],
+            "比較（暗）": [
+                "Darken"
+            ],
+            "比較（明）": [
+                "Lighten"
+            ],
+            "覆い焼き": [
+                "Color Dodge"
+            ],
+            "焼き込み": [
+                "Color Burn"
+            ],
+            "ハードライト": [
+                "Hard Light"
+            ],
+            "ソフトライト": [
+                "Soft Light"
+            ],
+            "差の絶対値": [
+                "Difference"
+            ],
+            "除外": [
+                "Exclusion"
+            ],
+            "色相": [
+                "Hue"
+            ],
+            "彩度": [
+                "Saturation"
+            ],
+            "カラー": [
+                "Color"
+            ],
+            "明度": [
+                "Luminosity"
+            ],
+            "エア": [
+                "Air"
+            ],
+            "バブル": [
+                "Bubble"
+            ],
+            "チェック": [
+                "Check"
+            ],
+            "アップロード画像": [
+                "Uploaded Image"
+            ],
+            "ドット": [
+                "Dot"
+            ],
+            "グリッド": [
+                "Grid"
+            ],
+            "アイス": [
+                "Ice"
+            ],
+            "既定画像": [
+                "Default Image"
+            ],
+            "リップル": [
+                "Ripple"
+            ],
+            "ストライプ": [
+                "Stripe"
+            ],
+            "吾輩は猫である。": [
+                "I Am a Cat."
+            ],
+            "名前はまだない。どこで生れたか頓と見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。": [
+                "I don't have a name yet. I have no idea where I was born. All I remember is that I was meowing in a dim and damp place."
+            ],
+            "名前はまだない。どこで生れたか頓と見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。しかもあとで聞くとそれは書生という人間中で一番獰悪な種族であったそうだ。この書生というのは時々我々を捕えて煮て食うという話である。しかしその当時は何という考もなかったから別段恐しいとも思わなかった。": [
+                "I don't have a name yet. I have no idea where I was born. All I remember is that I was meowing in a dim and damp place. It was there that I first saw a human. I later heard that this human was a student, the most ferocious kind of human. They say these students sometimes catch us, cook us, and eat us. At the time, however, I had no idea what was happening, so I was not particularly frightened."
+            ],
+            "『吾輩は猫である』（わがはいはねこである）　夏目漱石　著": [
+                "I Am a Cat by Natsume Soseki"
+            ],
+            "カスタムカラー": [
+                "Custom Color"
+            ],
+            "テンプレート": [
+                "Template"
+            ],
+            "ループ": [
+                "Loop"
+            ],
+            "プレビューループ数": [
+                "Preview Loop Count"
+            ],
+            "背景色": [
+                "Background Color"
+            ],
+            "なし": [
+                "None"
+            ],
+            "強調": [
+                "Emphasis"
+            ],
+            "z-index": [
+                "z-index"
+            ],
+            "背景画像": [
+                "Background Image"
+            ],
+            "固定": [
+                "Fixed"
+            ],
+            "モード": [
+                "Mode"
+            ],
+            "不透明度": [
+                "Opacity"
+            ],
+            "背景パターン": [
+                "Background Pattern"
+            ],
+            "横揃え": [
+                "Horizontal Alignment"
+            ],
+            "左": [
+                "Left"
+            ],
+            "中": [
+                "M"
+            ],
+            "右": [
+                "Right"
+            ],
+            "コンテンツ揃え": [
+                "Content Alignment"
+            ],
+            "上": [
+                "Top"
+            ],
+            "中央": [
+                "Center"
+            ],
+            "両端": [
+                "Space Between"
+            ],
+            "下": [
+                "Bottom"
+            ],
+            "テキスト揃え": [
+                "Text Alignment"
+            ],
+            "左揃え": [
+                "Align Left"
+            ],
+            "右揃え": [
+                "Align Right"
+            ],
+            "テキストタイプ": [
+                "Text Type"
+            ],
+            "見出し": [
+                "Heading"
+            ],
+            "リード": [
+                "Lead"
+            ],
+            "本文": [
+                "Body"
+            ],
+            "UI": [
+                "UI"
+            ],
+            "注釈": [
+                "Annotation"
+            ],
+            "垂直方向揃え": [
+                "Vertical Alignment"
+            ],
+            "上揃え": [
+                "Align Top"
+            ],
+            "下揃え": [
+                "Align Bottom"
+            ],
+            "画像位置": [
+                "Image Position"
+            ],
+            "ボタン": [
+                "Button"
+            ],
+            "マイクロコピー": [
+                "Microcopy"
+            ],
+            "キャプション": [
+                "Caption"
+            ],
+            "アイコン": [
+                "Icon"
+            ],
+            "文字サイズ": [
+                "Font Size"
+            ],
+            "極大": [
+                "XL"
+            ],
+            "大": [
+                "L"
+            ],
+            "小": [
+                "S"
+            ],
+            "極小": [
+                "XS"
+            ],
+            "文字の太さ": [
+                "Font Weight"
+            ],
+            "フォント": [
+                "Font"
+            ],
+            "ゴシック": [
+                "Gothic"
+            ],
+            "明朝": [
+                "Mincho"
+            ],
+            "英数": [
+                "Latin"
+            ],
+            "コード": [
+                "Code"
+            ],
+            "装飾": [
+                "Decorative"
+            ],
+            "筆記": [
+                "Handwriting"
+            ],
+            "セリフ": [
+                "Serif"
+            ],
+            "サンセリフ": [
+                "Sans Serif"
+            ],
+            "等幅": [
+                "Monospace"
+            ],
+            "太字": [
+                "Bold"
+            ],
+            "内": [
+                "Inside"
+            ],
+            "外": [
+                "Outside"
+            ],
+            "文字影": [
+                "Text Shadow"
+            ],
+            "枠線": [
+                "Stroke"
+            ],
+            "線色": [
+                "Line Color"
+            ],
+            "細": [
+                "Thin"
+            ],
+            "太": [
+                "Bold"
+            ],
+            "角丸": [
+                "Round"
+            ],
+            "ボーダー画像": [
+                "Border Image"
+            ],
+            "見出しタグ": [
+                "HeadingTag"
+            ],
+            "副見出しタグ": [
+                "Subheading Tag"
+            ],
+            "レベル": [
+                "Level"
+            ],
+            "見出しタイプ": [
+                "Heading Type"
+            ],
+            "ヘッダー": [
+                "Header"
+            ],
+            "ヘッドライン": [
+                "Headline"
+            ],
+            "キャッチ": [
+                "Tagline"
+            ],
+            "幅": [
+                "Width"
+            ],
+            "フル": [
+                "Full"
+            ],
+            "ワイド": [
+                "Wide"
+            ],
+            "レギュラー": [
+                "Regular"
+            ],
+            "コンパクト": [
+                "Compact"
+            ],
+            "ナロー": [
+                "Narrow"
+            ],
+            "アイテムサイズ": [
+                "Item Size"
+            ],
+            "アイテム位置": [
+                "Item Position"
+            ],
+            "アイテム間隔": [
+                "Item Spacing"
+            ],
+            "縦間隔": [
+                "Vertical Spacing"
+            ],
+            "横間隔": [
+                "Horizontal Spacing"
+            ],
+            "表示条件": [
+                "Display Conditions"
+            ],
+            "イベント": [
+                "Event"
+            ],
+            "色": [
+                "Color"
+            ],
+            "配色": [
+                "Color Scheme"
+            ],
+            "反転": [
+                "Invert"
+            ],
+            "ランク": [
+                "Rank"
+            ],
+            "優先": [
+                "Primary"
+            ],
+            "標準": [
+                "Standard"
+            ],
+            "副次": [
+                "Secondary"
+            ],
+            "レート": [
+                "Rating"
+            ],
+            "推奨": [
+                "Recommended"
+            ],
+            "非推奨": [
+                "Not Recommended"
+            ],
+            "安全": [
+                "Safe"
+            ],
+            "注意": [
+                "Caution"
+            ],
+            "危険": [
+                "Danger"
+            ],
+            "クリップ": [
+                "Clip"
+            ],
+            "形状": [
+                "Shape"
+            ],
+            "楕円": [
+                "Ellipse"
+            ],
+            "傾斜": [
+                "Slant"
+            ],
+            "アロー": [
+                "Arrow"
+            ],
+            "フキダシ": [
+                "Speech Bubble"
+            ],
+            "両方": [
+                "Both"
+            ],
+            "量": [
+                "Amount"
+            ],
+            "上高さ": [
+                "Top Height"
+            ],
+            "下高さ": [
+                "Bottom Height"
+            ],
+            "上幅": [
+                "Top Width"
+            ],
+            "下幅": [
+                "Bottom Width"
+            ],
+            "間隔・余白タイプ": [
+                "Spacing and Margin Type"
+            ],
+            "ブロック": [
+                "Block"
+            ],
+            "フレーム": [
+                "Frame"
+            ],
+            "カスタム": [
+                "Custom"
+            ],
+            "間隔タイプ": [
+                "Spacing Type"
+            ],
+            "パディング": [
+                "Padding"
+            ],
+            "上パディング": [
+                "Top Padding"
+            ],
+            "横パディング": [
+                "Horizontal Padding"
+            ],
+            "下パディング": [
+                "Bottom Padding"
+            ],
+            "余白": [
+                "Space"
+            ],
+            "上余白": [
+                "Top Space"
+            ],
+            "下余白": [
+                "Bottom Space"
+            ],
+            "横余白": [
+                "Horizontal Space"
+            ],
+            "マージン": [
+                "Margin"
+            ],
+            "上マージン": [
+                "Top Margin"
+            ],
+            "下マージン": [
+                "Bottom Margin"
+            ],
+            "間隔": [
+                "Spacing"
+            ],
+            "上間隔": [
+                "Top Spacing"
+            ],
+            "下間隔": [
+                "Bottom Spacing"
+            ],
+            "コンテンツ幅": [
+                "Content Width"
+            ],
+            "適": [
+                "Fit"
+            ],
+            "全": [
+                "Full"
+            ],
+            "地図とアクセス情報を表示": [
+                "Display a map and access information"
+            ],
+            "タイプ": [
+                "Type"
+            ],
+            "フラット": [
+                "Flat"
+            ],
+            "カード": [
+                "Card"
+            ],
+            "フーレム": [
+                "Frame"
+            ],
+            "地図の色": [
+                "Map Color"
+            ],
+            "グレー": [
+                "Gray"
+            ],
+            "同色": [
+                "Same Color"
+            ],
+            "電話番号": [
+                "Phone Number"
+            ],
+            "メール": [
+                "Email"
+            ],
+            "サイト": [
+                "Site"
+            ],
+            "地図タイプ": [
+                "Map Type"
+            ],
+            "地図": [
+                "Map"
+            ],
+            "航空写真": [
+                "Satellite"
+            ],
+            "地図 + 航空写真": [
+                "Map + Satellite"
+            ],
+            "地形図": [
+                "Terrain"
+            ],
+            "ズーム": [
+                "Zoom"
+            ],
+            "言語": [
+                "Language"
+            ],
+            "埋め込みURL": [
+                "Embed URL"
+            ],
+            "検索ワード": [
+                "Search Terms"
+            ],
+            "中心座標": [
+                "Center Coordinates"
+            ],
+            "地図画像コード": [
+                "Image Code"
+            ],
+            "スタイル": [
+                "Style"
+            ],
+            "リストアイテム": [
+                "List Item"
+            ],
+            "アクセス情報": [
+                "Access Information"
+            ],
+            "代替コンテンツ": [
+                "Fallback Content"
+            ],
+            "クリックで折り畳みできるブロックです。": [
+                "A block that can be collapsed with a click."
+            ],
+            "画像": [
+                "Image"
+            ],
+            "画像コード": [
+                "Image Code"
+            ],
+            "クラス": [
+                "Class"
+            ],
+            "同時に開かれるアコーディオンを制限するコンテナです。": [
+                "A container that limits which accordions can be open at the same time."
+            ],
+            "テーマに定義されたアプリを表示します。": [
+                "Displays an app defined by the theme."
+            ],
+            "画像とテキストを３次元にレイアウトします。": [
+                "Arranges images and text in three dimensions."
+            ],
+            "リンク付きのバナー画像を並べて表示するブロックです。": [
+                "Displays a list of linked banner images."
+            ],
+            "タイトル": [
+                "Title"
+            ],
+            "バナー": [
+                "Banner"
+            ],
+            "パンくずリストを表示します。": [
+                "Displays breadcrumbs."
+            ],
+            "ボタンのブロックです。": [
+                "A button block."
+            ],
+            "グラフを表示します。": [
+                "Displays a chart."
+            ],
+            "ステータス": [
+                "Status"
+            ],
+            "日数": [
+                "Number of Days"
+            ],
+            "日": [
+                "Days"
+            ],
+            "棒グラフ": [
+                "Bar Chart"
+            ],
+            "円グラフ": [
+                "Pie Chart"
+            ],
+            "折れ線グラフ": [
+                "Line Chart"
+            ],
+            "レーダーチャート": [
+                "Radar Chart"
+            ],
+            "値を表示": [
+                "Show Values"
+            ],
+            "単位を表示": [
+                "Show Units"
+            ],
+            "枠線を表示": [
+                "Show Border"
+            ],
+            "罫線を表示": [
+                "Show Gridlines"
+            ],
+            "転置": [
+                "Transpose"
+            ],
+            "タグ": [
+                "Tag"
+            ],
+            "見出し列": [
+                "Header Column"
+            ],
+            "列幅固定": [
+                "Fixed Column Width"
+            ],
+            "表幅": [
+                "Table Width"
+            ],
+            "高品質": [
+                "High Quality"
+            ],
+            "等": [
+                "Equal"
+            ],
+            "正": [
+                "Positive"
+            ],
+            "負": [
+                "Negative"
+            ],
+            "ラベル": [
+                "Label"
+            ],
+            "空白": [
+                "Blank"
+            ],
+            "行": [
+                "Row"
+            ],
+            "列": [
+                "Column"
+            ],
+            "セル": [
+                "Cell"
+            ],
+            "日時やログインユーザーによってコンテンツの表示が切り替わるコンテナです。": [
+                "A container that controls content visibility based on the date, time, or logged-in user."
+            ],
+            "表示条件：": [
+                "Display conditions:"
+            ],
+            "ログイン": [
+                "Login"
+            ],
+            "している": [
+                "Is"
+            ],
+            "していない": [
+                "Is Not"
+            ],
+            "スケジュール": [
+                "Schedule"
+            ],
+            "どちらでも": [
+                "Either"
+            ],
+            "権限": [
+                "Role"
+            ],
+            "ユーザー情報": [
+                "User Information"
+            ],
+            "フォーム入力値": [
+                "Form Input Value"
+            ],
+            "コンテンツ情報": [
+                "Content Information"
+            ],
+            "個別タイトル": [
+                "Individual Title"
+            ],
+            "個別リード": [
+                "Individual Lead"
+            ],
+            "個別キャプション": [
+                "Individual Caption"
+            ],
+            "アイテム": [
+                "Item"
+            ],
+            "スクロール可能領域を作成できるコンテナです。": [
+                "A container for creating a scrollable area."
+            ],
+            "スクロールX": [
+                "ScrollX"
+            ],
+            "コンテンツの幅": [
+                "Content Width"
+            ],
+            "スクロールY": [
+                "ScrollY"
+            ],
+            "コンテナの高さ": [
+                "Container Height"
+            ],
+            "目標日時": [
+                "Target Date and Time"
+            ],
+            "一行または１列の見出しを持つテーブルです。": [
+                "A table with a single header row or column."
+            ],
+            "ヘッダ行": [
+                "Header Row"
+            ],
+            "ヘッダ列": [
+                "Header Column"
+            ],
+            "表示設定": [
+                "Display Settings"
+            ],
+            "定義リストのブロックです": [
+                "A definition list block."
+            ],
+            "フキダシで会話を表現するブロックです。": [
+                "A block for presenting conversations with speech bubbles."
+            ],
+            "カラム幅": [
+                "Column Width"
+            ],
+            "テーマに定義された埋め込みコンテンツを表示します。": [
+                "Displays embedded content defined by the theme."
+            ],
+            "サイトで一回": [
+                "Once per Site"
+            ],
+            "ページで一回": [
+                "Once per Page"
+            ],
+            "毎回表示": [
+                "Always Show"
+            ],
+            "Qにキャプション": [
+                "Caption for Q"
+            ],
+            "Aに見出し": [
+                "Heading for A"
+            ],
+            "番号": [
+                "Number"
+            ],
+            "番号前置テキスト": [
+                "Text Before Number"
+            ],
+            "番号後置テキスト": [
+                "Text After Number"
+            ],
+            "アコーディオン": [
+                "Accordion"
+            ],
+            "手順や順番の一覧ブロックです。": [
+                "A block for listing steps or a sequence."
+            ],
+            "タイムライン": [
+                "Timeline"
+            ],
+            "コンテンツレベル": [
+                "Content Level"
+            ],
+            "タイトルキャプション": [
+                "Title Caption"
+            ],
+            "サブタイトル": [
+                "Subtitle"
+            ],
+            "リンク": [
+                "Link"
+            ],
+            "テーマに定義されたフォームを表示します。": [
+                "Displays a form defined by the theme."
+            ],
+            "フォーム": [
+                "Form"
+            ],
+            "入力値": [
+                "Input Value"
+            ],
+            "入力名": [
+                "Input Name"
+            ],
+            "データID": [
+                "Data ID"
+            ],
+            "初期値": [
+                "Initial Value"
+            ],
+            "テーマに定義された編集可能なフォームを表示します。": [
+                "Displays an editable form defined by the theme."
+            ],
+            "名前": [
+                "Name"
+            ],
+            "アクション": [
+                "Action"
+            ],
+            "送信": [
+                "Submit"
+            ],
+            "フォーム用のボタンです。": [
+                "A button for forms."
+            ],
+            "[button 送信 send]": [
+                "[button Submit send]"
+            ],
+            "画像を自由にレイアウトします。": [
+                "Freely arranges images."
+            ],
+            "背景スライドショー": [
+                "Background Slideshow"
+            ],
+            "ページの最初に表示するヘッダのブロックです。": [
+                "A header block displayed at the top of the page."
+            ],
+            "テキスト背景": [
+                "Text Background"
+            ],
+            "スライダーブレンドモード": [
+                "Slider Blend Mode"
+            ],
+            "スライダー不透明度": [
+                "Slider Opacity"
+            ],
+            "スライドショー画像": [
+                "Slideshow Images"
+            ],
+            "タイトルを入力": [
+                "Enter a title"
+            ],
+            "テキストを入力": [
+                "Enter text"
+            ],
+            "六角形のパネルをレイアウトします。": [
+                "Arranges hexagonal panels."
+            ],
+            "リンク付きのアイコン画像を並べて表示するブロックです。": [
+                "Displays a list of linked icon images."
+            ],
+            "塗り": [
+                "Fill"
+            ],
+            "丸": [
+                "Round"
+            ],
+            "四角": [
+                "Square"
+            ],
+            "各種の構造化データを記述。": [
+                "Defines various types of structured data."
+            ],
+            "セルの結合と幅の指定ができるテーブルです。": [
+                "A table that supports merged cells and custom widths."
+            ],
+            "文字": [
+                "Text"
+            ],
+            "セルを結合": [
+                "Merge Cells"
+            ],
+            "結合を解除": [
+                "Unmerge Cells"
+            ],
+            "サイト離脱時": [
+                "When Leaving the Site"
+            ],
+            "ページ離脱時": [
+                "When Leaving the Page"
+            ],
+            "クリックでポップアップ表示する画像です。": [
+                "An image that opens in a popup when clicked."
+            ],
+            "サムネール": [
+                "Thumbnail"
+            ],
+            "スライダー幅": [
+                "Slider Width"
+            ],
+            "スライダーレベル": [
+                "Slider Level"
+            ],
+            "スライダータイトル": [
+                "Slider Title"
+            ],
+            "スライダー画像": [
+                "Slider Image"
+            ],
+            "スライダーテキスト": [
+                "Slider Text"
+            ],
+            "サムネール画像": [
+                "Thumbnail Image"
+            ],
+            "サムネール画像コード": [
+                "Image Code"
+            ],
+            "ボックスクラス": [
+                "Box Class"
+            ],
+            "連番リスト": [
+                "Numbered List"
+            ],
+            "お知らせ": [
+                "Notice"
+            ],
+            "目次": [
+                "Table of Contents"
+            ],
+            "メニュー": [
+                "Menu"
+            ],
+            "ヘッダ画像コード": [
+                "Header Image Code"
+            ],
+            "サブ画像コード": [
+                "Image Code"
+            ],
+            "テーマに定義されたテンプレートで投稿を表示します。": [
+                "Displays posts using a template defined by the theme."
+            ],
+            "クエリの投稿の情報を表示するためのコンテナです。": [
+                "A container for displaying information about posts in a query."
+            ],
+            "ブロックの内容を変数のテーブルをループして表示します。各変数はブロック内で[var 変数名]のショートコードで利用できます。": [
+                "Loops through a table of variables to display the block content. Each variable can be used within the block with the [var variable_name] shortcode."
+            ],
+            "変数": [
+                "Variable"
+            ],
+            "材料・成分一覧のブロックです。": [
+                "A block for listing ingredients or materials."
+            ],
+            "グループ": [
+                "Group"
+            ],
+            "メニューを表示するブロックです。": [
+                "A block that displays a menu."
+            ],
+            "現在のURLに応じたコンテンツを表示します。": [
+                "Displays content based on the current URL."
+            ],
+            "表示中のURLに対応したコンテンツを表示します。テーマにURLに対応したコンテンツのテンプレートが定義されている場合はそのテンプレートが利用されます。定義がない場合は個別ページにおいては投稿されたコンテンツが表示されます。": [
+                "Displays content corresponding to the current URL. If the theme defines a content template for the URL, that template is used. Otherwise, the submitted content is displayed on individual pages."
+            ],
+            "パンくずリスト": [
+                "Breadcrumbs"
+            ],
+            "メニュー見出し": [
+                "Menu Heading"
+            ],
+            "メニューレベル": [
+                "Menu Level"
+            ],
+            "カスタムタイトル": [
+                "Custom Title"
+            ],
+            "大小の矩形パネルをレイアウトします。": [
+                "Arranges rectangular panels of various sizes."
+            ],
+            "タイル": [
+                "Tile"
+            ],
+            "文章": [
+                "Content"
+            ],
+            "画像を薄く": [
+                "Fade Image"
+            ],
+            "外部リンク": [
+                "External Link"
+            ],
+            "縦サイズ": [
+                "Height"
+            ],
+            "横サイズ": [
+                "Width"
+            ],
+            "グリッドサイズ": [
+                "Grid Size"
+            ],
+            "カラム約数（2^n）": [
+                "Column Divisor (2^n)"
+            ],
+            "カラム約数（3^n）": [
+                "Column Divisor (3^n)"
+            ],
+            "カラム約数（5^n）": [
+                "Column Divisor (5^n)"
+            ],
+            "合計グリッド数：": [
+                "Total grid count:"
+            ],
+            "期待グリッド数：": [
+                "Expected grid count:"
+            ],
+            "パネル": [
+                "Panel"
+            ],
+            "矩形の画像とテキストのペアのリスト。": [
+                "A list of rectangular image-and-text pairs."
+            ],
+            "シンボル": [
+                "Symbol"
+            ],
+            "画面サイズに応じて切り替わる画像。": [
+                "An image that changes according to the screen size."
+            ],
+            "アンカー名": [
+                "Anchor Name"
+            ],
+            "前の投稿・次の投稿へのリンクを表示します。": [
+                "Displays links to the previous and next posts."
+            ],
+            "前の記事": [
+                "Previous Post"
+            ],
+            "次の記事": [
+                "Next Post"
+            ],
+            "（税込）": [
+                "(Tax Included)"
+            ],
+            "サービス・商品情報の一覧ブロックです。": [
+                "A block for listing service or product information."
+            ],
+            "ヘッダ配色": [
+                "Header Color Scheme"
+            ],
+            "コンテンツ配色": [
+                "Content Color Scheme"
+            ],
+            "価格単位": [
+                "Price Unit"
+            ],
+            "単位の位置": [
+                "Unit Position"
+            ],
+            "前": [
+                "Before"
+            ],
+            "後": [
+                "After"
+            ],
+            "リンク文字列": [
+                "Link Text"
+            ],
+            "スペック": [
+                "Specifications"
+            ],
+            "おすすめ": [
+                "Recommended"
+            ],
+            "安価": [
+                "Budget"
+            ],
+            "高級": [
+                "Premium"
+            ],
+            "値引き": [
+                "Discount"
+            ],
+            "価格表のブロックです。": [
+                "A pricing table block."
+            ],
+            "インデント": [
+                "Indent"
+            ],
+            "入力": [
+                "Input"
+            ],
+            "確認": [
+                "Confirmation"
+            ],
+            "進捗のブロックです。": [
+                "A progress block."
+            ],
+            "セット": [
+                "Set"
+            ],
+            "ステップ": [
+                "Step"
+            ],
+            "番号前テキスト": [
+                "Text Before Number"
+            ],
+            "番号後テキスト": [
+                "Text After Number"
+            ],
+            "セット設定": [
+                "Set Settings"
+            ],
+            "新規登録": [
+                "Add New"
+            ],
+            "設定を更新": [
+                "Update Settings"
+            ],
+            "削除": [
+                "delete"
+            ],
+            "ランキングの一覧ブロックです。": [
+                "A block for displaying rankings."
+            ],
+            "第": [
+                "No."
+            ],
+            "位": [
+                "Place"
+            ],
+            "評価": [
+                "Rating"
+            ],
+            "前置テキスト": [
+                "Prefix Text"
+            ],
+            "開始ランク": [
+                "Starting Rank"
+            ],
+            "後置テキスト": [
+                "Suffix Text"
+            ],
+            "リード文": [
+                "Lead Text"
+            ],
+            "募集職種": [
+                "Job Title"
+            ],
+            "仕事内容を入力してください。": [
+                "Enter the job description."
+            ],
+            "正社員（フルタイム）": [
+                "Full-time Employee"
+            ],
+            "パート・アルバイト": [
+                "Part-time Employee"
+            ],
+            "業務委託": [
+                "Contractor"
+            ],
+            "派遣社員": [
+                "Temporary Employee"
+            ],
+            "インターン": [
+                "Intern"
+            ],
+            "その他": [
+                "Other"
+            ],
+            "時給": [
+                "Hourly"
+            ],
+            "日給": [
+                "Daily"
+            ],
+            "週給": [
+                "Weekly"
+            ],
+            "月給": [
+                "Monthly"
+            ],
+            "年俸": [
+                "Yearly"
+            ],
+            "円": [
+                "JPY"
+            ],
+            "リモート（%s）": [
+                "Remote (%s)"
+            ],
+            "地域未指定": [
+                "Region Not Specified"
+            ],
+            "掲載情報": [
+                "Posting Information"
+            ],
+            "掲載日": [
+                "Date Posted"
+            ],
+            "掲載終了日": [
+                "Valid Through"
+            ],
+            "求人ID": [
+                "Job ID"
+            ],
+            "雇用形態": [
+                "Employment Type"
+            ],
+            "雇用主": [
+                "Employer"
+            ],
+            "組織名": [
+                "Organization Name"
+            ],
+            "組織URL": [
+                "Organization URL"
+            ],
+            "ロゴ画像URL": [
+                "Logo Image URL"
+            ],
+            "勤務地": [
+                "Job Location"
+            ],
+            "勤務形態": [
+                "Work Arrangement"
+            ],
+            "勤務地へ出勤": [
+                "On-site"
+            ],
+            "完全リモート": [
+                "Fully Remote"
+            ],
+            "応募可能地域（国名）": [
+                "Eligible Region (Country)"
+            ],
+            "国コード": [
+                "Country Code"
+            ],
+            "都道府県": [
+                "State/Prefecture"
+            ],
+            "市区町村": [
+                "City"
+            ],
+            "町名・番地・建物名": [
+                "Street Address"
+            ],
+            "郵便番号": [
+                "Postal Code"
+            ],
+            "給与": [
+                "Salary"
+            ],
+            "単位": [
+                "Unit"
+            ],
+            "固定額": [
+                "Fixed Amount"
+            ],
+            "下限額": [
+                "Minimum Amount"
+            ],
+            "上限額": [
+                "Maximum Amount"
+            ],
+            "通貨コード": [
+                "Currency Code"
+            ],
+            "応募": [
+                "Application"
+            ],
+            "応募先URL": [
+                "Application URL"
+            ],
+            "応募先URLから直接応募できる": [
+                "Direct Application via URL"
+            ],
+            "仕事内容を入力": [
+                "Enter the job description"
+            ],
+            "応募する": [
+                "Apply"
+            ],
+            "MarkDownに似た記法でHTMLを書けるブロック": [
+                "A block for writing HTML using Markdown-like syntax"
+            ],
+            "■ 見出し\n\nテキスト[リンク](example.com)**強調**": [
+                "■ Heading\n\nText[Link](example.com)**Emphasis**"
+            ],
+            "セクションタグ": [
+                "Section Tag"
+            ],
+            "ヘッダコンテンツ幅": [
+                "Header Content Width"
+            ],
+            "タイトル画像": [
+                "Title Image"
+            ],
+            "ヘッダクリップ": [
+                "Header Clip"
+            ],
+            "ヘッダサイズ": [
+                "Header Size"
+            ],
+            "ヘッダ背景色": [
+                "Header Background Color"
+            ],
+            "ヘッダ背景画像": [
+                "Header Background Image"
+            ],
+            "ヘッダ背景パターン": [
+                "Header Background Pattern"
+            ],
+            "ヘッダ画像": [
+                "Header Image"
+            ],
+            "デコレーション": [
+                "Decoration"
+            ],
+            "メニューアイコン": [
+                "Menu Icon"
+            ],
+            "画像とテキストを並べて表示します。": [
+                "Displays images and text side by side."
+            ],
+            "サイドバーのあるコンテンツ領域のコンテナです。": [
+                "A container for a content area with a sidebar."
+            ],
+            "PCレイアウト": [
+                "Desktop Layout"
+            ],
+            "SPレイアウト": [
+                "Mobile Layout"
+            ],
+            "積上": [
+                "Stack"
+            ],
+            "追従": [
+                "Sticky"
+            ],
+            "見出しと本文の２列で構成されるシンプルなテーブルです。": [
+                "A simple two-column table with headings and body text."
+            ],
+            "種別": [
+                "Type"
+            ],
+            "重要": [
+                "Important"
+            ],
+            "必須": [
+                "Required"
+            ],
+            "任意": [
+                "Optional"
+            ],
+            "サイト共通フッタのブロックです。": [
+                "A site-wide footer block."
+            ],
+            "コンテンツ背景色": [
+                "Content Background Color"
+            ],
+            "コピーライト配色": [
+                "Copyright Color Scheme"
+            ],
+            "コピーライト背景色": [
+                "Copyright Background Color"
+            ],
+            "サイト共通ヘッダのブロックです。": [
+                "A site-wide header block."
+            ],
+            "スクロール可能なメニュー。": [
+                "A scrollable menu."
+            ],
+            "カラム数": [
+                "Number of Columns"
+            ],
+            "カルーセル": [
+                "Carousel"
+            ],
+            "初期スライド": [
+                "Initial Slide"
+            ],
+            "自動再生": [
+                "Autoplay"
+            ],
+            "自動再生間隔（秒）": [
+                "Autoplay Interval (seconds)"
+            ],
+            "手動操作後停止時間（秒）": [
+                "Pause After Manual Interaction (seconds)"
+            ],
+            "アニメーション設定": [
+                "Animation Settings"
+            ],
+            "スライド": [
+                "Slide"
+            ],
+            "丸型のアイテムリストブロックです。": [
+                "A circular item list block."
+            ],
+            "スクロールに追従するコンテンツを配置します。": [
+                "Places content that remains visible while scrolling."
+            ],
+            "位置": [
+                "Position"
+            ],
+            "全面": [
+                "Full Screen"
+            ],
+            "コンテナ": [
+                "Container"
+            ],
+            "折り畳み": [
+                "Collapse"
+            ],
+            "引き出し": [
+                "Drawer"
+            ],
+            "日時": [
+                "Date and Time"
+            ],
+            "ユーザー権限": [
+                "User Role"
+            ],
+            "ABテスト": [
+                "A/B Test"
+            ],
+            "日時やログインユーザーによってコンテンツの内容が切り替わるコンテナです。": [
+                "A container that switches content based on the date, time, or logged-in user."
+            ],
+            "ファクター": [
+                "Factor"
+            ],
+            "フィールド": [
+                "Field"
+            ],
+            "比較": [
+                "Comparison"
+            ],
+            "値": [
+                "Value"
+            ],
+            "条件": [
+                "Condition"
+            ],
+            "HTMLメール用のバナーブロックです。": [
+                "A banner block for HTML email."
+            ],
+            "配置": [
+                "Alignment"
+            ],
+            "画像出力コード": [
+                "Image Output Code"
+            ],
+            "HTMLメール用の複数バナーのブロックです。": [
+                "A multiple-banner block for HTML email."
+            ],
+            "列数": [
+                "Number of Columns"
+            ],
+            "HTMLメールのベースとなるヘッダ・フッタのブロックです。": [
+                "A base header and footer block for HTML email."
+            ],
+            "メールタイプ": [
+                "Email Type"
+            ],
+            "テキストメール編集モード": [
+                "Plain-text Email Editing Mode"
+            ],
+            "白": [
+                "White"
+            ],
+            "強調背景色": [
+                "Accent Background Color"
+            ],
+            "黒": [
+                "Black"
+            ],
+            "基本色": [
+                "Base Color"
+            ],
+            "強調色": [
+                "Accent Color"
+            ],
+            "ヘッダ": [
+                "Header"
+            ],
+            "白黒": [
+                "Monochrome"
+            ],
+            "フッタ": [
+                "Footer"
+            ],
+            "フッタ背景色": [
+                "Footer Background Color"
+            ],
+            "テキストメール": [
+                "Plain-text Email"
+            ],
+            "HTMLメール用のレイアウト調整用コンテナブロックです。": [
+                "A layout container block for HTML email."
+            ],
+            "HTMLメール用のテーブルレイアウトのボタンです。": [
+                "A table-layout button for HTML email."
+            ],
+            "HTMLメール用の見出しブロックです。": [
+                "A heading block for HTML email."
+            ],
+            "HTMLメール用の画像ブロックです。": [
+                "An image block for HTML email."
+            ],
+            "HTMLメール用のリストです。": [
+                "A list for HTML email."
+            ],
+            "番号付きリスト": [
+                "Numbered List"
+            ],
+            "番号サイズ": [
+                "Number Size"
+            ],
+            "番号の桁数": [
+                "Number of Digits"
+            ],
+            "マーカー色": [
+                "Marker Color"
+            ],
+            "基本": [
+                "Basic"
+            ],
+            "強調文字": [
+                "Emphasized Text"
+            ],
+            "マーカー太さ": [
+                "Marker Weight"
+            ],
+            "マーカーサイズ": [
+                "Marker Size"
+            ],
+            "マーカー幅": [
+                "Marker Width"
+            ],
+            "マーカー間隔": [
+                "Marker Spacing"
+            ],
+            "マーカー位置": [
+                "Marker Position"
+            ],
+            "HTMLメール用の画像・テキストのセットのブロックです。": [
+                "An image-and-text set block for HTML email."
+            ],
+            "画像の幅": [
+                "Image Width"
+            ],
+            "HTMLメール用の段落ブロックです。": [
+                "A paragraph block for HTML email."
+            ],
+            "バー": [
+                "Bar"
+            ],
+            "テーブル": [
+                "Table"
+            ],
+            "画像とテキストを並べてレイアウトするためのブロックです。": [
+                "A block for arranging images and text side by side."
+            ],
+            "ログイン中のユーザーの情報を表示するためのコンテナです。ログインしていない場合はログインフォームが表示されます。": [
+                "A container for displaying information about the logged-in user. If no user is logged in, a login form is displayed."
+            ],
+            "拡張機能に定義された埋め込みコンテンツを表示します。": [
+                "Displays embedded content defined by an extension."
+            ],
+            "ダミー画像": [
+                "Placeholder Image"
+            ],
+            "%sへのinsertにparent_idは必須です": [
+                "Inserting into %s requires parent_id."
+            ],
+            "gmapを使うにはGoogleAPIキーが必要です": [
+                "A Google API key is required to use gmap."
+            ],
+            "URL": [
+                "URL"
+            ],
+            "お名前": [
+                "name"
+            ],
+            "メールアドレス": [
+                "mail address"
+            ],
+            "PC": [
+                "PC"
+            ],
+            "SP": [
+                "SP"
+            ],
+            "購入者": [
+                "customer"
+            ],
+            "金額": [
+                "price"
+            ],
+            "支払い方法": [
+                "payment type"
+            ],
+            "進捗": [
+                "phase"
+            ],
+            "品名": [
+                "name"
+            ],
+            "価格": [
+                "price"
+            ],
+            "数量": [
+                "amount"
+            ],
+            "販売期限": [
+                "expire"
+            ],
+            "保管場所": [
+                "storage"
+            ],
+            "注文情報": [
+                "orders"
+            ],
+            "アクセス": [
+                "access"
+            ],
+            "連絡先": [
+                "contact"
+            ],
+            "コンテンツ": [
+                "Content"
+            ],
+            "メインビジュアル": [
+                "Hero Image"
+            ],
+            "色指定をHEX値で入力して下さい": [
+                "Enter a color as a hexadecimal value."
+            ],
+            "日付として読み取れませんでした": [
+                "The value could not be parsed as a date."
+            ],
+            "メールアドレスを入力してください": [
+                "Enter a valid email address."
+            ],
+            "半角英数で入力してください": [
+                "Enter alphanumeric characters."
+            ],
+            "%d文字の半角英数で入力してください": [
+                "Enter exactly %d alphanumeric characters."
+            ],
+            "ひらがなで入力してください": [
+                "Enter the value in hiragana."
+            ],
+            "HTML構文にエラーがあります": [
+                "The HTML contains a syntax error."
+            ],
+            "カタカナで入力してください": [
+                "Enter the value in katakana."
+            ],
+            "数字で入力してください": [
+                "Enter a number."
+            ],
+            "%d桁の数字で入力してください": [
+                "Enter exactly %d digits."
+            ],
+            "%d〜%dの数値で入力してください": [
+                "Enter a number from %d to %d."
+            ],
+            "数値で入力してください": [
+                "Enter a numeric value."
+            ],
+            "入力形式が正しくありません": [
+                "The input format is invalid."
+            ],
+            "電話番号が正しくありません": [
+                "Enter a valid phone number."
+            ],
+            "投稿が存在しません": [
+                "The post does not exist."
+            ],
+            "入力して下さい": [
+                "required"
+            ],
+            "選択項目にない値です": [
+                "The value is not one of the available options."
+            ],
+            "不正な値です": [
+                "invalid input"
+            ],
+            "%d文字で入力してください": [
+                "Enter exactly %d characters."
+            ],
+            "%d文字以内で入力してください": [
+                "Enter no more than %d characters."
+            ],
+            "この値はすでに使われています": [
+                "This value is already in use."
+            ],
+            "このメールアドレスはすでに使われています": [
+                "This email address is already in use."
+            ],
+            "%sの入力が正しくありません": [
+                "%s is invalid"
+            ],
+            "郵便番号を入力してください（半角数字）": [
+                "Enter a postal code using half-width digits."
+            ],
+            "キャンセル": [
+                "Cancel"
+            ],
+            "実行": [
+                "Execute"
+            ],
+            "一括処理": [
+                "Bulk"
+            ],
+            "件/頁": [
+                "items/page"
+            ],
+            "詳細を見る": [
+                "Show Detail"
+            ],
+            "検索結果なし": [
+                "Not Found"
+            ],
+            "%d件中%d件表示": [
+                "Showing %2$d of %1$d items"
+            ],
+            "%d件選択": [
+                "%d items selected"
+            ],
+            "Every Minutes": [
+                "Every Minute"
+            ],
+            "ゲスト": [
+                "guest"
+            ],
+            "メールフォーム": [
+                "mail form"
+            ],
+            "ニュース": [
+                "News"
+            ],
+            "ショップ": [
+                "shop"
+            ],
+            "カート": [
+                "Cart"
+            ],
+            "商品": [
+                "products"
+            ],
+            "スレッド": [
+                "thread"
+            ],
+            "送信・返信メール設定": [
+                "mail config"
+            ],
+            "%d件を削除しました": [
+                "Deleted %d items"
+            ],
+            "%d件のステータスを更新しました": [
+                "%d items status updated"
+            ],
+            "エントリー": [
+                "Entry"
+            ],
+            "下記のURLにて必要事項を入力して申込を行ってください。\n%s": [
+                "Use the URL below to enter the required information and submit your application.\n%s"
+            ],
+            "申込フォーム": [
+                "Entry Form"
+            ],
+            "下記のボタンから必要事項を入力して申込を行ってください。": [
+                "Use the button below to enter the required information and submit your application."
+            ],
+            "申込フォームへ": [
+                "Go to Entry Form"
+            ],
+            "リンクの有効期限は15分です。有効期限が切れた場合はお手数ですが申込メール送信からやり直してください。": [
+                "The link is valid for 15 minutes. If it expires, please start again by sending the application email."
+            ],
+            "【お問い合わせ】%s様より": [
+                "[Inquiry] From %s"
+            ],
+            "お問い合わせありがとうございます。": [
+                "Thank you for your inquiry."
+            ],
+            "送信先のメールアドレスを入力": [
+                "Input email to send"
+            ],
+            "入力したメールアドレスに申込フォームへのリンクを記載したメールを送信します": [
+                "An email containing a link to the application form will be sent to the email address you entered."
+            ],
+            "申込メールを送信": [
+                "Send Application Email"
+            ],
+            "戻る": [
+                "Back"
+            ],
+            "メールを送信しました": [
+                "Email sent"
+            ],
+            "申込フォームへのリンクを記載したメールを送信しました。<br/>メールに記載されたリンクから必要事項を記入して申込を行ってください。": [
+                "An email containing a link to the application form has been sent.<br/>Use the link in the email to enter the required information and submit your application."
+            ],
+            "支払方法に問題があるようです": [
+                "There appears to be a problem with the payment method."
+            ],
+            "Amazonがオーソリを拒否しました": [
+                "Amazon rejected the authorization"
+            ],
+            "内部処理エラーです": [
+                "An internal processing error occurred."
+            ],
+            "処理がタイムアウトしました": [
+                "The operation timed out."
+            ],
+            "支払いに同意していません": [
+                "Payment has not been authorized."
+            ],
+            "金額がセットされていません": [
+                "The amount has not been set."
+            ],
+            "販売者は購入できません": [
+                "The seller cannot make a purchase."
+            ],
+            "この支払い方法は選択できません": [
+                "invalid payment method"
+            ],
+            "この支払い方法は削除されました": [
+                "This payment method has been deleted."
+            ],
+            "この支払い方法は期限切れです": [
+                "This payment method has expired."
+            ],
+            "支払い方法を選択してください": [
+                "select payment method"
+            ],
+            "配送先がを選択してください": [
+                "Select a shipping address."
+            ],
+            "選択した配送先は削除されています": [
+                "The selected shipping address has been deleted."
+            ],
+            "注文IDがセットされていません": [
+                "OrderID was not set"
+            ],
+            "決済IDがセットされていません": [
+                "AuthorizationID was not set"
+            ],
+            "シェアボタンを表示": [
+                "Show Share Buttons"
+            ],
+            "子供向け": [
+                "For Children"
+            ],
+            "対象URL": [
+                "Target URL"
+            ],
+            "リファララベル": [
+                "Referrer Label"
+            ],
+            "FaceBookページ URL": [
+                "Facebook Page URL"
+            ],
+            "高さ": [
+                "Height"
+            ],
+            "カバー写真を非表示": [
+                "Hide Cover Photo"
+            ],
+            "プロフィール写真を表示": [
+                "Show Profile Photo"
+            ],
+            "CTAボタンを非表示": [
+                "Hide CTA Button"
+            ],
+            "小さなヘッダーを使用": [
+                "Use Small Header"
+            ],
+            "サイズを調整": [
+                "Adapt Size"
+            ],
+            "遅延読み込み": [
+                "Lazy Loading"
+            ],
+            "Facebookでログイン": [
+                "Log in with Facebook"
+            ],
+            "Googleの各種APIを利用するための認証情報を登録します。gmap,gcalで必要になります。": [
+                "Register credentials to use Google's APIs. These are required by gmap and gcal."
+            ],
+            "Googleでログイン": [
+                "login with Google"
+            ],
+            "表示": [
+                "show"
+            ],
+            "非表示": [
+                "hide"
+            ],
+            "表示形式": [
+                "Display Format"
+            ],
+            "縮尺": [
+                "Scale"
+            ],
+            "セーブ": [
+                "Save"
+            ],
+            "ロード": [
+                "Load"
+            ],
+            "接続承認": [
+                "Approve Connection"
+            ],
+            "接続承認確認": [
+                "Confirm Connection Approval"
+            ],
+            "タスク完了": [
+                "Complete Task"
+            ],
+            "タスク完了確認": [
+                "Confirm Task Completion"
+            ],
+            "タスク発行": [
+                "Issue Task"
+            ],
+            "有効期限": [
+                "Expiration Date"
+            ],
+            "有効回数": [
+                "Usage Limit"
+            ],
+            "ウェイト": [
+                "Weight"
+            ],
+            "カバー": [
+                "Cover"
+            ],
+            "グラデーション": [
+                "Gradient"
+            ],
+            "サイズ・間隔": [
+                "Size and Spacing"
+            ],
+            "サイズ・間隔・余白": [
+                "Size, Spacing, and Margin"
+            ],
+            "サムネイル": [
+                "Thumbnail"
+            ],
+            "ジャンプ": [
+                "Jump"
+            ],
+            "スナップ": [
+                "Snap"
+            ],
+            "スライドイン": [
+                "Slide In"
+            ],
+            "データ構造": [
+                "Data Structure"
+            ],
+            "フェード": [
+                "Fade"
+            ],
+            "フェードイン": [
+                "Fade In"
+            ],
+            "ブロック番号": [
+                "Block Number"
+            ],
+            "ベース画像": [
+                "Base Image"
+            ],
+            "ホバー": [
+                "Hover"
+            ],
+            "ボーダー": [
+                "Border"
+            ],
+            "リフト": [
+                "Lift"
+            ],
+            "ルビをつけたいテキストを選択してください": [
+                "Select the text to which you want to add ruby characters."
+            ],
+            "ルビを入力": [
+                "Enter Ruby Text"
+            ],
+            "ー": [
+                "—"
+            ],
+            "中強": [
+                "Semi-bold"
+            ],
+            "二重袋": [
+                "Double Box"
+            ],
+            "代替テキスト": [
+                "Alternative Text"
+            ],
+            "保存": [
+                "Save"
+            ],
+            "光彩": [
+                "Glow"
+            ],
+            "内容サイズ・余白": [
+                "Content Size and Margin"
+            ],
+            "内接": [
+                "Inscribed"
+            ],
+            "円形": [
+                "Circle"
+            ],
+            "切り抜き": [
+                "Crop"
+            ],
+            "前のアイテムと入れ替え": [
+                "Swap with Previous Item"
+            ],
+            "効果": [
+                "Effect"
+            ],
+            "動き": [
+                "Motion"
+            ],
+            "反転文字色": [
+                "Inverted Text Color"
+            ],
+            "回転": [
+                "Rotation"
+            ],
+            "外接": [
+                "Circumscribed"
+            ],
+            "大強": [
+                "Extra-bold"
+            ],
+            "太さ": [
+                "Weight"
+            ],
+            "小強": [
+                "Medium"
+            ],
+            "操作": [
+                "Actions"
+            ],
+            "文字色": [
+                "Text Color"
+            ],
+            "方向": [
+                "Direction"
+            ],
+            "星": [
+                "Star"
+            ],
+            "極太": [
+                "Black"
+            ],
+            "極細": [
+                "Thin"
+            ],
+            "次のアイテムと入れ替え": [
+                "Swap with Next Item"
+            ],
+            "矢印": [
+                "Arrow"
+            ],
+            "立体": [
+                "Three-dimensional"
+            ],
+            "背景": [
+                "Background"
+            ],
+            "自動": [
+                "Auto"
+            ],
+            "袋": [
+                "Box"
+            ],
+            "警告": [
+                "Warning"
+            ],
+            "速い": [
+                "Fast"
+            ],
+            "速度": [
+                "Speed"
+            ],
+            "遅い": [
+                "Slow"
+            ],
+            "🧹全てのスタイルをクリア": [
+                "🧹 Clear All Styles"
+            ]
+        }
+    }
+}
