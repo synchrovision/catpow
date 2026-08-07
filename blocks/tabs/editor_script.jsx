@@ -3,6 +3,7 @@
 import { clsx } from "clsx";
 
 wp.blocks.registerBlockType("catpow/tabs", {
+	description: __("タブによる表示切り替えのブロックです。", "catpow"),
 	attributes: {
 		classes: { source: "attribute", selector: "div", attribute: "class", default: "wp-block-catpow-tabs is-level3 is-type-panel is-style-flat" },
 		HeadingTag: { type: "text", default: "h3" },

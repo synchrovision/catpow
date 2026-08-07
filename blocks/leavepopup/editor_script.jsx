@@ -2,6 +2,7 @@
 import { classNamesToFlags, flagsToClassNames } from "catpow/util";
 
 wp.blocks.registerBlockType("catpow/leavepopup", {
+	description: __("サイト・ページ離脱に表示されるポップアップ。", "catpow"),
 	edit({ attributes, setAttributes }) {
 		const { classes, vars } = attributes;
 		const { useMemo, useCallback } = wp.element;

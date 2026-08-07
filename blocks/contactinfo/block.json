@@ -6,7 +6,6 @@
 	"icon": "phone",
 	"category": "catpow",
 	"textdomain": "catpow",
-	"description": "お問い合わせの電話番号やメールアドレスを記載するためのブロックです。",
 	"supports": {
 		"level": true,
 		"headingLevel": true,

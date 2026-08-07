@@ -5,6 +5,7 @@ const { __ } = wp.i18n;
 import { SelectiveClassConfig } from "cpdev/type";
 
 wp.blocks.registerBlockType("catpow/pagenavigation", {
+	description: __("ページの親子関係からナビゲーションを生成します", "catpow"),
 	edit({ attributes, className, setAttributes, isSelected }) {
 		const { useMemo } = wp.element;
 		const { InspectorControls, useBlockProps } = wp.blockEditor;

@@ -3,6 +3,7 @@ import { classNamesToFlags, flagsToClassNames } from "catpow/util";
 const { __ } = wp.i18n;
 
 wp.blocks.registerBlockType("catpow/popup", {
+	description: __("アンカーリンクで開くポップアップ", "catpow"),
 	edit({ attributes, className, setAttributes }) {
 		const { classes, anchor, vars } = attributes;
 		const { useState, useMemo, useCallback } = wp.element;

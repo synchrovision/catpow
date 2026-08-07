@@ -4,7 +4,6 @@
 	"textdomain": "catpow",
 	"name": "catpow/pagenavigation",
 	"title": "🐾 PageNavigation",
-	"description": "ページの親子関係からナビゲーションを生成します",
 	"icon": "menu",
 	"category": "catpow",
 	"supports": {

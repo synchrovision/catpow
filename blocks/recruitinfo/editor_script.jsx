@@ -140,6 +140,7 @@ const createStructuredData = (attributes) => {
 };
 
 wp.blocks.registerBlockType("catpow/recruitinfo", {
+	description: __("求人情報とJobPosting構造化データを出力するブロックです。", "catpow"),
 	example: CP.example,
 	edit({ attributes, setAttributes }) {
 		const { InspectorControls, RichText, useBlockProps } = wp.blockEditor;

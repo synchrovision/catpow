@@ -6,7 +6,6 @@
 	"icon": "editor-code",
 	"name": "catpow/div",
 	"title": "🐾 Div",
-	"description": "コンテンツを枠で囲んだりレイアウト調整をするためのコンテナです。",
 	"providesContext": {
 		"catpow/color": "color"
 	},

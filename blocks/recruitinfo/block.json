@@ -6,7 +6,6 @@
 	"icon": "businessperson",
 	"category": "catpow",
 	"textdomain": "catpow",
-	"description": "求人情報とJobPosting構造化データを出力するブロックです。",
 	"supports": {
 		"level": true,
 		"headingLevel": true,

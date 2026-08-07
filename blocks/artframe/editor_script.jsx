@@ -3,6 +3,7 @@
 import { useChangeEffect } from "catpow/hooks";
 
 wp.blocks.registerBlockType("catpow/artframe", {
+	description: __("切り抜きと装飾アートのブロックです。", "catpow"),
 	transforms: {
 		from: [
 			{

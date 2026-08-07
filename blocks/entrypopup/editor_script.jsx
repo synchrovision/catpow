@@ -2,6 +2,7 @@
 import { classNamesToFlags, flagsToClassNames } from "catpow/util";
 
 wp.blocks.registerBlockType("catpow/entrypopup", {
+	description: __("サイト・ページ訪問時に表示されるポップアップ。", "catpow"),
 	edit({ attributes, className, setAttributes }) {
 		const { classes, vars } = attributes;
 		const { useMemo, useCallback } = wp.element;

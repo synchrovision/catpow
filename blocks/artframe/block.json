@@ -4,7 +4,6 @@
 	"textdomain": "catpow",
 	"category": "catpow",
 	"title": "🐾 ArtFrame",
-	"description": "切り抜きと装飾アートのブロックです。",
 	"icon": "images-alt",
 	"name": "catpow/artframe",
 	"providesContext": {

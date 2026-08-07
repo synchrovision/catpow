@@ -10,6 +10,7 @@ CP.config.faq = {
 	},
 };
 wp.blocks.registerBlockType("catpow/faq", {
+	description: __("質問と回答の一覧ブロックです。", "catpow"),
 	transforms: {
 		from: [
 			{

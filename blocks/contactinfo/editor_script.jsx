@@ -9,6 +9,7 @@ CP.config.contactinfo = {
 const getSubHeadingTag = (HeadingTag) => HeadingTag.replace(/h(\d)/, (m, num) => `h${Math.min(parseInt(num) + 1, 6)}`);
 
 wp.blocks.registerBlockType("catpow/contactinfo", {
+	description: __("お問い合わせの電話番号やメールアドレスを記載するためのブロックです。", "catpow"),
 	example: CP.example,
 	edit({ attributes, className, setAttributes, isSelected }) {
 		const { useMemo, useEffect } = wp.element;

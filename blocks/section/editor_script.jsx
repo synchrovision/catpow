@@ -11,6 +11,7 @@ CP.config.section = {
 	},
 };
 wp.blocks.registerBlockType("catpow/section", {
+	description: __("見出しと内容のまとまりを表すセクションのブロックです。", "catpow"),
 	example: CP.example,
 	edit(props) {
 		const { InnerBlocks, BlockControls, InspectorControls, RichText, useBlockProps } = wp.blockEditor;
