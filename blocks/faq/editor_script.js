@@ -23,6 +23,7 @@
     }
   };
   wp.blocks.registerBlockType("catpow/faq", {
+    description: __("\u8CEA\u554F\u3068\u56DE\u7B54\u306E\u4E00\u89A7\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002", "catpow"),
     transforms: {
       from: [
         {

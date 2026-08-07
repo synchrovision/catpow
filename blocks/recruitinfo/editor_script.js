@@ -119,6 +119,7 @@
     });
   };
   wp.blocks.registerBlockType("catpow/recruitinfo", {
+    description: __("\u6C42\u4EBA\u60C5\u5831\u3068JobPosting\u69CB\u9020\u5316\u30C7\u30FC\u30BF\u3092\u51FA\u529B\u3059\u308B\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002", "catpow"),
     example: CP.example,
     edit({ attributes, setAttributes }) {
       const { InspectorControls, RichText, useBlockProps } = wp.blockEditor;

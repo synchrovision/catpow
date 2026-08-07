@@ -17,6 +17,7 @@
   // ../blocks/tabs/editor_script.jsx
   var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/tabs", {
+    description: __("\u30BF\u30D6\u306B\u3088\u308B\u8868\u793A\u5207\u308A\u66FF\u3048\u306E\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002", "catpow"),
     attributes: {
       classes: { source: "attribute", selector: "div", attribute: "class", default: "wp-block-catpow-tabs is-level3 is-type-panel is-style-flat" },
       HeadingTag: { type: "text", default: "h3" },

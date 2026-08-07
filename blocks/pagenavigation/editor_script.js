@@ -2,6 +2,7 @@
   // ../blocks/pagenavigation/editor_script.tsx
   var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/pagenavigation", {
+    description: __("\u30DA\u30FC\u30B8\u306E\u89AA\u5B50\u95A2\u4FC2\u304B\u3089\u30CA\u30D3\u30B2\u30FC\u30B7\u30E7\u30F3\u3092\u751F\u6210\u3057\u307E\u3059", "catpow"),
     edit({ attributes, className, setAttributes, isSelected }) {
       const { useMemo } = wp.element;
       const { InspectorControls, useBlockProps } = wp.blockEditor;

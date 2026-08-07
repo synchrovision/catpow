@@ -8,6 +8,7 @@
   };
   var getSubHeadingTag = (HeadingTag) => HeadingTag.replace(/h(\d)/, (m, num) => `h${Math.min(parseInt(num) + 1, 6)}`);
   wp.blocks.registerBlockType("catpow/contactinfo", {
+    description: __("\u304A\u554F\u3044\u5408\u308F\u305B\u306E\u96FB\u8A71\u756A\u53F7\u3084\u30E1\u30FC\u30EB\u30A2\u30C9\u30EC\u30B9\u3092\u8A18\u8F09\u3059\u308B\u305F\u3081\u306E\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002", "catpow"),
     example: CP.example,
     edit({ attributes, className, setAttributes, isSelected }) {
       const { useMemo, useEffect } = wp.element;

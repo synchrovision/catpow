@@ -11,6 +11,7 @@
     }
   };
   wp.blocks.registerBlockType("catpow/section", {
+    description: __("\u898B\u51FA\u3057\u3068\u5185\u5BB9\u306E\u307E\u3068\u307E\u308A\u3092\u8868\u3059\u30BB\u30AF\u30B7\u30E7\u30F3\u306E\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002", "catpow"),
     example: CP.example,
     edit(props) {
       const { InnerBlocks, BlockControls, InspectorControls, RichText, useBlockProps } = wp.blockEditor;

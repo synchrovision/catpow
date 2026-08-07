@@ -15,6 +15,7 @@
   // ../blocks/leavepopup/editor_script.jsx
   var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/leavepopup", {
+    description: __("\u30B5\u30A4\u30C8\u30FB\u30DA\u30FC\u30B8\u96E2\u8131\u306B\u8868\u793A\u3055\u308C\u308B\u30DD\u30C3\u30D7\u30A2\u30C3\u30D7\u3002", "catpow"),
     edit({ attributes, setAttributes }) {
       const { classes, vars } = attributes;
       const { useMemo, useCallback } = wp.element;

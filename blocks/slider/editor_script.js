@@ -59,6 +59,7 @@
     }
   };
   wp.blocks.registerBlockType("catpow/slider", {
+    description: __("\u30B9\u30E9\u30A4\u30C0\u30FC\u306E\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002", "catpow"),
     transforms: {
       from: [
         {

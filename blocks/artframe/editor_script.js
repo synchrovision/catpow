@@ -32,6 +32,7 @@
   // ../blocks/artframe/editor_script.jsx
   var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/artframe", {
+    description: __("\u5207\u308A\u629C\u304D\u3068\u88C5\u98FE\u30A2\u30FC\u30C8\u306E\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002", "catpow"),
     transforms: {
       from: [
         {

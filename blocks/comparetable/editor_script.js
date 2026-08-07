@@ -27,6 +27,7 @@
     }
   };
   wp.blocks.registerBlockType("catpow/comparetable", {
+    description: __("\u6BD4\u8F03\u60C5\u5831\u306E\u305F\u3081\u306E\u30C6\u30FC\u30D6\u30EB\u3067\u3059", "catpow"),
     transforms: {
       from: [
         {

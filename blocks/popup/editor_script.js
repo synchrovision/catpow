@@ -15,6 +15,7 @@
   // ../blocks/popup/editor_script.jsx
   var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/popup", {
+    description: __("\u30A2\u30F3\u30AB\u30FC\u30EA\u30F3\u30AF\u3067\u958B\u304F\u30DD\u30C3\u30D7\u30A2\u30C3\u30D7", "catpow"),
     edit({ attributes, className, setAttributes }) {
       const { classes, anchor, vars } = attributes;
       const { useState, useMemo, useCallback } = wp.element;
