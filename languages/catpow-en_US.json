@@ -2166,6 +2166,48 @@
             ],
             "🧹全てのスタイルをクリア": [
                 "🧹 Clear All Styles"
+            ],
+            "タブによる表示切り替えのブロックです。": [
+                "A block that switches content using tabs."
+            ],
+            "アンカーリンクで開くポップアップ": [
+                "A popup opened by an anchor link."
+            ],
+            "見出しと内容のまとまりを表すセクションのブロックです。": [
+                "A section block that groups a heading and its content."
+            ],
+            "コンテンツを枠で囲んだりレイアウト調整をするためのコンテナです。": [
+                "A container for framing content and adjusting its layout."
+            ],
+            "切り抜きと装飾アートのブロックです。": [
+                "A block for clipping and decorative artwork."
+            ],
+            "サイト・ページ離脱に表示されるポップアップ。": [
+                "A popup displayed when a visitor leaves the site or page."
+            ],
+            "質問と回答の一覧ブロックです。": [
+                "A block that lists questions and answers."
+            ],
+            "求人情報とJobPosting構造化データを出力するブロックです。": [
+                "A block that outputs job information and JobPosting structured data."
+            ],
+            "スライダーのブロックです。": [
+                "A slider block."
+            ],
+            "ページの親子関係からナビゲーションを生成します": [
+                "Generates navigation from the page hierarchy."
+            ],
+            "比較情報のためのテーブルです": [
+                "A table for comparing information."
+            ],
+            "お問い合わせの電話番号やメールアドレスを記載するためのブロックです。": [
+                "A block for displaying inquiry phone numbers and email addresses."
+            ],
+            "目次やお知らせなどの一覧ブロックです。": [
+                "A block for lists such as tables of contents and notices."
+            ],
+            "サイト・ページ訪問時に表示されるポップアップ。": [
+                "A popup displayed when a visitor enters the site or page."
             ]
         }
     }

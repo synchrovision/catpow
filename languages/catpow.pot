@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: catpow\n"
-"POT-Creation-Date: 2026-08-07 20:37+0900\n"
+"POT-Creation-Date: 2026-08-07 21:01+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -3312,4 +3312,60 @@ msgstr ""
 
 #: blocks/_init/init/format.jsx
 msgid "🧹全てのスタイルをクリア"
+msgstr ""
+
+#: blocks/tabs/editor_script.jsx
+msgid "タブによる表示切り替えのブロックです。"
+msgstr ""
+
+#: blocks/popup/editor_script.jsx
+msgid "アンカーリンクで開くポップアップ"
+msgstr ""
+
+#: blocks/section/editor_script.jsx
+msgid "見出しと内容のまとまりを表すセクションのブロックです。"
+msgstr ""
+
+#: blocks/div/editor_script.jsx
+msgid "コンテンツを枠で囲んだりレイアウト調整をするためのコンテナです。"
+msgstr ""
+
+#: blocks/artframe/editor_script.jsx
+msgid "切り抜きと装飾アートのブロックです。"
+msgstr ""
+
+#: blocks/leavepopup/editor_script.jsx
+msgid "サイト・ページ離脱に表示されるポップアップ。"
+msgstr ""
+
+#: blocks/faq/editor_script.jsx
+msgid "質問と回答の一覧ブロックです。"
+msgstr ""
+
+#: blocks/recruitinfo/editor_script.jsx
+msgid "求人情報とJobPosting構造化データを出力するブロックです。"
+msgstr ""
+
+#: blocks/slider/editor_script.jsx
+msgid "スライダーのブロックです。"
+msgstr ""
+
+#: blocks/pagenavigation/editor_script.tsx
+msgid "ページの親子関係からナビゲーションを生成します"
+msgstr ""
+
+#: blocks/comparetable/editor_script.jsx
+msgid "比較情報のためのテーブルです"
+msgstr ""
+
+#: blocks/contactinfo/editor_script.jsx
+msgid "お問い合わせの電話番号やメールアドレスを記載するためのブロックです。"
+msgstr ""
+
+#: blocks/listed/editor_script.jsx
+msgid "目次やお知らせなどの一覧ブロックです。"
+msgstr ""
+
+#: blocks/entrypopup/editor_script.jsx
+msgid "サイト・ページ訪問時に表示されるポップアップ。"
 msgstr ""
