@@ -46,10 +46,10 @@ class scss{
 		$scssc->registerFunction('debug',function($args){
 			error_log(var_export($args,1));
 			return false;
-		});
+		},['value']);
 		$scssc->registerFunction('get-real-type',function($args){
 			return [TYPE::T_KEYWORD,$args[0][0]];
-		});
+		},['value']);
 		$scssc->registerFunction('ksort',function($args)use($scssc){
 			if(empty($args[0]) || $args[0][0] !== 'map'){
 				return false;
@@ -70,25 +70,25 @@ class scss{
 				$sortedValues[] = $values[$index];
 			}
 			return [TYPE::T_MAP,$sortedKeys,$sortedValues];
-		});
+		},['map','asNumeric']);
 		$scssc->registerFunction('embed-svg',function($args)use($scssc){
 			if($f=CP::get_file_path($args[0][2][0])){
 				return sprintf('data:image/svg+xml;base64,%s',base64_encode(file_get_contents($f)));
 			}
 			return false;
-		});
+		},['path']);
 		$scssc->registerFunction('embed-image',function($args)use($scssc){
 			if($f=CP::get_file_path($args[0][2][0])){
 				return sprintf('data:%s;base64,%s',mime_content_type($f),base64_encode(file_get_contents($f)));
 			}
 			return false;
-		});
+		},['path']);
 		$scssc->registerFunction('export-colors',function($args){
 			static::export_map_data('colors',$args);
-		});
+		},['map']);
 		$scssc->registerFunction('export-fonts',function($args){
 			static::export_map_data('fonts',$args);
-		});
+		},['map']);
 		if($for_admin || apply_filters('cp_use_css_vars',true)){
 			$scssc->registerFunction('translate-color',function($args)use($color_roles_by_shorthand,$scssc){
 				$args=array_map([$scssc,'compileValue'],$args);
@@ -148,7 +148,7 @@ class scss{
 				$color=apply_filters('cp_translate_color',$color,$args);
 				if(empty($color)){return Compiler::$false;}
 				return [TYPE::T_KEYWORD,$color];
-			});
+			},['color','tint','alpha']);
 			$scssc->registerFunction('get-color-classes',function($args)use($color_roles_by_shorthand,$scssc){
 				//@todo: reduce code
 				$classes=[];
@@ -193,7 +193,7 @@ class scss{
 					}
 				}
 				return self::create_map_data($classes);
-			});
+			},['map']);
 			$scssc->registerFunction('extract-color-tone',function($args)use($scssc){
 				$args=array_map([$scssc,'compileValue'],$args);
 				$tones=util\style_config::get_config_json('tones');
@@ -214,7 +214,7 @@ class scss{
 				}
 				$tone=apply_filters('cp_extract_color_tone',$tone,$args);
 				return self::create_map_data($tone);
-			});
+			},['color','tint']);
 			$additionals=[
 				'size'=>['ph'=>'var(--cp-page-content-height)','pt'=>'var(--cp-page-top-offset)','pb'=>'var(--cp-page-bottom-offset)'],
 				'font_family'=>['mi'=>'Material Icons','di'=>'dashicons']
@@ -279,7 +279,7 @@ class scss{
 			$value=apply_filters('cp_translate_'.$role_name,$value,$args);
 			if(empty($value)){return Compiler::$false;}
 			return [TYPE::T_KEYWORD,$value];
-		});
+		},['value']);
 	}
 	public static function compile($scss_names){
 		if(!current_user_can('edit_themes'))return;
