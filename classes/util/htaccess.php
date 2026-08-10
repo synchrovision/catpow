@@ -15,6 +15,26 @@ class htaccess{
 		file_put_contents($f,$code_start.self::get_rules().$code_end.$content);
 	}
 	public static function get_rules(){
+		$gzip_rules='';
+		if(!self::is_server_gzip_enabled()){
+			$gzip_rules=
+<<<EOT
+
+RewriteCond %{HTTP:Accept-Encoding} gzip
+RewriteCond %{REQUEST_FILENAME}\.gz -s
+RewriteRule .+ %{REQUEST_FILENAME}.gz
+
+AddEncoding x-gzip .gz
+
+<files *.css.gz>
+  AddType text/css .gz
+</files>
+
+<files *.js.gz>
+  AddType text/javascript .gz
+</files>
+EOT;
+		}
 		return
 <<<EOT
 RewriteEngine On
@@ -31,22 +51,23 @@ RewriteRule .(jpe?g|png|gif)$ %{SCRIPT_FILENAME}.webp [T=image/webp]
 <IfModule mod_mime.c>
   AddType image/webp .webp
   AddType text/javascript .mjs
-</IfModule>
-
-RewriteCond %{HTTP:Accept-Encoding} gzip
-RewriteCond %{REQUEST_FILENAME}\.gz -s
-RewriteRule .+ %{REQUEST_FILENAME}.gz
-
-AddEncoding x-gzip .gz
-
-<files *.css.gz>
-  AddType text/css .gz
-</files>
-
-<files *.js.gz>
-  AddType text/javascript .gz
-</files>
+</IfModule>$gzip_rules
 EOT;
+	}
+	private static function is_server_gzip_enabled(){
+		$server_software=strtolower((string)($_SERVER['SERVER_SOFTWARE'] ?? ''));
+		if(strpos($server_software,'litespeed')!==false || strpos($server_software,'lsws')!==false){
+			return true;
+		}
+		if(function_exists('apache_get_modules')){
+			$modules=array_map('strtolower', apache_get_modules());
+			foreach(['mod_deflate','mod_gzip'] as $module){
+				if(in_array($module,$modules,true)){
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 }
 
