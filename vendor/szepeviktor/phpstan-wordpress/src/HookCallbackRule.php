@@ -15,11 +15,11 @@ use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\ParametersAcceptor;
 use PHPStan\Reflection\ParametersAcceptorSelector;
 use PHPStan\Rules\RuleErrorBuilder;
-use PHPStan\Rules\RuleLevelHelper;
 use PHPStan\Type\Constant\ConstantIntegerType;
 use PHPStan\Type\MixedType;
+use PHPStan\Type\NeverType;
+use PHPStan\Type\Type;
 use PHPStan\Type\VerbosityLevel;
-use PHPStan\Type\VoidType;
 
 /**
  * @implements \PHPStan\Rules\Rule<\PhpParser\Node\Expr\FuncCall>
@@ -31,87 +31,84 @@ class HookCallbackRule implements \PHPStan\Rules\Rule
         'add_action',
     ];
 
-    /** @var \PHPStan\Rules\RuleLevelHelper */
-    protected $ruleLevelHelper;
+    private const CALLBACK_INDEX = 1;
+
+    private const ACCEPTED_ARGS_INDEX = 3;
+
+    private const ACCEPTED_ARGS_DEFAULT = 1;
+
+    /** @var list<\PHPStan\Rules\IdentifierRuleError> */
+    private $errors;
 
     /** @var \PHPStan\Analyser\Scope */
     protected $currentScope;
-
-    public function __construct(
-        RuleLevelHelper $ruleLevelHelper
-    ) {
-        $this->ruleLevelHelper = $ruleLevelHelper;
-    }
 
     public function getNodeType(): string
     {
         return FuncCall::class;
     }
 
-    /**
-     * @param \PhpParser\Node\Expr\FuncCall $node
-     * @param \PHPStan\Analyser\Scope       $scope
-     * @return array<int, \PHPStan\Rules\RuleError>
-     */
     public function processNode(Node $node, Scope $scope): array
     {
-        $name = $node->name;
         $this->currentScope = $scope;
+        $this->errors = [];
 
-        if (!($name instanceof \PhpParser\Node\Name)) {
+        if (! ($node->name instanceof \PhpParser\Node\Name)) {
             return [];
         }
 
-        if (!in_array($name->toString(), self::SUPPORTED_FUNCTIONS, true)) {
+        if (! in_array($node->name->toString(), self::SUPPORTED_FUNCTIONS, true)) {
             return [];
         }
 
         $args = $node->getArgs();
 
         // If we don't have enough arguments, let PHPStan handle the error:
-        if (count($args) < 2) {
+        if (count($args) < self::CALLBACK_INDEX + 1) {
             return [];
         }
 
-        $callbackType = $scope->getType($args[1]->value);
+        $callbackType = $scope->getType($args[self::CALLBACK_INDEX]->value);
 
         // If the callback is not valid, let PHPStan handle the error:
         if (! $callbackType->isCallable()->yes()) {
             return [];
         }
 
-        $parametersAcceptors = $callbackType->getCallableParametersAcceptors($scope);
-        $callbackAcceptor = ParametersAcceptorSelector::selectFromArgs($scope, $args, $parametersAcceptors);
+        $callbackAcceptor = ParametersAcceptorSelector::selectFromArgs(
+            $scope,
+            $args,
+            $callbackType->getCallableParametersAcceptors($scope)
+        );
 
-        try {
-            if ($name->toString() === 'add_action') {
-                $this->validateActionReturnType($callbackAcceptor);
-            } else {
-                $this->validateFilterReturnType($callbackAcceptor);
-            }
-
-            $this->validateParamCount($callbackAcceptor, $args[3] ?? null);
-        } catch (\SzepeViktor\PHPStan\WordPress\HookCallbackException $e) {
-            return [RuleErrorBuilder::message($e->getMessage())->build()];
+        if ($node->name->toString() === 'add_action') {
+            $this->validateActionReturnType($callbackAcceptor->getReturnType());
+        } else {
+            $this->validateFilterReturnType($callbackAcceptor->getReturnType());
         }
 
-        return [];
+        if ($this->errors !== []) {
+            return $this->errors;
+        }
+
+        $this->validateParamCount($callbackAcceptor, $args[self::ACCEPTED_ARGS_INDEX] ?? null);
+
+        return $this->errors;
     }
 
     protected function getAcceptedArgs(?Arg $acceptedArgsParam): ?int
     {
-        $acceptedArgs = 1;
-
-        if (isset($acceptedArgsParam)) {
-            $acceptedArgs = null;
-            $argumentType = $this->currentScope->getType($acceptedArgsParam->value);
-
-            if ($argumentType instanceof ConstantIntegerType) {
-                $acceptedArgs = $argumentType->getValue();
-            }
+        if ($acceptedArgsParam === null) {
+            return self::ACCEPTED_ARGS_DEFAULT;
         }
 
-        return $acceptedArgs;
+        $argumentType = $this->currentScope->getType($acceptedArgsParam->value);
+
+        if ($argumentType instanceof ConstantIntegerType) {
+            return $argumentType->getValue();
+        }
+
+        return null;
     }
 
     protected function validateParamCount(ParametersAcceptor $callbackAcceptor, ?Arg $acceptedArgsParam): void
@@ -144,14 +141,14 @@ class HookCallbackRule implements \PHPStan\Rules\Rule
             return;
         }
 
-        throw new \SzepeViktor\PHPStan\WordPress\HookCallbackException(
+        $this->errors[] = RuleErrorBuilder::message(
             self::buildParameterCountMessage(
                 $minArgs,
                 $maxArgs,
                 $acceptedArgs,
                 $callbackAcceptor
             )
-        );
+        )->identifier('arguments.count')->build();
     }
 
     protected static function buildParameterCountMessage(int $minArgs, int $maxArgs, int $acceptedArgs, ParametersAcceptor $callbackAcceptor): string
@@ -183,51 +180,42 @@ class HookCallbackRule implements \PHPStan\Rules\Rule
         );
     }
 
-    protected function validateActionReturnType(ParametersAcceptor $callbackAcceptor): void
+    protected function validateActionReturnType(Type $returnType): void
     {
-        $acceptedType = $callbackAcceptor->getReturnType();
-        $exception = new \SzepeViktor\PHPStan\WordPress\HookCallbackException(
+        // Will be handled by PHPStan.
+        if ($returnType instanceof MixedType && ! $returnType->isExplicitMixed()) {
+            return;
+        }
+
+        if ($returnType->isVoid()->yes() || $this->isExplicitNever($returnType)) {
+            return;
+        }
+
+        $this->errors[] = RuleErrorBuilder::message(
             sprintf(
                 'Action callback returns %s but should not return anything.',
-                $acceptedType->describe(VerbosityLevel::getRecommendedLevelByType($acceptedType))
+                $returnType->describe(VerbosityLevel::getRecommendedLevelByType($returnType))
             )
-        );
-
-        if ($acceptedType instanceof MixedType && $acceptedType->isExplicitMixed()) {
-            throw $exception;
-        }
-
-        $accepted = $this->ruleLevelHelper->accepts(
-            new VoidType(),
-            $acceptedType,
-            true
-        );
-
-        if (! $accepted) {
-            throw $exception;
-        }
+        )->identifier('return.void')->build();
     }
 
-    protected function validateFilterReturnType(ParametersAcceptor $callbackAcceptor): void
+    protected function validateFilterReturnType(Type $returnType): void
     {
-        $returnType = $callbackAcceptor->getReturnType();
-
         if ($returnType instanceof MixedType) {
             return;
         }
 
-        $accepted = $this->ruleLevelHelper->accepts(
-            new VoidType(),
-            $returnType,
-            true
-        );
-
-        if (! $accepted) {
+        if (($returnType->isVoid()->no()) && ! $this->isExplicitNever($returnType)) {
             return;
         }
 
-        throw new \SzepeViktor\PHPStan\WordPress\HookCallbackException(
+        $this->errors[] = RuleErrorBuilder::message(
             'Filter callback return statement is missing.'
-        );
+        )->identifier('return.missing')->build();
+    }
+
+    protected function isExplicitNever(Type $type): bool
+    {
+        return $type instanceof NeverType && $type->isExplicit();
     }
 }

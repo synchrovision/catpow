@@ -10,16 +10,16 @@ use Psr\Http\Message\StreamInterface;
  * Lazily reads or writes to a file that is opened only after an IO operation
  * take place on the stream.
  */
-#[\AllowDynamicProperties]
 final class LazyOpenStream implements StreamInterface
 {
     use StreamDecoratorTrait;
+    use NonSerializableStreamTrait;
 
-    /** @var string */
-    private $filename;
+    private string $filename;
 
-    /** @var string */
-    private $mode;
+    private string $mode;
+
+    private StreamInterface $stream;
 
     /**
      * @param string $filename File to lazily open
@@ -29,6 +29,17 @@ final class LazyOpenStream implements StreamInterface
     {
         $this->filename = $filename;
         $this->mode = $mode;
+
+        // unsetting the property forces the first access to go through
+        // __get().
+        unset($this->stream);
+    }
+
+    public function __unserialize(array $data): void
+    {
+        $this->stream = new BufferStream();
+
+        throw new \LogicException(static::class.' should never be unserialized');
     }
 
     /**

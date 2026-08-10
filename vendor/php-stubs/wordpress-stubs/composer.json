@@ -9,14 +9,19 @@
     ],
     "homepage": "https://github.com/php-stubs/wordpress-stubs",
     "require-dev": {
-        "php": "^7.4 || ~8.0.0",
+        "php": "^7.4 || ^8.0",
         "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
-        "nikic/php-parser": "^4.13",
-        "php-stubs/generator": "^0.8.3",
-        "phpdocumentor/reflection-docblock": "5.3",
-        "phpstan/phpstan": "^1.10.49",
+        "nikic/php-parser": "^5.5",
+        "php-stubs/generator": "^0.8.6",
+        "phpdocumentor/reflection-docblock": "^6.0",
+        "phpstan/phpstan": "^2.1",
         "phpunit/phpunit": "^9.5",
-        "szepeviktor/phpcs-psr-12-neutron-hybrid-ruleset": "^0.11"
+        "symfony/polyfill-php80": "*",
+        "szepeviktor/phpcs-psr-12-neutron-hybrid-ruleset": "^1.1.1",
+        "wp-coding-standards/wpcs": "3.1.0 as 2.3.0"
+    },
+    "conflict": {
+        "phpdocumentor/reflection-docblock": "5.6.1"
     },
     "suggest": {
         "paragonie/sodium_compat": "Pure PHP implementation of libsodium",
@@ -39,7 +44,8 @@
         },
         "platform": {
             "php": "7.4.30"
-        }
+        },
+        "sort-packages": true
     },
     "scripts": {
         "post-install-cmd": "@composer --working-dir=source/ update --no-interaction",

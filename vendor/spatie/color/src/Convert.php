@@ -64,9 +64,9 @@ class Convert
         $keyNeg = (1 - $black);
 
         return [
-            ($keyNeg - $red) / $keyNeg,
-            ($keyNeg - $green) / $keyNeg,
-            ($keyNeg - $blue) / $keyNeg,
+            (1 - $red - $black) / ($keyNeg ?: 1),
+            (1 - $green - $black) / ($keyNeg ?: 1),
+            (1 - $blue - $black) / ($keyNeg ?: 1),
             $black,
         ];
     }
@@ -79,6 +79,16 @@ class Convert
     public static function rgbChannelToHexChannel(int $rgbValue): string
     {
         return str_pad(dechex($rgbValue), 2, '0', STR_PAD_LEFT);
+    }
+
+    public static function hexAlphaToFloat(string $hexAlpha): float
+    {
+        return round(static::hexChannelToRgbChannel($hexAlpha) / 255, 2);
+    }
+
+    public static function floatAlphaToHex(float $floatAlpha): string
+    {
+        return static::rgbChannelToHexChannel(round($floatAlpha * 255, 0));
     }
 
     public static function hsbValueToRgb($hue, $saturation, $brightness)

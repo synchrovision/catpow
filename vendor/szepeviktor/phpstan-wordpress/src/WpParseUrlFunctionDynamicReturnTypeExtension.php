@@ -19,7 +19,7 @@ use PHPStan\Type\Constant\ConstantArrayTypeBuilder;
 use PHPStan\Type\Constant\ConstantBooleanType;
 use PHPStan\Type\Constant\ConstantIntegerType;
 use PHPStan\Type\Constant\ConstantStringType;
-use PHPStan\Type\IntegerType;
+use PHPStan\Type\IntegerRangeType;
 use PHPStan\Type\NullType;
 use PHPStan\Type\StringType;
 use PHPStan\Type\Type;
@@ -53,7 +53,11 @@ final class WpParseUrlFunctionDynamicReturnTypeExtension implements \PHPStan\Typ
         return $functionReflection->getName() === 'wp_parse_url';
     }
 
-    // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
+    /**
+     * @see https://developer.wordpress.org/reference/functions/wp_parse_url/
+     *
+     * @phpcsSuppress SlevomatCodingStandard.Functions.UnusedParameter
+     */
     public function getTypeFromFunctionCall(FunctionReflection $functionReflection, FuncCall $functionCall, Scope $scope): ?Type
     {
         if (count($functionCall->getArgs()) < 1) {
@@ -63,31 +67,41 @@ final class WpParseUrlFunctionDynamicReturnTypeExtension implements \PHPStan\Typ
         $this->cacheReturnTypes();
 
         $componentType = new ConstantIntegerType(-1);
+
         if (count($functionCall->getArgs()) > 1) {
             $componentType = $scope->getType($functionCall->getArgs()[1]->value);
 
-            if (!$componentType instanceof ConstantIntegerType) {
+            if (! $componentType->isConstantValue()->yes()) {
+                return $this->createAllComponentsReturnType();
+            }
+
+            $componentType = $componentType->toInteger();
+
+            if (! $componentType instanceof ConstantIntegerType) {
                 return $this->createAllComponentsReturnType();
             }
         }
 
         $urlType = $scope->getType($functionCall->getArgs()[0]->value);
-        if (count($urlType->getConstantStrings()) !== 0) {
-            $returnTypes = [];
+        if (count($urlType->getConstantStrings()) > 0) {
+            $types = [];
             foreach ($urlType->getConstantStrings() as $constantString) {
                 try {
                     // phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged
                     $result = @parse_url($constantString->getValue(), $componentType->getValue());
-                    $returnTypes[] = $scope->getTypeFromValue($result);
                 } catch (\ValueError $e) {
-                    $returnTypes[] = new ConstantBooleanType(false);
+                    $types[] = new ConstantBooleanType(false);
+                    continue;
                 }
+
+                $types[] = $scope->getTypeFromValue($result);
             }
-            return TypeCombinator::union(...$returnTypes);
+
+            return TypeCombinator::union(...$types);
         }
 
         if ($componentType->getValue() === -1) {
-            return $this->createAllComponentsReturnType();
+            return TypeCombinator::union($this->createComponentsArray(), new ConstantBooleanType(false));
         }
 
         return $this->componentTypesPairedConstants[$componentType->getValue()] ?? new ConstantBooleanType(false);
@@ -98,24 +112,31 @@ final class WpParseUrlFunctionDynamicReturnTypeExtension implements \PHPStan\Typ
         if ($this->allComponentsTogetherType === null) {
             $returnTypes = [
                 new ConstantBooleanType(false),
+                new NullType(),
+                IntegerRangeType::fromInterval(0, 65535),
+                new StringType(),
+                $this->createComponentsArray(),
             ];
-
-            $builder = ConstantArrayTypeBuilder::createEmpty();
-
-            if ($this->componentTypesPairedStrings === null) {
-                throw new \PHPStan\ShouldNotHappenException();
-            }
-
-            foreach ($this->componentTypesPairedStrings as $componentName => $componentValueType) {
-                $builder->setOffsetValueType(new ConstantStringType($componentName), $componentValueType, true);
-            }
-
-            $returnTypes[] = $builder->getArray();
 
             $this->allComponentsTogetherType = TypeCombinator::union(...$returnTypes);
         }
 
         return $this->allComponentsTogetherType;
+    }
+
+    private function createComponentsArray(): Type
+    {
+            $builder = ConstantArrayTypeBuilder::createEmpty();
+
+        if ($this->componentTypesPairedStrings === null) {
+            throw new \PHPStan\ShouldNotHappenException();
+        }
+
+        foreach ($this->componentTypesPairedStrings as $componentName => $componentValueType) {
+            $builder->setOffsetValueType(new ConstantStringType($componentName), $componentValueType, true);
+        }
+
+            return $builder->getArray();
     }
 
     private function cacheReturnTypes(): void
@@ -124,18 +145,18 @@ final class WpParseUrlFunctionDynamicReturnTypeExtension implements \PHPStan\Typ
             return;
         }
 
-        $string = new StringType();
-        $integer = new IntegerType();
-        $false = new ConstantBooleanType(false);
-        $null = new NullType();
+        $stringType = new StringType();
+        $port = IntegerRangeType::fromInterval(0, 65535);
+        $falseType = new ConstantBooleanType(false);
+        $nullType = new NullType();
 
-        $stringOrFalseOrNull = TypeCombinator::union($string, $false, $null);
-        $integerOrFalseOrNull = TypeCombinator::union($integer, $false, $null);
+        $stringOrFalseOrNull = TypeCombinator::union($stringType, $falseType, $nullType);
+        $portOrFalseOrNull = TypeCombinator::union($port, $falseType, $nullType);
 
         $this->componentTypesPairedConstants = [
             PHP_URL_SCHEME => $stringOrFalseOrNull,
             PHP_URL_HOST => $stringOrFalseOrNull,
-            PHP_URL_PORT => $integerOrFalseOrNull,
+            PHP_URL_PORT => $portOrFalseOrNull,
             PHP_URL_USER => $stringOrFalseOrNull,
             PHP_URL_PASS => $stringOrFalseOrNull,
             PHP_URL_PATH => $stringOrFalseOrNull,
@@ -144,14 +165,14 @@ final class WpParseUrlFunctionDynamicReturnTypeExtension implements \PHPStan\Typ
         ];
 
         $this->componentTypesPairedStrings = [
-            'scheme' => $string,
-            'host' => $string,
-            'port' => $integer,
-            'user' => $string,
-            'pass' => $string,
-            'path' => $string,
-            'query' => $string,
-            'fragment' => $string,
+            'scheme' => $stringType,
+            'host' => $stringType,
+            'port' => $port,
+            'user' => $stringType,
+            'pass' => $stringType,
+            'path' => $stringType,
+            'query' => $stringType,
+            'fragment' => $stringType,
         ];
     }
 }

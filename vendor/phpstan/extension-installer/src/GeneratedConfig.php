@@ -12,7 +12,7 @@ final class GeneratedConfig
 	public const EXTENSIONS = array (
   'szepeviktor/phpstan-wordpress' => 
   array (
-    'install_path' => '/Users/hatanokazuhiro/Documents/htdocs/catpow/wp-content/plugins/catpow/vendor/szepeviktor/phpstan-wordpress',
+    'install_path' => '/Users/hatanokazuhiro/repos/catpow.info/dev.catpow.info/wp-content/plugins/catpow/vendor/szepeviktor/phpstan-wordpress',
     'relative_install_path' => '../../../szepeviktor/phpstan-wordpress',
     'extra' => 
     array (
@@ -21,12 +21,16 @@ final class GeneratedConfig
         0 => 'extension.neon',
       ),
     ),
-    'version' => 'v1.3.4',
+    'version' => 'v1.3.5',
+    'phpstanVersionConstraint' => '>=1.10.31.0-dev, <2.0.0.0-dev',
   ),
 );
 
 	public const NOT_INSTALLED = array (
 );
+
+	/** @var string|null */
+	public const PHPSTAN_VERSION_CONSTRAINT = '>=1.10.31.0-dev, <2.0.0.0-dev';
 
 	private function __construct()
 	{
