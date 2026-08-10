@@ -25,7 +25,7 @@ add_action('cp_cron_daily',function(){
 
 /*plugin update*/
 add_action('upgrader_process_complete',function($upgrader,$hook_extra){
-	cp::include_plugin_files('action/upgrader_process_complete');
+	cp::include_plugin_files('action/upgrader_process_complete',compact('hook_extra'));
 },10,2);
 
 /*plugin init*/
