@@ -199,7 +199,9 @@ wp.blocks.registerBlockType("catpow/listed", {
 				<InspectorControls>
 					<CP.SelectClassPanel title={__("スタイル", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 					<CP.SelectClassPanel title={__("リストアイテム", "catpow")} icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={["color"]} />
-					{states.hasLink && <CP.SelectClassPanel title={__("イベント", "catpow")} icon="flag" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={["event"]} />}
+					{states.hasLink && (
+						<CP.SelectClassPanel title={__("イベント", "catpow")} icon="flag" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={["event"]} />
+					)}
 					{isTemplate && (
 						<CP.SelectClassPanel
 							title={__("テンプレート", "catpow")}
