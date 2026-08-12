@@ -931,13 +931,13 @@ class CP{
 	public static function get_the_conf_data($content_path,$data_id=null){
 		static $cache;
 		if(empty($content_path)){return [];}
-		if(isset($cache[$content_path][$data_id])){return $cache[$content_path][$data_id];}
+		if(isset($cache[$content_path][$data_id??-1])){return $cache[$content_path][$data_id??-1];}
 		$content_path=trim($content_path,'/?');
 		$depth=substr_count($content_path,'/');
 		if($depth<3){
 			if($depth===2){list($data_type,$data_name,$tmp_name)=explode('/',$content_path);}
 			elseif($depth===1){list($data_type,$data_name)=explode('/',$content_path);}
-			else{return $cache[$content_path][$data_id]=[];}
+			else{return $cache[$content_path][$data_id??-1]=[];}
 			$conf_data_name=self::get_conf_data_name($data_type);
 			if(!isset(self::$config[$conf_data_name][$data_name])){
 				if($data_type==='catpow'){
@@ -971,7 +971,7 @@ class CP{
 					}
 				}
 			}
-			return $cache[$content_path][$data_id]=$conf_data;
+			return $cache[$content_path][$data_id??-1]=$conf_data;
 			
 		}
 		$meta_name=basename($content_path);
