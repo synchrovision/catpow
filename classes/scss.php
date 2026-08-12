@@ -2,9 +2,16 @@
 namespace Catpow;
 use ScssPhp\ScssPhp\Compiler;
 use ScssPhp\ScssPhp\Type;
-use Spatie\Color\Hex;
-use Spatie\Color\Hsl;
-use Spatie\Color\Rgba;
+use ScssPhp\ScssPhp\ValueConverter;
+
+use ScssPhp\ScssPhp\Value\ListSeparator;
+use ScssPhp\ScssPhp\Value\SassBoolean;
+use ScssPhp\ScssPhp\Value\SassList;
+use ScssPhp\ScssPhp\Value\SassMap;
+use ScssPhp\ScssPhp\Value\SassNull;
+use ScssPhp\ScssPhp\Value\SassNumber;
+use ScssPhp\ScssPhp\Value\SassString;
+use ScssPhp\ScssPhp\Value\Value;
 
 class scss{
 	public static $scssc,$admin_scssc;
@@ -45,14 +52,14 @@ class scss{
 		$fonts=get_theme_mod('fonts');
 		$scssc->registerFunction('debug',function($args){
 			error_log(var_export($args,1));
-			return false;
+			return Compiler::$true;
 		},['value']);
 		$scssc->registerFunction('get-real-type',function($args){
-			return [TYPE::T_KEYWORD,$args[0][0]];
+			return new SassString($args[0][0],false);
 		},['value']);
 		$scssc->registerFunction('ksort',function($args)use($scssc){
 			if(empty($args[0]) || $args[0][0] !== 'map'){
-				return false;
+				return;
 			}
 			$asNumeric=!empty($args[1][1]);
 			$keys = $args[0][1];
@@ -63,25 +70,24 @@ class scss{
 				if($asNumeric){return (int)$compiledKeys[$a] - (int)$compiledKeys[$b];}
 				return strcmp((string)$compiledKeys[$a], (string)$compiledKeys[$b]);
 			});
-			$sortedKeys = [];
-			$sortedValues = [];
-			foreach($indexOrder as $index){
-				$sortedKeys[] = $keys[$index];
-				$sortedValues[] = $values[$index];
-			}
-			return [TYPE::T_MAP,$sortedKeys,$sortedValues];
+            $map = new Map();
+            foreach($indexOrder as $index){
+                $map->put(new SassString($keys[$index]), self::fromPhp($values[$index]));
+            }
+
+            return SassMap::create($map);
 		},['map','asNumeric']);
 		$scssc->registerFunction('embed-svg',function($args)use($scssc){
 			if($f=CP::get_file_path($args[0][2][0])){
-				return sprintf('data:image/svg+xml;base64,%s',base64_encode(file_get_contents($f)));
+				return new SassString(sprintf('data:image/svg+xml;base64,%s',base64_encode(file_get_contents($f))));
 			}
-			return false;
+			return Compiler::$false;
 		},['path']);
 		$scssc->registerFunction('embed-image',function($args)use($scssc){
 			if($f=CP::get_file_path($args[0][2][0])){
-				return sprintf('data:%s;base64,%s',mime_content_type($f),base64_encode(file_get_contents($f)));
+				return new SassString(sprintf('data:%s;base64,%s',mime_content_type($f),base64_encode(file_get_contents($f))));
 			}
-			return false;
+			return Compiler::$false;
 		},['path']);
 		$scssc->registerFunction('export-colors',function($args){
 			static::export_map_data('colors',$args);
@@ -147,7 +153,7 @@ class scss{
 				}
 				$color=apply_filters('cp_translate_color',$color,$args);
 				if(empty($color)){return Compiler::$false;}
-				return [TYPE::T_KEYWORD,$color];
+				return new SassString($color,false);
 			},['color','tint','alpha']);
 			$scssc->registerFunction('get-color-classes',function($args)use($color_roles_by_shorthand,$scssc){
 				//@todo: reduce code
@@ -278,7 +284,7 @@ class scss{
 			}
 			$value=apply_filters('cp_translate_'.$role_name,$value,$args);
 			if(empty($value)){return Compiler::$false;}
-			return [TYPE::T_KEYWORD,$value];
+			return new SassString($value,false);
 		},['value']);
 	}
 	public static function compile($scss_names){
@@ -318,8 +324,8 @@ class scss{
 				$scssc=self::get_scssc(!$is_theme_file);
 				try{
 					$scssc->addVariables([
-						'is_plugins_scss'=>(strpos($scss_name,WP_PLUGIN_DIR)===0)?Compiler::$true:Compiler::$false,
-						'scss_name'=>[Type::T_STRING,$scss_name]
+						'is_plugins_scss'=>SassBoolean::create(strpos($scss_name,WP_PLUGIN_DIR)===0),
+						'scss_name'=>new SassString($scss_name)
 					]);
 					$scssc->setSourceMapOptions([
 						'sourceMapWriteTo'=>$scss_name.'.css.map',
@@ -328,11 +334,11 @@ class scss{
 						'sourceMapBasepath'=>ABSPATH,
 						'sourceRoot'=>'/'
 					]);
-					$css=$scssc->compile(file_get_contents($scss_name.'.scss'),$scss_name.'.scss');
+					error_log(var_export(file_get_contents($scss_name.'.scss'),1));
+					$css=$scssc->compileString(file_get_contents($scss_name.'.scss'),$scss_name.'.scss')->getCss();
 					file_put_contents($scss_name.'.css',$css);
 					$result['status']='success';
 				}catch(\Exception $e){
-					error_log(sprintf('%s:%s;',$scss_name,$e->getMessage()));
 					$result['status']='error';
 				}
 				$results[]=$result;
@@ -341,14 +347,7 @@ class scss{
 		return $results;
 	}
 	public static function create_map_data($data){
-		return [
-			TYPE::T_MAP,
-			array_map(function($key){return [TYPE::T_KEYWORD,$key];},array_keys($data)),
-			array_map(function($val){
-				if(is_array($val)){return self::create_map_data($val);}
-				return [TYPE::T_KEYWORD,$val];
-			},array_values($data))
-		];
+		return ValueConverter::fromPhp($data);
 	}
 	public static function export_map_data($name,$args){
 		if(empty($args[0]) || $args[0][0]!=='map'){return false;}
