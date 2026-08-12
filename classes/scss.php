@@ -334,7 +334,6 @@ class scss{
 						'sourceMapBasepath'=>ABSPATH,
 						'sourceRoot'=>'/'
 					]);
-					error_log(var_export(file_get_contents($scss_name.'.scss'),1));
 					$css=$scssc->compileString(file_get_contents($scss_name.'.scss'),$scss_name.'.scss')->getCss();
 					file_put_contents($scss_name.'.css',$css);
 					$result['status']='success';
