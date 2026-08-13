@@ -431,6 +431,7 @@ html{
 			@include txt((p:.6em,h:1em,c:mx));
 		}
 		&__caption{
+			@extend %caption-block;
 			@extend %caption;
 			@include bnd((d:b,w:fit,mgi:a,z:1));
 			@include txt((a:l,c:tx));
@@ -553,16 +554,17 @@ table{
 			&>th,&>td{
 				@include bnd((pd:5));
 				@include bdr((s:s,w:1,c:b 60));
-				@include bp((
-					1:(bnd:(pd:10))
-				));
+				@include bp(720){
+					@include bnd((pd:10));
+				}
 			}
 			&>th{
 				@include bnd((w:120));
 				@include txt((a:l,p:12,c:t,s:b));
-				@include bp((
-					-1:(bnd:(d:b,w:a),txt:(a:c))
-				));
+				@include bp(-720){
+					@include bnd((d:b,w:a));
+					@include txt((a:c));
+				}
 				i{
 					@include bnd((d:ib,w:15,mgr:15));
 					@include txt((a:c));
@@ -580,9 +582,10 @@ table{
 			&>td{
 				@include bg((c:b 1 .5));
 				@include txt((a:l,p:11,c:t,s:r));
-				@include bp((
-					-1:(bnd:(d:b,w:a),txt:(a:c))
-				));
+				@include bp(-720){
+					@include bnd((d:b,w:a));
+					@include txt((a:c));
+				}
 				input,textarea{
 					@include bnd((pd:.5em 1em));
 					@include bdr((s:n,r:1em));

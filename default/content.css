@@ -7,6 +7,7 @@
   line-height: var(--cp-line-height-t-h, 1.5);
   letter-spacing: var(--cp-letter-spacing-t-h, normal);
 }
+
 :root .has-text-type-lead, :root .has-text-type.has-text-type-lead {
   font-family: var(--cp-font-family-t-l, inherit);
   font-size: var(--cp-font-size-t-l, 2em);
@@ -14,6 +15,7 @@
   line-height: var(--cp-line-height-t-l, 1.5);
   letter-spacing: var(--cp-letter-spacing-t-l, normal);
 }
+
 :root .has-text-type-paragraph, :root .has-text-type.has-text-type-paragraph {
   font-family: var(--cp-font-family-t-p, inherit);
   font-size: var(--cp-font-size-t-p, 2em);
@@ -21,20 +23,27 @@
   line-height: var(--cp-line-height-t-p, 1.5);
   letter-spacing: var(--cp-letter-spacing-t-p, normal);
 }
-:root .has-text-type-ui, :root .has-text-type.has-text-type-ui, .cp-button__link {
+
+.cp-button__link, :root .has-text-type-ui, :root .has-text-type.has-text-type-ui {
   font-family: var(--cp-font-family-t-u, inherit);
   font-size: var(--cp-font-size-t-u, 2em);
   font-weight: var(--cp-font-weight-t-u, regular);
   line-height: var(--cp-line-height-t-u, 1.5);
   letter-spacing: var(--cp-letter-spacing-t-u, normal);
 }
-:root .has-text-type-caption, :root .has-text-type.has-text-type-caption, .cp-button__caption {
+
+.cp-button__caption {
+  margin: var(--cp-margin-t-c, 0);
+}
+
+.cp-button__caption, :root .has-text-type-caption, :root .has-text-type.has-text-type-caption {
   font-family: var(--cp-font-family-t-c, inherit);
   font-size: var(--cp-font-size-t-c, 2em);
   font-weight: var(--cp-font-weight-t-c, regular);
   line-height: var(--cp-line-height-t-c, 1.5);
   letter-spacing: var(--cp-letter-spacing-t-c, normal);
 }
+
 :root .has-box-shadow-inset-large {
   box-shadow: var(--cp-shadow-s-il) oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
@@ -233,105 +242,105 @@
   align-content: end;
 }
 :root .has-clip-path {
-  padding-top: calc((var(--cp-padding-top,0) + var(--cp-clip-shape-upper-height,40) * 0.0625rem));
-  padding-bottom: calc((var(--cp-padding-bottom,0) + var(--cp-clip-shape-below-height,40) * 0.0625rem));
-  margin-top: calc((var(--cp-margin-top,0) - var(--cp-clip-shape-upper-height,40) * 0.0625rem));
-  margin-bottom: calc((var(--cp-margin-bottom,0) - var(--cp-clip-shape-below-height,40) * 0.0625rem));
+  padding-top: calc(var(--cp-padding-top, 0) + var(--cp-clip-shape-upper-height, 40) * 0.0625rem);
+  padding-bottom: calc(var(--cp-padding-bottom, 0) + var(--cp-clip-shape-below-height, 40) * 0.0625rem);
+  margin-top: calc(var(--cp-margin-top, 0) - var(--cp-clip-shape-upper-height, 40) * 0.0625rem);
+  margin-bottom: calc(var(--cp-margin-bottom, 0) - var(--cp-clip-shape-below-height, 40) * 0.0625rem);
 }
 :root .has-clip-path.has-clip-shape-ellipse {
   clip-path: inset(0);
 }
-@supports (clip-path:shape(from 0 0,hline to 100%,vline to 100%,hline to 0%,close)) {
+@supports (clip-path: shape(from 0 0, hline to 100%, vline to 100%, hline to 0%, close)) {
   :root .has-clip-path.has-clip-shape-ellipse.has-clip-shape-both {
-    clip-path: shape(from 0% calc(var(--cp-clip-shape-amount,50) * 0.1rem), arc by 100% 0% of 60% calc(var(--cp-clip-shape-amount,50) * 0.2rem) cw, vline to calc(100% - var(--cp-clip-shape-amount,50) * 0.1rem), arc by -100% 0% of 60% calc(var(--cp-clip-shape-amount,50) * 0.2rem) cw, close);
+    clip-path: shape(from 0% calc(var(--cp-clip-shape-amount, 50) * 0.1rem), arc by 100% 0% of 60% calc(var(--cp-clip-shape-amount, 50) * 0.2rem) cw, vline to calc(100% - var(--cp-clip-shape-amount, 50) * 0.1rem), arc by -100% 0% of 60% calc(var(--cp-clip-shape-amount, 50) * 0.2rem) cw, close);
   }
   :root .has-clip-path.has-clip-shape-ellipse.has-clip-shape-upper {
-    clip-path: shape(from 0% calc(var(--cp-clip-shape-amount,50) * 0.1rem), arc by 100% 0% of 60% calc(var(--cp-clip-shape-amount,50) * 0.2rem) cw, vline to 100%, hline to 0%, close);
+    clip-path: shape(from 0% calc(var(--cp-clip-shape-amount, 50) * 0.1rem), arc by 100% 0% of 60% calc(var(--cp-clip-shape-amount, 50) * 0.2rem) cw, vline to 100%, hline to 0%, close);
   }
   :root .has-clip-path.has-clip-shape-ellipse.has-clip-shape-below {
-    clip-path: shape(from 0% 0%, hline to 100%, vline to calc(100% - var(--cp-clip-shape-amount,50) * 0.1rem), arc by -100% 0% of 60% calc(var(--cp-clip-shape-amount,50) * 0.2rem) cw, close);
+    clip-path: shape(from 0% 0%, hline to 100%, vline to calc(100% - var(--cp-clip-shape-amount, 50) * 0.1rem), arc by -100% 0% of 60% calc(var(--cp-clip-shape-amount, 50) * 0.2rem) cw, close);
   }
 }
 :root .has-clip-path.has-clip-shape-slope {
   clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
 }
 :root .has-clip-path.has-clip-shape-slope.has-clip-shape-below-left {
-  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem));
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% calc(100% - var(--cp-clip-shape-below-height, 40) * 0.0625rem));
 }
 :root .has-clip-path.has-clip-shape-slope.has-clip-shape-below-right {
-  clip-path: polygon(0% 0%, 100% 0%, 100% calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem), 0% 100%);
+  clip-path: polygon(0% 0%, 100% 0%, 100% calc(100% - var(--cp-clip-shape-below-height, 40) * 0.0625rem), 0% 100%);
 }
 :root .has-clip-path.has-clip-shape-slope.has-clip-shape-upper-left {
-  clip-path: polygon(0% calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), 100% 0%, 100% 100%, 0% 100%);
+  clip-path: polygon(0% calc(var(--cp-clip-shape-upper-height, 40) * 0.0625rem), 100% 0%, 100% 100%, 0% 100%);
 }
 :root .has-clip-path.has-clip-shape-slope.has-clip-shape-upper-left.has-clip-shape-below-left {
-  clip-path: polygon(0% calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), 100% 0%, 100% 100%, 0% calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem));
+  clip-path: polygon(0% calc(var(--cp-clip-shape-upper-height, 40) * 0.0625rem), 100% 0%, 100% 100%, 0% calc(100% - var(--cp-clip-shape-below-height, 40) * 0.0625rem));
 }
 :root .has-clip-path.has-clip-shape-slope.has-clip-shape-upper-left.has-clip-shape-below-right {
-  clip-path: polygon(0% calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), 100% 0%, 100% calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem), 0% 100%);
+  clip-path: polygon(0% calc(var(--cp-clip-shape-upper-height, 40) * 0.0625rem), 100% 0%, 100% calc(100% - var(--cp-clip-shape-below-height, 40) * 0.0625rem), 0% 100%);
 }
 :root .has-clip-path.has-clip-shape-slope.has-clip-shape-upper-right {
-  clip-path: polygon(0% 0%, 100% calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), 100% 100%, 0% 100%);
+  clip-path: polygon(0% 0%, 100% calc(var(--cp-clip-shape-upper-height, 40) * 0.0625rem), 100% 100%, 0% 100%);
 }
 :root .has-clip-path.has-clip-shape-slope.has-clip-shape-upper-right.has-clip-shape-below-left {
-  clip-path: polygon(0% 0%, 100% calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), 100% 100%, 0% calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem));
+  clip-path: polygon(0% 0%, 100% calc(var(--cp-clip-shape-upper-height, 40) * 0.0625rem), 100% 100%, 0% calc(100% - var(--cp-clip-shape-below-height, 40) * 0.0625rem));
 }
 :root .has-clip-path.has-clip-shape-slope.has-clip-shape-upper-right.has-clip-shape-below-right {
-  clip-path: polygon(0% 0%, 100% calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), 100% calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem), 0% 100%);
+  clip-path: polygon(0% 0%, 100% calc(var(--cp-clip-shape-upper-height, 40) * 0.0625rem), 100% calc(100% - var(--cp-clip-shape-below-height, 40) * 0.0625rem), 0% 100%);
 }
 :root .has-clip-path.has-clip-shape-arrow {
   clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
 }
 :root .has-clip-path.has-clip-shape-arrow.has-clip-shape-below-in {
-  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 100% 100%, 50% calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem), 0% 100%);
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 100% 100%, 50% calc(100% - var(--cp-clip-shape-below-height, 40) * 0.0625rem), 0% 100%);
 }
 :root .has-clip-path.has-clip-shape-arrow.has-clip-shape-below-out {
-  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 100% calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem), 50% 100%, 0% calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem));
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 100% calc(100% - var(--cp-clip-shape-below-height, 40) * 0.0625rem), 50% 100%, 0% calc(100% - var(--cp-clip-shape-below-height, 40) * 0.0625rem));
 }
 :root .has-clip-path.has-clip-shape-arrow.has-clip-shape-upper-in {
-  clip-path: polygon(0% 0%, 50% calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), 100% 0%, 100% 100%, 100% 100%, 0% 100%);
+  clip-path: polygon(0% 0%, 50% calc(var(--cp-clip-shape-upper-height, 40) * 0.0625rem), 100% 0%, 100% 100%, 100% 100%, 0% 100%);
 }
 :root .has-clip-path.has-clip-shape-arrow.has-clip-shape-upper-in.has-clip-shape-below-in {
-  clip-path: polygon(0% 0%, 50% calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), 100% 0%, 100% 100%, 100% 100%, 50% calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem), 0% 100%);
+  clip-path: polygon(0% 0%, 50% calc(var(--cp-clip-shape-upper-height, 40) * 0.0625rem), 100% 0%, 100% 100%, 100% 100%, 50% calc(100% - var(--cp-clip-shape-below-height, 40) * 0.0625rem), 0% 100%);
 }
 :root .has-clip-path.has-clip-shape-arrow.has-clip-shape-upper-in.has-clip-shape-below-out {
-  clip-path: polygon(0% 0%, 50% calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), 100% 0%, 100% 100%, 100% calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem), 50% 100%, 0% calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem));
+  clip-path: polygon(0% 0%, 50% calc(var(--cp-clip-shape-upper-height, 40) * 0.0625rem), 100% 0%, 100% 100%, 100% calc(100% - var(--cp-clip-shape-below-height, 40) * 0.0625rem), 50% 100%, 0% calc(100% - var(--cp-clip-shape-below-height, 40) * 0.0625rem));
 }
 :root .has-clip-path.has-clip-shape-arrow.has-clip-shape-upper-out {
-  clip-path: polygon(0% calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), 50% 0%, 100% calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), 100% 100%, 0% 100%);
+  clip-path: polygon(0% calc(var(--cp-clip-shape-upper-height, 40) * 0.0625rem), 50% 0%, 100% calc(var(--cp-clip-shape-upper-height, 40) * 0.0625rem), 100% 100%, 0% 100%);
 }
 :root .has-clip-path.has-clip-shape-arrow.has-clip-shape-upper-out.has-clip-shape-below-in {
-  clip-path: polygon(0% calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), 50% 0%, 100% calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), 100% 100%, 50% calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem), 0% 100%);
+  clip-path: polygon(0% calc(var(--cp-clip-shape-upper-height, 40) * 0.0625rem), 50% 0%, 100% calc(var(--cp-clip-shape-upper-height, 40) * 0.0625rem), 100% 100%, 50% calc(100% - var(--cp-clip-shape-below-height, 40) * 0.0625rem), 0% 100%);
 }
 :root .has-clip-path.has-clip-shape-arrow.has-clip-shape-upper-out.has-clip-shape-below-out {
-  clip-path: polygon(0% calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), 50% 0%, 100% calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), 100% calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem), 50% 100%, 0% calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem));
+  clip-path: polygon(0% calc(var(--cp-clip-shape-upper-height, 40) * 0.0625rem), 50% 0%, 100% calc(var(--cp-clip-shape-upper-height, 40) * 0.0625rem), 100% calc(100% - var(--cp-clip-shape-below-height, 40) * 0.0625rem), 50% 100%, 0% calc(100% - var(--cp-clip-shape-below-height, 40) * 0.0625rem));
 }
 :root .has-clip-path.has-clip-shape-tail {
   clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
 }
 :root .has-clip-path.has-clip-shape-tail.has-clip-shape-below-in {
-  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, calc(50% + var(--cp-clip-shape-below-width,40) * 0.0625rem / 2) 100%, 50% calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem), calc(50% - var(--cp-clip-shape-below-width,40) * 0.0625rem / 2) 100%, 0% 100%);
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, calc(50% + var(--cp-clip-shape-below-width, 40) * 0.0625rem / 2) 100%, 50% calc(100% - var(--cp-clip-shape-below-height, 40) * 0.0625rem), calc(50% - var(--cp-clip-shape-below-width, 40) * 0.0625rem / 2) 100%, 0% 100%);
 }
 :root .has-clip-path.has-clip-shape-tail.has-clip-shape-below-out {
-  clip-path: polygon(0% 0%, 100% 0%, 100% calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem), calc(50% + var(--cp-clip-shape-below-width,40) * 0.0625rem / 2) calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem), 50% 100%, calc(50% - var(--cp-clip-shape-below-width,40) * 0.0625rem / 2) calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem), 0% calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem));
+  clip-path: polygon(0% 0%, 100% 0%, 100% calc(100% - var(--cp-clip-shape-below-height, 40) * 0.0625rem), calc(50% + var(--cp-clip-shape-below-width, 40) * 0.0625rem / 2) calc(100% - var(--cp-clip-shape-below-height, 40) * 0.0625rem), 50% 100%, calc(50% - var(--cp-clip-shape-below-width, 40) * 0.0625rem / 2) calc(100% - var(--cp-clip-shape-below-height, 40) * 0.0625rem), 0% calc(100% - var(--cp-clip-shape-below-height, 40) * 0.0625rem));
 }
 :root .has-clip-path.has-clip-shape-tail.has-clip-shape-upper-in {
-  clip-path: polygon(0% 0%, calc(50% - var(--cp-clip-shape-upper-width,40) * 0.0625rem / 2) 0%, 50% calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), calc(50% + var(--cp-clip-shape-upper-width,40) * 0.0625rem / 2) 0%, 100% 0%, 100% 100%, 100% 100%, 0% 100%);
+  clip-path: polygon(0% 0%, calc(50% - var(--cp-clip-shape-upper-width, 40) * 0.0625rem / 2) 0%, 50% calc(var(--cp-clip-shape-upper-height, 40) * 0.0625rem), calc(50% + var(--cp-clip-shape-upper-width, 40) * 0.0625rem / 2) 0%, 100% 0%, 100% 100%, 100% 100%, 0% 100%);
 }
 :root .has-clip-path.has-clip-shape-tail.has-clip-shape-upper-in.has-clip-shape-below-in {
-  clip-path: polygon(0% 0%, calc(50% - var(--cp-clip-shape-upper-width,40) * 0.0625rem / 2) 0%, 50% calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), calc(50% + var(--cp-clip-shape-upper-width,40) * 0.0625rem / 2) 0%, 100% 0%, 100% 100%, 100% 100%, calc(50% + var(--cp-clip-shape-below-width,40) * 0.0625rem / 2) 100%, 50% calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem), calc(50% - var(--cp-clip-shape-below-width,40) * 0.0625rem / 2) 100%, 0% 100%);
+  clip-path: polygon(0% 0%, calc(50% - var(--cp-clip-shape-upper-width, 40) * 0.0625rem / 2) 0%, 50% calc(var(--cp-clip-shape-upper-height, 40) * 0.0625rem), calc(50% + var(--cp-clip-shape-upper-width, 40) * 0.0625rem / 2) 0%, 100% 0%, 100% 100%, 100% 100%, calc(50% + var(--cp-clip-shape-below-width, 40) * 0.0625rem / 2) 100%, 50% calc(100% - var(--cp-clip-shape-below-height, 40) * 0.0625rem), calc(50% - var(--cp-clip-shape-below-width, 40) * 0.0625rem / 2) 100%, 0% 100%);
 }
 :root .has-clip-path.has-clip-shape-tail.has-clip-shape-upper-in.has-clip-shape-below-out {
-  clip-path: polygon(0% 0%, calc(50% - var(--cp-clip-shape-upper-width,40) * 0.0625rem / 2) 0%, 50% calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), calc(50% + var(--cp-clip-shape-upper-width,40) * 0.0625rem / 2) 0%, 100% 0%, 100% 100%, 100% calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem), calc(50% + var(--cp-clip-shape-below-width,40) * 0.0625rem / 2) calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem), 50% 100%, calc(50% - var(--cp-clip-shape-below-width,40) * 0.0625rem / 2) calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem), 0% calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem));
+  clip-path: polygon(0% 0%, calc(50% - var(--cp-clip-shape-upper-width, 40) * 0.0625rem / 2) 0%, 50% calc(var(--cp-clip-shape-upper-height, 40) * 0.0625rem), calc(50% + var(--cp-clip-shape-upper-width, 40) * 0.0625rem / 2) 0%, 100% 0%, 100% 100%, 100% calc(100% - var(--cp-clip-shape-below-height, 40) * 0.0625rem), calc(50% + var(--cp-clip-shape-below-width, 40) * 0.0625rem / 2) calc(100% - var(--cp-clip-shape-below-height, 40) * 0.0625rem), 50% 100%, calc(50% - var(--cp-clip-shape-below-width, 40) * 0.0625rem / 2) calc(100% - var(--cp-clip-shape-below-height, 40) * 0.0625rem), 0% calc(100% - var(--cp-clip-shape-below-height, 40) * 0.0625rem));
 }
 :root .has-clip-path.has-clip-shape-tail.has-clip-shape-upper-out {
-  clip-path: polygon(0% calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), calc(50% - var(--cp-clip-shape-upper-width,40) * 0.0625rem / 2) calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), 50% 0%, calc(50% + var(--cp-clip-shape-upper-width,40) * 0.0625rem / 2) calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), 100% calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), 100% 100%, 0% 100%);
+  clip-path: polygon(0% calc(var(--cp-clip-shape-upper-height, 40) * 0.0625rem), calc(50% - var(--cp-clip-shape-upper-width, 40) * 0.0625rem / 2) calc(var(--cp-clip-shape-upper-height, 40) * 0.0625rem), 50% 0%, calc(50% + var(--cp-clip-shape-upper-width, 40) * 0.0625rem / 2) calc(var(--cp-clip-shape-upper-height, 40) * 0.0625rem), 100% calc(var(--cp-clip-shape-upper-height, 40) * 0.0625rem), 100% 100%, 0% 100%);
 }
 :root .has-clip-path.has-clip-shape-tail.has-clip-shape-upper-out.has-clip-shape-below-in {
-  clip-path: polygon(0% calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), calc(50% - var(--cp-clip-shape-upper-width,40) * 0.0625rem / 2) calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), 50% 0%, calc(50% + var(--cp-clip-shape-upper-width,40) * 0.0625rem / 2) calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), 100% calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), 100% 100%, calc(50% + var(--cp-clip-shape-below-width,40) * 0.0625rem / 2) 100%, 50% calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem), calc(50% - var(--cp-clip-shape-below-width,40) * 0.0625rem / 2) 100%, 0% 100%);
+  clip-path: polygon(0% calc(var(--cp-clip-shape-upper-height, 40) * 0.0625rem), calc(50% - var(--cp-clip-shape-upper-width, 40) * 0.0625rem / 2) calc(var(--cp-clip-shape-upper-height, 40) * 0.0625rem), 50% 0%, calc(50% + var(--cp-clip-shape-upper-width, 40) * 0.0625rem / 2) calc(var(--cp-clip-shape-upper-height, 40) * 0.0625rem), 100% calc(var(--cp-clip-shape-upper-height, 40) * 0.0625rem), 100% 100%, calc(50% + var(--cp-clip-shape-below-width, 40) * 0.0625rem / 2) 100%, 50% calc(100% - var(--cp-clip-shape-below-height, 40) * 0.0625rem), calc(50% - var(--cp-clip-shape-below-width, 40) * 0.0625rem / 2) 100%, 0% 100%);
 }
 :root .has-clip-path.has-clip-shape-tail.has-clip-shape-upper-out.has-clip-shape-below-out {
-  clip-path: polygon(0% calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), calc(50% - var(--cp-clip-shape-upper-width,40) * 0.0625rem / 2) calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), 50% 0%, calc(50% + var(--cp-clip-shape-upper-width,40) * 0.0625rem / 2) calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), 100% calc(var(--cp-clip-shape-upper-height,40) * 0.0625rem), 100% calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem), calc(50% + var(--cp-clip-shape-below-width,40) * 0.0625rem / 2) calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem), 50% 100%, calc(50% - var(--cp-clip-shape-below-width,40) * 0.0625rem / 2) calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem), 0% calc(100% - var(--cp-clip-shape-below-height,40) * 0.0625rem));
+  clip-path: polygon(0% calc(var(--cp-clip-shape-upper-height, 40) * 0.0625rem), calc(50% - var(--cp-clip-shape-upper-width, 40) * 0.0625rem / 2) calc(var(--cp-clip-shape-upper-height, 40) * 0.0625rem), 50% 0%, calc(50% + var(--cp-clip-shape-upper-width, 40) * 0.0625rem / 2) calc(var(--cp-clip-shape-upper-height, 40) * 0.0625rem), 100% calc(var(--cp-clip-shape-upper-height, 40) * 0.0625rem), 100% calc(100% - var(--cp-clip-shape-below-height, 40) * 0.0625rem), calc(50% + var(--cp-clip-shape-below-width, 40) * 0.0625rem / 2) calc(100% - var(--cp-clip-shape-below-height, 40) * 0.0625rem), 50% 100%, calc(50% - var(--cp-clip-shape-below-width, 40) * 0.0625rem / 2) calc(100% - var(--cp-clip-shape-below-height, 40) * 0.0625rem), 0% calc(100% - var(--cp-clip-shape-below-height, 40) * 0.0625rem));
 }
 :root .has-background-color {
   background-color: oklch(var(--cp-tones-bx-l) var(--cp-tones-bx-c) var(--cp-tones-bx-h) / var(--cp-tones-bx-a,1));
@@ -640,6 +649,7 @@
   --cp-margin-t-c:var(--cp-margin-t-c-6,0.75rem);
   --cp-font-size-t-c:var(--cp-font-size-t-c-6,0.75rem);
 }
+
 :root .has-text-color-text {
   color: oklch(var(--cp-tones-tx-l) var(--cp-tones-tx-c) var(--cp-tones-tx-h) / var(--cp-tones-tx-a,1));
 }
@@ -798,36 +808,42 @@
   font-family: "Yu Mincho", "MS Mincho", "Hiragino Mincho ProN", serif;
   font-weight: 700;
 }
+
 :root .has-background-color {
   background-color: oklch(var(--cp-tones-bx-l) var(--cp-tones-bx-c) var(--cp-tones-bx-h) / var(--cp-tones-bx-a,1));
 }
 :root .has-background-color-alt {
   background-color: oklch(var(--cp-tones-sx-l) var(--cp-tones-sx-c) var(--cp-tones-sx-h) / var(--cp-tones-sx-a,1));
 }
+
 .cp-meta-item.is-multiple > .cp-meta-item-unit {
   padding: var(--cp-padding-c-c);
   border-width: var(--cp-border-width-c-c, 0);
   border-radius: var(--cp-border-radius-c-c, 0);
   box-shadow: var(--cp-shadow-c-c) oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
+
 .cp-button__link {
   padding: var(--cp-padding-c-b);
   border-width: var(--cp-border-width-c-b, 0);
   border-radius: var(--cp-border-radius-c-b, 0);
   box-shadow: var(--cp-shadow-c-b) oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
-.cp-rtf-tag, .cp-button__copy {
+
+.cp-button__copy, .cp-rtf-tag {
   padding: var(--cp-padding-c-l);
   border-width: var(--cp-border-width-c-l, 0);
   border-radius: var(--cp-border-radius-c-l, 0);
   box-shadow: var(--cp-shadow-c-l) oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
-.cp-meta-item-unit-input.is-input-type-text, .cp-meta-item-unit-input.is-type-number {
+
+.cp-meta-item-unit-input.is-type-number, .cp-meta-item-unit-input.is-input-type-text {
   padding: var(--cp-padding-c-i);
   border-width: var(--cp-border-width-c-i, 0);
   border-radius: var(--cp-border-radius-c-i, 0);
   box-shadow: var(--cp-shadow-c-i) oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
+
 :root .has-text-type-heading, :root .has-text-type.has-text-type-heading {
   font-family: var(--cp-font-family-t-h, inherit);
   font-size: var(--cp-font-size-t-h, 2em);
@@ -835,6 +851,7 @@
   line-height: var(--cp-line-height-t-h, 1.5);
   letter-spacing: var(--cp-letter-spacing-t-h, normal);
 }
+
 :root .has-text-type-lead, :root .has-text-type.has-text-type-lead {
   font-family: var(--cp-font-family-t-l, inherit);
   font-size: var(--cp-font-size-t-l, 2em);
@@ -842,6 +859,7 @@
   line-height: var(--cp-line-height-t-l, 1.5);
   letter-spacing: var(--cp-letter-spacing-t-l, normal);
 }
+
 :root .has-text-type-paragraph, :root .has-text-type.has-text-type-paragraph {
   font-family: var(--cp-font-family-t-p, inherit);
   font-size: var(--cp-font-size-t-p, 2em);
@@ -849,20 +867,27 @@
   line-height: var(--cp-line-height-t-p, 1.5);
   letter-spacing: var(--cp-letter-spacing-t-p, normal);
 }
-:root .has-text-type-ui, :root .has-text-type.has-text-type-ui, .cp-button__link {
+
+.cp-button__link, :root .has-text-type-ui, :root .has-text-type.has-text-type-ui {
   font-family: var(--cp-font-family-t-u, inherit);
   font-size: var(--cp-font-size-t-u, 2em);
   font-weight: var(--cp-font-weight-t-u, regular);
   line-height: var(--cp-line-height-t-u, 1.5);
   letter-spacing: var(--cp-letter-spacing-t-u, normal);
 }
-:root .has-text-type-caption, :root .has-text-type.has-text-type-caption, .cp-button__caption {
+
+.cp-button__caption {
+  margin: var(--cp-margin-t-c, 0);
+}
+
+.cp-button__caption, :root .has-text-type-caption, :root .has-text-type.has-text-type-caption {
   font-family: var(--cp-font-family-t-c, inherit);
   font-size: var(--cp-font-size-t-c, 2em);
   font-weight: var(--cp-font-weight-t-c, regular);
   line-height: var(--cp-line-height-t-c, 1.5);
   letter-spacing: var(--cp-letter-spacing-t-c, normal);
 }
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 6.25rem;
@@ -879,6 +904,7 @@ html {
     display: none;
   }
 }
+
 .has-color--0 {
   --cp-tones-b-h: 0;
   --cp-container-tones-b-h: var(--cp-tones-b-h);
@@ -929,6 +955,7 @@ html {
   --cp-tones-shd-h: 0;
   --cp-container-tones-shd-h: var(--cp-tones-shd-h);
 }
+
 .has-color0 {
   --cp-tones-b-h: calc(var(--cp-root-tones-b-h) + var(--cp-tones-hr,20) * 0 + var(--cp-tones-hs,0));
   --cp-container-tones-b-h: var(--cp-tones-b-h);
@@ -979,6 +1006,7 @@ html {
   --cp-tones-shd-h: calc(var(--cp-root-tones-shd-h) + var(--cp-tones-hr,20) * 0 + var(--cp-tones-hs,0));
   --cp-container-tones-shd-h: var(--cp-tones-shd-h);
 }
+
 .has-color_0 {
   --cp-tones-b-h: calc(var(--cp-container-tones-b-h) + var(--cp-tones-hr,20) * 0 + var(--cp-tones-hs,0));
   --cp-tones-bx-h: var(--cp-tones-b-h);
@@ -1015,6 +1043,7 @@ html {
   --cp-tones-sh-h: calc(var(--cp-container-tones-sh-h) + var(--cp-tones-hr,20) * 0 + var(--cp-tones-hs,0));
   --cp-tones-shd-h: calc(var(--cp-container-tones-shd-h) + var(--cp-tones-hr,20) * 0 + var(--cp-tones-hs,0));
 }
+
 .has-color--1 {
   --cp-tones-b-h: 30;
   --cp-container-tones-b-h: var(--cp-tones-b-h);
@@ -1065,6 +1094,7 @@ html {
   --cp-tones-shd-h: 30;
   --cp-container-tones-shd-h: var(--cp-tones-shd-h);
 }
+
 .has-color1 {
   --cp-tones-b-h: calc(var(--cp-root-tones-b-h) + var(--cp-tones-hr,20) * -5 + var(--cp-tones-hs,0));
   --cp-container-tones-b-h: var(--cp-tones-b-h);
@@ -1115,6 +1145,7 @@ html {
   --cp-tones-shd-h: calc(var(--cp-root-tones-shd-h) + var(--cp-tones-hr,20) * -5 + var(--cp-tones-hs,0));
   --cp-container-tones-shd-h: var(--cp-tones-shd-h);
 }
+
 .has-color_1 {
   --cp-tones-b-h: calc(var(--cp-container-tones-b-h) + var(--cp-tones-hr,20) * -5 + var(--cp-tones-hs,0));
   --cp-tones-bx-h: var(--cp-tones-b-h);
@@ -1151,6 +1182,7 @@ html {
   --cp-tones-sh-h: calc(var(--cp-container-tones-sh-h) + var(--cp-tones-hr,20) * -5 + var(--cp-tones-hs,0));
   --cp-tones-shd-h: calc(var(--cp-container-tones-shd-h) + var(--cp-tones-hr,20) * -5 + var(--cp-tones-hs,0));
 }
+
 .has-color--2 {
   --cp-tones-b-h: 60;
   --cp-container-tones-b-h: var(--cp-tones-b-h);
@@ -1201,6 +1233,7 @@ html {
   --cp-tones-shd-h: 60;
   --cp-container-tones-shd-h: var(--cp-tones-shd-h);
 }
+
 .has-color2 {
   --cp-tones-b-h: calc(var(--cp-root-tones-b-h) + var(--cp-tones-hr,20) * -4 + var(--cp-tones-hs,0));
   --cp-container-tones-b-h: var(--cp-tones-b-h);
@@ -1251,6 +1284,7 @@ html {
   --cp-tones-shd-h: calc(var(--cp-root-tones-shd-h) + var(--cp-tones-hr,20) * -4 + var(--cp-tones-hs,0));
   --cp-container-tones-shd-h: var(--cp-tones-shd-h);
 }
+
 .has-color_2 {
   --cp-tones-b-h: calc(var(--cp-container-tones-b-h) + var(--cp-tones-hr,20) * -4 + var(--cp-tones-hs,0));
   --cp-tones-bx-h: var(--cp-tones-b-h);
@@ -1287,6 +1321,7 @@ html {
   --cp-tones-sh-h: calc(var(--cp-container-tones-sh-h) + var(--cp-tones-hr,20) * -4 + var(--cp-tones-hs,0));
   --cp-tones-shd-h: calc(var(--cp-container-tones-shd-h) + var(--cp-tones-hr,20) * -4 + var(--cp-tones-hs,0));
 }
+
 .has-color--3 {
   --cp-tones-b-h: 90;
   --cp-container-tones-b-h: var(--cp-tones-b-h);
@@ -1337,6 +1372,7 @@ html {
   --cp-tones-shd-h: 90;
   --cp-container-tones-shd-h: var(--cp-tones-shd-h);
 }
+
 .has-color3 {
   --cp-tones-b-h: calc(var(--cp-root-tones-b-h) + var(--cp-tones-hr,20) * -3 + var(--cp-tones-hs,0));
   --cp-container-tones-b-h: var(--cp-tones-b-h);
@@ -1387,6 +1423,7 @@ html {
   --cp-tones-shd-h: calc(var(--cp-root-tones-shd-h) + var(--cp-tones-hr,20) * -3 + var(--cp-tones-hs,0));
   --cp-container-tones-shd-h: var(--cp-tones-shd-h);
 }
+
 .has-color_3 {
   --cp-tones-b-h: calc(var(--cp-container-tones-b-h) + var(--cp-tones-hr,20) * -3 + var(--cp-tones-hs,0));
   --cp-tones-bx-h: var(--cp-tones-b-h);
@@ -1423,6 +1460,7 @@ html {
   --cp-tones-sh-h: calc(var(--cp-container-tones-sh-h) + var(--cp-tones-hr,20) * -3 + var(--cp-tones-hs,0));
   --cp-tones-shd-h: calc(var(--cp-container-tones-shd-h) + var(--cp-tones-hr,20) * -3 + var(--cp-tones-hs,0));
 }
+
 .has-color--4 {
   --cp-tones-b-h: 120;
   --cp-container-tones-b-h: var(--cp-tones-b-h);
@@ -1473,6 +1511,7 @@ html {
   --cp-tones-shd-h: 120;
   --cp-container-tones-shd-h: var(--cp-tones-shd-h);
 }
+
 .has-color4 {
   --cp-tones-b-h: calc(var(--cp-root-tones-b-h) + var(--cp-tones-hr,20) * -2 + var(--cp-tones-hs,0));
   --cp-container-tones-b-h: var(--cp-tones-b-h);
@@ -1523,6 +1562,7 @@ html {
   --cp-tones-shd-h: calc(var(--cp-root-tones-shd-h) + var(--cp-tones-hr,20) * -2 + var(--cp-tones-hs,0));
   --cp-container-tones-shd-h: var(--cp-tones-shd-h);
 }
+
 .has-color_4 {
   --cp-tones-b-h: calc(var(--cp-container-tones-b-h) + var(--cp-tones-hr,20) * -2 + var(--cp-tones-hs,0));
   --cp-tones-bx-h: var(--cp-tones-b-h);
@@ -1559,6 +1599,7 @@ html {
   --cp-tones-sh-h: calc(var(--cp-container-tones-sh-h) + var(--cp-tones-hr,20) * -2 + var(--cp-tones-hs,0));
   --cp-tones-shd-h: calc(var(--cp-container-tones-shd-h) + var(--cp-tones-hr,20) * -2 + var(--cp-tones-hs,0));
 }
+
 .has-color--5 {
   --cp-tones-b-h: 150;
   --cp-container-tones-b-h: var(--cp-tones-b-h);
@@ -1609,6 +1650,7 @@ html {
   --cp-tones-shd-h: 150;
   --cp-container-tones-shd-h: var(--cp-tones-shd-h);
 }
+
 .has-color5 {
   --cp-tones-b-h: calc(var(--cp-root-tones-b-h) + var(--cp-tones-hr,20) * -1 + var(--cp-tones-hs,0));
   --cp-container-tones-b-h: var(--cp-tones-b-h);
@@ -1659,6 +1701,7 @@ html {
   --cp-tones-shd-h: calc(var(--cp-root-tones-shd-h) + var(--cp-tones-hr,20) * -1 + var(--cp-tones-hs,0));
   --cp-container-tones-shd-h: var(--cp-tones-shd-h);
 }
+
 .has-color_5 {
   --cp-tones-b-h: calc(var(--cp-container-tones-b-h) + var(--cp-tones-hr,20) * -1 + var(--cp-tones-hs,0));
   --cp-tones-bx-h: var(--cp-tones-b-h);
@@ -1695,6 +1738,7 @@ html {
   --cp-tones-sh-h: calc(var(--cp-container-tones-sh-h) + var(--cp-tones-hr,20) * -1 + var(--cp-tones-hs,0));
   --cp-tones-shd-h: calc(var(--cp-container-tones-shd-h) + var(--cp-tones-hr,20) * -1 + var(--cp-tones-hs,0));
 }
+
 .has-color--6 {
   --cp-tones-b-h: 180;
   --cp-container-tones-b-h: var(--cp-tones-b-h);
@@ -1745,6 +1789,7 @@ html {
   --cp-tones-shd-h: 180;
   --cp-container-tones-shd-h: var(--cp-tones-shd-h);
 }
+
 .has-color6 {
   --cp-tones-b-h: calc(var(--cp-root-tones-b-h) + var(--cp-tones-hr,20) * 0 + var(--cp-tones-hs,0));
   --cp-container-tones-b-h: var(--cp-tones-b-h);
@@ -1795,6 +1840,7 @@ html {
   --cp-tones-shd-h: calc(var(--cp-root-tones-shd-h) + var(--cp-tones-hr,20) * 0 + var(--cp-tones-hs,0));
   --cp-container-tones-shd-h: var(--cp-tones-shd-h);
 }
+
 .has-color_6 {
   --cp-tones-b-h: calc(var(--cp-container-tones-b-h) + var(--cp-tones-hr,20) * 0 + var(--cp-tones-hs,0));
   --cp-tones-bx-h: var(--cp-tones-b-h);
@@ -1831,6 +1877,7 @@ html {
   --cp-tones-sh-h: calc(var(--cp-container-tones-sh-h) + var(--cp-tones-hr,20) * 0 + var(--cp-tones-hs,0));
   --cp-tones-shd-h: calc(var(--cp-container-tones-shd-h) + var(--cp-tones-hr,20) * 0 + var(--cp-tones-hs,0));
 }
+
 .has-color--7 {
   --cp-tones-b-h: 210;
   --cp-container-tones-b-h: var(--cp-tones-b-h);
@@ -1881,6 +1928,7 @@ html {
   --cp-tones-shd-h: 210;
   --cp-container-tones-shd-h: var(--cp-tones-shd-h);
 }
+
 .has-color7 {
   --cp-tones-b-h: calc(var(--cp-root-tones-b-h) + var(--cp-tones-hr,20) * 1 + var(--cp-tones-hs,0));
   --cp-container-tones-b-h: var(--cp-tones-b-h);
@@ -1931,6 +1979,7 @@ html {
   --cp-tones-shd-h: calc(var(--cp-root-tones-shd-h) + var(--cp-tones-hr,20) * 1 + var(--cp-tones-hs,0));
   --cp-container-tones-shd-h: var(--cp-tones-shd-h);
 }
+
 .has-color_7 {
   --cp-tones-b-h: calc(var(--cp-container-tones-b-h) + var(--cp-tones-hr,20) * 1 + var(--cp-tones-hs,0));
   --cp-tones-bx-h: var(--cp-tones-b-h);
@@ -1967,6 +2016,7 @@ html {
   --cp-tones-sh-h: calc(var(--cp-container-tones-sh-h) + var(--cp-tones-hr,20) * 1 + var(--cp-tones-hs,0));
   --cp-tones-shd-h: calc(var(--cp-container-tones-shd-h) + var(--cp-tones-hr,20) * 1 + var(--cp-tones-hs,0));
 }
+
 .has-color--8 {
   --cp-tones-b-h: 240;
   --cp-container-tones-b-h: var(--cp-tones-b-h);
@@ -2017,6 +2067,7 @@ html {
   --cp-tones-shd-h: 240;
   --cp-container-tones-shd-h: var(--cp-tones-shd-h);
 }
+
 .has-color8 {
   --cp-tones-b-h: calc(var(--cp-root-tones-b-h) + var(--cp-tones-hr,20) * 2 + var(--cp-tones-hs,0));
   --cp-container-tones-b-h: var(--cp-tones-b-h);
@@ -2067,6 +2118,7 @@ html {
   --cp-tones-shd-h: calc(var(--cp-root-tones-shd-h) + var(--cp-tones-hr,20) * 2 + var(--cp-tones-hs,0));
   --cp-container-tones-shd-h: var(--cp-tones-shd-h);
 }
+
 .has-color_8 {
   --cp-tones-b-h: calc(var(--cp-container-tones-b-h) + var(--cp-tones-hr,20) * 2 + var(--cp-tones-hs,0));
   --cp-tones-bx-h: var(--cp-tones-b-h);
@@ -2103,6 +2155,7 @@ html {
   --cp-tones-sh-h: calc(var(--cp-container-tones-sh-h) + var(--cp-tones-hr,20) * 2 + var(--cp-tones-hs,0));
   --cp-tones-shd-h: calc(var(--cp-container-tones-shd-h) + var(--cp-tones-hr,20) * 2 + var(--cp-tones-hs,0));
 }
+
 .has-color--9 {
   --cp-tones-b-h: 270;
   --cp-container-tones-b-h: var(--cp-tones-b-h);
@@ -2153,6 +2206,7 @@ html {
   --cp-tones-shd-h: 270;
   --cp-container-tones-shd-h: var(--cp-tones-shd-h);
 }
+
 .has-color9 {
   --cp-tones-b-h: calc(var(--cp-root-tones-b-h) + var(--cp-tones-hr,20) * 3 + var(--cp-tones-hs,0));
   --cp-container-tones-b-h: var(--cp-tones-b-h);
@@ -2203,6 +2257,7 @@ html {
   --cp-tones-shd-h: calc(var(--cp-root-tones-shd-h) + var(--cp-tones-hr,20) * 3 + var(--cp-tones-hs,0));
   --cp-container-tones-shd-h: var(--cp-tones-shd-h);
 }
+
 .has-color_9 {
   --cp-tones-b-h: calc(var(--cp-container-tones-b-h) + var(--cp-tones-hr,20) * 3 + var(--cp-tones-hs,0));
   --cp-tones-bx-h: var(--cp-tones-b-h);
@@ -2239,6 +2294,7 @@ html {
   --cp-tones-sh-h: calc(var(--cp-container-tones-sh-h) + var(--cp-tones-hr,20) * 3 + var(--cp-tones-hs,0));
   --cp-tones-shd-h: calc(var(--cp-container-tones-shd-h) + var(--cp-tones-hr,20) * 3 + var(--cp-tones-hs,0));
 }
+
 .has-color--10 {
   --cp-tones-b-h: 300;
   --cp-container-tones-b-h: var(--cp-tones-b-h);
@@ -2289,6 +2345,7 @@ html {
   --cp-tones-shd-h: 300;
   --cp-container-tones-shd-h: var(--cp-tones-shd-h);
 }
+
 .has-color10 {
   --cp-tones-b-h: calc(var(--cp-root-tones-b-h) + var(--cp-tones-hr,20) * 4 + var(--cp-tones-hs,0));
   --cp-container-tones-b-h: var(--cp-tones-b-h);
@@ -2339,6 +2396,7 @@ html {
   --cp-tones-shd-h: calc(var(--cp-root-tones-shd-h) + var(--cp-tones-hr,20) * 4 + var(--cp-tones-hs,0));
   --cp-container-tones-shd-h: var(--cp-tones-shd-h);
 }
+
 .has-color_10 {
   --cp-tones-b-h: calc(var(--cp-container-tones-b-h) + var(--cp-tones-hr,20) * 4 + var(--cp-tones-hs,0));
   --cp-tones-bx-h: var(--cp-tones-b-h);
@@ -2375,6 +2433,7 @@ html {
   --cp-tones-sh-h: calc(var(--cp-container-tones-sh-h) + var(--cp-tones-hr,20) * 4 + var(--cp-tones-hs,0));
   --cp-tones-shd-h: calc(var(--cp-container-tones-shd-h) + var(--cp-tones-hr,20) * 4 + var(--cp-tones-hs,0));
 }
+
 .has-color--11 {
   --cp-tones-b-h: 330;
   --cp-container-tones-b-h: var(--cp-tones-b-h);
@@ -2425,6 +2484,7 @@ html {
   --cp-tones-shd-h: 330;
   --cp-container-tones-shd-h: var(--cp-tones-shd-h);
 }
+
 .has-color11 {
   --cp-tones-b-h: calc(var(--cp-root-tones-b-h) + var(--cp-tones-hr,20) * 5 + var(--cp-tones-hs,0));
   --cp-container-tones-b-h: var(--cp-tones-b-h);
@@ -2475,6 +2535,7 @@ html {
   --cp-tones-shd-h: calc(var(--cp-root-tones-shd-h) + var(--cp-tones-hr,20) * 5 + var(--cp-tones-hs,0));
   --cp-container-tones-shd-h: var(--cp-tones-shd-h);
 }
+
 .has-color_11 {
   --cp-tones-b-h: calc(var(--cp-container-tones-b-h) + var(--cp-tones-hr,20) * 5 + var(--cp-tones-hs,0));
   --cp-tones-bx-h: var(--cp-tones-b-h);
@@ -2511,6 +2572,7 @@ html {
   --cp-tones-sh-h: calc(var(--cp-container-tones-sh-h) + var(--cp-tones-hr,20) * 5 + var(--cp-tones-hs,0));
   --cp-tones-shd-h: calc(var(--cp-container-tones-shd-h) + var(--cp-tones-hr,20) * 5 + var(--cp-tones-hs,0));
 }
+
 .has-color--12 {
   --cp-tones-b-h: 360;
   --cp-container-tones-b-h: var(--cp-tones-b-h);
@@ -2561,6 +2623,7 @@ html {
   --cp-tones-shd-h: 360;
   --cp-container-tones-shd-h: var(--cp-tones-shd-h);
 }
+
 .has-color12 {
   --cp-tones-b-h: calc(var(--cp-root-tones-b-h) + var(--cp-tones-hr,20) * 6 + var(--cp-tones-hs,0));
   --cp-container-tones-b-h: var(--cp-tones-b-h);
@@ -2611,6 +2674,7 @@ html {
   --cp-tones-shd-h: calc(var(--cp-root-tones-shd-h) + var(--cp-tones-hr,20) * 6 + var(--cp-tones-hs,0));
   --cp-container-tones-shd-h: var(--cp-tones-shd-h);
 }
+
 .has-color_12 {
   --cp-tones-b-h: calc(var(--cp-container-tones-b-h) + var(--cp-tones-hr,20) * 6 + var(--cp-tones-hs,0));
   --cp-tones-bx-h: var(--cp-tones-b-h);
@@ -2647,6 +2711,7 @@ html {
   --cp-tones-sh-h: calc(var(--cp-container-tones-sh-h) + var(--cp-tones-hr,20) * 6 + var(--cp-tones-hs,0));
   --cp-tones-shd-h: calc(var(--cp-container-tones-shd-h) + var(--cp-tones-hr,20) * 6 + var(--cp-tones-hs,0));
 }
+
 .has-tone-s-2 {
   --cp-tones-b-c: calc(var(--cp-root-tones-b-c) + var(--cp-tones-ss,0.1) * -2);
   --cp-tones-bx-s: var(--cp-tones-b-s);
@@ -2673,6 +2738,7 @@ html {
   --cp-tones-sh-c: calc(var(--cp-root-tones-sh-c) + var(--cp-tones-ss,0.1) * -2);
   --cp-tones-shd-c: calc(var(--cp-root-tones-shd-c) + var(--cp-tones-ss,0.1) * -2);
 }
+
 .has-tone-l-2 {
   --cp-tones-b-l: calc(var(--cp-root-tones-b-l) + var(--cp-tones-ls,0.1) * -2);
   --cp-tones-bx-l: var(--cp-tones-b-l);
@@ -2699,6 +2765,7 @@ html {
   --cp-tones-sh-l: calc(var(--cp-root-tones-sh-l) + var(--cp-tones-ls,0.1) * -2);
   --cp-tones-shd-l: calc(var(--cp-root-tones-shd-l) + var(--cp-tones-ls,0.1) * -2);
 }
+
 .has-tone-s-1 {
   --cp-tones-b-c: calc(var(--cp-root-tones-b-c) + var(--cp-tones-ss,0.1) * -1);
   --cp-tones-bx-s: var(--cp-tones-b-s);
@@ -2725,6 +2792,7 @@ html {
   --cp-tones-sh-c: calc(var(--cp-root-tones-sh-c) + var(--cp-tones-ss,0.1) * -1);
   --cp-tones-shd-c: calc(var(--cp-root-tones-shd-c) + var(--cp-tones-ss,0.1) * -1);
 }
+
 .has-tone-l-1 {
   --cp-tones-b-l: calc(var(--cp-root-tones-b-l) + var(--cp-tones-ls,0.1) * -1);
   --cp-tones-bx-l: var(--cp-tones-b-l);
@@ -2751,6 +2819,7 @@ html {
   --cp-tones-sh-l: calc(var(--cp-root-tones-sh-l) + var(--cp-tones-ls,0.1) * -1);
   --cp-tones-shd-l: calc(var(--cp-root-tones-shd-l) + var(--cp-tones-ls,0.1) * -1);
 }
+
 .has-tone-s0 {
   --cp-tones-b-c: calc(var(--cp-root-tones-b-c) + var(--cp-tones-ss,0.1) * 0);
   --cp-tones-bx-s: var(--cp-tones-b-s);
@@ -2777,6 +2846,7 @@ html {
   --cp-tones-sh-c: calc(var(--cp-root-tones-sh-c) + var(--cp-tones-ss,0.1) * 0);
   --cp-tones-shd-c: calc(var(--cp-root-tones-shd-c) + var(--cp-tones-ss,0.1) * 0);
 }
+
 .has-tone-l0 {
   --cp-tones-b-l: calc(var(--cp-root-tones-b-l) + var(--cp-tones-ls,0.1) * 0);
   --cp-tones-bx-l: var(--cp-tones-b-l);
@@ -2803,6 +2873,7 @@ html {
   --cp-tones-sh-l: calc(var(--cp-root-tones-sh-l) + var(--cp-tones-ls,0.1) * 0);
   --cp-tones-shd-l: calc(var(--cp-root-tones-shd-l) + var(--cp-tones-ls,0.1) * 0);
 }
+
 .has-tone-s1 {
   --cp-tones-b-c: calc(var(--cp-root-tones-b-c) + var(--cp-tones-ss,0.1) * 1);
   --cp-tones-bx-s: var(--cp-tones-b-s);
@@ -2829,6 +2900,7 @@ html {
   --cp-tones-sh-c: calc(var(--cp-root-tones-sh-c) + var(--cp-tones-ss,0.1) * 1);
   --cp-tones-shd-c: calc(var(--cp-root-tones-shd-c) + var(--cp-tones-ss,0.1) * 1);
 }
+
 .has-tone-l1 {
   --cp-tones-b-l: calc(var(--cp-root-tones-b-l) + var(--cp-tones-ls,0.1) * 1);
   --cp-tones-bx-l: var(--cp-tones-b-l);
@@ -2855,6 +2927,7 @@ html {
   --cp-tones-sh-l: calc(var(--cp-root-tones-sh-l) + var(--cp-tones-ls,0.1) * 1);
   --cp-tones-shd-l: calc(var(--cp-root-tones-shd-l) + var(--cp-tones-ls,0.1) * 1);
 }
+
 .has-tone-s2 {
   --cp-tones-b-c: calc(var(--cp-root-tones-b-c) + var(--cp-tones-ss,0.1) * 2);
   --cp-tones-bx-s: var(--cp-tones-b-s);
@@ -2881,6 +2954,7 @@ html {
   --cp-tones-sh-c: calc(var(--cp-root-tones-sh-c) + var(--cp-tones-ss,0.1) * 2);
   --cp-tones-shd-c: calc(var(--cp-root-tones-shd-c) + var(--cp-tones-ss,0.1) * 2);
 }
+
 .has-tone-l2 {
   --cp-tones-b-l: calc(var(--cp-root-tones-b-l) + var(--cp-tones-ls,0.1) * 2);
   --cp-tones-bx-l: var(--cp-tones-b-l);
@@ -2907,6 +2981,7 @@ html {
   --cp-tones-sh-l: calc(var(--cp-root-tones-sh-l) + var(--cp-tones-ls,0.1) * 2);
   --cp-tones-shd-l: calc(var(--cp-root-tones-shd-l) + var(--cp-tones-ls,0.1) * 2);
 }
+
 .has-color-scheme-reverted {
   --cp-tones-bx-l: var(--cp-tones-b-l);
   --cp-container-tones-bx-l: var(--cp-tones-b-l);
@@ -3009,6 +3084,7 @@ html {
   --cp-tones-rx-t: var(--cp-tones-r-t);
   --cp-container-tones-rx-t: var(--cp-tones-r-t);
 }
+
 .has-color-scheme-inverted {
   --cp-tones-bx-l: var(--cp-tones-m-l);
   --cp-container-tones-bx-l: var(--cp-tones-m-l);
@@ -3111,6 +3187,7 @@ html {
   --cp-tones-rx-t: var(--cp-tones-l-t);
   --cp-container-tones-rx-t: var(--cp-tones-l-t);
 }
+
 .cp-message {
   margin: 0.625rem;
   padding: 1.25rem;
@@ -3180,12 +3257,12 @@ html {
   color: oklch(var(--cp-tones-bx-l) var(--cp-tones-bx-c) var(--cp-tones-bx-h) / var(--cp-tones-bx-a,1));
 }
 .cp-meta-item.is-multiple > .cp-meta-item-unit .multiple-input-buttons .btn-inc::after {
-  content: "";
+  content: "\f067";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
 .cp-meta-item.is-multiple > .cp-meta-item-unit .multiple-input-buttons .btn-dec::after {
-  content: "";
+  content: "\f068";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
@@ -3216,17 +3293,17 @@ html {
   opacity: 0.5;
 }
 .cp-meta-item.is-multiple > .cp-meta-item-unit .sort-input-buttons .btn-up::after {
-  content: "";
+  content: "\f077";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
 .cp-meta-item.is-multiple > .cp-meta-item-unit .sort-input-buttons .btn-handle::after {
-  content: "";
+  content: "\f58d";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
 .cp-meta-item.is-multiple > .cp-meta-item-unit .sort-input-buttons .btn-down::after {
-  content: "";
+  content: "\f078";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
@@ -3250,7 +3327,7 @@ html {
 .cp-meta-item fieldset legend {
   color: oklch(calc(1 - var(--cp-tones-tx-t) * 100) var(--cp-tones-tx-c) var(--cp-tones-tx-h) / calc(var(--cp-tones-tx-a,1) * 0.3));
 }
-.cp-meta-item select, .cp-meta-item input[type="text"], .cp-meta-item textarea {
+.cp-meta-item select, .cp-meta-item input[type=text], .cp-meta-item textarea {
   padding: 0.625rem;
   margin: 0.3125rem;
   height: auto;
@@ -3342,22 +3419,22 @@ html {
   display: none;
 }
 .cp-meta-item span.checkbox > .label:before {
-  content: "";
+  content: "\f0c8";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
 .cp-meta-item span.checkbox > input:checked + .label:before {
-  content: "";
+  content: "\f14a";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
 .cp-meta-item span.radio > .label:before {
-  content: "";
+  content: "\f192";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
 .cp-meta-item span.radio > input:checked + .label:before {
-  content: "";
+  content: "\f111";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
@@ -3818,6 +3895,7 @@ html {
   background-color: transparent;
   box-shadow: none;
 }
+
 .cpform div.cpform_nav {
   display: block;
   position: fixed;
@@ -3839,12 +3917,14 @@ html {
   transform: -webkit- translateY(0rem);
   transform: translateY(0rem);
 }
+
 .wp-block-template-part {
   display: contents;
 }
 .wp-block-template-part.block-editor-block-list__block {
   display: block;
 }
+
 table.wp-list-table tr td div.cp-meta-item img, table.wp-list-table tr td div.cp-meta-item video {
   display: block;
   width: 6.25rem;
@@ -3866,12 +3946,24 @@ table.inputs > thead > tr > th, table.inputs > thead > tr > td, table.inputs > t
   border-width: 0.0625rem;
   border-color: oklch(calc(1 - var(--cp-tones-b-t) * 60) var(--cp-tones-b-c) var(--cp-tones-b-h) / var(--cp-tones-b-a,1));
 }
+@media (min-width:720px) {
+  table.inputs > thead > tr > th, table.inputs > thead > tr > td, table.inputs > tbody > tr > th, table.inputs > tbody > tr > td {
+    padding: 0.625rem;
+  }
+}
 table.inputs > thead > tr > th, table.inputs > tbody > tr > th {
   width: 7.5rem;
   text-align: left;
   font-size: 0.75rem;
   color: oklch(var(--cp-tones-t-l) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
   font-weight: bold;
+}
+@media (max-width:720px) {
+  table.inputs > thead > tr > th, table.inputs > tbody > tr > th {
+    display: block;
+    width: auto;
+    text-align: center;
+  }
 }
 table.inputs > thead > tr > th i, table.inputs > tbody > tr > th i {
   display: inline-block;
@@ -3900,6 +3992,13 @@ table.inputs > thead > tr > td, table.inputs > tbody > tr > td {
   color: oklch(var(--cp-tones-t-l) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
   font-weight: normal;
 }
+@media (max-width:720px) {
+  table.inputs > thead > tr > td, table.inputs > tbody > tr > td {
+    display: block;
+    width: auto;
+    text-align: center;
+  }
+}
 table.inputs > thead > tr > td input, table.inputs > thead > tr > td textarea, table.inputs > tbody > tr > td input, table.inputs > tbody > tr > td textarea {
   padding: 0.5em 1em;
   border-style: none;
@@ -3921,13 +4020,16 @@ table.inputs > thead > tr > td span, table.inputs > tbody > tr > td span {
 table.inputs > thead > tr.disabled, table.inputs > tbody > tr.disabled {
   display: none;
 }
+
 ruby rt {
   font-size: 40%;
   font-weight: normal;
 }
+
 del {
   text-decoration-line: line-through;
 }
+
 .transition.org, .transition.new, .transition.del {
   -webkit-transition: 1s;
   transition: 1s;
@@ -3962,7 +4064,11 @@ del {
   transform: -webkit- translateY(-1.25rem);
   transform: translateY(-1.25rem);
 }
-[data-role="cpform_submit"], [data-role="cpform_section_submit"], [data-role="cpform_acion_submit"] {
+
+[data-role=cpform_submit],
+[data-role=cpform_section_submit],
+[data-role=cpform_acion_submit] {
   cursor: pointer;
 }
+
 /*# sourceMappingURL=./content.css.map */
