@@ -338,6 +338,7 @@ class scss{
 					file_put_contents($scss_name.'.css',$css);
 					$result['status']='success';
 				}catch(\Exception $e){
+					error_log(sprintf('%s:%s;',$scss_name,$e->getMessage()));
 					$result['status']='error';
 				}
 				$results[]=$result;
