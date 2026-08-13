@@ -13,6 +13,7 @@
   width: 6.25rem;
   height: auto;
 }
+
 .cp-item {
   anchor-name: --item;
   anchor-scope: all;
@@ -363,6 +364,7 @@
   top: 0rem;
   height: fit-content;
   width: fit-content;
+  z-index: 10000;
 }
 .cp-link__popover-box-input {
   display: block;
@@ -389,7 +391,7 @@
   pointer-events: auto;
 }
 .cp-link__popover-box-input::before {
-  content: "";
+  content: "\f103";
   display: block;
   position: absolute;
   top: -1em;
@@ -420,6 +422,9 @@
   opacity: 0;
   transform: -webkit- translateY(-0.5em);
   transform: translateY(-0.5em);
+  pointer-events: none;
+}
+.cp-link:not(.is-selected) .cp-link__popover {
   pointer-events: none;
 }
 .cp-rtf {
@@ -630,10 +635,10 @@
   grid-template-columns: 2fr 1fr 2fr 1fr;
   grid-gap: 0.25rem;
 }
-.cp-selectpicturesources.is-compact .cp-selectpicturesources {
+.cp-selectpicturesources.is-compact .cp-selectpicturesources-image {
   position: relative;
 }
-.cp-selectpicturesources.is-compact .cp-selectpicturesources-image-img {
+.cp-selectpicturesources.is-compact .cp-selectpicturesources-image-image-img {
   display: block;
   position: absolute;
   top: 0rem;
@@ -830,37 +835,37 @@
   opacity: 0.7;
 }
 .cp-itemcontrol__body-button.is-delete::before {
-  content: "";
+  content: "\f068";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
 .cp-itemcontrol__body-button.is-clone::before {
-  content: "";
+  content: "\f067";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
 .cp-itemcontrol__body-button.is-up::before {
-  content: "";
+  content: "\f139";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
 .cp-itemcontrol__body-button.is-down::before {
-  content: "";
+  content: "\f13a";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
 .cp-itemcontrol__body-button.is-left::before {
-  content: "";
+  content: "\f137";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
 .cp-itemcontrol__body-button.is-right::before {
-  content: "";
+  content: "\f138";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
 .cp-itemcontrol__body-button.is-edit::before {
-  content: "";
+  content: "\f304";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
@@ -1049,10 +1054,10 @@
 .cp-selectgridbuttons.has-columns-3 > *:first-child:nth-last-child(1), .cp-selectgridbuttons.has-columns-3 > *:first-child:nth-last-child(1) ~ * {
   flex-basis: 100%;
 }
-.cp-selectgridbuttons.has-columns-3 > *, .cp-selectgridbuttons.has-columns-3 > *:first-child:nth-last-child(2), .cp-selectgridbuttons.has-columns-3 > *:first-child:nth-last-child(2) ~ * {
+.cp-selectgridbuttons.has-columns-3 > *:first-child:nth-last-child(2), .cp-selectgridbuttons.has-columns-3 > *:first-child:nth-last-child(2) ~ *, .cp-selectgridbuttons.has-columns-3 > * {
   flex-basis: 50%;
 }
-.cp-selectgridbuttons.has-columns-3 > *:first-child:nth-last-child(3n), .cp-selectgridbuttons.has-columns-3 > *:first-child:nth-last-child(3n) ~ *, .cp-selectgridbuttons.has-columns-3 > *:nth-child(2n):nth-last-child(3n + 1) ~ * {
+.cp-selectgridbuttons.has-columns-3 > *:nth-child(2n):nth-last-child(3n+1) ~ *, .cp-selectgridbuttons.has-columns-3 > *:first-child:nth-last-child(3n), .cp-selectgridbuttons.has-columns-3 > *:first-child:nth-last-child(3n) ~ * {
   flex-basis: 33%;
 }
 .cp-selectgridbuttons.has-columns-4 {
@@ -1067,13 +1072,13 @@
   flex-grow: 1;
   box-sizing: border-box;
 }
-.cp-selectgridbuttons.has-columns-4 > *:first-child:nth-last-child(2), .cp-selectgridbuttons.has-columns-4 > *:first-child:nth-last-child(2) ~ *, .cp-selectgridbuttons.has-columns-4 > *:first-child:nth-last-child(5), .cp-selectgridbuttons.has-columns-4 > *:first-child:nth-last-child(5) ~ * {
+.cp-selectgridbuttons.has-columns-4 > *:first-child:nth-last-child(5), .cp-selectgridbuttons.has-columns-4 > *:first-child:nth-last-child(5) ~ *, .cp-selectgridbuttons.has-columns-4 > *:first-child:nth-last-child(2), .cp-selectgridbuttons.has-columns-4 > *:first-child:nth-last-child(2) ~ * {
   flex-basis: 50%;
 }
-.cp-selectgridbuttons.has-columns-4 > *, .cp-selectgridbuttons.has-columns-4 > *:first-child:nth-last-child(3), .cp-selectgridbuttons.has-columns-4 > *:first-child:nth-last-child(3) ~ *, .cp-selectgridbuttons.has-columns-4 > *:first-child:nth-last-child(5) ~ *:nth-child(2n):nth-last-child(3n + 1) ~ * {
+.cp-selectgridbuttons.has-columns-4 > *:first-child:nth-last-child(5) ~ *:nth-child(2n):nth-last-child(3n+1) ~ *, .cp-selectgridbuttons.has-columns-4 > *:first-child:nth-last-child(3), .cp-selectgridbuttons.has-columns-4 > *:first-child:nth-last-child(3) ~ *, .cp-selectgridbuttons.has-columns-4 > * {
   flex-basis: 33%;
 }
-.cp-selectgridbuttons.has-columns-4 > *:first-child:nth-last-child(4n), .cp-selectgridbuttons.has-columns-4 > *:first-child:nth-last-child(4n) ~ *, .cp-selectgridbuttons.has-columns-4 > *:nth-child(3n):nth-last-child(4n + 1) ~ * {
+.cp-selectgridbuttons.has-columns-4 > *:nth-child(3n):nth-last-child(4n+1) ~ *, .cp-selectgridbuttons.has-columns-4 > *:first-child:nth-last-child(4n), .cp-selectgridbuttons.has-columns-4 > *:first-child:nth-last-child(4n) ~ * {
   flex-basis: 25%;
 }
 .cp-selectgridbuttons.has-columns-5 {
@@ -1088,13 +1093,13 @@
   flex-grow: 1;
   box-sizing: border-box;
 }
-.cp-selectgridbuttons.has-columns-5 > *:first-child:nth-last-child(3), .cp-selectgridbuttons.has-columns-5 > *:first-child:nth-last-child(3) ~ *, .cp-selectgridbuttons.has-columns-5 > *:first-child:nth-last-child(7), .cp-selectgridbuttons.has-columns-5 > *:first-child:nth-last-child(7) ~ *, .cp-selectgridbuttons.has-columns-5 > *:first-child:nth-last-child(11), .cp-selectgridbuttons.has-columns-5 > *:first-child:nth-last-child(11) ~ * {
+.cp-selectgridbuttons.has-columns-5 > *:first-child:nth-last-child(11), .cp-selectgridbuttons.has-columns-5 > *:first-child:nth-last-child(11) ~ *, .cp-selectgridbuttons.has-columns-5 > *:first-child:nth-last-child(7), .cp-selectgridbuttons.has-columns-5 > *:first-child:nth-last-child(7) ~ *, .cp-selectgridbuttons.has-columns-5 > *:first-child:nth-last-child(3), .cp-selectgridbuttons.has-columns-5 > *:first-child:nth-last-child(3) ~ * {
   flex-basis: 33%;
 }
-.cp-selectgridbuttons.has-columns-5 > *, .cp-selectgridbuttons.has-columns-5 > *:first-child:nth-last-child(4), .cp-selectgridbuttons.has-columns-5 > *:first-child:nth-last-child(4) ~ *, .cp-selectgridbuttons.has-columns-5 > *:first-child:nth-last-child(7) ~ *:nth-child(3n):nth-last-child(4n + 1) ~ *, .cp-selectgridbuttons.has-columns-5 > *:first-child:nth-last-child(8), .cp-selectgridbuttons.has-columns-5 > *:first-child:nth-last-child(8) ~ *, .cp-selectgridbuttons.has-columns-5 > *:first-child:nth-last-child(11) ~ *:nth-child(3n):nth-last-child(4n + 1) ~ * {
+.cp-selectgridbuttons.has-columns-5 > *:first-child:nth-last-child(11) ~ *:nth-child(3n):nth-last-child(4n+1) ~ *, .cp-selectgridbuttons.has-columns-5 > *:first-child:nth-last-child(8), .cp-selectgridbuttons.has-columns-5 > *:first-child:nth-last-child(8) ~ *, .cp-selectgridbuttons.has-columns-5 > *:first-child:nth-last-child(7) ~ *:nth-child(3n):nth-last-child(4n+1) ~ *, .cp-selectgridbuttons.has-columns-5 > *:first-child:nth-last-child(4), .cp-selectgridbuttons.has-columns-5 > *:first-child:nth-last-child(4) ~ *, .cp-selectgridbuttons.has-columns-5 > * {
   flex-basis: 25%;
 }
-.cp-selectgridbuttons.has-columns-5 > *:first-child:nth-last-child(5n), .cp-selectgridbuttons.has-columns-5 > *:first-child:nth-last-child(5n) ~ *, .cp-selectgridbuttons.has-columns-5 > *:nth-child(4n):nth-last-child(5n + 1) ~ * {
+.cp-selectgridbuttons.has-columns-5 > *:nth-child(4n):nth-last-child(5n+1) ~ *, .cp-selectgridbuttons.has-columns-5 > *:first-child:nth-last-child(5n), .cp-selectgridbuttons.has-columns-5 > *:first-child:nth-last-child(5n) ~ * {
   flex-basis: 20%;
 }
 .cp-selectgridbuttons.has-columns-5 > *:first-child:nth-last-child(6), .cp-selectgridbuttons.has-columns-5 > *:first-child:nth-last-child(6) ~ * {
@@ -1115,16 +1120,16 @@
 .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(3), .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(3) ~ * {
   flex-basis: 33%;
 }
-.cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(4), .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(4) ~ *, .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(8), .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(8) ~ *, .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(9), .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(9) ~ *, .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(14), .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(14) ~ *, .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(19), .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(19) ~ * {
+.cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(19), .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(19) ~ *, .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(14), .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(14) ~ *, .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(9), .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(9) ~ *, .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(8), .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(8) ~ *, .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(4), .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(4) ~ * {
   flex-basis: 25%;
 }
-.cp-selectgridbuttons.has-columns-6 > *, .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(5), .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(5) ~ *, .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(9) ~ *:nth-child(4n):nth-last-child(5n + 1) ~ *, .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(10), .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(10) ~ *, .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(14) ~ *:nth-child(4n):nth-last-child(5n + 1) ~ *, .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(15), .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(15) ~ *, .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(19) ~ *:nth-child(4n):nth-last-child(5n + 1) ~ * {
+.cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(19) ~ *:nth-child(4n):nth-last-child(5n+1) ~ *, .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(15), .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(15) ~ *, .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(14) ~ *:nth-child(4n):nth-last-child(5n+1) ~ *, .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(10), .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(10) ~ *, .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(9) ~ *:nth-child(4n):nth-last-child(5n+1) ~ *, .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(5), .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(5) ~ *, .cp-selectgridbuttons.has-columns-6 > * {
   flex-basis: 20%;
 }
-.cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(6n), .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(6n) ~ *, .cp-selectgridbuttons.has-columns-6 > *:nth-child(5n):nth-last-child(6n + 1) ~ *, .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(13), .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(13) ~ * {
+.cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(13), .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(13) ~ *, .cp-selectgridbuttons.has-columns-6 > *:nth-child(5n):nth-last-child(6n+1) ~ *, .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(6n), .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(6n) ~ * {
   flex-basis: 16%;
 }
-.cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(7), .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(7) ~ *, .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(13) ~ *:nth-child(6n):nth-last-child(7n + 1) ~ * {
+.cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(13) ~ *:nth-child(6n):nth-last-child(7n+1) ~ *, .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(7), .cp-selectgridbuttons.has-columns-6 > *:first-child:nth-last-child(7) ~ * {
   flex-basis: 14%;
 }
 .cp-selectgridbuttons__item {
@@ -1313,4 +1318,5 @@
   flex-shrink: 1;
   flex-basis: 100%;
 }
+
 /*# sourceMappingURL=./base_style.css.map */

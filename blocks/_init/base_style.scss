@@ -204,11 +204,12 @@ $colors:(
 		}
 	}
 	&-link{
+		$block:&;
 		@include anc((n:--link,s:a));
 		@include bnd((p:r));
 		&__popover{
 			@include pos((anc:--link,a:b c));
-			@include bnd((d:b,p:f,t:0,h:fit,w:fit));
+			@include bnd((d:b,p:f,t:0,h:fit,w:fit,z:10000));
 			&-box{
 				&-input{
 					@include bnd((d:b,p:r,w:1em fit,h:1em,pd:.5em 1em,mg:.5em));
@@ -234,6 +235,13 @@ $colors:(
 						@include trn((o:0,y:-.5em));
 						@include usr((e:n));
 					}
+				}
+			}
+		}
+		&:not(.is-selected){
+			#{$block}{
+				&__popover{
+					@include usr((e:n));
 				}
 			}
 		}
