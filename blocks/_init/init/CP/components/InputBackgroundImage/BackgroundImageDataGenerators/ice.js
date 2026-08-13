@@ -1,4 +1,4 @@
-﻿import { baseGradientParams, invertParams, alphaParams, aParams, hParams, seedParams, getBaseGradientCode, rParams } from "./common";
+﻿import { baseGradientParams, invertParams, alphaParams, aParams, hParams, seedParams, getBaseGradientCode, rParams, complementParams } from "./common";
 import { srand, pfloor } from "catpow/util";
 const { __ } = wp.i18n;
 
@@ -15,7 +15,7 @@ export const ice = {
 		...alphaParams,
 	},
 	getData(params = {}) {
-		const { invert = false, a = 5, h = 50, r = 0, seed = 10, alpha = 25 } = params;
+		const { invert, a, h, r, seed, alpha } = complementParams(params, ice.params);
 		const rand = srand(seed);
 
 		const c = (alpha = 100) => (invert ? `rgba(0,0,0,${alpha / 100})` : `rgba(255,255,255,${alpha / 100})`);

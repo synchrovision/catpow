@@ -2483,22 +2483,6 @@
     stripe: () => stripe
   });
 
-  // ../blocks/_init/init/CP/components/InputBackgroundImage/BackgroundImageDataGenerators/prepared.js
-  var { __: __2 } = wp.i18n;
-  var prepared = {
-    label: __2("\u65E2\u5B9A\u753B\u50CF", "catpow"),
-    order: 1,
-    params: {
-      image: { "@editor": "Image" }
-    },
-    getData(params = {}) {
-      const { image } = params;
-      return {
-        image: []
-      };
-    }
-  };
-
   // node_modules-included/catpow/src/scssc/settings.js
   var colorRoles = {
     b: {
@@ -2633,24 +2617,24 @@
   };
 
   // ../blocks/_init/init/CP/components/InputBackgroundImage/BackgroundImageDataGenerators/common.js
-  var aParam = { minimum: 1, maximum: 10 };
-  var rParam = { "@editor": "Angle" };
-  var wParam = { steps: { 1: 0, 10: 1, 20: 2, 50: 5, 100: 10, 200: 20 } };
-  var hParam = { steps: { 1: 0, 10: 1, 20: 2, 50: 5, 100: 10, 200: 20 } };
+  var aParam = { minimum: 1, maximum: 10, default: 5 };
+  var rParam = { "@editor": "Angle", default: 0 };
+  var wParam = { steps: { 1: 0, 10: 1, 20: 2, 50: 5, 100: 10, 200: 20 }, default: 50 };
+  var hParam = { steps: { 1: 0, 10: 1, 20: 2, 50: 5, 100: 10, 200: 20 }, default: 50 };
   var baseGradientParams = {
-    useAccentColor: { type: "boolean" },
-    useInvertibleColor: { type: "boolean" },
-    baseGradientRotate: { "@editor": "Angle" },
-    baseGradientRange: { steps: { [-180]: 0, [-90]: 30, 90: 15, 180: 30 } }
+    useAccentColor: { type: "boolean", default: true },
+    useInvertibleColor: { type: "boolean", default: true },
+    baseGradientRotate: { "@editor": "Angle", default: 0 },
+    baseGradientRange: { steps: { [-180]: 0, [-90]: 30, 90: 15, 180: 30 }, default: 60 }
   };
   var invertParams = {
-    invert: { type: "boolean" }
+    invert: { type: "boolean", default: false }
   };
   var contrastParams = {
-    contrast: { steps: { 6: 1, 10: 2, 60: 5, 100: 10 } }
+    contrast: { steps: { 6: 1, 10: 2, 60: 5, 100: 10 }, default: 50 }
   };
   var alphaParams = {
-    alpha: { steps: { 6: 1, 10: 2, 60: 5, 100: 10 } }
+    alpha: { steps: { 6: 1, 10: 2, 60: 5, 100: 10 }, default: 25 }
   };
   var positionParams = {
     position: {
@@ -2660,9 +2644,10 @@
       height: 100,
       margin: 10,
       properties: {
-        x: { default: 50 },
-        y: { default: 50 }
-      }
+        x: { minimum: 0, maximum: 100 },
+        y: { minimum: 0, maximum: 100 }
+      },
+      default: { x: 50, y: 50 }
     }
   };
   var aParams = {
@@ -2670,6 +2655,12 @@
   };
   var rParams = {
     r: rParam
+  };
+  var r1Params = {
+    r1: rParam
+  };
+  var r2Params = {
+    r2: { ...rParam, default: 90 }
   };
   var wParams = {
     w: wParam
@@ -2682,13 +2673,33 @@
   };
   var getBaseGradientCode = (params) => {
     const {
-      useAccentColor = true,
-      useInvertibleColor = true,
-      baseGradientRotate = 0,
-      baseGradientRange = 0,
+      useAccentColor = baseGradientParams.useAccentColor.default,
+      useInvertibleColor = baseGradientParams.useInvertibleColor.default,
+      baseGradientRotate = baseGradientParams.baseGradientRotate.default,
+      baseGradientRange = baseGradientParams.baseGradientRange.default,
       colorKey = useInvertibleColor ? useAccentColor ? "sx" : "bx" : useAccentColor ? "a" : "m"
     } = params;
     return `linear-gradient(${baseGradientRotate}deg in oklch,${translateColor(colorKey)},oklch(from ${translateColor(colorKey)} l c calc(h + ${baseGradientRange})))`;
+  };
+  var complementParams = (params, properties) => ({
+    ...Object.keys(properties).reduce((p, c) => ({ ...p, [c]: properties[c].default }), {}),
+    ...params
+  });
+
+  // ../blocks/_init/init/CP/components/InputBackgroundImage/BackgroundImageDataGenerators/prepared.js
+  var { __: __2 } = wp.i18n;
+  var prepared = {
+    label: __2("\u65E2\u5B9A\u753B\u50CF", "catpow"),
+    order: 1,
+    params: {
+      image: { "@editor": "Image" }
+    },
+    getData(params = {}) {
+      const { image } = complementParams(params, prepared.params);
+      return {
+        image: []
+      };
+    }
   };
 
   // ../blocks/_init/init/CP/components/InputBackgroundImage/BackgroundImageDataGenerators/custom.js
@@ -2728,7 +2739,7 @@
         size = "cover",
         position: { x = 50, y = 50 },
         repeat = "repeat"
-      } = params;
+      } = complementParams(params, custom.params);
       return {
         image: [`url('${image.url}')`],
         size: [size.type === "custom" ? `${size.value}px` : size.type],
@@ -2752,7 +2763,7 @@
       ...alphaParams
     },
     getData(params = {}) {
-      const { r: r2 = 0, w1 = 10, w2 = 10, alpha = 50 } = params;
+      const { r: r2, w1, w2, alpha } = complementParams(params, stripe.params);
       const gradient1 = `repeating-linear-gradient(${r2}deg,#0000,#0000 ${w1}px,rgba(255,255,255,${alpha / 100}) ${w1}px,rgba(255,255,255,${alpha / 100}) ${w1 + w2}px)`;
       const gradient2 = getBaseGradientCode(params);
       return {
@@ -2777,7 +2788,7 @@
       ...alphaParams
     },
     getData(params = {}) {
-      const { invert = false, r: r2 = 0, w1 = 10, w2 = 10, alpha = 50 } = params;
+      const { invert, r: r2, w1, w2, alpha } = complementParams(params, grid.params);
       const c = (alpha2 = 100) => invert ? `rgba(0,0,0,${alpha2 / 100})` : `rgba(255,255,255,${alpha2 / 100})`;
       const image = [
         `repeating-linear-gradient(${r2}deg,${c(0)},${c(0)} ${w1}px,${c(alpha)} ${w1}px,${c(alpha)} ${w1 + w2}px)`,
@@ -2808,13 +2819,13 @@
     order: 2,
     params: {
       ...baseGradientParams,
-      r1: rParam,
-      r2: rParam,
+      ...r1Params,
+      ...r2Params,
       ...wParams,
       ...alphaParams
     },
     getData(params = {}) {
-      const { r1 = 45, r2 = 135, w = 20, alpha = 50 } = params;
+      const { r1, r2, w, alpha } = complementParams(params, check.params);
       const gradient1 = getBaseGradientCode(params);
       const gradient2 = `linear-gradient(rgba(0,0,0,${1 - alpha / 100}),rgba(0,0,0,${1 - alpha / 100}))`;
       const gradient3 = `repeating-linear-gradient(${r1}deg,#000,#000 ${w}px,#fff ${w}px,#fff ${w * 2}px)`;
@@ -2840,7 +2851,7 @@
       ...alphaParams
     },
     getData(params = {}) {
-      const { position: { x = 50, y = 50 } = {}, w1 = 10, w2 = 10, alpha = 50 } = params;
+      const { position: { x, y }, w1, w2, alpha } = complementParams(params, ripple.params);
       const gradient1 = `repeating-radial-gradient(circle at ${x}% ${y}%,#0000,#0000 ${w1}px,rgba(255,255,255,${alpha / 100}) ${w1}px,rgba(255,255,255,${alpha / 100}) ${w1 + w2}px)`;
       const gradient2 = getBaseGradientCode(params);
       return {
@@ -2866,7 +2877,7 @@
       ...alphaParams
     },
     getData(params = {}) {
-      const { invert = false, r: r2 = 0, w1 = 80, w2 = 80, contrast = 50, alpha = 25 } = params;
+      const { invert, r: r2, w1, w2, contrast, alpha } = complementParams(params, dots.params);
       const c = (l = 100) => invert ? `rgb(${255 - l},${255 - l},${255 - l})` : `rgb(${l},${l},${l})`;
       const l1 = c(Math.floor(alpha / 100 * 255));
       const l2 = c(Math.floor(alpha * (100 - contrast) / 1e4 * 255));
@@ -2900,7 +2911,7 @@
       ...seedParams
     },
     getData(params = {}) {
-      const { invert = false, a = 3, w = 50, h = 50, r: r2 = 0, alpha = 25, seed = 10 } = params;
+      const { invert, a, w, h, r: r2, alpha, seed } = complementParams(params, air.params);
       const rand = srand(seed);
       const image = [];
       const blendmode = [];
@@ -2946,7 +2957,7 @@
       ...seedParams
     },
     getData(params = {}) {
-      const { invert = false, a = 5, w = 50, alpha = 25, seed = 10 } = params;
+      const { invert, a, w, alpha, seed } = complementParams(params, bubble.params);
       const rand = srand(seed);
       const image = [];
       const blendmode = [];
@@ -2984,7 +2995,7 @@
       ...alphaParams
     },
     getData(params = {}) {
-      const { invert = false, a = 5, h = 50, r: r2 = 0, seed = 10, alpha = 25 } = params;
+      const { invert, a, h, r: r2, seed, alpha } = complementParams(params, ice.params);
       const rand = srand(seed);
       const c = (alpha2 = 100) => invert ? `rgba(0,0,0,${alpha2 / 100})` : `rgba(255,255,255,${alpha2 / 100})`;
       const image = [];

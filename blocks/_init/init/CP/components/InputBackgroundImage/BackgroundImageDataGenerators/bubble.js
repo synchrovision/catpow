@@ -1,4 +1,4 @@
-﻿import { baseGradientParams, invertParams, alphaParams, aParams, wParams, seedParams, getBaseGradientCode } from "./common";
+﻿import { baseGradientParams, invertParams, alphaParams, aParams, wParams, seedParams, getBaseGradientCode, complementParams } from "./common";
 import { srand } from "catpow/util";
 const { __ } = wp.i18n;
 
@@ -14,7 +14,7 @@ export const bubble = {
 		...seedParams,
 	},
 	getData(params = {}) {
-		const { invert = false, a = 5, w = 50, alpha = 25, seed = 10 } = params;
+		const { invert, a, w, alpha, seed } = complementParams(params, bubble.params);
 		const rand = srand(seed);
 		const image = [];
 		const blendmode = [];

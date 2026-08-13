@@ -1,4 +1,5 @@
-﻿const { __ } = wp.i18n;
+﻿import { complementParams } from "./common";
+const { __ } = wp.i18n;
 
 export const prepared = {
 	label: __("既定画像", "catpow"),
@@ -7,7 +8,7 @@ export const prepared = {
 		image: { "@editor": "Image" },
 	},
 	getData(params = {}) {
-		const { image } = params;
+		const { image } = complementParams(params, prepared.params);
 		return {
 			image: [],
 		};

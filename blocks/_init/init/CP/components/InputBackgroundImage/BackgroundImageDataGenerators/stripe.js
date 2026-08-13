@@ -1,4 +1,4 @@
-﻿import { baseGradientParams, alphaParams, rParams, wParam, getBaseGradientCode } from "./common";
+﻿import { baseGradientParams, alphaParams, rParams, wParam, getBaseGradientCode, complementParams } from "./common";
 const { __ } = wp.i18n;
 
 export const stripe = {
@@ -12,7 +12,7 @@ export const stripe = {
 		...alphaParams,
 	},
 	getData(params = {}) {
-		const { r = 0, w1 = 10, w2 = 10, alpha = 50 } = params;
+		const { r, w1, w2, alpha } = complementParams(params, stripe.params);
 		const gradient1 = `repeating-linear-gradient(${r}deg,#0000,#0000 ${w1}px,rgba(255,255,255,${alpha / 100}) ${w1}px,rgba(255,255,255,${alpha / 100}) ${w1 + w2}px)`;
 		const gradient2 = getBaseGradientCode(params);
 		return {

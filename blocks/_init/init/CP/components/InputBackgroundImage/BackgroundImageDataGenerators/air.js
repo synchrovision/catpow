@@ -1,4 +1,4 @@
-﻿import { baseGradientParams, invertParams, alphaParams, aParams, wParams, hParams, rParams, seedParams, getBaseGradientCode } from "./common";
+﻿import { baseGradientParams, invertParams, alphaParams, aParams, wParams, hParams, rParams, seedParams, getBaseGradientCode, complementParams } from "./common";
 import { srand, pfloor } from "catpow/util";
 const { __ } = wp.i18n;
 
@@ -16,7 +16,7 @@ export const air = {
 		...seedParams,
 	},
 	getData(params = {}) {
-		const { invert = false, a = 3, w = 50, h = 50, r = 0, alpha = 25, seed = 10 } = params;
+		const { invert, a, w, h, r, alpha, seed } = complementParams(params, air.params);
 		const rand = srand(seed);
 
 		const image = [];

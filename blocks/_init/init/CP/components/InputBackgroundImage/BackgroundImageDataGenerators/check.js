@@ -1,4 +1,4 @@
-﻿import { baseGradientParams, alphaParams, rParam, wParams, getBaseGradientCode } from "./common";
+﻿import { baseGradientParams, alphaParams, r1Params, r2Params, wParams, getBaseGradientCode, complementParams } from "./common";
 const { __ } = wp.i18n;
 
 export const check = {
@@ -6,13 +6,13 @@ export const check = {
 	order: 2,
 	params: {
 		...baseGradientParams,
-		r1: rParam,
-		r2: rParam,
+		...r1Params,
+		...r2Params,
 		...wParams,
 		...alphaParams,
 	},
 	getData(params = {}) {
-		const { r1 = 45, r2 = 135, w = 20, alpha = 50 } = params;
+		const { r1, r2, w, alpha } = complementParams(params, check.params);
 
 		const gradient1 = getBaseGradientCode(params);
 		const gradient2 = `linear-gradient(rgba(0,0,0,${1 - alpha / 100}),rgba(0,0,0,${1 - alpha / 100}))`;

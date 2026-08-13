@@ -1,4 +1,4 @@
-﻿import { baseGradientParams, invertParams, alphaParams, rParams, contrastParams, wParam, getBaseGradientCode } from "./common";
+﻿import { baseGradientParams, invertParams, alphaParams, rParams, contrastParams, wParam, getBaseGradientCode, complementParams } from "./common";
 const { __ } = wp.i18n;
 
 export const dots = {
@@ -14,7 +14,7 @@ export const dots = {
 		...alphaParams,
 	},
 	getData(params = {}) {
-		const { invert = false, r = 0, w1 = 80, w2 = 80, contrast = 50, alpha = 25 } = params;
+		const { invert, r, w1, w2, contrast, alpha } = complementParams(params, dots.params);
 
 		const c = (l = 100) => (invert ? `rgb(${255 - l},${255 - l},${255 - l})` : `rgb(${l},${l},${l})`);
 

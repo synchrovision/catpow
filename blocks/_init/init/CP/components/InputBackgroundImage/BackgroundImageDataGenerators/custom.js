@@ -1,4 +1,4 @@
-﻿import { positionParams } from "./common";
+﻿import { positionParams, complementParams } from "./common";
 const { __ } = wp.i18n;
 
 export const custom = {
@@ -36,7 +36,7 @@ export const custom = {
 			size = "cover",
 			position: { x = 50, y = 50 },
 			repeat = "repeat",
-		} = params;
+		} = complementParams(params, custom.params);
 		return {
 			image: [`url('${image.url}')`],
 			size: [size.type === "custom" ? `${size.value}px` : size.type],

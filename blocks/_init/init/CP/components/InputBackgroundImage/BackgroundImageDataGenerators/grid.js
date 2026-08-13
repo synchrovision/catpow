@@ -1,4 +1,4 @@
-﻿import { baseGradientParams, invertParams, alphaParams, rParams, wParam, getBaseGradientCode } from "./common";
+﻿import { baseGradientParams, invertParams, alphaParams, rParams, wParam, getBaseGradientCode, complementParams } from "./common";
 const { __ } = wp.i18n;
 
 export const grid = {
@@ -13,7 +13,7 @@ export const grid = {
 		...alphaParams,
 	},
 	getData(params = {}) {
-		const { invert = false, r = 0, w1 = 10, w2 = 10, alpha = 50 } = params;
+		const { invert, r, w1, w2, alpha } = complementParams(params, grid.params);
 
 		const c = (alpha = 100) => (invert ? `rgba(0,0,0,${alpha / 100})` : `rgba(255,255,255,${alpha / 100})`);
 		const image = [
