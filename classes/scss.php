@@ -198,6 +198,11 @@ class scss{
 						}
 					}
 				}
+				foreach($classes as $class=>$params){
+					foreach($params as $param=>$value){
+						$classes[$class][$param]=new SassString($value,false);
+					}
+				}
 				return self::create_map_data($classes);
 			},['map']);
 			$scssc->registerFunction('extract-color-tone',function($args)use($scssc){
