@@ -6,6 +6,7 @@
   line-height: var(--cp-line-height-t-h, 1.5);
   letter-spacing: var(--cp-letter-spacing-t-h, normal);
 }
+
 .wp-block-catpow-pageheader {
   display: block;
   position: relative;
@@ -105,4 +106,5 @@
 .wp-block-catpow-pageheader.is-size-xlarge .wp-block-catpow-pageheader__body-title {
   padding: 15rem 1.25rem;
 }
+
 /*# sourceMappingURL=./style.css.map */

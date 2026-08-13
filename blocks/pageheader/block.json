@@ -6,6 +6,7 @@
 		"level": true,
 		"color": true,
 		"spacing": true,
-		"background": true
+		"background": true,
+		"backgroundImage": true
 	}
 }
