@@ -1250,27 +1250,24 @@
     }, deps);
   };
 
-  // node_modules-included/catpow/src/component/Bem.jsx
+  // node_modules-included/catpow/src/component/Bem.tsx
   init_react();
   var applyBem = (component, { ...ctx }) => {
     if (Array.isArray(component)) {
-      component.forEach((child) => {
-        applyBem(child, ctx);
-      });
-      return;
+      return component.map((child) => applyBem(child, ctx));
     }
-    if (component?.props == null) {
-      return;
+    if (!isValidElement(component)) {
+      return component;
     }
-    if (component.type == react_default.Fragment) {
-      applyBem(component.props.children, ctx);
-      return;
+    if (component.type == react_default.Fragment || component.type == "template") {
+      return cloneElement(component, component?.props || {}, applyBem(component.props.children, ctx));
     }
+    let newClassName;
     const {
       props: { className, children }
     } = component;
     if (className) {
-      component.props.className = className.split(" ").map((className2) => {
+      newClassName = className.split(" ").map((className2) => {
         if (className2.slice(0, 2) === "--") {
           return ctx.element + className2;
         }
@@ -1288,10 +1285,10 @@
         }
         return className2;
       }).join(" ");
-      if (component.props.className === className) {
+      if (newClassName === className) {
         const matches = ctx.prefix && className.match(new RegExp(`\\b((${ctx.prefix.replaceAll("-", "\\-")})\\-[a-z]+(\\-[a-z]+)*)(__[a-z]+(\\-[a-z]+)*)?\\b`)) || className.match(/\b(([a-z]+)\-[a-z]+(\-[a-z]+)*)(__[a-z]+(\-[a-z]+)*)?\b/);
         if (!matches) {
-          return;
+          return component;
         }
         if (!matches[1].startsWith(ctx.prefix)) {
           ctx.prefix = matches[2];
@@ -1300,20 +1297,14 @@
         ctx.element = matches[0];
       }
     } else if (typeof component.type === "string") {
-      component.props.className = ctx.element = ctx.element + (ctx.element === ctx.block ? "__" : "-") + component.type;
+      newClassName = ctx.element = ctx.element + (ctx.element === ctx.block ? "__" : "-") + component.type;
     } else {
-      return;
+      return component;
     }
     if (children == null) {
-      return;
+      return cloneElement(component, { ...component.props, className: newClassName });
     }
-    if (Array.isArray(children)) {
-      children.forEach((child) => {
-        applyBem(child, ctx);
-      });
-    } else {
-      applyBem(children, ctx);
-    }
+    return cloneElement(component, { ...component.props, className: newClassName }, applyBem(children, ctx));
   };
   var Bem = ({ prefix = "cp", block, element, children }) => {
     if (element == null && block != null) {
@@ -1323,8 +1314,7 @@
       block = element.split("__")[0];
     }
     const ctx = { prefix, block, element };
-    applyBem(children, ctx);
-    return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, children);
+    return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, applyBem(children, ctx));
   };
 
   // node_modules-included/catpow/src/component/Input/AngleInput.jsx
@@ -1341,7 +1331,6 @@
     }, [state.dx, state.dy]);
     useThrottle(
       () => {
-        console.log({ originalValue, value });
         onChange(value);
       },
       50,
@@ -1944,7 +1933,7 @@
             e.preventDefault();
             setEditMode(false);
             window.queueMicrotask(() => {
-              document.activeElement.blur();
+              document.activeElement instanceof HTMLElement && document.activeElement.blur();
               cell.focus({ focusVisible: true });
             });
           }
@@ -4403,18 +4392,15 @@
     const { className = "cp-jsoneditor-editor", title = "JsonEditor", debug = false, onChange, autoSave = false, showHeader = true, children: getAdditionalInputComponent } = props;
     const [hasChange, setHasChange] = useState(false);
     const json = useMemo(() => {
-      if (typeof props.json === "object") {
-        return props.json;
-      }
+      if (typeof props.json === "object") return props.json;
+      if (typeof props.json !== "string") return {};
       const json2 = JSON.parse(props.json);
-      if (json2 == null) {
-        return null;
-      }
+      if (json2 == null) return null;
       return json2;
     }, []);
     const rootAgent = useMemo(() => {
       const rootAgent2 = schema(props.schema, { debug }).createAgent(json);
-      rootAgent2.on("change", (e) => {
+      rootAgent2.on("change", () => {
         setHasChange(true);
       });
       return rootAgent2;
@@ -4428,7 +4414,7 @@
     }, [getAdditionalInputComponent]);
     useEffect(() => {
       let timer, isHold = false;
-      const cb = (e) => {
+      const cb = () => {
         if (autoSave) {
           if (!isHold) {
             save();
