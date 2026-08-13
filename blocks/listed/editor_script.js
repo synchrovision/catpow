@@ -85,7 +85,6 @@
         EditMode = false,
         AltMode = false
       } = attributes;
-      var classArray = _.uniq((className + " " + classes).split(" "));
       const states = CP.classNamesToFlags(classes);
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
@@ -128,12 +127,11 @@
                 { name: "link", label: __("\u30EA\u30F3\u30AF", "catpow"), values: "hasLink" }
               ],
               isTypeNews: [{ name: "link", label: __("\u30EA\u30F3\u30AF", "catpow"), values: "hasLink" }],
-              isTypeIndex: ["itemSize"],
+              isTypeIndex: [],
               isTypeMenu: [
-                "itemSize",
-                "colorScheme",
                 {
                   preset: "backgroundImage",
+                  label: __("\u30A2\u30A4\u30C6\u30E0\u80CC\u666F\u753B\u50CF", "catpow"),
                   classKey: "commonItemClasses"
                 },
                 {

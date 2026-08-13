@@ -72,7 +72,6 @@ wp.blocks.registerBlockType("catpow/listed", {
 			EditMode = false,
 			AltMode = false,
 		} = attributes;
-		var classArray = _.uniq((className + " " + classes).split(" "));
 
 		const states = CP.classNamesToFlags(classes);
 
@@ -117,12 +116,11 @@ wp.blocks.registerBlockType("catpow/listed", {
 							{ name: "link", label: __("リンク", "catpow"), values: "hasLink" },
 						],
 						isTypeNews: [{ name: "link", label: __("リンク", "catpow"), values: "hasLink" }],
-						isTypeIndex: ["itemSize"],
+						isTypeIndex: [],
 						isTypeMenu: [
-							"itemSize",
-							"colorScheme",
 							{
 								preset: "backgroundImage",
+								label: __("アイテム背景画像", "catpow"),
 								classKey: "commonItemClasses",
 							},
 							{

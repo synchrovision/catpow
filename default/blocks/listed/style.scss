@@ -48,13 +48,12 @@
 	&.is-type-orderd{
 		@include bnd((mg:30 a,w:a c));
 		@include txt((l:n));
-		@include grd((rc:400,g:20));
+		@include grd((rc:i,g:c-c));
 		#{$block}{
 			&__item{
 				@extend %card-component;
 				@include bnd((p:r,pd:0,o:h));
 				@include bg((c:bx));
-				@include shd((b:4));
 				&-header{
 					@extend %header-component;
 					@include bg((c:sx));
@@ -63,8 +62,7 @@
 						@include bnd((d:b,p:a,t:.5em,l:.5em));
 						@include bg((c:mx));
 						@include bdr((s:s));
-						@include txt((a:c,p:18,h:1em,f:d,c:ix));
-						@include shd((b:2));
+						@include txt((a:c,p:t-l,h:1em,f:d,c:ix));
 						&-prefix,&-suffix{
 							
 						}
@@ -84,7 +82,7 @@
 					}
 				}
 				&-contents{
-					@include bnd((pd:20));
+					@include bnd((pd:c-c));
 					&-subtitle{
 						@extend %paragraph-block;
 						@extend %paragraph;
@@ -128,6 +126,7 @@
 		} 
 	}
 	&.is-type-news{
+		@include bnd((c:sz(i),g:c-c));
 		#{$block}{
 			&__item{
 				@include bnd((p:r,pd:sp-c,pdi:0));
@@ -147,7 +146,7 @@
 		}
 	}
 	&.is-type-index{
-		@include bnd((c:i,g:c-c));
+		@include bnd((c:sz(i),g:c-c));
 		#{$block}{
 			&__item{
 				@include bnd((pd:0,mg:0,bs:b,bi:a));
@@ -184,15 +183,9 @@
 				@extend %card-component;
 				@include bnd((p:r,o:h));
 				@include bg((c:bx));
-				@include shd((b:4));
 				&-contents{
 					&-text{
 						@include bnd((mgb:0));
-					}
-				}
-				&-link{
-					a{
-						@include bnd((d:b,p:a,i:0));
 					}
 				}
 			}
