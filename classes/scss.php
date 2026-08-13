@@ -103,7 +103,7 @@ class scss{
 				foreach($color_roles_by_shorthand as $key=>$color_role){
 					$available_tone_keys[$key]=$available_tone_keys[$key.'x']=true;
 				}
-				if($args[0]==='wp'){return 'var(--wp-admin-theme-color)';}
+				if($args[0]==='wp'){return new SassString('var(--wp-admin-theme-color)',false);}
 				if(preg_match('/^([a-z]+)?(_|\-\-)?(\-?\d+)?$/',$args[0],$matches)){
 					$key=$matches[1]?:'m';
 					$sep=$matches[2]??null;
