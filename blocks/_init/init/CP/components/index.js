@@ -2,6 +2,7 @@
 export * from "./Collapsible.jsx";
 export * from "./ConfigIcon.jsx";
 export * from "./BoundingBox.jsx";
+export * from "./Button.jsx";
 export * from "./Bem.jsx";
 export * from "./SelectBlendMode.jsx";
 export * from "./SelectThemeColor.jsx";

@@ -32,7 +32,6 @@ export const saveItem = ({ items, itemsKey, set, attributes, setAttributes, item
 export const updateItem = (props, values) => {
 	const { attributes, setAttributes, itemKeys } = props;
 	if (itemKeys) {
-		console.log({ props, values });
 		Object.assign(getTheItem(props), values);
 		saveItem(props);
 	} else {
