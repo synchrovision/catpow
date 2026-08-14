@@ -4294,9 +4294,7 @@
     const { blockClasssKey = "classes", classKey: primaryClassKey = "classes", setAttributes, attributes, itemKeys, triggerClasses } = wp.hooks.applyFilters("catpow.SelectClassPanelProps", props);
     const selectiveClasses = useMemo12(() => {
       if (!triggerClasses || !triggerClasses.item) {
-        if (!props.selectiveClasses) {
-          return [];
-        }
+        if (!props.selectiveClasses) return [];
         if (Array.isArray(props.selectiveClasses)) {
           return CP.resolveSelectiveClassesPresets(props.selectiveClasses);
         }
@@ -5937,14 +5935,11 @@
       values: "hasButtons",
       sub: ["buttonsOptions"]
     },
-    buttonsOptions: {
-      sub: [
-        { name: "microcopy", label: __21("\u30DE\u30A4\u30AF\u30ED\u30B3\u30D4\u30FC", "catpow"), values: "hasMicroCopy" },
-        { name: "caption", label: __21("\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3", "catpow"), values: "hasCaption" }
-      ]
+    buttonOptions: {
+      sub: [{ name: "microcopy", label: __21("\u30DE\u30A4\u30AF\u30ED\u30B3\u30D4\u30FC", "catpow"), values: "hasMicroCopy" }, "hasIcon", { name: "caption", label: __21("\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3", "catpow"), values: "hasCaption" }]
     },
     buttonParams: {
-      sub: ["color", "rank", "hasIcon", "event"]
+      sub: ["color", "uiType", "rank", "event"]
     },
     hasIcon: { label: __21("\u30A2\u30A4\u30B3\u30F3", "catpow"), values: "hasIcon", sub: ["icon"] },
     icon: { input: "icon", label: __21("\u30A2\u30A4\u30B3\u30F3", "catpow") },
@@ -6437,6 +6432,16 @@
       values: {
         hasColorSchemeReverted: __21("\u901A\u5E38", "catpow"),
         hasColorSchemeInverted: __21("\u53CD\u8EE2", "catpow")
+      }
+    },
+    uiType: {
+      name: "uiType",
+      type: "gridbuttons",
+      label: __21("UI\u30BF\u30A4\u30D7", "catpow"),
+      values: {
+        isUiTypeSolid: __21("\u30BD\u30EA\u30C3\u30C9", "catpow"),
+        isUiTypeLinear: __21("\u30EA\u30CB\u30A2", "catpow"),
+        isUiTypeText: __21("\u30C6\u30AD\u30B9\u30C8", "catpow")
       }
     },
     rank: {

@@ -200,14 +200,11 @@ export const selectiveClassesPresets = {
 		values: "hasButtons",
 		sub: ["buttonsOptions"],
 	},
-	buttonsOptions: {
-		sub: [
-			{ name: "microcopy", label: __("マイクロコピー", "catpow"), values: "hasMicroCopy" },
-			{ name: "caption", label: __("キャプション", "catpow"), values: "hasCaption" },
-		],
+	buttonOptions: {
+		sub: [{ name: "microcopy", label: __("マイクロコピー", "catpow"), values: "hasMicroCopy" }, "hasIcon", { name: "caption", label: __("キャプション", "catpow"), values: "hasCaption" }],
 	},
 	buttonParams: {
-		sub: ["color", "rank", "hasIcon", "event"],
+		sub: ["color", "uiType", "rank", "event"],
 	},
 	hasIcon: { label: __("アイコン", "catpow"), values: "hasIcon", sub: ["icon"] },
 	icon: { input: "icon", label: __("アイコン", "catpow") },
@@ -700,6 +697,16 @@ export const selectiveClassesPresets = {
 		values: {
 			hasColorSchemeReverted: __("通常", "catpow"),
 			hasColorSchemeInverted: __("反転", "catpow"),
+		},
+	},
+	uiType: {
+		name: "uiType",
+		type: "gridbuttons",
+		label: __("UIタイプ", "catpow"),
+		values: {
+			isUiTypeSolid: __("ソリッド", "catpow"),
+			isUiTypeLinear: __("リニア", "catpow"),
+			isUiTypeText: __("テキスト", "catpow"),
 		},
 	},
 	rank: {

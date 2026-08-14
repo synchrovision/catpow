@@ -9,9 +9,7 @@ export const SelectClassPanel = (props) => {
 	const { blockClasssKey = "classes", classKey: primaryClassKey = "classes", setAttributes, attributes, itemKeys, triggerClasses } = wp.hooks.applyFilters("catpow.SelectClassPanelProps", props);
 	const selectiveClasses = useMemo(() => {
 		if (!triggerClasses || !triggerClasses.item) {
-			if (!props.selectiveClasses) {
-				return [];
-			}
+			if (!props.selectiveClasses) return [];
 			if (Array.isArray(props.selectiveClasses)) {
 				return CP.resolveSelectiveClassesPresets(props.selectiveClasses);
 			}
