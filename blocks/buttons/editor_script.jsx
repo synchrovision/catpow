@@ -31,23 +31,13 @@ wp.blocks.registerBlockType("catpow/buttons", {
 		const states = CP.classNamesToFlags(classes);
 
 		const selectiveClasses = useMemo(() => {
-			const selectiveClasses = [{ name: "microcopy", label: __("マイクロコピー", "catpow"), values: "hasMicroCopy" }, { name: "caption", label: __("キャプション", "catpow"), values: "hasCaption" }, "isTemplate"];
+			const selectiveClasses = ["isTemplate"];
 			wp.hooks.applyFilters("catpow.blocks.buttons.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
 		}, []);
 
 		const selectiveItemClasses = useMemo(() => {
-			const selectiveItemClasses = [
-				"color",
-				"rank",
-				{
-					name: "icon",
-					label: __("アイコン", "catpow"),
-					values: "hasIcon",
-					sub: [{ input: "icon" }],
-				},
-				"event",
-			];
+			const selectiveItemClasses = ["buttonParams"];
 			wp.hooks.applyFilters("catpow.blocks.buttons.selectiveItemClasses", CP.finderProxy(selectiveItemClasses));
 			return selectiveItemClasses;
 		}, []);
@@ -69,7 +59,13 @@ wp.blocks.registerBlockType("catpow/buttons", {
 				<CP.SelectModeToolbar setAttributes={setAttributes} attributes={attributes} />
 				<InspectorControls>
 					<CP.SelectClassPanel title={__("スタイル", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
-					<CP.SelectClassPanel title={__("ボタン", "catpow")} icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={selectiveItemClasses} />
+					<CP.SelectClassPanel
+						title={__("ボタン", "catpow")}
+						icon="edit"
+						{...{ setAttributes, attributes }}
+						itemKeys={["items", attributes.currentItemIndex]}
+						selectiveClasses={selectiveItemClasses}
+					/>
 				</InspectorControls>
 				<>
 					{EditMode ? (
@@ -104,57 +100,7 @@ wp.blocks.registerBlockType("catpow/buttons", {
 										{[...Array(Math.max(items.length, loopCount)).keys()].map((i) => {
 											const index = i % items.length;
 											const item = items[index];
-											const itemStates = CP.classNamesToFlags(item.classes);
-											return (
-												<CP.Item tag="li" className={item.classes} {...{ setAttributes, attributes }} itemKeys={["items", index]} key={index}>
-													{states.hasMicroCopy && (
-														<span
-															className="_copy cp-button__copy"
-															onInput={(e) => {
-																item.copy = e.target.innerText;
-															}}
-															onBlur={(e) => {
-																saveItems();
-															}}
-															contentEditable={true}
-															suppressContentEditableWarning={true}
-														>
-															{item.copy}
-														</span>
-													)}
-													<CP.Link.Edit className="-button cp-button__link" attributes={attributes} setAttributes={setAttributes} keys={linkKeys.link} itemKeys={["items", index]}>
-														{itemStates.hasIcon && <CP.OutputIcon className="_icon cp-button__link-icon" item={item} />}
-														<span
-															className="_text cp-button__link-text"
-															onInput={(e) => {
-																item.text = e.target.innerText;
-															}}
-															onBlur={(e) => {
-																saveItems();
-															}}
-															contentEditable={true}
-															suppressContentEditableWarning={true}
-														>
-															{item.text}
-														</span>
-													</CP.Link.Edit>
-													{states.hasCaption && (
-														<span
-															className="_caption cp-button__caption"
-															onInput={(e) => {
-																item.caption = e.target.innerText;
-															}}
-															onBlur={(e) => {
-																saveItems();
-															}}
-															contentEditable={true}
-															suppressContentEditableWarning={true}
-														>
-															{item.caption}
-														</span>
-													)}
-												</CP.Item>
-											);
+											return <CP.Button.Edit tag="li" className={item.classes} isItem={true} {...{ setAttributes, attributes, states }} itemKeys={["items", index]} keys={linkKeys.link} key={index} />;
 										})}
 									</ul>
 								</CP.Bem>
@@ -175,26 +121,17 @@ wp.blocks.registerBlockType("catpow/buttons", {
 			<>
 				<CP.Bem prefix="wp-block-catpow">
 					<ul className={classes} style={vars}>
-						{items.map((item, index) => {
-							const itemStates = CP.classNamesToFlags(item.classes);
-							const shouldOpenWithOtherWindow = /^\w+:\/\//.test(item.href);
-							return (
-								<li className={item.classes} key={index}>
-									{states.hasMicroCopy && <span className="_copy cp-button__copy">{item.copy}</span>}
-									<a
-										href={item.href}
-										className="-button cp-button__link"
-										target={shouldOpenWithOtherWindow ? "_blank" : null}
-										rel={shouldOpenWithOtherWindow ? "noopener" : null}
-										{...CP.extractEventDispatcherAttributes("catpow/buttons", item)}
-									>
-										{itemStates.hasIcon && <CP.OutputIcon className="_icon cp-button__link-icon" item={item} />}
-										<span className="_text cp-button__link-text">{item.text}</span>
-									</a>
-									{states.hasCaption && <span className="_caption cp-button__caption">{item.caption}</span>}
-								</li>
-							);
-						})}
+						{items.map((item, index) => (
+							<CP.Button
+								tag="li"
+								className={item.classes}
+								{...{ attributes, states }}
+								itemKeys={["items", index]}
+								keys={blockConfig.linkKeys.link}
+								{...CP.extractEventDispatcherAttributes("catpow/buttons", item)}
+								key={index}
+							/>
+						))}
 					</ul>
 				</CP.Bem>
 				{doLoop && (
@@ -205,43 +142,4 @@ wp.blocks.registerBlockType("catpow/buttons", {
 			</>
 		);
 	},
-	deprecated: [
-		{
-			save({ attributes, className }) {
-				const { items = [], classes, loopParam } = attributes;
-				const states = CP.classNamesToFlags(classes);
-
-				let rtn = [];
-				items.map((item, index) => {
-					const itemStates = CP.classNamesToFlags(item.classes);
-					rtn.push(
-						<li className={item.classes}>
-							<a href={item.url} className="button" data-event={item.event}>
-								{itemStates.hasIcon && (
-									<span className="icon">
-										<img src={item.iconSrc} alt={item.iconAlt} />
-									</span>
-								)}
-								{item.text}
-							</a>
-						</li>,
-					);
-				});
-				return (
-					<ul className={classes}>
-						{states?.doLoop && "[loop_template " + loopParam + "]"}
-						{rtn}
-						{states?.doLoop && "[/loop_template]"}
-					</ul>
-				);
-			},
-			migrate(attributes) {
-				var states = CP.classNamesToFlags(classes);
-				attributes.content_path = attributes.loopParam.split(" ")[0];
-				attributes.query = attributes.loopParam.split(" ").slice(1).join("\n");
-				attributes.doLoop = states?.doLoop;
-				return attributes;
-			},
-		},
-	],
 });

@@ -23,26 +23,16 @@
       const { BlockControls, InnerBlocks, InspectorControls, useBlockProps } = wp.blockEditor;
       const { Icon, PanelBody, TextareaControl } = wp.components;
       const { attributes, setAttributes, isSelected } = props;
-      const { isTemplate, items = [], classes: classes2, vars, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
+      const { isTemplate, items = [], classes, vars, loopCount, doLoop, EditMode = false, AltMode = false } = attributes;
       const { linkKeys } = blockConfig;
-      const states = CP.classNamesToFlags(classes2);
+      const states = CP.classNamesToFlags(classes);
       const selectiveClasses = useMemo(() => {
-        const selectiveClasses2 = [{ name: "microcopy", label: __("\u30DE\u30A4\u30AF\u30ED\u30B3\u30D4\u30FC", "catpow"), values: "hasMicroCopy" }, { name: "caption", label: __("\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3", "catpow"), values: "hasCaption" }, "isTemplate"];
+        const selectiveClasses2 = ["isTemplate"];
         wp.hooks.applyFilters("catpow.blocks.buttons.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);
       const selectiveItemClasses = useMemo(() => {
-        const selectiveItemClasses2 = [
-          "color",
-          "rank",
-          {
-            name: "icon",
-            label: __("\u30A2\u30A4\u30B3\u30F3", "catpow"),
-            values: "hasIcon",
-            sub: [{ input: "icon" }]
-          },
-          "event"
-        ];
+        const selectiveItemClasses2 = ["buttonParams"];
         wp.hooks.applyFilters("catpow.blocks.buttons.selectiveItemClasses", CP.finderProxy(selectiveItemClasses2));
         return selectiveItemClasses2;
       }, []);
@@ -50,10 +40,19 @@
         setAttributes({ items: JSON.parse(JSON.stringify(items)) });
       };
       const blockProps = useBlockProps({
-        className: classes2,
+        className: classes,
         style: vars
       });
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(CP.AlignClassToolbar, { setAttributes, attributes })), /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { setAttributes, attributes }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30B9\u30BF\u30A4\u30EB", "catpow"), icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30DC\u30BF\u30F3", "catpow"), icon: "edit", ...{ setAttributes, attributes }, itemKeys: ["items", attributes.currentItemIndex], selectiveClasses: selectiveItemClasses })), /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, EditMode ? /* @__PURE__ */ wp.element.createElement("div", { ...blockProps, className: "cp-altcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(BlockControls, null, /* @__PURE__ */ wp.element.createElement(CP.AlignClassToolbar, { setAttributes, attributes })), /* @__PURE__ */ wp.element.createElement(CP.SelectModeToolbar, { setAttributes, attributes }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30B9\u30BF\u30A4\u30EB", "catpow"), icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(
+        CP.SelectClassPanel,
+        {
+          title: __("\u30DC\u30BF\u30F3", "catpow"),
+          icon: "edit",
+          ...{ setAttributes, attributes },
+          itemKeys: ["items", attributes.currentItemIndex],
+          selectiveClasses: selectiveItemClasses
+        }
+      )), /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, EditMode ? /* @__PURE__ */ wp.element.createElement("div", { ...blockProps, className: "cp-altcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "edit" })), /* @__PURE__ */ wp.element.createElement(
         CP.EditItemsTable,
         {
           setAttributes,
@@ -69,96 +68,26 @@
       )) : /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { className: "cp-altcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("ul", { ...blockProps }, [...Array(Math.max(items.length, loopCount)).keys()].map((i) => {
         const index = i % items.length;
         const item = items[index];
-        const itemStates = CP.classNamesToFlags(item.classes);
-        return /* @__PURE__ */ wp.element.createElement(CP.Item, { tag: "li", className: item.classes, ...{ setAttributes, attributes }, itemKeys: ["items", index], key: index }, states.hasMicroCopy && /* @__PURE__ */ wp.element.createElement(
-          "span",
-          {
-            className: "_copy cp-button__copy",
-            onInput: (e) => {
-              item.copy = e.target.innerText;
-            },
-            onBlur: (e) => {
-              saveItems();
-            },
-            contentEditable: true,
-            suppressContentEditableWarning: true
-          },
-          item.copy
-        ), /* @__PURE__ */ wp.element.createElement(CP.Link.Edit, { className: "-button cp-button__link", attributes, setAttributes, keys: linkKeys.link, itemKeys: ["items", index] }, itemStates.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { className: "_icon cp-button__link-icon", item }), /* @__PURE__ */ wp.element.createElement(
-          "span",
-          {
-            className: "_text cp-button__link-text",
-            onInput: (e) => {
-              item.text = e.target.innerText;
-            },
-            onBlur: (e) => {
-              saveItems();
-            },
-            contentEditable: true,
-            suppressContentEditableWarning: true
-          },
-          item.text
-        )), states.hasCaption && /* @__PURE__ */ wp.element.createElement(
-          "span",
-          {
-            className: "_caption cp-button__caption",
-            onInput: (e) => {
-              item.caption = e.target.innerText;
-            },
-            onBlur: (e) => {
-              saveItems();
-            },
-            contentEditable: true,
-            suppressContentEditableWarning: true
-          },
-          item.caption
-        ));
+        return /* @__PURE__ */ wp.element.createElement(CP.Button.Edit, { tag: "li", className: item.classes, isItem: true, ...{ setAttributes, attributes, states }, itemKeys: ["items", index], keys: linkKeys.link, key: index });
       }))))));
     },
     save(props) {
       const { InnerBlocks } = wp.blockEditor;
       const { attributes } = props;
-      const { items = [], classes: classes2, vars, doLoop } = attributes;
-      const states = CP.classNamesToFlags(classes2);
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("ul", { className: classes2, style: vars }, items.map((item, index) => {
-        const itemStates = CP.classNamesToFlags(item.classes);
-        const shouldOpenWithOtherWindow = /^\w+:\/\//.test(item.href);
-        return /* @__PURE__ */ wp.element.createElement("li", { className: item.classes, key: index }, states.hasMicroCopy && /* @__PURE__ */ wp.element.createElement("span", { className: "_copy cp-button__copy" }, item.copy), /* @__PURE__ */ wp.element.createElement(
-          "a",
-          {
-            href: item.href,
-            className: "-button cp-button__link",
-            target: shouldOpenWithOtherWindow ? "_blank" : null,
-            rel: shouldOpenWithOtherWindow ? "noopener" : null,
-            ...CP.extractEventDispatcherAttributes("catpow/buttons", item)
-          },
-          itemStates.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { className: "_icon cp-button__link-icon", item }),
-          /* @__PURE__ */ wp.element.createElement("span", { className: "_text cp-button__link-text" }, item.text)
-        ), states.hasCaption && /* @__PURE__ */ wp.element.createElement("span", { className: "_caption cp-button__caption" }, item.caption));
-      }))), doLoop && /* @__PURE__ */ wp.element.createElement("on-empty", null, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));
-    },
-    deprecated: [
-      {
-        save({ attributes, className }) {
-          const { items = [], classes: classes2, loopParam } = attributes;
-          const states = CP.classNamesToFlags(classes2);
-          let rtn = [];
-          items.map((item, index) => {
-            const itemStates = CP.classNamesToFlags(item.classes);
-            rtn.push(
-              /* @__PURE__ */ wp.element.createElement("li", { className: item.classes }, /* @__PURE__ */ wp.element.createElement("a", { href: item.url, className: "button", "data-event": item.event }, itemStates.hasIcon && /* @__PURE__ */ wp.element.createElement("span", { className: "icon" }, /* @__PURE__ */ wp.element.createElement("img", { src: item.iconSrc, alt: item.iconAlt })), item.text))
-            );
-          });
-          return /* @__PURE__ */ wp.element.createElement("ul", { className: classes2 }, states?.doLoop && "[loop_template " + loopParam + "]", rtn, states?.doLoop && "[/loop_template]");
-        },
-        migrate(attributes) {
-          var states = CP.classNamesToFlags(classes);
-          attributes.content_path = attributes.loopParam.split(" ")[0];
-          attributes.query = attributes.loopParam.split(" ").slice(1).join("\n");
-          attributes.doLoop = states?.doLoop;
-          return attributes;
+      const { items = [], classes, vars, doLoop } = attributes;
+      const states = CP.classNamesToFlags(classes);
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("ul", { className: classes, style: vars }, items.map((item, index) => /* @__PURE__ */ wp.element.createElement(
+        CP.Button,
+        {
+          tag: "li",
+          className: item.classes,
+          ...{ attributes, states },
+          itemKeys: ["items", index],
+          keys: blockConfig.linkKeys.link,
+          ...CP.extractEventDispatcherAttributes("catpow/buttons", item),
+          key: index
         }
-      }
-    ]
+      )))), doLoop && /* @__PURE__ */ wp.element.createElement("on-empty", null, /* @__PURE__ */ wp.element.createElement(InnerBlocks.Content, null)));
+    }
   });
 })();
