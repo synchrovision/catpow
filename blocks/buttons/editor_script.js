@@ -68,7 +68,7 @@
       )) : /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { className: "cp-altcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("ul", { ...blockProps }, [...Array(Math.max(items.length, loopCount)).keys()].map((i) => {
         const index = i % items.length;
         const item = items[index];
-        return /* @__PURE__ */ wp.element.createElement(CP.Button.Edit, { tag: "li", className: item.classes, isItem: true, ...{ setAttributes, attributes, states }, itemKeys: ["items", index], keys: linkKeys.link, key: index });
+        return /* @__PURE__ */ wp.element.createElement(CP.Button.Edit, { tag: "li", className: item.classes, isItem: true, ...{ setAttributes, attributes }, itemKeys: ["items", index], keys: linkKeys.link, key: index });
       }))))));
     },
     save(props) {
@@ -81,7 +81,7 @@
         {
           tag: "li",
           className: item.classes,
-          ...{ attributes, states },
+          ...{ attributes },
           itemKeys: ["items", index],
           keys: blockConfig.linkKeys.link,
           ...CP.extractEventDispatcherAttributes("catpow/buttons", item),

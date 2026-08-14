@@ -100,7 +100,7 @@ wp.blocks.registerBlockType("catpow/buttons", {
 										{[...Array(Math.max(items.length, loopCount)).keys()].map((i) => {
 											const index = i % items.length;
 											const item = items[index];
-											return <CP.Button.Edit tag="li" className={item.classes} isItem={true} {...{ setAttributes, attributes, states }} itemKeys={["items", index]} keys={linkKeys.link} key={index} />;
+											return <CP.Button.Edit tag="li" className={item.classes} isItem={true} {...{ setAttributes, attributes }} itemKeys={["items", index]} keys={linkKeys.link} key={index} />;
 										})}
 									</ul>
 								</CP.Bem>
@@ -125,7 +125,7 @@ wp.blocks.registerBlockType("catpow/buttons", {
 							<CP.Button
 								tag="li"
 								className={item.classes}
-								{...{ attributes, states }}
+								{...{ attributes }}
 								itemKeys={["items", index]}
 								keys={blockConfig.linkKeys.link}
 								{...CP.extractEventDispatcherAttributes("catpow/buttons", item)}
