@@ -3,9 +3,10 @@ const { __ } = wp.i18n;
 const { RichText } = wp.blockEditor;
 
 export const Button = (props) => {
-	const { tag: Tag = "div", className, attributes, states, isLink = true, itemKeys, keys = {}, ...otherProps } = props;
+	const { tag: Tag = "div", className, attributes, isLink = true, itemKeys, keys = {}, ...otherProps } = props;
 
 	const item = (itemKeys ? CP.getTheItem(props) : attributes) || {};
+	const states = CP.classNamesToFlags(className);
 
 	const LinkTag = isLink ? "a" : "span";
 	const linkProps = isLink ? { href: item[keys.href] || "" } : {};
@@ -27,10 +28,11 @@ export const Button = (props) => {
 	);
 };
 Button.Edit = (props) => {
-	const { tag = "div", className, setAttributes, attributes, states, isItem, itemKeys, keys = {}, ...otherProps } = props;
+	const { tag = "div", className, setAttributes, attributes, isItem, itemKeys, keys = {}, ...otherProps } = props;
 	const { useMemo, useEffect, useState } = wp.element;
 
 	const item = useMemo(() => (itemKeys ? CP.getTheItem(props) : attributes) || {}, [attributes, itemKeys]);
+	const states = CP.classNamesToFlags(className);
 
 	const ItemComponent = isItem ? CP.Item : PlainComponent;
 

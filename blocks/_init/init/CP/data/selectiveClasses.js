@@ -200,11 +200,16 @@ export const selectiveClassesPresets = {
 		values: "hasButtons",
 		sub: ["buttonsOptions"],
 	},
-	buttonOptions: {
-		sub: [{ name: "microcopy", label: __("マイクロコピー", "catpow"), values: "hasMicroCopy" }, "hasIcon", { name: "caption", label: __("キャプション", "catpow"), values: "hasCaption" }],
-	},
 	buttonParams: {
-		sub: ["color", "uiType", "rank", "event"],
+		sub: [
+			"color",
+			"uiType",
+			"rank",
+			{ name: "microcopy", label: __("マイクロコピー", "catpow"), values: "hasMicroCopy" },
+			"hasIcon",
+			{ name: "caption", label: __("キャプション", "catpow"), values: "hasCaption" },
+			"event",
+		],
 	},
 	hasIcon: { label: __("アイコン", "catpow"), values: "hasIcon", sub: ["icon"] },
 	icon: { input: "icon", label: __("アイコン", "catpow") },

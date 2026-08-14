@@ -1556,8 +1556,9 @@
   var { __ } = wp.i18n;
   var { RichText } = wp.blockEditor;
   var Button = (props) => {
-    const { tag: Tag = "div", className, attributes, states, isLink = true, itemKeys, keys = {}, ...otherProps } = props;
+    const { tag: Tag = "div", className, attributes, isLink = true, itemKeys, keys = {}, ...otherProps } = props;
     const item = (itemKeys ? CP.getTheItem(props) : attributes) || {};
+    const states = CP.classNamesToFlags(className);
     const LinkTag = isLink ? "a" : "span";
     const linkProps = isLink ? { href: item[keys.href] || "" } : {};
     if (isLink && /^\w+:\/\//.test(item[keys.href])) {
@@ -1566,9 +1567,10 @@
     return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement(Tag, { className }, states.hasMicroCopy && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "span", className: "_copy cp-button__copy", value: item.copy }), /* @__PURE__ */ wp.element.createElement(LinkTag, { className: "-button cp-button__link", ...otherProps, ...linkProps }, states.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { className: "_icon cp-button__link-icon", item }), /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "span", className: "_text cp-button__link-text", value: item.text })), states.hasCaption && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "span", className: "_caption cp-button__caption", value: item.caption })));
   };
   Button.Edit = (props) => {
-    const { tag = "div", className, setAttributes, attributes, states, isItem, itemKeys, keys = {}, ...otherProps } = props;
+    const { tag = "div", className, setAttributes, attributes, isItem, itemKeys, keys = {}, ...otherProps } = props;
     const { useMemo: useMemo12, useEffect: useEffect7, useState: useState8 } = wp.element;
     const item = useMemo12(() => (itemKeys ? CP.getTheItem(props) : attributes) || {}, [attributes, itemKeys]);
+    const states = CP.classNamesToFlags(className);
     const ItemComponent = isItem ? CP.Item : PlainComponent;
     return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement(ItemComponent, { tag, className, ...{ setAttributes, attributes, itemKeys } }, states.hasMicroCopy && /* @__PURE__ */ wp.element.createElement(RichText, { tagName: "span", className: "_copy cp-button__copy", value: item.copy, placeholder: __("\u30DE\u30A4\u30AF\u30ED\u30B3\u30D4\u30FC", "catpow"), onChange: (copy) => CP.updateItem(props, { copy }) }), /* @__PURE__ */ wp.element.createElement(CP.Link.Edit, { className: "-button cp-button__link", ...{ setAttributes, attributes, itemKeys, keys } }, states.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { className: "_icon cp-button__link-icon", item }), /* @__PURE__ */ wp.element.createElement(RichText, { tagName: "span", className: "_text cp-button__link-text", value: item.text, onChange: (text) => CP.updateItem(props, { text }) })), states.hasCaption && /* @__PURE__ */ wp.element.createElement(RichText, { tagName: "span", className: "_caption cp-button__caption", value: item.caption, placeholder: __("\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3", "catpow"), onChange: (caption) => CP.updateItem(props, { caption }) })));
   };
@@ -5935,11 +5937,16 @@
       values: "hasButtons",
       sub: ["buttonsOptions"]
     },
-    buttonOptions: {
-      sub: [{ name: "microcopy", label: __21("\u30DE\u30A4\u30AF\u30ED\u30B3\u30D4\u30FC", "catpow"), values: "hasMicroCopy" }, "hasIcon", { name: "caption", label: __21("\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3", "catpow"), values: "hasCaption" }]
-    },
     buttonParams: {
-      sub: ["color", "uiType", "rank", "event"]
+      sub: [
+        "color",
+        "uiType",
+        "rank",
+        { name: "microcopy", label: __21("\u30DE\u30A4\u30AF\u30ED\u30B3\u30D4\u30FC", "catpow"), values: "hasMicroCopy" },
+        "hasIcon",
+        { name: "caption", label: __21("\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3", "catpow"), values: "hasCaption" },
+        "event"
+      ]
     },
     hasIcon: { label: __21("\u30A2\u30A4\u30B3\u30F3", "catpow"), values: "hasIcon", sub: ["icon"] },
     icon: { input: "icon", label: __21("\u30A2\u30A4\u30B3\u30F3", "catpow") },
