@@ -23,7 +23,7 @@ wp.blocks.registerBlockType("catpow/formbuttons", {
 		const states = CP.classNamesToFlags(classes);
 
 		const selectiveClasses = useMemo(() => {
-			var selectiveClasses = ["buttonsOptions"];
+			var selectiveClasses = [];
 			wp.hooks.applyFilters("catpow.blocks.formbuttons.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
 		}, []);
@@ -61,65 +61,20 @@ wp.blocks.registerBlockType("catpow/formbuttons", {
 					<CP.Bem prefix="wp-block-catpow">
 						<ul {...blockProps}>
 							{items.map((item, index) => {
-								if (!item.controlClasses) {
-									item.controlClasses = "control";
-								}
-								const itemStates = CP.classNamesToFlags(item.classes);
-								return (
-									<CP.Item className={item.classes} tag="li" {...{ setAttributes, attributes }} itemKeys={["items", index]} key={index}>
-										{states.hasMicroCopy && (
-											<span
-												className="_copy cp-button__copy"
-												onInput={(e) => {
-													item.copy = e.target.innerText;
-												}}
-												onBlur={(e) => {
-													saveItems();
-												}}
-												contentEditable={true}
-												suppressContentEditableWarning={true}
-											>
-												{item.copy}
-											</span>
-										)}
-										<CP.Link.Edit className="-button cp-button__link" attributes={attributes} setAttributes={setAttributes} keys={linkKeys.link} itemKeys={["items", index]}>
-											{itemStates.hasIcon && <CP.OutputIcon className="_icon cp-button__link-icon" item={item} />}
-											<span
-												className="_text cp-button__link-text"
-												onInput={(e) => {
-													item.text = e.target.innerText;
-												}}
-												onBlur={saveItems}
-												contentEditable={true}
-												suppressContentEditableWarning={true}
-											>
-												{item.text}
-											</span>
-										</CP.Link.Edit>
-										{states.hasCaption && (
-											<span
-												className="_caption cp-button__caption"
-												onInput={(e) => {
-													item.caption = e.target.innerText;
-												}}
-												onBlur={(e) => {
-													saveItems();
-												}}
-												contentEditable={true}
-												suppressContentEditableWarning={true}
-											>
-												{item.caption}
-											</span>
-										)}
-									</CP.Item>
-								);
+								return <CP.Button.Edit tag="li" className={item.classes} isItem={true} {...{ setAttributes, attributes }} itemKeys={["items", index]} keys={linkKeys.link} key={index} />;
 							})}
 						</ul>
 					</CP.Bem>
 				)}
 				<InspectorControls>
 					<CP.SelectClassPanel title={__("クラス", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
-					<CP.SelectClassPanel title={__("ボタン", "catpow")} icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={selectiveItemClasses} />
+					<CP.SelectClassPanel
+						title={__("ボタン", "catpow")}
+						icon="edit"
+						{...{ setAttributes, attributes }}
+						itemKeys={["items", attributes.currentItemIndex]}
+						selectiveClasses={selectiveItemClasses}
+					/>
 					<CP.ItemControlInfoPanel />
 				</InspectorControls>
 				<BlockControls>
@@ -133,92 +88,27 @@ wp.blocks.registerBlockType("catpow/formbuttons", {
 		const { items = [], classes = "", vars } = attributes;
 		const blockType = wp.data.select("core/blocks").getBlockType("catpow/formbuttons");
 
-		const states = CP.classNamesToFlags(classes);
-
 		return (
 			<CP.Bem prefix="wp-block-catpow">
 				<ul {...useBlockProps.save({ className: classes, style: vars })}>
-					{items.map((item, index) => {
-						const itemStates = CP.classNamesToFlags(item.classes);
-						return (
-							<li className={item.classes} key={index}>
-								{states.hasMicroCopy && <span className="_copy cp-button__copy">{item.copy}</span>}
-								<div
-									className="-button cp-button__link"
-									role="button"
-									data-action={item.action}
-									data-callback={item.callback}
-									data-target={item.target}
-									ignore-message={item.ignoreMessage}
-									{...CP.extractEventDispatcherAttributes("catpow/formbuttons", item)}
-								>
-									{itemStates.hasIcon && <CP.OutputIcon className="_icon cp-button__link-icon" item={item} />}
-									<span className="_text cp-button__link-text">{item.text}</span>
-								</div>
-								{states.hasCaption && <span className="_caption cp-button__caption">{item.caption}</span>}
-							</li>
-						);
-					})}
+					{items.map((item, index) => (
+						<CP.Button
+							tag="li"
+							className={item.classes}
+							isLink={false}
+							{...{ attributes }}
+							itemKeys={["items", index]}
+							keys={blockConfig.linkKeys.link}
+							data-action={item.action}
+							data-callback={item.callback}
+							data-target={item.target}
+							ignore-message={item.ignoreMessage}
+							{...CP.extractEventDispatcherAttributes("catpow/formbuttons", item)}
+							key={index}
+						/>
+					))}
 				</ul>
 			</CP.Bem>
 		);
 	},
-	deprecated: [
-		{
-			attributes: {
-				version: { type: "number", default: 0 },
-				classes: {
-					source: "attribute",
-					selector: "ul",
-					attribute: "class",
-					default: "wp-block-catpow-formbuttons buttons",
-				},
-				items: {
-					source: "query",
-					selector: "li.item",
-					query: {
-						classes: { source: "attribute", attribute: "class" },
-						event: { source: "attribute", attribute: "data-event" },
-						button: { source: "text" },
-					},
-					default: [{ classes: "item", button: __("[button 送信 send]", "catpow") }],
-				},
-			},
-			save({ attributes, className }) {
-				const { items = [], classes = "" } = attributes;
-				var classArray = _.uniq(classes.split(" "));
-
-				let rtn = [];
-				items.map((item, index) => {
-					rtn.push(
-						<li className={item.classes} data-event={item.event}>
-							{item.button}
-						</li>,
-					);
-				});
-				return <ul className={classes}>{rtn}</ul>;
-			},
-			migrate(attributes) {
-				const { items = [] } = attributes;
-				const parseButtonShortCode = (code) => {
-					let matches = code.match(/^\[button ([^ ]+) ([^ ]+)( ignore_message\=1)?\]$/);
-					if (matches) {
-						let rtn = { content: matches[1], action: matches[2] };
-						if (matches[3]) {
-							rtn.ignore_message = 1;
-						}
-						return rtn;
-					}
-					return { content: __("送信", "catpow") };
-				};
-				items.map((item) => {
-					const buttonData = parseButtonShortCode(item.button);
-					item.action = buttonData.action;
-					item.text = buttonData.content;
-					item.ignore_message = buttonData.ignore_message;
-				});
-				return attributes;
-			},
-		},
-	],
 });
