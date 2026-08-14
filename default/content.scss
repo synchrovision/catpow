@@ -423,12 +423,11 @@ html{
 	}
 	&-button{
 		$block:&;
+		@include bnd((p:r));
 		&__copy{
-			@extend %label-component;
-			@include bnd((d:b,p:r,i:0,mg:a,mgb:-.8em,pd:.4em 1em,w:fit,h:fit,z:1));
-			@include bg((c:bx));
-			@include bdr((s:s,w:2));
-			@include txt((p:.6em,h:1em,c:mx));
+			@extend %button-component;
+			@include bnd((d:b,p:a,l:0,r:0,b:f,mgi:a,pd:.4em 1em,w:fit,h:fit,z:1));
+			@include txt((p:.625em,h:1em));
 		}
 		&__caption{
 			@extend %caption-block;
@@ -439,15 +438,11 @@ html{
 		&__link{
 			@extend %button-component;
 			@extend %ui;
-			@include bnd((d:b,p:r,pd:ipd));
-			@include bg((c:bx));
-			@include bdr((s:s));
+			@include bnd((d:b,p:r));
 			@include txt((a:c,c:mx,td:n,b:k));
 			@include trn((t:.2s));
 			@include usr((c:p));
 			&-icon{
-				@include bnd((p:a,w:1em,h:1em,t:0,b:0,l:.5em,mg:a));
-				@include txt((t:0,p:1.8em,l:1em));
 				svg{
 					@include svg((f:crr));
 				}
@@ -461,20 +456,28 @@ html{
 			&:active{
 				@include shd((b:0 0 0 clr(mx 1 .2)));
 			}
-			&::after{
-				content:'';
-				@include bnd((d:b,p:a,i:0,mg:a,mgr:1em,w:.8em,h:.8em));
-				@include bdr((p:r b,s:s,w:2));
-				@include trn((r:-45deg));
-			}
 		}
-		&.is-rank-primary{
+		:has(#{$block}__copy) > &{
+			@include bnd((mgt:1em));
+		}
+		&.is-ui-type-solid,
+		&.is-ui-type-linear{
 			#{$block}{
 				&__link{
+					&-icon{
+						@include bnd((p:a,w:1em,h:1em,t:0,b:0,l:.5em,mg:a));
+						@include txt((t:0,p:1.5em,l:1em));
+					}
+				}
+			}
+		}
+		&.is-ui-type-solid{
+			#{$block}{
+				&__copy{
+					@include bnd((mgb:-.6em));
+				}
+				&__link{
 					@include bnd((d:b,p:r,o:h));
-					@include txt((c:i));
-					@include bg((g:l 60deg m oklch(from clr(m) l c calc(h + var(--cp-tones-hr) * 2))));
-					@include shd((t:t-u));
 					&::before{
 						content:'';
 						@include bnd((d:b,p:a,i:0,r:f));
@@ -487,31 +490,157 @@ html{
 							@include bnd((r:0));
 						}
 					}
-					.icon{
-						svg{
-							@include svg((f:i));
+				}
+			}
+			&.is-rank-primary{
+				#{$block}{
+					&__copy{
+						@include bdr((s:s));
+						@include txt((c:i));
+						@include bg((g:l 60deg a oklch(from clr(a) l c calc(h + var(--cp-tones-hr) * 1.5))));
+					}
+					&__link{
+						@include txt((c:i));
+						@include bg((g:l 60deg a oklch(from clr(a) l c calc(h + var(--cp-tones-hr) * 2))));
+						@include shd((t:t-u));
+						&::before{
+							content:'';
+							@include bnd((d:b,p:a,i:0,r:f));
+							@include bdr((r:calc(#{sz(r-b)} - #{sz(2)})));
+							@include bg((c:m 90));
+							@include trn((t:.3s,bm:o,o:.5));
+						}
+						&:hover{
+							&::before{
+								@include bnd((r:0));
+							}
 						}
 					}
 				}
 			}
-		}
-		&.is-rank-secondary{
-			#{$block}{
-				&__link{
-					@include bg((c:mx));
-					@include txt((c:bx));
+			&.is-rank-secondary{
+				#{$block}{
+					&__copy{
+						@include bdr((s:s));
+						@include bg((c:mx));
+						@include txt((c:ix));
+					}
+					&__link{
+						@include bg((c:mx));
+						@include txt((c:ix));
+					}
+				}
+			}
+			&.is-rank-tertiary{
+				#{$block}{
+					&__copy{
+						@include bg((c:mx-bx 25));
+					}
+					&__link{
+						@include bg((c:mx-bx 15));
+					}
 				}
 			}
 		}
-		&.is-rank-tertiary{
-			@include trn((o:.8));
+		&.is-ui-type-linear{
+			#{$block}{
+				&__copy{
+					@include bdr((s:s,w:calc(bw(c-b) * 1.6)));
+					@include bdr((p:b,s:n,br:0));
+					@include shd((b:n));
+				}
+				&__link{
+					@include bdr((s:s));
+					@include shd((b:n));
+					&::after{
+						content:'';
+						@include bnd((d:b,p:a,i:0,mg:a,mgr:1em,w:.8em,h:.8em));
+						@include bdr((p:r b,s:s,w:2));
+						@include trn((t:.4s,r:-45deg));
+					}
+				}
+			}
+			&:hover{
+				#{$block}{
+					&__link{
+						&::after{
+							@include trn((x:.25em,r:-45deg));
+						}
+					}
+				}
+			}
+			&.is-rank-primary{
+				#{$block}{
+					&__copy,&__link{
+						@include txt((c:hx));
+					}
+				}
+			}
+			&.is-rank-secondary{
+				#{$block}{
+					&__copy,&__link{
+						@include txt((c:mx));
+					}
+				}
+			}
+			&.is-rank-tertiary{
+				@include trn((o:.8));
+				#{$block}{
+					&__copy,&__link{
+						@include txt((c:tx));
+						@include bdr((c:lx));
+					}
+				}
+			}
+		}
+		&.is-ui-type-text{
 			#{$block}{
 				&__copy{
 					@include shd((b:n));
 				}
 				&__link{
-					@include bg((c:n));
+					@include flx((w:n,j:c));
 					@include shd((b:n));
+					&::after{
+						content:'';
+						@include bnd((d:b,p:a,b:0,l:0,r:0,mgi:a,w:1em,h:bw(c-b)));
+						@include bg((c:crr));
+						@include trn((t:.2s));
+					}
+					&-icon{
+						@include bnd((d:ib,mgr:.25em,w:1em,h:a,a:1));
+					}
+				}
+			}
+			&:hover{
+				#{$block}{
+					&__link{
+						&::after{
+							@include bnd((w:4em));
+						}
+					}
+				}
+			}
+			&.is-rank-primary{
+				#{$block}{
+					&__copy,&__link{
+						@include txt((c:hx));
+					}
+				}
+			}
+			&.is-rank-secondary{
+				#{$block}{
+					&__copy,&__link{
+						@include txt((c:mx));
+					}
+				}
+			}
+			&.is-rank-tertiary{
+				@include trn((o:.8));
+				#{$block}{
+					&__copy,&__link{
+						@include txt((c:tx));
+					}
 				}
 			}
 		}
