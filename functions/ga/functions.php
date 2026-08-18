@@ -57,11 +57,6 @@ function cpga_send_event($cat,$action,$label=false,$value=false){
 add_action('enqueue_block_assets',function(){
 	cp::enqueue_script('functions/ga/script.js',['catpow.eventProcessor']);
 });
-add_filter('cp_block_items_attributes_eventDispatcher',function($items,$args){
-	$items['query']['event']=array_merge(["source"=>'attribute',"attribute"=>'data-event'],$args);
-	$items['eventDispatcherAttributes'][]='event';
-	return $items;
-},10,2);
 add_action('cp_set_user_properties',function($user_properties){
 	add_filter('cpga_user_properties',function($ga_user_properties)use($user_properties){
 		return array_merge($ga_user_properties,$user_properties);

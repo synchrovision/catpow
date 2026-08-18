@@ -131,6 +131,7 @@ class blocks{
 		$transient='block_data_to_register_for_'.get_stylesheet();
 		if((!current_user_can('edit_themes') || wp_is_json_request()) && $data=get_transient($transient)){return $data;}
 		$data=[];
+		foreach(CP::get_file_paths('blocks/_init/filters.php') as $f){include_once $f;}
 		$data['editor_init']=CP::get_file_paths('blocks/_init/_init.php');
 		foreach(CP::get_file_urls('blocks/_init') as $block_init_dir=>$block_init_url){
 			foreach(glob($block_init_dir.'/*.js') as $format_script){
