@@ -12,7 +12,7 @@ const sizesToValue = (size) => {
 };
 
 export const ResponsiveItemSizeInput = (props) => {
-	const { value, steps = { 10: 0, 100: 2 }, order = ["rem", "vw"], snap = true, onChange } = props;
+	const { value, steps = { 4: 0, 100: 2 }, order = ["rem", "vw"], snap = true, onChange } = props;
 
 	const [sizes, setSizes] = useState(valueToSizes(value));
 	useThrottle(
