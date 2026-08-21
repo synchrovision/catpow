@@ -1,10 +1,12 @@
-﻿export const extractEventDispatcherAttributes = (blockTypeName, item, itemKeys = ["items"]) => {
-	const [itemsKey] = itemKeys;
+﻿export const extractEventDispatcherAttributes = (blockTypeName, attributes, itemKeys) => {
 	const blockType = wp.data.select("core/blocks").getBlockType(blockTypeName);
+	const [itemsKey, itemIndex, subItemsKey, subItemIndex] = itemKeys;
+	const item = CP.getTheItem({ attributes, itemKeys });
+	const atts = (subItemsKey ? blockType.attributes[itemsKey]?.query?.[subItemsKey] : blockType.attributes[itemsKey])?.eventDispatcherAttributes;
 	const eventDispatcherAttributes = {};
-	if (blockType.attributes[itemsKey].eventDispatcherAttributes) {
-		blockType.attributes[itemsKey].eventDispatcherAttributes.map((attr_name) => {
-			eventDispatcherAttributes[blockType.attributes[itemsKey].query[attr_name].attribute] = item[attr_name];
+	if (atts?.query) {
+		atts.query.map((attr_name) => {
+			eventDispatcherAttributes[atts.query[attr_name].attribute] = item[attr_name];
 		});
 	}
 	return eventDispatcherAttributes;
