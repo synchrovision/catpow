@@ -12,15 +12,13 @@ export const getTheItemIndex = (props) => {
 	return itemIndex;
 };
 export const getTheItem = (props) => {
-	var { items, index, attributes, itemKeys = [] } = props;
-	if (items) return items[index];
+	var { attributes, itemKeys = [] } = props;
 	const [itemsKey, itemIndex, subItemsKey, subItemIndex] = itemKeys;
 	if (subItemsKey) return attributes?.[itemsKey]?.[itemIndex]?.[subItemsKey][subItemIndex];
 	return attributes?.[itemsKey]?.[itemIndex];
 };
 export const getTheItems = (props) => {
-	var { items, attributes, itemKeys = [] } = props;
-	if (items) return items;
+	var { attributes, itemKeys = [] } = props;
 	const [itemsKey, itemIndex, subItemsKey] = itemKeys;
 	if (subItemsKey) return attributes?.[itemsKey]?.[itemIndex]?.[subItemsKey];
 	return attributes?.[itemsKey];
