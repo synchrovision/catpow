@@ -8,7 +8,14 @@ export const Link = (props) => {
 	const target = href.indexOf("://") !== -1 ? "_brank" : null;
 
 	return (
-		<a className={className} href={href} target={target} rel={target && "noopener"} {...CP.extractEventDispatcherAttributes(blockTypeName, attributes, itemKeys)} {...otherProps}>
+		<a
+			className={className + (className.includes("cp-link") ? "" : " cp-link")}
+			href={href}
+			target={target}
+			rel={target && "noopener"}
+			{...CP.extractEventDispatcherAttributes(blockTypeName, attributes, itemKeys)}
+			{...otherProps}
+		>
 			{props.children}
 		</a>
 	);
