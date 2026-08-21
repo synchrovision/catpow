@@ -1,20 +1,20 @@
 ﻿import { clsx } from "clsx";
 
 export const Link = (props) => {
-	const { className, attributes, itemKeys, keys = {}, ...otherProps } = props;
+	const { blockTypeName, className, attributes, itemKeys, keys = { href: "href" }, ...otherProps } = props;
 
 	const item = itemKeys ? CP.getTheItem(props) : attributes;
 	const href = item?.[keys?.href] || "";
 	const target = href.indexOf("://") !== -1 ? "_brank" : null;
 
 	return (
-		<a className={className} href={href} target={target} rel={target && "noopener"} {...otherProps}>
+		<a className={className} href={href} target={target} rel={target && "noopener"} {...CP.extractEventDispatcherAttributes(blockTypeName, attributes, itemKeys)} {...otherProps}>
 			{props.children}
 		</a>
 	);
 };
 Link.Edit = (props) => {
-	const { className, setAttributes, attributes, itemKeys, keys = {}, isSelected = "auto", ...otherProps } = props;
+	const { className, setAttributes, attributes, itemKeys, keys = { href: "href" }, isSelected = "auto", ...otherProps } = props;
 	const { useMemo, useEffect, useState } = wp.element;
 
 	const item = useMemo(() => (itemKeys ? CP.getTheItem(props) : attributes) || {}, [attributes, itemKeys]);
