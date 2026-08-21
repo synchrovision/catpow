@@ -1556,23 +1556,41 @@
   var { __ } = wp.i18n;
   var { RichText } = wp.blockEditor;
   var Button = (props) => {
-    const { tag: Tag = "div", className, attributes, isLink = true, itemKeys, keys = {}, ...otherProps } = props;
+    const { tag: Tag = "div", blockTypeName, attributes, isLink = true, itemKeys, keys = {}, ...otherProps } = props;
     const item = (itemKeys ? CP.getTheItem(props) : attributes) || {};
-    const states = CP.classNamesToFlags(className);
+    const states = CP.classNamesToFlags(item.buttonClasses);
     const LinkTag = isLink ? "a" : "span";
-    const linkProps = isLink ? { href: item[keys.href] || "" } : {};
-    if (isLink && /^\w+:\/\//.test(item[keys.href])) {
+    const linkProps = isLink ? { href: item.buttonHref || "" } : {};
+    if (isLink && /^\w+:\/\//.test(item.buttonHref)) {
       Object.assign(linkProps, { rel: "noopener", target: "_blank" });
     }
-    return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement(Tag, { className }, states.hasMicroCopy && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "span", className: "_copy cp-button__copy", value: item.copy }), /* @__PURE__ */ wp.element.createElement(LinkTag, { className: "-button cp-button__link", ...otherProps, ...linkProps }, states.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { className: "_icon cp-button__link-icon", item }), /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "span", className: "_text cp-button__link-text", value: item.text })), states.hasCaption && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "span", className: "_caption cp-button__caption", value: item.caption })));
+    return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement(Tag, { className: item.buttonClasses }, states.hasMicroCopy && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "span", className: "_copy cp-button__copy", value: item.buttonCopy }), /* @__PURE__ */ wp.element.createElement(LinkTag, { className: "-button cp-button__link", ...otherProps, ...CP.extractEventDispatcherAttributes(blockTypeName, attributes, itemKeys), ...linkProps }, states.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { className: "_icon cp-button__link-icon", item }), /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "span", className: "_text cp-button__link-text", value: item.buttonText })), states.hasCaption && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "span", className: "_caption cp-button__caption", value: item.buttonCaption })));
   };
   Button.Edit = (props) => {
-    const { tag = "div", className, setAttributes, attributes, isItem, itemKeys, keys = {}, ...otherProps } = props;
+    const { tag = "div", blockTypeName, setAttributes, attributes, isItem, itemKeys, keys = {}, ...otherProps } = props;
     const { useMemo: useMemo12, useEffect: useEffect7, useState: useState8 } = wp.element;
     const item = useMemo12(() => (itemKeys ? CP.getTheItem(props) : attributes) || {}, [attributes, itemKeys]);
-    const states = CP.classNamesToFlags(className);
+    const states = CP.classNamesToFlags(item.buttonClasses);
     const ItemComponent = isItem ? CP.Item : PlainComponent;
-    return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement(ItemComponent, { tag, className, ...{ setAttributes, attributes, itemKeys } }, states.hasMicroCopy && /* @__PURE__ */ wp.element.createElement(RichText, { tagName: "span", className: "_copy cp-button__copy", value: item.copy, placeholder: __("\u30DE\u30A4\u30AF\u30ED\u30B3\u30D4\u30FC", "catpow"), onChange: (copy) => CP.updateItem(props, { copy }) }), /* @__PURE__ */ wp.element.createElement(CP.Link.Edit, { className: "-button cp-button__link", ...{ setAttributes, attributes, itemKeys, keys } }, states.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { className: "_icon cp-button__link-icon", item }), /* @__PURE__ */ wp.element.createElement(RichText, { tagName: "span", className: "_text cp-button__link-text", value: item.text, onChange: (text) => CP.updateItem(props, { text }) })), states.hasCaption && /* @__PURE__ */ wp.element.createElement(RichText, { tagName: "span", className: "_caption cp-button__caption", value: item.caption, placeholder: __("\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3", "catpow"), onChange: (caption) => CP.updateItem(props, { caption }) })));
+    return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement(ItemComponent, { tag, className: item.buttonClasses, ...{ setAttributes, attributes, itemKeys } }, states.hasMicroCopy && /* @__PURE__ */ wp.element.createElement(
+      RichText,
+      {
+        tagName: "span",
+        className: "_copy cp-button__copy",
+        value: item.buttonCopy,
+        placeholder: __("\u30DE\u30A4\u30AF\u30ED\u30B3\u30D4\u30FC", "catpow"),
+        onChange: (buttonCopy) => CP.updateItem(props, { buttonCopy })
+      }
+    ), /* @__PURE__ */ wp.element.createElement(CP.Link.Edit, { className: "-button cp-button__link", ...{ setAttributes, attributes, itemKeys, keys } }, states.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { className: "_icon cp-button__link-icon", item }), /* @__PURE__ */ wp.element.createElement(RichText, { tagName: "span", className: "_text cp-button__link-text", value: item.buttonText, onChange: (buttonText) => CP.updateItem(props, { buttonText }) })), states.hasCaption && /* @__PURE__ */ wp.element.createElement(
+      RichText,
+      {
+        tagName: "span",
+        className: "_caption cp-button__caption",
+        value: item.buttonCaption,
+        placeholder: __("\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3", "catpow"),
+        onChange: (buttonCaption) => CP.updateItem(props, { buttonCaption })
+      }
+    )));
   };
   var PlainComponent = (props) => {
     const { tag: Tag = "div", setAttributes, attributes, itemKeys = [], children, ...otherProps } = props;
@@ -2444,7 +2462,7 @@
     return `min(${vw}vw,${rem}rem)`;
   };
   var ResponsiveItemSizeInput = (props) => {
-    const { value: value2, steps = { 10: 0, 100: 2 }, order = ["rem", "vw"], snap = true, onChange } = props;
+    const { value: value2, steps = { 4: 0, 100: 2 }, order = ["rem", "vw"], snap = true, onChange } = props;
     const [sizes, setSizes] = useState(valueToSizes(value2));
     useThrottle(
       () => {
@@ -5324,14 +5342,14 @@
 
   // ../blocks/_init/init/CP/components/Link.jsx
   var Link = (props) => {
-    const { className, attributes, itemKeys, keys = {}, ...otherProps } = props;
+    const { blockTypeName, className, attributes, itemKeys, keys = { href: "href" }, ...otherProps } = props;
     const item = itemKeys ? CP.getTheItem(props) : attributes;
     const href = item?.[keys?.href] || "";
     const target = href.indexOf("://") !== -1 ? "_brank" : null;
-    return /* @__PURE__ */ wp.element.createElement("a", { className, href, target, rel: target && "noopener", ...otherProps }, props.children);
+    return /* @__PURE__ */ wp.element.createElement("a", { className, href, target, rel: target && "noopener", ...CP.extractEventDispatcherAttributes(blockTypeName, attributes, itemKeys), ...otherProps }, props.children);
   };
   Link.Edit = (props) => {
-    const { className, setAttributes, attributes, itemKeys, keys = {}, isSelected = "auto", ...otherProps } = props;
+    const { className, setAttributes, attributes, itemKeys, keys = { href: "href" }, isSelected = "auto", ...otherProps } = props;
     const { useMemo: useMemo12, useEffect: useEffect7, useState: useState8 } = wp.element;
     const item = useMemo12(() => (itemKeys ? CP.getTheItem(props) : attributes) || {}, [attributes, itemKeys]);
     const [hasSelection, setHasSelection] = useState8(false);
@@ -5939,12 +5957,11 @@
     },
     buttonParams: {
       sub: [
-        "color",
-        "uiType",
-        "rank",
-        { name: "microcopy", label: __21("\u30DE\u30A4\u30AF\u30ED\u30B3\u30D4\u30FC", "catpow"), values: "hasMicroCopy" },
-        "hasIcon",
-        { name: "caption", label: __21("\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3", "catpow"), values: "hasCaption" },
+        { preset: "uiType", classKey: "buttonClasses" },
+        { preset: "rank", classKey: "buttonClasses" },
+        { name: "microcopy", label: __21("\u30DE\u30A4\u30AF\u30ED\u30B3\u30D4\u30FC", "catpow"), values: "hasMicroCopy", classKey: "buttonClasses" },
+        { preset: "hasIcon", classKey: "buttonClasses" },
+        { name: "caption", label: __21("\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3", "catpow"), values: "hasCaption", classKey: "buttonClasses" },
         "event"
       ]
     },
@@ -7300,15 +7317,13 @@
     return itemIndex;
   };
   var getTheItem = (props) => {
-    var { items, index, attributes, itemKeys = [] } = props;
-    if (items) return items[index];
+    var { attributes, itemKeys = [] } = props;
     const [itemsKey, itemIndex, subItemsKey, subItemIndex] = itemKeys;
     if (subItemsKey) return attributes?.[itemsKey]?.[itemIndex]?.[subItemsKey][subItemIndex];
     return attributes?.[itemsKey]?.[itemIndex];
   };
   var getTheItems = (props) => {
-    var { items, attributes, itemKeys = [] } = props;
-    if (items) return items;
+    var { attributes, itemKeys = [] } = props;
     const [itemsKey, itemIndex, subItemsKey] = itemKeys;
     if (subItemsKey) return attributes?.[itemsKey]?.[itemIndex]?.[subItemsKey];
     return attributes?.[itemsKey];
@@ -7906,13 +7921,15 @@
   };
 
   // ../blocks/_init/init/CP/functions/event.js
-  var extractEventDispatcherAttributes = (blockTypeName, item, itemKeys = ["items"]) => {
-    const [itemsKey] = itemKeys;
+  var extractEventDispatcherAttributes = (blockTypeName, attributes, itemKeys) => {
     const blockType = wp.data.select("core/blocks").getBlockType(blockTypeName);
+    const [itemsKey, itemIndex, subItemsKey, subItemIndex] = itemKeys;
+    const item = CP.getTheItem({ attributes, itemKeys });
+    const atts = (subItemsKey ? blockType.attributes[itemsKey]?.query?.[subItemsKey] : blockType.attributes[itemsKey])?.eventDispatcherAttributes;
     const eventDispatcherAttributes = {};
-    if (blockType.attributes[itemsKey].eventDispatcherAttributes) {
-      blockType.attributes[itemsKey].eventDispatcherAttributes.map((attr_name) => {
-        eventDispatcherAttributes[blockType.attributes[itemsKey].query[attr_name].attribute] = item[attr_name];
+    if (atts?.query) {
+      atts.query.map((attr_name) => {
+        eventDispatcherAttributes[atts.query[attr_name].attribute] = item[attr_name];
       });
     }
     return eventDispatcherAttributes;
