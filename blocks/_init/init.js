@@ -5346,7 +5346,18 @@
     const item = itemKeys ? CP.getTheItem(props) : attributes;
     const href = item?.[keys?.href] || "";
     const target = href.indexOf("://") !== -1 ? "_brank" : null;
-    return /* @__PURE__ */ wp.element.createElement("a", { className, href, target, rel: target && "noopener", ...CP.extractEventDispatcherAttributes(blockTypeName, attributes, itemKeys), ...otherProps }, props.children);
+    return /* @__PURE__ */ wp.element.createElement(
+      "a",
+      {
+        className: className + (className.includes("cp-link") ? "" : " cp-link"),
+        href,
+        target,
+        rel: target && "noopener",
+        ...CP.extractEventDispatcherAttributes(blockTypeName, attributes, itemKeys),
+        ...otherProps
+      },
+      props.children
+    );
   };
   Link.Edit = (props) => {
     const { className, setAttributes, attributes, itemKeys, keys = { href: "href" }, isSelected = "auto", ...otherProps } = props;
@@ -7923,12 +7934,12 @@
   // ../blocks/_init/init/CP/functions/event.js
   var extractEventDispatcherAttributes = (blockTypeName, attributes, itemKeys) => {
     const blockType = wp.data.select("core/blocks").getBlockType(blockTypeName);
-    const [itemsKey, itemIndex, subItemsKey, subItemIndex] = itemKeys;
+    const [itemsKey, subItemsKey] = itemKeys;
     const item = CP.getTheItem({ attributes, itemKeys });
-    const atts = (subItemsKey ? blockType.attributes[itemsKey]?.query?.[subItemsKey] : blockType.attributes[itemsKey])?.eventDispatcherAttributes;
+    const atts = subItemsKey ? blockType.attributes[itemsKey]?.query?.[subItemsKey] : blockType.attributes[itemsKey];
     const eventDispatcherAttributes = {};
-    if (atts?.query) {
-      atts.query.map((attr_name) => {
+    if (atts?.eventDispatcherAttributes) {
+      atts.eventDispatcherAttributes.map((attr_name) => {
         eventDispatcherAttributes[atts.query[attr_name].attribute] = item[attr_name];
       });
     }
