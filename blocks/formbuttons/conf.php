@@ -6,17 +6,20 @@ $button_class="cp-button";
 $attributes=[
 	"isTemplate"=>["type"=>"boolean","default"=>false],
 	"vars"=>["type"=>"object","default"=>[]],
-	"classes"=>["source"=>"attribute","selector"=>".{$block_class}","attribute"=>"class","default"=>"{$block_class} {$buttons_class} is-level3 has-item-size-medium"],
-	"items"=>BlockConfig::getButtonsAttributes(
-		"{$block_class}__item",
-		[
+	"classes"=>["source"=>"attribute","selector"=>".{$block_class}","attribute"=>"class","default"=>"{$block_class} {$buttons_class} is-level3 has-content-width has-spacing-type-block has-item-size-medium"],
+	"items"=>[
+		'type'=>'query',
+		'filters'=>[
+			'button'=>['class'=>"{$block_class}__button"]
+		],
+		'query'=>[
 			"action"=>["source"=>"attribute","selector"=>".{$block_class}-button","attribute"=>"data-action"],
 			"callback"=>["source"=>"attribute","selector"=>".{$block_class}-button","attribute"=>"data-callback"],
 			"target"=>["source"=>"attribute","selector"=>".{$block_class}-button","attribute"=>"data-target"],
 			"ignoreMessage"=>["source"=>"attribute","selector"=>".{$block_class}-button","attribute"=>"ignore-message"],
 		],
-		[
-			["action"=>"send","text"=>__("送信",'catpow')]
+		'default'=>[
+			["action"=>"send","buttonText"=>__("送信",'catpow')]
 		]
-	)
+	]
 ];

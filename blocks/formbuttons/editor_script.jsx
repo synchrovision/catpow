@@ -16,7 +16,6 @@ wp.blocks.registerBlockType("catpow/formbuttons", {
 	edit({ attributes, className, setAttributes, isSelected }) {
 		const { useMemo } = wp.element;
 		const { BlockControls, InspectorControls, useBlockProps } = wp.blockEditor;
-		const { Icon, PanelBody, TextareaControl } = wp.components;
 		const { isTemplate, items = [], classes = "", vars, EditMode = false } = attributes;
 		const { linkKeys } = blockConfig;
 
@@ -32,10 +31,6 @@ wp.blocks.registerBlockType("catpow/formbuttons", {
 			wp.hooks.applyFilters("catpow.blocks.formbuttons.selectiveItemClasses", CP.finderProxy(selectiveItemClasses));
 			return selectiveItemClasses;
 		}, []);
-
-		const saveItems = () => {
-			setAttributes({ items: JSON.parse(JSON.stringify(items)) });
-		};
 
 		const blockProps = useBlockProps({ className: EditMode ? "cp-altcontent" : classes, style: vars });
 
@@ -61,7 +56,18 @@ wp.blocks.registerBlockType("catpow/formbuttons", {
 					<CP.Bem prefix="wp-block-catpow">
 						<ul {...blockProps}>
 							{items.map((item, index) => {
-								return <CP.Button.Edit tag="li" className={item.classes} isItem={true} {...{ setAttributes, attributes }} itemKeys={["items", index]} keys={linkKeys.link} key={index} />;
+								return (
+									<CP.Button.Edit
+										tag="li"
+										blockTypeName="catpow/formbuttons"
+										className={item.classes}
+										isItem={true}
+										{...{ setAttributes, attributes }}
+										itemKeys={["items", index]}
+										keys={linkKeys.link}
+										key={index}
+									/>
+								);
 							})}
 						</ul>
 					</CP.Bem>
@@ -73,6 +79,7 @@ wp.blocks.registerBlockType("catpow/formbuttons", {
 						icon="edit"
 						{...{ setAttributes, attributes }}
 						itemKeys={["items", attributes.currentItemIndex]}
+						classKey="buttonClasses"
 						selectiveClasses={selectiveItemClasses}
 					/>
 					<CP.ItemControlInfoPanel />
@@ -86,7 +93,6 @@ wp.blocks.registerBlockType("catpow/formbuttons", {
 	save({ attributes }) {
 		const { useBlockProps } = wp.blockEditor;
 		const { items = [], classes = "", vars } = attributes;
-		const blockType = wp.data.select("core/blocks").getBlockType("catpow/formbuttons");
 
 		return (
 			<CP.Bem prefix="wp-block-catpow">
@@ -94,7 +100,7 @@ wp.blocks.registerBlockType("catpow/formbuttons", {
 					{items.map((item, index) => (
 						<CP.Button
 							tag="li"
-							className={item.classes}
+							blockTypeName="catpow/formbuttons"
 							isLink={false}
 							{...{ attributes }}
 							itemKeys={["items", index]}
@@ -103,7 +109,6 @@ wp.blocks.registerBlockType("catpow/formbuttons", {
 							data-callback={item.callback}
 							data-target={item.target}
 							ignore-message={item.ignoreMessage}
-							{...CP.extractEventDispatcherAttributes("catpow/formbuttons", item)}
 							key={index}
 						/>
 					))}

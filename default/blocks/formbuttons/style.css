@@ -1,4 +1,4 @@
-.wp-block-catpow-formbuttons__item {
+.wp-block-catpow-formbuttons__button {
   font-family: var(--cp-font-family-t-u, inherit);
   font-size: var(--cp-font-size-t-u, 2em);
   font-weight: var(--cp-font-weight-t-u, regular);
@@ -19,7 +19,7 @@
   align-items: flex-start;
   gap: var(--cp-margin-c-b);
 }
-.wp-block-catpow-formbuttons__item {
+.wp-block-catpow-formbuttons__button {
   position: relative;
   -webkit-box-flex: 0;
   flex-grow: 0;
