@@ -105,7 +105,7 @@ wp.hooks.addFilter("editor.BlockEdit", "catpow/editor", (BlockEdit) => (props) =
 		return (
 			<>
 				<BlockEdit {...props} />
-				<InspectorControls>
+				<InspectorControls group="bindings">
 					{panelSupports.style && <CP.SelectClassPanel title={__("スタイル", "catpow")} icon="pets" classKey={classKey} {...props} selectiveClasses={blockStyleSelectiveClasses[props.name]} />}
 					<CP.SelectClassPanel title={__("レベル", "catpow")} icon="pets" classKey={classKey} {...props} selectiveClasses={["level", panelSupports.headingLevel && "headingTag"]} />
 					{panelSupports.typography && (
@@ -130,7 +130,9 @@ wp.hooks.addFilter("editor.BlockEdit", "catpow/editor", (BlockEdit) => (props) =
 								selectiveClasses={["hasContentWidth", "hasMarginType", panelSupports.itemSize && "itemSize"]}
 							/>
 						))}
-					{panelSupports.bodySize && <CP.SelectClassPanel title={__("内容サイズ・余白", "catpow")} icon="pets" classKey="bodyClasses" {...props} selectiveClasses={["hasContentWidth", "hasPadding"]} />}
+					{panelSupports.bodySize && (
+						<CP.SelectClassPanel title={__("内容サイズ・余白", "catpow")} icon="pets" classKey="bodyClasses" {...props} selectiveClasses={["hasContentWidth", "hasPadding"]} />
+					)}
 					{panelSupports.background && (
 						<>
 							<CP.SelectClassPanel
