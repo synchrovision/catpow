@@ -80,10 +80,7 @@ wp.blocks.registerBlockType("catpow/banners", {
 				<CP.SelectModeToolbar setAttributes={setAttributes} attributes={attributes} />
 				<CP.SelectDeviceToolbar attributes={attributes} setAttributes={setAttributes} devices={devices} />
 				<InspectorControls>
-					<CP.SelectClassPanel title={__("クラス", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
-					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
-						<TextareaControl label={__("クラス", "catpow")} onChange={(classes) => setAttributes({ classes })} value={classes} />
-					</PanelBody>
+					<CP.SelectClassPanel title={__("スタイル", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 					{isTemplate ? (
 						<CP.SelectClassPanel
 							title={__("テンプレート", "catpow")}
@@ -93,9 +90,14 @@ wp.blocks.registerBlockType("catpow/banners", {
 							selectiveClasses={itemTemplateSelectiveClasses}
 						/>
 					) : (
-						<CP.SelectClassPanel title={__("バナー", "catpow")} icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={selectiveItemClasses} />
+						<CP.SelectClassPanel
+							title={__("バナー", "catpow")}
+							icon="edit"
+							{...{ setAttributes, attributes }}
+							itemKeys={["items", attributes.currentItemIndex]}
+							selectiveClasses={selectiveItemClasses}
+						/>
 					)}
-					<CP.ItemControlInfoPanel />
 				</InspectorControls>
 
 				{EditMode ? (
@@ -149,7 +151,7 @@ wp.blocks.registerBlockType("catpow/banners", {
 														value={item.title}
 													/>
 												)}
-												<CP.Link.Edit className="_link" attributes={attributes} setAttributes={setAttributes} keys={linkKeys.link} itemKeys={["items", index]}>
+												<CP.Link.Edit blockTypeName="catpow/banners" className="_link" attributes={attributes} setAttributes={setAttributes} keys={linkKeys.link} itemKeys={["items", index]}>
 													<CP.SelectResponsiveImage
 														className="_image"
 														attributes={attributes}
@@ -191,8 +193,7 @@ wp.blocks.registerBlockType("catpow/banners", {
 							return (
 								<li className={item.classes} key={index}>
 									{states.hasTitle && <RichText.Content tagName={HeadingTag} className="_title" value={item.title} />}
-
-									<CP.Link className="_link" attributes={attributes} keys={linkKeys.link} itemKeys={["items", index]} {...CP.extractEventDispatcherAttributes("catpow/banners", item)}>
+									<CP.Link blockTypeName="catpow/banners" className="_link" attributes={attributes} keys={linkKeys.link} itemKeys={["items", index]}>
 										<CP.ResponsiveImage className="_image" size="regular_banner" attributes={attributes} keys={imageKeys.image} itemKeys={["items", index]} devices={devices} isTemplate={isTemplate} />
 									</CP.Link>
 								</li>
@@ -208,50 +209,4 @@ wp.blocks.registerBlockType("catpow/banners", {
 			</>
 		);
 	},
-	deprecated: [
-		{
-			save({ attributes, className }) {
-				const { isTemplate, items = [], classes, loopParam } = attributes;
-
-				var states = CP.classNamesToFlags(classes);
-				const imageKeys = {
-					image: {
-						src: "src",
-						srcset: "srcset",
-						alt: "alt",
-						code: "imageCode",
-						items: "items",
-					},
-				};
-
-				return (
-					<ul className={classes}>
-						{states?.doLoop && "[loop_template " + loopParam + "]"}
-						{items.map((item, index) => {
-							return (
-								<li className={item.classes}>
-									{states.hasTitle && (
-										<h3>
-											<RichText.Content value={item.title} />
-										</h3>
-									)}
-									<a href={item.linkUrl} target={item.target} data-event={item.event} rel={item.target ? "noopener noreferrer" : ""}>
-										<CP.ResponsiveImage attributes={attributes} keys={imageKeys.image} itemKeys={["items", index]} isTemplate={isTemplate} />
-									</a>
-								</li>
-							);
-						})}
-						{states?.doLoop && "[/loop_template]"}
-					</ul>
-				);
-			},
-			migrate(attributes) {
-				var states = CP.classNamesToFlags(classes);
-				attributes.content_path = attributes.loopParam.split(" ")[0];
-				attributes.query = attributes.loopParam.split(" ").slice(1).join("\n");
-				attributes.doLoop = states?.doLoop;
-				return attributes;
-			},
-		},
-	],
 });

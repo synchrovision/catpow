@@ -5,6 +5,7 @@
 	"supports": {
 		"level": true,
 		"headingLevel": true,
+		"color": true,
 		"spacing": true,
 		"itemSize": true,
 		"background": true
