@@ -26,7 +26,7 @@ add_filter('cp_block_items_attributes_button',function($items,$args){
 		foreach($items['default'] as $i=>$item){
 			$items['default'][$i]+=[
 				'buttonClasses'=>$args['class'].' is-ui-type-solid is-rank-secondary cp-button',
-				'buttonText'=>'',
+				'buttonText'=>__('もっと詳しく','catpow'),
 			];
 			if($is_link){$items['default'][$i]+=['buttonHref'=>'/'];}
 			if(!preg_match('/\bcp\-button\b/',$items['default'][$i]['buttonClasses'])){
