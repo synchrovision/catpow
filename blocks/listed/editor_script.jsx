@@ -24,7 +24,7 @@ CP.config.listed = {
 };
 
 wp.blocks.registerBlockType("catpow/listed", {
-	description: __("目次やお知らせなどの一覧ブロックです。", "catpow"),
+	description: __("コンテンツ一覧のブロックです。", "catpow"),
 	transforms: {
 		from: [
 			{
@@ -63,6 +63,7 @@ wp.blocks.registerBlockType("catpow/listed", {
 			HeadingTag,
 			classes = "",
 			commonItemClasses = "",
+			commonItemHeaderClasses = "",
 			countPrefix,
 			countSuffix,
 			subCountPrefix,
@@ -82,73 +83,62 @@ wp.blocks.registerBlockType("catpow/listed", {
 					label: __("タイプ", "catpow"),
 					filter: "type",
 					type: "gridbuttons",
-					values: {
-						isTypeOrderd: __("連番リスト", "catpow"),
-						isTypeNews: __("お知らせ", "catpow"),
-						isTypeIndex: __("目次", "catpow"),
-						isTypeMenu: __("メニュー", "catpow"),
-					},
+					values: { isTypeCard: __("カード", "catpow"), isTypeFlat: __("フラット", "catpow") },
 					sub: {
-						isTypeOrderd: [
-							{ name: "image", label: __("画像", "catpow"), values: "hasImage" },
+						isTypeCard: [
 							{
-								name: "countPrefix",
-								input: "text",
-								label: __("番号前置テキスト", "catpow"),
-								key: "countPrefix",
+								preset: "colorScheme",
+								label: __("ヘッダ配色", "catpow"),
+								classKey: "commonItemHeaderClasses",
 							},
 							{
-								name: "countSuffix",
-								input: "text",
-								label: __("番号後置テキスト", "catpow"),
-								key: "countSuffix",
+								preset: "backgroundColor",
+								label: __("ヘッダ背景色", "catpow"),
+								classKey: "commonItemHeaderClasses",
 							},
-							{
-								name: "titleCaption",
-								label: __("タイトルキャプション", "catpow"),
-								values: "hasTitleCaption",
-							},
-							{
-								name: "subTitle",
-								label: __("サブタイトル", "catpow"),
-								values: "hasSubTitle",
-							},
-							{ name: "link", label: __("リンク", "catpow"), values: "hasLink" },
-						],
-						isTypeNews: [{ name: "link", label: __("リンク", "catpow"), values: "hasLink" }],
-						isTypeIndex: [],
-						isTypeMenu: [
 							{
 								preset: "backgroundImage",
 								label: __("アイテム背景画像", "catpow"),
 								classKey: "commonItemClasses",
 							},
-							{
-								name: "image",
-								type: "buttons",
-								label: __("画像", "catpow"),
-								values: {
-									noImage: __("なし", "catpow"),
-									hasImage: __("大", "catpow"),
-									hasHeaderImage: __("小", "catpow"),
-								},
-							},
-							{
-								name: "titleCaption",
-								label: __("タイトルキャプション", "catpow"),
-								values: "hasTitleCaption",
-							},
-							{ name: "text", label: __("テキスト", "catpow"), values: "hasText" },
-							{ name: "link", label: __("リンク", "catpow"), values: "hasLink" },
 						],
 					},
-					bind: {
-						isTypeOrderd: ["hasHeader", "hasCounter", "hasTitle", "hasText"],
-						isTypeNews: ["hasText", "hasSubTitle"],
-						isTypeIndex: ["hasHeader", "hasTitle", "hasText"],
-						isTypeMenu: ["hasHeader", "hasTitle"],
+				},
+				{
+					name: "counter",
+					label: __("番号", "catpow"),
+					values: "hasCounter",
+					sub: [
+						{
+							name: "countPrefix",
+							input: "text",
+							label: __("番号前置テキスト", "catpow"),
+							key: "countPrefix",
+						},
+						{
+							name: "countSuffix",
+							input: "text",
+							label: __("番号後置テキスト", "catpow"),
+							key: "countSuffix",
+						},
+					],
+				},
+				{
+					name: "image",
+					type: "buttons",
+					label: __("画像", "catpow"),
+					values: {
+						hasImage: __("大", "catpow"),
+						hasHeaderImage: __("小", "catpow"),
 					},
 				},
+				{
+					name: "titleCaption",
+					label: __("タイトルキャプション", "catpow"),
+					values: "hasTitleCaption",
+				},
+				{ name: "text", label: __("テキスト", "catpow"), values: "hasText" },
+				{ name: "hasLink", label: __("リンク", "catpow"), values: "hasLink" },
 				"isTemplate",
 			];
 			wp.hooks.applyFilters("catpow.blocks.listed.selectiveClasses", CP.finderProxy(selectiveClasses));
@@ -196,10 +186,13 @@ wp.blocks.registerBlockType("catpow/listed", {
 				<CP.SelectModeToolbar setAttributes={setAttributes} attributes={attributes} />
 				<InspectorControls>
 					<CP.SelectClassPanel title={__("スタイル", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
-					<CP.SelectClassPanel title={__("リストアイテム", "catpow")} icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={["color"]} />
-					{states.hasLink && (
-						<CP.SelectClassPanel title={__("イベント", "catpow")} icon="flag" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={["event"]} />
-					)}
+					<CP.SelectClassPanel
+						title={__("リストアイテム", "catpow")}
+						icon="edit"
+						{...{ setAttributes, attributes }}
+						itemKeys={["items", attributes.currentItemIndex]}
+						selectiveClasses={[{ preset: "buttonParams", cond: states.hasLink }]}
+					/>
 					{isTemplate && (
 						<CP.SelectClassPanel
 							title={__("テンプレート", "catpow")}
@@ -284,11 +277,19 @@ wp.blocks.registerBlockType("catpow/listed", {
 											<CP.Item tag="li" className={clsx("_item", item.classes, commonItemClasses)} {...{ setAttributes, attributes }} itemKeys={["items", index]} key={i}>
 												{states.hasImage && (
 													<div className="_image">
-														<CP.SelectResponsiveImage attributes={attributes} setAttributes={setAttributes} keys={imageKeys.image} itemKeys={["items", index]} size="vga" isTemplate={isTemplate} />
+														<CP.SelectResponsiveImage
+															className="_img"
+															attributes={attributes}
+															setAttributes={setAttributes}
+															keys={imageKeys.image}
+															itemKeys={["items", index]}
+															size="vga"
+															isTemplate={isTemplate}
+														/>
 													</div>
 												)}
 												{states.hasHeader && (
-													<header className="_header">
+													<header className={clsx("_header", commonItemHeaderClasses)}>
 														{states.hasCounter && (
 															<div className="_counter">
 																{countPrefix && <span className="_prefix">{countPrefix}</span>}
@@ -299,6 +300,7 @@ wp.blocks.registerBlockType("catpow/listed", {
 														{states.hasHeaderImage && (
 															<div className="_image">
 																<CP.SelectResponsiveImage
+																	className="_img"
 																	attributes={attributes}
 																	setAttributes={setAttributes}
 																	keys={imageKeys.headerImage}
@@ -334,7 +336,7 @@ wp.blocks.registerBlockType("catpow/listed", {
 														</div>
 													</header>
 												)}
-												{(states.hasSubImage || states.hasSubTitle || states.hasText) && (
+												{(states.hasSubImage || states.hasSubTitle || states.hasText || states.hasLink) && (
 													<div className="_contents">
 														{states.hasSubCounter && (
 															<div className="_subcounter">
@@ -346,6 +348,7 @@ wp.blocks.registerBlockType("catpow/listed", {
 														{states.hasSubImage && (
 															<div className="_image">
 																<CP.SelectResponsiveImage
+																	className="_img"
 																	attributes={attributes}
 																	setAttributes={setAttributes}
 																	keys={imageKeys.subImage}
@@ -378,17 +381,7 @@ wp.blocks.registerBlockType("catpow/listed", {
 																value={item.text}
 															/>
 														)}
-														{states.hasLink && (
-															<CP.Link.Edit className="_link" attributes={attributes} setAttributes={setAttributes} keys={linkKeys.link} itemKeys={["items", index]}>
-																<RichText
-																	onChange={(linkText) => {
-																		item.linkText = linkText;
-																		save();
-																	}}
-																	value={item.linkText}
-																/>
-															</CP.Link.Edit>
-														)}
+														{states.hasLink && <CP.Button.Edit blockTypeName="catpow/listed" {...{ setAttributes, attributes }} itemKeys={["items", index]} />}
 													</div>
 												)}
 											</CP.Item>
@@ -404,7 +397,7 @@ wp.blocks.registerBlockType("catpow/listed", {
 	},
 	save({ attributes, className }) {
 		const { InnerBlocks, RichText, useBlockProps } = wp.blockEditor;
-		const { isTemplate, vars, items = [], HeadingTag, classes = "", commonItemClasses, countPrefix, countSuffix, subCountPrefix, subCountSuffix, doLoop } = attributes;
+		const { isTemplate, vars, items = [], HeadingTag, classes = "", commonItemClasses, commonItemHeaderClasses, countPrefix, countSuffix, subCountPrefix, subCountSuffix, doLoop } = attributes;
 		const states = CP.classNamesToFlags(classes);
 		const { imageKeys, linkKeys } = CP.config.listed;
 
@@ -416,11 +409,11 @@ wp.blocks.registerBlockType("catpow/listed", {
 							<li className={clsx("_item", item.classes, commonItemClasses)} data-class={item.classes} key={index}>
 								{states.hasImage && (
 									<div className="_image">
-										<CP.ResponsiveImage attributes={attributes} keys={imageKeys.image} itemKeys={["items", index]} isTemplate={isTemplate} />
+										<CP.ResponsiveImage className="_img" attributes={attributes} keys={imageKeys.image} itemKeys={["items", index]} isTemplate={isTemplate} />
 									</div>
 								)}
 								{states.hasHeader && (
-									<header className="_header">
+									<header className={clsx("_header", commonItemHeaderClasses)}>
 										{states.hasCounter && (
 											<div className="_counter">
 												{countPrefix && <span className="_prefix">{countPrefix}</span>}
@@ -430,7 +423,7 @@ wp.blocks.registerBlockType("catpow/listed", {
 										)}
 										{states.hasHeaderImage && (
 											<div className="_image">
-												<CP.ResponsiveImage attributes={attributes} keys={imageKeys.headerImage} itemKeys={["items", index]} isTemplate={isTemplate} />
+												<CP.ResponsiveImage className="_img" attributes={attributes} keys={imageKeys.headerImage} itemKeys={["items", index]} isTemplate={isTemplate} />
 											</div>
 										)}
 										<div className="_text">
@@ -439,7 +432,7 @@ wp.blocks.registerBlockType("catpow/listed", {
 										</div>
 									</header>
 								)}
-								{(states.hasSubImage || states.hasSubTitle || states.hasText) && (
+								{(states.hasSubImage || states.hasSubTitle || states.hasText || states.hasLink) && (
 									<div className="_contents">
 										{states.hasSubCounter && (
 											<div className="_subcounter">
@@ -455,11 +448,7 @@ wp.blocks.registerBlockType("catpow/listed", {
 										)}
 										{states.hasSubTitle && <RichText.Content tagName="p" className="_subtitle" value={item.subTitle} />}
 										{states.hasText && <RichText.Content tagName="p" className="_text" value={item.text} />}
-										{states.hasLink && (
-											<CP.Link className="_link" attributes={attributes} keys={linkKeys.link} itemKeys={["items", index]} {...CP.extractEventDispatcherAttributes("catpow/listed", item)}>
-												<RichText.Content value={item.linkText} />
-											</CP.Link>
-										)}
+										{states.hasLink && <CP.Button blockTypeName="catpow/listed" attributes={attributes} keys={linkKeys.link} itemKeys={["items", index]} />}
 									</div>
 								)}
 							</li>

@@ -6,14 +6,44 @@
 .wp-block-catpow-listed{
 	$block:&;
 	@include bnd((pd:0,mgi:a));
+	@include grd((rc:i,g:c-c));
 	@include txt((l:n,c:tx));
 	&__item{
+		@extend %card-component;
+		@include bnd((p:r,pd:0,o:h));
+		@include anc((n:--item,s:a));
+		&-image{
+			&-img{
+				@include bnd((d:b,w:f,h:a,a:1.5));
+			}
+		}
 		&-header{
+			@include flx((w:n));
+			&-counter{
+				@extend %label-component;
+				@include bnd((d:b,p:f,w:fit,h:a,a:1,t:-1em,l:-.5em,ac:c,bs:b,z:3));
+				@include pos((anc:--item,a:c));
+				@include bg((c:m));
+				@include bdr((s:s,r:50%));
+				@include txt((a:c,p:t-l,h:1em,f:d,c:i));
+				&-prefix,&-suffix{
+					@include txt((p:r-s));
+				}
+				&-number{
+					@include bnd((mg:0 .1em));
+					@include txt((f:d));
+				}
+			}
 			&-image{
+				@include bnd((f:1 1 80));
 				@include bnd((p:r));
+				&-img{
+					@include bnd((d:b,p:a,w:f,h:f,op:c,of:c));
+				}
 			}
 			&-text{
-				@include bnd((p:r));
+				@include bnd((p:r,f:4 4 120,pd:c-c));
+				@include txt((c:tx));
 				&-title{
 					@extend %heading-block;
 					@extend %heading;
@@ -22,10 +52,16 @@
 					@extend %caption-block;
 					@extend %caption;
 				}
+				>:first-child{
+					@include bnd((mgt:0));
+				}
+				>:last-child{
+					@include bnd((mgb:0));
+				}
 			}
 		}
 		&-contents{
-			@include bnd((p:r));
+			@include bnd((p:r,pd:c-c));
 			&-subtitle{
 				@extend %lead-block;
 				@extend %lead;
@@ -35,206 +71,41 @@
 				@extend %paragraph;
 			}
 			&-link{
-				@extend %button-component;
 				@extend %ui-block;
-				@extend %ui;
-				@include bnd((d:b));
-				@include bg((c:bx));
-				@include bdr((s:s));
-				@include txt((a:c,c:mx));
+			}
+			>:first-child{
+				@include bnd((mgt:0));
+			}
+			>:last-child{
+				@include bnd((mgb:0));
 			}
 		}
 	}
-	&.is-type-orderd{
-		@include bnd((mg:30 a,w:a c));
-		@include txt((l:n));
-		@include grd((rc:i,g:c-c));
+	&.is-type-card{
 		#{$block}{
 			&__item{
-				@extend %card-component;
-				@include bnd((p:r,pd:0,o:h));
 				@include bg((c:bx));
+			}
+		}
+	}
+	&.is-type-flat{
+		#{$block}{
+			&__item{
+				@include bdr((r:0));
+				@include shd((b:n));
+				&-image{
+					@include bnd((o:h));
+					@include bdr((r:c-c));
+				}
 				&-header{
-					@extend %header-component;
-					@include bg((c:sx));
-					&-counter{
-						@extend %label-component;
-						@include bnd((d:b,p:a,t:.5em,l:.5em));
-						@include bg((c:mx));
-						@include bdr((s:s));
-						@include txt((a:c,p:t-l,h:1em,f:d,c:ix));
-						&-prefix,&-suffix{
-							
-						}
-						&-number{
-							@include bnd((mg:0 .1em));
-							@include txt((p:1.5em,f:dc));
-						}
-					}
 					&-text{
-						&-title{
-							@include bnd((mg:0,pd:0));
-							@include txt((c:mx));
-						}
-						&-caption{
-							@include bnd((mgb:0));
-						}
+						@include bnd((pdi:0));
 					}
 				}
 				&-contents{
-					@include bnd((pd:c-c));
-					&-subtitle{
-						@extend %paragraph-block;
-						@extend %paragraph;
-					}
-					&-text{
-						@extend %paragraph;
-					}
-				}
-				&-link{
-					a{
-						@include bnd((d:b,p:a,t:0,b:0,l:0,r:0));
-					}
+					@include bnd((pd:0));
 				}
 			}
-		}
-		&:not(.has-image){
-			#{$block}{
-				&__item{
-					&-header{
-						&-text{
-							&-title{
-								@include bnd((mgt:0));
-							}
-						}
-					}
-				}
-			}
-		}
-		&.has-image{
-			#{$block}{
-				&__item{
-					@include bnd((pdt:75%));
-					&-image{
-						@include bnd((d:b,p:a,l:0,r:0,t:0));
-						img{
-							@include bnd((d:b,w:f,a:4/3,op:c,of:c));
-						}
-					}
-				}
-			}	
-		} 
-	}
-	&.is-type-news{
-		@include bnd((c:sz(i),g:c-c));
-		#{$block}{
-			&__item{
-				@include bnd((p:r,pd:sp-c,pdi:0));
-				@include bdr((p:b,s:s,w:1));
-				&-contents{
-					@include flx((w:w,g:.5em));
-					&-subtitle{
-						@include bnd((f:1 1 10em));
-						@include bnd((mg:0));
-					}
-					&-text{
-						@include bnd((f:4 4 20em));
-						@include bnd((mg:0));
-					}
-				}
-			}
-		}
-	}
-	&.is-type-index{
-		@include bnd((c:sz(i),g:c-c));
-		#{$block}{
-			&__item{
-				@include bnd((pd:0,mg:0,bs:b,bi:a));
-				@include flx((w:w));
-				&-header{
-					@include bnd((f:1 1 a,pd:0,mg:0));
-					@include flx((w:n,a:c));
-					&-text{
-						@include bnd((f:0 0 auto));
-						&-title{
-							@extend %lead;
-							@include bnd((pd:0,mg:0));
-						}
-					}
-					&::after{
-						content: '';
-						@include bnd((f:1 1 a,mg:10));
-						@include bdr((p:b,s:d,w:2,c:t 1 .5));
-					}
-				}
-				&-contents{
-					@include flx((w:n,a:c));
-					&-text{
-						@include bnd((pd:0,mg:0));
-					}
-				}
-			}
-		}
-	}
-	&.is-type-menu{
-		@include grd((rc:i,g:c-c));
-		#{$block}{
-			&__item{
-				@extend %card-component;
-				@include bnd((p:r,o:h));
-				@include bg((c:bx));
-				&-contents{
-					&-text{
-						@include bnd((mgb:0));
-					}
-				}
-			}
-		}
-		&:not(.has-image){
-			#{$block}{
-				&__item{
-					&-header{
-						&-text{
-							&-title{
-								@include bnd((mgt:0));
-							}
-						}
-					}
-				}
-			}
-		}
-		&.has-image{
-			#{$block}{
-				&__item{
-					@include bnd((pdt:75%));
-					&-image{
-						@include bnd((d:b,p:a,l:0,r:0,t:0));
-						img{
-							@include bnd((d:b,w:f,a:4/3,op:c,of:c));
-						}
-					}
-				}
-			}	
-		} 
-		&.has-header-image{
-			#{$block}{
-				&__item{
-					&-header{
-						@include grd((tc:1fr 4fr,g:c-c));
-						&-image{
-							@include bnd((p:r));
-							img{
-								@include bnd((d:b,p:a,i:0,w:f,h:f,op:c,of:c));
-							}
-						}
-						&-text{
-							&-caption{
-								@include bnd((mgb:0));
-							}
-						}
-					}
-				}
-			}	
 		}
 	}
 }
