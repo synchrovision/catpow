@@ -1,4 +1,4 @@
-.wp-block-catpow-buttons__item {
+.wp-block-catpow-buttons__button, .wp-block-catpow-buttons__item {
   font-family: var(--cp-font-family-t-u, inherit);
   font-size: var(--cp-font-size-t-u, 2em);
   font-weight: var(--cp-font-weight-t-u, regular);
@@ -20,6 +20,37 @@
   gap: var(--cp-margin-c-b);
 }
 .wp-block-catpow-buttons__item {
+  position: relative;
+  -webkit-box-flex: 0;
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: var(--cp-size-i);
+  margin: 0rem;
+  list-style: none;
+}
+
+.wp-block-catpow-buttons__button, .wp-block-catpow-buttons__item {
+  font-family: var(--cp-font-family-t-u, inherit);
+  font-size: var(--cp-font-size-t-u, 2em);
+  font-weight: var(--cp-font-weight-t-u, regular);
+  line-height: var(--cp-line-height-t-u, 1.5);
+  letter-spacing: var(--cp-letter-spacing-t-u, normal);
+}
+
+.wp-block-catpow-buttons {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: multiple;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: flex-start;
+  align-items: flex-start;
+  gap: var(--cp-margin-c-b);
+}
+.wp-block-catpow-buttons__button {
   position: relative;
   -webkit-box-flex: 0;
   flex-grow: 0;

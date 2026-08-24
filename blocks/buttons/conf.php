@@ -5,9 +5,18 @@ $buttons_class='cp-buttons';
 $button_class='cp-button';
 $attributes=[
 	"isTemplate"=>["type"=>"boolean","default"=>false],
-	"classes"=>["source"=>'attribute',"selector"=>".{$block_class}","attribute"=>'class',"default"=>"{$block_class} {$buttons_class} is-level3 has-item-size-medium"],
+	"classes"=>["source"=>'attribute',"selector"=>".{$block_class}","attribute"=>'class',"default"=>"{$block_class} {$buttons_class} is-level3 has-content-width has-spacing-type-block has-item-size-medium"],
 	'vars'=>['type'=>'object','default'=>[]],
-	"items"=>BlockConfig::getButtonsAttributes("{$block_class}__item"),
+	"items"=>[
+		'type'=>'query',
+		'filters'=>[
+			'button'=>['class'=>"{$block_class}__button"]
+		],
+		'query'=>[],
+		'default'=>[
+			['buttonText'=>__('もっと詳しく','catpow')]
+		]
+	],
 	"loopParam"=>["type"=>'text'],
 	"loopCount"=>["type"=>'number',"default"=>1],
 	

@@ -11,3 +11,16 @@
 		@include txt((l:n));
 	}
 }
+@import 'admin_style_config.scss';
+@import "text-placeholders.scss";
+@import "component-placeholders.scss";
+
+.wp-block-catpow-buttons{
+	$block:&;
+	@include flx((w:w,j:c,a:s,g:c-b));
+	&__button{
+		@extend %ui;
+		@include bnd((p:r,f:0 1 i,mg:0));
+		@include txt((l:n));
+	}
+}
