@@ -7934,7 +7934,7 @@
   // ../blocks/_init/init/CP/functions/event.js
   var extractEventDispatcherAttributes = (blockTypeName, attributes, itemKeys) => {
     const blockType = wp.data.select("core/blocks").getBlockType(blockTypeName);
-    const [itemsKey, subItemsKey] = itemKeys;
+    const [itemsKey, , subItemsKey] = itemKeys;
     const item = CP.getTheItem({ attributes, itemKeys });
     const atts = subItemsKey ? blockType.attributes[itemsKey]?.query?.[subItemsKey] : blockType.attributes[itemsKey];
     const eventDispatcherAttributes = {};
