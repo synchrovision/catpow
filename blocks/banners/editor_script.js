@@ -57,8 +57,7 @@
             devices
           },
           { name: "alt", input: "text", label: "alt", key: "alt" },
-          { name: "target", input: "text", label: "target", key: "target" },
-          "event"
+          { name: "target", input: "text", label: "target", key: "target" }
         ];
         wp.hooks.applyFilters("catpow.blocks.banners.selectiveItemClasses", CP.finderProxy(selectiveItemClasses2));
         return selectiveItemClasses2;
@@ -86,7 +85,7 @@
           itemKeys: ["items", attributes.currentItemIndex],
           selectiveClasses: selectiveItemClasses
         }
-      )), EditMode ? /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(CP.Label, { icon: "edit" }), /* @__PURE__ */ wp.element.createElement(
+      ), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30A4\u30D9\u30F3\u30C8", "catpow"), icon: "flag", ...{ setAttributes, attributes }, itemKeys: ["items", attributes.currentItemIndex], selectiveClasses: ["event"] })), EditMode ? /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(CP.Label, { icon: "edit" }), /* @__PURE__ */ wp.element.createElement(
         CP.EditItemsTable,
         {
           setAttributes,

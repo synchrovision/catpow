@@ -62,7 +62,6 @@ wp.blocks.registerBlockType("catpow/banners", {
 				},
 				{ name: "alt", input: "text", label: "alt", key: "alt" },
 				{ name: "target", input: "text", label: "target", key: "target" },
-				"event",
 			];
 			wp.hooks.applyFilters("catpow.blocks.banners.selectiveItemClasses", CP.finderProxy(selectiveItemClasses));
 			return selectiveItemClasses;
@@ -98,6 +97,7 @@ wp.blocks.registerBlockType("catpow/banners", {
 							selectiveClasses={selectiveItemClasses}
 						/>
 					)}
+					<CP.SelectClassPanel title={__("イベント", "catpow")} icon="flag" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={["event"]} />
 				</InspectorControls>
 
 				{EditMode ? (
