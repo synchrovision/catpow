@@ -37,7 +37,7 @@ wp.blocks.registerBlockType("catpow/buttons", {
 		}, []);
 
 		const selectiveItemClasses = useMemo(() => {
-			const selectiveItemClasses = ["buttonParams"];
+			const selectiveItemClasses = ["color", "buttonParams"];
 			wp.hooks.applyFilters("catpow.blocks.buttons.selectiveItemClasses", CP.finderProxy(selectiveItemClasses));
 			return selectiveItemClasses;
 		}, []);
