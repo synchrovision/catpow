@@ -7933,7 +7933,15 @@
 
   // ../blocks/_init/init/CP/functions/event.js
   var extractEventDispatcherAttributes = (blockTypeName, attributes, itemKeys) => {
+    if (!blockTypeName) {
+      console.error(`extractEventDispatcherAttributes : blockTypeName required`);
+      return {};
+    }
     const blockType = wp.data.select("core/blocks").getBlockType(blockTypeName);
+    if (!blockType?.attributes) {
+      console.error(`extractEventDispatcherAttributes : attempt to get not existing blockType ${blockTypeName}`);
+      return {};
+    }
     const [itemsKey, , subItemsKey] = itemKeys;
     const item = CP.getTheItem({ attributes, itemKeys });
     const atts = subItemsKey ? blockType.attributes[itemsKey]?.query?.[subItemsKey] : blockType.attributes[itemsKey];
