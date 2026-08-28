@@ -37,7 +37,7 @@ wp.blocks.registerBlockType("catpow/panes", {
 		var states = CP.classNamesToFlags(classes);
 		const { imageKeys } = CP.config.panes;
 
-		var selectiveClasses = [ { label: __("シンボル", "catpow"), values: "hasSymbol" }, "isTemplate"];
+		var selectiveClasses = [{ label: __("シンボル", "catpow"), values: "hasSymbol" }, "isTemplate"];
 		const itemSelectiveClasses = ["color", { input: "icon" }];
 
 		const save = () => {
@@ -54,7 +54,13 @@ wp.blocks.registerBlockType("catpow/panes", {
 					<PanelBody title="CLASS" icon="admin-generic" initialOpen={false}>
 						<TextareaControl label={__("クラス", "catpow")} onChange={(classes) => setAttributes({ classes })} value={classes} />
 					</PanelBody>
-					<CP.SelectClassPanel title={__("アイテム", "catpow")} icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={itemSelectiveClasses} />
+					<CP.SelectClassPanel
+						title={__("アイテム", "catpow")}
+						icon="edit"
+						{...{ setAttributes, attributes }}
+						itemKeys={["items", attributes.currentItemIndex]}
+						selectiveClasses={itemSelectiveClasses}
+					/>
 					<CP.ItemControlInfoPanel />
 				</InspectorControls>
 				{EditMode ? (
@@ -176,7 +182,7 @@ wp.blocks.registerBlockType("catpow/panes", {
 									</div>
 								</div>
 								{states.hasLink && item.linkUrl && (
-									<CP.Link className="_link" attributes={attributes} keys={linkKeys.link} itemKeys={["items", index]} {...CP.extractEventDispatcherAttributes("catpow/panes", item)}>
+									<CP.Link className="_link" attributes={attributes} keys={linkKeys.link} itemKeys={["items", index]}>
 										<RichText.Content value={item.linkText} />
 									</CP.Link>
 								)}

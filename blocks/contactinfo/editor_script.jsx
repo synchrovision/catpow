@@ -69,7 +69,13 @@ wp.blocks.registerBlockType("catpow/contactinfo", {
 				<CP.SelectModeToolbar setAttributes={setAttributes} attributes={attributes} />
 				<InspectorControls>
 					<CP.SelectClassPanel title={__("スタイル", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
-					<CP.SelectClassPanel title={__("アイテム", "catpow")} icon="edit" {...{ setAttributes, attributes }} itemKeys={["items", attributes.currentItemIndex]} selectiveClasses={selectiveItemClasses} />
+					<CP.SelectClassPanel
+						title={__("アイテム", "catpow")}
+						icon="edit"
+						{...{ setAttributes, attributes }}
+						itemKeys={["items", attributes.currentItemIndex]}
+						selectiveClasses={selectiveItemClasses}
+					/>
 					<CP.ItemControlInfoPanel />
 				</InspectorControls>
 				{EditMode ? (
@@ -223,7 +229,7 @@ wp.blocks.registerBlockType("catpow/contactinfo", {
 									<li className="_item" key={index}>
 										{states.hasItemTitle && <RichText.Content tagName={getSubHeadingTag(HeadingTag)} className="_title" value={item.title} />}
 										{states.hasItemLead && <RichText.Content tagName="p" className="_lead" value={item.lead} />}
-										<CP.Link className="_link" attributes={attributes} keys={linkKeys.link} itemKeys={["items", index]} {...CP.extractEventDispatcherAttributes("catpow/contactinfo", item)}>
+										<CP.Link className="_link" attributes={attributes} keys={linkKeys.link} itemKeys={["items", index]}>
 											{states.hasIcon && <CP.OutputIcon className="_icon" item={attributes} />}
 											<RichText.Content tagName="span" className="_text" value={item.link} />
 										</CP.Link>

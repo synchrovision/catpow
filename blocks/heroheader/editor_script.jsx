@@ -75,7 +75,13 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 				<InspectorControls>
 					<CP.SelectClassPanel title={__("スタイル", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
 					{states.hasButtons && (
-						<CP.SelectClassPanel title={__("ボタン", "catpow")} icon="edit" {...{ setAttributes, attributes }} itemKeys={["buttons", attributes.currentItemIndex]} selectiveClasses={["buttonParams"]} />
+						<CP.SelectClassPanel
+							title={__("ボタン", "catpow")}
+							icon="edit"
+							{...{ setAttributes, attributes }}
+							itemKeys={["buttons", attributes.currentItemIndex]}
+							selectiveClasses={["buttonParams"]}
+						/>
 					)}
 				</InspectorControls>
 				<CP.SelectModeToolbar setAttributes={setAttributes} attributes={attributes} />
@@ -205,13 +211,7 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 									{buttons.map((button, index) => (
 										<li className={button.classes} key={index}>
 											{states.hasMicroCopy && <span className="_copy cp-button__copy">{button.copy}</span>}
-											<CP.Link
-												className="_link cp-button__link"
-												attributes={attributes}
-												keys={{ items: "buttons", href: "href" }}
-												itemKeys={["buttons", index]}
-												{...CP.extractEventDispatcherAttributes("catpow/heroheader", button, ["buttons"])}
-											>
+											<CP.Link className="_link cp-button__link" attributes={attributes} keys={{ items: "buttons", href: "href" }} itemKeys={["buttons", index]}>
 												<CP.OutputIcon className="_icon cp-button__link-icon" item={button} />
 												<RichText.Content tagName="span" className="_text cp-button__link-text" value={button.text} />
 											</CP.Link>
