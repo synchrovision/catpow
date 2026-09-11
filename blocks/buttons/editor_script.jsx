@@ -98,11 +98,9 @@ wp.blocks.registerBlockType("catpow/buttons", {
 							) : (
 								<CP.Bem prefix="wp-block-catpow">
 									<ul {...blockProps}>
-										{[...Array(Math.max(items.length, loopCount)).keys()].map((i) => {
-											const index = i % items.length;
-											const item = items[index];
-											return <CP.Button.Edit tag="li" isItem={true} {...{ setAttributes, attributes }} itemKeys={["items", index]} keys={linkKeys.link} key={index} />;
-										})}
+										{[...Array(Math.max(items.length, loopCount)).keys()].map((i) => (
+											<CP.Button.Edit tag="li" isItem={true} {...{ setAttributes, attributes }} itemKeys={["items", i % items.length]} keys={linkKeys.link} key={i} />
+										))}
 									</ul>
 								</CP.Bem>
 							)}

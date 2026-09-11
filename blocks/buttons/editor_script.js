@@ -66,11 +66,7 @@
           ],
           isTemplate
         }
-      )) : /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { className: "cp-altcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("ul", { ...blockProps }, [...Array(Math.max(items.length, loopCount)).keys()].map((i) => {
-        const index = i % items.length;
-        const item = items[index];
-        return /* @__PURE__ */ wp.element.createElement(CP.Button.Edit, { tag: "li", isItem: true, ...{ setAttributes, attributes }, itemKeys: ["items", index], keys: linkKeys.link, key: index });
-      }))))));
+      )) : /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, AltMode && doLoop ? /* @__PURE__ */ wp.element.createElement("div", { className: "cp-altcontent" }, /* @__PURE__ */ wp.element.createElement("div", { className: "label" }, /* @__PURE__ */ wp.element.createElement(Icon, { icon: "welcome-comments" })), /* @__PURE__ */ wp.element.createElement(InnerBlocks, null)) : /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("ul", { ...blockProps }, [...Array(Math.max(items.length, loopCount)).keys()].map((i) => /* @__PURE__ */ wp.element.createElement(CP.Button.Edit, { tag: "li", isItem: true, ...{ setAttributes, attributes }, itemKeys: ["items", i % items.length], keys: linkKeys.link, key: i })))))));
     },
     save(props) {
       const { InnerBlocks } = wp.blockEditor;
