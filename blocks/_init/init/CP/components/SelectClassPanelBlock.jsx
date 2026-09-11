@@ -679,7 +679,7 @@ export const SelectClassPanelBlock = ({ prm }) => {
 			const classFlagsByValue = CP.getClassFlagsByValue(prm, primaryClassKey);
 			const bindClasseFlagsByValue = CP.getBindClassFlagsByValue(prm, primaryClassKey);
 			if (prm.values == null) {
-				if (prm.sub) {
+				if (prm.sub && Array.isArray(prm.sub)) {
 					rtn.push(...prm.sub.map((prm) => <SelectClassPanelBlock prm={prm} />));
 				}
 			} else if (_.isObject(prm.values)) {

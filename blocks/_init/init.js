@@ -4219,7 +4219,7 @@
         const classFlagsByValue = CP.getClassFlagsByValue(prm, primaryClassKey);
         const bindClasseFlagsByValue = CP.getBindClassFlagsByValue(prm, primaryClassKey);
         if (prm.values == null) {
-          if (prm.sub) {
+          if (prm.sub && Array.isArray(prm.sub)) {
             rtn.push(...prm.sub.map((prm2) => /* @__PURE__ */ wp.element.createElement(SelectClassPanelBlock, { prm: prm2 })));
           }
         } else if (_.isObject(prm.values)) {
@@ -5963,8 +5963,7 @@
     },
     hasButtons: {
       label: __21("\u30DC\u30BF\u30F3", "catpow"),
-      values: "hasButtons",
-      sub: ["buttonsOptions"]
+      values: "hasButtons"
     },
     buttonParams: {
       sub: [

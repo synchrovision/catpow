@@ -198,7 +198,6 @@ export const selectiveClassesPresets = {
 	hasButtons: {
 		label: __("ボタン", "catpow"),
 		values: "hasButtons",
-		sub: ["buttonsOptions"],
 	},
 	buttonParams: {
 		sub: [
