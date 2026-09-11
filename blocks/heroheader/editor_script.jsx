@@ -1,7 +1,11 @@
 ﻿import { useChangeEffect } from "catpow/hooks";
 const { __ } = wp.i18n;
+
 CP.config.heroheader = {
 	devices: ["tb", "sp"],
+	linkKeys: {
+		link: { href: "href", items: "buttons" },
+	},
 	imageKeys: {
 		bgImages: { src: "src", alt: "alt", sources: "sources", items: "images" },
 	},
@@ -18,11 +22,44 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 		const { InspectorControls, RichText, useBlockProps } = wp.blockEditor;
 		const states = CP.classNamesToFlags(attributes.classes);
 		const [ref, setRef] = useState(null);
-		const { devices, imageKeys } = CP.config.heroheader;
+		const { devices, imageKeys, linkKeys } = CP.config.heroheader;
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
-				{ name: "hasTextBackground", label: __("テキスト背景", "catpow"), values: "hasTextBackground", classKey: "bodyClasses" },
+				{
+					name: "layout",
+					label: __("レイアウト", "catpow"),
+					type: "gridbuttons",
+					values: { hasLayoutSplitted: __("分割", "catpow"), hasLayoutOverlay: __("上掛", "catpow") },
+					sub: {
+						hasLayoutSplitted: [
+							{ name: "sp", type: "buttons", label: __("テキスト位置（SP）", "catpow"), values: { hasTextTop: __("上", "catpow"), hasTextBottom: __("下", "catpow") } },
+							{ name: "pc", type: "buttons", label: __("テキスト位置（PC）", "catpow"), values: { hasTextLeft: __("左", "catpow"), hasTextRight: __("右", "catpow") } },
+							{
+								name: "imageBorder",
+								type: "buttons",
+								label: __("画像境界", "catpow"),
+								values: { hasImageBorderFade: __("ぼかし", "catpow"), hasImageBorderSlope: __("傾斜", "catpow"), hasImageBorderEllipse: __("楕円", "catpow") },
+							},
+							{ name: "amount", input: "range", min: -100, max: 100, step: 10, vars: "vars", key: "--cp-image-border-amount" },
+						],
+						hasLayoutOverlay: [
+							{
+								name: "hasTextBackground",
+								label: __("テキスト背景", "catpow"),
+								values: "hasTextBackground",
+								sub: [
+									{
+										name: "textBackground",
+										type: "buttons",
+										values: { hasTextBackgroundFade: __("ぼかし", "catpow"), hasTextBackgroundSlope: __("傾斜", "catpow"), hasTextBackgroundEllipse: __("楕円", "catpow") },
+									},
+								],
+							},
+						],
+					},
+				},
+
 				{ preset: "textAlign", classKey: "bodyClasses" },
 				{ preset: "alignContent", classKey: "bodyClasses" },
 				"hasButtons",
@@ -68,7 +105,7 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 			setAttributes({ params: { ...heroheaderSelectiveClasses.sub[Element][0].default, ...params } });
 		}, [Element]);
 
-		const blockProps = useBlockProps({ className: EditMode ? "cp-altcontent" : attributes.classes, style: CP.convertCssVarsForPreview(vars) });
+		const blockProps = useBlockProps({ className: EditMode ? "cp-altcontent" : classes, style: CP.convertCssVarsForPreview(vars) });
 
 		return (
 			<>
@@ -101,8 +138,8 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 					</div>
 				) : (
 					<CP.Bem prefix="wp-block-catpow">
-						<div {...blockProps} ref={setRef}>
-							<div className={bodyClasses}>
+						<div {...blockProps}>
+							<div className={bodyClasses} ref={setRef}>
 								<div className="_texts">
 									<RichText
 										tagName={HeadingTag}
@@ -111,7 +148,7 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 										onChange={(title) => {
 											setAttributes({ title });
 										}}
-										value={attributes.title}
+										value={title}
 									/>
 									<RichText
 										tagName="p"
@@ -120,61 +157,14 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 										onChange={(text) => {
 											setAttributes({ text });
 										}}
-										value={attributes.text}
+										value={text}
 									/>
 								</div>
 								{states.hasButtons && (
 									<div className="_buttons cp-buttons">
-										{buttons.map((button, index) => {
-											const itemStates = CP.classNamesToFlags(button.classes);
-											return (
-												<CP.Item tag="li" className={button.classes} {...{ setAttributes, attributes }} itemKeys={["buttons", index]} key={index}>
-													{states.hasMicroCopy && (
-														<RichText
-															tagName="span"
-															className="_copy cp-button__copy"
-															placeholder={__("テキストを入力", "catpow")}
-															onChange={(copy) => {
-																button.copy = copy;
-																setAttributes({ buttons: [...buttons] });
-															}}
-															value={button.copy}
-														/>
-													)}
-													<CP.Link.Edit
-														className="_link cp-button__link"
-														setAttributes={setAttributes}
-														attributes={attributes}
-														keys={{ items: "buttons", href: "linkUrl" }}
-														itemKeys={["buttons", index]}
-													>
-														{itemStates.hasIcon && <CP.OutputIcon className="_icon cp-button__link-icon" item={button} />}
-														<RichText
-															tagName="span"
-															className="_text cp-button__link-text"
-															placeholder={__("テキストを入力", "catpow")}
-															onChange={(text) => {
-																button.text = text;
-																setAttributes({ buttons: [...buttons] });
-															}}
-															value={button.text}
-														/>
-													</CP.Link.Edit>
-													{states.hasCaption && (
-														<RichText
-															tagName="span"
-															className="_caption cp-button__caption"
-															placeholder={__("テキストを入力", "catpow")}
-															onChange={(caption) => {
-																button.caption = caption;
-																setAttributes({ buttons: [...buttons] });
-															}}
-															value={button.caption}
-														/>
-													)}
-												</CP.Item>
-											);
-										})}
+										{buttons.map((button, index) => (
+											<CP.Button.Edit tag="li" isItem={true} {...{ setAttributes, attributes }} itemKeys={["buttons", index]} keys={linkKeys} key={index} />
+										))}
 									</div>
 								)}
 							</div>
@@ -193,30 +183,23 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 	save({ attributes }) {
 		const { classes, bodyClasses, vars, params, HeadingTag, title, text, buttons, images, element: Element = "div" } = attributes;
 		const { RichText, useBlockProps } = wp.blockEditor;
-		const states = CP.classNamesToFlags(attributes.classes);
-		const { devices, imageKeys } = CP.config.heroheader;
+		const states = CP.classNamesToFlags(classes);
+		const { devices, imageKeys, linkKeys } = CP.config.heroheader;
 
 		return (
 			<>
 				<script type="module" src={heroheaderSelectiveClasses.mjs[Element]} />
 				<CP.Bem prefix="wp-block-catpow">
-					<div {...useBlockProps.save({ className: attributes.classes, style: vars })}>
+					<div {...useBlockProps.save({ className: classes, style: vars })}>
 						<div className={bodyClasses}>
 							<div className="_texts">
-								<RichText.Content tagName={HeadingTag} className="_title" value={attributes.title} />
-								<RichText.Content tagName="p" className="_text" value={attributes.text} />
+								<RichText.Content tagName={HeadingTag} className="_title" value={title} />
+								<RichText.Content tagName="p" className="_text" value={text} />
 							</div>
 							{states.hasButtons && (
 								<ul className="_buttons">
 									{buttons.map((button, index) => (
-										<li className={button.classes} key={index}>
-											{states.hasMicroCopy && <span className="_copy cp-button__copy">{button.copy}</span>}
-											<CP.Link className="_link cp-button__link" attributes={attributes} keys={{ items: "buttons", href: "href" }} itemKeys={["buttons", index]}>
-												<CP.OutputIcon className="_icon cp-button__link-icon" item={button} />
-												<RichText.Content tagName="span" className="_text cp-button__link-text" value={button.text} />
-											</CP.Link>
-											{states.hasCaption && <span className="_caption cp-button__caption">{button.caption}</span>}
-										</li>
+										<CP.Button tag="li" blockTypeName="catpow/buttons" {...{ attributes }} itemKeys={["buttons", index]} keys={linkKeys} key={index} />
 									))}
 								</ul>
 							)}

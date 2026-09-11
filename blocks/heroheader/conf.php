@@ -4,7 +4,7 @@ $block_class="wp-block-catpow-heroheader";
 $button_class="cp-button";
 $attributes=[
 	"isTemplate"=>["type"=>"boolean","default"=>false],
-	"classes"=>["source"=>"attribute","selector"=>".{$block_class}","attribute"=>"class","default"=>"{$block_class} is-size-medium is-level1 has-color-scheme-inverted has-text has-buttons"],
+	"classes"=>["source"=>"attribute","selector"=>".{$block_class}","attribute"=>"class","default"=>"{$block_class} has-layout-overlay is-size-medium is-level1 has-color-scheme-inverted has-text has-buttons"],
 	"bodyClasses"=>["source"=>"attribute","selector"=>".{$block_class}__body","attribute"=>"class","default"=>"{$block_class}__body has-align-content-center has-text-align-center"],
 	"vars"=>["type"=>"object","default"=>["--cp-slider-blendmode"=>"multiply"]],
 	"HeadingTag"=>["type"=>"string","default"=>"h1"],
