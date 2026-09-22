@@ -26,54 +26,92 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
+				{ preset: "colorScheme", label: __("テキスト配色", "catpow"), classKey: "bodyClasses" },
 				{
-					name: "layout",
-					label: __("レイアウト", "catpow"),
-					type: "gridbuttons",
-					values: { hasLayoutSplitted: __("分割", "catpow"), hasLayoutOverlay: __("上掛", "catpow") },
-					sub: {
-						hasLayoutSplitted: [
-							{ name: "sp", type: "buttons", label: __("テキスト位置（SP）", "catpow"), values: { hasTextTop: __("上", "catpow"), hasTextBottom: __("下", "catpow") } },
-							{ name: "pc", type: "buttons", label: __("テキスト位置（PC）", "catpow"), values: { hasTextLeft: __("左", "catpow"), hasTextRight: __("右", "catpow") } },
-							{
-								name: "imageBorder",
-								type: "buttons",
-								label: __("画像境界", "catpow"),
-								values: { hasImageBorderFade: __("ぼかし", "catpow"), hasImageBorderSlope: __("傾斜", "catpow"), hasImageBorderEllipse: __("楕円", "catpow") },
+					name: "hasTextBackground",
+					label: __("テキスト背景", "catpow"),
+					values: "hasTextBackground",
+					sub: [
+						{
+							name: "textBackground",
+							type: "buttons",
+							values: {
+								hasTextBackgroundFade: __("ぼかし", "catpow"),
+								hasTextBackgroundBelt: __("帯", "catpow"),
+								hasTextBackgroundRect: __("矩形", "catpow"),
+								hasTextBackgroundCircle: __("円", "catpow"),
 							},
-							{ name: "amount", input: "range", min: -100, max: 100, step: 10, vars: "vars", key: "--cp-image-border-amount" },
-						],
-						hasLayoutOverlay: [
-							{
-								name: "hasTextBackground",
-								label: __("テキスト背景", "catpow"),
-								values: "hasTextBackground",
-								sub: [
-									{
-										name: "textBackground",
-										type: "buttons",
-										values: { hasTextBackgroundFade: __("ぼかし", "catpow"), hasTextBackgroundSlope: __("傾斜", "catpow"), hasTextBackgroundEllipse: __("楕円", "catpow") },
-									},
-								],
-							},
-						],
-					},
+						},
+						{
+							name: "blendmode",
+							label: __("ブレンドモード", "catpow"),
+							vars: "vars",
+							key: "--cp-text-background-blendmode",
+							input: "blendmode",
+						},
+						{ name: "opacity", label: __("不透明度", "catpow"), input: "range", min: 0, max: 1, step: 0.1, vars: "vars", key: "--cp-text-background-opacity" },
+					],
 				},
-
+				{ preset: "align", classKey: "bodyClasses" },
+				{ preset: "verticalAlign", classKey: "bodyClasses" },
 				{ preset: "textAlign", classKey: "bodyClasses" },
-				{ preset: "alignContent", classKey: "bodyClasses" },
 				"hasButtons",
 				{ preset: "itemSize", cond: ({ hasButtons }) => hasButtons, classKey: "bodyClasses" },
+			];
+			wp.hooks.applyFilters("catpow.blocks.heroheader.selectiveClasses", CP.finderProxy(selectiveClasses));
+			return selectiveClasses;
+		}, []);
+		const sliderSelectiveClasses = useMemo(() => {
+			const sliderSelectiveClasses = [
+				{ name: "sliderFixed", label: __("固定", "catpow"), values: "hasSliderFixed" },
+				{
+					name: "sliderSplit",
+					label: __("切抜", "catpow"),
+					values: "hasSliderSplit",
+					sub: [
+						{
+							name: "sliderSize",
+							label: __("サイズ", "catpow"),
+							vars: "vars",
+							key: "--cp-slider-size",
+							input: "range",
+							min: 0,
+							max: 100,
+							step: 10,
+						},
+						{ name: "sp", type: "buttons", label: __("位置（SP）", "catpow"), values: { hasSliderTop: __("上", "catpow"), hasSliderBottom: __("下", "catpow") } },
+						{ name: "pc", type: "buttons", label: __("位置（PC）", "catpow"), values: { hasSliderLeft: __("左", "catpow"), hasSliderRight: __("右", "catpow") } },
+						{
+							name: "sliderBorder",
+							label: __("境界効果", "catpow"),
+							values: "hasSliderBorder",
+							sub: [
+								{
+									type: "buttons",
+									values: { hasSliderBorderFade: __("ぼかし", "catpow"), hasSliderBorderSlope: __("傾斜", "catpow"), hasSliderBorderEllipse: __("楕円", "catpow") },
+									sub: {
+										hasSliderBorderSlope: [
+											{ label: __("方向（SP）", "catpow"), type: "buttons", values: { hasSliderBorderSlopeLeft: __("左", "catpow"), hasSliderBorderSlopeRight: __("右", "catpow") } },
+											{ label: __("方向（PC）", "catpow"), type: "buttons", values: { hasSliderBorderSlopeTop: __("上", "catpow"), hasSliderBorderSlopeBottom: __("下", "catpow") } },
+										],
+										hasSliderBorderEllipse: [{ type: "buttons", values: { hasSliderBorderEllipseInside: __("内", "catpow"), hasSliderBorderEllipseOutside: __("外", "catpow") } }],
+									},
+								},
+								{ name: "amount", input: "range", min: 0, max: 100, step: 10, vars: "vars", key: "--cp-slider-border-amount" },
+							],
+						},
+					],
+				},
 				{
 					name: "blendmode",
-					label: __("スライダーブレンドモード", "catpow"),
+					label: __("ブレンドモード", "catpow"),
 					vars: "vars",
 					key: "--cp-slider-blendmode",
 					input: "blendmode",
 				},
 				{
 					name: "opacity",
-					label: __("スライダー不透明度", "catpow"),
+					label: __("不透明度", "catpow"),
 					vars: "vars",
 					key: "--cp-slider-opacity",
 					input: "range",
@@ -82,10 +120,10 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 					step: 0.1,
 				},
 				heroheaderSelectiveClasses,
-				{ input: "pictures", label: __("スライドショー画像", "catpow"), key: "images", keys: imageKeys.bgImages },
+				{ input: "pictures", label: __("画像", "catpow"), key: "images", keys: imageKeys.bgImages },
 			];
-			wp.hooks.applyFilters("catpow.blocks.heroheader.selectiveClasses", CP.finderProxy(selectiveClasses));
-			return selectiveClasses;
+			wp.hooks.applyFilters("catpow.blocks.heroheader.sliderSelectiveClasses", CP.finderProxy(sliderSelectiveClasses));
+			return sliderSelectiveClasses;
 		}, []);
 
 		useEffect(() => {
@@ -111,6 +149,7 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 			<>
 				<InspectorControls>
 					<CP.SelectClassPanel title={__("スタイル", "catpow")} icon="art" {...{ setAttributes, attributes }} selectiveClasses={selectiveClasses} />
+					<CP.SelectClassPanel title={__("スライダー", "catpow")} icon="images-alt" {...{ setAttributes, attributes }} selectiveClasses={sliderSelectiveClasses} />
 					{states.hasButtons && (
 						<CP.SelectClassPanel
 							title={__("ボタン", "catpow")}
@@ -139,6 +178,11 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 				) : (
 					<CP.Bem prefix="wp-block-catpow">
 						<div {...blockProps}>
+							<Element class="wp-block-catpow-heroheader__bg" className="_bg" {...params}>
+								{images.map((image, index) => (
+									<CP.ResponsiveImage className="_picture" attributes={attributes} keys={imageKeys.bgImages} itemKeys={["images", index]} devices={devices} key={index} />
+								))}
+							</Element>
 							<div className={bodyClasses} ref={setRef}>
 								<div className="_texts">
 									<RichText
@@ -159,20 +203,15 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 										}}
 										value={text}
 									/>
+									{states.hasButtons && (
+										<div className="_buttons cp-buttons">
+											{buttons.map((button, index) => (
+												<CP.Button.Edit tag="li" isItem={true} {...{ setAttributes, attributes }} itemKeys={["buttons", index]} keys={linkKeys} key={index} />
+											))}
+										</div>
+									)}
 								</div>
-								{states.hasButtons && (
-									<div className="_buttons cp-buttons">
-										{buttons.map((button, index) => (
-											<CP.Button.Edit tag="li" isItem={true} {...{ setAttributes, attributes }} itemKeys={["buttons", index]} keys={linkKeys} key={index} />
-										))}
-									</div>
-								)}
 							</div>
-							<Element class="wp-block-catpow-heroheader__bg" className="_bg" {...params}>
-								{images.map((image, index) => (
-									<CP.ResponsiveImage className="_picture" attributes={attributes} keys={imageKeys.bgImages} itemKeys={["images", index]} devices={devices} key={index} />
-								))}
-							</Element>
 						</div>
 					</CP.Bem>
 				)}
@@ -191,24 +230,24 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 				<script type="module" src={heroheaderSelectiveClasses.mjs[Element]} />
 				<CP.Bem prefix="wp-block-catpow">
 					<div {...useBlockProps.save({ className: classes, style: vars })}>
-						<div className={bodyClasses}>
-							<div className="_texts">
-								<RichText.Content tagName={HeadingTag} className="_title" value={title} />
-								<RichText.Content tagName="p" className="_text" value={text} />
-							</div>
-							{states.hasButtons && (
-								<ul className="_buttons">
-									{buttons.map((button, index) => (
-										<CP.Button tag="li" blockTypeName="catpow/buttons" {...{ attributes }} itemKeys={["buttons", index]} keys={linkKeys} key={index} />
-									))}
-								</ul>
-							)}
-						</div>
 						<Element className="_bg" {...params}>
 							{images.map((image, index) => (
 								<CP.ResponsiveImage className="_picture" attributes={attributes} keys={imageKeys.bgImages} itemKeys={["images", index]} devices={devices} />
 							))}
 						</Element>
+						<div className={bodyClasses}>
+							<div className="_texts">
+								<RichText.Content tagName={HeadingTag} className="_title" value={title} />
+								<RichText.Content tagName="p" className="_text" value={text} />
+								{states.hasButtons && (
+									<ul className="_buttons">
+										{buttons.map((button, index) => (
+											<CP.Button tag="li" blockTypeName="catpow/buttons" {...{ attributes }} itemKeys={["buttons", index]} keys={linkKeys} key={index} />
+										))}
+									</ul>
+								)}
+							</div>
+						</div>
 					</div>
 				</CP.Bem>
 			</>

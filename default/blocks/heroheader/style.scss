@@ -9,47 +9,68 @@
 	@include bg((c:bx));
 	&__body{
 		$body:&;
-		@include bnd((p:r,h:f,z:2,bs:b));
+		@include bnd((p:r,h:f,bs:b));
 		@include grd((tc:1fr,g:c-f));
-		&.has-text-align-left{
+		&.is-align-left{
 			#{$body}{
 				&-texts{
 					@include bnd((mgr:a));
-					&::before{
-						@include bg((g:l 90deg bx bx n));
-					}
 				}
-				&-buttons{
-					@include flx((j:s));
+			}
+		}
+		&.is-align-center{
+			#{$body}{
+				&-texts{
+					@include bnd((mgi:a));
+				}
+			}
+		}
+		&.is-align-right{
+			#{$body}{
+				&-texts{
+					@include bnd((mgl:a));
+				}
+			}
+		}
+		&.has-vertical-align-top{
+			@include bnd((ac:s));
+		}
+		&.has-vertical-align-middle{
+			@include bnd((ac:c));
+		}
+		&.has-vertical-align-bottom{
+			@include bnd((ac:e));
+		}
+		&.has-text-align-left{
+			#{$body}{
+				&-texts{
+					&-buttons{
+						@include flx((j:s));
+					}
 				}
 			}
 		}
 		&.has-text-align-center{
 			#{$body}{
 				&-texts{
-					@include bnd((mgi:a));
-				}
-				&-buttons{
-					@include flx((j:c));
+					&-buttons{
+						@include flx((j:c));
+					}
 				}
 			}
 		}
 		&.has-text-align-right{
 			#{$body}{
 				&-texts{
-					@include bnd((mgl:a));
-					&::before{
-						@include bg((g:l 90deg n bx bx));
+					&-buttons{
+						@include flx((j:e));
 					}
-				}
-				&-buttons{
-					@include flx((j:e));
 				}
 			}
 		}
 		&-texts{
-			@include bnd((w:fit));
-			&-title,&-text{
+			@include bnd((w:i));
+			&-title,&-text,&-buttons{
 				@include bnd((p:r,z:2));
 			}
 			&-title{
@@ -63,31 +84,13 @@
 				@extend %paragraph;
 				@include txt((c:tx));
 			}
-		}
-		&-buttons{
-			@include flx((w:w,g:c-b));
-			@include txt((l:n));
-			&-button{
-				@include bnd((f:0 1 i));
-				&-link{
-					@extend %button-component;
-					@extend %ui;
-					@include bnd((d:b));
-					@include bdr((s:s));
-					@include txt((a:c,c:mx));
-					&-icon{
-						@include bnd((w:1.5em,h:1.5em,mgr:.25em));
-						@include trn((y:.25lh));
-					}
-					&-text{
-						
-					}
-				}
+			&-buttons{
+				@extend %ui-block;
 			}
 		}
 	}
 	&__bg{
-		@include bnd((p:r,o:h));
+		@include bnd((p:a,i:0,mg:a,z:1,o:h));
 		@include trn((bm:var(--cp-slider-blendmode),o:var(--cp-slider-opacity)));
 	}
 	&.has-text-background{
@@ -97,98 +100,204 @@
 					@include bnd((p:r,pd:c-f));
 					&::before{
 						content:'';
-						@include bnd((d:b,p:a,i:0 -30vw,z:1));
-						@include bg((g:l 90deg n bx n));
-						@include trn((o:.8));
+							@include bnd((d:b,p:a,z:1));
+						@include trn((o:var(--cp-text-background-opacity,1),bm:var(--cp-text-background-blendmode,nomal)));
+					}
+				}
+			}
+		}
+		&.has-text-background-fade{
+			#{$block}{
+				&__body{
+					&-texts{
+						&::before{
+							@include bnd((i:0 -30vw));
+							@include bg((g:l 90deg n bx n));
+						}
+					}
+				}
+			}
+		}
+		&.has-text-background-belt{
+			#{$block}{
+				&__body{
+					&-texts{
+						&::before{
+							@include bnd((i:0 -100vw));
+							@include bg((c:bx));
+						}
+					}
+				}
+			}
+		}
+		&.has-text-background-rect{
+			#{$block}{
+				&__body{
+					&-texts{
+						&::before{
+							@include bnd((i:-50vw,mg:a,w:100%,h:a,a:1));
+							@include bg((c:bx));
+						}
+					}
+				}
+			}
+		}
+		&.has-text-background-circle{
+			#{$block}{
+				&__body{
+					&-texts{
+						&::before{
+							@include bnd((i:-50vw,mg:a,w:100%,h:a,a:1));
+							@include bdr((r:50%));
+							@include bg((c:bx));
+						}
 					}
 				}
 			}
 		}
 	}
-	&.has-layout-splitted{
-		@include flx((w:n));
+	&.has-slider-fixed{
 		#{$block}{
-			&__body{
-				@include bnd((f:2 2 240,pd:f));
-			}
 			&__bg{
-				@include bnd((f:3 3 240));
+				@include bnd((p:f));
 			}
 		}
+	}
+	&.has-slider-split{
 		@include bp(720){
-			&.has-text-left{
+			#{$block}{
+				&__bg{
+					@include bnd((w:calc(1% * var(--cp-slider-size,100))));
+				}
+			}
+			&.has-slider-right{
 				#{$block}{
 					&__bg{
-						@include bnd((mgl:calc(-0.2% * abs(var(--cp-image-border-amount,0)))));
+						@include bnd((mgr:0));
 					}
 				}
-				&.has-image-border-fade{
+				&.has-slider-border-fade{
 					#{$block}{
 						&__bg{
-							@include msk((g:l 90deg 0% calc(1% * abs(var(--cp-image-border-amount,0)))));
+							@include msk((g:l 90deg 0% calc(1% * abs(var(--cp-slider-border-amount,0)))));
 						}
 					}
 				}
-				&.has-image-border-slope{
-					#{$block}{
-						&__bg{
-							clip-path:polygon(
-								max(0%, calc(1% * var(--cp-image-border-amount,0))) 0%,
-								100% 0%,
-								100% 100%,
-								max(0%, calc(-1% * var(--cp-image-border-amount,0))) 100%,
-							);
+				&.has-slider-border-slope{
+					&.has-slider-border-slope-top{
+						#{$block}{
+							&__bg{
+								clip-path:polygon(
+									calc(1% * var(--cp-slider-border-amount,0)) 0%,
+									100% 0%,
+									100% 100%,
+									0% 100%,
+								);
+							}
+						}
+					}
+					&.has-slider-border-slope-bottom{
+						#{$block}{
+							&__bg{
+								clip-path:polygon(
+									0% 0%,
+									100% 0%,
+									100% 100%,
+									calc(1% * var(--cp-slider-border-amount,0)) 100%,
+								);
+							}
 						}
 					}
 				}
-				&.has-image-border-ellipse{
-					#{$block}{
-						&__bg{
-							clip-path:shape(
-								from 100% 0%,
-								vline to 100%,
-								hline to 0%,
-								arc by 0% -100% of calc(0.5% * abs(var(--cp-image-border-amount,0))) calc(100% - 0.5% * abs(var(--cp-image-border-amount,0)))
-							);
+				&.has-slider-border-ellipse{
+					&.has-slider-border-ellipse-inside{
+						#{$block}{
+							&__bg{
+								clip-path:shape(
+									from 100% 0%,
+									vline to 100%,
+									hline to 0%,
+									arc by 0% -100% of calc(100% * sin(var(--cp-slider-border-amount,0) * 0.9deg)) calc(55% - 0.05% * var(--cp-slider-border-amount,0))
+								);
+							}
+						}
+					}
+					&.has-slider-border-ellipse-outside{
+						#{$block}{
+							&__bg{
+								clip-path:shape(
+									from 100% 0%,
+									vline to 100%,
+									hline by calc(-100% + 1% * var(--cp-slider-border-amount,0)),
+									arc by 0% -100% of calc(100% * sin(var(--cp-slider-border-amount,0) * 0.9deg)) calc(55% - 0.05% * var(--cp-slider-border-amount,0)) cw
+								);
+							}
 						}
 					}
 				}
 			}
-			&.has-text-right{
-				@include flx((d:rr));
+			&.has-slider-left{
 				#{$block}{
 					&__bg{
-						@include bnd((mgr:calc(-0.2% * abs(var(--cp-image-border-amount,0)))));
+						@include bnd((mgl:0));
 					}
 				}
-				&.has-image-border-fade{
+				&.has-slider-border-fade{
 					#{$block}{
 						&__bg{
-							@include msk((g:l -90deg 0% calc(1% * abs(var(--cp-image-border-amount,0)))));
+							@include msk((g:l -90deg 0% calc(1% * abs(var(--cp-slider-border-amount,0)))));
 						}
 					}
 				}
-				&.has-image-border-slope{
-					#{$block}{
-						&__bg{
-							clip-path:polygon(
-								0% 0%,
-								min(100%, calc(100% - 1% * var(--cp-image-border-amount,0))) 0%,
-								min(100%, calc(100% + 1% * var(--cp-image-border-amount,0))) 100%,
-								0% 100%
-							);
+				&.has-slider-border-slope{
+					&.has-slider-border-slope-top{
+						#{$block}{
+							&__bg{
+								clip-path:polygon(
+									0% 0%,
+									calc(100% - 1% * var(--cp-slider-border-amount,0)) 0%,
+									100% 100%,
+									0% 100%,
+								);
+							}
+						}
+					}
+					&.has-slider-border-slope-bottom{
+						#{$block}{
+							&__bg{
+								clip-path:polygon(
+									0% 0%,
+									100% 0%,
+									calc(100% - 1% * var(--cp-slider-border-amount,0)) 100%,
+									0% 100%,
+								);
+							}
 						}
 					}
 				}
-				&.has-image-border-ellipse{
-					#{$block}{
-						&__bg{
-							clip-path:shape(
-								from 0% 0%,
-								hline to 100%,
-								arc by 0% 100% of calc(0.5% * abs(var(--cp-image-border-amount,0))) calc(100% - 0.5% * abs(var(--cp-image-border-amount,0))),
-								hline to 0%
-							);
+				&.has-slider-border-ellipse{
+					&.has-slider-border-ellipse-inside{
+						#{$block}{
+							&__bg{
+								clip-path:shape(
+									from 0% 0%,
+									hline to 100%,
+									arc by 0% 100% of calc(100% * sin(var(--cp-slider-border-amount,0) * 0.9deg)) calc(55% - 0.05% * var(--cp-slider-border-amount,0)),
+									hline to 0%
+								);
+							}
+						}
+					}
+					&.has-slider-border-ellipse-outside{
+						#{$block}{
+							&__bg{
+								clip-path:shape(
+									from 0% 0%,
+									hline to calc(100% - 1% * var(--cp-slider-border-amount,0)),
+									arc by 0% 100% of calc(100% * sin(var(--cp-slider-border-amount,0) * 0.9deg)) calc(55% - 0.05% * var(--cp-slider-border-amount,0)) cw,
+									hline to 0%
+								);
+							}
 						}
 					}
 				}
@@ -197,93 +306,140 @@
 		@include bp(-720){
 			#{$block}{
 				&__bg{
-
+					@include bnd((h:calc(1% * var(--cp-slider-size,100))));
 				}
 			}
-			&.has-text-top{
-				@include flx((d:c));
+			&.has-slider-bottom{
 				#{$block}{
 					&__bg{
-						@include bnd((mgt:calc(-0.2% * abs(var(--cp-image-border-amount,0)))));
+						@include bnd((mgb:0));
 					}
 				}
-				&.has-image-border-fade{
+				&.has-slider-border-fade{
 					#{$block}{
 						&__bg{
-							@include msk((g:l 180deg 0% calc(1% * abs(var(--cp-image-border-amount,0)))));
+							@include msk((g:l 180deg 0% calc(1% * abs(var(--cp-slider-border-amount,0)))));
 						}
 					}
 				}
-				&.has-image-border-slope{
-					#{$block}{
-						&__bg{
-							clip-path:polygon(
-								0% max(0%, calc(1% * var(--cp-image-border-amount,0))),
-								100% max(0%, calc(-1% * var(--cp-image-border-amount,0))),
-								100% 100%,
-								0% 100%
-							);
+				&.has-slider-border-slope{
+					&.has-slider-border-slope-left{
+						#{$block}{
+							&__bg{
+								clip-path:polygon(
+									0% calc(1% * var(--cp-slider-border-amount,0)),
+									100% 0%,
+									100% 100%,
+									0% 100%
+								);
+							}
+						}
+					}
+					&.has-slider-border-slope-right{
+						#{$block}{
+							&__bg{
+								clip-path:polygon(
+									0% 0%,
+									100% calc(1% * var(--cp-slider-border-amount,0)),
+									100% 100%,
+									0% 100%
+								);
+							}
 						}
 					}
 				}
-				&.has-image-border-ellipse{
-					#{$block}{
-						&__bg{
-							clip-path:shape(
-								from 0% 0%,
-								arc by 100% 0% of calc(100% - 0.5% * abs(var(--cp-image-border-amount,0))) calc(0.5% * abs(var(--cp-image-border-amount,0))),
-								vline to 100%,
-								hline to 0%
-							);
+				&.has-slider-border-ellipse{
+					&.has-slider-border-ellipse-inside{
+						#{$block}{
+							&__bg{
+								clip-path:shape(
+									from 0% 0%,
+									arc by 100% 0% of calc(55% - 0.05% * var(--cp-slider-border-amount,0)) calc(100% * sin(var(--cp-slider-border-amount,0) * 0.9deg)),
+									vline to 100%,
+									hline to 0%
+								);
+							}
+						}
+					}
+					&.has-slider-border-ellipse-outside{
+						#{$block}{
+							&__bg{
+								clip-path:shape(
+									from 0% calc(1% * var(--cp-slider-border-amount,0)),
+									arc by 100% 0% of calc(55% - 0.05% * var(--cp-slider-border-amount,0)) calc(100% * sin(var(--cp-slider-border-amount,0) * 0.9deg)) cw,
+									vline to 100%,
+									hline to 0%
+								);
+							}
 						}
 					}
 				}
 			}
-			&.has-text-bottom{
-				@include flx((d:cr));
+			&.has-slider-top{
 				#{$block}{
 					&__bg{
-						@include bnd((mgb:calc(-0.2% * abs(var(--cp-image-border-amount,0)))));
+						@include bnd((mgt:0));
 					}
 				}
-				&.has-image-border-fade{
+				&.has-slider-border-fade{
 					#{$block}{
 						&__bg{
-							@include msk((g:l 0deg 0% calc(1% * abs(var(--cp-image-border-amount,0)))));
+							@include msk((g:l 0deg 0% calc(1% * abs(var(--cp-slider-border-amount,0)))));
 						}
 					}
 				}
-				&.has-image-border-slope{
-					#{$block}{
-						&__bg{
-							clip-path:polygon(
-								0% 0%,
-								100% 0%,
-								100% min(100%, calc(100% + 1% * var(--cp-image-border-amount,0))),
-								0% min(100%, calc(100% - 1% * var(--cp-image-border-amount,0)))
-							);
+				&.has-slider-border-slope{
+					&.has-slider-border-slope-left{
+						#{$block}{
+							&__bg{
+								clip-path:polygon(
+									0% 0%,
+									100% 0%,
+									100%  100%,
+									0% calc(100% - 1% * var(--cp-slider-border-amount,0))
+								);
+							}
+						}
+					}
+					&.has-slider-border-slope-right{
+						#{$block}{
+							&__bg{
+								clip-path:polygon(
+									0% 0%,
+									100% 0%,
+									100%  calc(100% - 1% * var(--cp-slider-border-amount,0)),
+									0% 100%
+								);
+							}
 						}
 					}
 				}
-				&.has-image-border-ellipse{
-					#{$block}{
-						&__bg{
-							clip-path:shape(
-								from 0% 0%,
-								hline to 100%,
-								vline to 100%,
-								arc by -100% 0% of calc(100% - 0.5% * abs(var(--cp-image-border-amount,0))) calc(0.5% * abs(var(--cp-image-border-amount,0)))
-							);
+				&.has-slider-border-ellipse{
+					&.has-slider-border-ellipse-inside{
+						#{$block}{
+							&__bg{
+								clip-path:shape(
+									from 0% 0%,
+									hline to 100%,
+									vline to 100%,
+									arc by -100% 0% of calc(55% - 0.05% * var(--cp-slider-border-amount,0)) calc(100% * sin(var(--cp-slider-border-amount,0) * 0.9deg))
+								);
+							}
+						}
+					}
+					&.has-slider-border-ellipse-inside{
+						#{$block}{
+							&__bg{
+								clip-path:shape(
+									from 0% 0%,
+									hline to 100%,
+									vline to calc(100% - 1% *  var(--cp-slider-border-amount,0)),
+									arc by -100% 0% of calc(55% - 0.05% * var(--cp-slider-border-amount,0)) calc(100% * sin(var(--cp-slider-border-amount,0) * 0.9deg)) cw
+								);
+							}
 						}
 					}
 				}
-			}
-		}
-	}
-	&.has-layout-overlay{
-		#{$block}{
-			&__bg{
-				@include bnd((p:f,i:0,z:1,o:h));
 			}
 		}
 	}
