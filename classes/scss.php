@@ -180,8 +180,10 @@ class scss{
 							}
 						}	
 						foreach(range(-2,2) as $n){
-							$classes['.has-tone-s'.$n]["--cp-tones-{$key}-c"]="calc(var(--cp-root-tones-{$key}-c) + var(--cp-tones-ss,0.1) * {$n})";
-							$classes['.has-tone-l'.$n]["--cp-tones-{$key}-l"]="calc(var(--cp-root-tones-{$key}-l) + var(--cp-tones-ls,0.1) * {$n})";
+							$classes['.has-tone-s'.$n]["--cp-tones-{$key}-c"]="calc(var(--cp-root-tones-{$key}-c) + var(--cp-tones-ss,0.04) * {$n})";
+							if(empty($color_role['keepLightness'])){
+								$classes['.has-tone-l'.$n]["--cp-tones-{$key}-l"]="calc(var(--cp-root-tones-{$key}-l) + var(--cp-tones-ls,0.1) * {$n})";
+							}
 						}
 					}
 					if(!empty($color_role['invert'])){
@@ -194,7 +196,9 @@ class scss{
 						}
 						foreach(range(-2,2) as $n){
 							$classes['.has-tone-s'.$n]["--cp-tones-{$key}x-s"]="var(--cp-tones-{$key}-s)";
-							$classes['.has-tone-l'.$n]["--cp-tones-{$key}x-l"]="var(--cp-tones-{$key}-l)";
+							if(empty($color_role['keepLightness'])){
+								$classes['.has-tone-l'.$n]["--cp-tones-{$key}x-l"]="var(--cp-tones-{$key}-l)";
+							}
 						}
 					}
 				}

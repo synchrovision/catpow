@@ -100,18 +100,18 @@ class style_config{
 		return static::$roles['color']=apply_filters('cp_color_roles',[
 			'background'=>['label'=>'背景','default'=>'#ffffff','shorthand'=>'b','extend'=>true,'invert'=>'m'],
 			'sheet'=>['label'=>'強調背景','default'=>'#F8F6F4','shorthand'=>'s','extend'=>true,'invert'=>'a'],
-			'text'=>['label'=>'文字','default'=>'#666666','shorthand'=>'t','extend'=>true,'invert'=>'i'],
-			'highlight'=>['label'=>'強調文字','default'=>'#AA1100','shorthand'=>'h','extend'=>true,'invert'=>'e'],
+			'text'=>['label'=>'文字','default'=>'#666666','shorthand'=>'t','extend'=>true,'invert'=>'i','keepLightness'=>true],
+			'highlight'=>['label'=>'強調文字','default'=>'#AA1100','shorthand'=>'h','extend'=>true,'invert'=>'e','keepLightness'=>true],
 			'line'=>['label'=>'線','default'=>'#AAAAAA','shorthand'=>'l','extend'=>true,'invert'=>'r'],
 			'main'=>['label'=>'基本','default'=>'#443322','shorthand'=>'m','extend'=>true,'invert'=>'b'],
 			'accent'=>['label'=>'強調','default'=>'#FF8800','shorthand'=>'a','extend'=>true,'invert'=>'s'],
-			'inside'=>['label'=>'抜文字','default'=>'#ffffff','shorthand'=>'i','extend'=>true,'invert'=>'t'],
-			'emphasis'=>['label'=>'抜強調文字','default'=>'#FF3300','shorthand'=>'e','extend'=>true,'invert'=>'h'],
+			'inside'=>['label'=>'抜文字','default'=>'#ffffff','shorthand'=>'i','extend'=>true,'invert'=>'t','keepLightness'=>true],
+			'emphasis'=>['label'=>'抜強調文字','default'=>'#FF3300','shorthand'=>'e','extend'=>true,'invert'=>'h','keepLightness'=>true],
 			'rule'=>['label'=>'抜線','default'=>'#AAAAAA','shorthand'=>'r','extend'=>true,'invert'=>'l'],
-			'light'=>['label'=>'照明','default'=>'#ffffff99','shorthand'=>'lt','extend'=>true,'alphaEnabled'=>true],
-			'lust'=>['label'=>'光沢','default'=>'#ffffffe6','shorthand'=>'lst','extend'=>true,'alphaEnabled'=>true],
-			'shade'=>['label'=>'陰','default'=>'#00000033','shorthand'=>'sh','extend'=>true,'alphaEnabled'=>true],
-			'shadow'=>['label'=>'影','default'=>'#0000004d','shorthand'=>'shd','extend'=>true,'alphaEnabled'=>true],
+			'light'=>['label'=>'照明','default'=>'#ffffff99','shorthand'=>'lt','extend'=>true,'alphaEnabled'=>true,'keepLightness'=>true],
+			'lust'=>['label'=>'光沢','default'=>'#ffffffe6','shorthand'=>'lst','extend'=>true,'alphaEnabled'=>true,'keepLightness'=>true],
+			'shade'=>['label'=>'陰','default'=>'#00000033','shorthand'=>'sh','extend'=>true,'alphaEnabled'=>true,'keepLightness'=>true],
+			'shadow'=>['label'=>'影','default'=>'#0000004d','shorthand'=>'shd','extend'=>true,'alphaEnabled'=>true,'keepLightness'=>true],
 		]);
 	}
 	public static function get_size_roles(){
