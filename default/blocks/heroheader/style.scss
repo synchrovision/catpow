@@ -86,6 +86,11 @@
 			}
 			&-buttons{
 				@extend %ui-block;
+				@include flx((w:w,g:c-b));
+				@include txt((l:n));
+				&-button{
+					@include bnd((f:0 0 i));
+				}
 			}
 		}
 	}

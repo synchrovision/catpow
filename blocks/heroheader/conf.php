@@ -7,10 +7,15 @@ $attributes=[
 	"classes"=>["source"=>"attribute","selector"=>".{$block_class}","attribute"=>"class","default"=>"{$block_class} has-layout-overlay is-size-medium is-level1 has-color-scheme-inverted has-text has-buttons"],
 	"bodyClasses"=>["source"=>"attribute","selector"=>".{$block_class}__body","attribute"=>"class","default"=>"{$block_class}__body is-align-center has-vertical-align-middle has-text-align-center"],
 	"vars"=>["type"=>"object","default"=>["--cp-slider-blendmode"=>"multiply"]],
+	
 	"HeadingTag"=>["type"=>"string","default"=>"h1"],
 	"title"=>["source"=>"html","selector"=>".{$block_class}__body-texts-title","default"=>"[post title]"],
 	"text"=>["source"=>"html","selector"=>".{$block_class}__body-texts-text","default"=>"[post excerpt]"],
+
 	"buttons"=>BlockConfig::getButtonsAttributes("{$block_class}__body-texts-buttons-button"),
+	"buttonsClasses"=>["source"=>"attribute","selector"=>".{$block_class}__body-texts-buttons","attribute"=>"class","default"=>"{$block_class}__body-texts-buttons"],
+	"buttonsVars"=>["type"=>"object","default"=>[]],
+
 	"images"=>[
 		"source"=>"query",
 		"selector"=>".{$block_class}__bg-picture",

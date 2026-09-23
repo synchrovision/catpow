@@ -47,7 +47,7 @@
     category: "catpow-parts",
     example: CP.example,
     edit({ attributes, setAttributes }) {
-      const { isTemplate, classes, bodyClasses, vars, params, HeadingTag, title, text, buttons, images, element: Element = "div", EditMode = false } = attributes;
+      const { isTemplate, classes, bodyClasses, vars, params, HeadingTag, title, text, buttons, buttonsClasses, buttonsVars, images, element: Element = "div", EditMode = false } = attributes;
       const { useState: useState2, useMemo: useMemo2, useEffect: useEffect2, useRef: useRef2 } = wp.element;
       const { InspectorControls, RichText, useBlockProps } = wp.blockEditor;
       const states = CP.classNamesToFlags(attributes.classes);
@@ -81,11 +81,12 @@
               { name: "opacity", label: __("\u4E0D\u900F\u660E\u5EA6", "catpow"), input: "range", min: 0, max: 1, step: 0.1, vars: "vars", key: "--cp-text-background-opacity" }
             ]
           },
+          { preset: "itemSize", label: __("\u30C6\u30AD\u30B9\u30C8\u30A8\u30EA\u30A2\u30B5\u30A4\u30BA", "catpow"), classKey: "bodyClasses" },
           { preset: "align", classKey: "bodyClasses" },
           { preset: "verticalAlign", classKey: "bodyClasses" },
           { preset: "textAlign", classKey: "bodyClasses" },
           "hasButtons",
-          { preset: "itemSize", cond: ({ hasButtons }) => hasButtons, classKey: "bodyClasses" }
+          { preset: "itemSize", label: __("\u30DC\u30BF\u30F3\u30B5\u30A4\u30BA", "catpow"), cond: ({ hasButtons }) => hasButtons, classKey: "buttonsClasses", vars: "buttonsVars" }
         ];
         wp.hooks.applyFilters("catpow.blocks.heroheader.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
@@ -213,14 +214,14 @@
           },
           value: text
         }
-      ), states.hasButtons && /* @__PURE__ */ wp.element.createElement("div", { className: "_buttons cp-buttons" }, buttons.map((button, index) => /* @__PURE__ */ wp.element.createElement(CP.Button.Edit, { tag: "li", isItem: true, ...{ setAttributes, attributes }, itemKeys: ["buttons", index], keys: linkKeys, key: index }))))))));
+      ), states.hasButtons && /* @__PURE__ */ wp.element.createElement("div", { className: buttonsClasses + " cp-buttons", style: buttonsVars }, buttons.map((button, index) => /* @__PURE__ */ wp.element.createElement(CP.Button.Edit, { tag: "li", isItem: true, ...{ setAttributes, attributes }, itemKeys: ["buttons", index], keys: linkKeys, key: index }))))))));
     },
     save({ attributes }) {
-      const { classes, bodyClasses, vars, params, HeadingTag, title, text, buttons, images, element: Element = "div" } = attributes;
+      const { classes, bodyClasses, vars, params, HeadingTag, title, text, buttons, buttonsClasses, buttonsVars, images, element: Element = "div" } = attributes;
       const { RichText, useBlockProps } = wp.blockEditor;
       const states = CP.classNamesToFlags(classes);
       const { devices, imageKeys, linkKeys } = CP.config.heroheader;
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("script", { type: "module", src: heroheaderSelectiveClasses.mjs[Element] }), /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps.save({ className: classes, style: vars }) }, /* @__PURE__ */ wp.element.createElement(Element, { className: "_bg", ...params }, images.map((image, index) => /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImage, { className: "_picture", attributes, keys: imageKeys.bgImages, itemKeys: ["images", index], devices }))), /* @__PURE__ */ wp.element.createElement("div", { className: bodyClasses }, /* @__PURE__ */ wp.element.createElement("div", { className: "_texts" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: HeadingTag, className: "_title", value: title }), /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "p", className: "_text", value: text }), states.hasButtons && /* @__PURE__ */ wp.element.createElement("ul", { className: "_buttons" }, buttons.map((button, index) => /* @__PURE__ */ wp.element.createElement(CP.Button, { tag: "li", blockTypeName: "catpow/buttons", ...{ attributes }, itemKeys: ["buttons", index], keys: linkKeys, key: index }))))))));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement("script", { type: "module", src: heroheaderSelectiveClasses.mjs[Element] }), /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps.save({ className: classes, style: vars }) }, /* @__PURE__ */ wp.element.createElement(Element, { className: "_bg", ...params }, images.map((image, index) => /* @__PURE__ */ wp.element.createElement(CP.ResponsiveImage, { className: "_picture", attributes, keys: imageKeys.bgImages, itemKeys: ["images", index], devices }))), /* @__PURE__ */ wp.element.createElement("div", { className: bodyClasses }, /* @__PURE__ */ wp.element.createElement("div", { className: "_texts" }, /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: HeadingTag, className: "_title", value: title }), /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "p", className: "_text", value: text }), states.hasButtons && /* @__PURE__ */ wp.element.createElement("ul", { className: buttonsClasses, style: buttonsVars }, buttons.map((button, index) => /* @__PURE__ */ wp.element.createElement(CP.Button, { tag: "li", blockTypeName: "catpow/buttons", ...{ attributes }, itemKeys: ["buttons", index], keys: linkKeys, key: index }))))))));
     }
   });
 })();

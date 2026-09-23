@@ -17,7 +17,7 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 	category: "catpow-parts",
 	example: CP.example,
 	edit({ attributes, setAttributes }) {
-		const { isTemplate, classes, bodyClasses, vars, params, HeadingTag, title, text, buttons, images, element: Element = "div", EditMode = false } = attributes;
+		const { isTemplate, classes, bodyClasses, vars, params, HeadingTag, title, text, buttons, buttonsClasses, buttonsVars, images, element: Element = "div", EditMode = false } = attributes;
 		const { useState, useMemo, useEffect, useRef } = wp.element;
 		const { InspectorControls, RichText, useBlockProps } = wp.blockEditor;
 		const states = CP.classNamesToFlags(attributes.classes);
@@ -52,11 +52,12 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 						{ name: "opacity", label: __("不透明度", "catpow"), input: "range", min: 0, max: 1, step: 0.1, vars: "vars", key: "--cp-text-background-opacity" },
 					],
 				},
+				{ preset: "itemSize", label: __("テキストエリアサイズ", "catpow"), classKey: "bodyClasses" },
 				{ preset: "align", classKey: "bodyClasses" },
 				{ preset: "verticalAlign", classKey: "bodyClasses" },
 				{ preset: "textAlign", classKey: "bodyClasses" },
 				"hasButtons",
-				{ preset: "itemSize", cond: ({ hasButtons }) => hasButtons, classKey: "bodyClasses" },
+				{ preset: "itemSize", label: __("ボタンサイズ", "catpow"), cond: ({ hasButtons }) => hasButtons, classKey: "buttonsClasses", vars: "buttonsVars" },
 			];
 			wp.hooks.applyFilters("catpow.blocks.heroheader.selectiveClasses", CP.finderProxy(selectiveClasses));
 			return selectiveClasses;
@@ -204,7 +205,7 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 										value={text}
 									/>
 									{states.hasButtons && (
-										<div className="_buttons cp-buttons">
+										<div className={buttonsClasses + " cp-buttons"} style={buttonsVars}>
 											{buttons.map((button, index) => (
 												<CP.Button.Edit tag="li" isItem={true} {...{ setAttributes, attributes }} itemKeys={["buttons", index]} keys={linkKeys} key={index} />
 											))}
@@ -220,7 +221,7 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 	},
 
 	save({ attributes }) {
-		const { classes, bodyClasses, vars, params, HeadingTag, title, text, buttons, images, element: Element = "div" } = attributes;
+		const { classes, bodyClasses, vars, params, HeadingTag, title, text, buttons, buttonsClasses, buttonsVars, images, element: Element = "div" } = attributes;
 		const { RichText, useBlockProps } = wp.blockEditor;
 		const states = CP.classNamesToFlags(classes);
 		const { devices, imageKeys, linkKeys } = CP.config.heroheader;
@@ -240,7 +241,7 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 								<RichText.Content tagName={HeadingTag} className="_title" value={title} />
 								<RichText.Content tagName="p" className="_text" value={text} />
 								{states.hasButtons && (
-									<ul className="_buttons">
+									<ul className={buttonsClasses} style={buttonsVars}>
 										{buttons.map((button, index) => (
 											<CP.Button tag="li" blockTypeName="catpow/buttons" {...{ attributes }} itemKeys={["buttons", index]} keys={linkKeys} key={index} />
 										))}

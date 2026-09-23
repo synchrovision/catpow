@@ -99,6 +99,22 @@
 .wp-block-catpow-heroheader__body-texts-text {
   color: oklch(var(--cp-tones-tx-l) var(--cp-tones-tx-c) var(--cp-tones-tx-h) / var(--cp-tones-tx-a,1));
 }
+.wp-block-catpow-heroheader__body-texts-buttons {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: multiple;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  gap: var(--cp-margin-c-b);
+  list-style: none;
+}
+.wp-block-catpow-heroheader__body-texts-buttons-button {
+  -webkit-box-flex: 0;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: var(--cp-size-i);
+}
 .wp-block-catpow-heroheader__bg {
   position: absolute;
   top: 0rem;
