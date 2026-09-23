@@ -12,7 +12,7 @@
     const onChange = useCallback(
       (value2) => {
         setValue(value2);
-        wp.customize.control(id).setting.set(value2);
+        wp.customize.control(id)?.setting?.set(value2);
       },
       [id]
     );

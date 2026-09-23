@@ -16,7 +16,7 @@ Catpow.Customize = (props) => {
 	const onChange = useCallback(
 		(value) => {
 			setValue(value);
-			wp.customize.control(id).setting.set(value);
+			wp.customize.control(id)?.setting?.set(value);
 		},
 		[id],
 	);
