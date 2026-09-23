@@ -2731,30 +2731,30 @@ html {
 }
 
 .has-tone-s-2 {
-  --cp-tones-b-c: calc(var(--cp-root-tones-b-c) + var(--cp-tones-ss,0.1) * -2);
+  --cp-tones-b-c: calc(var(--cp-root-tones-b-c) + var(--cp-tones-ss,0.04) * -2);
   --cp-tones-bx-s: var(--cp-tones-b-s);
-  --cp-tones-s-c: calc(var(--cp-root-tones-s-c) + var(--cp-tones-ss,0.1) * -2);
+  --cp-tones-s-c: calc(var(--cp-root-tones-s-c) + var(--cp-tones-ss,0.04) * -2);
   --cp-tones-sx-s: var(--cp-tones-s-s);
-  --cp-tones-t-c: calc(var(--cp-root-tones-t-c) + var(--cp-tones-ss,0.1) * -2);
+  --cp-tones-t-c: calc(var(--cp-root-tones-t-c) + var(--cp-tones-ss,0.04) * -2);
   --cp-tones-tx-s: var(--cp-tones-t-s);
-  --cp-tones-h-c: calc(var(--cp-root-tones-h-c) + var(--cp-tones-ss,0.1) * -2);
+  --cp-tones-h-c: calc(var(--cp-root-tones-h-c) + var(--cp-tones-ss,0.04) * -2);
   --cp-tones-hx-s: var(--cp-tones-h-s);
-  --cp-tones-l-c: calc(var(--cp-root-tones-l-c) + var(--cp-tones-ss,0.1) * -2);
+  --cp-tones-l-c: calc(var(--cp-root-tones-l-c) + var(--cp-tones-ss,0.04) * -2);
   --cp-tones-lx-s: var(--cp-tones-l-s);
-  --cp-tones-m-c: calc(var(--cp-root-tones-m-c) + var(--cp-tones-ss,0.1) * -2);
+  --cp-tones-m-c: calc(var(--cp-root-tones-m-c) + var(--cp-tones-ss,0.04) * -2);
   --cp-tones-mx-s: var(--cp-tones-m-s);
-  --cp-tones-a-c: calc(var(--cp-root-tones-a-c) + var(--cp-tones-ss,0.1) * -2);
+  --cp-tones-a-c: calc(var(--cp-root-tones-a-c) + var(--cp-tones-ss,0.04) * -2);
   --cp-tones-ax-s: var(--cp-tones-a-s);
-  --cp-tones-i-c: calc(var(--cp-root-tones-i-c) + var(--cp-tones-ss,0.1) * -2);
+  --cp-tones-i-c: calc(var(--cp-root-tones-i-c) + var(--cp-tones-ss,0.04) * -2);
   --cp-tones-ix-s: var(--cp-tones-i-s);
-  --cp-tones-e-c: calc(var(--cp-root-tones-e-c) + var(--cp-tones-ss,0.1) * -2);
+  --cp-tones-e-c: calc(var(--cp-root-tones-e-c) + var(--cp-tones-ss,0.04) * -2);
   --cp-tones-ex-s: var(--cp-tones-e-s);
-  --cp-tones-r-c: calc(var(--cp-root-tones-r-c) + var(--cp-tones-ss,0.1) * -2);
+  --cp-tones-r-c: calc(var(--cp-root-tones-r-c) + var(--cp-tones-ss,0.04) * -2);
   --cp-tones-rx-s: var(--cp-tones-r-s);
-  --cp-tones-lt-c: calc(var(--cp-root-tones-lt-c) + var(--cp-tones-ss,0.1) * -2);
-  --cp-tones-lst-c: calc(var(--cp-root-tones-lst-c) + var(--cp-tones-ss,0.1) * -2);
-  --cp-tones-sh-c: calc(var(--cp-root-tones-sh-c) + var(--cp-tones-ss,0.1) * -2);
-  --cp-tones-shd-c: calc(var(--cp-root-tones-shd-c) + var(--cp-tones-ss,0.1) * -2);
+  --cp-tones-lt-c: calc(var(--cp-root-tones-lt-c) + var(--cp-tones-ss,0.04) * -2);
+  --cp-tones-lst-c: calc(var(--cp-root-tones-lst-c) + var(--cp-tones-ss,0.04) * -2);
+  --cp-tones-sh-c: calc(var(--cp-root-tones-sh-c) + var(--cp-tones-ss,0.04) * -2);
+  --cp-tones-shd-c: calc(var(--cp-root-tones-shd-c) + var(--cp-tones-ss,0.04) * -2);
 }
 
 .has-tone-l-2 {
@@ -2762,53 +2762,41 @@ html {
   --cp-tones-bx-l: var(--cp-tones-b-l);
   --cp-tones-s-l: calc(var(--cp-root-tones-s-l) + var(--cp-tones-ls,0.1) * -2);
   --cp-tones-sx-l: var(--cp-tones-s-l);
-  --cp-tones-t-l: calc(var(--cp-root-tones-t-l) + var(--cp-tones-ls,0.1) * -2);
-  --cp-tones-tx-l: var(--cp-tones-t-l);
-  --cp-tones-h-l: calc(var(--cp-root-tones-h-l) + var(--cp-tones-ls,0.1) * -2);
-  --cp-tones-hx-l: var(--cp-tones-h-l);
   --cp-tones-l-l: calc(var(--cp-root-tones-l-l) + var(--cp-tones-ls,0.1) * -2);
   --cp-tones-lx-l: var(--cp-tones-l-l);
   --cp-tones-m-l: calc(var(--cp-root-tones-m-l) + var(--cp-tones-ls,0.1) * -2);
   --cp-tones-mx-l: var(--cp-tones-m-l);
   --cp-tones-a-l: calc(var(--cp-root-tones-a-l) + var(--cp-tones-ls,0.1) * -2);
   --cp-tones-ax-l: var(--cp-tones-a-l);
-  --cp-tones-i-l: calc(var(--cp-root-tones-i-l) + var(--cp-tones-ls,0.1) * -2);
-  --cp-tones-ix-l: var(--cp-tones-i-l);
-  --cp-tones-e-l: calc(var(--cp-root-tones-e-l) + var(--cp-tones-ls,0.1) * -2);
-  --cp-tones-ex-l: var(--cp-tones-e-l);
   --cp-tones-r-l: calc(var(--cp-root-tones-r-l) + var(--cp-tones-ls,0.1) * -2);
   --cp-tones-rx-l: var(--cp-tones-r-l);
-  --cp-tones-lt-l: calc(var(--cp-root-tones-lt-l) + var(--cp-tones-ls,0.1) * -2);
-  --cp-tones-lst-l: calc(var(--cp-root-tones-lst-l) + var(--cp-tones-ls,0.1) * -2);
-  --cp-tones-sh-l: calc(var(--cp-root-tones-sh-l) + var(--cp-tones-ls,0.1) * -2);
-  --cp-tones-shd-l: calc(var(--cp-root-tones-shd-l) + var(--cp-tones-ls,0.1) * -2);
 }
 
 .has-tone-s-1 {
-  --cp-tones-b-c: calc(var(--cp-root-tones-b-c) + var(--cp-tones-ss,0.1) * -1);
+  --cp-tones-b-c: calc(var(--cp-root-tones-b-c) + var(--cp-tones-ss,0.04) * -1);
   --cp-tones-bx-s: var(--cp-tones-b-s);
-  --cp-tones-s-c: calc(var(--cp-root-tones-s-c) + var(--cp-tones-ss,0.1) * -1);
+  --cp-tones-s-c: calc(var(--cp-root-tones-s-c) + var(--cp-tones-ss,0.04) * -1);
   --cp-tones-sx-s: var(--cp-tones-s-s);
-  --cp-tones-t-c: calc(var(--cp-root-tones-t-c) + var(--cp-tones-ss,0.1) * -1);
+  --cp-tones-t-c: calc(var(--cp-root-tones-t-c) + var(--cp-tones-ss,0.04) * -1);
   --cp-tones-tx-s: var(--cp-tones-t-s);
-  --cp-tones-h-c: calc(var(--cp-root-tones-h-c) + var(--cp-tones-ss,0.1) * -1);
+  --cp-tones-h-c: calc(var(--cp-root-tones-h-c) + var(--cp-tones-ss,0.04) * -1);
   --cp-tones-hx-s: var(--cp-tones-h-s);
-  --cp-tones-l-c: calc(var(--cp-root-tones-l-c) + var(--cp-tones-ss,0.1) * -1);
+  --cp-tones-l-c: calc(var(--cp-root-tones-l-c) + var(--cp-tones-ss,0.04) * -1);
   --cp-tones-lx-s: var(--cp-tones-l-s);
-  --cp-tones-m-c: calc(var(--cp-root-tones-m-c) + var(--cp-tones-ss,0.1) * -1);
+  --cp-tones-m-c: calc(var(--cp-root-tones-m-c) + var(--cp-tones-ss,0.04) * -1);
   --cp-tones-mx-s: var(--cp-tones-m-s);
-  --cp-tones-a-c: calc(var(--cp-root-tones-a-c) + var(--cp-tones-ss,0.1) * -1);
+  --cp-tones-a-c: calc(var(--cp-root-tones-a-c) + var(--cp-tones-ss,0.04) * -1);
   --cp-tones-ax-s: var(--cp-tones-a-s);
-  --cp-tones-i-c: calc(var(--cp-root-tones-i-c) + var(--cp-tones-ss,0.1) * -1);
+  --cp-tones-i-c: calc(var(--cp-root-tones-i-c) + var(--cp-tones-ss,0.04) * -1);
   --cp-tones-ix-s: var(--cp-tones-i-s);
-  --cp-tones-e-c: calc(var(--cp-root-tones-e-c) + var(--cp-tones-ss,0.1) * -1);
+  --cp-tones-e-c: calc(var(--cp-root-tones-e-c) + var(--cp-tones-ss,0.04) * -1);
   --cp-tones-ex-s: var(--cp-tones-e-s);
-  --cp-tones-r-c: calc(var(--cp-root-tones-r-c) + var(--cp-tones-ss,0.1) * -1);
+  --cp-tones-r-c: calc(var(--cp-root-tones-r-c) + var(--cp-tones-ss,0.04) * -1);
   --cp-tones-rx-s: var(--cp-tones-r-s);
-  --cp-tones-lt-c: calc(var(--cp-root-tones-lt-c) + var(--cp-tones-ss,0.1) * -1);
-  --cp-tones-lst-c: calc(var(--cp-root-tones-lst-c) + var(--cp-tones-ss,0.1) * -1);
-  --cp-tones-sh-c: calc(var(--cp-root-tones-sh-c) + var(--cp-tones-ss,0.1) * -1);
-  --cp-tones-shd-c: calc(var(--cp-root-tones-shd-c) + var(--cp-tones-ss,0.1) * -1);
+  --cp-tones-lt-c: calc(var(--cp-root-tones-lt-c) + var(--cp-tones-ss,0.04) * -1);
+  --cp-tones-lst-c: calc(var(--cp-root-tones-lst-c) + var(--cp-tones-ss,0.04) * -1);
+  --cp-tones-sh-c: calc(var(--cp-root-tones-sh-c) + var(--cp-tones-ss,0.04) * -1);
+  --cp-tones-shd-c: calc(var(--cp-root-tones-shd-c) + var(--cp-tones-ss,0.04) * -1);
 }
 
 .has-tone-l-1 {
@@ -2816,53 +2804,41 @@ html {
   --cp-tones-bx-l: var(--cp-tones-b-l);
   --cp-tones-s-l: calc(var(--cp-root-tones-s-l) + var(--cp-tones-ls,0.1) * -1);
   --cp-tones-sx-l: var(--cp-tones-s-l);
-  --cp-tones-t-l: calc(var(--cp-root-tones-t-l) + var(--cp-tones-ls,0.1) * -1);
-  --cp-tones-tx-l: var(--cp-tones-t-l);
-  --cp-tones-h-l: calc(var(--cp-root-tones-h-l) + var(--cp-tones-ls,0.1) * -1);
-  --cp-tones-hx-l: var(--cp-tones-h-l);
   --cp-tones-l-l: calc(var(--cp-root-tones-l-l) + var(--cp-tones-ls,0.1) * -1);
   --cp-tones-lx-l: var(--cp-tones-l-l);
   --cp-tones-m-l: calc(var(--cp-root-tones-m-l) + var(--cp-tones-ls,0.1) * -1);
   --cp-tones-mx-l: var(--cp-tones-m-l);
   --cp-tones-a-l: calc(var(--cp-root-tones-a-l) + var(--cp-tones-ls,0.1) * -1);
   --cp-tones-ax-l: var(--cp-tones-a-l);
-  --cp-tones-i-l: calc(var(--cp-root-tones-i-l) + var(--cp-tones-ls,0.1) * -1);
-  --cp-tones-ix-l: var(--cp-tones-i-l);
-  --cp-tones-e-l: calc(var(--cp-root-tones-e-l) + var(--cp-tones-ls,0.1) * -1);
-  --cp-tones-ex-l: var(--cp-tones-e-l);
   --cp-tones-r-l: calc(var(--cp-root-tones-r-l) + var(--cp-tones-ls,0.1) * -1);
   --cp-tones-rx-l: var(--cp-tones-r-l);
-  --cp-tones-lt-l: calc(var(--cp-root-tones-lt-l) + var(--cp-tones-ls,0.1) * -1);
-  --cp-tones-lst-l: calc(var(--cp-root-tones-lst-l) + var(--cp-tones-ls,0.1) * -1);
-  --cp-tones-sh-l: calc(var(--cp-root-tones-sh-l) + var(--cp-tones-ls,0.1) * -1);
-  --cp-tones-shd-l: calc(var(--cp-root-tones-shd-l) + var(--cp-tones-ls,0.1) * -1);
 }
 
 .has-tone-s0 {
-  --cp-tones-b-c: calc(var(--cp-root-tones-b-c) + var(--cp-tones-ss,0.1) * 0);
+  --cp-tones-b-c: calc(var(--cp-root-tones-b-c) + var(--cp-tones-ss,0.04) * 0);
   --cp-tones-bx-s: var(--cp-tones-b-s);
-  --cp-tones-s-c: calc(var(--cp-root-tones-s-c) + var(--cp-tones-ss,0.1) * 0);
+  --cp-tones-s-c: calc(var(--cp-root-tones-s-c) + var(--cp-tones-ss,0.04) * 0);
   --cp-tones-sx-s: var(--cp-tones-s-s);
-  --cp-tones-t-c: calc(var(--cp-root-tones-t-c) + var(--cp-tones-ss,0.1) * 0);
+  --cp-tones-t-c: calc(var(--cp-root-tones-t-c) + var(--cp-tones-ss,0.04) * 0);
   --cp-tones-tx-s: var(--cp-tones-t-s);
-  --cp-tones-h-c: calc(var(--cp-root-tones-h-c) + var(--cp-tones-ss,0.1) * 0);
+  --cp-tones-h-c: calc(var(--cp-root-tones-h-c) + var(--cp-tones-ss,0.04) * 0);
   --cp-tones-hx-s: var(--cp-tones-h-s);
-  --cp-tones-l-c: calc(var(--cp-root-tones-l-c) + var(--cp-tones-ss,0.1) * 0);
+  --cp-tones-l-c: calc(var(--cp-root-tones-l-c) + var(--cp-tones-ss,0.04) * 0);
   --cp-tones-lx-s: var(--cp-tones-l-s);
-  --cp-tones-m-c: calc(var(--cp-root-tones-m-c) + var(--cp-tones-ss,0.1) * 0);
+  --cp-tones-m-c: calc(var(--cp-root-tones-m-c) + var(--cp-tones-ss,0.04) * 0);
   --cp-tones-mx-s: var(--cp-tones-m-s);
-  --cp-tones-a-c: calc(var(--cp-root-tones-a-c) + var(--cp-tones-ss,0.1) * 0);
+  --cp-tones-a-c: calc(var(--cp-root-tones-a-c) + var(--cp-tones-ss,0.04) * 0);
   --cp-tones-ax-s: var(--cp-tones-a-s);
-  --cp-tones-i-c: calc(var(--cp-root-tones-i-c) + var(--cp-tones-ss,0.1) * 0);
+  --cp-tones-i-c: calc(var(--cp-root-tones-i-c) + var(--cp-tones-ss,0.04) * 0);
   --cp-tones-ix-s: var(--cp-tones-i-s);
-  --cp-tones-e-c: calc(var(--cp-root-tones-e-c) + var(--cp-tones-ss,0.1) * 0);
+  --cp-tones-e-c: calc(var(--cp-root-tones-e-c) + var(--cp-tones-ss,0.04) * 0);
   --cp-tones-ex-s: var(--cp-tones-e-s);
-  --cp-tones-r-c: calc(var(--cp-root-tones-r-c) + var(--cp-tones-ss,0.1) * 0);
+  --cp-tones-r-c: calc(var(--cp-root-tones-r-c) + var(--cp-tones-ss,0.04) * 0);
   --cp-tones-rx-s: var(--cp-tones-r-s);
-  --cp-tones-lt-c: calc(var(--cp-root-tones-lt-c) + var(--cp-tones-ss,0.1) * 0);
-  --cp-tones-lst-c: calc(var(--cp-root-tones-lst-c) + var(--cp-tones-ss,0.1) * 0);
-  --cp-tones-sh-c: calc(var(--cp-root-tones-sh-c) + var(--cp-tones-ss,0.1) * 0);
-  --cp-tones-shd-c: calc(var(--cp-root-tones-shd-c) + var(--cp-tones-ss,0.1) * 0);
+  --cp-tones-lt-c: calc(var(--cp-root-tones-lt-c) + var(--cp-tones-ss,0.04) * 0);
+  --cp-tones-lst-c: calc(var(--cp-root-tones-lst-c) + var(--cp-tones-ss,0.04) * 0);
+  --cp-tones-sh-c: calc(var(--cp-root-tones-sh-c) + var(--cp-tones-ss,0.04) * 0);
+  --cp-tones-shd-c: calc(var(--cp-root-tones-shd-c) + var(--cp-tones-ss,0.04) * 0);
 }
 
 .has-tone-l0 {
@@ -2870,53 +2846,41 @@ html {
   --cp-tones-bx-l: var(--cp-tones-b-l);
   --cp-tones-s-l: calc(var(--cp-root-tones-s-l) + var(--cp-tones-ls,0.1) * 0);
   --cp-tones-sx-l: var(--cp-tones-s-l);
-  --cp-tones-t-l: calc(var(--cp-root-tones-t-l) + var(--cp-tones-ls,0.1) * 0);
-  --cp-tones-tx-l: var(--cp-tones-t-l);
-  --cp-tones-h-l: calc(var(--cp-root-tones-h-l) + var(--cp-tones-ls,0.1) * 0);
-  --cp-tones-hx-l: var(--cp-tones-h-l);
   --cp-tones-l-l: calc(var(--cp-root-tones-l-l) + var(--cp-tones-ls,0.1) * 0);
   --cp-tones-lx-l: var(--cp-tones-l-l);
   --cp-tones-m-l: calc(var(--cp-root-tones-m-l) + var(--cp-tones-ls,0.1) * 0);
   --cp-tones-mx-l: var(--cp-tones-m-l);
   --cp-tones-a-l: calc(var(--cp-root-tones-a-l) + var(--cp-tones-ls,0.1) * 0);
   --cp-tones-ax-l: var(--cp-tones-a-l);
-  --cp-tones-i-l: calc(var(--cp-root-tones-i-l) + var(--cp-tones-ls,0.1) * 0);
-  --cp-tones-ix-l: var(--cp-tones-i-l);
-  --cp-tones-e-l: calc(var(--cp-root-tones-e-l) + var(--cp-tones-ls,0.1) * 0);
-  --cp-tones-ex-l: var(--cp-tones-e-l);
   --cp-tones-r-l: calc(var(--cp-root-tones-r-l) + var(--cp-tones-ls,0.1) * 0);
   --cp-tones-rx-l: var(--cp-tones-r-l);
-  --cp-tones-lt-l: calc(var(--cp-root-tones-lt-l) + var(--cp-tones-ls,0.1) * 0);
-  --cp-tones-lst-l: calc(var(--cp-root-tones-lst-l) + var(--cp-tones-ls,0.1) * 0);
-  --cp-tones-sh-l: calc(var(--cp-root-tones-sh-l) + var(--cp-tones-ls,0.1) * 0);
-  --cp-tones-shd-l: calc(var(--cp-root-tones-shd-l) + var(--cp-tones-ls,0.1) * 0);
 }
 
 .has-tone-s1 {
-  --cp-tones-b-c: calc(var(--cp-root-tones-b-c) + var(--cp-tones-ss,0.1) * 1);
+  --cp-tones-b-c: calc(var(--cp-root-tones-b-c) + var(--cp-tones-ss,0.04) * 1);
   --cp-tones-bx-s: var(--cp-tones-b-s);
-  --cp-tones-s-c: calc(var(--cp-root-tones-s-c) + var(--cp-tones-ss,0.1) * 1);
+  --cp-tones-s-c: calc(var(--cp-root-tones-s-c) + var(--cp-tones-ss,0.04) * 1);
   --cp-tones-sx-s: var(--cp-tones-s-s);
-  --cp-tones-t-c: calc(var(--cp-root-tones-t-c) + var(--cp-tones-ss,0.1) * 1);
+  --cp-tones-t-c: calc(var(--cp-root-tones-t-c) + var(--cp-tones-ss,0.04) * 1);
   --cp-tones-tx-s: var(--cp-tones-t-s);
-  --cp-tones-h-c: calc(var(--cp-root-tones-h-c) + var(--cp-tones-ss,0.1) * 1);
+  --cp-tones-h-c: calc(var(--cp-root-tones-h-c) + var(--cp-tones-ss,0.04) * 1);
   --cp-tones-hx-s: var(--cp-tones-h-s);
-  --cp-tones-l-c: calc(var(--cp-root-tones-l-c) + var(--cp-tones-ss,0.1) * 1);
+  --cp-tones-l-c: calc(var(--cp-root-tones-l-c) + var(--cp-tones-ss,0.04) * 1);
   --cp-tones-lx-s: var(--cp-tones-l-s);
-  --cp-tones-m-c: calc(var(--cp-root-tones-m-c) + var(--cp-tones-ss,0.1) * 1);
+  --cp-tones-m-c: calc(var(--cp-root-tones-m-c) + var(--cp-tones-ss,0.04) * 1);
   --cp-tones-mx-s: var(--cp-tones-m-s);
-  --cp-tones-a-c: calc(var(--cp-root-tones-a-c) + var(--cp-tones-ss,0.1) * 1);
+  --cp-tones-a-c: calc(var(--cp-root-tones-a-c) + var(--cp-tones-ss,0.04) * 1);
   --cp-tones-ax-s: var(--cp-tones-a-s);
-  --cp-tones-i-c: calc(var(--cp-root-tones-i-c) + var(--cp-tones-ss,0.1) * 1);
+  --cp-tones-i-c: calc(var(--cp-root-tones-i-c) + var(--cp-tones-ss,0.04) * 1);
   --cp-tones-ix-s: var(--cp-tones-i-s);
-  --cp-tones-e-c: calc(var(--cp-root-tones-e-c) + var(--cp-tones-ss,0.1) * 1);
+  --cp-tones-e-c: calc(var(--cp-root-tones-e-c) + var(--cp-tones-ss,0.04) * 1);
   --cp-tones-ex-s: var(--cp-tones-e-s);
-  --cp-tones-r-c: calc(var(--cp-root-tones-r-c) + var(--cp-tones-ss,0.1) * 1);
+  --cp-tones-r-c: calc(var(--cp-root-tones-r-c) + var(--cp-tones-ss,0.04) * 1);
   --cp-tones-rx-s: var(--cp-tones-r-s);
-  --cp-tones-lt-c: calc(var(--cp-root-tones-lt-c) + var(--cp-tones-ss,0.1) * 1);
-  --cp-tones-lst-c: calc(var(--cp-root-tones-lst-c) + var(--cp-tones-ss,0.1) * 1);
-  --cp-tones-sh-c: calc(var(--cp-root-tones-sh-c) + var(--cp-tones-ss,0.1) * 1);
-  --cp-tones-shd-c: calc(var(--cp-root-tones-shd-c) + var(--cp-tones-ss,0.1) * 1);
+  --cp-tones-lt-c: calc(var(--cp-root-tones-lt-c) + var(--cp-tones-ss,0.04) * 1);
+  --cp-tones-lst-c: calc(var(--cp-root-tones-lst-c) + var(--cp-tones-ss,0.04) * 1);
+  --cp-tones-sh-c: calc(var(--cp-root-tones-sh-c) + var(--cp-tones-ss,0.04) * 1);
+  --cp-tones-shd-c: calc(var(--cp-root-tones-shd-c) + var(--cp-tones-ss,0.04) * 1);
 }
 
 .has-tone-l1 {
@@ -2924,53 +2888,41 @@ html {
   --cp-tones-bx-l: var(--cp-tones-b-l);
   --cp-tones-s-l: calc(var(--cp-root-tones-s-l) + var(--cp-tones-ls,0.1) * 1);
   --cp-tones-sx-l: var(--cp-tones-s-l);
-  --cp-tones-t-l: calc(var(--cp-root-tones-t-l) + var(--cp-tones-ls,0.1) * 1);
-  --cp-tones-tx-l: var(--cp-tones-t-l);
-  --cp-tones-h-l: calc(var(--cp-root-tones-h-l) + var(--cp-tones-ls,0.1) * 1);
-  --cp-tones-hx-l: var(--cp-tones-h-l);
   --cp-tones-l-l: calc(var(--cp-root-tones-l-l) + var(--cp-tones-ls,0.1) * 1);
   --cp-tones-lx-l: var(--cp-tones-l-l);
   --cp-tones-m-l: calc(var(--cp-root-tones-m-l) + var(--cp-tones-ls,0.1) * 1);
   --cp-tones-mx-l: var(--cp-tones-m-l);
   --cp-tones-a-l: calc(var(--cp-root-tones-a-l) + var(--cp-tones-ls,0.1) * 1);
   --cp-tones-ax-l: var(--cp-tones-a-l);
-  --cp-tones-i-l: calc(var(--cp-root-tones-i-l) + var(--cp-tones-ls,0.1) * 1);
-  --cp-tones-ix-l: var(--cp-tones-i-l);
-  --cp-tones-e-l: calc(var(--cp-root-tones-e-l) + var(--cp-tones-ls,0.1) * 1);
-  --cp-tones-ex-l: var(--cp-tones-e-l);
   --cp-tones-r-l: calc(var(--cp-root-tones-r-l) + var(--cp-tones-ls,0.1) * 1);
   --cp-tones-rx-l: var(--cp-tones-r-l);
-  --cp-tones-lt-l: calc(var(--cp-root-tones-lt-l) + var(--cp-tones-ls,0.1) * 1);
-  --cp-tones-lst-l: calc(var(--cp-root-tones-lst-l) + var(--cp-tones-ls,0.1) * 1);
-  --cp-tones-sh-l: calc(var(--cp-root-tones-sh-l) + var(--cp-tones-ls,0.1) * 1);
-  --cp-tones-shd-l: calc(var(--cp-root-tones-shd-l) + var(--cp-tones-ls,0.1) * 1);
 }
 
 .has-tone-s2 {
-  --cp-tones-b-c: calc(var(--cp-root-tones-b-c) + var(--cp-tones-ss,0.1) * 2);
+  --cp-tones-b-c: calc(var(--cp-root-tones-b-c) + var(--cp-tones-ss,0.04) * 2);
   --cp-tones-bx-s: var(--cp-tones-b-s);
-  --cp-tones-s-c: calc(var(--cp-root-tones-s-c) + var(--cp-tones-ss,0.1) * 2);
+  --cp-tones-s-c: calc(var(--cp-root-tones-s-c) + var(--cp-tones-ss,0.04) * 2);
   --cp-tones-sx-s: var(--cp-tones-s-s);
-  --cp-tones-t-c: calc(var(--cp-root-tones-t-c) + var(--cp-tones-ss,0.1) * 2);
+  --cp-tones-t-c: calc(var(--cp-root-tones-t-c) + var(--cp-tones-ss,0.04) * 2);
   --cp-tones-tx-s: var(--cp-tones-t-s);
-  --cp-tones-h-c: calc(var(--cp-root-tones-h-c) + var(--cp-tones-ss,0.1) * 2);
+  --cp-tones-h-c: calc(var(--cp-root-tones-h-c) + var(--cp-tones-ss,0.04) * 2);
   --cp-tones-hx-s: var(--cp-tones-h-s);
-  --cp-tones-l-c: calc(var(--cp-root-tones-l-c) + var(--cp-tones-ss,0.1) * 2);
+  --cp-tones-l-c: calc(var(--cp-root-tones-l-c) + var(--cp-tones-ss,0.04) * 2);
   --cp-tones-lx-s: var(--cp-tones-l-s);
-  --cp-tones-m-c: calc(var(--cp-root-tones-m-c) + var(--cp-tones-ss,0.1) * 2);
+  --cp-tones-m-c: calc(var(--cp-root-tones-m-c) + var(--cp-tones-ss,0.04) * 2);
   --cp-tones-mx-s: var(--cp-tones-m-s);
-  --cp-tones-a-c: calc(var(--cp-root-tones-a-c) + var(--cp-tones-ss,0.1) * 2);
+  --cp-tones-a-c: calc(var(--cp-root-tones-a-c) + var(--cp-tones-ss,0.04) * 2);
   --cp-tones-ax-s: var(--cp-tones-a-s);
-  --cp-tones-i-c: calc(var(--cp-root-tones-i-c) + var(--cp-tones-ss,0.1) * 2);
+  --cp-tones-i-c: calc(var(--cp-root-tones-i-c) + var(--cp-tones-ss,0.04) * 2);
   --cp-tones-ix-s: var(--cp-tones-i-s);
-  --cp-tones-e-c: calc(var(--cp-root-tones-e-c) + var(--cp-tones-ss,0.1) * 2);
+  --cp-tones-e-c: calc(var(--cp-root-tones-e-c) + var(--cp-tones-ss,0.04) * 2);
   --cp-tones-ex-s: var(--cp-tones-e-s);
-  --cp-tones-r-c: calc(var(--cp-root-tones-r-c) + var(--cp-tones-ss,0.1) * 2);
+  --cp-tones-r-c: calc(var(--cp-root-tones-r-c) + var(--cp-tones-ss,0.04) * 2);
   --cp-tones-rx-s: var(--cp-tones-r-s);
-  --cp-tones-lt-c: calc(var(--cp-root-tones-lt-c) + var(--cp-tones-ss,0.1) * 2);
-  --cp-tones-lst-c: calc(var(--cp-root-tones-lst-c) + var(--cp-tones-ss,0.1) * 2);
-  --cp-tones-sh-c: calc(var(--cp-root-tones-sh-c) + var(--cp-tones-ss,0.1) * 2);
-  --cp-tones-shd-c: calc(var(--cp-root-tones-shd-c) + var(--cp-tones-ss,0.1) * 2);
+  --cp-tones-lt-c: calc(var(--cp-root-tones-lt-c) + var(--cp-tones-ss,0.04) * 2);
+  --cp-tones-lst-c: calc(var(--cp-root-tones-lst-c) + var(--cp-tones-ss,0.04) * 2);
+  --cp-tones-sh-c: calc(var(--cp-root-tones-sh-c) + var(--cp-tones-ss,0.04) * 2);
+  --cp-tones-shd-c: calc(var(--cp-root-tones-shd-c) + var(--cp-tones-ss,0.04) * 2);
 }
 
 .has-tone-l2 {
@@ -2978,26 +2930,14 @@ html {
   --cp-tones-bx-l: var(--cp-tones-b-l);
   --cp-tones-s-l: calc(var(--cp-root-tones-s-l) + var(--cp-tones-ls,0.1) * 2);
   --cp-tones-sx-l: var(--cp-tones-s-l);
-  --cp-tones-t-l: calc(var(--cp-root-tones-t-l) + var(--cp-tones-ls,0.1) * 2);
-  --cp-tones-tx-l: var(--cp-tones-t-l);
-  --cp-tones-h-l: calc(var(--cp-root-tones-h-l) + var(--cp-tones-ls,0.1) * 2);
-  --cp-tones-hx-l: var(--cp-tones-h-l);
   --cp-tones-l-l: calc(var(--cp-root-tones-l-l) + var(--cp-tones-ls,0.1) * 2);
   --cp-tones-lx-l: var(--cp-tones-l-l);
   --cp-tones-m-l: calc(var(--cp-root-tones-m-l) + var(--cp-tones-ls,0.1) * 2);
   --cp-tones-mx-l: var(--cp-tones-m-l);
   --cp-tones-a-l: calc(var(--cp-root-tones-a-l) + var(--cp-tones-ls,0.1) * 2);
   --cp-tones-ax-l: var(--cp-tones-a-l);
-  --cp-tones-i-l: calc(var(--cp-root-tones-i-l) + var(--cp-tones-ls,0.1) * 2);
-  --cp-tones-ix-l: var(--cp-tones-i-l);
-  --cp-tones-e-l: calc(var(--cp-root-tones-e-l) + var(--cp-tones-ls,0.1) * 2);
-  --cp-tones-ex-l: var(--cp-tones-e-l);
   --cp-tones-r-l: calc(var(--cp-root-tones-r-l) + var(--cp-tones-ls,0.1) * 2);
   --cp-tones-rx-l: var(--cp-tones-r-l);
-  --cp-tones-lt-l: calc(var(--cp-root-tones-lt-l) + var(--cp-tones-ls,0.1) * 2);
-  --cp-tones-lst-l: calc(var(--cp-root-tones-lst-l) + var(--cp-tones-ls,0.1) * 2);
-  --cp-tones-sh-l: calc(var(--cp-root-tones-sh-l) + var(--cp-tones-ls,0.1) * 2);
-  --cp-tones-shd-l: calc(var(--cp-root-tones-shd-l) + var(--cp-tones-ls,0.1) * 2);
 }
 
 .has-color-scheme-reverted {
