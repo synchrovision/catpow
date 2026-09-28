@@ -74,6 +74,7 @@ wp.hooks.addFilter("blocks.registerBlockType", "catpow/editor", (settings, name,
 			typography: settings.supports.typography,
 			background: !!settings.supports.background,
 			backgroundImage: !!settings.supports.backgroundImage,
+			animation: !!settings.supports.animation,
 		};
 		if (Object.values(panelSupports).some((v) => v)) {
 			if (name.slice(0, 5) === "core/") coreBlocksToAddPanel.add(name);
@@ -147,6 +148,7 @@ wp.hooks.addFilter("editor.BlockEdit", "catpow/editor", (BlockEdit) => (props) =
 							<CP.SelectClassPanel title={__("切り抜き", "catpow")} icon="pets" classKey={classKey} {...props} selectiveClasses={["clipPath"]} />
 						</>
 					)}
+					{panelSupports.animation && <CP.SelectClassPanel title={__("アニメーション", "catpow")} icon="pets" classKey={classKey} {...props} selectiveClasses={["animation"]} />}
 				</InspectorControls>
 			</>
 		);

@@ -483,6 +483,26 @@ export const selectiveClassesPresets = {
 			...otherParams,
 		};
 	},
+	animation({ peset, vars = "vars", ...otherParams }) {
+		return {
+			name: "animation",
+			label: __("アニメーション", "catpow"),
+			type: "buttons",
+			values: { hasAnimation: __("あり", "catpow"), hasNoAnimation: __("なし", "catpow") },
+			sub: {
+				hasAnimation: [
+					{
+						name: "animationType",
+						type: "gridbuttons",
+						values: { hasAnimationTypeFade: __("フェード", "catpow"), hasAnimationTypeSlide: __("スライド", "catpow"), hasAnimationTypeZoom: __("ズーム", "catpow") },
+						sub: {
+							hasAnimationTypeSlide: [],
+						},
+					},
+				],
+			},
+		};
+	},
 	headingTag({ preset, name = "headingTag", label = __("見出しタグ", "catpow"), key = "HeadingTag", classKey, ...otherParams }) {
 		return {
 			name,
