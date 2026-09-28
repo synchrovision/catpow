@@ -37,6 +37,7 @@ export * from "./ImporterCSVPanel.jsx";
 export * from "./SelectBreakPointToolbar.jsx";
 export * from "./SelectModeToolbar.jsx";
 export * from "./SelectDeviceToolbar.jsx";
+export * from "./ToggleVisible.jsx";
 export * from "./EditItemsTable.jsx";
 export * from "./DummyImage.jsx";
 export * from "./DataStructure.jsx";

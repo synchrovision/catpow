@@ -108,6 +108,19 @@ $colors:(
 			}
 		}
 	}
+	&-togglevisible{
+		@include bnd((d:b,p:a,t:4,l:4,w:2em,h:a,a:1,bs:b,ac:c,z:100));
+		@include bdr((s:s,w:2,r:50%));
+		@include bg((c:white));
+		@include txt((a:c,h:1em,c:gray));
+		&.is-active{
+			@include bg((c:wp));
+			@include txt((c:white));
+		}
+		&__icon{
+
+		}
+	}
 	&-message{
 		@include bnd((pd:20));
 		&__body{
