@@ -9,6 +9,7 @@
 		"spacing": true,
 		"bodySize": true,
 		"background": true,
-		"backgroundImage": true
+		"backgroundImage": true,
+		"animation": true
 	}
 }

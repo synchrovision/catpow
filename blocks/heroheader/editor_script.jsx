@@ -145,7 +145,7 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 		}, [Element]);
 
 		const blockProps = useBlockProps({ className: EditMode ? "cp-altcontent" : classes, style: CP.convertCssVarsForPreview(vars) });
-
+		console.log(CP.ToggleVisible);
 		return (
 			<>
 				<InspectorControls>
@@ -179,6 +179,7 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 				) : (
 					<CP.Bem prefix="wp-block-catpow">
 						<div {...blockProps}>
+							{states.hasAnimation && <CP.ToggleVisible />}
 							<Element class="wp-block-catpow-heroheader__bg" className="_bg" {...params}>
 								{images.map((image, index) => (
 									<CP.ResponsiveImage className="_picture" attributes={attributes} keys={imageKeys.bgImages} itemKeys={["images", index]} devices={devices} key={index} />
@@ -186,9 +187,10 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 							</Element>
 							<div className={bodyClasses} ref={setRef}>
 								<div className="_texts">
+									{states.hasTextBackground && <div className="_bg is-primary-part"></div>}
 									<RichText
 										tagName={HeadingTag}
-										className="_title"
+										className="_title is-primary-part"
 										placeholder={__("タイトルを入力", "catpow")}
 										onChange={(title) => {
 											setAttributes({ title });
@@ -197,7 +199,7 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 									/>
 									<RichText
 										tagName="p"
-										className="_text"
+										className="_text is-secondary-part"
 										placeholder={__("テキストを入力", "catpow")}
 										onChange={(text) => {
 											setAttributes({ text });
@@ -238,8 +240,9 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 						</Element>
 						<div className={bodyClasses}>
 							<div className="_texts">
-								<RichText.Content tagName={HeadingTag} className="_title" value={title} />
-								<RichText.Content tagName="p" className="_text" value={text} />
+								{states.hasTextBackground && <div className="_bg is-primary-part"></div>}
+								<RichText.Content tagName={HeadingTag} className="_title is-primary-part" value={title} />
+								<RichText.Content tagName="p" className="_text is-secondary-part" value={text} />
 								{states.hasButtons && (
 									<ul className={buttonsClasses} style={buttonsVars}>
 										{buttons.map((button, index) => (

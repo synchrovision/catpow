@@ -103,9 +103,8 @@
 			&__body{
 				&-texts{
 					@include bnd((p:r,pd:c-f));
-					&::before{
-						content:'';
-							@include bnd((d:b,p:a,z:1));
+					&-bg{
+						@include bnd((d:b,p:a,z:1));
 						@include trn((o:var(--cp-text-background-opacity,1),bm:var(--cp-text-background-blendmode,nomal)));
 					}
 				}
@@ -115,7 +114,7 @@
 			#{$block}{
 				&__body{
 					&-texts{
-						&::before{
+						&-bg{
 							@include bnd((i:0 -30vw));
 							@include bg((g:l 90deg n bx n));
 						}
@@ -127,7 +126,7 @@
 			#{$block}{
 				&__body{
 					&-texts{
-						&::before{
+						&-bg{
 							@include bnd((i:0 -100vw));
 							@include bg((c:bx));
 						}
@@ -139,7 +138,7 @@
 			#{$block}{
 				&__body{
 					&-texts{
-						&::before{
+						&-bg{
 							@include bnd((i:-50vw,mg:a,w:100%,h:a,a:1));
 							@include bg((c:bx));
 						}
@@ -151,7 +150,7 @@
 			#{$block}{
 				&__body{
 					&-texts{
-						&::before{
+						&-bg{
 							@include bnd((i:-50vw,mg:a,w:100%,h:a,a:1));
 							@include bdr((r:50%));
 							@include bg((c:bx));

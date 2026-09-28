@@ -13,7 +13,7 @@ $attributes=[
 	"text"=>["source"=>"html","selector"=>".{$block_class}__body-texts-text","default"=>"[post excerpt]"],
 
 	"buttons"=>BlockConfig::getButtonsAttributes("{$block_class}__body-texts-buttons-button"),
-	"buttonsClasses"=>["source"=>"attribute","selector"=>".{$block_class}__body-texts-buttons","attribute"=>"class","default"=>"{$block_class}__body-texts-buttons"],
+	"buttonsClasses"=>["source"=>"attribute","selector"=>".{$block_class}__body-texts-buttons","attribute"=>"class","default"=>"{$block_class}__body-texts-buttons is-tertiary-part"],
 	"buttonsVars"=>["type"=>"object","default"=>[]],
 
 	"images"=>[
