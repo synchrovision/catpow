@@ -103,10 +103,14 @@
 			&__body{
 				&-texts{
 					@include bnd((p:r,pd:c-f));
-					&-bg::before{
-						content:'';
-						@include bnd((d:b,p:a,z:1));
-						@include trn((o:var(--cp-text-background-opacity,1),bm:var(--cp-text-background-blendmode,nomal)));
+					&-bg{
+						@include bnd((d:b,p:a,i:0,z:1));
+						@include trn((bm:var(--cp-text-background-blendmode,nomal)));
+						&::before{
+							content:'';
+							@include bnd((d:b,p:a,i:0));
+							@include trn((o:var(--cp-text-background-opacity,1)));
+						}
 					}
 				}
 			}
