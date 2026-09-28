@@ -47,6 +47,12 @@ add_action('customize_preview_init',function($manager){
 	cp::include_plugin_files('action/customize_preview_init',compact('manager'));
 },20,1);
 
+/*block*/
+add_action('enqueue_block_assets',function(){
+	cp::include_plugin_files('action/enqueue_block_assets');
+},20);
+
+
 /*ログイン画面アクション*/
 add_action('login_init',function(){
 	cp::include_plugin_files('action/login_init');
