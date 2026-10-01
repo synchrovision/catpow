@@ -399,7 +399,7 @@ class style_config{
 				'shorthand'=>'i',
 				'type'=>'animationTime',
 				'variants'=>self::$interval_variants,
-				'defaultValues'=>array_map(fn($n)=>sprintf('%ss',pow(2,$n) * 0.1),range(1,5))
+				'defaultValues'=>array_map(fn($n)=>sprintf('%ss',pow(2,$n) * 0.1),range(0,4))
 			],
 		]);
 	}
