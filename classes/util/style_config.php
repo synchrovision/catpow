@@ -18,7 +18,8 @@ class style_config{
 			'border_radius',
 			'line_height',
 			'letter_spacing',
-			'shadow'
+			'shadow',
+			'animation'
 		];
 	protected static
 		$roles=[],
@@ -76,6 +77,20 @@ class style_config{
 			'4'=>'Level4',
 			'5'=>'Level5',
 			'6'=>'Level6',
+		],
+		$speed_variants=[
+			'xf'=>'極速',
+			'f'=>'速',
+			'n'=>'中',
+			's'=>'遅',
+			'xs'=>'極遅',
+		],
+		$interval_variants=[
+			'xs'=>'極短',
+			's'=>'短',
+			'm'=>'中',
+			'l'=>'長',
+			'xl'=>'極長'
 		],
 		$block_variants=[
 			's'=>'セクション',
@@ -360,6 +375,32 @@ class style_config{
 				'variants'=>self::$text_role_variants,
 				'defaultValues'=>array_pad([],5,'none')
 			]
+		]);
+	}
+	public static function get_animation_roles(){
+		if(isset(static::$roles['animation'])){return static::$roles['animation'];}
+		return static::$roles['animation']=apply_filters('cp_animation_roles',[
+			'amount'=>[
+				'label'=>'量',
+				'shorthand'=>'a',
+				'type'=>'amount',
+				'variants'=>self::$size_variants_5,
+				'defaultValues'=>array_map(fn($n)=>sprintf('%s',$n * 10),range(1,5))
+			],
+			'speed'=>[
+				'label'=>'速度',
+				'shorthand'=>'s',
+				'type'=>'animationTime',
+				'variants'=>self::$speed_variants,
+				'defaultValues'=>array_map(fn($n)=>sprintf('%ss',$n * 0.2),range(1,5))
+			],
+			'interval'=>[
+				'label'=>'間隔',
+				'shorthand'=>'i',
+				'type'=>'animationTime',
+				'variants'=>self::$interval_variants,
+				'defaultValues'=>array_map(fn($n)=>sprintf('%ss',pow(2,$n) * 0.1),range(1,5))
+			],
 		]);
 	}
 	//css

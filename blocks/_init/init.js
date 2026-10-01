@@ -6282,9 +6282,79 @@
             {
               name: "animationType",
               type: "gridbuttons",
-              values: { hasAnimationTypeFade: __22("\u30D5\u30A7\u30FC\u30C9", "catpow"), hasAnimationTypeSlide: __22("\u30B9\u30E9\u30A4\u30C9", "catpow"), hasAnimationTypeZoom: __22("\u30BA\u30FC\u30E0", "catpow") },
+              values: {
+                hasAnimationTypeFade: __22("\u30D5\u30A7\u30FC\u30C9", "catpow"),
+                hasAnimationTypeSlide: __22("\u30B9\u30E9\u30A4\u30C9", "catpow"),
+                hasAnimationTypeZoom: __22("\u30BA\u30FC\u30E0", "catpow")
+              },
               sub: {
-                hasAnimationTypeSlide: []
+                hasAnimationTypeSlide: [
+                  {
+                    name: "direction",
+                    type: "buttons",
+                    label: __22("\u65B9\u5411", "catpow"),
+                    values: {
+                      hasAnimationTypeSlideUp: __22("\u4E0A", "catpow"),
+                      hasAnimationTypeSlideDown: __22("\u4E0B", "catpow"),
+                      hasAnimationTypeSlideLeft: __22("\u5DE6", "catpow"),
+                      hasAnimationTypeSlideRight: __22("\u53F3", "catpow")
+                    }
+                  }
+                ],
+                hasAnimationTypeZoom: [
+                  {
+                    name: "direction",
+                    type: "buttons",
+                    label: __22("\u65B9\u5411", "catpow"),
+                    values: {
+                      hasAnimationTypeZoomIn: __22("\u62E1\u5927", "catpow"),
+                      hasAnimationTypeZoomOut: __22("\u7E2E\u5C0F", "catpow")
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              name: "animationEasing",
+              type: "gridbuttons",
+              values: {
+                hasAnimationEasingLinear: __22("\u30EA\u30CB\u30A2", "catpow"),
+                hasAnimationEasingEase: __22("\u30A4\u30FC\u30BA", "catpow"),
+                hasAnimationEasingBound: __22("\u30D0\u30A6\u30F3\u30C9", "catpow"),
+                hasAnimationEasingJump: __22("\u30B8\u30E3\u30F3\u30D7", "catpow")
+              }
+            },
+            {
+              name: "animationAmount",
+              type: "gridbuttons",
+              values: {
+                hasAnimationAmountXSmall: __22("\u6975\u5C0F", "catpow"),
+                hasAnimationAmountSmall: __22("\u5C0F", "catpow"),
+                hasAnimationAmountMedium: __22("\u4E2D", "catpow"),
+                hasAnimationAmountLarge: __22("\u5927", "catpow"),
+                hasAnimationAmountXLarge: __22("\u6975\u5927", "catpow")
+              }
+            },
+            {
+              name: "animationSpeed",
+              type: "gridbuttons",
+              values: {
+                hasAnimationSpeedXFast: __22("\u6975\u901F", "catpow"),
+                hasAnimationSpeedFast: __22("\u901F", "catpow"),
+                hasAnimationSpeedNormal: __22("\u4E2D", "catpow"),
+                hasAnimationSpeedSlow: __22("\u9045", "catpow"),
+                hasAnimationSpeedXSlow: __22("\u6975\u9045", "catpow")
+              }
+            },
+            {
+              name: "animationInterval",
+              type: "gridbuttons",
+              values: {
+                hasAnimationIntervalXShort: __22("\u6975\u77ED", "catpow"),
+                hasAnimationIntervalShort: __22("\u77ED", "catpow"),
+                hasAnimationIntervalMedium: __22("\u4E2D", "catpow"),
+                hasAnimationIntervalLong: __22("\u9577", "catpow"),
+                hasAnimationIntervalXLong: __22("\u6975\u9577", "catpow")
               }
             }
           ]

@@ -494,9 +494,79 @@ export const selectiveClassesPresets = {
 					{
 						name: "animationType",
 						type: "gridbuttons",
-						values: { hasAnimationTypeFade: __("フェード", "catpow"), hasAnimationTypeSlide: __("スライド", "catpow"), hasAnimationTypeZoom: __("ズーム", "catpow") },
+						values: {
+							hasAnimationTypeFade: __("フェード", "catpow"),
+							hasAnimationTypeSlide: __("スライド", "catpow"),
+							hasAnimationTypeZoom: __("ズーム", "catpow"),
+						},
 						sub: {
-							hasAnimationTypeSlide: [],
+							hasAnimationTypeSlide: [
+								{
+									name: "direction",
+									type: "buttons",
+									label: __("方向", "catpow"),
+									values: {
+										hasAnimationTypeSlideUp: __("上", "catpow"),
+										hasAnimationTypeSlideDown: __("下", "catpow"),
+										hasAnimationTypeSlideLeft: __("左", "catpow"),
+										hasAnimationTypeSlideRight: __("右", "catpow"),
+									},
+								},
+							],
+							hasAnimationTypeZoom: [
+								{
+									name: "direction",
+									type: "buttons",
+									label: __("方向", "catpow"),
+									values: {
+										hasAnimationTypeZoomIn: __("拡大", "catpow"),
+										hasAnimationTypeZoomOut: __("縮小", "catpow"),
+									},
+								},
+							],
+						},
+					},
+					{
+						name: "animationEasing",
+						type: "gridbuttons",
+						values: {
+							hasAnimationEasingLinear: __("リニア", "catpow"),
+							hasAnimationEasingEase: __("イーズ", "catpow"),
+							hasAnimationEasingBound: __("バウンド", "catpow"),
+							hasAnimationEasingJump: __("ジャンプ", "catpow"),
+						},
+					},
+					{
+						name: "animationAmount",
+						type: "gridbuttons",
+						values: {
+							hasAnimationAmountXSmall: __("極小", "catpow"),
+							hasAnimationAmountSmall: __("小", "catpow"),
+							hasAnimationAmountMedium: __("中", "catpow"),
+							hasAnimationAmountLarge: __("大", "catpow"),
+							hasAnimationAmountXLarge: __("極大", "catpow"),
+						},
+					},
+					{
+						name: "animationSpeed",
+						type: "gridbuttons",
+						values: {
+							hasAnimationSpeedXFast: __("極速", "catpow"),
+							hasAnimationSpeedFast: __("速", "catpow"),
+							hasAnimationSpeedNormal: __("中", "catpow"),
+							hasAnimationSpeedSlow: __("遅", "catpow"),
+							hasAnimationSpeedXSlow: __("極遅", "catpow"),
+						},
+					},
+					{
+						name: "animationInterval",
+						type: "gridbuttons",
+						values: {
+							hasAnimationIntervalXShort: __("極短", "catpow"),
+							hasAnimationIntervalShort: __("短", "catpow"),
+							hasAnimationIntervalMedium: __("中", "catpow"),
+							hasAnimationIntervalLong: __("長", "catpow"),
+							hasAnimationIntervalXLong: __("極長", "catpow"),
 						},
 					},
 				],

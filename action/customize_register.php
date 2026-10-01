@@ -192,3 +192,20 @@ $wp_customize->add_control(new Catpow\customize\control($wp_customize,'shadow',[
 	]
 ]));
 add_action("customize_save_shadow",["Catpow\\util\\style_config",'update']);
+
+//Animation
+$wp_customize->add_section('animation',[
+	'title'=>__('アニメーション','catpow'),
+	'priority'=>40
+]);
+$wp_customize->add_setting(new Catpow\customize\setting($wp_customize,'animation',[
+	'transport'=>'postMessage'
+]));
+$wp_customize->add_control(new Catpow\customize\control($wp_customize,'animation',[
+	'type'=>'Animation',
+	'section'=>'animation',
+	'param'=>[
+		'roles'=>style_config::get_animation_roles()
+	]
+]));
+add_action("customize_save_animation",["Catpow\\util\\style_config",'update']);

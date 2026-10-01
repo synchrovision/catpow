@@ -1,4 +1,6 @@
-﻿type role = {
+﻿import { pround } from "catpow/util";
+
+type role = {
 	label: string;
 };
 type converter = {
@@ -89,7 +91,27 @@ const fontWeightConfig = {
 	},
 	height: 80,
 };
+const animationTimeConfig = {
+	steps: {
+		0.6: 0.1,
+		2.0: 0.2,
+		4.0: 0.4,
+	},
+	height: 160,
+};
 
+export const amountConverter: converter = {
+	steps: {
+		5: 1,
+		50: 5,
+		100: 10,
+	},
+	height: 200,
+	getRowLabels: (label) => [label],
+	toValues: (size) => [parseInt(size)],
+	toSizes: (val) => `${val}`,
+	getDisplayValue: (val) => `${val}`,
+};
 export const responsiveSizeConverter: converter = {
 	...contentSizeInputConfig,
 	getRowLabels: (label) => ["(vw)", "(rem)"].map((suffix) => label + suffix),
@@ -197,4 +219,11 @@ export const fontWeightConverter: converter = {
 	toValues: (size) => [parseFloat(size)],
 	toSizes: (value) => `${value}`,
 	getDisplayValue: (val) => val,
+};
+export const animationTimeConverter: converter = {
+	...animationTimeConfig,
+	getRowLabels: (label) => [label],
+	toValues: (size) => [parseFloat(size)],
+	toSizes: (value) => `${value}s`,
+	getDisplayValue: (val) => pround(val, 1),
 };

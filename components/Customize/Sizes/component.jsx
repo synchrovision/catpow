@@ -2,7 +2,7 @@
 import { Bem, DataSet, LineChartInput, Legend, DataTable } from "catpow/component";
 import * as converters from "../converters.ts";
 
-const init = ({ sizes, rolesByShorthand }) => {
+export const init = ({ sizes, rolesByShorthand }) => {
 	return {
 		sizes,
 		values: Object.keys(rolesByShorthand).reduce((p, shorthand) => {
@@ -27,7 +27,7 @@ const init = ({ sizes, rolesByShorthand }) => {
 		}, {}),
 	};
 };
-const reducer = (state, action) => {
+export const reducer = (state, action) => {
 	switch (action.type) {
 		case "updateValues": {
 			const { roles, group, values } = action;
@@ -117,7 +117,7 @@ const getColors = (roles) => {
 	});
 	return colors;
 };
-const translateToDisplayValue = (value, { r }, role) => {
+export const translateToDisplayValue = (value, { r }, role) => {
 	const cnv = getConverter(role);
 	return cnv.getDisplayValue(value, r % cnv.toSizes.length);
 };

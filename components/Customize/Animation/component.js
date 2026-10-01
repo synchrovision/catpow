@@ -789,7 +789,7 @@
     }
   });
 
-  // ../components/Customize/Sizes/component.jsx
+  // ../components/Customize/Animation/component.jsx
   init_react();
 
   // node_modules-included/catpow/src/util/array/phasedRange.js
@@ -1449,9 +1449,13 @@
     return /* @__PURE__ */ wp.element.createElement(SVGColorsContext.Provider, { value: colors }, /* @__PURE__ */ wp.element.createElement(SVGScreenContext.Provider, { value: ScreenValue }, /* @__PURE__ */ wp.element.createElement("svg", { className, width, height, viewBox: `0 0 ${width} ${height}`, xmlns: "http://www.w3.org/2000/svg", ...otherProps }, children)));
   };
 
+  // ../components/Customize/Sizes/component.jsx
+  init_react();
+
   // ../components/Customize/converters.ts
   var converters_exports = {};
   __export(converters_exports, {
+    amountConverter: () => amountConverter,
     animationTimeConverter: () => animationTimeConverter,
     fontSizeConverter: () => fontSizeConverter,
     fontWeightConverter: () => fontWeightConverter,
@@ -1561,6 +1565,18 @@
       4: 0.4
     },
     height: 160
+  };
+  var amountConverter = {
+    steps: {
+      5: 1,
+      50: 5,
+      100: 10
+    },
+    height: 200,
+    getRowLabels: (label) => [label],
+    toValues: (size) => [parseInt(size)],
+    toSizes: (val) => `${val}`,
+    getDisplayValue: (val) => `${val}`
   };
   var responsiveSizeConverter = {
     ...contentSizeInputConfig,
@@ -1793,6 +1809,37 @@
     return cnv.getDisplayValue(value, r2 % cnv.toSizes.length);
   };
   Catpow.Customize.Sizes = (props) => {
+    const {
+      value: sizes,
+      onChange,
+      param: { roles }
+    } = props;
+    const rolesByShorthand = useMemo(() => Object.values(roles).reduce((p, c) => ({ ...p, [c.shorthand]: c }), {}), [roles]);
+    const [state, dispatch] = useReducer(reducer, { sizes, rolesByShorthand }, init);
+    useEffect(() => {
+      onChange(state.sizes);
+    }, [state]);
+    return /* @__PURE__ */ wp.element.createElement(Bem, null, Object.keys(rolesByShorthand).map((h) => /* @__PURE__ */ wp.element.createElement(
+      DataSet,
+      {
+        values: state.values[h],
+        labels: state.labels[h],
+        colors: state.colors[h],
+        steps: state.steps[h],
+        translateToDisplayValue: (value, ctx) => translateToDisplayValue(value, ctx, rolesByShorthand[h]),
+        onChange: (values) => {
+          dispatch({ type: "updateValues", group: h, roles: [rolesByShorthand[h]], values });
+        }
+      },
+      /* @__PURE__ */ wp.element.createElement("h5", { className: "cp-customize__label" }, rolesByShorthand[h].label),
+      /* @__PURE__ */ wp.element.createElement(Legend, null),
+      /* @__PURE__ */ wp.element.createElement(LineChartInput, { width: 400, height: state.height[h] }),
+      /* @__PURE__ */ wp.element.createElement(DataTable, { showRowHeader: false })
+    )));
+  };
+
+  // ../components/Customize/Animation/component.jsx
+  Catpow.Customize.Animation = (props) => {
     const {
       value: sizes,
       onChange,
