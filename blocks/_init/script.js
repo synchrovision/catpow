@@ -32,6 +32,6 @@
 
   // ../blocks/_init/script/index.jsx
   ready(() => {
-    scrollspy(document.querySelectorAll(".has-animation"));
+    scrollspy(document.querySelectorAll(".has-animation"), { rootMargin: "0% 0% -25%" });
   });
 })();
