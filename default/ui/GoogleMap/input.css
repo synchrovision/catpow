@@ -7,7 +7,7 @@
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
   gap: 1rem;
-  box-shadow: 2px 2px 2px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a,1)) inset, -1px -1px 1px hsla(var(--cp-tones-sh-h),var(--cp-tones-sh-s),var(--cp-tones-sh-l),var(--cp-tones-sh-a,1)), -2px -2px 2px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a,1)) inset, 1px 1px 1px hsla(var(--cp-tones-lt-h),var(--cp-tones-lt-s),var(--cp-tones-lt-l),var(--cp-tones-lt-a,1));
+  box-shadow: 2px 2px 2px oklch(var(--cp-tones-sh-l) var(--cp-tones-sh-c) var(--cp-tones-sh-h) / var(--cp-tones-sh-a,1)) inset, -1px -1px 1px oklch(var(--cp-tones-sh-l) var(--cp-tones-sh-c) var(--cp-tones-sh-h) / var(--cp-tones-sh-a,1)), -2px -2px 2px oklch(var(--cp-tones-lt-l) var(--cp-tones-lt-c) var(--cp-tones-lt-h) / var(--cp-tones-lt-a,1)) inset, 1px 1px 1px oklch(var(--cp-tones-lt-l) var(--cp-tones-lt-c) var(--cp-tones-lt-h) / var(--cp-tones-lt-a,1));
   border-radius: 0.5rem;
 }
 .cpui-googlemap-preview {
@@ -20,15 +20,13 @@
   width: 100%;
   max-height: 100%;
   height: 18.75rem;
-  box-shadow: 0 2px 5px hsla(var(--cp-tones-shd-h),var(--cp-tones-shd-s),var(--cp-tones-shd-l),var(--cp-tones-shd-a,1));
+  box-shadow: 0 2px 5px oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
 .cpui-googlemap-inputs {
   -webkit-box-flex: 4;
   flex-grow: 4;
   flex-shrink: 4;
   flex-basis: 30rem;
-  container-type: inline-size;
-  container-name: inputs;
 }
 .cpui-googlemap-inputs__dl-dt, .cpui-googlemap-inputs__dl-dd {
   padding: 0.5rem;
@@ -49,4 +47,5 @@
   width: 100%;
   height: auto;
 }
+
 /*# sourceMappingURL=./input.css.map */
