@@ -816,6 +816,134 @@
   background-color: oklch(var(--cp-tones-sx-l) var(--cp-tones-sx-c) var(--cp-tones-sx-h) / var(--cp-tones-sx-a,1));
 }
 
+.has-animation {
+  --cp-transition-container-delay:0s;
+  --cp-transition-part-delay:0s;
+}
+
+@scope (.has-animation) to (.has-animation,.has-no-animation) {
+  .is-primary-part, .is-secondary-part, .is-tertiary-part {
+    -webkit-transition: transform var(--cp-transition-duration, 1s) var(--cp-transition-part-delay, 0s) var(--cp-transition-easing, linear), opacity var(--cp-transition-duration, 1s) var(--cp-transition-part-delay, 0s) linear;
+    transition: transform var(--cp-transition-duration, 1s) var(--cp-transition-part-delay, 0s) var(--cp-transition-easing, linear), opacity var(--cp-transition-duration, 1s) var(--cp-transition-part-delay, 0s) linear;
+    opacity: 1;
+  }
+  :scope:not(.is-visible) .is-primary-part, :scope:not(.is-visible) .is-secondary-part, :scope:not(.is-visible) .is-tertiary-part {
+    -webkit-transition: transform 0s 0.4s linear, opacity 0.4s linear;
+    transition: transform 0s 0.4s linear, opacity 0.4s linear;
+    opacity: 0;
+  }
+  .is-primary-part, .is-primary-part-container {
+    --cp-transition-part-delay:calc(var(--cp-transition-base-delay,0s) + var(--cp-transition-container-delay) + var(--cp-transition-delay,0.4s));
+  }
+  .is-secondary-part, .is-secondary-part-container {
+    --cp-transition-part-delay:calc(var(--cp-transition-base-delay,0s) + var(--cp-transition-container-delay) + var(--cp-transition-delay,0.4s) * 2);
+  }
+  .is-tertiary-part, .is-tertiary-part-container {
+    --cp-transition-part-delay:calc(var(--cp-transition-base-delay,0s) + var(--cp-transition-container-delay) + var(--cp-transition-delay,0.4s) * 3);
+  }
+  .is-listed-part {
+    --cp-transition-part-delay:calc(var(--cp-transition-base-delay,0s) + var(--cp-transition-container-delay) + var(--cp-transition-delay,0.4s) * var(--index,0) * 0.4);
+  }
+  :scope.has-animation-type-slide {
+    --cp-transition-slide-amount:calc(var(--cp-transition-amount,30) * 0.1em * var(--cp-transition-coef,1));
+  }
+  :scope.has-animation-type-slide .is-primary-part, :scope.has-animation-type-slide .is-secondary-part, :scope.has-animation-type-slide .is-tertiary-part {
+    transform: -webkit- translateY(0rem);
+    transform: translateY(0rem);
+  }
+  :scope.has-animation-type-slide:not(.is-visible).has-animation-type-slide-up .is-primary-part, :scope.has-animation-type-slide:not(.is-visible).has-animation-type-slide-up .is-secondary-part, :scope.has-animation-type-slide:not(.is-visible).has-animation-type-slide-up .is-tertiary-part {
+    transform: -webkit- translateY(var(--cp-transition-slide-amount));
+    transform: translateY(var(--cp-transition-slide-amount));
+  }
+  :scope.has-animation-type-slide:not(.is-visible).has-animation-type-slide-down .is-primary-part, :scope.has-animation-type-slide:not(.is-visible).has-animation-type-slide-down .is-secondary-part, :scope.has-animation-type-slide:not(.is-visible).has-animation-type-slide-down .is-tertiary-part {
+    transform: -webkit- translateY(calc(var(--cp-transition-slide-amount) * -1));
+    transform: translateY(calc(var(--cp-transition-slide-amount) * -1));
+  }
+  :scope.has-animation-type-slide:not(.is-visible).has-animation-type-slide-left .is-primary-part, :scope.has-animation-type-slide:not(.is-visible).has-animation-type-slide-left .is-secondary-part, :scope.has-animation-type-slide:not(.is-visible).has-animation-type-slide-left .is-tertiary-part {
+    transform: -webkit- translateX(calc(var(--cp-transition-slide-amount) * -1));
+    transform: translateX(calc(var(--cp-transition-slide-amount) * -1));
+  }
+  :scope.has-animation-type-slide:not(.is-visible).has-animation-type-slide-right .is-primary-part, :scope.has-animation-type-slide:not(.is-visible).has-animation-type-slide-right .is-secondary-part, :scope.has-animation-type-slide:not(.is-visible).has-animation-type-slide-right .is-tertiary-part {
+    transform: -webkit- translateX(var(--cp-transition-slide-amount));
+    transform: translateX(var(--cp-transition-slide-amount));
+  }
+  :scope.has-animation-type-zoom {
+    --cp-transition-zoom-amount:calc(var(--cp-transition-amount,30) * var(--cp-transition-coef,1));
+  }
+  :scope.has-animation-type-zoom .is-primary-part, :scope.has-animation-type-zoom .is-secondary-part, :scope.has-animation-type-zoom .is-tertiary-part {
+    transform: -webkit- scale(1);
+    transform: scale(1);
+  }
+  :scope.has-animation-type-zoom:not(.is-visible).has-animation-type-zoom-in .is-primary-part, :scope.has-animation-type-zoom:not(.is-visible).has-animation-type-zoom-in .is-secondary-part, :scope.has-animation-type-zoom:not(.is-visible).has-animation-type-zoom-in .is-tertiary-part {
+    transform: -webkit- scale(calc(1 - var(--cp-transition-zoom-amount) / 100));
+    transform: scale(calc(1 - var(--cp-transition-zoom-amount) / 100));
+  }
+  :scope.has-animation-type-zoom:not(.is-visible).has-animation-type-zoom-out .is-primary-part, :scope.has-animation-type-zoom:not(.is-visible).has-animation-type-zoom-out .is-secondary-part, :scope.has-animation-type-zoom:not(.is-visible).has-animation-type-zoom-out .is-tertiary-part {
+    transform: -webkit- scale(calc(1 + var(--cp-transition-zoom-amount) / 50));
+    transform: scale(calc(1 + var(--cp-transition-zoom-amount) / 50));
+  }
+}
+:root .has-animation-speed-x-fast {
+  --cp-transition-duration:var(--cp-animation-s-xf);
+}
+:root .has-animation-speed-fast {
+  --cp-transition-duration:var(--cp-animation-s-f);
+}
+:root .has-animation-speed-normal {
+  --cp-transition-duration:var(--cp-animation-s-n);
+}
+:root .has-animation-speed-slow {
+  --cp-transition-duration:var(--cp-animation-s-s);
+}
+:root .has-animation-speed-x-slow {
+  --cp-transition-duration:var(--cp-animation-s-xs);
+}
+:root .has-animation-interval-x-short {
+  --cp-transition-delay:var(--cp-animation-i-xs);
+}
+:root .has-animation-interval-fast {
+  --cp-transition-delay:var(--cp-animation-i-f);
+}
+:root .has-animation-interval-normal {
+  --cp-transition-delay:var(--cp-animation-i-n);
+}
+:root .has-animation-interval-long {
+  --cp-transition-delay:var(--cp-animation-i-l);
+}
+:root .has-animation-interval-x-long {
+  --cp-transition-delay:var(--cp-animation-i-xl);
+}
+:root .has-animation-amount-x-small {
+  --cp-transition-amount:var(--cp-animation-a-xs);
+}
+:root .has-animation-amount-small {
+  --cp-transition-amount:var(--cp-animation-a-s);
+}
+:root .has-animation-amount-medium {
+  --cp-transition-amount:var(--cp-animation-a-m);
+}
+:root .has-animation-amount-large {
+  --cp-transition-amount:var(--cp-animation-a-l);
+}
+:root .has-animation-amount-x-large {
+  --cp-transition-amount:var(--cp-animation-a-xl);
+}
+:root .has-animation-easing-linear {
+  --cp-transition-easing:linear;
+}
+:root .has-animation-easing-ease {
+  --cp-transition-easing:ease;
+}
+:root .has-animation-easing-bound {
+  --cp-transition-easing:cubic-bezier(0.2, 2, 0.4, 0.7);
+}
+:root .has-animation-easing-jump {
+  --cp-transition-easing:cubic-bezier(0.2, 10, 0.8, 10);
+}
+:root .has-animation-easing-jump {
+  --cp-transition-coef:0.1;
+}
+
 .cp-meta-item.is-multiple > .cp-meta-item-unit {
   padding: var(--cp-padding-c-c);
   border-width: var(--cp-border-width-c-c, 0);
@@ -2762,14 +2890,10 @@ html {
   --cp-tones-bx-l: var(--cp-tones-b-l);
   --cp-tones-s-l: calc(var(--cp-root-tones-s-l) + var(--cp-tones-ls,0.1) * -2);
   --cp-tones-sx-l: var(--cp-tones-s-l);
-  --cp-tones-l-l: calc(var(--cp-root-tones-l-l) + var(--cp-tones-ls,0.1) * -2);
-  --cp-tones-lx-l: var(--cp-tones-l-l);
   --cp-tones-m-l: calc(var(--cp-root-tones-m-l) + var(--cp-tones-ls,0.1) * -2);
   --cp-tones-mx-l: var(--cp-tones-m-l);
   --cp-tones-a-l: calc(var(--cp-root-tones-a-l) + var(--cp-tones-ls,0.1) * -2);
   --cp-tones-ax-l: var(--cp-tones-a-l);
-  --cp-tones-r-l: calc(var(--cp-root-tones-r-l) + var(--cp-tones-ls,0.1) * -2);
-  --cp-tones-rx-l: var(--cp-tones-r-l);
 }
 
 .has-tone-s-1 {
@@ -2804,14 +2928,10 @@ html {
   --cp-tones-bx-l: var(--cp-tones-b-l);
   --cp-tones-s-l: calc(var(--cp-root-tones-s-l) + var(--cp-tones-ls,0.1) * -1);
   --cp-tones-sx-l: var(--cp-tones-s-l);
-  --cp-tones-l-l: calc(var(--cp-root-tones-l-l) + var(--cp-tones-ls,0.1) * -1);
-  --cp-tones-lx-l: var(--cp-tones-l-l);
   --cp-tones-m-l: calc(var(--cp-root-tones-m-l) + var(--cp-tones-ls,0.1) * -1);
   --cp-tones-mx-l: var(--cp-tones-m-l);
   --cp-tones-a-l: calc(var(--cp-root-tones-a-l) + var(--cp-tones-ls,0.1) * -1);
   --cp-tones-ax-l: var(--cp-tones-a-l);
-  --cp-tones-r-l: calc(var(--cp-root-tones-r-l) + var(--cp-tones-ls,0.1) * -1);
-  --cp-tones-rx-l: var(--cp-tones-r-l);
 }
 
 .has-tone-s0 {
@@ -2846,14 +2966,10 @@ html {
   --cp-tones-bx-l: var(--cp-tones-b-l);
   --cp-tones-s-l: calc(var(--cp-root-tones-s-l) + var(--cp-tones-ls,0.1) * 0);
   --cp-tones-sx-l: var(--cp-tones-s-l);
-  --cp-tones-l-l: calc(var(--cp-root-tones-l-l) + var(--cp-tones-ls,0.1) * 0);
-  --cp-tones-lx-l: var(--cp-tones-l-l);
   --cp-tones-m-l: calc(var(--cp-root-tones-m-l) + var(--cp-tones-ls,0.1) * 0);
   --cp-tones-mx-l: var(--cp-tones-m-l);
   --cp-tones-a-l: calc(var(--cp-root-tones-a-l) + var(--cp-tones-ls,0.1) * 0);
   --cp-tones-ax-l: var(--cp-tones-a-l);
-  --cp-tones-r-l: calc(var(--cp-root-tones-r-l) + var(--cp-tones-ls,0.1) * 0);
-  --cp-tones-rx-l: var(--cp-tones-r-l);
 }
 
 .has-tone-s1 {
@@ -2888,14 +3004,10 @@ html {
   --cp-tones-bx-l: var(--cp-tones-b-l);
   --cp-tones-s-l: calc(var(--cp-root-tones-s-l) + var(--cp-tones-ls,0.1) * 1);
   --cp-tones-sx-l: var(--cp-tones-s-l);
-  --cp-tones-l-l: calc(var(--cp-root-tones-l-l) + var(--cp-tones-ls,0.1) * 1);
-  --cp-tones-lx-l: var(--cp-tones-l-l);
   --cp-tones-m-l: calc(var(--cp-root-tones-m-l) + var(--cp-tones-ls,0.1) * 1);
   --cp-tones-mx-l: var(--cp-tones-m-l);
   --cp-tones-a-l: calc(var(--cp-root-tones-a-l) + var(--cp-tones-ls,0.1) * 1);
   --cp-tones-ax-l: var(--cp-tones-a-l);
-  --cp-tones-r-l: calc(var(--cp-root-tones-r-l) + var(--cp-tones-ls,0.1) * 1);
-  --cp-tones-rx-l: var(--cp-tones-r-l);
 }
 
 .has-tone-s2 {
@@ -2930,14 +3042,10 @@ html {
   --cp-tones-bx-l: var(--cp-tones-b-l);
   --cp-tones-s-l: calc(var(--cp-root-tones-s-l) + var(--cp-tones-ls,0.1) * 2);
   --cp-tones-sx-l: var(--cp-tones-s-l);
-  --cp-tones-l-l: calc(var(--cp-root-tones-l-l) + var(--cp-tones-ls,0.1) * 2);
-  --cp-tones-lx-l: var(--cp-tones-l-l);
   --cp-tones-m-l: calc(var(--cp-root-tones-m-l) + var(--cp-tones-ls,0.1) * 2);
   --cp-tones-mx-l: var(--cp-tones-m-l);
   --cp-tones-a-l: calc(var(--cp-root-tones-a-l) + var(--cp-tones-ls,0.1) * 2);
   --cp-tones-ax-l: var(--cp-tones-a-l);
-  --cp-tones-r-l: calc(var(--cp-root-tones-r-l) + var(--cp-tones-ls,0.1) * 2);
-  --cp-tones-rx-l: var(--cp-tones-r-l);
 }
 
 .has-color-scheme-reverted {
