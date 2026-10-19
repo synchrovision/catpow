@@ -171,7 +171,6 @@
         setAttributes({ params: { ...heroheaderSelectiveClasses.sub[Element][0].default, ...params } });
       }, [Element]);
       const blockProps = useBlockProps({ className: EditMode ? "cp-altcontent" : classes, style: CP.convertCssVarsForPreview(vars) });
-      console.log(CP.ToggleVisible);
       return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30B9\u30BF\u30A4\u30EB", "catpow"), icon: "art", ...{ setAttributes, attributes }, selectiveClasses }), /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30B9\u30E9\u30A4\u30C0\u30FC", "catpow"), icon: "images-alt", ...{ setAttributes, attributes }, selectiveClasses: sliderSelectiveClasses }), states.hasButtons && /* @__PURE__ */ wp.element.createElement(
         CP.SelectClassPanel,
         {

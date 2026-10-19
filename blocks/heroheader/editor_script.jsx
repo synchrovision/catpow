@@ -145,7 +145,6 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 		}, [Element]);
 
 		const blockProps = useBlockProps({ className: EditMode ? "cp-altcontent" : classes, style: CP.convertCssVarsForPreview(vars) });
-		console.log(CP.ToggleVisible);
 		return (
 			<>
 				<InspectorControls>
