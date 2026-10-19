@@ -9,8 +9,9 @@
 };
 
 export const ResponsiveImageBody = (props) => {
-	const { className = "cp-responsiveimage", keys, devices, device, isTemplate, item, size, ...otherProps } = props;
+	const { className = "cp-responsiveimage", attributes, setAttributes, itemKeys, keys, devices, device, isTemplate, item, size, ...otherProps } = props;
 	let { sizes } = props;
+	delete otherProps.sizes;
 	const primaryClassName = className.split(" ")[0];
 	if (item?.[keys?.mime] === "application/pdf") {
 		return <iframe className={className + " is-pdf"} src={item?.[keys?.src]} data-mime={item?.[keys?.mime]} {...otherProps}></iframe>;
@@ -72,5 +73,7 @@ export const ResponsiveImageBody = (props) => {
 			</picture>
 		);
 	}
-	return <img className={className + " is-img"} src={src} alt={item?.[keys?.alt]} srcSet={item?.[keys?.srcset]} sizes={sizes} data-mime={item?.[keys?.mime]} {...otherProps} />;
+	return (
+		<img className={className + " is-img"} src={src} alt={item?.[keys?.alt]} srcSet={keys?.srcset && item?.[keys?.srcset]} sizes={sizes} data-mime={keys?.mime && item?.[keys?.mime]} {...otherProps} />
+	);
 };
