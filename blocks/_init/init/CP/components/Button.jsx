@@ -28,7 +28,7 @@ export const Button = (props) => {
 	);
 };
 Button.Edit = (props) => {
-	const { tag = "div", blockTypeName, setAttributes, attributes, isItem, itemKeys, keys = {}, ...otherProps } = props;
+	const { tag = "div", blockTypeName, setAttributes, attributes, isItem, itemKeys, keys = { href: "buttonHref" }, ...otherProps } = props;
 	const { useMemo, useEffect, useState } = wp.element;
 
 	const item = useMemo(() => (itemKeys ? CP.getTheItem(props) : attributes) || {}, [attributes, itemKeys]);
