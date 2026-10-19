@@ -18,9 +18,6 @@ CP.config.listed = {
 			items: "items",
 		},
 	},
-	linkKeys: {
-		link: { href: "linkUrl", items: "items" },
-	},
 };
 
 wp.blocks.registerBlockType("catpow/listed", {
@@ -177,7 +174,7 @@ wp.blocks.registerBlockType("catpow/listed", {
 			setAttributes({ items: JSON.parse(JSON.stringify(items)) });
 		};
 
-		const { imageKeys, linkKeys } = CP.config.listed;
+		const { imageKeys } = CP.config.listed;
 
 		const blockProps = useBlockProps({ className: EditMode || (AltMode && doLoop) ? "cp-altcontent" : classes, style: vars });
 
@@ -399,7 +396,7 @@ wp.blocks.registerBlockType("catpow/listed", {
 		const { InnerBlocks, RichText, useBlockProps } = wp.blockEditor;
 		const { isTemplate, vars, items = [], HeadingTag, classes = "", commonItemClasses, commonItemHeaderClasses, countPrefix, countSuffix, subCountPrefix, subCountSuffix, doLoop } = attributes;
 		const states = CP.classNamesToFlags(classes);
-		const { imageKeys, linkKeys } = CP.config.listed;
+		const { imageKeys } = CP.config.listed;
 
 		return (
 			<>
@@ -448,7 +445,7 @@ wp.blocks.registerBlockType("catpow/listed", {
 										)}
 										{states.hasSubTitle && <RichText.Content tagName="p" className="_subtitle" value={item.subTitle} />}
 										{states.hasText && <RichText.Content tagName="p" className="_text" value={item.text} />}
-										{states.hasLink && <CP.Button blockTypeName="catpow/listed" attributes={attributes} keys={linkKeys.link} itemKeys={["items", index]} />}
+										{states.hasLink && <CP.Button blockTypeName="catpow/listed" attributes={attributes} itemKeys={["items", index]} />}
 									</div>
 								)}
 							</li>
