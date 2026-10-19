@@ -87,6 +87,8 @@
   width: 100%;
   height: auto;
   aspect-ratio: 1.5;
+  object-position: center;
+  object-fit: cover;
 }
 .wp-block-catpow-listed__item-header {
   display: -webkit-box;

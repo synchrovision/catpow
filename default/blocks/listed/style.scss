@@ -14,7 +14,7 @@
 		@include anc((n:--item,s:a));
 		&-image{
 			&-img{
-				@include bnd((d:b,w:f,h:a,a:1.5));
+				@include bnd((d:b,w:f,h:a,a:1.5,op:c,of:c));
 			}
 		}
 		&-header{
