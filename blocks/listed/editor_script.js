@@ -195,7 +195,7 @@
           icon: "edit",
           ...{ setAttributes, attributes },
           itemKeys: ["items", attributes.currentItemIndex],
-          selectiveClasses: [{ preset: "buttonParams", cond: states.hasLink }]
+          selectiveClasses: ["color", { preset: "buttonParams", cond: states.hasLink }]
         }
       ), isTemplate && /* @__PURE__ */ wp.element.createElement(
         CP.SelectClassPanel,

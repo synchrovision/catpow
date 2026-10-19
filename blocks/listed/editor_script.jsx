@@ -191,7 +191,7 @@ wp.blocks.registerBlockType("catpow/listed", {
 						icon="edit"
 						{...{ setAttributes, attributes }}
 						itemKeys={["items", attributes.currentItemIndex]}
-						selectiveClasses={[{ preset: "buttonParams", cond: states.hasLink }]}
+						selectiveClasses={["color", { preset: "buttonParams", cond: states.hasLink }]}
 					/>
 					{isTemplate && (
 						<CP.SelectClassPanel
