@@ -1568,7 +1568,7 @@
     return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement(Tag, { className: item.buttonClasses }, states.hasMicroCopy && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "span", className: "_copy cp-button__copy", value: item.buttonCopy }), /* @__PURE__ */ wp.element.createElement(LinkTag, { className: "-button cp-button__link", ...otherProps, ...CP.extractEventDispatcherAttributes(blockTypeName, attributes, itemKeys), ...linkProps }, states.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { className: "_icon cp-button__link-icon", item }), /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "span", className: "_text cp-button__link-text", value: item.buttonText })), states.hasCaption && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "span", className: "_caption cp-button__caption", value: item.buttonCaption })));
   };
   Button.Edit = (props) => {
-    const { tag = "div", blockTypeName, setAttributes, attributes, isItem, itemKeys, keys = {}, ...otherProps } = props;
+    const { tag = "div", blockTypeName, setAttributes, attributes, isItem, itemKeys, keys = { href: "buttonHref" }, ...otherProps } = props;
     const { useMemo: useMemo12, useEffect: useEffect7, useState: useState9 } = wp.element;
     const item = useMemo12(() => (itemKeys ? CP.getTheItem(props) : attributes) || {}, [attributes, itemKeys]);
     const states = CP.classNamesToFlags(item.buttonClasses);
@@ -2403,8 +2403,9 @@
     return /* @__PURE__ */ wp.element.createElement(ResponsiveImageBody, { ...props, className, item });
   };
   var ResponsiveImageBody = (props) => {
-    const { className = "cp-responsiveimage", keys, devices: devices2, device, isTemplate, item, size, ...otherProps } = props;
+    const { className = "cp-responsiveimage", attributes, setAttributes, itemKeys, keys, devices: devices2, device, isTemplate, item, size, ...otherProps } = props;
     let { sizes } = props;
+    delete otherProps.sizes;
     const primaryClassName = className.split(" ")[0];
     if (item?.[keys?.mime] === "application/pdf") {
       return /* @__PURE__ */ wp.element.createElement("iframe", { className: className + " is-pdf", src: item?.[keys?.src], "data-mime": item?.[keys?.mime], ...otherProps });
@@ -2449,7 +2450,7 @@
       }
       return /* @__PURE__ */ wp.element.createElement("picture", { className: className + " is-picture", ...otherProps }, item?.[keys?.sources] && item?.[keys?.sources].sort(({ device: d1 }, { device: d2 }) => CP.devices[d1].width - CP.devices[d2].width).map((source) => /* @__PURE__ */ wp.element.createElement("source", { srcSet: source.srcset, media: CP.devices[source.device].media_query, "data-device": source.device, key: source.device })), /* @__PURE__ */ wp.element.createElement("img", { className: primaryClassName + "-img", src, alt: item?.[keys?.alt] }));
     }
-    return /* @__PURE__ */ wp.element.createElement("img", { className: className + " is-img", src, alt: item?.[keys?.alt], srcSet: item?.[keys?.srcset], sizes, "data-mime": item?.[keys?.mime], ...otherProps });
+    return /* @__PURE__ */ wp.element.createElement("img", { className: className + " is-img", src, alt: item?.[keys?.alt], srcSet: keys?.srcset && item?.[keys?.srcset], sizes, "data-mime": keys?.mime && item?.[keys?.mime], ...otherProps });
   };
 
   // ../blocks/_init/init/CP/components/ResponsiveItemSizeInput.jsx
