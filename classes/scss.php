@@ -3,6 +3,7 @@ namespace Catpow;
 use ScssPhp\ScssPhp\Compiler;
 use ScssPhp\ScssPhp\Type;
 use ScssPhp\ScssPhp\ValueConverter;
+use ScssPhp\ScssPhp\Collection\Map;
 
 use ScssPhp\ScssPhp\Value\ListSeparator;
 use ScssPhp\ScssPhp\Value\SassBoolean;
@@ -57,26 +58,26 @@ class scss{
 		$scssc->registerFunction('get-real-type',function($args){
 			return new SassString($args[0][0],false);
 		},['value']);
-		$scssc->registerFunction('ksort',function($args)use($scssc){
-			if(empty($args[0]) || $args[0][0] !== 'map'){
-				return;
+		$scssc->registerFunction('ksort',static function(array $args): Value{
+			$map=$args[0]->assertMap('map');
+			$as_numeric=$args[1]->assertBoolean('asNumeric')->isTruthy();
+			$entries=[];
+			$sort_keys=[];
+			foreach($map->getContents() as $key=>$value){
+				$entries[]=[$key,$value];
+				$sort_keys[]=$as_numeric
+					?($key instanceof SassNumber?$key->getValue():(float)($key instanceof SassString?$key->getText():(string)$key))
+					:(string)$key;
 			}
-			$asNumeric=!empty($args[1][1]);
-			$keys = $args[0][1];
-			$values = $args[0][2];
-			$compiledKeys = array_map([$scssc,'compileValue'],$keys);
-			$indexOrder = array_keys($keys);
-			usort($indexOrder, function($a, $b) use ($compiledKeys,$asNumeric){
-				if($asNumeric){return (int)$compiledKeys[$a] - (int)$compiledKeys[$b];}
-				return strcmp((string)$compiledKeys[$a], (string)$compiledKeys[$b]);
-			});
-            $map = new Map();
-            foreach($indexOrder as $index){
-                $map->put(new SassString($keys[$index]), self::fromPhp($values[$index]));
-            }
+			asort($sort_keys,$as_numeric?SORT_NUMERIC:SORT_STRING);
 
-            return SassMap::create($map);
-		},['map','asNumeric']);
+			$sorted=new Map();
+			foreach(array_keys($sort_keys) as $index){
+				[$key,$value]=$entries[$index];
+				$sorted->put($key,$value);
+			}
+			return SassMap::create($sorted);
+		},['map','asNumeric: false']);
 		$scssc->registerFunction('embed-svg',function($args)use($scssc){
 			if($f=CP::get_file_path($args[0][2][0])){
 				return new SassString(sprintf('data:image/svg+xml;base64,%s',base64_encode(file_get_contents($f))));
