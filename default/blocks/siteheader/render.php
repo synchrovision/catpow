@@ -9,12 +9,23 @@ HTML::render(['header#siteHeader.wp-block-catpow-siteheader--',
 	],
 	['ul._menu',
 		'children'=>array_map(fn($item)=>['li._item',
-			['a._link','href'=>$item->url,$item->title]
+			[
+				'a._link',
+				'href'=>$item->url,
+				$item->icon?['span._icon',$item->icon]:null,
+				['span._text',$item->title]
+			]
 		],[...loop('nav/header')])
 	],
 	['ul._primary',
 		'children'=>array_map(fn($item)=>['li._item',
-			['a._link','href'=>$item->url,$item->title]
+			'class'=>$item->post_class,
+			[
+				'a._link',
+				'href'=>$item->url,
+				$item->icon?['span._icon',['svg._svg',['use','href'=>$item->icon.'#root']]]:null,
+				['span._text',$item->title]
+			]
 		],[...loop('nav/primary')])
 	],
 	['button._button',

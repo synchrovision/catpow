@@ -47,10 +47,18 @@
 			@include clp((c:t 30 20));
 		}
 	}
-	&__menu{
+	&__menu,&__primary{
 		&-item{
 			&-link{
 				@extend %ui;
+				&:has(&-icon){
+					@include grd((tc:a 1fr,ai:c,g:.25em));
+				}
+				&-icon{
+					&-svg{
+						@include bnd((d:b,w:1.25em,h:a,a:1));
+					}
+				}
 			}
 		}
 	}
@@ -58,7 +66,6 @@
 		&-item{
 			&-link{
 				@extend %button-component;
-				@extend %ui;
 			}
 		}
 	}
