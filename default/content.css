@@ -1,6 +1,6 @@
 @charset "UTF-8";
 @import url("https://fonts.googleapis.com/css?family=Staatliches&subset=latin-ext");
-:root .has-text-type-heading, :root .has-text-type.has-text-type-heading {
+:root .has-text-role-heading {
   font-family: var(--cp-font-family-t-h, inherit);
   font-size: var(--cp-font-size-t-h, 2em);
   font-weight: var(--cp-font-weight-t-h, regular);
@@ -8,7 +8,7 @@
   letter-spacing: var(--cp-letter-spacing-t-h, normal);
 }
 
-:root .has-text-type-lead, :root .has-text-type.has-text-type-lead {
+:root .has-text-role-lead {
   font-family: var(--cp-font-family-t-l, inherit);
   font-size: var(--cp-font-size-t-l, 2em);
   font-weight: var(--cp-font-weight-t-l, regular);
@@ -16,7 +16,7 @@
   letter-spacing: var(--cp-letter-spacing-t-l, normal);
 }
 
-:root .has-text-type-paragraph, :root .has-text-type.has-text-type-paragraph {
+:root .has-text-role-paragraph {
   font-family: var(--cp-font-family-t-p, inherit);
   font-size: var(--cp-font-size-t-p, 2em);
   font-weight: var(--cp-font-weight-t-p, regular);
@@ -24,7 +24,7 @@
   letter-spacing: var(--cp-letter-spacing-t-p, normal);
 }
 
-.cp-button__link, :root .has-text-type-ui, :root .has-text-type.has-text-type-ui {
+.cp-button__link, :root .has-text-role-ui {
   font-family: var(--cp-font-family-t-u, inherit);
   font-size: var(--cp-font-size-t-u, 2em);
   font-weight: var(--cp-font-weight-t-u, regular);
@@ -36,7 +36,7 @@
   margin: var(--cp-margin-t-c, 0);
 }
 
-.cp-button__caption, :root .has-text-type-caption, :root .has-text-type.has-text-type-caption {
+.cp-button__caption, :root .has-text-role-caption {
   font-family: var(--cp-font-family-t-c, inherit);
   font-size: var(--cp-font-size-t-c, 2em);
   font-weight: var(--cp-font-weight-t-c, regular);
@@ -62,28 +62,29 @@
 :root .has-box-shadow-large {
   box-shadow: var(--cp-shadow-s-ol) oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
+:root .has-text-shadow {
+  text-shadow: var(--cp-text-shadow) oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
+  --cp-text-shadow:var(--cp-text-shadow-offset-x,0) var(--cp-text-shadow-offset-y,0) var(--cp-text-shadow-blur,0) var(--cp-color-shd,rgba(0,0,0,.2));
+}
 :root .has-text-shadow-small {
-  text-shadow: var(--cp-shadow-s-os-ns) oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
+  --cp-text-shadow-offset-x-small:var(--cp-text-shadow-offset-x-small,0.1em);
+  --cp-text-shadow-offset-y-small:var(--cp-text-shadow-offset-y-small,0.1em);
+  --cp-text-shadow-blur-small:var(--cp-text-shadow-blur-small,0.05em);
 }
 :root .has-text-shadow-medium {
-  text-shadow: var(--cp-shadow-s-om-ns) oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
+  --cp-text-shadow-offset-x-medium:var(--cp-text-shadow-offset-x-medium,0.2em);
+  --cp-text-shadow-offset-y-medium:var(--cp-text-shadow-offset-y-medium,0.2em);
+  --cp-text-shadow-blur-medium:var(--cp-text-shadow-blur-medium,0.1em);
 }
 :root .has-text-shadow-large {
-  text-shadow: var(--cp-shadow-s-ol-ns) oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
+  --cp-text-shadow-offset-x-large:var(--cp-text-shadow-offset-x-large,0.4em);
+  --cp-text-shadow-offset-y-large:var(--cp-text-shadow-offset-y-large,0.4em);
+  --cp-text-shadow-blur-large:var(--cp-text-shadow-blur-large,0.2em);
 }
-:root .has-spacing-type-block {
-  padding: var(--cp-padding-b);
-  margin: var(--cp-margin-b);
-}
-:root .has-spacing-type-frame {
-  padding: var(--cp-padding-f);
-  margin: var(--cp-margin-f);
-}
-:root .has-margin-type-block {
-  margin: var(--cp-margin-b);
-}
-:root .has-margin-type-frame {
-  margin: var(--cp-margin-f);
+:root .has-text-shadow-custom {
+  --cp-text-shadow-offset-x-custom:var(--cp-text-shadow-offset-x-custom,0.2em);
+  --cp-text-shadow-offset-y-custom:var(--cp-text-shadow-offset-y-custom,0.2em);
+  --cp-text-shadow-blur-custom:var(--cp-text-shadow-blur-custom,0.1em);
 }
 :root .has-padding {
   --cp-padding:var(--cp-padding-top,0) var(--cp-padding-inline,0) var(--cp-padding-bottom,0);
@@ -345,9 +346,6 @@
 :root .has-background-color {
   background-color: oklch(var(--cp-tones-bx-l) var(--cp-tones-bx-c) var(--cp-tones-bx-h) / var(--cp-tones-bx-a,1));
 }
-:root .has-background-color-none {
-  background-color: transparent;
-}
 :root .has-background-color-alt {
   background-color: oklch(var(--cp-tones-sx-l) var(--cp-tones-sx-c) var(--cp-tones-sx-h) / var(--cp-tones-sx-a,1));
 }
@@ -429,19 +427,19 @@
 :root .has-font-weight {
   font-weight: var(--cp-font-weight);
 }
-:root .has-font-weight-x-light, :root .has-font-weight.has-font-weight-x-light {
+:root .has-font-weight-x-light {
   --cp-font-weight:var(--cp-font-weight-s-xl);
 }
-:root .has-font-weight-light, :root .has-font-weight.has-font-weight-light {
+:root .has-font-weight-light {
   --cp-font-weight:var(--cp-font-weight-s-l);
 }
-:root .has-font-weight-regular, :root .has-font-weight.has-font-weight-regular {
+:root .has-font-weight-regular {
   --cp-font-weight:var(--cp-font-weight-s-r);
 }
-:root .has-font-weight-bold, :root .has-font-weight.has-font-weight-bold {
+:root .has-font-weight-bold {
   --cp-font-weight:var(--cp-font-weight-s-b);
 }
-:root .has-font-weight-x-bold, :root .has-font-weight.has-font-weight-x-bold {
+:root .has-font-weight-x-bold {
   --cp-font-weight:var(--cp-font-weight-s-xb);
 }
 :root .has-border {
@@ -499,15 +497,6 @@
 :root .has-border-radius-custom {
   --cp-border-radius:var(--cp-border-radius-custom);
 }
-:root .has-border-color {
-  border-color: oklch(var(--cp-tones-lx-l) var(--cp-tones-lx-c) var(--cp-tones-lx-h) / var(--cp-tones-lx-a,1));
-}
-:root .has-border-color-none {
-  border-color: transparent;
-}
-:root .has-border-color-alt {
-  border-color: oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1));
-}
 :root .has-border-image {
   border-style: solid;
   border-image: var(--cp-border-image);
@@ -554,6 +543,7 @@
   --cp-item-gap-inline:var(--cp-item-gap-inline-custom);
 }
 :root .is-level1 {
+  font-size: var(--cp-font-size-t-p-1);
   --cp-padding-b:var(--cp-padding-b-1);
   --cp-margin-b:var(--cp-margin-b-1);
   --cp-padding-f:var(--cp-padding-f-1);
@@ -570,6 +560,7 @@
   --cp-font-size-t-c:var(--cp-font-size-t-c-1,2rem);
 }
 :root .is-level2 {
+  font-size: var(--cp-font-size-t-p-2);
   --cp-padding-b:var(--cp-padding-b-2);
   --cp-margin-b:var(--cp-margin-b-2);
   --cp-padding-f:var(--cp-padding-f-2);
@@ -586,6 +577,7 @@
   --cp-font-size-t-c:var(--cp-font-size-t-c-2,1.5rem);
 }
 :root .is-level3 {
+  font-size: var(--cp-font-size-t-p-3);
   --cp-padding-b:var(--cp-padding-b-3);
   --cp-margin-b:var(--cp-margin-b-3);
   --cp-padding-f:var(--cp-padding-f-3);
@@ -602,6 +594,7 @@
   --cp-font-size-t-c:var(--cp-font-size-t-c-3,1.25rem);
 }
 :root .is-level4 {
+  font-size: var(--cp-font-size-t-p-4);
   --cp-padding-b:var(--cp-padding-b-4);
   --cp-margin-b:var(--cp-margin-b-4);
   --cp-padding-f:var(--cp-padding-f-4);
@@ -618,6 +611,7 @@
   --cp-font-size-t-c:var(--cp-font-size-t-c-4,1rem);
 }
 :root .is-level5 {
+  font-size: var(--cp-font-size-t-p-5);
   --cp-padding-b:var(--cp-padding-b-5);
   --cp-margin-b:var(--cp-margin-b-5);
   --cp-padding-f:var(--cp-padding-f-5);
@@ -634,6 +628,7 @@
   --cp-font-size-t-c:var(--cp-font-size-t-c-5,0.875rem);
 }
 :root .is-level6 {
+  font-size: var(--cp-font-size-t-p-6);
   --cp-padding-b:var(--cp-padding-b-6);
   --cp-margin-b:var(--cp-margin-b-6);
   --cp-padding-f:var(--cp-padding-f-6);
@@ -668,26 +663,6 @@
   -moz-background-clip: text;
   -ms-background-clip: text;
   background-clip: text;
-}
-:root .has-text-effect-glow {
-  text-shadow: none;
-  -webkit-filter: drop-shadow(0 0 0.05em oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(0 0 0.2em oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1)));
-  filter: drop-shadow(0 0 0.05em oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(0 0 0.2em oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1)));
-}
-:root .has-text-effect-stroke {
-  text-shadow: none;
-  -webkit-filter: drop-shadow(calc(sin(0deg) * 0.04em) calc(cos(0deg) * 0.04em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(45deg) * 0.04em) calc(cos(45deg) * 0.04em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(90deg) * 0.04em) calc(cos(90deg) * 0.04em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(135deg) * 0.04em) calc(cos(135deg) * 0.04em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(180deg) * 0.04em) calc(cos(180deg) * 0.04em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(225deg) * 0.04em) calc(cos(225deg) * 0.04em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(270deg) * 0.04em) calc(cos(270deg) * 0.04em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(315deg) * 0.04em) calc(cos(315deg) * 0.04em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(0deg) * 0.02em) calc(cos(0deg) * 0.02em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(45deg) * 0.02em) calc(cos(45deg) * 0.02em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(90deg) * 0.02em) calc(cos(90deg) * 0.02em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(135deg) * 0.02em) calc(cos(135deg) * 0.02em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(180deg) * 0.02em) calc(cos(180deg) * 0.02em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(225deg) * 0.02em) calc(cos(225deg) * 0.02em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(270deg) * 0.02em) calc(cos(270deg) * 0.02em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(315deg) * 0.02em) calc(cos(315deg) * 0.02em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1)));
-  filter: drop-shadow(calc(sin(0deg) * 0.04em) calc(cos(0deg) * 0.04em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(45deg) * 0.04em) calc(cos(45deg) * 0.04em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(90deg) * 0.04em) calc(cos(90deg) * 0.04em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(135deg) * 0.04em) calc(cos(135deg) * 0.04em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(180deg) * 0.04em) calc(cos(180deg) * 0.04em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(225deg) * 0.04em) calc(cos(225deg) * 0.04em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(270deg) * 0.04em) calc(cos(270deg) * 0.04em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(315deg) * 0.04em) calc(cos(315deg) * 0.04em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(0deg) * 0.02em) calc(cos(0deg) * 0.02em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(45deg) * 0.02em) calc(cos(45deg) * 0.02em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(90deg) * 0.02em) calc(cos(90deg) * 0.02em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(135deg) * 0.02em) calc(cos(135deg) * 0.02em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(180deg) * 0.02em) calc(cos(180deg) * 0.02em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(225deg) * 0.02em) calc(cos(225deg) * 0.02em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(270deg) * 0.02em) calc(cos(270deg) * 0.02em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(315deg) * 0.02em) calc(cos(315deg) * 0.02em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1)));
-}
-:root .has-text-effect-double-stroke {
-  text-shadow: none;
-  -webkit-filter: drop-shadow(calc(sin(0deg) * 0.04em) calc(cos(0deg) * 0.04em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(45deg) * 0.04em) calc(cos(45deg) * 0.04em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(90deg) * 0.04em) calc(cos(90deg) * 0.04em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(135deg) * 0.04em) calc(cos(135deg) * 0.04em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(180deg) * 0.04em) calc(cos(180deg) * 0.04em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(225deg) * 0.04em) calc(cos(225deg) * 0.04em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(270deg) * 0.04em) calc(cos(270deg) * 0.04em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(315deg) * 0.04em) calc(cos(315deg) * 0.04em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(0deg) * 0.02em) calc(cos(0deg) * 0.02em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(45deg) * 0.02em) calc(cos(45deg) * 0.02em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(90deg) * 0.02em) calc(cos(90deg) * 0.02em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(135deg) * 0.02em) calc(cos(135deg) * 0.02em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(180deg) * 0.02em) calc(cos(180deg) * 0.02em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(225deg) * 0.02em) calc(cos(225deg) * 0.02em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(270deg) * 0.02em) calc(cos(270deg) * 0.02em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(315deg) * 0.02em) calc(cos(315deg) * 0.02em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(0deg) * 0.04em) calc(cos(0deg) * 0.04em) oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1))) drop-shadow(calc(sin(45deg) * 0.04em) calc(cos(45deg) * 0.04em) oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1))) drop-shadow(calc(sin(90deg) * 0.04em) calc(cos(90deg) * 0.04em) oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1))) drop-shadow(calc(sin(135deg) * 0.04em) calc(cos(135deg) * 0.04em) oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1))) drop-shadow(calc(sin(180deg) * 0.04em) calc(cos(180deg) * 0.04em) oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1))) drop-shadow(calc(sin(225deg) * 0.04em) calc(cos(225deg) * 0.04em) oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1))) drop-shadow(calc(sin(270deg) * 0.04em) calc(cos(270deg) * 0.04em) oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1))) drop-shadow(calc(sin(315deg) * 0.04em) calc(cos(315deg) * 0.04em) oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1))) drop-shadow(calc(sin(0deg) * 0.02em) calc(cos(0deg) * 0.02em) oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1))) drop-shadow(calc(sin(45deg) * 0.02em) calc(cos(45deg) * 0.02em) oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1))) drop-shadow(calc(sin(90deg) * 0.02em) calc(cos(90deg) * 0.02em) oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1))) drop-shadow(calc(sin(135deg) * 0.02em) calc(cos(135deg) * 0.02em) oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1))) drop-shadow(calc(sin(180deg) * 0.02em) calc(cos(180deg) * 0.02em) oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1))) drop-shadow(calc(sin(225deg) * 0.02em) calc(cos(225deg) * 0.02em) oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1))) drop-shadow(calc(sin(270deg) * 0.02em) calc(cos(270deg) * 0.02em) oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1))) drop-shadow(calc(sin(315deg) * 0.02em) calc(cos(315deg) * 0.02em) oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1)));
-  filter: drop-shadow(calc(sin(0deg) * 0.04em) calc(cos(0deg) * 0.04em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(45deg) * 0.04em) calc(cos(45deg) * 0.04em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(90deg) * 0.04em) calc(cos(90deg) * 0.04em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(135deg) * 0.04em) calc(cos(135deg) * 0.04em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(180deg) * 0.04em) calc(cos(180deg) * 0.04em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(225deg) * 0.04em) calc(cos(225deg) * 0.04em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(270deg) * 0.04em) calc(cos(270deg) * 0.04em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(315deg) * 0.04em) calc(cos(315deg) * 0.04em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(0deg) * 0.02em) calc(cos(0deg) * 0.02em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(45deg) * 0.02em) calc(cos(45deg) * 0.02em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(90deg) * 0.02em) calc(cos(90deg) * 0.02em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(135deg) * 0.02em) calc(cos(135deg) * 0.02em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(180deg) * 0.02em) calc(cos(180deg) * 0.02em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(225deg) * 0.02em) calc(cos(225deg) * 0.02em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(270deg) * 0.02em) calc(cos(270deg) * 0.02em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(315deg) * 0.02em) calc(cos(315deg) * 0.02em) oklch(var(--cp-tones-ix-l) var(--cp-tones-ix-c) var(--cp-tones-ix-h) / var(--cp-tones-ix-a,1))) drop-shadow(calc(sin(0deg) * 0.04em) calc(cos(0deg) * 0.04em) oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1))) drop-shadow(calc(sin(45deg) * 0.04em) calc(cos(45deg) * 0.04em) oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1))) drop-shadow(calc(sin(90deg) * 0.04em) calc(cos(90deg) * 0.04em) oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1))) drop-shadow(calc(sin(135deg) * 0.04em) calc(cos(135deg) * 0.04em) oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1))) drop-shadow(calc(sin(180deg) * 0.04em) calc(cos(180deg) * 0.04em) oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1))) drop-shadow(calc(sin(225deg) * 0.04em) calc(cos(225deg) * 0.04em) oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1))) drop-shadow(calc(sin(270deg) * 0.04em) calc(cos(270deg) * 0.04em) oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1))) drop-shadow(calc(sin(315deg) * 0.04em) calc(cos(315deg) * 0.04em) oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1))) drop-shadow(calc(sin(0deg) * 0.02em) calc(cos(0deg) * 0.02em) oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1))) drop-shadow(calc(sin(45deg) * 0.02em) calc(cos(45deg) * 0.02em) oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1))) drop-shadow(calc(sin(90deg) * 0.02em) calc(cos(90deg) * 0.02em) oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1))) drop-shadow(calc(sin(135deg) * 0.02em) calc(cos(135deg) * 0.02em) oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1))) drop-shadow(calc(sin(180deg) * 0.02em) calc(cos(180deg) * 0.02em) oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1))) drop-shadow(calc(sin(225deg) * 0.02em) calc(cos(225deg) * 0.02em) oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1))) drop-shadow(calc(sin(270deg) * 0.02em) calc(cos(270deg) * 0.02em) oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1))) drop-shadow(calc(sin(315deg) * 0.02em) calc(cos(315deg) * 0.02em) oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1)));
-}
-:root .has-text-effect-emboss {
-  text-shadow: none;
-  -webkit-filter: drop-shadow(0.05em 0.05em 0.05em oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1))) drop-shadow(-0.05em -0.05em 0.05em oklch(var(--cp-tones-lst-l) var(--cp-tones-lst-c) var(--cp-tones-lst-h) / var(--cp-tones-lst-a,1)));
-  filter: drop-shadow(0.05em 0.05em 0.05em oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1))) drop-shadow(-0.05em -0.05em 0.05em oklch(var(--cp-tones-lst-l) var(--cp-tones-lst-c) var(--cp-tones-lst-h) / var(--cp-tones-lst-a,1)));
 }
 :root .has-font-size-relative-x-small {
   font-size: var(--cp-font-size-r-xs);
@@ -755,7 +730,7 @@
 :root .has-text-align-right {
   text-align: right;
 }
-:root .has-font-family-gothic {
+:root .has-font-family-gohic {
   font-family: var(--cp-font-family-f-g);
 }
 :root .has-font-family-mincho {
@@ -972,7 +947,7 @@
   box-shadow: var(--cp-shadow-c-i) oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
 
-:root .has-text-type-heading, :root .has-text-type.has-text-type-heading {
+:root .has-text-role-heading {
   font-family: var(--cp-font-family-t-h, inherit);
   font-size: var(--cp-font-size-t-h, 2em);
   font-weight: var(--cp-font-weight-t-h, regular);
@@ -980,7 +955,7 @@
   letter-spacing: var(--cp-letter-spacing-t-h, normal);
 }
 
-:root .has-text-type-lead, :root .has-text-type.has-text-type-lead {
+:root .has-text-role-lead {
   font-family: var(--cp-font-family-t-l, inherit);
   font-size: var(--cp-font-size-t-l, 2em);
   font-weight: var(--cp-font-weight-t-l, regular);
@@ -988,7 +963,7 @@
   letter-spacing: var(--cp-letter-spacing-t-l, normal);
 }
 
-:root .has-text-type-paragraph, :root .has-text-type.has-text-type-paragraph {
+:root .has-text-role-paragraph {
   font-family: var(--cp-font-family-t-p, inherit);
   font-size: var(--cp-font-size-t-p, 2em);
   font-weight: var(--cp-font-weight-t-p, regular);
@@ -996,7 +971,7 @@
   letter-spacing: var(--cp-letter-spacing-t-p, normal);
 }
 
-.cp-button__link, :root .has-text-type-ui, :root .has-text-type.has-text-type-ui {
+.cp-button__link, :root .has-text-role-ui {
   font-family: var(--cp-font-family-t-u, inherit);
   font-size: var(--cp-font-size-t-u, 2em);
   font-weight: var(--cp-font-weight-t-u, regular);
@@ -1008,7 +983,7 @@
   margin: var(--cp-margin-t-c, 0);
 }
 
-.cp-button__caption, :root .has-text-type-caption, :root .has-text-type.has-text-type-caption {
+.cp-button__caption, :root .has-text-role-caption {
   font-family: var(--cp-font-family-t-c, inherit);
   font-size: var(--cp-font-size-t-c, 2em);
   font-weight: var(--cp-font-weight-t-c, regular);

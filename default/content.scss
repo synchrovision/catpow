@@ -18,8 +18,7 @@ html{
 		@include txt((p:4vw));
 	}
 }
-
-@include define_color_classes;
+@include define-color-classes;
 
 .cp{
 	&-message{
