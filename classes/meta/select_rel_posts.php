@@ -67,7 +67,7 @@ class select_rel_posts extends select{
 						return ob_get_clean();
 					}
 					elseif(isset(cp::$config['post_types'][$post_type]['meta'][$prm])){
-						$meta=new \Catpow\content\meta(['data_path'=>'post/'.$post_type.'/'.$val.'/'.$prm]);
+						$meta=new \Catpow\content\meta(['data_path'=>'post/'.$post_type.'/'.$id.'/'.$prm]);
 						return $meta->get_output();
 					}
 			}
