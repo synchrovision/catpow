@@ -3254,6 +3254,11 @@ html {
   --cp-container-tones-rx-t: var(--cp-tones-l-t);
 }
 
+@property --cp-animation-progress {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 1;
+}
 .cp-message {
   margin: 0.625rem;
   padding: 1.25rem;

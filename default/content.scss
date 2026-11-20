@@ -19,6 +19,7 @@ html{
 	}
 }
 @include define-color-classes;
+@include define-animation-properties;
 
 .cp{
 	&-message{
