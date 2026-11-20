@@ -324,6 +324,7 @@
     justify-content: space-around;
     -webkit-align-items: center;
     align-items: center;
+    gap: var(--cp-margin-c-b);
     list-style: none;
   }
   .wp-block-catpow-siteheader__primary-item-link {

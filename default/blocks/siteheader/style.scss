@@ -188,7 +188,7 @@
 		}
 		&__primary{
 			@include bnd((pd:10));
-			@include flx((w:n,j:a,a:c));
+			@include flx((w:n,j:a,a:c,g:c-b));
 			@include txt((l:n));
 			&-item{
 				&-link{
