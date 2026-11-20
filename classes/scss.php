@@ -310,7 +310,7 @@ class scss{
 			}
 		}
 		if(empty($admin_style_config_modified_time)){
-			if(empty($admin_config_file=CP::get_file_path('scss/admin_style_config.scss',CP::FROM_PLUGIN))){$admin_style_config_modified_time=0;}
+			if(empty($admin_config_file=CP::get_file_path('scss/admin-style-config.scss',CP::FROM_PLUGIN))){$admin_style_config_modified_time=0;}
 			else{$admin_style_config_modified_time=filemtime($admin_config_file);}
 		}
 		foreach((array)$scss_names as $scss_base_name){
