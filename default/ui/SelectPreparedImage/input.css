@@ -1,5 +1,6 @@
 .cpui-selectpreparedimage {
   position: relative;
+  width: fit-content;
 }
 .cpui-selectpreparedimage-icon {
   display: block;
@@ -16,12 +17,9 @@
   border-style: none;
 }
 .cpui-selectpreparedimage-popover {
-  position: absolute;
-  top: 100%;
-  left: -50vw;
-  right: -50vw;
+  position: relative;
   width: 18.75rem;
-  height: fit-content;
+  height: 18.75rem;
   margin: auto;
   z-index: 100;
   background-color: oklch(calc(1 - var(--cp-tones-t-t) * 20) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
@@ -29,7 +27,8 @@
 }
 .cpui-selectpreparedimage-popover-search {
   display: block;
-  position: relative;
+  position: sticky;
+  top: 0rem;
   padding: 0.5em;
   background-color: oklch(var(--cp-tones-b-l) var(--cp-tones-b-c) var(--cp-tones-b-h) / var(--cp-tones-b-a,1));
   font-size: 1rem;
@@ -47,8 +46,10 @@
   width: 1em;
   height: 1em;
   margin: auto;
-  margin-left: 1em;
-  font-family: i;
+  margin-left: 0.5em;
+  font-size: 1.5em;
+  line-height: 1em;
+  font-family: Material Icons;
   color: oklch(var(--cp-tones-i-l) var(--cp-tones-i-c) var(--cp-tones-i-h) / var(--cp-tones-i-a,1));
 }
 .cpui-selectpreparedimage-popover-search .cpui-selectpreparedimage-popover-search-input {
@@ -56,13 +57,14 @@
   -moz-appearance: none;
   appearance: none;
   display: block;
+  margin: 0rem;
   padding: 0.5em;
   height: 1em;
   width: 100%;
   box-sizing: border-box;
   border-style: solid;
   border-width: 0.0625rem;
-  border-color: oklch(calc(1 - var(--cp-tones-t-t) * 50) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
+  border-color: oklch(var(--cp-tones-l-l) var(--cp-tones-l-c) var(--cp-tones-l-h) / var(--cp-tones-l-a,1));
   border-left-width: 2em;
 }
 .cpui-selectpreparedimage-popover-list {

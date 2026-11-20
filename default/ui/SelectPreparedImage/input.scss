@@ -1,7 +1,7 @@
 @import 'admin-style-config.scss';
 
 .cpui-selectpreparedimage{
-	@include bnd((p:r));
+	@include bnd((p:r,w:fit));
 	&-icon{
 		@include bnd((d:b,w:fit,pd:4));
 		@include bg((c:m));
@@ -11,21 +11,21 @@
 		}
 	}
 	&-popover{
-		@include bnd((p:a,t:100%,l:-50vw,r:-50vw,w:300,h:fit,mg:a,z:100));
+		@include bnd((p:r,w:300,h:300,mg:a,z:100));
 		@include bg((c:t 20));
 		@include shd((b:4));
 		&-search{
-			@include bnd((d:b,p:r,pd:.5em));
+			@include bnd((d:b,p:s,t:0,pd:.5em));
 			@include bg((c:b));
 			@include txt((p:16,h:1em));
 			&::before{
 				content:'\e8b6';
-				@include bnd((d:b,p:a,i:0,w:1em,h:1em,mg:a,mgl:1em));
-				@include txt((f:i,c:i));
+				@include bnd((d:b,p:a,i:0,w:1em,h:1em,mg:a,mgl:.5em));
+				@include txt((p:1.5em,h:1em,f:mi,c:i));
 			}
 			& &-input{
-				@include bnd((ap:n,d:b,pd:.5em,h:1em,w:f,bs:b));
-				@include bdr((s:s,w:1,c:t 50));
+				@include bnd((ap:n,d:b,mg:0,pd:.5em,h:1em,w:f,bs:b));
+				@include bdr((s:s,w:1,c:l));
 				@include bdr((p:l,w:2em));
 			}
 		}
