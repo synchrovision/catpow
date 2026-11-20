@@ -50,7 +50,7 @@
 				}
 
 				img,video {
-					@include bnd((p:a,i:0,h:f,w:f,o:h,o:c,of:c,pd:0));
+					@include bnd((p:a,i:0,h:f,w:f,o:c,of:c,pd:0));
 					@include bdr((s:n));
 				}
 			}

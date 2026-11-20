@@ -5,6 +5,7 @@
   line-height: var(--cp-line-height-t-u, 1.5);
   letter-spacing: var(--cp-letter-spacing-t-u, normal);
 }
+
 .wp-block-catpow-progress {
   container-type: inline-size;
   line-height: 1em;
@@ -114,4 +115,5 @@
     display: none;
   }
 }
+
 /*# sourceMappingURL=./style.css.map */

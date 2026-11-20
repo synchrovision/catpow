@@ -1,4 +1,4 @@
-@import "admin_style_config.scss";
+@import "admin-style-config.scss";
 @import "fontawesome.scss";
 @import "text-placeholders.scss";
 @import "component-placeholders.scss";
@@ -45,6 +45,21 @@
 			@include bnd((d:b,p:a,i:0,mg:a,w:12,h:8));
 			@include bg((c:i));
 			@include clp((c:t 30 20));
+		}
+	}
+	&__menu{
+		&-item{
+			&-link{
+				@extend %ui;
+			}
+		}
+	}
+	&__primary{
+		&-item{
+			&-link{
+				@extend %button-component;
+				@extend %ui;
+			}
 		}
 	}
 
@@ -99,7 +114,6 @@
 			&-item{
 				@include bdr((p:b,s:s,w:1,c:shd));
 				&-link{
-					@extend %ui;
 					@include bnd((d:b));
 					@include txt((p:18,c:t));
 				}
@@ -111,8 +125,6 @@
 			@include txt((l:n));
 			&-item{
 				&-link{
-					@extend %button-component;
-					@extend %ui;
 					@include bdr((br:0));
 					@include bg((c:m));
 					@include txt((p:18,c:i));
@@ -170,7 +182,6 @@
 			&-item{
 				@include bnd((f:0 1 200));
 				&-link{
-					@extend %ui;
 					@include txt((p:16,c:t));
 				}
 			}
@@ -181,8 +192,6 @@
 			@include txt((l:n));
 			&-item{
 				&-link{
-					@extend %button-component;
-					@extend %ui;
 					@include bg((c:m));
 					@include txt((p:18,c:i));
 				}

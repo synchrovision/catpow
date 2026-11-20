@@ -4,6 +4,7 @@
   border-radius: var(--cp-border-radius-c-f, 0);
   box-shadow: var(--cp-shadow-c-f) oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
+
 .wp-block-catpow-div {
   margin-inline: auto;
   position: relative;
@@ -53,4 +54,5 @@
     height: auto;
   }
 }
+
 /*# sourceMappingURL=./style.css.map */

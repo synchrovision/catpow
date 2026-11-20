@@ -166,7 +166,7 @@
   border-radius: 0.5em 0.5em 0rem 0rem;
   cursor: pointer;
   text-align: center;
-  background-color: #0001;
+  background-color: rgba(0, 0, 0, 0.0666666667);
 }
 .cp-tabpanel__tabs-tab.is-active {
   border-bottom-style: none;
@@ -196,8 +196,8 @@
   border-radius: 0.25em;
   -webkit-transform-origin: 50% 100%;
   transform-origin: 50% 100%;
-  transform: -webkit- rotateZ(calc(var(--angle,0) * 1deg));
-  transform: rotateZ(calc(var(--angle,0) * 1deg));
+  transform: -webkit- rotateZ(calc(var(--angle, 0) * 1deg));
+  transform: rotateZ(calc(var(--angle, 0) * 1deg));
   box-shadow: 0 2px 5px oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
 .cp-toggle {
@@ -295,4 +295,5 @@
   transform: -webkit- translateY(0.5em);
   transform: translateY(0.5em);
 }
+
 /*# sourceMappingURL=./style.css.map */

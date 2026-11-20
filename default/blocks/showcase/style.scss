@@ -1,4 +1,4 @@
-@import "admin_style_config.scss";
+@import "admin-style-config.scss";
 @import "text-placeholders.scss";
 @import "component-placeholders.scss";
 
@@ -63,7 +63,7 @@
                     @include txt((p:p,h:p));
                     &-counter{
                         @extend %heading;
-                        @include bnd((w:fit,w:4em,h:4em,ac:c));
+                        @include bnd((w:fit,h:4em,ac:c));
                         @include bg((c:mx));
                         @include bdr((r:50%));
                         @include txt((a:c,h:1em,c:bx,f:d,b:k));

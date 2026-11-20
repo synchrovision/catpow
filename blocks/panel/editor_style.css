@@ -1,4 +1,3 @@
-@charset "UTF-8";
 ul.wp-block-catpow-panel li.item {
   position: relative;
 }
@@ -81,7 +80,7 @@ ul.wp-block-catpow-panel.edit li.item div.text .link a {
   color: oklch(var(--cp-tones-t-l) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
 }
 ul.wp-block-catpow-panel.edit li.item div.text .link a::before {
-  content: "";
+  content: "\f054";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
   display: inline-block;
@@ -101,4 +100,5 @@ ul.wp-block-catpow-panel.panel li.item .text .link input.components-text-control
   z-index: 1;
   pointer-events: auto;
 }
+
 /*# sourceMappingURL=./editor_style.css.map */

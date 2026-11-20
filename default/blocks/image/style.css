@@ -4,6 +4,7 @@
   border-radius: var(--cp-border-radius-c-c, 0);
   box-shadow: var(--cp-shadow-c-c) oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
+
 .wp-block-image {
   width: fit-content;
   margin: 0rem;
@@ -42,4 +43,5 @@
   object-position: center;
   object-fit: cover;
 }
+
 /*# sourceMappingURL=./style.css.map */

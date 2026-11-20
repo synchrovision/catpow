@@ -1,1 +1,10 @@
-{"version":3,"file":"input.css.map","sourceRoot":"/","sources":["Users/synchro_vision/Documents/htdocs/catpow/wp-content/plugins/catpow/scss/admin_style_config.scss"],"names":[],"mappings":"AAAA"}
+{
+	"version": 3,
+	"file": "input.css.map",
+	"sourceRoot": "/",
+	"sources": [
+		"Users/synchro_vision/Documents/htdocs/catpow/wp-content/plugins/catpow/scss/admin-style-config.scss"
+	],
+	"names": [],
+	"mappings": "AAAA"
+}

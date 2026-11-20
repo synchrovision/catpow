@@ -1,10 +1,11 @@
-.wp-block-catpow-panes__item-contents-text-symbol, .wp-block-catpow-panes__item-contents-text-title {
+.wp-block-catpow-panes__item-contents-text-title, .wp-block-catpow-panes__item-contents-text-symbol {
   font-family: var(--cp-font-family-t-h, inherit);
   font-size: var(--cp-font-size-t-h, 2em);
   font-weight: var(--cp-font-weight-t-h, regular);
   line-height: var(--cp-line-height-t-h, 1.5);
   letter-spacing: var(--cp-letter-spacing-t-h, normal);
 }
+
 .wp-block-catpow-panes__item-contents-text-caption {
   font-family: var(--cp-font-family-t-c, inherit);
   font-size: var(--cp-font-size-t-c, 2em);
@@ -12,6 +13,7 @@
   line-height: var(--cp-line-height-t-c, 1.5);
   letter-spacing: var(--cp-letter-spacing-t-c, normal);
 }
+
 .wp-block-catpow-panes {
   padding: 0px;
   margin-inline: auto;
@@ -33,14 +35,14 @@
   .wp-block-catpow-panes > *:first-child:nth-last-child(1), .wp-block-catpow-panes > *:first-child:nth-last-child(1) ~ * {
     flex-basis: 100%;
   }
-  .wp-block-catpow-panes > *, .wp-block-catpow-panes > *:first-child:nth-last-child(2), .wp-block-catpow-panes > *:first-child:nth-last-child(2) ~ * {
+  .wp-block-catpow-panes > *:first-child:nth-last-child(2), .wp-block-catpow-panes > *:first-child:nth-last-child(2) ~ *, .wp-block-catpow-panes > * {
     flex-basis: 50%;
   }
-  .wp-block-catpow-panes > *:first-child:nth-last-child(3n), .wp-block-catpow-panes > *:first-child:nth-last-child(3n) ~ *, .wp-block-catpow-panes > *:nth-child(2n):nth-last-child(3n + 1) ~ * {
+  .wp-block-catpow-panes > *:nth-child(2n):nth-last-child(3n+1) ~ *, .wp-block-catpow-panes > *:first-child:nth-last-child(3n), .wp-block-catpow-panes > *:first-child:nth-last-child(3n) ~ * {
     flex-basis: 33%;
   }
 }
-@media (min-width:960px) {
+@media (pc) {
   .wp-block-catpow-panes {
     display: -webkit-box;
     display: -webkit-flex;
@@ -53,13 +55,13 @@
     flex-grow: 1;
     box-sizing: border-box;
   }
-  .wp-block-catpow-panes > *:first-child:nth-last-child(3), .wp-block-catpow-panes > *:first-child:nth-last-child(3) ~ *, .wp-block-catpow-panes > *:first-child:nth-last-child(7), .wp-block-catpow-panes > *:first-child:nth-last-child(7) ~ *, .wp-block-catpow-panes > *:first-child:nth-last-child(11), .wp-block-catpow-panes > *:first-child:nth-last-child(11) ~ * {
+  .wp-block-catpow-panes > *:first-child:nth-last-child(11), .wp-block-catpow-panes > *:first-child:nth-last-child(11) ~ *, .wp-block-catpow-panes > *:first-child:nth-last-child(7), .wp-block-catpow-panes > *:first-child:nth-last-child(7) ~ *, .wp-block-catpow-panes > *:first-child:nth-last-child(3), .wp-block-catpow-panes > *:first-child:nth-last-child(3) ~ * {
     flex-basis: 33%;
   }
-  .wp-block-catpow-panes > *, .wp-block-catpow-panes > *:first-child:nth-last-child(4), .wp-block-catpow-panes > *:first-child:nth-last-child(4) ~ *, .wp-block-catpow-panes > *:first-child:nth-last-child(7) ~ *:nth-child(3n):nth-last-child(4n + 1) ~ *, .wp-block-catpow-panes > *:first-child:nth-last-child(8), .wp-block-catpow-panes > *:first-child:nth-last-child(8) ~ *, .wp-block-catpow-panes > *:first-child:nth-last-child(11) ~ *:nth-child(3n):nth-last-child(4n + 1) ~ * {
+  .wp-block-catpow-panes > *:first-child:nth-last-child(11) ~ *:nth-child(3n):nth-last-child(4n+1) ~ *, .wp-block-catpow-panes > *:first-child:nth-last-child(8), .wp-block-catpow-panes > *:first-child:nth-last-child(8) ~ *, .wp-block-catpow-panes > *:first-child:nth-last-child(7) ~ *:nth-child(3n):nth-last-child(4n+1) ~ *, .wp-block-catpow-panes > *:first-child:nth-last-child(4), .wp-block-catpow-panes > *:first-child:nth-last-child(4) ~ *, .wp-block-catpow-panes > * {
     flex-basis: 25%;
   }
-  .wp-block-catpow-panes > *:first-child:nth-last-child(5n), .wp-block-catpow-panes > *:first-child:nth-last-child(5n) ~ *, .wp-block-catpow-panes > *:nth-child(4n):nth-last-child(5n + 1) ~ * {
+  .wp-block-catpow-panes > *:nth-child(4n):nth-last-child(5n+1) ~ *, .wp-block-catpow-panes > *:first-child:nth-last-child(5n), .wp-block-catpow-panes > *:first-child:nth-last-child(5n) ~ * {
     flex-basis: 20%;
   }
   .wp-block-catpow-panes > *:first-child:nth-last-child(6), .wp-block-catpow-panes > *:first-child:nth-last-child(6) ~ * {
@@ -137,4 +139,5 @@
 .wp-block-catpow-panes__item-contents-text-caption {
   margin: 0px;
 }
+
 /*# sourceMappingURL=./style.css.map */

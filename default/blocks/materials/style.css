@@ -5,13 +5,15 @@
   line-height: var(--cp-line-height-t-h, 1.5);
   letter-spacing: var(--cp-letter-spacing-t-h, normal);
 }
-.wp-block-catpow-materials, .wp-block-catpow-materials__group-items-item-title {
+
+.wp-block-catpow-materials__group-items-item-title, .wp-block-catpow-materials {
   font-family: var(--cp-font-family-t-p, inherit);
   font-size: var(--cp-font-size-t-p, 2em);
   font-weight: var(--cp-font-weight-t-p, regular);
   line-height: var(--cp-line-height-t-p, 1.5);
   letter-spacing: var(--cp-letter-spacing-t-p, normal);
 }
+
 .wp-block-catpow-materials__group-items-item-caption {
   font-family: var(--cp-font-family-t-c, inherit);
   font-size: var(--cp-font-size-t-c, 2em);
@@ -19,6 +21,7 @@
   line-height: var(--cp-line-height-t-c, 1.5);
   letter-spacing: var(--cp-letter-spacing-t-c, normal);
 }
+
 .wp-block-catpow-materials {
   column-width: var(--cp-size-i);
   column-gap: 1.5lh;
@@ -88,4 +91,5 @@
   flex-shrink: 1;
   flex-basis: 100%;
 }
+
 /*# sourceMappingURL=./style.css.map */

@@ -22,8 +22,9 @@
   border-radius: 0.25em;
   -webkit-transform-origin: 50% 100%;
   transform-origin: 50% 100%;
-  transform: -webkit- rotateZ(calc(var(--angle,0) * 1deg));
-  transform: rotateZ(calc(var(--angle,0) * 1deg));
+  transform: -webkit- rotateZ(calc(var(--angle, 0) * 1deg));
+  transform: rotateZ(calc(var(--angle, 0) * 1deg));
   box-shadow: 0 2px 5px oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
+
 /*# sourceMappingURL=./style.css.map */

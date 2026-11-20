@@ -1,6 +1,7 @@
 .wp-block-code {
   margin: var(--cp-margin-t-p, 0);
 }
+
 .wp-block-code code {
   font-family: var(--cp-font-family-t-p, inherit);
   font-size: var(--cp-font-size-t-p, 2em);
@@ -8,6 +9,7 @@
   line-height: var(--cp-line-height-t-p, 1.5);
   letter-spacing: var(--cp-letter-spacing-t-p, normal);
 }
+
 .wp-block-code {
   padding: ipd;
   background-color: black;
@@ -17,4 +19,5 @@
   font-family: var(--cp-font-family-t-c);
   white-space: pre-wrap;
 }
+
 /*# sourceMappingURL=./style.css.map */

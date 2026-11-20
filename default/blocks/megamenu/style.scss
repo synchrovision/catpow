@@ -1,4 +1,4 @@
-@import "admin_style_config.scss";
+@import "admin-style-config.scss";
 
 .wp-block-catpow-megamenu{
 	@include bnd((p:s,t:var(--wp-admin--admin-bar--height,0),l:0,r:0,z:1000));

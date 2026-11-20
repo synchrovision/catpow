@@ -1,6 +1,7 @@
 .wp-block-catpow-panel.is-type-tile .wp-block-catpow-panel__items-item-texts-title {
   margin: var(--cp-margin-t-h, 0);
 }
+
 .wp-block-catpow-panel.is-type-tile .wp-block-catpow-panel__items-item-texts-title {
   font-family: var(--cp-font-family-t-h, inherit);
   font-size: var(--cp-font-size-t-h, 2em);
@@ -8,9 +9,11 @@
   line-height: var(--cp-line-height-t-h, 1.5);
   letter-spacing: var(--cp-letter-spacing-t-h, normal);
 }
+
 .wp-block-catpow-panel.is-type-tile .wp-block-catpow-panel__items-item-texts-text {
   margin: var(--cp-margin-t-p, 0);
 }
+
 .wp-block-catpow-panel.is-type-tile .wp-block-catpow-panel__items-item-texts-text {
   font-family: var(--cp-font-family-t-p, inherit);
   font-size: var(--cp-font-size-t-p, 2em);
@@ -18,6 +21,7 @@
   line-height: var(--cp-line-height-t-p, 1.5);
   letter-spacing: var(--cp-letter-spacing-t-p, normal);
 }
+
 .wp-block-catpow-panel {
   padding: 0rem;
   container-type: inline-size;
@@ -1100,4 +1104,5 @@
   top: 5%;
   left: 5%;
 }
+
 /*# sourceMappingURL=./style.css.map */

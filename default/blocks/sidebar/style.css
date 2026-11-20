@@ -5,6 +5,7 @@
   line-height: var(--cp-line-height-t-l, 1.5);
   letter-spacing: var(--cp-letter-spacing-t-l, normal);
 }
+
 .wp-block-catpow-sidebar {
   position: relative;
   overflow: clip;
@@ -159,4 +160,5 @@
   flex-shrink: 99;
   flex-basis: var(--cp-size-i);
 }
+
 /*# sourceMappingURL=./style.css.map */

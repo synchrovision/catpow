@@ -40,16 +40,16 @@
   color: oklch(calc(1 - var(--cp-tones-t-t) * 30) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
 }
 .cp-calendar-table-caption-year-button.is-prev::before {
-  content: "";
+  content: "\f341";
 }
 .cp-calendar-table-caption-year-button.is-next::before {
-  content: "";
+  content: "\f345";
 }
 .cp-calendar-table-caption-year-button.is-prev10::before {
-  content: "";
+  content: "\f141";
 }
 .cp-calendar-table-caption-year-button.is-next10::before {
-  content: "";
+  content: "\f139";
 }
 .cp-calendar-table-caption-month {
   display: block;
@@ -129,4 +129,5 @@
 .cp-calendar.is-size-large .cp-calendar-table-tbody-week-day-date {
   display: block;
 }
+
 /*# sourceMappingURL=./style.css.map */

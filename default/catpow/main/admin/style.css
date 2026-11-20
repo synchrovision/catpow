@@ -31,7 +31,7 @@
   width: 1.875rem;
   margin: 0rem;
   margin-right: 0.625rem;
-  box-shadow: 0 1px 3px #0004 inset;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2666666667) inset;
 }
 .cp-admin .checkbox.cp-meta-item-use_functions .cp-meta-unit label.checkbox .text {
   -webkit-box-flex: 1;
@@ -63,7 +63,7 @@
   font-size: 0.6875rem;
   font-weight: 400;
   color: white;
-  box-shadow: 0 2px 5px #0004;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2666666667);
   -webkit-transition: 0.5s;
   transition: 0.5s;
   opacity: 0;
@@ -158,7 +158,7 @@
 .cp-admin-functions__item .image, .cp-admin-functions__item > .cpform-section .image {
   background-color: #fff;
   border-radius: 0.625rem;
-  box-shadow: 0 3px 7px #0004 inset;
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2666666667) inset;
 }
 .cp-admin-functions__item .desc, .cp-admin-functions__item > .cpform-section .desc {
   text-align: justify;
@@ -189,7 +189,7 @@
   -webkit-flex-wrap: wrap;
   flex-wrap: wrap;
   background-color: white;
-  box-shadow: 0 10px 21px #0004;
+  box-shadow: 0 10px 21px rgba(0, 0, 0, 0.2666666667);
 }
 .cp-admin-lightbox__body {
   -webkit-box-flex: 10;
@@ -307,15 +307,16 @@
   border-style: none;
   border-radius: 50%;
   background-color: var(--wp-admin-theme-color);
-  box-shadow: 0 2px 5px #0004;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2666666667);
   text-align: center;
   font-size: 1.25rem;
   line-height: 1em;
   color: white;
 }
 .cp-admin-lightbox__close .button::before {
-  content: "";
+  content: "\f00d";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
+
 /*# sourceMappingURL=./style.css.map */

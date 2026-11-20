@@ -1,1 +1,10 @@
-{"version":3,"file":"editor_style.css.map","sourceRoot":"/","sources":["wp-content/plugins/catpow/scss/admin_style_config.scss"],"names":[],"mappings":"AAAA"}
+{
+	"version": 3,
+	"file": "editor_style.css.map",
+	"sourceRoot": "/",
+	"sources": [
+		"wp-content/plugins/catpow/scss/admin-style-config.scss"
+	],
+	"names": [],
+	"mappings": "AAAA"
+}

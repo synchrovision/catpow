@@ -16,6 +16,7 @@
 .cp-mail-body.has-bg-a {
   background-color: oklch(var(--cp-tones-a-l) var(--cp-tones-a-c) var(--cp-tones-a-h) / var(--cp-tones-a-a,1));
 }
+
 .wp-block-catpow-t-body {
   border-collapse: collapse;
   border-spacing: 0px;
@@ -24,7 +25,7 @@
   margin: 0rem auto;
   border-style: none;
 }
-.wp-block-catpow-t-body [class^="wp-image-"] {
+.wp-block-catpow-t-body [class^=wp-image-] {
   display: inline;
 }
 .wp-block-catpow-t-body__thead, .wp-block-catpow-t-body__tfoot {
@@ -73,4 +74,5 @@
 .wp-block-catpow-t-body__tfoot.has-color-scheme-inverted .wp-block-catpow-t-body__tfoot-tr-td {
   color: oklch(var(--cp-tones-i-l) var(--cp-tones-i-c) var(--cp-tones-i-h) / var(--cp-tones-i-a,1));
 }
+
 /*# sourceMappingURL=./style.css.map */

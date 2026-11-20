@@ -6,6 +6,7 @@
   line-height: var(--cp-line-height-t-p, 1.5);
   letter-spacing: var(--cp-letter-spacing-t-p, normal);
 }
+
 .wp-block-list {
   color: oklch(var(--cp-tones-tx-l) var(--cp-tones-tx-c) var(--cp-tones-tx-h) / var(--cp-tones-tx-a,1));
 }
@@ -36,46 +37,49 @@
   top: 0px;
   left: 0px;
 }
+
 ul.is-style-annotation > li::before {
   content: "※";
   color: inherit;
 }
 ul.is-style-circle > li::before {
-  content: "";
+  content: "\f111";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
 ul.is-style-caret > li::before {
-  content: "";
+  content: "\f0da";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
 ul.is-style-square > li::before {
-  content: "";
+  content: "\f0c8";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
 ul.is-style-star > li::before {
-  content: "";
+  content: "\f005";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
 ul.is-style-check > li::before {
-  content: "";
+  content: "\f00c";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
 ul.is-style-alert > li::before {
-  content: "";
+  content: "\f06a";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
 ul.is-style-caution > li::before {
-  content: "";
+  content: "\f071";
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
 }
+
 ol.wp-block-list.is-style-annotation li::before, ol.wp-block-list.is-style-circle li::before, ol.wp-block-list.is-style-caret li::before, ol.wp-block-list.is-style-square li::before, ol.wp-block-list.is-style-star li::before, ol.wp-block-list.is-style-check li::before, ol.wp-block-list.is-style-alert li::before, ol.wp-block-list.is-style-caution li::before {
   font-size: 1.5em;
 }
+
 /*# sourceMappingURL=./style.css.map */

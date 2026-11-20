@@ -22,4 +22,5 @@
   box-shadow: 0 3px 7px oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
   background-color: oklch(var(--cp-tones-b-l) var(--cp-tones-b-c) var(--cp-tones-b-h) / var(--cp-tones-b-a,1));
 }
+
 /*# sourceMappingURL=./editor_style.css.map */
