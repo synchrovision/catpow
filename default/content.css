@@ -3387,7 +3387,7 @@ html {
   transform: -webkit- translateY(0rem);
   transform: translateY(0rem);
 }
-.cp-meta-item fieldset {
+:where(.cp-meta-item) fieldset {
   margin: 0.625rem 0rem;
   padding: 0.625rem;
   border-style: solid;
@@ -3395,10 +3395,10 @@ html {
   border-color: oklch(calc(1 - var(--cp-tones-tx-t) * 100) var(--cp-tones-tx-c) var(--cp-tones-tx-h) / calc(var(--cp-tones-tx-a,1) * 0.3));
   border-radius: 0.3125rem;
 }
-.cp-meta-item fieldset legend {
+:where(.cp-meta-item) fieldset legend {
   color: oklch(calc(1 - var(--cp-tones-tx-t) * 100) var(--cp-tones-tx-c) var(--cp-tones-tx-h) / calc(var(--cp-tones-tx-a,1) * 0.3));
 }
-.cp-meta-item select, .cp-meta-item input[type=text], .cp-meta-item textarea {
+:where(.cp-meta-item) select, :where(.cp-meta-item) input[type=text], :where(.cp-meta-item) textarea {
   padding: 0.625rem;
   margin: 0.3125rem;
   height: auto;
@@ -3410,7 +3410,7 @@ html {
   color: oklch(var(--cp-tones-tx-l) var(--cp-tones-tx-c) var(--cp-tones-tx-h) / var(--cp-tones-tx-a,1));
   font-size: 1rem;
 }
-.cp-meta-item select {
+:where(.cp-meta-item) select {
   padding-right: 1.25rem;
 }
 .cp-meta-item-unit-input.is-input-type-select {
