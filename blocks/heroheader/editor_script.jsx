@@ -23,9 +23,8 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 		const states = CP.classNamesToFlags(attributes.classes);
 		const [ref, setRef] = useState(null);
 		const { devices, imageKeys, linkKeys } = CP.config.heroheader;
-		const buttonAttributes = states.hasButtons && buttons.length === 0
-			? { ...attributes, buttons: wp.blocks.getBlockType("catpow/heroheader").attributes.buttons.default.map((button) => ({ ...button })) }
-			: attributes;
+		const buttonAttributes =
+			states.hasButtons && buttons.length === 0 ? { ...attributes, buttons: wp.blocks.getBlockType("catpow/heroheader").attributes.buttons.default.map((button) => ({ ...button })) } : attributes;
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
