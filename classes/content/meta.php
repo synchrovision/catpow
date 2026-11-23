@@ -38,6 +38,18 @@ class meta extends content{
 		ob_start();$this->output($prm,$format);
 		return ob_get_clean();
 	}
+	public function get_output_html_data($prm=null){
+		$class_name=\cp::get_class_name('meta',$this->conf['output-type']??$this->conf['type']??'text');
+		if($class_name::$is_bulk_output || isset($this->loop_id)){
+			return $class_name::get_output_html_data($this,$prm);
+		}
+		$items=[];
+		foreach($class_name::loop($this,$class_name::USE_ALTERNATIVE|$class_name::USE_DEFAULT) as $this->loop_id=>$this->value){
+			$items[]=$class_name::get_output_html_data($this,$prm);
+		}
+		unset($this->loop_id,$this->value);
+		return $items;
+	}
 	public function output_item($prm=null,$format=null){
 		$class_name=\cp::get_class_name('meta',$this->conf['output-type']?:$this->conf['type']?:'text');
 		$format=$this->conf['output-format']?:$this->conf['format']?:null;
