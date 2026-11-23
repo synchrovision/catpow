@@ -2,7 +2,7 @@
 
 const blockConfig = {
 	linkKeys: {
-		link: { href: "href", items: "items" },
+		link: { href: "buttonHref", items: "items" },
 	},
 };
 CP.config.buttons = blockConfig;
@@ -81,7 +81,7 @@ wp.blocks.registerBlockType("catpow/buttons", {
 									{ type: "text", key: "copy", cond: states.hasMicroCopy },
 									{ type: "text", key: "text", cond: true },
 									{ type: "text", key: "caption", cond: states.hasCaption },
-									{ type: "text", key: "url", cond: true },
+									{ type: "text", key: linkKeys.link.href, cond: true },
 								]}
 								isTemplate={isTemplate}
 							/>
