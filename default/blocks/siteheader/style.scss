@@ -35,8 +35,8 @@
 		}
 	}
 	&__back{
+		@extend %button-component;
 		@include bnd((d:b,p:f,w:40,h:40,pd:20,b:10,r:10));
-		@include bdr((s:s,w:2,c:b,r:r-b));
 		@include bg((c:m));
 		@include txt((a:c,p:20,h:20,f:t-u,s:r,c:b));
 		@include usr((c:p));
@@ -85,6 +85,9 @@
 				}
 			}
 		}
+		&__back{
+			@include bnd((b:80));
+		}
 		&__button{
 			@include bnd((d:b,p:a,t:0,r:0,w:50,h:50,z:2));
 			@include bdr((s:n));
@@ -127,14 +130,15 @@
 			}
 		}
 		&__primary{
-			@include bnd((p:f,b:0,l:0));
+			@include bnd((p:f,b:0,l:0,w:min(100vw,30rem)));
 			@include flx((w:n,j:a,a:c));
 			@include txt((l:n));
 			&-item{
+				@include bnd((f:1 1 a));
 				&-link{
 					@include bdr((br:0));
 					@include bg((c:m));
-					@include txt((p:18,c:i));
+					@include txt((a:n,p:18,c:i));
 				}
 			}
 		}
