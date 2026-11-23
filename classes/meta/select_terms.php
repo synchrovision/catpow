@@ -82,6 +82,14 @@ class select_terms extends select{
 	}
 	
 	public static function output($meta,$prm){
+		return static::get_selection_output($meta,$prm,false);
+	}
+	public static function get_output_html_data($meta,$prm){
+		return static::get_selection_output($meta,$prm,true);
+	}
+	protected static function get_selection_output($meta,$prm,$as_html_data){
+		$class=$as_html_data?($prm['class']??null):null;
+		$prm=$as_html_data && is_array($prm)?($prm['type']??null):$prm;
 		$val=$meta->value;
 		if(empty($val))return '';
 		if(isset($meta->conf['addition'])){
@@ -110,11 +118,17 @@ class select_terms extends select{
 				case 'title':
 					return $term->name;
 				case 'icon':
+					if($as_html_data){
+						return ['span.icon.term','class'=>array_merge(explode(' ',$term->slug.' '.$term->taxonomy),(array)$class),$term->name];
+					}
 					return sprintf(
 						'<span class="icon term %s %s">%s</span>',
 						$term->slug,$term->taxonomy,$term->name
 					);
 				case 'link':
+					if($as_html_data){
+						return ['a.term_link','class'=>array_merge(explode(' ',$term->slug.' '.$term->taxonomy),(array)$class),'href'=>get_term_link($term),$term->name];
+					}
 					return sprintf(
 						'<a class="term_link %s %s" href="%s">%s</a>',
 						$term->slug,$term->taxonomy,get_term_link($term),$term->name

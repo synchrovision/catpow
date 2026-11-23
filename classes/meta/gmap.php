@@ -6,6 +6,12 @@ class gmap extends data{
 		$is_bulk_output=true;
 	
 	public static function output($meta,$prm){
+		return static::get_map_output($meta,$prm,false);
+	}
+	public static function get_output_html_data($meta,$prm){
+		return static::get_map_output($meta,$prm,true);
+	}
+	protected static function get_map_output($meta,$prm,$as_html_data){
 		$val=$meta->value;
 		static $token,$mapOptions_default,$markerOptions_default,$is_called;
 		
@@ -18,7 +24,9 @@ class gmap extends data{
 		if(empty($token)){
 			$gauth_conf=get_option('gauth_conf');
 			if(empty($gauth_conf['api_key'][0])){
-				return '<p class="caution">'.__('gmapを使うにはGoogleAPIキーが必要です','Catpow').'</p>';
+				$message=__('gmapを使うにはGoogleAPIキーが必要です','Catpow');
+				if($as_html_data){return ['p.caution','class'=>$prm['class']??null,$message];}
+				return '<p class="caution">'.$message.'</p>';
 			}
 			$token=$gauth_conf['api_key'][0];
 		}
@@ -48,6 +56,13 @@ class gmap extends data{
 		}
 		$cp_gmap_data['markers']=$val;
 		
+		if($as_html_data){
+			$options=json_encode($cp_gmap_data,JSON_HEX_TAG);
+			return ['div.gmap','class'=>$prm['class']??null,'id'=>$map_id,
+				['script',sprintf('jQuery(function($){$("#%s").cp_gmap(%s)});',$map_id,$options)]
+			];
+		}
+
 		ob_start();
 		?>
 			<div class="gmap" id="<?=$map_id?>"></div>

@@ -13,6 +13,14 @@ class select_rel_terms extends select{
 		return select_terms::get_rel_data_conf($conf);
 	}
 	public static function output($meta,$prm){
+		return static::get_selection_output($meta,$prm,false);
+	}
+	public static function get_output_html_data($meta,$prm){
+		return static::get_selection_output($meta,$prm,true);
+	}
+	protected static function get_selection_output($meta,$prm,$as_html_data){
+		$class=$as_html_data?($prm['class']??null):null;
+		$prm=$as_html_data && is_array($prm)?($prm['type']??null):$prm;
 		$val=$meta->value;
 		if(empty($val))return false;
 		if(isset($meta->conf['addition'])){
@@ -28,6 +36,9 @@ class select_rel_terms extends select{
 					return $term->name;
 					break;
 				case 'link':
+					if($as_html_data){
+						return ['a.post_link','class'=>array_merge(explode(' ',$term->taxonomy),(array)$class),'href'=>get_term_link($val),$term->name];
+					}
 					return vsprintf(
 						'<a class="post_link %s" href="%s">%s</a>',
 						[$term->taxonomy,get_term_link($val),$term->name]

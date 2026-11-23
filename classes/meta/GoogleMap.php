@@ -12,5 +12,15 @@ class GoogleMap extends UI{
 			$meta->value,$meta->conf['width']??640,$meta->conf['height']??480
 		);
 	}
+	public static function get_output_html_data($meta,$prm){
+		return [
+			'iframe.googlemap',
+			'class'=>$prm['class']??null,
+			'src'=>$meta->value,
+			'frameBorder'=>'0',
+			'width'=>$meta->conf['width']??640,
+			'height'=>$meta->conf['height']??480
+		];
+	}
 }
 ?>

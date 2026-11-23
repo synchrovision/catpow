@@ -41,31 +41,31 @@ class ProtectedMedia extends UI{
 		return $param;
 	}
 	public static function output($meta,$prm){
-		if(empty($meta->value['id'])){return '';}
-		if(self::should_allow($meta,$prm)){media_protect::allow($meta->value['id']);}
-		$val=$meta->value['id'];
-		if($prm=='url'){return wp_get_attachment_url($val);}
-		if(empty($post=get_post($val))){return '';}
+		return static::get_protected_media_output($meta,$prm,false);
+	}
+	public static function get_output_html_data($meta,$prm){
+		return static::get_protected_media_output($meta,$prm,true);
+	}
+	protected static function get_protected_media_output($meta,$prm,$as_html_data){
+		if(empty($meta->value['id'])){return $as_html_data?null:'';}
+		$id=$meta->value['id'];
+		if(self::should_allow($meta,$prm)){media_protect::allow($id);}
+		if($prm=='url'){return wp_get_attachment_url($id);}
+		if(empty($post=get_post($id))){return $as_html_data?null:'';}
 		if($prm=='type'){return $post->post_mime_type;}
 		if($prm==='alt'){return $post->_wp_attachment_image_alt;}
-		switch(substr($post->post_mime_type,0,5)){
-			case 'image':
-				if(is_array($prm)){
-					return wp_get_attachment_image($val,$prm['size']??'full');
-				}
-				return wp_get_attachment_image($val,has_image_size($prm)?$prm:'full');
-			case 'video':
-				return sprintf(
-					'<video src="%s"%s></video>',
-					wp_get_attachment_url($val),
-					static::get_player_attr(array_merge($meta->conf,(array)$prm))
-				);
-			case 'audio':
-				return sprintf(
-					'<audio src="%s"%s></audio>',
-					wp_get_attachment_url($val),
-					static::get_player_attr(array_merge($meta->conf,(array)$prm))
-				);
+		$type=substr($post->post_mime_type,0,5);
+		if($type==='image'){
+			$size=is_array($prm)?($prm['size']??'full'):(has_image_size($prm)?$prm:'full');
+			return wp_get_attachment_image($id,$size);
+		}
+		if($type==='video' || $type==='audio'){
+			$url=wp_get_attachment_url($id);
+			$params=array_merge($meta->conf,(array)$prm);
+			if($as_html_data){
+				return [$type,'class'=>$prm['class']??null,'src'=>$url]+media::get_player_attributes($params);
+			}
+			return sprintf('<%1$s src="%2$s"%3$s></%1$s>',$type,$url,media::get_player_attr($params));
 		}
 	}
 	public static function input($meta,$prm){

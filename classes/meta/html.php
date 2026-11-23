@@ -24,5 +24,10 @@ class html extends meta{
 		if(empty($val)){return $val;}
 		return sprintf('<div class="cp_html">%s</div>',$val);
 	}
+	public static function get_output_html_data($meta,$prm){
+		$value=$meta->value;
+		if(empty($value)){return null;}
+		return ['div.cp_html','class'=>$prm['class']??null,$value];
+	}
 }
 ?>

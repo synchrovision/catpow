@@ -30,6 +30,19 @@ class data extends meta{
 		$rtn.='</tbody></table>';
 		return $rtn;
 	}
+	public static function get_output_html_data($meta,$prm){
+		if((new \ReflectionMethod(static::class,'output'))->getDeclaringClass()->getName()!==self::class){
+			return parent::get_output_html_data($meta,$prm);
+		}
+		if(isset($meta->conf['output-item-format']) || isset($meta->conf['item-format'])){
+			return static::output($meta,$prm);
+		}
+		$rows=[];
+		foreach((array)$meta->conf['meta'] as $name=>$child_meta){
+			$rows[]=['tr',['th',$child_meta['label']],['td',$meta->meta($name)->get_output()]];
+		}
+		return ['table.inputs','class'=>$prm['class']??null,['tbody','children'=>$rows]];
+	}
 	public static function input($meta,$prm){
 		$format=$meta->conf['input-item-format']??$meta->conf['item-format']??null;
 		$inputs=[];

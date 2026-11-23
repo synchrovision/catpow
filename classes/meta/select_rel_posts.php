@@ -27,6 +27,14 @@ class select_rel_posts extends select{
 		return \CP::get_the_conf_data("post/{$post_type}");
 	}
 	public static function output($meta,$prm){
+		return static::get_selection_output($meta,$prm,false);
+	}
+	public static function get_output_html_data($meta,$prm){
+		return static::get_selection_output($meta,$prm,true);
+	}
+	protected static function get_selection_output($meta,$prm,$as_html_data){
+		$class=$as_html_data?($prm['class']??null):null;
+		$prm=$as_html_data && is_array($prm)?($prm['type']??null):$prm;
 		$val=$meta->value;
 		if(empty($val))return false;
 		if(isset($meta->conf['addition'])){
@@ -39,17 +47,24 @@ class select_rel_posts extends select{
 			switch($prm){
 				case null:
 				case false:
+					if($as_html_data){return ['span.select_item','class'=>$class,get_the_title($val)];}
 					return '<span class="select_item">'.get_the_title($val).'</span>';
 				case 'title':
 					return get_the_title($val);
 				case 'content':
 					return str_replace(']]>',']]&gt;',apply_filters('the_content',get_post($val)->post_content));
 				case 'link':
+					if($as_html_data){
+						return ['a.post_link','class'=>array_merge(explode(' ',get_post_type($val)),(array)$class),'href'=>get_permalink($val),get_the_title($val)];
+					}
 					return vsprintf(
 						'<a class="post_link %s" href="%s">%s</a>',
 						[get_post_type($val),get_permalink($val),get_the_title($val)]
 					);
 				case 'tag':
+					if($as_html_data){
+						return ['a.tag','class'=>array_merge(explode(' ',implode(' ',get_post_meta($id,'post_class')?:[])),(array)$class),'href'=>get_permalink($val),get_the_title($val)];
+					}
 					return vsprintf(
 						'<a class="tag %s" href="%s">%s</a>',
 						[implode(' ',get_post_meta($id,'post_class')?:[]),get_permalink($val),get_the_title($val)]

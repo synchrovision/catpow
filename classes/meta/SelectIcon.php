@@ -10,6 +10,11 @@ class SelectIcon extends UI{
 		if($prm=='url'){return $val;}
 		return sprintf('<img src="%s" alt=""/>',$val);
 	}
+	public static function get_output_html_data($meta,$prm){
+		if($prm=='url'){return $meta->value;}
+		if(empty($meta->value)){return null;}
+		return ['img','class'=>$prm['class']??null,'src'=>$meta->value,'alt'=>''];
+	}
 	public static function fill_param($prm,$meta){
 		$prm=parent::fill_param($prm,$meta);
 		$prm['type']='icon';

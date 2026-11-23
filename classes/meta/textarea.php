@@ -9,6 +9,15 @@ class textarea extends meta{
 		$val=$meta->value;
 		return implode('<br/>',explode(chr(10),$val));
 	}
+	public static function get_output_html_data($meta,$prm){
+		$lines=explode(chr(10),$meta->value);
+		$children=[array_shift($lines)];
+		foreach($lines as $line){
+			$children[]=['br'];
+			$children[]=$line;
+		}
+		return ['span','class'=>$prm['class']??null,'children'=>$children];
+	}
 	public static function input($meta,$prm){
 		$path=$meta->the_data_path;
 		return sprintf(

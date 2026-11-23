@@ -10,5 +10,15 @@ class Progress extends UI{
 			$meta->conf['max']??100
 		);
 	}
+	public static function get_output_html_data($meta,$prm){
+		$value=(int)$meta->value;
+		return [
+			'progress',
+			'class'=>$prm['class']??null,
+			'value'=>$value,
+			'max'=>(int)($meta->conf['max']??100),
+			$value
+		];
+	}
 }
 ?>

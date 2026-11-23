@@ -32,6 +32,12 @@ class SelectPostColor extends UI{
 		if($prm=='chip'){return sprintf('<span class="cp-colorchip fill-color %s"></span>',$val);}
 		return $val;
 	}
+	public static function get_output_html_data($meta,$prm){
+		$value=implode(' ',(array)$meta->value);
+		if($prm!='chip' && ($prm['type']??null)!=='chip'){return $value;}
+		$classes=array_merge(explode(' ',$value),(array)($prm['class']??[]));
+		return ['span.cp-colorchip.fill-color','class'=>$classes];
+	}
 	public static function export($data_type,$data_name,$id,$meta_name,$conf){
 		return implode(',',static::get($data_type,$data_name,$id,$meta_name,$conf)[0]);
 	}

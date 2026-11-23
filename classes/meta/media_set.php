@@ -7,6 +7,12 @@ class media_set extends media{
 		$is_unit_output=true;
 	
 	public static function output($meta,$prm){
+		return static::get_media_set_output($meta,$prm,false);
+	}
+	public static function get_output_html_data($meta,$prm){
+		return static::get_media_set_output($meta,$prm,true);
+	}
+	protected static function get_media_set_output($meta,$prm,$as_html_data){
 		$vals=$meta->value;
 		if(empty($vals)){return false;}
 		krsort($vals);
@@ -20,6 +26,16 @@ class media_set extends media{
 		}
 		$post=get_post(reset($vs));
 		$media=substr($post->post_mime_type,0,5);
+		if($as_html_data){
+			$id=$meta->input_id;
+			$element=[
+				$media==='image'?'img':$media,
+				'id'=>$id,'class'=>$prm['class']??null,'srcset'=>implode(',',$srcset)
+			];
+			if($media!=='image'){$element+=static::get_player_attributes(array_merge($meta->conf,$prm));}
+			$script=sprintf('jQuery(function($){$("#%s").cp_loader().update();});',$id);
+			return ['div',$element,['script',$script]];
+		}
 		if($media==='image'){
 			return sprintf(
 				'<img id="%s" srcset="%s"/><script>jQuery(function($){$("#%1$s").cp_loader().update();});</script>',

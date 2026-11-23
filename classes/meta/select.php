@@ -14,15 +14,27 @@ class select extends meta{
 	}
 	
 	public static function output($meta,$prm){
+		$label=static::get_output_label($meta);
+		if(isset($label)){return '<span class="select_item">'.$label.'</span>';}
+	}
+	public static function get_output_html_data($meta,$prm){
+		if((new \ReflectionMethod(static::class,'output'))->getDeclaringClass()->getName()!==self::class){
+			return parent::get_output_html_data($meta,$prm);
+		}
+		$label=static::get_output_label($meta);
+		if(!isset($label)){return null;}
+		return ['span.select_item','class'=>$prm['class']??null,$label];
+	}
+	protected static function get_output_label($meta){
 		$sels=static::get_selections($meta);
 		$v=$meta->value;
 		foreach($sels as $key=>$val){
 			if(is_array($val)){
 				foreach($val as $k=>$s){
-					if($s==$v){return '<span class="select_item">'.(is_int($k)?$s:$k).'</span>';}
+					if($s==$v){return (string)(is_int($k)?$s:$k);}
 				}
 			}
-			elseif($val==$v){return '<span class="select_item">'.(is_int($key)?$val:$key).'</span>';}
+			elseif($val==$v){return (string)(is_int($key)?$val:$key);}
 		}
 	}
 	public static function input($meta,$prm){

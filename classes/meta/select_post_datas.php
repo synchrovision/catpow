@@ -4,6 +4,14 @@ namespace Catpow\meta;
 class select_post_datas extends select{
 	
 	public static function output($meta,$prm){
+		return static::get_selection_output($meta,$prm,false);
+	}
+	public static function get_output_html_data($meta,$prm){
+		return static::get_selection_output($meta,$prm,true);
+	}
+	protected static function get_selection_output($meta,$prm,$as_html_data){
+		$class=$as_html_data?($prm['class']??null):null;
+		$prm=$as_html_data && is_array($prm)?($prm['type']??null):$prm;
 		$val=$meta->value;
 		if(empty($val))return false;
 		if(isset($meta->conf['addition'])){
@@ -16,6 +24,7 @@ class select_post_datas extends select{
 				case 'content':
 					return str_replace(']]>',']]&gt;',apply_filters('the_content',$post_data['post_content']));
 				default:
+					if($as_html_data){return ['span.select_item','class'=>$class,$post_data['post_title']];}
 					return '<span class="select_item">'.$post_data['post_title'].'</span>';
 			}
 

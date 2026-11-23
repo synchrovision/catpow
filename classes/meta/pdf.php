@@ -31,6 +31,12 @@ class pdf extends media{
 			$url,substr(strrchr($url,'/'),1)
 		);
 	}
+	public static function get_output_html_data($meta,$prm){
+		if($prm==='url' || $prm==='path'){return static::output($meta,$prm);}
+		$url=wp_get_attachment_url($meta->value);
+		if(empty($url)){return null;}
+		return ['a.link-pdf','class'=>$prm['class']??null,'href'=>$url,'target'=>'_blank',substr(strrchr($url,'/'),1)];
+	}
 	public static function get_input($path,$conf,$val){
 		wp_enqueue_media();
 		wp_enqueue_script('jquery.catpow.media_upload');
