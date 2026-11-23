@@ -91,6 +91,9 @@ abstract class meta{
 		$values=$meta->value;
 		return is_array($values)?implode($meta->conf['delimiter']??',',$values):$values;
 	}
+	public static function get_output_html_data($meta,$prm){
+		return static::output($meta,$prm);
+	}
 	public static function input($meta,$prm){
 		return sprintf(
 			'<input type="%s" name="%s" value="%s"%s/>',
