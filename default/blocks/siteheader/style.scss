@@ -6,7 +6,7 @@
 .wp-block-template-part{
 	@include bnd((d:c));
 }
-.wp-block-catpow-siteheader{
+.cp-siteheader{
 	$block:&;
 	@include bnd((p:s,t:var(--wp-admin--admin-bar--height,0),w:f,l:0,z:3000));
 	@include bg((c:b));

@@ -1,6 +1,6 @@
 <?php
 namespace Catpow;
-HTML::render(['header#siteHeader.wp-block-catpow-siteheader--',
+HTML::render(['header#siteHeader.cp-siteheader--',
 	['div._contents',
 		['h1._logo',
 			get_custom_logo(),
@@ -12,7 +12,7 @@ HTML::render(['header#siteHeader.wp-block-catpow-siteheader--',
 			[
 				'a._link',
 				'href'=>$item->url,
-				$item->icon?['span._icon',$item->icon]:null,
+				$item->icon?['span._icon','children'=>meta('icon')->get_output_html_data()]:null,
 				['span._text',$item->title]
 			]
 		],'nav/header')
