@@ -209,3 +209,5 @@ $wp_customize->add_control(new Catpow\customize\control($wp_customize,'animation
 	]
 ]));
 add_action("customize_save_animation",["Catpow\\util\\style_config",'update']);
+
+Catpow\customize\nav_menu_fields::register($wp_customize);
