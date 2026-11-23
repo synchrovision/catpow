@@ -680,7 +680,20 @@ export const SelectClassPanelBlock = ({ prm }) => {
 			const bindClasseFlagsByValue = CP.getBindClassFlagsByValue(prm, primaryClassKey);
 			if (prm.values == null) {
 				if (prm.sub && Array.isArray(prm.sub)) {
-					rtn.push(...prm.sub.map((prm) => <SelectClassPanelBlock prm={prm} />));
+					if (prm.label) {
+						rtn.push(<h5>{prm.label}</h5>);
+						rtn.push(
+							<div className="sub">
+								{prm.sub.map((prm, index) => (
+									<Fragment key={index}>
+										<SelectClassPanelBlock prm={prm} />
+									</Fragment>
+								))}
+							</div>,
+						);
+					} else {
+						rtn.push(...prm.sub.map((prm) => <SelectClassPanelBlock prm={prm} />));
+					}
 				}
 			} else if (_.isObject(prm.values)) {
 				var { options, values } = CP.parseSelections(prm.values);

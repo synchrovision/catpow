@@ -4224,7 +4224,14 @@
         const bindClasseFlagsByValue = CP.getBindClassFlagsByValue(prm, primaryClassKey);
         if (prm.values == null) {
           if (prm.sub && Array.isArray(prm.sub)) {
-            rtn.push(...prm.sub.map((prm2) => /* @__PURE__ */ wp.element.createElement(SelectClassPanelBlock, { prm: prm2 })));
+            if (prm.label) {
+              rtn.push(/* @__PURE__ */ wp.element.createElement("h5", null, prm.label));
+              rtn.push(
+                /* @__PURE__ */ wp.element.createElement("div", { className: "sub" }, prm.sub.map((prm2, index) => /* @__PURE__ */ wp.element.createElement(Fragment2, { key: index }, /* @__PURE__ */ wp.element.createElement(SelectClassPanelBlock, { prm: prm2 }))))
+              );
+            } else {
+              rtn.push(...prm.sub.map((prm2) => /* @__PURE__ */ wp.element.createElement(SelectClassPanelBlock, { prm: prm2 })));
+            }
           }
         } else if (_.isObject(prm.values)) {
           var { options: options3, values } = CP.parseSelections(prm.values);
