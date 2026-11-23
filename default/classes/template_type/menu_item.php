@@ -8,6 +8,11 @@ namespace Catpow\template_type;
 
 class menu_item extends template_type{
 	public static $menu_template_type='menu_item';
+	public static function fill_conf_data(&$conf_data){
+		$conf_data['meta']['alt']=['type'=>'text'];
+		$conf_data['meta']['icon']=['type'=>'SelectEmbedIcon'];
+		$conf_data['meta']['color']=['type'=>'SelectPostColor'];
+	}
 }
 
 ?>
