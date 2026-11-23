@@ -64,7 +64,7 @@ class HTML{
 
 		$attr='';
 		foreach($props as $key=>$val){
-			if(empty($val)){continue;}
+			if(empty($val) && $val!==0 && $val!=='0' && !($key==='alt' && $val==='')){continue;}
 			if($val===true){$attr.=' '.$key;continue;}
 			if(is_array($val)){
 				if($key==='style'){
@@ -83,6 +83,10 @@ class HTML{
 		}
 
 		printf('<%s%s>',$tag,$attr);
+		if(in_array($tag,['area','base','br','col','embed','hr','img','input','link','meta','param','source','track','wbr'],true)){
+			$bem->end();
+			return;
+		}
 		if(!empty($children)){
 			foreach($children as $child){
 				if(is_array($child)){
