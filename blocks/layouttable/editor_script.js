@@ -145,7 +145,7 @@
           cell.r = r;
           cell.c = c;
           cell.style = CP.parseStyleString(cell.style);
-          var cellCopy = jQuery.extend(true, {}, cell);
+          var cellCopy = JSON.parse(JSON.stringify(cell));
           if (cell.rowspan > 1 || cell.colspan > 1) {
             let arias = { mergedTo: cellCopy };
             rowsCopy.slice(r, r + parseInt(cell.rowspan ? cell.rowspan : 1)).map((row2) => {
@@ -398,7 +398,7 @@
           let r = cell.r;
           let c = cell.c;
           if (cell.rowspan > 1 || cell.colspan > 1) {
-            var cellCopy = jQuery.extend(true, {}, cell);
+            var cellCopy = JSON.parse(JSON.stringify(cell));
             cellCopy.text = [];
             cellCopy.rowspan = cellCopy.colspan = false;
             rowsCopy.slice(r, r + parseInt(cell.rowspan ? cell.rowspan : 1)).map((row) => {
