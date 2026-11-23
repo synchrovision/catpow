@@ -51,12 +51,23 @@
 		&-item{
 			&-link{
 				@extend %ui;
+				@include bnd((d:b));
 				&:has(&-icon){
 					@include grd((tc:a 1fr,ai:c,g:.25em));
 				}
 				&-icon{
 					&-svg{
 						@include bnd((d:b,w:1.25em,h:a,a:1));
+					}
+				}
+				&-label{
+					&-text{
+						@include bnd((d:b));
+					}
+					&-alt{
+						@include bnd((d:b));
+						@include txt((a:c,p:clamp(.6rem,.6em,1rem)));
+						@include trn((o:.6));
 					}
 				}
 			}

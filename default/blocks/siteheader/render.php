@@ -1,6 +1,8 @@
 <?php
 namespace Catpow;
+$states=array_fill_keys(explode(' ',$attr['classes']),true);
 HTML::render(['header#siteHeader.cp-siteheader--',
+	'class'=>$attr['classes'],
 	['div._contents',
 		['h1._logo',
 			get_custom_logo(),
@@ -12,8 +14,8 @@ HTML::render(['header#siteHeader.cp-siteheader--',
 			[
 				'a._link',
 				'href'=>$item->url,
-				$item->icon?['span._icon','children'=>meta('icon')->get_output_html_data()]:null,
-				['span._text',$item->title]
+				($states['has-icon-in-main-menu'] && $item->icon)?['span._icon','children'=>meta('icon')->get_output_html_data()]:null,
+				['span._label',['span._text',$item->title],$states['has-sub-title-in-main-menu']?['span._alt',get_output('alt')]:null]
 			]
 		],'nav/header')
 	],
@@ -23,8 +25,8 @@ HTML::render(['header#siteHeader.cp-siteheader--',
 			[
 				'a._link',
 				'href'=>$item->url,
-				$item->icon?['span._icon','children'=>meta('icon')->get_output_html_data()]:null,
-				['span._text',$item->title]
+				($states['has-icon-in-primary-menu'] && $item->icon)?['span._icon','children'=>meta('icon')->get_output_html_data()]:null,
+				['span._label',['span._text',$item->title],$states['has-sub-title-in-primary-menu']?['span._alt',get_output('alt')]:null]
 			]
 		],'nav/primary')
 	],
