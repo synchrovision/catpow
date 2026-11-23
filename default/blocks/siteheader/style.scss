@@ -21,10 +21,10 @@
 			@include grd((tc:a 1fr,g:8,ai:e));
 			@include txt((p:20,h:1em,f:t-u,a:l,s:b));
 			a.custom-logo-link{
-				@include bnd((d:b));
+				@include bnd((d:b,as:c));
 				@include txt((a:l,p:25,h:1em,f:t-u,w:900,c:t));
 				img{
-					@include bnd((w:a 200,h:30));
+					@include bnd((w:a 320,h:40,op:c,of:i));
 					@include txt((v:m));
 				}
 			}
@@ -78,18 +78,13 @@
 					@include txt((p:12));
 					@include bnd((mgt:.2em));
 				}
-				a.custom-logo-link{
-					img{
-						@include bnd((w:a 160));
-					}
-				}
 			}
 		}
 		&__back{
 			@include bnd((b:80));
 		}
 		&__button{
-			@include bnd((d:b,p:a,t:0,r:0,w:50,h:50,z:2));
+			@include bnd((d:b,p:a,t:0,r:0,w:a,h:f,a:1,z:2));
 			@include bdr((s:n));
 			@include txt((a:c,p:30));
 			@include trn((t:.5s));
@@ -124,7 +119,7 @@
 			&-item{
 				@include bdr((p:b,s:s,w:1,c:shd));
 				&-link{
-					@include bnd((d:b));
+					@include bnd((d:b,pd:c-b));
 					@include txt((p:18,c:t));
 				}
 			}

@@ -52,6 +52,7 @@
 }
 .cp-siteheader__contents-logo a.custom-logo-link {
   display: block;
+  align-self: center;
   text-align: left;
   font-size: 1.5625rem;
   line-height: 1em;
@@ -60,9 +61,11 @@
   color: oklch(var(--cp-tones-t-l) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
 }
 .cp-siteheader__contents-logo a.custom-logo-link img {
-  max-width: 12.5rem;
+  max-width: 20rem;
   width: auto;
-  height: 1.875rem;
+  height: 2.5rem;
+  object-position: center;
+  object-fit: contain;
   vertical-align: middle;
 }
 .cp-siteheader__contents-logo-catch {
@@ -129,10 +132,6 @@
     font-size: 0.75rem;
     margin-top: 0.2em;
   }
-  .cp-siteheader__contents-logo a.custom-logo-link img {
-    max-width: 10rem;
-    width: auto;
-  }
   .cp-siteheader__back {
     bottom: 5rem;
   }
@@ -141,8 +140,9 @@
     position: absolute;
     top: 0rem;
     right: 0rem;
-    width: 3.125rem;
-    height: 3.125rem;
+    width: auto;
+    height: 100%;
+    aspect-ratio: 1;
     z-index: 2;
     border-style: none;
     text-align: center;
@@ -209,6 +209,7 @@
   }
   .cp-siteheader__menu-item-link {
     display: block;
+    padding: var(--cp-padding-c-b);
     font-size: 1.125rem;
     color: oklch(var(--cp-tones-t-l) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
   }

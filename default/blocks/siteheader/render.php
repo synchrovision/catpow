@@ -39,10 +39,10 @@ HTML::render(['header#siteHeader.cp-siteheader--',
 <script type="text/javascript">
 	document.addEventListener('DOMContentLoaded',function(){
 		const siteHeader=document.getElementById('siteHeader');
-		siteHeader.querySelector('.wp-block-catpow-siteheader__button').addEventListener('click',()=>{
+		siteHeader.querySelector('.cp-siteheader__button').addEventListener('click',()=>{
 			siteHeader.classList.toggle('is-open');
 		});
-		siteHeader.querySelector('.wp-block-catpow-siteheader__back').addEventListener('click',()=>{
+		siteHeader.querySelector('.cp-siteheader__back').addEventListener('click',()=>{
 			window.scrollTo(0,0);
 		});
 		var reseizeObserver=new ResizeObserver(function(entries){
