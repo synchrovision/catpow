@@ -23,6 +23,9 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 		const states = CP.classNamesToFlags(attributes.classes);
 		const [ref, setRef] = useState(null);
 		const { devices, imageKeys, linkKeys } = CP.config.heroheader;
+		const buttonAttributes = states.hasButtons && buttons.length === 0
+			? { ...attributes, buttons: wp.blocks.getBlockType("catpow/heroheader").attributes.buttons.default.map((button) => ({ ...button })) }
+			: attributes;
 
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
@@ -56,6 +59,7 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 				{ preset: "align", classKey: "bodyClasses" },
 				{ preset: "verticalAlign", classKey: "bodyClasses" },
 				{ preset: "textAlign", classKey: "bodyClasses" },
+				{ label: __("リード", "catpow"), values: "hasLead" },
 				"hasButtons",
 				{ preset: "itemSize", label: __("ボタンサイズ", "catpow"), cond: ({ hasButtons }) => hasButtons, classKey: "buttonsClasses", vars: "buttonsVars" },
 			];
@@ -196,19 +200,21 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 										}}
 										value={title}
 									/>
-									<RichText
-										tagName="p"
-										className="_text is-secondary-part"
-										placeholder={__("テキストを入力", "catpow")}
-										onChange={(text) => {
-											setAttributes({ text });
-										}}
-										value={text}
-									/>
+									{states.hasLead && (
+										<RichText
+											tagName="p"
+											className="_text is-secondary-part"
+											placeholder={__("テキストを入力", "catpow")}
+											onChange={(text) => {
+												setAttributes({ text });
+											}}
+											value={text}
+										/>
+									)}
 									{states.hasButtons && (
 										<div className={buttonsClasses + " cp-buttons"} style={buttonsVars}>
-											{buttons.map((button, index) => (
-												<CP.Button.Edit tag="li" isItem={true} {...{ setAttributes, attributes }} itemKeys={["buttons", index]} keys={linkKeys} key={index} />
+											{buttonAttributes.buttons.map((button, index) => (
+												<CP.Button.Edit tag="li" isItem={true} {...{ setAttributes }} attributes={buttonAttributes} itemKeys={["buttons", index]} keys={linkKeys.link} key={index} />
 											))}
 										</div>
 									)}
@@ -241,11 +247,11 @@ wp.blocks.registerBlockType("catpow/heroheader", {
 							<div className="_texts">
 								{states.hasTextBackground && <div className="_bg is-primary-part"></div>}
 								<RichText.Content tagName={HeadingTag} className="_title is-primary-part" value={title} />
-								<RichText.Content tagName="p" className="_text is-secondary-part" value={text} />
+								{states.hasLead && <RichText.Content tagName="p" className="_text is-secondary-part" value={text} />}
 								{states.hasButtons && (
 									<ul className={buttonsClasses} style={buttonsVars}>
 										{buttons.map((button, index) => (
-											<CP.Button tag="li" blockTypeName="catpow/buttons" {...{ attributes }} itemKeys={["buttons", index]} keys={linkKeys} key={index} />
+											<CP.Button tag="li" blockTypeName="catpow/buttons" {...{ attributes }} itemKeys={["buttons", index]} keys={linkKeys.link} key={index} />
 										))}
 									</ul>
 								)}
