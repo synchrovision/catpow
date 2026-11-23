@@ -8,25 +8,25 @@ HTML::render(['header#siteHeader.wp-block-catpow-siteheader--',
 		]
 	],
 	['ul._menu',
-		'children'=>array_map(fn($item)=>['li._item',
+		'children'=>loop_map(fn($item)=>['li._item',
 			[
 				'a._link',
 				'href'=>$item->url,
 				$item->icon?['span._icon',$item->icon]:null,
 				['span._text',$item->title]
 			]
-		],[...loop('nav/header')])
+		],'nav/header')
 	],
 	['ul._primary',
-		'children'=>array_map(fn($item)=>['li._item',
+		'children'=>loop_map(fn($item)=>['li._item',
 			'class'=>$item->post_class,
 			[
 				'a._link',
 				'href'=>$item->url,
-				$item->icon?['span._icon',['svg._svg',['use','href'=>$item->icon.'#root']]]:null,
+				$item->icon?['span._icon','children'=>meta('icon')->get_output_html_data()]:null,
 				['span._text',$item->title]
 			]
-		],[...loop('nav/primary')])
+		],'nav/primary')
 	],
 	['button._button',
 		['span._icon',' ']
