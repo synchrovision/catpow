@@ -3,14 +3,15 @@ const { __ } = wp.i18n;
 const { RichText } = wp.blockEditor;
 
 export const Button = (props) => {
-	const { tag: Tag = "div", blockTypeName, attributes, isLink = true, itemKeys, keys = {}, ...otherProps } = props;
+	const { tag: Tag = "div", blockTypeName, attributes, isLink = true, itemKeys, keys, ...otherProps } = props;
 
 	const item = (itemKeys ? CP.getTheItem(props) : attributes) || {};
 	const states = CP.classNamesToFlags(item.buttonClasses);
 
 	const LinkTag = isLink ? "a" : "span";
-	const linkProps = isLink ? { href: item.buttonHref || "" } : {};
-	if (isLink && /^\w+:\/\//.test(item.buttonHref)) {
+	const href = item[keys?.href ?? "buttonHref"] || "";
+	const linkProps = isLink ? { href } : {};
+	if (isLink && /^\w+:\/\//.test(href)) {
 		Object.assign(linkProps, { rel: "noopener", target: "_blank" });
 	}
 
@@ -28,8 +29,9 @@ export const Button = (props) => {
 	);
 };
 Button.Edit = (props) => {
-	const { tag = "div", blockTypeName, setAttributes, attributes, isItem, itemKeys, keys = { href: "buttonHref" }, ...otherProps } = props;
+	const { tag = "div", blockTypeName, setAttributes, attributes, isItem, itemKeys, keys, ...otherProps } = props;
 	const { useMemo, useEffect, useState } = wp.element;
+	const linkKeys = { ...keys, href: keys?.href ?? "buttonHref" };
 
 	const item = useMemo(() => (itemKeys ? CP.getTheItem(props) : attributes) || {}, [attributes, itemKeys]);
 	const states = CP.classNamesToFlags(item.buttonClasses);
@@ -48,7 +50,7 @@ Button.Edit = (props) => {
 						onChange={(buttonCopy) => CP.updateItem(props, { buttonCopy })}
 					/>
 				)}
-				<CP.Link.Edit className="-button cp-button__link" {...{ setAttributes, attributes, itemKeys, keys }}>
+				<CP.Link.Edit className="-button cp-button__link" {...{ setAttributes, attributes, itemKeys }} keys={linkKeys}>
 					{states.hasIcon && <CP.OutputIcon className="_icon cp-button__link-icon" item={item} />}
 					<RichText tagName="span" className="_text cp-button__link-text" value={item.buttonText} onChange={(buttonText) => CP.updateItem(props, { buttonText })} />
 				</CP.Link.Edit>

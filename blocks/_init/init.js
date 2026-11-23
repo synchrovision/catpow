@@ -1557,19 +1557,21 @@
   var { __ } = wp.i18n;
   var { RichText } = wp.blockEditor;
   var Button = (props) => {
-    const { tag: Tag = "div", blockTypeName, attributes, isLink = true, itemKeys, keys = {}, ...otherProps } = props;
+    const { tag: Tag = "div", blockTypeName, attributes, isLink = true, itemKeys, keys, ...otherProps } = props;
     const item = (itemKeys ? CP.getTheItem(props) : attributes) || {};
     const states = CP.classNamesToFlags(item.buttonClasses);
     const LinkTag = isLink ? "a" : "span";
-    const linkProps = isLink ? { href: item.buttonHref || "" } : {};
-    if (isLink && /^\w+:\/\//.test(item.buttonHref)) {
+    const href = item[keys?.href ?? "buttonHref"] || "";
+    const linkProps = isLink ? { href } : {};
+    if (isLink && /^\w+:\/\//.test(href)) {
       Object.assign(linkProps, { rel: "noopener", target: "_blank" });
     }
     return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement(Tag, { className: item.buttonClasses }, states.hasMicroCopy && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "span", className: "_copy cp-button__copy", value: item.buttonCopy }), /* @__PURE__ */ wp.element.createElement(LinkTag, { className: "-button cp-button__link", ...otherProps, ...CP.extractEventDispatcherAttributes(blockTypeName, attributes, itemKeys), ...linkProps }, states.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { className: "_icon cp-button__link-icon", item }), /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "span", className: "_text cp-button__link-text", value: item.buttonText })), states.hasCaption && /* @__PURE__ */ wp.element.createElement(RichText.Content, { tagName: "span", className: "_caption cp-button__caption", value: item.buttonCaption })));
   };
   Button.Edit = (props) => {
-    const { tag = "div", blockTypeName, setAttributes, attributes, isItem, itemKeys, keys = { href: "buttonHref" }, ...otherProps } = props;
+    const { tag = "div", blockTypeName, setAttributes, attributes, isItem, itemKeys, keys, ...otherProps } = props;
     const { useMemo: useMemo12, useEffect: useEffect7, useState: useState9 } = wp.element;
+    const linkKeys = { ...keys, href: keys?.href ?? "buttonHref" };
     const item = useMemo12(() => (itemKeys ? CP.getTheItem(props) : attributes) || {}, [attributes, itemKeys]);
     const states = CP.classNamesToFlags(item.buttonClasses);
     const ItemComponent = isItem ? CP.Item : PlainComponent;
@@ -1582,7 +1584,7 @@
         placeholder: __("\u30DE\u30A4\u30AF\u30ED\u30B3\u30D4\u30FC", "catpow"),
         onChange: (buttonCopy) => CP.updateItem(props, { buttonCopy })
       }
-    ), /* @__PURE__ */ wp.element.createElement(CP.Link.Edit, { className: "-button cp-button__link", ...{ setAttributes, attributes, itemKeys, keys } }, states.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { className: "_icon cp-button__link-icon", item }), /* @__PURE__ */ wp.element.createElement(RichText, { tagName: "span", className: "_text cp-button__link-text", value: item.buttonText, onChange: (buttonText) => CP.updateItem(props, { buttonText }) })), states.hasCaption && /* @__PURE__ */ wp.element.createElement(
+    ), /* @__PURE__ */ wp.element.createElement(CP.Link.Edit, { className: "-button cp-button__link", ...{ setAttributes, attributes, itemKeys }, keys: linkKeys }, states.hasIcon && /* @__PURE__ */ wp.element.createElement(CP.OutputIcon, { className: "_icon cp-button__link-icon", item }), /* @__PURE__ */ wp.element.createElement(RichText, { tagName: "span", className: "_text cp-button__link-text", value: item.buttonText, onChange: (buttonText) => CP.updateItem(props, { buttonText }) })), states.hasCaption && /* @__PURE__ */ wp.element.createElement(
       RichText,
       {
         tagName: "span",
