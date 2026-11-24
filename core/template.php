@@ -296,6 +296,16 @@ function loop_map($callback,$name=null,$prm=null,$vars=null){
 function children(){
 	return \cp::$content->children();
 }
+function has_children(){
+	return !children()->query->is_empty();
+}
+function children_map($callback){
+	$rtn=[];
+	foreach(children()->loop() as $key=>$val){
+		$rtn[]=$callback($val,$key);
+	};
+	return $rtn;
+}
 function user($path,$id=null){
 	if(is_null($id)){$id=get_current_user_id();}
 	return loop('user/'.$path,['ID'=>$id]);
