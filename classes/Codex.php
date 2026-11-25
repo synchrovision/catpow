@@ -6,7 +6,8 @@ namespace Catpow;
  * Use from trusted server-side code. The PHP worker needs access to Codex CLI and its session storage.
  */
 final class Codex{
-	public const API_KEY_OPTION='catpow_codex_api_key';
+	public const API_KEY_OPTION='connectors_ai_openai_api_key';
+	private const LEGACY_API_KEY_OPTION='catpow_codex_api_key';
 
 	private string $binary;
 	private array $options=[];
@@ -19,16 +20,28 @@ final class Codex{
 	}
 
 	public static function setApiKey(string $apiKey):bool{
+		$option=self::getApiKeyOption();
 		$apiKey=trim($apiKey);
 		if($apiKey===''){
-			return !self::getApiKey() || delete_option(self::API_KEY_OPTION);
+			return get_option($option,'')==='' || delete_option($option);
 		}
-		return self::getApiKey()===$apiKey || update_option(self::API_KEY_OPTION,$apiKey,false);
+		return get_option($option,'')===$apiKey || update_option($option,$apiKey,false);
 	}
 
 	public static function getApiKey():?string{
-		$key=get_option(self::API_KEY_OPTION,'');
+		$key=getenv('OPENAI_API_KEY');
+		if($key!==false && $key!==''){
+			return $key;
+		}
+		if(defined('OPENAI_API_KEY') && is_string(OPENAI_API_KEY) && OPENAI_API_KEY!==''){
+			return OPENAI_API_KEY;
+		}
+		$key=get_option(self::getApiKeyOption(),'');
 		return is_string($key) && $key!==''?$key:null;
+	}
+
+	private static function getApiKeyOption():string{
+		return function_exists('wp_get_connector')?self::API_KEY_OPTION:self::LEGACY_API_KEY_OPTION;
 	}
 
 	/**
@@ -93,7 +106,7 @@ final class Codex{
 		}
 		$apiKey=self::getApiKey();
 		if($apiKey===null){
-			throw new \RuntimeException('Set the Codex API key before running a turn.');
+			throw new \RuntimeException('Configure the OpenAI API key before running a Codex turn.');
 		}
 		$directory=$this->options['workingDirectory']??getcwd();
 		$sandbox=$this->options['sandboxMode']??'read-only';
