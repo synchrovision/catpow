@@ -12,6 +12,10 @@ wp.blocks.registerBlockType("catpow/siteheader", {
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = [
 				{
+					label: __("ロゴ", "catpow"),
+					sub: [{ label: __("キャッチフレーズ", "catpow"), values: "hasCatchPhrase" }],
+				},
+				{
 					label: __("メインメニュー", "catpow"),
 					sub: [
 						{ label: __("サブタイトル", "catpow"), values: "hasSubTitleInMainMenu" },

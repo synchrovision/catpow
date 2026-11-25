@@ -13,6 +13,10 @@
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = [
           {
+            label: __("\u30ED\u30B4", "catpow"),
+            sub: [{ label: __("\u30AD\u30E3\u30C3\u30C1\u30D5\u30EC\u30FC\u30BA", "catpow"), values: "hasCatchPhrase" }]
+          },
+          {
             label: __("\u30E1\u30A4\u30F3\u30E1\u30CB\u30E5\u30FC", "catpow"),
             sub: [
               { label: __("\u30B5\u30D6\u30BF\u30A4\u30C8\u30EB", "catpow"), values: "hasSubTitleInMainMenu" },

@@ -1,0 +1,13 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "catpow/siteheader",
+	"title": "🐾 SiteHeader",
+	"icon": "editor-ul",
+	"category": "catpow",
+	"textdomain": "catpow",
+	"supports": {
+		"level": true,
+		"color": true
+	}
+}

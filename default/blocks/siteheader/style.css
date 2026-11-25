@@ -1,4 +1,12 @@
-.cp-siteheader__menu-item-link, .cp-siteheader__primary-item-link {
+.cp-siteheader__menu-item-link, .cp-siteheader__contents-logo {
+  font-family: var(--cp-font-family-t-p, inherit);
+  font-size: var(--cp-font-size-t-p, 2em);
+  font-weight: var(--cp-font-weight-t-p, regular);
+  line-height: var(--cp-line-height-t-p, 1.5);
+  letter-spacing: var(--cp-letter-spacing-t-p, normal);
+}
+
+.cp-siteheader__primary-item-link {
   font-family: var(--cp-font-family-t-u, inherit);
   font-size: var(--cp-font-size-t-u, 2em);
   font-weight: var(--cp-font-weight-t-u, regular);
@@ -23,8 +31,8 @@
   width: 100%;
   left: 0rem;
   z-index: 3000;
-  background-color: oklch(var(--cp-tones-b-l) var(--cp-tones-b-c) var(--cp-tones-b-h) / var(--cp-tones-b-a,1));
-  box-shadow: 0 5px 11px oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
+  background-color: oklch(var(--cp-tones-bx-l) var(--cp-tones-bx-c) var(--cp-tones-bx-h) / var(--cp-tones-bx-a,1));
+  box-shadow: var(--cp-shadow-c-c) oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
 }
 @media (max-width:782px) {
   .cp-siteheader {
@@ -32,19 +40,11 @@
   }
 }
 .cp-siteheader__contents {
-  background-color: oklch(var(--cp-tones-b-l) var(--cp-tones-b-c) var(--cp-tones-b-h) / var(--cp-tones-b-a,1));
+  background-color: oklch(var(--cp-tones-bx-l) var(--cp-tones-bx-c) var(--cp-tones-bx-h) / var(--cp-tones-bx-a,1));
 }
 .cp-siteheader__contents-logo {
   padding: 0.625rem;
   box-sizing: border-box;
-  display: -webkit-grid;
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: auto 1fr;
-  grid-template-columns: auto 1fr;
-  grid-gap: 0.5rem;
-  align-items: end;
-  font-size: 1.25rem;
   line-height: 1em;
   font-family: var(--cp-font-family-t-u);
   text-align: left;
@@ -54,28 +54,35 @@
   display: block;
   align-self: center;
   text-align: left;
-  font-size: 1.5625rem;
   line-height: 1em;
   font-family: var(--cp-font-family-t-u);
   font-weight: 900;
   color: oklch(var(--cp-tones-t-l) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
 }
 .cp-siteheader__contents-logo a.custom-logo-link img {
+  display: block;
   max-width: 20rem;
   width: auto;
-  height: 2.5rem;
+  height: 2.5em;
+  margin-inline: auto;
   object-position: center;
   object-fit: contain;
   vertical-align: middle;
 }
 .cp-siteheader__contents-logo-catch {
   display: block;
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 12.5rem;
   padding: 0.2em 0rem;
-  color: oklch(var(--cp-tones-t-l) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
-  font-size: 0.875rem;
+  text-align: center;
+  font-size: clamp(0.6rem, 0.6em, 1rem);
+  color: oklch(var(--cp-tones-tx-l) var(--cp-tones-tx-c) var(--cp-tones-tx-h) / var(--cp-tones-tx-a,1));
   line-height: 1em;
   font-family: var(--cp-font-family-t-p);
   font-weight: normal;
+  opacity: 0.6;
 }
 .cp-siteheader__back {
   display: block;
@@ -85,13 +92,13 @@
   padding: 1.25rem;
   bottom: 0.625rem;
   right: 0.625rem;
-  background-color: oklch(var(--cp-tones-m-l) var(--cp-tones-m-c) var(--cp-tones-m-h) / var(--cp-tones-m-a,1));
+  background-color: oklch(var(--cp-tones-bx-l) var(--cp-tones-bx-c) var(--cp-tones-bx-h) / var(--cp-tones-bx-a,1));
   text-align: center;
   font-size: 1.25rem;
   line-height: 20;
   font-family: var(--cp-font-family-t-u);
   font-weight: normal;
-  color: oklch(var(--cp-tones-b-l) var(--cp-tones-b-c) var(--cp-tones-b-h) / var(--cp-tones-b-a,1));
+  color: oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1));
   cursor: pointer;
 }
 .cp-siteheader__back::before {
@@ -106,20 +113,24 @@
   margin: auto;
   width: 0.75rem;
   height: 0.5rem;
-  background-color: oklch(var(--cp-tones-i-l) var(--cp-tones-i-c) var(--cp-tones-i-h) / var(--cp-tones-i-a,1));
+  background-color: oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1));
   clip-path: polygon(50% 0%, 100% calc(100% - 30%), 100% 100%, 50% 30%, 0% 100%, 0% calc(100% - 30%));
 }
 .cp-siteheader__menu-item-link, .cp-siteheader__primary-item-link {
   display: block;
 }
 .cp-siteheader__menu-item-link:has(.cp-siteheader__menu-item-link-icon, .cp-siteheader__primary-item-link-icon), .cp-siteheader__primary-item-link:has(.cp-siteheader__menu-item-link-icon, .cp-siteheader__primary-item-link-icon) {
-  display: -webkit-grid;
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: auto 1fr;
-  grid-template-columns: auto 1fr;
-  align-items: center;
-  grid-gap: 0.25em;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-lines: single;
+  -webkit-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: flex-start;
+  align-items: flex-start;
+  gap: 0.5em;
 }
 .cp-siteheader__menu-item-link-icon-svg, .cp-siteheader__primary-item-link-icon-svg {
   display: block;
@@ -135,6 +146,14 @@
   text-align: center;
   font-size: clamp(0.6rem, 0.6em, 1rem);
   opacity: 0.6;
+}
+.cp-siteheader__menu-item-link {
+  background-color: oklch(var(--cp-tones-bx-l) var(--cp-tones-bx-c) var(--cp-tones-bx-h) / var(--cp-tones-bx-a,1));
+  color: oklch(var(--cp-tones-tx-l) var(--cp-tones-tx-c) var(--cp-tones-tx-h) / var(--cp-tones-tx-a,1));
+}
+.cp-siteheader__primary-item-link {
+  background-color: oklch(var(--cp-tones-mx-l) var(--cp-tones-mx-c) var(--cp-tones-mx-h) / var(--cp-tones-mx-a,1));
+  color: oklch(var(--cp-tones-bx-l) var(--cp-tones-bx-c) var(--cp-tones-bx-h) / var(--cp-tones-bx-a,1));
 }
 @media (max-width:1280px) {
   .cp-siteheader__contents-logo {
@@ -312,12 +331,6 @@
     -webkit-flex-wrap: wrap;
     flex-wrap: wrap;
   }
-  .cp-siteheader__contents-logo {
-    -webkit-box-flex: 2;
-    flex-grow: 2;
-    flex-shrink: 2;
-    flex-basis: 18.75rem;
-  }
   .cp-siteheader__button {
     display: none;
   }
@@ -330,22 +343,55 @@
     flex-wrap: nowrap;
     -webkit-justify-content: center;
     justify-content: center;
-    -webkit-align-items: center;
-    align-items: center;
     clear: both;
     align-content: center;
     text-align: center;
     list-style: none;
   }
   .cp-siteheader__menu-item {
+    anchor-name: --menu-item;
+    anchor-scope: all;
     -webkit-box-flex: 0;
     flex-grow: 0;
     flex-shrink: 1;
     flex-basis: 12.5rem;
+    display: -webkit-grid;
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr;
+    grid-template-columns: 1fr;
   }
   .cp-siteheader__menu-item-link {
-    font-size: 1rem;
-    color: oklch(var(--cp-tones-t-l) var(--cp-tones-t-c) var(--cp-tones-t-h) / var(--cp-tones-t-a,1));
+    display: block;
+    align-self: center;
+    color: oklch(var(--cp-tones-tx-l) var(--cp-tones-tx-c) var(--cp-tones-tx-h) / var(--cp-tones-tx-a,1));
+  }
+  .cp-siteheader__menu-item-panel {
+    position: fixed;
+    width: 12.5rem;
+    top: 0rem;
+    left: -6.25rem;
+    right: -6.25rem;
+    margin-inline: auto;
+    -webkit-position-anchor: --menu-item;
+    position-anchor: --menu-item;
+    -webkit-position-area: bottom center;
+    position-area: bottom center;
+    background-color: oklch(var(--cp-tones-b-l) var(--cp-tones-b-c) var(--cp-tones-b-h) / var(--cp-tones-b-a,1));
+    box-shadow: 0 4px 9px oklch(var(--cp-tones-shd-l) var(--cp-tones-shd-c) var(--cp-tones-shd-h) / var(--cp-tones-shd-a,1));
+    -webkit-transition: 0.2s;
+    transition: 0.2s;
+    opacity: 1;
+  }
+  .cp-siteheader__menu-item-panel:not(.is-open) {
+    opacity: 0;
+  }
+  .cp-siteheader__menu-item-panel-items {
+    list-style: none;
+  }
+  .cp-siteheader__menu-item-panel-items-item-link {
+    display: block;
+    padding: var(--cp-padding-c-b);
   }
   .cp-siteheader__primary {
     padding: 0.625rem;
@@ -361,11 +407,6 @@
     align-items: center;
     gap: var(--cp-margin-c-b);
     list-style: none;
-  }
-  .cp-siteheader__primary-item-link {
-    background-color: oklch(var(--cp-tones-m-l) var(--cp-tones-m-c) var(--cp-tones-m-h) / var(--cp-tones-m-a,1));
-    font-size: 1.125rem;
-    color: oklch(var(--cp-tones-i-l) var(--cp-tones-i-c) var(--cp-tones-i-h) / var(--cp-tones-i-a,1));
   }
 }
 
