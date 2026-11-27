@@ -303,6 +303,20 @@ class blocks{
 		set_transient($transient,$data);
 		return $data;
 	}
+	public static function get_generation_attributes($name){
+		$registered=\WP_Block_Type_Registry::get_instance()->get_registered($name);
+		if(!str_starts_with($name,'catpow/')){return $registered->attributes??[];}
+		$path='blocks/'.substr($name,7).'/';
+		$param=[];
+		if($file=CP::get_file_path($path.'block.json')){
+			$param=json_decode(file_get_contents($file),true)??[];
+		}
+		if(empty($registered) && ($file=CP::get_file_path($path.'conf.php'))){
+			$conf=[];
+			self::apply_conf_file($conf,$file);
+		}
+		return ($registered->attributes??$conf['attributes']??[])+($param['attributes']??[]);
+	}
 	protected static function apply_conf_file(&$param,$conf_file){
 		include $conf_file;
 		if(isset($attributes)){
