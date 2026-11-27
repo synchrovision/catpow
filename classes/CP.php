@@ -815,7 +815,15 @@ class CP{
 	public static function get_block_code($block,$attr,$children=false){
 		if($f=self::get_file_path("blocks/{$block}/gen.php")){
 			if(is_array($children)){$children=implode("\n",$children);}
-			ob_start();include $f;return ob_get_clean();
+			$level=ob_get_level();
+			ob_start();
+			try{
+				include $f;
+				return ob_get_clean();
+			}
+			finally{
+				while(ob_get_level()>$level){ob_end_clean();}
+			}
 		}
 	}
 	
