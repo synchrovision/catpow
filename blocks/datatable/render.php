@@ -1,11 +1,14 @@
 <?php
 if($attr['doLoop']){
 	$id=uniqid();
-	preg_match(
-		'|(?P<before_loop><table class=".+?">.+?<tbody>)(?P<content>.*?)(?P<after_loop></tbody>\s*</table>)<on-empty>(?P<on_empty>.*)</on-empty>|s',
+	if(!preg_match(
+		'|(?P<before_loop><table\b[^>]*>.*?<tbody\b[^>]*>)(?P<content>.*?)(?P<after_loop></tbody>\s*</table>)\s*<on-empty>(?P<on_empty>.*)</on-empty>|s',
 		$content,
 		$matches
-	);
+	)){
+		echo $content;
+		return;
+	}
 	$GLOBALS['loop_block_data'][$id]=[
 		'path'=>$attr['content_path'],
 		'query'=>$attr['query'],
