@@ -9,6 +9,6 @@
 	"category": "catpow",
 	"parent": [
 		"catpow/sidecolumn",
-		"catpow/side-section"
+		"catpow/sidebar-section"
 	]
 }

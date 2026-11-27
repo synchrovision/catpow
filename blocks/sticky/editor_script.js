@@ -103,7 +103,6 @@
     apiVersion: 3,
     icon: "editor-code",
     category: "catpow",
-    parent: ["catpow/sticky"],
     edit({ attributes, className, setAttributes }) {
       const { InnerBlocks: InnerBlocks2, useBlockProps } = wp.blockEditor;
       return [

@@ -3,7 +3,6 @@
 wp.blocks.registerBlockType("catpow/t-paragraph", {
 	icon: "editor-code",
 	category: "catpow-mail",
-	parent: CP.mailContensContainer,
 	transforms: {
 		from: [
 			{

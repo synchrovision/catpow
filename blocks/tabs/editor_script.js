@@ -118,7 +118,6 @@
     apiVersion: 3,
     icon: "editor-code",
     category: "catpow",
-    parent: ["catpow/tabs"],
     edit({ attributes, className, setAttributes }) {
       const { InnerBlocks, useBlockProps } = wp.blockEditor;
       const { index } = attributes;

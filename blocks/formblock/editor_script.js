@@ -1,4 +1,9 @@
 (() => {
+  // ../blocks/formblock/block.json
+  var allowedBlocks = [
+    "catpow/formblockcontent"
+  ];
+
   // ../blocks/formblock/editor_script.jsx
   var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/formblock", {
@@ -29,7 +34,7 @@
             }
           ]
         }
-      )), /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps({ className: "formBlock cp-embeddedcontent" + (EditMode ? " editMode" : "") }) }, /* @__PURE__ */ wp.element.createElement(CP.Label, { icon: "feedback" }, content_path || "not selected"), /* @__PURE__ */ wp.element.createElement(InnerBlocks, { allowedBlocks: ["catpow/formblockcontent"] })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: __("\u30D5\u30A9\u30FC\u30E0", "catpow") }, /* @__PURE__ */ wp.element.createElement(
+      )), /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps({ className: "formBlock cp-embeddedcontent" + (EditMode ? " editMode" : "") }) }, /* @__PURE__ */ wp.element.createElement(CP.Label, { icon: "feedback" }, content_path || "not selected"), /* @__PURE__ */ wp.element.createElement(InnerBlocks, { allowedBlocks })), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: __("\u30D5\u30A9\u30FC\u30E0", "catpow") }, /* @__PURE__ */ wp.element.createElement(
         TreeSelect,
         {
           label: "path",
@@ -81,7 +86,6 @@
     apiVersion: 3,
     icon: "editor-code",
     category: "catpow",
-    parent: ["catpow/formblock"],
     edit({ attributes, className, setAttributes, clientId }) {
       const { InnerBlocks, InspectorControls, useBlockProps } = wp.blockEditor;
       const { PanelBody, TextControl } = wp.components;

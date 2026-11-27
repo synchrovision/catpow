@@ -7,6 +7,9 @@
 	"description": "Sidebar レイアウトのサイドバー領域に、サイドバー用のセクションを配置します。",
 	"icon": "editor-code",
 	"category": "catpow",
+	"allowedBlocks": [
+		"catpow/sidebar-section"
+	],
 	"parent": [
 		"catpow/sidebar"
 	]

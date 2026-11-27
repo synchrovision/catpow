@@ -7,6 +7,9 @@
 	"description": "タブによる表示切り替えのブロックです。",
 	"icon": "editor-code",
 	"category": "catpow",
+	"allowedBlocks": [
+		"catpow/tabscontent"
+	],
 	"supports": {
 		"level": true,
 		"headingLevel": true,

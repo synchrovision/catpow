@@ -181,7 +181,6 @@ wp.blocks.registerBlockType("catpow/stickycontent", {
 	apiVersion: 3,
 	icon: "editor-code",
 	category: "catpow",
-	parent: ["catpow/sticky"],
 	edit({ attributes, className, setAttributes }) {
 		const { InnerBlocks, useBlockProps } = wp.blockEditor;
 		return [

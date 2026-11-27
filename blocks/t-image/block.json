@@ -6,5 +6,11 @@
 	"title": "🐾 T-Image",
 	"description": "HTMLメール用の画像ブロックです。",
 	"icon": "editor-code",
-	"category": "catpow-mail"
+	"category": "catpow-mail",
+	"parent": [
+		"catpow/t-body",
+		"catpow/t-box",
+		"catpow/t-loopcontent",
+		"catpow/t-media-text"
+	]
 }

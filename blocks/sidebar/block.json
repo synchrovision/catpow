@@ -7,6 +7,10 @@
 	"description": "サイドバーのあるコンテンツ領域のコンテナです。",
 	"icon": "editor-code",
 	"category": "catpow",
+	"allowedBlocks": [
+		"catpow/maincolumn",
+		"catpow/sidecolumn"
+	],
 	"supports": {
 		"itemSize": true
 	}

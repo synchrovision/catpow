@@ -3,7 +3,6 @@
 wp.blocks.registerBlockType("catpow/t-button", {
 	icon: "editor-code",
 	category: "catpow-mail",
-	parent: CP.mailContensContainer,
 	example: CP.example,
 	edit({ attributes, className, setAttributes }) {
 		const { useState, useMemo } = wp.element;

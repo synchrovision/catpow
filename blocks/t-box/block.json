@@ -7,6 +7,12 @@
 	"description": "HTMLメール用のレイアウト調整用コンテナブロックです。",
 	"icon": "editor-code",
 	"category": "catpow-mail",
+	"parent": [
+		"catpow/t-body",
+		"catpow/t-box",
+		"catpow/t-loopcontent",
+		"catpow/t-media-text"
+	],
 	"supports": {
 		"color": true
 	}

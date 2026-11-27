@@ -66,7 +66,6 @@
     apiVersion: 3,
     icon: "editor-code",
     category: "catpow",
-    parent: ["catpow/loopblock"],
     edit({ attributes, className, setAttributes, clientId }) {
       const { name } = attributes;
       const template = name == "on_empty" ? [["core/paragraph", { align: "center", content: "Not Found" }]] : [["catpow/section"]];

@@ -63,7 +63,6 @@ wp.blocks.registerBlockType("catpow/loopblockcontent", {
 	apiVersion: 3,
 	icon: "editor-code",
 	category: "catpow",
-	parent: ["catpow/loopblock"],
 	edit({ attributes, className, setAttributes, clientId }) {
 		const { name } = attributes;
 

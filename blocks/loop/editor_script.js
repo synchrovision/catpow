@@ -1,4 +1,9 @@
 (() => {
+  // ../blocks/loop/block.json
+  var allowedBlocks = [
+    "catpow/loopcontent"
+  ];
+
   // ../blocks/loop/editor_script.jsx
   var { InnerBlocks, BlockControls, InspectorControls, useBlockProps } = wp.blockEditor;
   var { Icon, PanelBody, TreeSelect, TextareaControl, ToolbarGroup } = wp.components;
@@ -49,7 +54,7 @@
             }
           ]
         }
-      )), config?.template && EditMode ? /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(CP.Label, { icon: "edit" }), /* @__PURE__ */ wp.element.createElement(InnerBlocks, { allowedBlocks: ["catpow/loopcontent"], template: config.template, templateLock: "ALL" })) : /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(CP.Label, null, content_path), /* @__PURE__ */ wp.element.createElement(ServerSideRender, { block: "catpow/loop", attributes, httpMethod: "POST" })), item?.deps?.css && /* @__PURE__ */ wp.element.createElement("link", { rel: "stylesheet", href: item.deps.css }), item?.deps?.js && /* @__PURE__ */ wp.element.createElement("script", { type: "text/javascript", src: item.deps.js }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "Query" }, /* @__PURE__ */ wp.element.createElement(
+      )), config?.template && EditMode ? /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(CP.Label, { icon: "edit" }), /* @__PURE__ */ wp.element.createElement(InnerBlocks, { allowedBlocks, template: config.template, templateLock: "ALL" })) : /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(CP.Label, null, content_path), /* @__PURE__ */ wp.element.createElement(ServerSideRender, { block: "catpow/loop", attributes, httpMethod: "POST" })), item?.deps?.css && /* @__PURE__ */ wp.element.createElement("link", { rel: "stylesheet", href: item.deps.css }), item?.deps?.js && /* @__PURE__ */ wp.element.createElement("script", { type: "text/javascript", src: item.deps.js }), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "Query" }, /* @__PURE__ */ wp.element.createElement(
         TreeSelect,
         {
           label: "content path",
@@ -104,7 +109,6 @@
     apiVersion: 3,
     icon: "editor-code",
     category: "catpow",
-    parent: ["catpow/loop"],
     edit({ attributes }) {
       const { useBlockProps: useBlockProps2 } = wp.blockEditor;
       const { name } = attributes;

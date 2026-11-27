@@ -1,4 +1,7 @@
-﻿import { clsx } from "clsx";
+import { allowedBlocks as sectionBlocks } from "./sidebar-section/block.json";
+import { allowedBlocks as sidebarBlocks } from "./sidecolumn/block.json";
+
+import { clsx } from "clsx";
 
 const { __ } = wp.i18n;
 
@@ -72,14 +75,21 @@ wp.blocks.registerBlockType("catpow/sidebar", {
 	},
 });
 
+// Let the filtered InnerBlocks list extend the block.json defaults in the editor.
+wp.hooks.addFilter("blocks.registerBlockType", "catpow/sidebar/allowedBlocks", (settings, name) => {
+	if (name === "catpow/sidecolumn" || name === "catpow/sidebar-section") {
+		return { ...settings, allowedBlocks: null };
+	}
+	return settings;
+});
+
 wp.blocks.registerBlockType("catpow/sidecolumn", {
 	apiVersion: 3,
 	icon: "editor-code",
 	category: "catpow",
-	parent: ["catpow/sidebar"],
 	edit({ attributes, className, setAttributes }) {
 		const { classes } = attributes;
-		const allowedBlocks = useMemo(() => wp.hooks.applyFilters("catpow.blocks.sidebar.allowedBlocks", ["catpow/sidebar-section"]), []);
+		const allowedBlocks = useMemo(() => wp.hooks.applyFilters("catpow.blocks.sidebar.allowedBlocks", sidebarBlocks), []);
 		const selectiveClasses = useMemo(() => {
 			const selectiveClasses = ["level", "color", "colorScheme", "backgroundColor"];
 			const proxy = CP.finderProxy(selectiveClasses);
@@ -130,7 +140,6 @@ wp.blocks.registerBlockType("catpow/maincolumn", {
 	apiVersion: 3,
 	icon: "editor-code",
 	category: "catpow",
-	parent: ["catpow/sidebar"],
 	edit({ attributes, className, setAttributes }) {
 		return (
 			<CP.Bem prefix="wp-block-catpow">
@@ -155,10 +164,9 @@ wp.blocks.registerBlockType("catpow/sidebar-section", {
 	apiVersion: 3,
 	icon: "editor-ul",
 	category: "catpow",
-	parent: ["catpow/sidecolumn", "catpow/sidebar-section"],
 	edit({ attributes, className, setAttributes, clientId }) {
 		const { classes, HeadingTag, title } = attributes;
-		const allowedBlocks = useMemo(() => wp.hooks.applyFilters("catpow.blocks.sidebar.allowedBlocks", ["catpow/sidebar-section"]), []);
+		const allowedBlocks = useMemo(() => wp.hooks.applyFilters("catpow.blocks.sidebar.allowedBlocks", sectionBlocks), []);
 
 		const selectiveClasses = useMemo(() => {
 			const { devices, imageKeys } = CP.config.div;

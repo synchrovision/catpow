@@ -7,7 +7,6 @@ wp.blocks.registerBlockType("catpow/sidebar-articlenav", {
 	apiVersion: 3,
 	icon: "editor-ul",
 	category: "catpow",
-	parent: ["catpow/sidecolumn", "catpow/side-section"],
 	edit({ attributes, className, setAttributes, clientId }) {
 		const { classes } = attributes;
 		const { useEffect } = wp.element;

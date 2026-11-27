@@ -29,7 +29,6 @@
   wp.blocks.registerBlockType("catpow/t-banners", {
     icon: "editor-code",
     category: "catpow-mail",
-    parent: CP.mailContensContainer,
     example: CP.example,
     edit({ attributes, className, setAttributes, isSelected }) {
       const { useState: useState2, useMemo: useMemo2 } = wp.element;

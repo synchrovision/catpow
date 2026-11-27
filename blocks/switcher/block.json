@@ -6,5 +6,8 @@
 	"title": "🐾 Switcher",
 	"description": "日時やログインユーザーによってコンテンツの内容が切り替わるコンテナです。",
 	"icon": "networking",
-	"category": "catpow-functional"
+	"category": "catpow-functional",
+	"allowedBlocks": [
+		"catpow/switchercontent"
+	]
 }

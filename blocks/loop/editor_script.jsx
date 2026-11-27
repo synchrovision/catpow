@@ -1,3 +1,5 @@
+import { allowedBlocks } from "./block.json";
+
 
 const { InnerBlocks, BlockControls, InspectorControls, useBlockProps } = wp.blockEditor;
 const { Icon, PanelBody, TreeSelect, TextareaControl, ToolbarGroup } = wp.components;
@@ -62,7 +64,7 @@ wp.blocks.registerBlockType("catpow/loop", {
 				{config?.template && EditMode ? (
 					<div {...blockProps}>
 						<CP.Label icon="edit" />
-						<InnerBlocks allowedBlocks={["catpow/loopcontent"]} template={config.template} templateLock={"ALL"} />
+						<InnerBlocks allowedBlocks={allowedBlocks} template={config.template} templateLock={"ALL"} />
 					</div>
 				) : (
 					<div {...blockProps}>
@@ -133,7 +135,6 @@ wp.blocks.registerBlockType("catpow/loopcontent", {
 	apiVersion: 3,
 	icon: "editor-code",
 	category: "catpow",
-	parent: ["catpow/loop"],
 	edit({ attributes }) {
 		const { useBlockProps } = wp.blockEditor;
 		const { name } = attributes;

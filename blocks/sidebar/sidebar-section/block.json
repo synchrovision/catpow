@@ -7,6 +7,9 @@
 	"description": "サイドバー内で、見出しの下に関連するコンテンツをまとめます。",
 	"icon": "editor-ul",
 	"category": "catpow",
+	"allowedBlocks": [
+		"catpow/sidebar-section"
+	],
 	"parent": [
 		"catpow/sidecolumn",
 		"catpow/sidebar-section"

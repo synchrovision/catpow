@@ -1,4 +1,6 @@
-﻿const { __ } = wp.i18n;
+import { allowedBlocks } from "./block.json";
+
+const { __ } = wp.i18n;
 
 CP.config.switcher = {
 	factors: {
@@ -152,7 +154,7 @@ wp.blocks.registerBlockType("catpow/switcher", {
 							: false}
 					</ul>
 					<div className="contents">
-						<InnerBlocks template={values.map((cond) => ["catpow/switchercontent", { cond }])} allowedBlocks={["catpow/switchercontent"]} />
+						<InnerBlocks template={values.map((cond) => ["catpow/switchercontent", { cond }])} allowedBlocks={allowedBlocks} />
 					</div>
 				</div>
 				{currentBlockId && <style>{CP.createStyleCode({ ["#" + currentBlockId]: { display: "block" } })}</style>}
@@ -172,7 +174,6 @@ wp.blocks.registerBlockType("catpow/switchercontent", {
 	apiVersion: 3,
 	icon: "editor-code",
 	category: "catpow",
-	parent: ["catpow/switcher"],
 	edit({ attributes, setAttributes, clientId }) {
 		const { InnerBlocks, useBlockProps } = wp.blockEditor;
 		const { cond } = attributes;

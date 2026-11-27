@@ -3,7 +3,6 @@
   wp.blocks.registerBlockType("catpow/t-loop", {
     icon: "editor-code",
     category: "catpow-functional",
-    parent: CP.mailContensContainer,
     example: CP.example,
     edit({ attributes, setAttributes, className }) {
       const { InnerBlocks, BlockControls, InspectorControls, useBlockProps } = wp.blockEditor;
@@ -50,7 +49,6 @@
     apiVersion: 3,
     icon: "editor-code",
     category: "catpow",
-    parent: ["catpow/t-loop"],
     edit({ attributes, className, setAttributes, clientId }) {
       const { InnerBlocks, useBlockProps } = wp.blockEditor;
       const { name } = attributes;

@@ -5,7 +5,6 @@ import { Fragment } from "react";
 wp.blocks.registerBlockType("catpow/t-banners", {
 	icon: "editor-code",
 	category: "catpow-mail",
-	parent: CP.mailContensContainer,
 	example: CP.example,
 	edit({ attributes, className, setAttributes, isSelected }) {
 		const { useState, useMemo } = wp.element;

@@ -1,4 +1,6 @@
-﻿const { __ } = wp.i18n;
+import { allowedBlocks } from "./block.json";
+
+const { __ } = wp.i18n;
 
 wp.blocks.registerBlockType("catpow/formblock", {
 	apiVersion: 3,
@@ -34,7 +36,7 @@ wp.blocks.registerBlockType("catpow/formblock", {
 				</BlockControls>
 				<div {...useBlockProps({ className: "formBlock cp-embeddedcontent" + (EditMode ? " editMode" : "") })}>
 					<CP.Label icon="feedback">{content_path || "not selected"}</CP.Label>
-					<InnerBlocks allowedBlocks={["catpow/formblockcontent"]} />
+					<InnerBlocks allowedBlocks={allowedBlocks} />
 				</div>
 				<InspectorControls>
 					<PanelBody title={__("フォーム", "catpow")}>
@@ -89,7 +91,6 @@ wp.blocks.registerBlockType("catpow/formblockcontent", {
 	apiVersion: 3,
 	icon: "editor-code",
 	category: "catpow",
-	parent: ["catpow/formblock"],
 	edit({ attributes, className, setAttributes, clientId }) {
 		const { InnerBlocks, InspectorControls, useBlockProps } = wp.blockEditor;
 		const { PanelBody, TextControl } = wp.components;

@@ -1,4 +1,14 @@
 (() => {
+  // ../blocks/sidebar/sidebar-section/block.json
+  var allowedBlocks = [
+    "catpow/sidebar-section"
+  ];
+
+  // ../blocks/sidebar/sidecolumn/block.json
+  var allowedBlocks2 = [
+    "catpow/sidebar-section"
+  ];
+
   // ../blocks/sidebar/editor_script.jsx
   var { __ } = wp.i18n;
   var { useMemo } = wp.element;
@@ -46,21 +56,26 @@
       return /* @__PURE__ */ wp.element.createElement("div", { ...blockProps }, /* @__PURE__ */ wp.element.createElement(InnerBlocks2.Content, null));
     }
   });
+  wp.hooks.addFilter("blocks.registerBlockType", "catpow/sidebar/allowedBlocks", (settings, name) => {
+    if (name === "catpow/sidecolumn" || name === "catpow/sidebar-section") {
+      return { ...settings, allowedBlocks: null };
+    }
+    return settings;
+  });
   wp.blocks.registerBlockType("catpow/sidecolumn", {
     apiVersion: 3,
     icon: "editor-code",
     category: "catpow",
-    parent: ["catpow/sidebar"],
     edit({ attributes, className, setAttributes }) {
       const { classes } = attributes;
-      const allowedBlocks = useMemo(() => wp.hooks.applyFilters("catpow.blocks.sidebar.allowedBlocks", ["catpow/sidebar-section"]), []);
+      const allowedBlocks3 = useMemo(() => wp.hooks.applyFilters("catpow.blocks.sidebar.allowedBlocks", allowedBlocks2), []);
       const selectiveClasses = useMemo(() => {
         const selectiveClasses2 = ["level", "color", "colorScheme", "backgroundColor"];
         const proxy = CP.finderProxy(selectiveClasses2);
         wp.hooks.applyFilters("catpow.blocks.sidecolumn.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps({ className: classes }) }, /* @__PURE__ */ wp.element.createElement(CP.Label, { icon: "excerpt-view" }), /* @__PURE__ */ wp.element.createElement("div", { className: "_container" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: [["catpow/sidebar-section"]], allowedBlocks, templateLock: false })), /* @__PURE__ */ wp.element.createElement("div", { className: "_button" }, /* @__PURE__ */ wp.element.createElement("span", { className: "_icon" })))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30AF\u30E9\u30B9", "catpow"), icon: "art", ...{ setAttributes, attributes }, selectiveClasses, initialOpen: true }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: __("\u30AF\u30E9\u30B9", "catpow"), onChange: (classes2) => setAttributes({ classes: classes2 }), value: classes }))));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps({ className: classes }) }, /* @__PURE__ */ wp.element.createElement(CP.Label, { icon: "excerpt-view" }), /* @__PURE__ */ wp.element.createElement("div", { className: "_container" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: [["catpow/sidebar-section"]], allowedBlocks: allowedBlocks3, templateLock: false })), /* @__PURE__ */ wp.element.createElement("div", { className: "_button" }, /* @__PURE__ */ wp.element.createElement("span", { className: "_icon" })))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30AF\u30E9\u30B9", "catpow"), icon: "art", ...{ setAttributes, attributes }, selectiveClasses, initialOpen: true }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: __("\u30AF\u30E9\u30B9", "catpow"), onChange: (classes2) => setAttributes({ classes: classes2 }), value: classes }))));
     },
     save({ attributes, className, setAttributes }) {
       const { classes } = attributes;
@@ -72,7 +87,6 @@
     apiVersion: 3,
     icon: "editor-code",
     category: "catpow",
-    parent: ["catpow/sidebar"],
     edit({ attributes, className, setAttributes }) {
       return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps({ className: "sidebar-column- is-column-main" }) }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: [["catpow/section"]], templateLock: false })));
     },
@@ -84,10 +98,9 @@
     apiVersion: 3,
     icon: "editor-ul",
     category: "catpow",
-    parent: ["catpow/sidecolumn", "catpow/sidebar-section"],
     edit({ attributes, className, setAttributes, clientId }) {
       const { classes, HeadingTag, title } = attributes;
-      const allowedBlocks = useMemo(() => wp.hooks.applyFilters("catpow.blocks.sidebar.allowedBlocks", ["catpow/sidebar-section"]), []);
+      const allowedBlocks3 = useMemo(() => wp.hooks.applyFilters("catpow.blocks.sidebar.allowedBlocks", allowedBlocks), []);
       const selectiveClasses = useMemo(() => {
         const { devices, imageKeys } = CP.config.div;
         const selectiveClasses2 = ["level", "headingTag"];
@@ -95,7 +108,7 @@
         wp.hooks.applyFilters("catpow.blocks.sideSection.selectiveClasses", CP.finderProxy(selectiveClasses2));
         return selectiveClasses2;
       }, []);
-      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps({ className: classes }) }, /* @__PURE__ */ wp.element.createElement("header", { className: "_header" }, /* @__PURE__ */ wp.element.createElement(RichText, { tagName: HeadingTag, className: "_title", value: title, placeholder: "Title", onChange: (title2) => setAttributes({ title: title2 }) })), /* @__PURE__ */ wp.element.createElement("div", { className: "_contents" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, { allowedBlocks, templateLock: false })))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30AF\u30E9\u30B9", "catpow"), icon: "art", ...{ setAttributes, attributes }, selectiveClasses, initialOpen: true }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: __("\u30AF\u30E9\u30B9", "catpow"), onChange: (classes2) => setAttributes({ classes: classes2 }), value: classes }))));
+      return /* @__PURE__ */ wp.element.createElement(wp.element.Fragment, null, /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps({ className: classes }) }, /* @__PURE__ */ wp.element.createElement("header", { className: "_header" }, /* @__PURE__ */ wp.element.createElement(RichText, { tagName: HeadingTag, className: "_title", value: title, placeholder: "Title", onChange: (title2) => setAttributes({ title: title2 }) })), /* @__PURE__ */ wp.element.createElement("div", { className: "_contents" }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, { allowedBlocks: allowedBlocks3, templateLock: false })))), /* @__PURE__ */ wp.element.createElement(InspectorControls, null, /* @__PURE__ */ wp.element.createElement(CP.SelectClassPanel, { title: __("\u30AF\u30E9\u30B9", "catpow"), icon: "art", ...{ setAttributes, attributes }, selectiveClasses, initialOpen: true }), /* @__PURE__ */ wp.element.createElement(PanelBody, { title: "CLASS", icon: "admin-generic", initialOpen: false }, /* @__PURE__ */ wp.element.createElement(TextareaControl, { label: __("\u30AF\u30E9\u30B9", "catpow"), onChange: (classes2) => setAttributes({ classes: classes2 }), value: classes }))));
     },
     save({ attributes, className, setAttributes }) {
       const { classes, HeadingTag, title } = attributes;
