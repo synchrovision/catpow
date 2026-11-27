@@ -17,7 +17,6 @@ class i18n{
 					if(!file_exists($json_file)or filemtime($json_file)< filemtime($po_file)){
 						$translations=(new PoLoader())->loadFile($po_file);
 						$translations->setDomain('catpow');
-						$domain=$data['domain'];
 						file_put_contents($json_file,json_encode(static::get_data_for_json($translations),0700));
 					}
 				}
