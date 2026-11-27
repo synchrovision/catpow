@@ -3662,3 +3662,83 @@ msgstr "A container for displaying information about the logged-in user. If no u
 msgctxt "block description"
 msgid "拡張機能に定義された埋め込みコンテンツを表示します。"
 msgstr "Displays embedded content defined by an extension."
+
+#: blocks/countdown/block.json
+msgctxt "block description"
+msgid "指定した日時までの残り時間をカウントダウンで表示します。"
+msgstr "Displays a countdown to a specified date and time."
+
+#: blocks/formblock/formblockcontent/block.json
+msgctxt "block description"
+msgid "フォーム内の名前付きコンテンツを編集し、その部分で使うフォームのアクションを設定します。"
+msgstr "Defines a named content section in a form and lets you configure the actions it uses."
+
+#: blocks/loop/loopcontent/block.json
+msgctxt "block description"
+msgid "Loop ブロック内で、名前を付けてコンテンツを編集するための子ブロックです。"
+msgstr "Holds a named section of editable content inside a Loop block."
+
+#: blocks/loopblock/loopblockcontent/block.json
+msgctxt "block description"
+msgid "LoopBlock でクエリに一致した投稿ごとに表示する内容や、投稿が見つからないときの表示を定義します。"
+msgstr "Defines what a LoopBlock displays for each matching post or when no posts match."
+
+#: blocks/megamenu/block.json
+msgctxt "block description"
+msgid "複数階層のリンクをまとめたメガメニューを表示します。"
+msgstr "Displays a mega menu with links organized into multiple levels."
+
+#: blocks/motiongraphic/block.json
+msgctxt "block description"
+msgid "選択したアニメーションを背景に表示し、その上にほかのブロックを配置します。"
+msgstr "Displays a selected animation in the background with other blocks layered above it."
+
+#: blocks/sidebar/maincolumn/block.json
+msgctxt "block description"
+msgid "Sidebar レイアウトのメイン領域に、本文やセクションを配置します。"
+msgstr "Holds the main content and sections in a Sidebar layout."
+
+#: blocks/sidebar/sidebar-section/block.json
+msgctxt "block description"
+msgid "サイドバー内で、見出しの下に関連するコンテンツをまとめます。"
+msgstr "Groups related content under a heading in the sidebar."
+
+#: blocks/sidebar/sidecolumn/block.json
+msgctxt "block description"
+msgid "Sidebar レイアウトのサイドバー領域に、サイドバー用のセクションを配置します。"
+msgstr "Holds sidebar sections in the side column of a Sidebar layout."
+
+#: blocks/sidebar-articlenav/block.json
+msgctxt "block description"
+msgid "本文のアンカー付きセクションへのリンクをサイドバーに一覧表示します。"
+msgstr "Lists links to anchored sections of the main content in the sidebar."
+
+#: blocks/sticky/stickycontent/block.json
+msgctxt "block description"
+msgid "Sticky ブロック内に、スクロールに追従して表示するコンテンツを配置します。"
+msgstr "Holds the content that stays in view as the page scrolls in a Sticky block."
+
+#: blocks/switcher/switchercontent/block.json
+msgctxt "block description"
+msgid "Switcher で、指定した条件に一致したときに表示するコンテンツを定義します。"
+msgstr "Defines the content a Switcher displays when its condition is met."
+
+#: blocks/t-loop/t-loopcontent/block.json
+msgctxt "block description"
+msgid "HTML メールでクエリに一致した投稿ごとに繰り返す内容や、投稿が見つからないときの表示を定義します。"
+msgstr "Defines what an HTML email displays for each matching post or when no posts match."
+
+#: blocks/tabs/tabscontent/block.json
+msgctxt "block description"
+msgid "Tabs ブロックで、対応するタブを選んだときに表示するコンテンツを配置します。"
+msgstr "Holds the content shown when its corresponding tab is selected in a Tabs block."
+
+#: functions/instagram/blocks/instagramfeed/block.json
+msgctxt "block description"
+msgid "連携した Instagram アカウントの投稿画像を一覧表示します。"
+msgstr "Displays a feed of post images from connected Instagram accounts."
+
+#: functions/zeus/blocks/zeus/block.json
+msgctxt "block description"
+msgid "フォーム内に ZEUS のクレジットカード決済ボタンを表示します。"
+msgstr "Displays a ZEUS credit card payment button inside a form."
