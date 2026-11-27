@@ -112,4 +112,10 @@ add_action('phpmailer_init',function($phpmailer){
 	cp::include_plugin_files('action/phpmailer_init',compact(['phpmailer']));
 },20);
 
-?>
+/* AI */
+add_action('wp_abilities_api_categories_init',function($categories){
+	cp::include_plugin_files('action/wp_abilities_api_categories_init',[$categories]);
+},20);
+add_action('wp_abilities_api_init',function($abilities){
+	cp::include_plugin_files('action/wp_abilities_api_init',[$abilities]);
+},20);

@@ -1,0 +1,19 @@
+<?php
+foreach(cp::glob('classes/Ability/*/*.php') as $f){
+    $cat=basename(dirname($f));
+    $cat_slug=strtolower(preg_replace('/([a-z])([A-Z])/','$1-$2',$cat));
+    $name=substr(basename($f),0,-4);
+    $slug=strtolower(preg_replace('/([a-z])([A-Z])/','$1-$2',$name));
+    $class_name=cp::get_class_name('Ability',$cat,$name);
+    $result=wp_register_ability('catpow/'.$slug,[
+        'label'=>$class_name::$label,
+        'description'=>$class_name::$description,
+        'category'=>$cat_slug,
+        'input_schema'=>$class_name::$input_schema,
+        'output_schema'=>$class_name::$output_schema,
+        'execute_callback'=>[$class_name,'exec'],
+        'permission_callback'=>[$class_name,'permission'],
+        'meta'=>$class_name::$meta,
+        'annotations'=>$class_name::$annotations
+    ]);
+}
