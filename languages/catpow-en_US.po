@@ -3362,3 +3362,303 @@ msgstr "A popup displayed when a visitor enters the site or page."
 
 #~ msgid "catpow"
 #~ msgstr "catpow"
+
+#: blocks/accessmap/block.json
+msgctxt "block description"
+msgid "地図とアクセス情報を表示"
+msgstr "Display a map and access information"
+
+#: blocks/accordion/accordiongroup/block.json
+msgctxt "block description"
+msgid "同時に開かれるアコーディオンを制限するコンテナです。"
+msgstr "A container that limits which accordions can be open at the same time."
+
+#: blocks/accordion/block.json
+msgctxt "block description"
+msgid "クリックで折り畳みできるブロックです。"
+msgstr "A block that can be collapsed with a click."
+
+#: blocks/app/block.json
+msgctxt "block description"
+msgid "テーマに定義されたアプリを表示します。"
+msgstr "Displays an app defined by the theme."
+
+#: blocks/aquarium/block.json
+msgctxt "block description"
+msgid "画像とテキストを３次元にレイアウトします。"
+msgstr "Arranges images and text in three dimensions."
+
+#: blocks/banners/block.json
+msgctxt "block description"
+msgid "リンク付きのバナー画像を並べて表示するブロックです。"
+msgstr "Displays a list of linked banner images."
+
+#: blocks/breadcrumb/block.json
+msgctxt "block description"
+msgid "パンくずリストを表示します。"
+msgstr "Displays breadcrumbs."
+
+#: blocks/buttons/block.json
+msgctxt "block description"
+msgid "ボタンのブロックです。"
+msgstr "A button block."
+
+#: blocks/chart/block.json
+msgctxt "block description"
+msgid "グラフを表示します。"
+msgstr "Displays a chart."
+
+#: blocks/cond/block.json
+msgctxt "block description"
+msgid "日時やログインユーザーによってコンテンツの表示が切り替わるコンテナです。"
+msgstr "A container that controls content visibility based on the date, time, or logged-in user."
+
+#: blocks/container/block.json
+msgctxt "block description"
+msgid "スクロール可能領域を作成できるコンテナです。"
+msgstr "A container for creating a scrollable area."
+
+#: blocks/datatable/block.json
+msgctxt "block description"
+msgid "一行または１列の見出しを持つテーブルです。"
+msgstr "A table with a single header row or column."
+
+#: blocks/definition/block.json
+msgctxt "block description"
+msgid "定義リストのブロックです"
+msgstr "A definition list block."
+
+#: blocks/dialog/block.json
+msgctxt "block description"
+msgid "フキダシで会話を表現するブロックです。"
+msgstr "A block for presenting conversations with speech bubbles."
+
+#: blocks/embed/block.json
+msgctxt "block description"
+msgid "テーマに定義された埋め込みコンテンツを表示します。"
+msgstr "Displays embedded content defined by the theme."
+
+#: blocks/flow/block.json
+msgctxt "block description"
+msgid "手順や順番の一覧ブロックです。"
+msgstr "A block for listing steps or a sequence."
+
+#: blocks/form/block.json
+msgctxt "block description"
+msgid "テーマに定義されたフォームを表示します。"
+msgstr "Displays a form defined by the theme."
+
+#: blocks/formblock/block.json
+msgctxt "block description"
+msgid "テーマに定義された編集可能なフォームを表示します。"
+msgstr "Displays an editable form defined by the theme."
+
+#: blocks/formbuttons/block.json
+msgctxt "block description"
+msgid "フォーム用のボタンです。"
+msgstr "A button for forms."
+
+#: blocks/graphics/block.json
+msgctxt "block description"
+msgid "画像を自由にレイアウトします。"
+msgstr "Freely arranges images."
+
+#: blocks/heroheader/block.json blocks/pageheader/block.json
+msgctxt "block description"
+msgid "ページの最初に表示するヘッダのブロックです。"
+msgstr "A header block displayed at the top of the page."
+
+#: blocks/honeycomb/block.json
+msgctxt "block description"
+msgid "六角形のパネルをレイアウトします。"
+msgstr "Arranges hexagonal panels."
+
+#: blocks/icons/block.json
+msgctxt "block description"
+msgid "リンク付きのアイコン画像を並べて表示するブロックです。"
+msgstr "Displays a list of linked icon images."
+
+#: blocks/jsonld/block.json
+msgctxt "block description"
+msgid "各種の構造化データを記述。"
+msgstr "Defines various types of structured data."
+
+#: blocks/layouttable/block.json
+msgctxt "block description"
+msgid "セルの結合と幅の指定ができるテーブルです。"
+msgstr "A table that supports merged cells and custom widths."
+
+#: blocks/lightbox/block.json
+msgctxt "block description"
+msgid "クリックでポップアップ表示する画像です。"
+msgstr "An image that opens in a popup when clicked."
+
+#: blocks/loop/block.json
+msgctxt "block description"
+msgid "テーマに定義されたテンプレートで投稿を表示します。"
+msgstr "Displays posts using a template defined by the theme."
+
+#: blocks/loopblock/block.json blocks/t-loop/block.json
+msgctxt "block description"
+msgid "クエリの投稿の情報を表示するためのコンテナです。"
+msgstr "A container for displaying information about posts in a query."
+
+#: blocks/loopvars/block.json
+msgctxt "block description"
+msgid "ブロックの内容を変数のテーブルをループして表示します。各変数はブロック内で[var 変数名]のショートコードで利用できます。"
+msgstr "Loops through a table of variables to display the block content. Each variable can be used within the block with the [var variable_name] shortcode."
+
+#: blocks/materials/block.json
+msgctxt "block description"
+msgid "材料・成分一覧のブロックです。"
+msgstr "A block for listing ingredients or materials."
+
+#: blocks/nav/block.json
+msgctxt "block description"
+msgid "メニューを表示するブロックです。"
+msgstr "A block that displays a menu."
+
+#: blocks/panel/block.json
+msgctxt "block description"
+msgid "大小の矩形パネルをレイアウトします。"
+msgstr "Arranges rectangular panels of various sizes."
+
+#: blocks/panes/block.json
+msgctxt "block description"
+msgid "矩形の画像とテキストのペアのリスト。"
+msgstr "A list of rectangular image-and-text pairs."
+
+#: blocks/picture/block.json
+msgctxt "block description"
+msgid "画面サイズに応じて切り替わる画像。"
+msgstr "An image that changes according to the screen size."
+
+#: blocks/pricecard/block.json
+msgctxt "block description"
+msgid "サービス・商品情報の一覧ブロックです。"
+msgstr "A block for listing service or product information."
+
+#: blocks/pricelist/block.json
+msgctxt "block description"
+msgid "価格表のブロックです。"
+msgstr "A pricing table block."
+
+#: blocks/progress/block.json
+msgctxt "block description"
+msgid "進捗のブロックです。"
+msgstr "A progress block."
+
+#: blocks/ranking/block.json
+msgctxt "block description"
+msgid "ランキングの一覧ブロックです。"
+msgstr "A block for displaying rankings."
+
+#: blocks/rtf/block.json
+msgctxt "block description"
+msgid "MarkDownに似た記法でHTMLを書けるブロック"
+msgstr "A block for writing HTML using Markdown-like syntax"
+
+#: blocks/sidebar/block.json
+msgctxt "block description"
+msgid "サイドバーのあるコンテンツ領域のコンテナです。"
+msgstr "A container for a content area with a sidebar."
+
+#: blocks/simpletable/block.json
+msgctxt "block description"
+msgid "見出しと本文の２列で構成されるシンプルなテーブルです。"
+msgstr "A simple two-column table with headings and body text."
+
+#: blocks/sitefooter/block.json
+msgctxt "block description"
+msgid "サイト共通フッタのブロックです。"
+msgstr "A site-wide footer block."
+
+#: blocks/siteheader/block.json
+msgctxt "block description"
+msgid "サイト共通ヘッダのブロックです。"
+msgstr "A site-wide header block."
+
+#: blocks/slidablemenu/block.json
+msgctxt "block description"
+msgid "スクロール可能なメニュー。"
+msgstr "A scrollable menu."
+
+#: blocks/sphere/block.json
+msgctxt "block description"
+msgid "丸型のアイテムリストブロックです。"
+msgstr "A circular item list block."
+
+#: blocks/sticky/block.json
+msgctxt "block description"
+msgid "スクロールに追従するコンテンツを配置します。"
+msgstr "Places content that remains visible while scrolling."
+
+#: blocks/switcher/block.json
+msgctxt "block description"
+msgid "日時やログインユーザーによってコンテンツの内容が切り替わるコンテナです。"
+msgstr "A container that switches content based on the date, time, or logged-in user."
+
+#: blocks/t-banner/block.json
+msgctxt "block description"
+msgid "HTMLメール用のバナーブロックです。"
+msgstr "A banner block for HTML email."
+
+#: blocks/t-banners/block.json
+msgctxt "block description"
+msgid "HTMLメール用の複数バナーのブロックです。"
+msgstr "A multiple-banner block for HTML email."
+
+#: blocks/t-body/block.json
+msgctxt "block description"
+msgid "HTMLメールのベースとなるヘッダ・フッタのブロックです。"
+msgstr "A base header and footer block for HTML email."
+
+#: blocks/t-box/block.json
+msgctxt "block description"
+msgid "HTMLメール用のレイアウト調整用コンテナブロックです。"
+msgstr "A layout container block for HTML email."
+
+#: blocks/t-button/block.json
+msgctxt "block description"
+msgid "HTMLメール用のテーブルレイアウトのボタンです。"
+msgstr "A table-layout button for HTML email."
+
+#: blocks/t-heading/block.json
+msgctxt "block description"
+msgid "HTMLメール用の見出しブロックです。"
+msgstr "A heading block for HTML email."
+
+#: blocks/t-image/block.json
+msgctxt "block description"
+msgid "HTMLメール用の画像ブロックです。"
+msgstr "An image block for HTML email."
+
+#: blocks/t-list/block.json
+msgctxt "block description"
+msgid "HTMLメール用のリストです。"
+msgstr "A list for HTML email."
+
+#: blocks/t-media-text/block.json
+msgctxt "block description"
+msgid "HTMLメール用の画像・テキストのセットのブロックです。"
+msgstr "An image-and-text set block for HTML email."
+
+#: blocks/t-paragraph/block.json
+msgctxt "block description"
+msgid "HTMLメール用の段落ブロックです。"
+msgstr "A paragraph block for HTML email."
+
+#: blocks/unit/block.json
+msgctxt "block description"
+msgid "画像とテキストを並べてレイアウトするためのブロックです。"
+msgstr "A block for arranging images and text side by side."
+
+#: blocks/userinfo/block.json
+msgctxt "block description"
+msgid "ログイン中のユーザーの情報を表示するためのコンテナです。ログインしていない場合はログインフォームが表示されます。"
+msgstr "A container for displaying information about the logged-in user. If no user is logged in, a login form is displayed."
+
+#: blocks/widget/block.json
+msgctxt "block description"
+msgid "拡張機能に定義された埋め込みコンテンツを表示します。"
+msgstr "Displays embedded content defined by an extension."
