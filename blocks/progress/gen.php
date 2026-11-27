@@ -1,1 +1,5 @@
-<!-- wp:catpow/progress <?=json_encode(['post'=>$attr['post']??'default','step'=>$attr['step']??0])?> /-->
+<?php
+use Catpow\util\BlockCode;
+$attr+=['post'=>'default','step'=>0];
+$name='catpow/progress';
+echo BlockCode::serialize($name,$attr,(string)'');

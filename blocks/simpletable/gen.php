@@ -1,12 +1,25 @@
-<!-- wp:catpow/simpletable -->
-<table class="wp-block-catpow-simpletable <?=$attr['classes']??'is-level3 is-type-spec'?>">
-	<tbody class="wp-block-catpow-simpletable__tbody">
-<?php foreach($attr['rows'] as $row): ?>
-		<tr class="wp-block-catpow-simpletable__tbody-tr <?=$row['classes']?>">
-			<th class="wp-block-catpow-simpletable__tbody-tr-th <?=$row['cells'][0]['classes']??''?>"><?=$row['cells'][0]['text']?></th>
-			<td class="wp-block-catpow-simpletable__tbody-tr-td <?=$row['cells'][1]['classes']??''?>"><?=$row['cells'][1]['text']?></td>
-		</tr>
-<?php endforeach ?>
-	</tbody>
-</table>
-<!-- /wp:catpow/simpletable -->
+<?php
+use Catpow\util\BlockCode;
+
+$name='catpow/simpletable';
+$prefix='wp-block-catpow-simpletable';
+$comment=BlockCode::commentAttributes($name,$attr,['vars']);
+$attr=BlockCode::defaults($name,$attr);
+ob_start();
+?>
+<table<?=BlockCode::root('simpletable',$attr)?>>
+<tbody>
+<?php foreach($attr['rows']??[] as $row): ?>
+	<tr<?=BlockCode::attrs(['class'=>BlockCode::classes($prefix.'__tbody-tr',$row['classes']??''),'data-refine-cond'=>$row['cond']??null])?>>
+	<?php foreach(array_values($row['cells']??$row) as $j=>$cell):
+		$text=BlockCode::rich($cell['text']??'');
+		$tag=$j===0?'th':'td';
+$class=BlockCode::classes($prefix.'__tbody-tr-'.$tag,$cell['classes']??'');
+	?>
+		<<?=$tag?><?=BlockCode::attrs(['class'=>$class])?>><?=$text?></<?=$tag?>>
+	<?php endforeach; ?>
+	</tr>
+
+<?php endforeach; ?>
+</tbody></table>
+<?=BlockCode::serialize($name,$comment,trim(ob_get_clean()))?>

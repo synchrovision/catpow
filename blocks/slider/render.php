@@ -1,11 +1,14 @@
 <?php
 if($attr['doLoop']){
 	$id=uniqid();
-	preg_match(
-		'|(?P<before_loop><div class=".+?">\s*<ul class="wp-block-catpow-slider__contents">)(?P<content>.*?)(?P<after_loop></ul>.+</div>)<on-empty>(?P<on_empty>.*)</on-empty>|s',
+	if(!preg_match(
+		'|(?P<before_loop><div\b[^>]*>\s*<ul class="wp-block-catpow-slider__contents">)(?P<content>.*?)(?P<after_loop></ul>.+</div>)\s*<on-empty>(?P<on_empty>.*)</on-empty>|s',
 		$content,
 		$matches
-	);
+	)){
+		echo $content;
+		return;
+	}
 	$GLOBALS['loop_block_data'][$id]=[
 		'path'=>$attr['content_path'],
 		'query'=>$attr['query'],

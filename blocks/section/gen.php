@@ -1,59 +1,32 @@
 <?php
-$attr=array_merge([
-	'SectionTag'=>'section',
-	'classes'=>'article level3 center headline',
-	'title'=>'Title'
-],$attr);
-$SectionTag=$attr['SectionTag']??'section';
-$level=preg_match('/\blevel(\d+)\b/',$attr['classes'],$matches)?$matches[1]:'3';
-$HeadingTag='h'.$level;
-$states=[];
-foreach(explode(' ',$attr['classes']) as $name){$states[$name]=true;}
+use Catpow\util\BlockCode;
+
+$name='catpow/section';
+$prefix='wp-block-catpow-section';
+$has=static function($flag)use(&$attr){return BlockCode::has($attr['classes']??'',$flag);};
+$attr['classes']=BlockCode::legacySectionClasses($attr['classes']??'article level3 center headline');
+$attr['anchor']=$attr['anchor']??$attr['id']??'sec-'.\cp::rand_id(4);
+$attr['HeadingTag']=$attr['HeadingTag']??(preg_match('/\bis-level([1-6])\b/',$attr['classes'],$matches)?'h'.$matches[1]:'h3');
+$tag=BlockCode::tag($attr['SectionTag']??'section','section');
+$heading=BlockCode::tag($attr['HeadingTag'],'h3');
+$comment=BlockCode::commentAttributes($name,$attr,['SectionTag','HeadingTag','anchor','isTemplate','vars','headerVars','bodyVars','color']);
+$attr=BlockCode::defaults($name,$attr);
+ob_start();
 ?>
-<!-- wp:catpow/section <?=json_encode(compact('HeadingTag'))?> -->
-<<?=$SectionTag?> id="<?=$attr['id']??'sec-'.cp::rand_id(4)?>" class="wp-block-catpow-section <?=$attr['classes']??'article level3 headline'?>" data-icon="<?=$attr['navIcon']??''?>">
-<?php if($states['hasImage']??false): ?>
-		<div class="image"><?=$attr['image']??''?></div>
-<?php endif; ?>
-	<div class="contents">
-		<header class='header'>
-			<div class="title">
-<?php if($states['hasIcon']??false): ?>
-				<div class="icon"><?=$attr['icon']??''?></div>
-<?php endif; ?>
-<?php if($states['hasPrefix']??false): ?>
-				<div class="prefix"><?=$attr['prefix']??''?></div>
-<?php endif; ?>
-<?php if($states['hasHeaderImage']??false): ?>
-				<div class="image"><?=$attr['headerImage']??''?></div>
-<?php endif; ?>
-				<<?=$HeadingTag?> class="heading"><?=$attr['title']??''?></<?=$HeadingTag?>>
-<?php if($states['hasLead']??false): ?>
-				 <p class="lead"><?=$attr['lead']??''?></p>
-<?php endif; ?>
-			</div>
-<?php if($states['hasHeaderBackgroundImage']??false): ?>
-			<div class="background"><?=$attr['headerBackgroundImage']??''?></div>
-<?php endif; ?>
-		</header>
-		<div class="text"><?=$children?></div>
-	</div>
-<?php if($states['hasBackgroundImage']??false): ?>
-	<div class="background">
-		<div class="background"><?=$attr['backgroundImage']??''?></div>
-	</div>
-<?php endif; ?>
-<?php if($states['hasPatternImage']??false): ?>
-	<style class="patternImageCss"><?=$attr['patternImageCss']??''?></style>
-<?php endif; ?>
-<?php if($states['hasHeaderPatternImage']??false): ?>
-	<style class="headerPatternImageCss"><?=$attr['headerPatternImageCss']??''?></style>
-<?php endif; ?>
-<?php if($states['hasBorderImage']??false): ?>
-	<style class="borderImageCss"><?=$attr['borderImageCss']??''?></style>
-<?php endif; ?>
-<?php if($states['hasFrameImage']??false): ?>
-	<style class="frameImageCss"><?=$attr['frameImageCss']??''?></style>
-<?php endif; ?>
-</<?=$SectionTag?>>
-<!-- /wp:catpow/section -->
+<<?=$tag?><?=BlockCode::root('section',$attr,['id'=>$attr['anchor'],'data-icon'=>$attr['navIcon']??null])?>>
+<div<?=BlockCode::attrs(['class'=>$attr['bodyClasses']??$prefix.'__body has-content-width','style'=>BlockCode::style($attr['bodyVars']??[])])?>>
+	<?php if($has('has-decoration')): ?><?=BlockCode::decorations($prefix.'__decoration',$attr['decoration']??[])?><?php endif; ?>
+	<header<?=BlockCode::attrs(['class'=>$attr['headerClasses']??$prefix.'__header','style'=>BlockCode::style($attr['headerVars']??[])])?>>
+		<?php if($has('has-header-image')): ?><div class="<?=$prefix?>__header-image"><?=BlockCode::templateImage($attr,$attr,$prefix.'__header-image-picture','headerImage',true)?></div><?php endif; ?>
+		<div<?=BlockCode::attrs(['class'=>$attr['titleClasses']??$prefix.'__header-title'])?>>
+			<?php if($has('has-icon')): ?><?=BlockCode::icon($prefix.'__header-title-icon',$attr)?><?php endif; ?>
+			<<?=$heading?> class="<?=$prefix?>__header-title-<?=$has('has-title-image')?'titleimage':'heading'?>"><?=
+				$has('has-title-image')?BlockCode::templateImage($attr,$attr,$prefix.'__header-title-titleimage-image','titleImage',true):BlockCode::rich($attr['title']??'Title')
+			?></<?=$heading?>>
+			<?php if($has('has-lead')): ?><?=BlockCode::element('div',$prefix.'__header-title-lead',$attr['lead']??'')?><?php endif; ?>
+		</div>
+	</header>
+	<div class="<?=$prefix?>__contents"><?=$children?></div>
+</div>
+</<?=$tag?>>
+<?=BlockCode::serialize($name,$comment,trim(ob_get_clean()))?>

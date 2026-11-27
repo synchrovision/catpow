@@ -1,16 +1,15 @@
-<!-- wp:catpow/buttons -->
-<ul class="wp-block-catpow-buttons buttons <?=$attr['classes']?>">
-<?php foreach($attr['items'] as $item): ?>
-	<li class="item <?=$item['classes']?>">
-		<a href="<?=$item['url']?>" class="button" data-event="<?=$item['event']??''?>">
-			<?php if(preg_match('/\bhasIcon\b/',$item['classes'])):?>
-				<span class="icon">
-					<img src="<?=$item['iconSrc']??''?>" alt="<?=$item['iconAlt']??''?>"/>
-				</span>
-			<?php endif; ?>
-			<?=$item['text']?>
-		</a>
-	</li>
-<?php endforeach ?>
-</ul>
-<!-- /wp:catpow/buttons -->
+<?php
+use Catpow\util\BlockCode;
+
+$name='catpow/buttons';
+$comment=BlockCode::commentAttributes($name,$attr,['doLoop','loopParam','loopCount','content_path','query','isTemplate','vars']);
+$attr=BlockCode::defaults($name,$attr);
+$attr['classes']=BlockCode::classes($attr['classes']??'is-level3 has-item-size-medium','cp-buttons');
+ob_start();
+?>
+<ul<?=BlockCode::root('buttons',$attr)?>>
+<?php foreach($attr['items']??[] as $item): ?>
+	<?=BlockCode::button($name,$item,false)?>
+<?php endforeach; ?>
+</ul><?php if(!empty($attr['doLoop'])): ?><on-empty><?=$children?></on-empty><?php endif; ?>
+<?=BlockCode::serialize($name,$comment,trim(ob_get_clean()))?>

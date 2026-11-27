@@ -4,7 +4,7 @@ $content=str_replace('{$uid}',$uid,$content);
 if($attr['doLoop']){
 	$id=uniqid();
 	preg_match(
-		'|(?P<before_loop><ul\b[^>]*>)(?P<content>.*?)(?P<after_loop></ul>.*?)<on-empty>(?P<on_empty>.*)</on-empty>|s',
+		'|(?P<before_loop>.*?<ul\b[^>]*>)(?P<content>.*?)(?P<after_loop></ul>.*?)<on-empty>(?P<on_empty>.*)</on-empty>|s',
 		$content,
 		$matches
 	);
