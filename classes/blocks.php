@@ -128,7 +128,7 @@ class blocks{
 		return $supported_blocks;
 	}
 	public static function get_block_data_to_register(){
-		$transient='block_data_to_register_for_'.get_stylesheet();
+		$transient='block_metadata_to_register_for_'.get_stylesheet().'_'.determine_locale();
 		if((!current_user_can('edit_themes') || wp_is_json_request()) && $data=get_transient($transient)){return $data;}
 		$data=[];
 		foreach(CP::get_file_paths('blocks/_init/filters.php') as $f){include_once $f;}
@@ -296,6 +296,18 @@ class blocks{
 					}
 					else{
 						$data['blocks'][$block_type]=$param;
+					}
+					foreach(CP::get_file_paths('blocks/'.$block_name) as $block_dir){
+						foreach(glob($block_dir.'/*/block.json') as $nested_json){
+							$nested_path='blocks/'.$block_name.'/'.basename(dirname($nested_json));
+							$nested_json=CP::get_file_path($nested_path.'/block.json');
+							if(isset($data['blocks'][$nested_json])){continue;}
+							$nested_param=['editor_script_handles'=>$param['editor_script_handles']??[]];
+							if($nested_conf=CP::get_file_path($nested_path.'/conf.php')){
+								self::apply_conf_file($nested_param,$nested_conf);
+							}
+							$data['blocks'][$nested_json]=$nested_param;
+						}
 					}
 				}
 			}
