@@ -1,0 +1,10 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"textdomain": "catpow",
+	"name": "catpow/loopblock",
+	"title": "🐾 Loopblock",
+	"description": "クエリの投稿の情報を表示するためのコンテナです。",
+	"icon": "editor-code",
+	"category": "catpow-functional"
+}

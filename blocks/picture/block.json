@@ -1,7 +1,12 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
+	"textdomain": "catpow",
 	"name": "catpow/picture",
+	"title": "🐾 Picture",
+	"description": "画面サイズに応じて切り替わる画像。",
+	"icon": "id-alt",
+	"category": "catpow",
 	"supports": {
 		"spacing": true
 	}

@@ -1,5 +1,4 @@
 ﻿wp.blocks.registerBlockType('catpow/instagramfeed',{
-	title: '🐾 InstagramFeed',
 	icon: 'instagram',
 	category: 'catpow',
 	edit({attributes,className,setAttributes,isSelected}){

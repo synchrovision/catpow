@@ -1,8 +1,6 @@
 ﻿const { __ } = wp.i18n;
 
 wp.blocks.registerBlockType("catpow/definition", {
-	title: "🐾 Definition",
-	description: __("定義リストのブロックです", "catpow"),
 	icon: "editor-ul",
 	category: "catpow",
 	transforms: {

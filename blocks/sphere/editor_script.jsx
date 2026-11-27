@@ -6,8 +6,6 @@ CP.config.sphere = {
 	},
 };
 wp.blocks.registerBlockType("catpow/sphere", {
-	title: "🐾 Sphere",
-	description: __("丸型のアイテムリストブロックです。", "catpow"),
 	icon: "image-filter",
 	category: "catpow",
 	transforms: {

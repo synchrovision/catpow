@@ -7,8 +7,6 @@
     }
   };
   wp.blocks.registerBlockType("catpow/sphere", {
-    title: "\u{1F43E} Sphere",
-    description: __("\u4E38\u578B\u306E\u30A2\u30A4\u30C6\u30E0\u30EA\u30B9\u30C8\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002", "catpow"),
     icon: "image-filter",
     category: "catpow",
     transforms: {

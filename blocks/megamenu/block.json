@@ -1,0 +1,9 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"textdomain": "catpow",
+	"name": "catpow/megamenu",
+	"title": "🐾 MegaMenu",
+	"icon": "clock",
+	"category": "catpow-embed"
+}

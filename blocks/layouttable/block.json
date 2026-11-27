@@ -1,7 +1,12 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
+	"textdomain": "catpow",
 	"name": "catpow/layouttable",
+	"title": "🐾 LayoutTable",
+	"description": "セルの結合と幅の指定ができるテーブルです。",
+	"icon": "editor-table",
+	"category": "catpow",
 	"supports": {
 		"color": true,
 		"spacing": true,

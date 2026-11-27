@@ -1,7 +1,12 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
+	"textdomain": "catpow",
 	"name": "catpow/rtf",
+	"title": "🐾 RTF",
+	"description": "MarkDownに似た記法でHTMLを書けるブロック",
+	"icon": "editor-code",
+	"category": "catpow",
 	"supports": {
 		"level": true,
 		"spacing": true,

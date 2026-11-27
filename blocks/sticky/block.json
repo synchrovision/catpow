@@ -1,0 +1,10 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"textdomain": "catpow",
+	"name": "catpow/sticky",
+	"title": "🐾 Sticky",
+	"description": "スクロールに追従するコンテンツを配置します。",
+	"icon": "menu",
+	"category": "catpow"
+}

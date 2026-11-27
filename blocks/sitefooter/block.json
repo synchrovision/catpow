@@ -1,7 +1,12 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
+	"textdomain": "catpow",
 	"name": "catpow/sitefooter",
+	"title": "🐾 SiteFooter",
+	"description": "サイト共通フッタのブロックです。",
+	"icon": "welcome-widgets-menus",
+	"category": "catpow-parts",
 	"supports": {
 		"level": true
 	}

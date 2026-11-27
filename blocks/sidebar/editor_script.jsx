@@ -7,15 +7,8 @@ const { RichText, InnerBlocks, BlockControls, InspectorControls, useBlockProps }
 const { PanelBody, TextareaControl } = wp.components;
 
 wp.blocks.registerBlockType("catpow/sidebar", {
-	title: "🐾 Sidebar",
-	description: __("サイドバーのあるコンテンツ領域のコンテナです。", "catpow"),
 	icon: "editor-code",
 	category: "catpow",
-	attributes: {
-		classes: { source: "attribute", selector: "div", attribute: "class", default: "wp-block-catpow-sidebar is-align-left is-stuck is-stuck-bottom has-item-size-small" },
-		vars: { type: "object" },
-		sidebarClases: { type: "string" },
-	},
 	example: CP.example,
 	edit({ attributes, className, setAttributes }) {
 		const { classes, vars, sidebarClases } = attributes;
@@ -81,12 +74,8 @@ wp.blocks.registerBlockType("catpow/sidebar", {
 
 wp.blocks.registerBlockType("catpow/sidecolumn", {
 	apiVersion: 3,
-	title: "🐾 SideColumn",
 	icon: "editor-code",
 	category: "catpow",
-	attributes: {
-		classes: { source: "attribute", attribute: "class", selector: ".wp-block-catpow-sidebar-column", default: "wp-block-catpow-sidebar-column is-column-side has-background-color" },
-	},
 	parent: ["catpow/sidebar"],
 	edit({ attributes, className, setAttributes }) {
 		const { classes } = attributes;
@@ -139,12 +128,8 @@ wp.blocks.registerBlockType("catpow/sidecolumn", {
 
 wp.blocks.registerBlockType("catpow/maincolumn", {
 	apiVersion: 3,
-	title: "🐾 MainColumn",
 	icon: "editor-code",
 	category: "catpow",
-	attributes: {
-		columnType: { type: "string", default: "main" },
-	},
 	parent: ["catpow/sidebar"],
 	edit({ attributes, className, setAttributes }) {
 		return (
@@ -168,14 +153,8 @@ wp.blocks.registerBlockType("catpow/maincolumn", {
 
 wp.blocks.registerBlockType("catpow/sidebar-section", {
 	apiVersion: 3,
-	title: "🐾 SideSection",
 	icon: "editor-ul",
 	category: "catpow",
-	attributes: {
-		classes: { source: "attribute", attribute: "class", default: "wp-block-catpow-sidebar-section is-level3" },
-		HeadingTag: { type: "string", default: "h3" },
-		title: { source: "html", selector: ".wp-block-catpow-sidebar-section__header-title" },
-	},
 	parent: ["catpow/sidecolumn", "catpow/sidebar-section"],
 	edit({ attributes, className, setAttributes, clientId }) {
 		const { classes, HeadingTag, title } = attributes;

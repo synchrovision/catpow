@@ -16,7 +16,6 @@
   var clsx_default = clsx;
 
   // ../blocks/jsonld/editor_script.jsx
-  var { __ } = wp.i18n;
   var { useState, useCallback, useMemo, useEffect, useContext, useRef } = wp.element;
   var { useBlockProps } = wp.blockEditor;
   CP.JsonLdBlockContext = wp.element.createContext({});
@@ -200,8 +199,6 @@
     }
   };
   wp.blocks.registerBlockType("catpow/jsonld", {
-    title: "\u{1F43E} JsonLD",
-    description: __("\u5404\u7A2E\u306E\u69CB\u9020\u5316\u30C7\u30FC\u30BF\u3092\u8A18\u8FF0\u3002", "catpow"),
     icon: "analytics",
     category: "catpow",
     edit({ attributes, className, setAttributes }) {

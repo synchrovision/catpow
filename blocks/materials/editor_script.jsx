@@ -1,8 +1,6 @@
 ﻿const { __ } = wp.i18n;
 
 wp.blocks.registerBlockType("catpow/materials", {
-	title: "🐾 Materials",
-	description: __("材料・成分一覧のブロックです。", "catpow"),
 	icon: "editor-ul",
 	category: "catpow",
 	example: CP.example,

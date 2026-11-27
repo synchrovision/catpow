@@ -1,0 +1,10 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"textdomain": "catpow",
+	"name": "catpow/app",
+	"title": "🐾 App",
+	"description": "テーマに定義されたアプリを表示します。",
+	"icon": "editor-code",
+	"category": "catpow-embed"
+}

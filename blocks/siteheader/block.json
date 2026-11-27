@@ -1,11 +1,12 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
+	"textdomain": "catpow",
 	"name": "catpow/siteheader",
 	"title": "🐾 SiteHeader",
+	"description": "サイト共通ヘッダのブロックです。",
 	"icon": "editor-ul",
 	"category": "catpow",
-	"textdomain": "catpow",
 	"supports": {
 		"level": true,
 		"color": true

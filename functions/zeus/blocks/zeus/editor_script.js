@@ -1,7 +1,6 @@
 (() => {
   // ../functions/zeus/blocks/zeus/editor_script.jsx
   wp.blocks.registerBlockType("catpow/zeus", {
-    title: "\u{1F43E} Zeus",
     icon: "cart",
     category: "catpow",
     edit({ attributes, className, setAttributes, isSelected }) {

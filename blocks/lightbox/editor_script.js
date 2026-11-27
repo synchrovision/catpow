@@ -28,8 +28,6 @@
     }
   };
   wp.blocks.registerBlockType("catpow/lightbox", {
-    title: "\u{1F43E} Lightbox",
-    description: __("\u30AF\u30EA\u30C3\u30AF\u3067\u30DD\u30C3\u30D7\u30A2\u30C3\u30D7\u8868\u793A\u3059\u308B\u753B\u50CF\u3067\u3059\u3002", "catpow"),
     icon: "editor-ul",
     category: "catpow",
     transforms: {

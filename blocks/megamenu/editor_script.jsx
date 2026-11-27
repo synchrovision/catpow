@@ -1,5 +1,4 @@
 ﻿wp.blocks.registerBlockType("catpow/megamenu", {
-	title: "🐾 MegaMenu",
 	icon: "clock",
 	category: "catpow-embed",
 	example: CP.example,

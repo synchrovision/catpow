@@ -1,7 +1,12 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
+	"textdomain": "catpow",
 	"name": "catpow/ranking",
+	"title": "🐾 Ranking",
+	"description": "ランキングの一覧ブロックです。",
+	"icon": "awards",
+	"category": "catpow",
 	"supports": {
 		"level": true,
 		"headingLevel": true,

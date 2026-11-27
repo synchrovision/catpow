@@ -7,8 +7,6 @@
     }
   };
   wp.blocks.registerBlockType("catpow/honeycomb", {
-    title: "\u{1F43E} honeycomb",
-    description: __("\u516D\u89D2\u5F62\u306E\u30D1\u30CD\u30EB\u3092\u30EC\u30A4\u30A2\u30A6\u30C8\u3057\u307E\u3059\u3002", "catpow"),
     icon: /* @__PURE__ */ wp.element.createElement("svg", { viewBox: "0 0 512 512" }, /* @__PURE__ */ wp.element.createElement(
       "path",
       {
@@ -16,34 +14,6 @@
       }
     ), /* @__PURE__ */ wp.element.createElement("polygon", { points: "120.9,357 120.9,448 199.7,493.6 278.6,448 278.6,357 199.7,311.5 	" }), /* @__PURE__ */ wp.element.createElement("polygon", { points: "30.9,214 30.9,305 109.7,350.6 188.6,305 188.6,214 109.7,168.5 	" }), /* @__PURE__ */ wp.element.createElement("polygon", { points: "117.9,65 117.9,156 196.7,201.6 275.6,156 275.6,65 196.7,19.5 	" }), /* @__PURE__ */ wp.element.createElement("polygon", { points: "290.4,357.9 290.4,449 369.3,494.5 448.1,449 448.1,357.9 369.3,312.4 	" })),
     category: "catpow",
-    attributes: {
-      id: { source: "attribute", selector: ".wp-block-catpow-honeycomb", attribute: "id", default: "" },
-      classes: { source: "attribute", selector: ".wp-block-catpow-honeycomb", attribute: "class", default: "wp-block-catpow-honeycomb" },
-      vars: { type: "object", default: {} },
-      breakpoints: { source: "attribute", selector: ".wp-block-catpow-honeycomb", attribute: "data-breakpoints", default: "480,960" },
-      grid: { source: "attribute", selector: ".wp-block-catpow-honeycomb", attribute: "data-grid", default: "4 6,6 4,8 3" },
-      items: {
-        source: "query",
-        selector: ".wp-block-catpow-honeycomb__item",
-        query: {
-          classes: { source: "attribute", attribute: "class" },
-          order: { source: "attribute", attribute: "data-order" },
-          src: { source: "attribute", selector: ".wp-block-catpow-honeycomb__item-image", attribute: "src" },
-          title: { source: "html", selector: ".wp-block-catpow-honeycomb__item-contents-title" },
-          text: { source: "html", selector: ".wp-block-catpow-honeycomb__item-contents-text" }
-        },
-        default: [
-          {
-            classes: "wp-block-catpow-honeycomb__item has-image has-title has-text",
-            order: "2 2 2 1,2 2 2 1,2 2 2 1",
-            src: wpinfo.theme_url + "/images/dummy.jpg",
-            title: ["Title"],
-            text: ["Text"]
-          }
-        ]
-      },
-      bp: { source: "attribute", default: "0" }
-    },
     example: CP.example,
     edit({ attributes, className, setAttributes, isSelected }) {
       const { useMemo } = wp.element;

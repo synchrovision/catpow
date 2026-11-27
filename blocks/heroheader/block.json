@@ -1,7 +1,12 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
+	"textdomain": "catpow",
 	"name": "catpow/heroheader",
+	"title": "🐾 HeroHeader",
+	"description": "ページの最初に表示するヘッダのブロックです。",
+	"icon": "welcome-widgets-menus",
+	"category": "catpow-parts",
 	"supports": {
 		"level": true,
 		"headingLevel": true,

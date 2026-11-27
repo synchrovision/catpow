@@ -15,8 +15,6 @@ CP.config.lightbox = {
 };
 
 wp.blocks.registerBlockType("catpow/lightbox", {
-	title: "🐾 Lightbox",
-	description: __("クリックでポップアップ表示する画像です。", "catpow"),
 	icon: "editor-ul",
 	category: "catpow",
 	transforms: {

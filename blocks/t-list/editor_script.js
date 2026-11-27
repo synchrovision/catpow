@@ -2,44 +2,9 @@
   // ../blocks/t-list/editor_script.jsx
   var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/t-list", {
-    title: "\u{1F43E} T-List",
-    description: __("HTML\u30E1\u30FC\u30EB\u7528\u306E\u30EA\u30B9\u30C8\u3067\u3059\u3002", "catpow"),
     icon: "editor-code",
     category: "catpow-mail",
     parent: CP.mailContensContainer,
-    attributes: {
-      classes: { source: "attribute", selector: "table", attribute: "class", default: "wp-block-catpow-t-list has-font-weight-regular is-ordered has-font-size-middle has-marker-color-main" },
-      marginTop: { type: "number", default: 0.5 },
-      marginBetween: { type: "number", default: 0.5 },
-      marginBottom: { type: "number", default: 0.5 },
-      markerSize: { type: "string", default: "1em" },
-      markerWidth: { type: "string", default: "1.5em" },
-      markerMargin: { type: "string", default: "0.1em" },
-      markerClasses: { source: "attribute", selector: ".wp-block-catpow-t-list__item-marker", attribute: "class", default: "wp-block-catpow-t-list__item-marker has-font-weight-regular" },
-      markerIndexSize: { type: "string", default: "1em" },
-      markerIndexPad: { type: "number", default: 1 },
-      markerAlign: { source: "attribute", selector: ".wp-block-catpow-t-list__item-marker", attribute: "align", default: "left" },
-      prefix: { source: "html", selector: ".wp-block-catpow-t-list__item-marker-prefix", default: "\u25CF" },
-      sufix: { source: "html", selector: ".wp-block-catpow-t-list__item-marker-suffix", default: "" },
-      items: {
-        source: "query",
-        selector: ".wp-block-catpow-t-list__item",
-        query: {
-          text: { source: "html", selector: ".wp-block-catpow-t-list__item-text" }
-        },
-        default: [
-          {
-            text: "Item 1"
-          },
-          {
-            text: "Item 2"
-          },
-          {
-            text: "Item 3"
-          }
-        ]
-      }
-    },
     example: CP.example,
     edit({ attributes, className, setAttributes }) {
       const { useState, useMemo } = wp.element;

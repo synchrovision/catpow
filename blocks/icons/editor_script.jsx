@@ -1,8 +1,6 @@
 ﻿const { __ } = wp.i18n;
 
 wp.blocks.registerBlockType("catpow/icons", {
-	title: "🐾 Icons",
-	description: __("リンク付きのアイコン画像を並べて表示するブロックです。", "catpow"),
 	icon: "image-filter",
 	category: "catpow",
 	transforms: {
@@ -16,29 +14,6 @@ wp.blocks.registerBlockType("catpow/icons", {
 				},
 			},
 		],
-	},
-	attributes: {
-		vars: { type: "object", default: {} },
-		version: { type: "number", default: 0 },
-		classes: { source: "attribute", selector: "ul", attribute: "class", default: "wp-block-catpow-icons" },
-		items: {
-			source: "query",
-			selector: ".wp-block-catpow-icons__item",
-			query: {
-				classes: { source: "attribute", attribute: "class" },
-				src: { source: "attribute", selector: "[src]", attribute: "src" },
-				alt: { source: "attribute", selector: "[src]", attribute: "alt" },
-				href: { source: "attribute", selector: "a", attribute: "href" },
-			},
-			default: [...Array(3)].map(() => {
-				return {
-					classes: "wp-block-catpow-icons__item",
-					src: wpinfo.theme_url + "/images/dummy_icon.svg",
-					alt: "dummy",
-					href: wpinfo.home_url,
-				};
-			}),
-		},
 	},
 	example: CP.example,
 	edit({ attributes, className, setAttributes, isSelected }) {

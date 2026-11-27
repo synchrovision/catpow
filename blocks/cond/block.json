@@ -1,0 +1,10 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"textdomain": "catpow",
+	"name": "catpow/cond",
+	"title": "🐾 Cond",
+	"description": "日時やログインユーザーによってコンテンツの表示が切り替わるコンテナです。",
+	"icon": "editor-code",
+	"category": "catpow-functional"
+}

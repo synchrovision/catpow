@@ -3,8 +3,6 @@ CP.config.pageheader = {
 	devices: ["tb", "sp"],
 };
 wp.blocks.registerBlockType("catpow/pageheader", {
-	title: "🐾 PageHeader",
-	description: __("ページの最初に表示するヘッダのブロックです。", "catpow"),
 	icon: "welcome-widgets-menus",
 	category: "catpow-parts",
 	example: CP.example,

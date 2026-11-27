@@ -1,7 +1,12 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
+	"textdomain": "catpow",
 	"name": "catpow/pricecard",
+	"title": "🐾 PriceCard",
+	"description": "サービス・商品情報の一覧ブロックです。",
+	"icon": "index-card",
+	"category": "catpow",
 	"supports": {
 		"level": true,
 		"headingLevel": true,

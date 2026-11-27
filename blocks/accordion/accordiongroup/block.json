@@ -1,0 +1,10 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"textdomain": "catpow",
+	"name": "catpow/accordiongroup",
+	"title": "🐾 AccordionGroup",
+	"description": "同時に開かれるアコーディオンを制限するコンテナです。",
+	"icon": "insert",
+	"category": "catpow"
+}

@@ -1,7 +1,6 @@
 (() => {
   // ../blocks/ranking/editor_script.jsx
   var { __ } = wp.i18n;
-  var blockClass = "wp-block-catpow-ranking";
   var config = CP.config.ranking = {
     imageKeys: {
       image: { src: "src", alt: "alt", items: "items" }
@@ -11,8 +10,6 @@
     }
   };
   wp.blocks.registerBlockType("catpow/ranking", {
-    title: "\u{1F43E} Ranking",
-    description: __("\u30E9\u30F3\u30AD\u30F3\u30B0\u306E\u4E00\u89A7\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002", "catpow"),
     icon: "awards",
     category: "catpow",
     transforms: {
@@ -29,48 +26,6 @@
           }
         }
       ]
-    },
-    attributes: {
-      version: { type: "number", default: 0 },
-      classes: { source: "attribute", selector: `.${blockClass}`, attribute: "class", default: `${blockClass} is-level3 has-content-width has-item-size-medium is-type-card has-rank has-rate` },
-      contentsClasses: { source: "attribute", selector: `.${blockClass}__item-contents`, attribute: "class", default: `${blockClass}__item-contents is-level4` },
-      vars: { type: "object" },
-      HeadingTag: { type: "string", default: "h3" },
-      SubHeadingTag: { type: "string", default: "h4" },
-      items: {
-        source: "query",
-        selector: `.${blockClass}__item`,
-        query: {
-          classes: { source: "attribute", attribute: "class" },
-          title: { source: "html", selector: `.${blockClass}__item-header-text-title` },
-          titleCaption: { source: "html", selector: `.${blockClass}__item-header-text-caption` },
-          rate: { source: "attribute", attribute: "value", selector: `.${blockClass}__item-header-rate-data` },
-          src: { source: "attribute", selector: `.${blockClass}__item-image [src]`, attribute: "src" },
-          alt: { source: "attribute", selector: `.${blockClass}__item-image [src]`, attribute: "alt" },
-          lead: { source: "html", selector: `.${blockClass}__item-contents-lead` },
-          text: { source: "html", selector: `.${blockClass}__item-contents-text` },
-          linkUrl: { source: "attribute", selector: `.${blockClass}__item-contents-link`, attribute: "href" },
-          linkText: { source: "text", selector: `.${blockClass}__item-contents-link` }
-        },
-        default: [...Array(3)].map(() => {
-          return {
-            classes: `${blockClass}__item`,
-            title: ["Title"],
-            titleCaption: ["Caption"],
-            rate: 3,
-            lead: ["Lead"],
-            src: wpinfo.theme_url + "/images/dummy.jpg",
-            alt: "dummy",
-            text: ["Text"],
-            linkUrl: wpinfo.home_url,
-            linkText: "Read More"
-          };
-        })
-      },
-      rankPrefix: { source: "text", selector: `.${blockClass}__item-header-rank-prefix`, default: __("\u7B2C", "catpow") },
-      rankStart: { source: "attribute", attribute: "value", selector: `.${blockClass}__item-header-rank-number`, default: "1" },
-      rankSuffix: { source: "text", selector: `.${blockClass}__item-header-rank-suffix`, default: __("\u4F4D", "catpow") },
-      rateLabel: { source: "text", selector: `.${blockClass}__item-header-rate-label`, default: __("\u8A55\u4FA1", "catpow") }
     },
     example: CP.example,
     edit({ attributes, className, setAttributes, isSelected }) {

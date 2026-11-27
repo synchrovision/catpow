@@ -2,20 +2,9 @@
   // ../blocks/t-button/editor_script.jsx
   var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/t-button", {
-    title: "\u{1F43E} T-Button",
-    description: __("HTML\u30E1\u30FC\u30EB\u7528\u306E\u30C6\u30FC\u30D6\u30EB\u30EC\u30A4\u30A2\u30A6\u30C8\u306E\u30DC\u30BF\u30F3\u3067\u3059\u3002", "catpow"),
     icon: "editor-code",
     category: "catpow-mail",
     parent: CP.mailContensContainer,
-    attributes: {
-      classes: { source: "attribute", selector: "table", attribute: "class", default: "wp-block-catpow-t-button is-size-medium has-font-weight-bold" },
-      width: { source: "attribute", selector: "table", attribute: "width", default: "300" },
-      align: { source: "attribute", selector: "table", attribute: "align", default: "center" },
-      marginTop: { type: "number", default: 0.5 },
-      marginBottom: { type: "number", default: 0.5 },
-      title: { source: "html", selector: "a", default: "Title" },
-      url: { source: "attribute", selector: "a", attribute: "href", default: wpinfo.home_url }
-    },
     example: CP.example,
     edit({ attributes, className, setAttributes }) {
       const { useState, useMemo } = wp.element;

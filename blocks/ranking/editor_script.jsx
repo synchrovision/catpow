@@ -1,7 +1,5 @@
 ﻿const { __ } = wp.i18n;
 
-const blockClass = "wp-block-catpow-ranking";
-
 const config = (CP.config.ranking = {
 	imageKeys: {
 		image: { src: "src", alt: "alt", items: "items" },
@@ -11,8 +9,6 @@ const config = (CP.config.ranking = {
 	},
 });
 wp.blocks.registerBlockType("catpow/ranking", {
-	title: "🐾 Ranking",
-	description: __("ランキングの一覧ブロックです。", "catpow"),
 	icon: "awards",
 	category: "catpow",
 	transforms: {
@@ -29,49 +25,6 @@ wp.blocks.registerBlockType("catpow/ranking", {
 				},
 			},
 		],
-	},
-	attributes: {
-		version: { type: "number", default: 0 },
-		classes: { source: "attribute", selector: `.${blockClass}`, attribute: "class", default: `${blockClass} is-level3 has-content-width has-item-size-medium is-type-card has-rank has-rate` },
-		contentsClasses: { source: "attribute", selector: `.${blockClass}__item-contents`, attribute: "class", default: `${blockClass}__item-contents is-level4` },
-
-		vars: { type: "object" },
-		HeadingTag: { type: "string", default: "h3" },
-		SubHeadingTag: { type: "string", default: "h4" },
-		items: {
-			source: "query",
-			selector: `.${blockClass}__item`,
-			query: {
-				classes: { source: "attribute", attribute: "class" },
-				title: { source: "html", selector: `.${blockClass}__item-header-text-title` },
-				titleCaption: { source: "html", selector: `.${blockClass}__item-header-text-caption` },
-				rate: { source: "attribute", attribute: "value", selector: `.${blockClass}__item-header-rate-data` },
-				src: { source: "attribute", selector: `.${blockClass}__item-image [src]`, attribute: "src" },
-				alt: { source: "attribute", selector: `.${blockClass}__item-image [src]`, attribute: "alt" },
-				lead: { source: "html", selector: `.${blockClass}__item-contents-lead` },
-				text: { source: "html", selector: `.${blockClass}__item-contents-text` },
-				linkUrl: { source: "attribute", selector: `.${blockClass}__item-contents-link`, attribute: "href" },
-				linkText: { source: "text", selector: `.${blockClass}__item-contents-link` },
-			},
-			default: [...Array(3)].map(() => {
-				return {
-					classes: `${blockClass}__item`,
-					title: ["Title"],
-					titleCaption: ["Caption"],
-					rate: 3,
-					lead: ["Lead"],
-					src: wpinfo.theme_url + "/images/dummy.jpg",
-					alt: "dummy",
-					text: ["Text"],
-					linkUrl: wpinfo.home_url,
-					linkText: "Read More",
-				};
-			}),
-		},
-		rankPrefix: { source: "text", selector: `.${blockClass}__item-header-rank-prefix`, default: __("第", "catpow") },
-		rankStart: { source: "attribute", attribute: "value", selector: `.${blockClass}__item-header-rank-number`, default: "1" },
-		rankSuffix: { source: "text", selector: `.${blockClass}__item-header-rank-suffix`, default: __("位", "catpow") },
-		rateLabel: { source: "text", selector: `.${blockClass}__item-header-rate-label`, default: __("評価", "catpow") },
 	},
 	example: CP.example,
 	edit({ attributes, className, setAttributes, isSelected }) {

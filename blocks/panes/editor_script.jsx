@@ -13,8 +13,6 @@ CP.config.panes = {
 };
 
 wp.blocks.registerBlockType("catpow/panes", {
-	title: "🐾 Panes",
-	description: __("矩形の画像とテキストのペアのリスト。", "catpow"),
 	icon: "editor-ul",
 	category: "catpow",
 	transforms: {

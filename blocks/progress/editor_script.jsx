@@ -1,8 +1,6 @@
 ﻿const { __ } = wp.i18n;
 
 wp.blocks.registerBlockType("catpow/progress", {
-	title: "🐾 Progress",
-	description: __("進捗のブロックです。", "catpow"),
 	icon: "editor-ul",
 	category: "catpow",
 	example: CP.example,

@@ -1,8 +1,6 @@
 ﻿const { __ } = wp.i18n;
 
 wp.blocks.registerBlockType("catpow/loopvars", {
-	title: "🐾 LoopVars",
-	description: __("ブロックの内容を変数のテーブルをループして表示します。各変数はブロック内で[var 変数名]のショートコードで利用できます。", "catpow"),
 	icon: "editor-code",
 	category: "catpow-functional",
 	example: CP.example,

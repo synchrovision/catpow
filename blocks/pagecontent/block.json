@@ -1,0 +1,10 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"textdomain": "catpow",
+	"name": "catpow/pagecontent",
+	"title": "🐾 pagecontent",
+	"description": "現在のURLに応じたコンテンツを表示します。",
+	"icon": "editor-code",
+	"category": "catpow-embed"
+}

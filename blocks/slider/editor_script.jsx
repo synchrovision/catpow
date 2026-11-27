@@ -20,7 +20,6 @@ CP.config.slider = {
 };
 
 wp.blocks.registerBlockType("catpow/slider", {
-	description: __("スライダーのブロックです。", "catpow"),
 	transforms: {
 		from: [
 			{

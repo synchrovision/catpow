@@ -2,8 +2,6 @@
   // ../blocks/t-paragraph/editor_script.jsx
   var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/t-paragraph", {
-    title: "\u{1F43E} T-Paragraph",
-    description: __("HTML\u30E1\u30FC\u30EB\u7528\u306E\u6BB5\u843D\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002", "catpow"),
     icon: "editor-code",
     category: "catpow-mail",
     parent: CP.mailContensContainer,
@@ -35,12 +33,6 @@
       return {
         text: (attributes.text || "") + (attributesToMerge.text || "")
       };
-    },
-    attributes: {
-      classes: { source: "attribute", selector: "table", attribute: "class", default: "wp-block-catpow-t-paragraph has-font-size-medium" },
-      marginTop: { type: "number", default: 0 },
-      marginBottom: { type: "number", default: 0.5 },
-      text: { source: "html", selector: ".is-text-cell", default: "text" }
     },
     example: CP.example,
     edit({ attributes, className, setAttributes, onReplace, mergeBlocks }) {

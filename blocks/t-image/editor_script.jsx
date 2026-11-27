@@ -1,21 +1,9 @@
 ﻿const { __ } = wp.i18n;
 
 wp.blocks.registerBlockType("catpow/t-image", {
-	title: "🐾 T-Image",
-	description: __("HTMLメール用の画像ブロックです。", "catpow"),
 	icon: "editor-code",
 	category: "catpow-mail",
 	parent: CP.mailContensContainer,
-	attributes: {
-		isTemplate: { type: "boolean", default: false },
-		classes: { source: "attribute", selector: "table", attribute: "class", default: "wp-block-catpow-t-image" },
-		src: { source: "attribute", selector: "[src]", attribute: "src", default: wpinfo.theme_url + "/images/dummy.jpg" },
-		alt: { source: "attribute", selector: "[src]", attribute: "alt" },
-		loopImage: { source: "text", selector: "td", default: "[output image]" },
-		width: { source: "attribute", selector: "table", attribute: "width", default: "100%" },
-		marginTop: { type: "number", default: 0 },
-		marginBottom: { type: "number", default: 0 },
-	},
 	example: CP.example,
 	edit({ attributes, className, setAttributes }) {
 		const { useState, useMemo } = wp.element;

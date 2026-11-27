@@ -1,0 +1,10 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"textdomain": "catpow",
+	"name": "catpow/progress",
+	"title": "🐾 Progress",
+	"description": "進捗のブロックです。",
+	"icon": "editor-ul",
+	"category": "catpow"
+}

@@ -1,7 +1,12 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
+	"textdomain": "catpow",
 	"name": "catpow/panel",
+	"title": "🐾 Panel",
+	"description": "大小の矩形パネルをレイアウトします。",
+	"icon": "grid-view",
+	"category": "catpow",
 	"supports": {
 		"level": true,
 		"headingLevel": true,

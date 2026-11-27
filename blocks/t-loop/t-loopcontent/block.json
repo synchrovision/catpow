@@ -1,0 +1,12 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"textdomain": "catpow",
+	"name": "catpow/t-loopcontent",
+	"title": "🐾 t-loopContent",
+	"icon": "editor-code",
+	"category": "catpow",
+	"parent": [
+		"catpow/t-loop"
+	]
+}

@@ -13,23 +13,8 @@ CP.config.accordion = {
 };
 
 wp.blocks.registerBlockType("catpow/accordion", {
-	title: "🐾 Accordion",
-	description: __("クリックで折り畳みできるブロックです。", "catpow"),
 	icon: "insert",
 	category: "catpow",
-	attributes: {
-		isTemplate: { type: "boolean", default: false },
-		vars: { type: "object", default: {} },
-		classes: { source: "attribute", selector: ".wp-block-catpow-accordion", attribute: "class", default: "wp-block-catpow-accordion is-level3" },
-		HeadingTag: { type: "string", default: "h3" },
-
-		title: { source: "html", selector: ".wp-block-catpow-accordion__header-title", default: "Title" },
-
-		imageMime: { source: "attribute", selector: ".wp-block-catpow-accordion__header-image [src]", attribute: "data-mime" },
-		imageSrc: { source: "attribute", selector: ".wp-block-catpow-accordion__header-image [src]", attribute: "src", default: wpinfo.theme_url + "/images/dummy.jpg" },
-		imageAlt: { source: "attribute", selector: ".wp-block-catpow-accordion__header-image [src]", attribute: "alt" },
-		imageCode: { source: "text", selector: ".wp-block-catpow-accordion__header-image" },
-	},
 	example: CP.example,
 	edit({ attributes, setAttributes }) {
 		const { useMemo } = wp.element;
@@ -144,14 +129,8 @@ wp.blocks.registerBlockType("catpow/accordion", {
 
 wp.blocks.registerBlockType("catpow/accordiongroup", {
 	apiVersion: 3,
-	title: "🐾 AccordionGroup",
-	description: __("同時に開かれるアコーディオンを制限するコンテナです。", "catpow"),
 	icon: "insert",
 	category: "catpow",
-	attributes: {
-		classes: { source: "attribute", selector: ".wp-block-catpow-accordiongourp", attribute: "class", default: "wp-block-catpow-accordiongroup" },
-		groupId: { type: "string", default: "accordionGroup" },
-	},
 	example: CP.example,
 	edit({ attributes, setAttributes }) {
 		const { InnerBlocks, InspectorControls, useBlockProps } = wp.blockEditor;

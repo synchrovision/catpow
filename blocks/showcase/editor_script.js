@@ -11,8 +11,6 @@
   };
   CP.config.showcase = blockConfig;
   wp.blocks.registerBlockType("catpow/showcase", {
-    title: "\u{1F43E} showcase",
-    description: __("\u753B\u50CF\u3068\u30C6\u30AD\u30B9\u30C8\u3092\u4E26\u3079\u3066\u8868\u793A\u3057\u307E\u3059\u3002", "catpow"),
     icon: "columns",
     category: "catpow",
     transforms: {

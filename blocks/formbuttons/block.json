@@ -1,8 +1,15 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
+	"textdomain": "catpow",
 	"name": "catpow/formbuttons",
-	"usesContext": ["catpow/color"],
+	"title": "🐾 FormButtons",
+	"description": "フォーム用のボタンです。",
+	"icon": "upload",
+	"category": "catpow",
+	"usesContext": [
+		"catpow/color"
+	],
 	"supports": {
 		"level": true,
 		"spacing": true,

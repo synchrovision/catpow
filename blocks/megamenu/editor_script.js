@@ -1,7 +1,6 @@
 (() => {
   // ../blocks/megamenu/editor_script.jsx
   wp.blocks.registerBlockType("catpow/megamenu", {
-    title: "\u{1F43E} MegaMenu",
     icon: "clock",
     category: "catpow-embed",
     example: CP.example,

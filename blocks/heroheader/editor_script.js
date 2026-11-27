@@ -41,8 +41,6 @@
     }
   };
   wp.blocks.registerBlockType("catpow/heroheader", {
-    title: "\u{1F43E} HeroHeader",
-    description: __("\u30DA\u30FC\u30B8\u306E\u6700\u521D\u306B\u8868\u793A\u3059\u308B\u30D8\u30C3\u30C0\u306E\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002", "catpow"),
     icon: "welcome-widgets-menus",
     category: "catpow-parts",
     example: CP.example,

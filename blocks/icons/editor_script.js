@@ -2,8 +2,6 @@
   // ../blocks/icons/editor_script.jsx
   var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/icons", {
-    title: "\u{1F43E} Icons",
-    description: __("\u30EA\u30F3\u30AF\u4ED8\u304D\u306E\u30A2\u30A4\u30B3\u30F3\u753B\u50CF\u3092\u4E26\u3079\u3066\u8868\u793A\u3059\u308B\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002", "catpow"),
     icon: "image-filter",
     category: "catpow",
     transforms: {
@@ -17,29 +15,6 @@
           }
         }
       ]
-    },
-    attributes: {
-      vars: { type: "object", default: {} },
-      version: { type: "number", default: 0 },
-      classes: { source: "attribute", selector: "ul", attribute: "class", default: "wp-block-catpow-icons" },
-      items: {
-        source: "query",
-        selector: ".wp-block-catpow-icons__item",
-        query: {
-          classes: { source: "attribute", attribute: "class" },
-          src: { source: "attribute", selector: "[src]", attribute: "src" },
-          alt: { source: "attribute", selector: "[src]", attribute: "alt" },
-          href: { source: "attribute", selector: "a", attribute: "href" }
-        },
-        default: [...Array(3)].map(() => {
-          return {
-            classes: "wp-block-catpow-icons__item",
-            src: wpinfo.theme_url + "/images/dummy_icon.svg",
-            alt: "dummy",
-            href: wpinfo.home_url
-          };
-        })
-      }
     },
     example: CP.example,
     edit({ attributes, className, setAttributes, isSelected }) {

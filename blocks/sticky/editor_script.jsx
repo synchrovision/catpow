@@ -10,18 +10,8 @@ CP.config.sticky = {
 	},
 };
 wp.blocks.registerBlockType("catpow/sticky", {
-	title: "🐾 Sticky",
-	description: __("スクロールに追従するコンテンツを配置します。", "catpow"),
 	icon: "menu",
 	category: "catpow",
-	attributes: {
-		classes: { source: "attribute", selector: "div", attribute: "class", default: "wp-block-catpow-sticky topLeft small label" },
-
-		labelText: { source: "html", selector: ".content>.label", defalt: __("ラベル", "catpow") },
-
-		openButtonImageSrc: { source: "attribute", selector: ".wp-block-catpow-sticky>.stickyButton [src].open", attribute: "src", default: wpinfo.theme_url + "/images/dummy_icon.svg" },
-		closeButtonImageSrc: { source: "attribute", selector: ".wp-block-catpow-sticky>.stickyButton [src].close", attribute: "src", default: wpinfo.theme_url + "/images/dummy_icon.svg" },
-	},
 	example: CP.example,
 	edit({ attributes, className, setAttributes }) {
 		const { useState, useMemo } = wp.element;
@@ -189,7 +179,6 @@ wp.blocks.registerBlockType("catpow/sticky", {
 
 wp.blocks.registerBlockType("catpow/stickycontent", {
 	apiVersion: 3,
-	title: "🐾 StickyContent",
 	icon: "editor-code",
 	category: "catpow",
 	parent: ["catpow/sticky"],

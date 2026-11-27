@@ -2,8 +2,6 @@
   // ../blocks/pricelist/editor_script.jsx
   var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/pricelist", {
-    title: "\u{1F43E} PriceList",
-    description: __("\u4FA1\u683C\u8868\u306E\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002", "catpow"),
     icon: "editor-ul",
     category: "catpow",
     example: CP.example,

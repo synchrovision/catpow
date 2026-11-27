@@ -12,7 +12,6 @@ CP.config.comparetable = {
 	},
 };
 wp.blocks.registerBlockType("catpow/comparetable", {
-	description: __("比較情報のためのテーブルです", "catpow"),
 	transforms: {
 		from: [
 			{

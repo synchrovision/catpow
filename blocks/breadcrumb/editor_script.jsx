@@ -1,8 +1,5 @@
-﻿const { __ } = wp.i18n;
 
 wp.blocks.registerBlockType("catpow/breadcrumb", {
-	title: "🐾 Breadcrumb",
-	description: __("パンくずリストを表示します。", "catpow"),
 	icon: "welcome-widgets-menus",
 	category: "catpow-parts",
 	edit({ attributes }) {

@@ -21,7 +21,6 @@ CP.config.listed = {
 };
 
 wp.blocks.registerBlockType("catpow/listed", {
-	description: __("コンテンツ一覧のブロックです。", "catpow"),
 	transforms: {
 		from: [
 			{

@@ -7,8 +7,6 @@
     }
   };
   wp.blocks.registerBlockType("catpow/slidablemenu", {
-    title: "\u{1F43E} Slidable Menu",
-    description: __("\u30B9\u30AF\u30ED\u30FC\u30EB\u53EF\u80FD\u306A\u30E1\u30CB\u30E5\u30FC\u3002", "catpow"),
     icon: "list-view",
     category: "catpow",
     transforms: {

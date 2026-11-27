@@ -1,7 +1,12 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
+	"textdomain": "catpow",
 	"name": "catpow/flow",
+	"title": "🐾 Flow",
+	"description": "手順や順番の一覧ブロックです。",
+	"icon": "editor-ol",
+	"category": "catpow",
 	"supports": {
 		"level": true,
 		"headingLevel": true,

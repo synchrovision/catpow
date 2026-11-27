@@ -4,7 +4,6 @@
  * 指定の日時までのカウントダウンを表示します
  */
 wp.blocks.registerBlockType("catpow/countdown", {
-	title: "🐾 CountDown",
 	icon: "clock",
 	category: "catpow-embed",
 	example: CP.example,

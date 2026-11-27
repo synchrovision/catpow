@@ -1,8 +1,6 @@
 ﻿const { __ } = wp.i18n;
 
 wp.blocks.registerBlockType("catpow/t-heading", {
-	title: "🐾 T-Heading",
-	description: __("HTMLメール用の見出しブロックです。", "catpow"),
 	icon: "editor-code",
 	category: "catpow-mail",
 	parent: CP.mailContensContainer,
@@ -34,17 +32,6 @@ wp.blocks.registerBlockType("catpow/t-heading", {
 		return {
 			title: (attributes.title || "") + (attributesToMerge.title || ""),
 		};
-	},
-	attributes: {
-		classes: {
-			source: "attribute",
-			selector: "table",
-			attribute: "class",
-			default: "wp-block-catpow-t-heading has-text-align-left has-font-weight-medium has-font-size-middle has-heading-type-headline",
-		},
-		marginTop: { type: "number", default: 1 },
-		marginBottom: { type: "number", default: 0.5 },
-		title: { source: "html", selector: ".is-text-cell", default: "Title" },
 	},
 	example: CP.example,
 	edit({ attributes, className, setAttributes, onReplace, mergeBlocks }) {

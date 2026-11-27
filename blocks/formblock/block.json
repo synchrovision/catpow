@@ -1,0 +1,10 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"textdomain": "catpow",
+	"name": "catpow/formblock",
+	"title": "🐾 FormBlock",
+	"description": "テーマに定義された編集可能なフォームを表示します。",
+	"icon": "editor-code",
+	"category": "catpow-embed"
+}

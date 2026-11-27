@@ -2,18 +2,9 @@
   // ../blocks/t-box/editor_script.jsx
   var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/t-box", {
-    title: "\u{1F43E} T-Box",
-    description: __("HTML\u30E1\u30FC\u30EB\u7528\u306E\u30EC\u30A4\u30A2\u30A6\u30C8\u8ABF\u6574\u7528\u30B3\u30F3\u30C6\u30CA\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002", "catpow"),
     icon: "editor-code",
     category: "catpow-mail",
     parent: CP.mailContensContainer,
-    attributes: {
-      classes: { source: "attribute", selector: ".wp-block-catpow-t-box", attribute: "class", default: "wp-block-catpow-t-box has-mail-content-width" },
-      width: { source: "attribute", selector: "table", attribute: "width", default: "600" },
-      paddingTop: { type: "number", default: 1 },
-      paddingInline: { type: "number", default: 1 },
-      paddingBottom: { type: "number", default: 1 }
-    },
     example: CP.example,
     edit({ attributes, className, setAttributes }) {
       const { useState, useMemo } = wp.element;

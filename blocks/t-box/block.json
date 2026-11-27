@@ -1,7 +1,12 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
+	"textdomain": "catpow",
 	"name": "catpow/t-box",
+	"title": "🐾 T-Box",
+	"description": "HTMLメール用のレイアウト調整用コンテナブロックです。",
+	"icon": "editor-code",
+	"category": "catpow-mail",
 	"supports": {
 		"color": true
 	}

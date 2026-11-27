@@ -1,17 +1,12 @@
 (() => {
   // ../blocks/sidebar-articlenav/editor_script.jsx
-  var { __ } = wp.i18n;
   var { useMemo, useCallback } = wp.element;
   var { RichText, InnerBlocks, BlockControls, InspectorControls, useBlockProps } = wp.blockEditor;
   var { PanelBody, TextareaControl } = wp.components;
   wp.blocks.registerBlockType("catpow/sidebar-articlenav", {
     apiVersion: 3,
-    title: "\u{1F43E} SideArticelNav",
     icon: "editor-ul",
     category: "catpow",
-    attributes: {
-      classes: { source: "attribute", selector: ".wp-block-catpow-sidebar-articlenav", attribute: "class", default: "wp-block-catpow-sidebar-articlenav" }
-    },
     parent: ["catpow/sidecolumn", "catpow/side-section"],
     edit({ attributes, className, setAttributes, clientId }) {
       const { classes } = attributes;

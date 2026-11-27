@@ -3,7 +3,6 @@
   var { __ } = wp.i18n;
   CP.config.motiongraphic = {};
   wp.blocks.registerBlockType("catpow/motiongraphic", {
-    title: "\u{1F43E} MotionGraphic",
     icon: "video-alt3",
     category: "catpow-embed",
     example: CP.example,

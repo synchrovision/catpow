@@ -2,8 +2,6 @@
 
 wp.blocks.registerBlockType("catpow/accessmap", {
 	apiVersion: 3,
-	title: "🐾 Access Map",
-	description: __("地図とアクセス情報を表示", "catpow"),
 	icon: "location-alt",
 	category: "catpow",
 	example: CP.example,

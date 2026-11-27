@@ -1,8 +1,6 @@
 ﻿const { __ } = wp.i18n;
 
 wp.blocks.registerBlockType("catpow/aquarium", {
-	title: "🐾 aquarium",
-	description: __("画像とテキストを３次元にレイアウトします。", "catpow"),
 	icon: (
 		<svg role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" aria-hidden="true">
 			<path
@@ -23,52 +21,6 @@ wp.blocks.registerBlockType("catpow/aquarium", {
 		</svg>
 	),
 	category: "catpow",
-	attributes: {
-		classes: { source: "attribute", selector: ".wp-block-catpow-aquarium", attribute: "class", default: "wp-block-catpow-aquarium" },
-		layers: {
-			source: "query",
-			selector: ".layer",
-			query: {
-				classes: { source: "attribute", attribute: "class" },
-				items: {
-					source: "query",
-					selector: ".item",
-					query: {
-						classes: { source: "attribute", attribute: "class" },
-						images: {
-							source: "query",
-							selector: ".image",
-							query: {
-								classes: { source: "attribute", attribute: "class" },
-								src: { source: "attribute", attribute: "src", selector: "img" },
-								srcset: { source: "attribute", attribute: "srcset", selector: "img" },
-								alt: { source: "attribute", attribute: "alt", selector: "img" },
-							},
-						},
-						texts: {
-							source: "query",
-							selector: ".text",
-							query: {
-								classes: { source: "attribute", attribute: "class" },
-								title: { source: "html", selector: "h3" },
-								text: { source: "html", selector: "p" },
-							},
-						},
-					},
-				},
-			},
-			default: [
-				{
-					classes: "layer h_120",
-					items: [{ classes: "item center middle w_50 h_50 t_40 l_30", images: [], texts: [{ classes: "text top left w_100 h_100 t_0 l_0 hasTitle hasText", title: "Title", text: "Text" }] }],
-				},
-				{
-					classes: "layer h_160",
-					items: [{ classes: "item center middle w_50 h_50 t_60 l_70", images: [], texts: [{ classes: "text top left w_100 h_100 t_0 l_0 hasTitle hasText", title: "Title", text: "Text" }] }],
-				},
-			],
-		},
-	},
 	example: CP.example,
 	edit({ attributes, className, setAttributes }) {
 		const { useState, useMemo } = wp.element;

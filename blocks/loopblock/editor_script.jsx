@@ -1,12 +1,9 @@
-﻿const { __ } = wp.i18n;
 const { InnerBlocks, BlockControls, InspectorControls, useBlockProps } = wp.blockEditor;
 const { Icon, PanelBody, TextareaControl, TextControl, ToolbarGroup } = wp.components;
 
 import { clsx } from "clsx";
 
 wp.blocks.registerBlockType("catpow/loopblock", {
-	title: "🐾 Loopblock",
-	description: __("クエリの投稿の情報を表示するためのコンテナです。", "catpow"),
 	icon: "editor-code",
 	category: "catpow-functional",
 	example: CP.example,
@@ -64,19 +61,9 @@ wp.blocks.registerBlockType("catpow/loopblock", {
 
 wp.blocks.registerBlockType("catpow/loopblockcontent", {
 	apiVersion: 3,
-	title: "🐾 LoopBlockContent",
 	icon: "editor-code",
 	category: "catpow",
 	parent: ["catpow/loopblock"],
-	attributes: {
-		name: {
-			type: "attribute",
-			label: __("名前", "catpow"),
-			selector: "loop-block-content",
-			attribute: "name",
-			default: "content",
-		},
-	},
 	edit({ attributes, className, setAttributes, clientId }) {
 		const { name } = attributes;
 

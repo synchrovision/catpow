@@ -2,8 +2,6 @@
   // ../blocks/container/editor_script.jsx
   var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/container", {
-    title: "\u{1F43E} Container",
-    description: __("\u30B9\u30AF\u30ED\u30FC\u30EB\u53EF\u80FD\u9818\u57DF\u3092\u4F5C\u6210\u3067\u304D\u308B\u30B3\u30F3\u30C6\u30CA\u3067\u3059\u3002", "catpow"),
     icon: "editor-code",
     category: "catpow",
     transforms: {
@@ -16,11 +14,6 @@
           }
         }
       ]
-    },
-    attributes: {
-      vars: { type: "object", default: {} },
-      boxSizeVars: { type: "object", default: { "--cp-inner-content-width": 960, "--cp-container-height": 400 } },
-      classes: { source: "attribute", selector: ".wp-block-catpow-container", attribute: "class", default: "wp-block-catpow-container" }
     },
     example: CP.example,
     edit(props) {

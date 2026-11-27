@@ -1,0 +1,10 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"textdomain": "catpow",
+	"name": "catpow/userinfo",
+	"title": "🐾 UserInfo",
+	"description": "ログイン中のユーザーの情報を表示するためのコンテナです。ログインしていない場合はログインフォームが表示されます。",
+	"icon": "admin-users",
+	"category": "catpow-functional"
+}

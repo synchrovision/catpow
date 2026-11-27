@@ -2,8 +2,6 @@
   // ../blocks/simpletable/editor_script.jsx
   var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/simpletable", {
-    title: "\u{1F43E} SimpleTable",
-    description: __("\u898B\u51FA\u3057\u3068\u672C\u6587\u306E\uFF12\u5217\u3067\u69CB\u6210\u3055\u308C\u308B\u30B7\u30F3\u30D7\u30EB\u306A\u30C6\u30FC\u30D6\u30EB\u3067\u3059\u3002", "catpow"),
     icon: "editor-table",
     category: "catpow",
     transforms: {
@@ -20,58 +18,6 @@
           }
         }
       ]
-    },
-    attributes: {
-      classes: {
-        source: "attribute",
-        selector: "table",
-        attribute: "class",
-        default: "wp-block-catpow-simpletable is-level3 is-type-spec"
-      },
-      vars: {
-        type: "object"
-      },
-      rows: {
-        source: "query",
-        selector: "table tr",
-        query: {
-          classes: { source: "attribute", attribute: "class" },
-          cond: { source: "attribute", attribute: "data-refine-cond" },
-          cells: {
-            source: "query",
-            selector: "th,td",
-            query: {
-              text: { source: "html" },
-              classes: { source: "attribute", attribute: "class" },
-              style: { source: "attribute", attribute: "style" }
-            }
-          }
-        },
-        default: [
-          {
-            classes: "wp-block-catpow-simpletable__tbody-tr",
-            cells: [
-              { text: ["Title"], classes: "" },
-              { text: ["Content"], classes: "" }
-            ]
-          },
-          {
-            classes: "wp-block-catpow-simpletable__tbody-tr",
-            cells: [
-              { text: ["Title"], classes: "" },
-              { text: ["Content"], classes: "" }
-            ]
-          },
-          {
-            classes: "wp-block-catpow-simpletable__tbody-tr",
-            cells: [
-              { text: ["Title"], classes: "" },
-              { text: ["Content"], classes: "" }
-            ]
-          }
-        ]
-      },
-      blockState: { type: "object", default: { enableBlockFormat: true } }
     },
     example: CP.example,
     edit({ attributes, className, setAttributes, isSelected }) {

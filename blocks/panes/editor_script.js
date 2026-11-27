@@ -13,8 +13,6 @@
     }
   };
   wp.blocks.registerBlockType("catpow/panes", {
-    title: "\u{1F43E} Panes",
-    description: __("\u77E9\u5F62\u306E\u753B\u50CF\u3068\u30C6\u30AD\u30B9\u30C8\u306E\u30DA\u30A2\u306E\u30EA\u30B9\u30C8\u3002", "catpow"),
     icon: "editor-ul",
     category: "catpow",
     transforms: {

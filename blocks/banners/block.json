@@ -1,7 +1,12 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
+	"textdomain": "catpow",
 	"name": "catpow/banners",
+	"title": "🐾 Banners",
+	"description": "リンク付きのバナー画像を並べて表示するブロックです。",
+	"icon": "images-alt",
+	"category": "catpow",
 	"supports": {
 		"level": true,
 		"headingLevel": true,

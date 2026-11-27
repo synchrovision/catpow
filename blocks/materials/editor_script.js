@@ -2,8 +2,6 @@
   // ../blocks/materials/editor_script.jsx
   var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/materials", {
-    title: "\u{1F43E} Materials",
-    description: __("\u6750\u6599\u30FB\u6210\u5206\u4E00\u89A7\u306E\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002", "catpow"),
     icon: "editor-ul",
     category: "catpow",
     example: CP.example,

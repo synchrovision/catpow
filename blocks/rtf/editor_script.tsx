@@ -5,16 +5,8 @@ declare var wp: any, CP: any, React: any;
 import { SelectiveClassConfig } from "cpdev/type";
 
 wp.blocks.registerBlockType("catpow/rtf", {
-	title: "🐾 RTF",
-	description: __("MarkDownに似た記法でHTMLを書けるブロック", "catpow"),
 	icon: "editor-code",
 	category: "catpow",
-	attributes: {
-		classes: { type: "string", source: "attribute", attribute: "class", default: "wp-block-catpow-rtf" },
-		level: { type: "number", default: 3 },
-		vars: { type: "object", default: [] },
-		text: { type: "string", default: __("■ 見出し\n\nテキスト[リンク](example.com)**強調**", "catpow") },
-	},
 	example: CP.example,
 	edit({ attributes, setAttributes, isSelected }) {
 		const { classes, vars, level } = attributes;

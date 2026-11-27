@@ -1,0 +1,10 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"textdomain": "catpow",
+	"name": "catpow/embed",
+	"title": "🐾 Embed",
+	"description": "テーマに定義された埋め込みコンテンツを表示します。",
+	"icon": "editor-code",
+	"category": "catpow-embed"
+}

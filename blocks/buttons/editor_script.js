@@ -8,8 +8,6 @@
   };
   CP.config.buttons = blockConfig;
   wp.blocks.registerBlockType("catpow/buttons", {
-    title: "\u{1F43E} Buttons",
-    description: __("\u30DC\u30BF\u30F3\u306E\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002", "catpow"),
     icon: /* @__PURE__ */ wp.element.createElement("svg", { role: "img", focusable: "false", xmlns: "http://www.w3.org/2000/svg", width: "20", height: "20", viewBox: "0 0 20 20", "aria-hidden": "true" }, /* @__PURE__ */ wp.element.createElement(
       "path",
       {

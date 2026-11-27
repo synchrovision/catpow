@@ -7,8 +7,6 @@ CP.config.panel = {
 	},
 };
 wp.blocks.registerBlockType("catpow/panel", {
-	title: "🐾 Panel",
-	description: __("大小の矩形パネルをレイアウトします。", "catpow"),
 	icon: "grid-view",
 	category: "catpow",
 	example: CP.example,

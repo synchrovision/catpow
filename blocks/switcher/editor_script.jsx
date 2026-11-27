@@ -26,8 +26,6 @@ CP.config.switcher = {
 	},
 };
 wp.blocks.registerBlockType("catpow/switcher", {
-	title: "🐾 Switcher",
-	description: __("日時やログインユーザーによってコンテンツの内容が切り替わるコンテナです。", "catpow"),
 	icon: "networking",
 	category: "catpow-functional",
 	example: CP.example,
@@ -172,13 +170,9 @@ wp.blocks.registerBlockType("catpow/switcher", {
 
 wp.blocks.registerBlockType("catpow/switchercontent", {
 	apiVersion: 3,
-	title: "🐾 SwitcherContent",
 	icon: "editor-code",
 	category: "catpow",
 	parent: ["catpow/switcher"],
-	attributes: {
-		cond: { source: "attribute", label: __("条件", "catpow"), selector: "switcher-content", attribute: "cond", default: "content" },
-	},
 	edit({ attributes, setAttributes, clientId }) {
 		const { InnerBlocks, useBlockProps } = wp.blockEditor;
 		const { cond } = attributes;

@@ -61,8 +61,6 @@ CP.config.graphics = {
 };
 
 wp.blocks.registerBlockType("catpow/graphics", {
-	title: "🐾 graphics",
-	description: __("画像を自由にレイアウトします。", "catpow"),
 	icon: "format-image",
 	category: "catpow",
 	example: CP.example,

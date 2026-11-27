@@ -17,8 +17,6 @@
   // ../blocks/datatable/editor_script.jsx
   var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/datatable", {
-    title: "\u{1F43E} DataTable",
-    description: __("\u4E00\u884C\u307E\u305F\u306F\uFF11\u5217\u306E\u898B\u51FA\u3057\u3092\u6301\u3064\u30C6\u30FC\u30D6\u30EB\u3067\u3059\u3002", "catpow"),
     icon: "editor-table",
     category: "catpow",
     transforms: {

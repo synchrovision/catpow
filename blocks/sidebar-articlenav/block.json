@@ -1,0 +1,13 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"textdomain": "catpow",
+	"name": "catpow/sidebar-articlenav",
+	"title": "🐾 SideArticelNav",
+	"icon": "editor-ul",
+	"category": "catpow",
+	"parent": [
+		"catpow/sidecolumn",
+		"catpow/side-section"
+	]
+}

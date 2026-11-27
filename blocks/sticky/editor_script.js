@@ -11,16 +11,8 @@
     }
   };
   wp.blocks.registerBlockType("catpow/sticky", {
-    title: "\u{1F43E} Sticky",
-    description: __("\u30B9\u30AF\u30ED\u30FC\u30EB\u306B\u8FFD\u5F93\u3059\u308B\u30B3\u30F3\u30C6\u30F3\u30C4\u3092\u914D\u7F6E\u3057\u307E\u3059\u3002", "catpow"),
     icon: "menu",
     category: "catpow",
-    attributes: {
-      classes: { source: "attribute", selector: "div", attribute: "class", default: "wp-block-catpow-sticky topLeft small label" },
-      labelText: { source: "html", selector: ".content>.label", defalt: __("\u30E9\u30D9\u30EB", "catpow") },
-      openButtonImageSrc: { source: "attribute", selector: ".wp-block-catpow-sticky>.stickyButton [src].open", attribute: "src", default: wpinfo.theme_url + "/images/dummy_icon.svg" },
-      closeButtonImageSrc: { source: "attribute", selector: ".wp-block-catpow-sticky>.stickyButton [src].close", attribute: "src", default: wpinfo.theme_url + "/images/dummy_icon.svg" }
-    },
     example: CP.example,
     edit({ attributes, className, setAttributes }) {
       const { useState, useMemo } = wp.element;
@@ -109,7 +101,6 @@
   });
   wp.blocks.registerBlockType("catpow/stickycontent", {
     apiVersion: 3,
-    title: "\u{1F43E} StickyContent",
     icon: "editor-code",
     category: "catpow",
     parent: ["catpow/sticky"],

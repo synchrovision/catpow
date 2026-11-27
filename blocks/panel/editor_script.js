@@ -8,8 +8,6 @@
     }
   };
   wp.blocks.registerBlockType("catpow/panel", {
-    title: "\u{1F43E} Panel",
-    description: __("\u5927\u5C0F\u306E\u77E9\u5F62\u30D1\u30CD\u30EB\u3092\u30EC\u30A4\u30A2\u30A6\u30C8\u3057\u307E\u3059\u3002", "catpow"),
     icon: "grid-view",
     category: "catpow",
     example: CP.example,

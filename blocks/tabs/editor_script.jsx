@@ -3,22 +3,6 @@
 import { clsx } from "clsx";
 
 wp.blocks.registerBlockType("catpow/tabs", {
-	description: __("タブによる表示切り替えのブロックです。", "catpow"),
-	attributes: {
-		classes: { source: "attribute", selector: "div", attribute: "class", default: "wp-block-catpow-tabs is-level3 is-type-panel is-style-flat" },
-		HeadingTag: { type: "text", default: "h3" },
-		vars: { type: "object", default: {} },
-		items: {
-			source: "query",
-			selector: ".wp-block-catpow-tabs__tab-item",
-			query: {
-				title: { source: "html", selector: ".wp-block-catpow-tabs__tab-item-title" },
-			},
-			default: [...Array(3)].map((_, i) => {
-				return { title: [`Tab ${i + 1}`] };
-			}),
-		},
-	},
 	example: CP.example,
 	edit({ attributes, className, setAttributes, isSelected, clientId }) {
 		const { useMemo, useEffect } = wp.element;
@@ -149,13 +133,9 @@ wp.blocks.registerBlockType("catpow/tabs", {
 
 wp.blocks.registerBlockType("catpow/tabscontent", {
 	apiVersion: 3,
-	title: "🐾 TabsContent",
 	icon: "editor-code",
 	category: "catpow",
 	parent: ["catpow/tabs"],
-	attributes: {
-		index: { type: "number" },
-	},
 	edit({ attributes, className, setAttributes }) {
 		const { InnerBlocks, useBlockProps } = wp.blockEditor;
 		const { index } = attributes;

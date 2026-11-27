@@ -7,17 +7,6 @@
     }
   };
 
-  // node_modules-included/catpow/src/util/array/range.js
-  var range = function* (start, end, step = 1) {
-    if (arguments.length === 1) {
-      end = start;
-      start = 0;
-    }
-    for (let i = start; i <= end; i += step) {
-      yield i;
-    }
-  };
-
   // react-global:react
   var react_default = window.wp.element;
   var useState = wp.element.useState;
@@ -38,33 +27,9 @@
   // ../blocks/t-banners/editor_script.jsx
   var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/t-banners", {
-    title: "\u{1F43E} T-Banners",
-    description: __("HTML\u30E1\u30FC\u30EB\u7528\u306E\u8907\u6570\u30D0\u30CA\u30FC\u306E\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002", "catpow"),
     icon: "editor-code",
     category: "catpow-mail",
     parent: CP.mailContensContainer,
-    attributes: {
-      isTemplate: { type: "boolean", default: false },
-      classes: { source: "attribute", selector: "table", attribute: "class", default: "wp-block-catpow-t-banners" },
-      items: {
-        source: "query",
-        selector: "tbody td:not(.is-spacer-cell)",
-        query: {
-          src: { source: "attribute", selector: "[src]", attribute: "src" },
-          alt: { source: "attribute", selector: "[src]", attribute: "alt" },
-          url: { source: "attribute", selector: "a", attribute: "href" },
-          loopImage: { source: "text", selector: "td", default: "[output image]" }
-        },
-        default: [...range(4)].map(() => ({ src: wpinfo.theme_url + "/images/dummy.jpg", alt: "", url: wpinfo.home_url, loopImage: "[output image]" }))
-      },
-      width: { source: "attribute", selector: "table", attribute: "width", default: "100%" },
-      gapX: { type: "number", default: 10 },
-      gapY: { type: "number", default: 10 },
-      align: { source: "attribute", selector: "table", attribute: "align", default: "center" },
-      columns: { type: "number", default: 2 },
-      marginTop: { type: "number", default: 1 },
-      marginBottom: { type: "number", default: 1 }
-    },
     example: CP.example,
     edit({ attributes, className, setAttributes, isSelected }) {
       const { useState: useState2, useMemo: useMemo2 } = wp.element;

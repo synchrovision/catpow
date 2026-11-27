@@ -1,7 +1,12 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
+	"textdomain": "catpow",
 	"name": "catpow/sphere",
+	"title": "🐾 Sphere",
+	"description": "丸型のアイテムリストブロックです。",
+	"icon": "image-filter",
+	"category": "catpow",
 	"supports": {
 		"level": true,
 		"headingLevel": true,

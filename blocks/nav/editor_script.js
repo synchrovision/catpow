@@ -2,8 +2,6 @@
   // ../blocks/nav/editor_script.jsx
   var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/nav", {
-    title: "\u{1F43E} Nav",
-    description: __("\u30E1\u30CB\u30E5\u30FC\u3092\u8868\u793A\u3059\u308B\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002", "catpow"),
     icon: "welcome-widgets-menus",
     category: "catpow-parts",
     edit({ attributes, setAttributes, className, clientId }) {

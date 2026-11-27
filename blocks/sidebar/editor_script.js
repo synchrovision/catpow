@@ -5,15 +5,8 @@
   var { RichText, InnerBlocks, BlockControls, InspectorControls, useBlockProps } = wp.blockEditor;
   var { PanelBody, TextareaControl } = wp.components;
   wp.blocks.registerBlockType("catpow/sidebar", {
-    title: "\u{1F43E} Sidebar",
-    description: __("\u30B5\u30A4\u30C9\u30D0\u30FC\u306E\u3042\u308B\u30B3\u30F3\u30C6\u30F3\u30C4\u9818\u57DF\u306E\u30B3\u30F3\u30C6\u30CA\u3067\u3059\u3002", "catpow"),
     icon: "editor-code",
     category: "catpow",
-    attributes: {
-      classes: { source: "attribute", selector: "div", attribute: "class", default: "wp-block-catpow-sidebar is-align-left is-stuck is-stuck-bottom has-item-size-small" },
-      vars: { type: "object" },
-      sidebarClases: { type: "string" }
-    },
     example: CP.example,
     edit({ attributes, className, setAttributes }) {
       const { classes, vars, sidebarClases } = attributes;
@@ -55,12 +48,8 @@
   });
   wp.blocks.registerBlockType("catpow/sidecolumn", {
     apiVersion: 3,
-    title: "\u{1F43E} SideColumn",
     icon: "editor-code",
     category: "catpow",
-    attributes: {
-      classes: { source: "attribute", attribute: "class", selector: ".wp-block-catpow-sidebar-column", default: "wp-block-catpow-sidebar-column is-column-side has-background-color" }
-    },
     parent: ["catpow/sidebar"],
     edit({ attributes, className, setAttributes }) {
       const { classes } = attributes;
@@ -81,12 +70,8 @@
   });
   wp.blocks.registerBlockType("catpow/maincolumn", {
     apiVersion: 3,
-    title: "\u{1F43E} MainColumn",
     icon: "editor-code",
     category: "catpow",
-    attributes: {
-      columnType: { type: "string", default: "main" }
-    },
     parent: ["catpow/sidebar"],
     edit({ attributes, className, setAttributes }) {
       return /* @__PURE__ */ wp.element.createElement(CP.Bem, { prefix: "wp-block-catpow" }, /* @__PURE__ */ wp.element.createElement("div", { ...useBlockProps({ className: "sidebar-column- is-column-main" }) }, /* @__PURE__ */ wp.element.createElement(InnerBlocks, { template: [["catpow/section"]], templateLock: false })));
@@ -97,14 +82,8 @@
   });
   wp.blocks.registerBlockType("catpow/sidebar-section", {
     apiVersion: 3,
-    title: "\u{1F43E} SideSection",
     icon: "editor-ul",
     category: "catpow",
-    attributes: {
-      classes: { source: "attribute", attribute: "class", default: "wp-block-catpow-sidebar-section is-level3" },
-      HeadingTag: { type: "string", default: "h3" },
-      title: { source: "html", selector: ".wp-block-catpow-sidebar-section__header-title" }
-    },
     parent: ["catpow/sidecolumn", "catpow/sidebar-section"],
     edit({ attributes, className, setAttributes, clientId }) {
       const { classes, HeadingTag, title } = attributes;

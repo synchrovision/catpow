@@ -8,8 +8,6 @@
     }
   };
   wp.blocks.registerBlockType("catpow/unit", {
-    title: "\u{1F43E} Unit",
-    description: __("\u753B\u50CF\u3068\u30C6\u30AD\u30B9\u30C8\u3092\u4E26\u3079\u3066\u30EC\u30A4\u30A2\u30A6\u30C8\u3059\u308B\u305F\u3081\u306E\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002", "catpow"),
     icon: "align-pull-left",
     category: "catpow",
     transforms: {
@@ -22,16 +20,6 @@
           }
         }
       ]
-    },
-    attributes: {
-      isTemplate: { type: "boolean", default: false },
-      vars: { type: "object", default: {} },
-      classes: { source: "attribute", selector: ".wp-block-catpow-unit", attribute: "class", default: "wp-block-catpow-unit" },
-      sources: CP.getPictureSoucesAttributesForDevices(CP.config.unit.devices),
-      mime: { source: "attribute", selector: "[src]", attribute: "data-mime" },
-      src: { source: "attribute", selector: "[src]", attribute: "src", default: wpinfo.theme_url + "/images/dummy.jpg" },
-      alt: { source: "attribute", selector: "[src]", attribute: "alt" },
-      code: { source: "text" }
     },
     example: CP.example,
     edit({ attributes, className, setAttributes }) {

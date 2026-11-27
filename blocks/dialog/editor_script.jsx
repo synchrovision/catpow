@@ -1,8 +1,6 @@
 ﻿const { __ } = wp.i18n;
 
 wp.blocks.registerBlockType("catpow/dialog", {
-	title: "🐾 Dialog",
-	description: __("フキダシで会話を表現するブロックです。", "catpow"),
 	icon: "format-chat",
 	category: "catpow",
 	transforms: {

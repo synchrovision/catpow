@@ -1,0 +1,10 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"textdomain": "catpow",
+	"name": "catpow/t-body",
+	"title": "🐾 T-Body",
+	"description": "HTMLメールのベースとなるヘッダ・フッタのブロックです。",
+	"icon": "editor-code",
+	"category": "catpow-mail"
+}

@@ -1,8 +1,5 @@
-﻿const { __ } = wp.i18n;
 
 wp.blocks.registerBlockType("catpow/userinfo", {
-	title: "🐾 UserInfo",
-	description: __("ログイン中のユーザーの情報を表示するためのコンテナです。ログインしていない場合はログインフォームが表示されます。", "catpow"),
 	icon: "admin-users",
 	category: "catpow-functional",
 	example: CP.example,

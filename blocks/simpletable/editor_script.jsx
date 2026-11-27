@@ -1,8 +1,6 @@
 ﻿const { __ } = wp.i18n;
 
 wp.blocks.registerBlockType("catpow/simpletable", {
-	title: "🐾 SimpleTable",
-	description: __("見出しと本文の２列で構成されるシンプルなテーブルです。", "catpow"),
 	icon: "editor-table",
 	category: "catpow",
 
@@ -20,58 +18,6 @@ wp.blocks.registerBlockType("catpow/simpletable", {
 				},
 			},
 		],
-	},
-	attributes: {
-		classes: {
-			source: "attribute",
-			selector: "table",
-			attribute: "class",
-			default: "wp-block-catpow-simpletable is-level3 is-type-spec",
-		},
-		vars: {
-			type: "object",
-		},
-		rows: {
-			source: "query",
-			selector: "table tr",
-			query: {
-				classes: { source: "attribute", attribute: "class" },
-				cond: { source: "attribute", attribute: "data-refine-cond" },
-				cells: {
-					source: "query",
-					selector: "th,td",
-					query: {
-						text: { source: "html" },
-						classes: { source: "attribute", attribute: "class" },
-						style: { source: "attribute", attribute: "style" },
-					},
-				},
-			},
-			default: [
-				{
-					classes: "wp-block-catpow-simpletable__tbody-tr",
-					cells: [
-						{ text: ["Title"], classes: "" },
-						{ text: ["Content"], classes: "" },
-					],
-				},
-				{
-					classes: "wp-block-catpow-simpletable__tbody-tr",
-					cells: [
-						{ text: ["Title"], classes: "" },
-						{ text: ["Content"], classes: "" },
-					],
-				},
-				{
-					classes: "wp-block-catpow-simpletable__tbody-tr",
-					cells: [
-						{ text: ["Title"], classes: "" },
-						{ text: ["Content"], classes: "" },
-					],
-				},
-			],
-		},
-		blockState: { type: "object", default: { enableBlockFormat: true } },
 	},
 	example: CP.example,
 	edit({ attributes, className, setAttributes, isSelected }) {

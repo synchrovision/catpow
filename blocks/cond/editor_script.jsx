@@ -1,8 +1,6 @@
 ﻿const { __ } = wp.i18n;
 
 wp.blocks.registerBlockType("catpow/cond", {
-	title: "🐾 Cond",
-	description: __("日時やログインユーザーによってコンテンツの表示が切り替わるコンテナです。", "catpow"),
 	icon: "editor-code",
 	category: "catpow-functional",
 	transforms: {

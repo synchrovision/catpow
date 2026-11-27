@@ -14,8 +14,6 @@ const blockConfig: CatpowBlockConfig = {
 CP.config.picture = blockConfig;
 
 wp.blocks.registerBlockType("catpow/picture", {
-	title: "🐾 Picture",
-	description: __("画面サイズに応じて切り替わる画像。", "catpow"),
 	icon: "id-alt",
 	category: "catpow",
 	example: CP.example,

@@ -1,7 +1,12 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
+	"textdomain": "catpow",
 	"name": "catpow/postlink",
+	"title": "🐾 PostLink",
+	"description": "前の投稿・次の投稿へのリンクを表示します。",
+	"icon": "editor-code",
+	"category": "catpow",
 	"supports": {
 		"level": true,
 		"spacing": true,

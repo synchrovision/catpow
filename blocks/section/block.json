@@ -4,12 +4,15 @@
 	"textdomain": "catpow",
 	"name": "catpow/section",
 	"title": "🐾 Section",
+	"description": "見出しと内容のまとまりを表すセクションのブロックです。",
 	"icon": "id-alt",
 	"category": "catpow",
 	"providesContext": {
 		"catpow/color": "color"
 	},
-	"usesContext": ["catpow/color"],
+	"usesContext": [
+		"catpow/color"
+	],
 	"supports": {
 		"level": true,
 		"anchor": true,

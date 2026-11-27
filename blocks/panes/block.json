@@ -1,7 +1,12 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
+	"textdomain": "catpow",
 	"name": "catpow/panes",
+	"title": "🐾 Panes",
+	"description": "矩形の画像とテキストのペアのリスト。",
+	"icon": "editor-ul",
+	"category": "catpow",
 	"supports": {
 		"level": true,
 		"headingLevel": true,

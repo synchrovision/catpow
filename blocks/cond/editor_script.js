@@ -2,8 +2,6 @@
   // ../blocks/cond/editor_script.jsx
   var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/cond", {
-    title: "\u{1F43E} Cond",
-    description: __("\u65E5\u6642\u3084\u30ED\u30B0\u30A4\u30F3\u30E6\u30FC\u30B6\u30FC\u306B\u3088\u3063\u3066\u30B3\u30F3\u30C6\u30F3\u30C4\u306E\u8868\u793A\u304C\u5207\u308A\u66FF\u308F\u308B\u30B3\u30F3\u30C6\u30CA\u3067\u3059\u3002", "catpow"),
     icon: "editor-code",
     category: "catpow-functional",
     transforms: {

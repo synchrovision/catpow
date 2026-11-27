@@ -11,8 +11,6 @@ CP.config.heroheader = {
 	},
 };
 wp.blocks.registerBlockType("catpow/heroheader", {
-	title: "🐾 HeroHeader",
-	description: __("ページの最初に表示するヘッダのブロックです。", "catpow"),
 	icon: "welcome-widgets-menus",
 	category: "catpow-parts",
 	example: CP.example,

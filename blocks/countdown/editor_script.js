@@ -2,7 +2,6 @@
   // ../blocks/countdown/editor_script.jsx
   var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/countdown", {
-    title: "\u{1F43E} CountDown",
     icon: "clock",
     category: "catpow-embed",
     example: CP.example,

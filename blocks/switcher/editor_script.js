@@ -27,8 +27,6 @@
     }
   };
   wp.blocks.registerBlockType("catpow/switcher", {
-    title: "\u{1F43E} Switcher",
-    description: __("\u65E5\u6642\u3084\u30ED\u30B0\u30A4\u30F3\u30E6\u30FC\u30B6\u30FC\u306B\u3088\u3063\u3066\u30B3\u30F3\u30C6\u30F3\u30C4\u306E\u5185\u5BB9\u304C\u5207\u308A\u66FF\u308F\u308B\u30B3\u30F3\u30C6\u30CA\u3067\u3059\u3002", "catpow"),
     icon: "networking",
     category: "catpow-functional",
     example: CP.example,
@@ -141,13 +139,9 @@
   });
   wp.blocks.registerBlockType("catpow/switchercontent", {
     apiVersion: 3,
-    title: "\u{1F43E} SwitcherContent",
     icon: "editor-code",
     category: "catpow",
     parent: ["catpow/switcher"],
-    attributes: {
-      cond: { source: "attribute", label: __("\u6761\u4EF6", "catpow"), selector: "switcher-content", attribute: "cond", default: "content" }
-    },
     edit({ attributes, setAttributes, clientId }) {
       const { InnerBlocks, useBlockProps } = wp.blockEditor;
       const { cond } = attributes;

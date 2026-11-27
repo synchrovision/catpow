@@ -2,8 +2,6 @@
   // ../blocks/definition/editor_script.jsx
   var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/definition", {
-    title: "\u{1F43E} Definition",
-    description: __("\u5B9A\u7FA9\u30EA\u30B9\u30C8\u306E\u30D6\u30ED\u30C3\u30AF\u3067\u3059", "catpow"),
     icon: "editor-ul",
     category: "catpow",
     transforms: {

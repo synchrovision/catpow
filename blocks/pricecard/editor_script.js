@@ -7,8 +7,6 @@
     }
   };
   wp.blocks.registerBlockType("catpow/pricecard", {
-    title: "\u{1F43E} PriceCard",
-    description: __("\u30B5\u30FC\u30D3\u30B9\u30FB\u5546\u54C1\u60C5\u5831\u306E\u4E00\u89A7\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002", "catpow"),
     icon: "index-card",
     category: "catpow",
     example: CP.example,

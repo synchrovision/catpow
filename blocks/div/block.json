@@ -2,10 +2,11 @@
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
 	"textdomain": "catpow",
-	"category": "catpow",
-	"icon": "editor-code",
 	"name": "catpow/div",
 	"title": "🐾 Div",
+	"description": "コンテンツを枠で囲んだりレイアウト調整をするためのコンテナです。",
+	"icon": "editor-code",
+	"category": "catpow",
 	"providesContext": {
 		"catpow/color": "color"
 	},

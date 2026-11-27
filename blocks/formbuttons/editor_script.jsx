@@ -8,8 +8,6 @@ const blockConfig = {
 CP.config.formbuttons = blockConfig;
 
 wp.blocks.registerBlockType("catpow/formbuttons", {
-	title: "🐾 FormButtons",
-	description: __("フォーム用のボタンです。", "catpow"),
 	icon: "upload",
 	category: "catpow",
 	example: CP.example,

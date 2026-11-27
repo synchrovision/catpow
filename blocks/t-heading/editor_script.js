@@ -2,8 +2,6 @@
   // ../blocks/t-heading/editor_script.jsx
   var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/t-heading", {
-    title: "\u{1F43E} T-Heading",
-    description: __("HTML\u30E1\u30FC\u30EB\u7528\u306E\u898B\u51FA\u3057\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002", "catpow"),
     icon: "editor-code",
     category: "catpow-mail",
     parent: CP.mailContensContainer,
@@ -35,17 +33,6 @@
       return {
         title: (attributes.title || "") + (attributesToMerge.title || "")
       };
-    },
-    attributes: {
-      classes: {
-        source: "attribute",
-        selector: "table",
-        attribute: "class",
-        default: "wp-block-catpow-t-heading has-text-align-left has-font-weight-medium has-font-size-middle has-heading-type-headline"
-      },
-      marginTop: { type: "number", default: 1 },
-      marginBottom: { type: "number", default: 0.5 },
-      title: { source: "html", selector: ".is-text-cell", default: "Title" }
     },
     example: CP.example,
     edit({ attributes, className, setAttributes, onReplace, mergeBlocks }) {

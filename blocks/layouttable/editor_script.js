@@ -2,8 +2,6 @@
   // ../blocks/layouttable/editor_script.jsx
   var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/layouttable", {
-    title: "\u{1F43E} LayoutTable",
-    description: __("\u30BB\u30EB\u306E\u7D50\u5408\u3068\u5E45\u306E\u6307\u5B9A\u304C\u3067\u304D\u308B\u30C6\u30FC\u30D6\u30EB\u3067\u3059\u3002", "catpow"),
     icon: "editor-table",
     category: "catpow",
     transforms: {
@@ -35,52 +33,6 @@
           }
         }
       ]
-    },
-    attributes: {
-      vars: { type: "object", default: {} },
-      classes: { source: "attribute", selector: "table", attribute: "class", default: "wp-block-catpow-layouttable is-level3 is-style-spec" },
-      rows: {
-        source: "query",
-        selector: "tr",
-        query: {
-          cells: {
-            source: "query",
-            selector: "th,td",
-            query: {
-              text: { source: "html" },
-              classes: { source: "attribute", attribute: "class" },
-              rowspan: { source: "attribute", attribute: "rowspan" },
-              colspan: { source: "attribute", attribute: "colspan" },
-              style: { source: "attribute", attribute: "style" }
-            }
-          }
-        },
-        default: [
-          {
-            cells: [
-              { text: ["Title"], classes: "wp-block-catpow-layouttable__tbody-tr-th" },
-              { text: ["Title"], classes: "wp-block-catpow-layouttable__tbody-tr-th" },
-              { text: ["Title"], classes: "wp-block-catpow-layouttable__tbody-tr-th" }
-            ]
-          },
-          {
-            cells: [
-              { text: ["Content"], classes: "wp-block-catpow-layouttable__tbody-tr-td" },
-              { text: ["Content"], classes: "wp-block-catpow-layouttable__tbody-tr-td" },
-              { text: ["Content"], classes: "wp-block-catpow-layouttable__tbody-tr-td" }
-            ]
-          },
-          {
-            cells: [
-              { text: ["Content"], classes: "wp-block-catpow-layouttable__tbody-tr-td" },
-              { text: ["Content"], classes: "wp-block-catpow-layouttable__tbody-tr-td" },
-              { text: ["Content"], classes: "wp-block-catpow-layouttable__tbody-tr-td" }
-            ]
-          }
-        ]
-      },
-      file: { type: "object" },
-      blockState: { type: "object", default: { enableBlockFormat: false } }
     },
     example: CP.example,
     edit({ attributes, className, setAttributes, isSelected }) {

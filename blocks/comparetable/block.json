@@ -4,6 +4,7 @@
 	"textdomain": "catpow",
 	"name": "catpow/comparetable",
 	"title": "🐾 CompareTable",
+	"description": "比較情報のためのテーブルです",
 	"icon": "editor-table",
 	"category": "catpow",
 	"supports": {

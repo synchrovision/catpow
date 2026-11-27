@@ -1,7 +1,12 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
+	"textdomain": "catpow",
 	"name": "catpow/datatable",
+	"title": "🐾 DataTable",
+	"description": "一行または１列の見出しを持つテーブルです。",
+	"icon": "editor-table",
+	"category": "catpow",
 	"supports": {
 		"level": true,
 		"color": true,

@@ -26,21 +26,8 @@
     }
   };
   wp.blocks.registerBlockType("catpow/accordion", {
-    title: "\u{1F43E} Accordion",
-    description: __("\u30AF\u30EA\u30C3\u30AF\u3067\u6298\u308A\u7573\u307F\u3067\u304D\u308B\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002", "catpow"),
     icon: "insert",
     category: "catpow",
-    attributes: {
-      isTemplate: { type: "boolean", default: false },
-      vars: { type: "object", default: {} },
-      classes: { source: "attribute", selector: ".wp-block-catpow-accordion", attribute: "class", default: "wp-block-catpow-accordion is-level3" },
-      HeadingTag: { type: "string", default: "h3" },
-      title: { source: "html", selector: ".wp-block-catpow-accordion__header-title", default: "Title" },
-      imageMime: { source: "attribute", selector: ".wp-block-catpow-accordion__header-image [src]", attribute: "data-mime" },
-      imageSrc: { source: "attribute", selector: ".wp-block-catpow-accordion__header-image [src]", attribute: "src", default: wpinfo.theme_url + "/images/dummy.jpg" },
-      imageAlt: { source: "attribute", selector: ".wp-block-catpow-accordion__header-image [src]", attribute: "alt" },
-      imageCode: { source: "text", selector: ".wp-block-catpow-accordion__header-image" }
-    },
     example: CP.example,
     edit({ attributes, setAttributes }) {
       const { useMemo } = wp.element;
@@ -109,14 +96,8 @@
   });
   wp.blocks.registerBlockType("catpow/accordiongroup", {
     apiVersion: 3,
-    title: "\u{1F43E} AccordionGroup",
-    description: __("\u540C\u6642\u306B\u958B\u304B\u308C\u308B\u30A2\u30B3\u30FC\u30C7\u30A3\u30AA\u30F3\u3092\u5236\u9650\u3059\u308B\u30B3\u30F3\u30C6\u30CA\u3067\u3059\u3002", "catpow"),
     icon: "insert",
     category: "catpow",
-    attributes: {
-      classes: { source: "attribute", selector: ".wp-block-catpow-accordiongourp", attribute: "class", default: "wp-block-catpow-accordiongroup" },
-      groupId: { type: "string", default: "accordionGroup" }
-    },
     example: CP.example,
     edit({ attributes, setAttributes }) {
       const { InnerBlocks, InspectorControls, useBlockProps } = wp.blockEditor;

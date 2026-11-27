@@ -24,8 +24,6 @@
   };
   CP.config.picture = blockConfig;
   wp.blocks.registerBlockType("catpow/picture", {
-    title: "\u{1F43E} Picture",
-    description: __("\u753B\u9762\u30B5\u30A4\u30BA\u306B\u5FDC\u3058\u3066\u5207\u308A\u66FF\u308F\u308B\u753B\u50CF\u3002", "catpow"),
     icon: "id-alt",
     category: "catpow",
     example: CP.example,

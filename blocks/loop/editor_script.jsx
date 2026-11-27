@@ -1,11 +1,8 @@
-﻿const { __ } = wp.i18n;
 
 const { InnerBlocks, BlockControls, InspectorControls, useBlockProps } = wp.blockEditor;
 const { Icon, PanelBody, TreeSelect, TextareaControl, ToolbarGroup } = wp.components;
 
 wp.blocks.registerBlockType("catpow/loop", {
-	title: "🐾 Loop",
-	description: __("テーマに定義されたテンプレートで投稿を表示します。", "catpow"),
 	icon: "editor-code",
 	category: "catpow-embed",
 	example: CP.example,
@@ -134,19 +131,9 @@ wp.blocks.registerBlockType("catpow/loop", {
 
 wp.blocks.registerBlockType("catpow/loopcontent", {
 	apiVersion: 3,
-	title: "🐾 LoopContent",
 	icon: "editor-code",
 	category: "catpow",
 	parent: ["catpow/loop"],
-	attributes: {
-		name: {
-			type: "attribute",
-			label: __("名前", "catpow"),
-			selector: "loop-content",
-			attribute: "name",
-			default: "content",
-		},
-	},
 	edit({ attributes }) {
 		const { useBlockProps } = wp.blockEditor;
 		const { name } = attributes;

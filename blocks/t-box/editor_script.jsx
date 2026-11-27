@@ -1,18 +1,9 @@
 ﻿const { __ } = wp.i18n;
 
 wp.blocks.registerBlockType("catpow/t-box", {
-	title: "🐾 T-Box",
-	description: __("HTMLメール用のレイアウト調整用コンテナブロックです。", "catpow"),
 	icon: "editor-code",
 	category: "catpow-mail",
 	parent: CP.mailContensContainer,
-	attributes: {
-		classes: { source: "attribute", selector: ".wp-block-catpow-t-box", attribute: "class", default: "wp-block-catpow-t-box has-mail-content-width" },
-		width: { source: "attribute", selector: "table", attribute: "width", default: "600" },
-		paddingTop: { type: "number", default: 1 },
-		paddingInline: { type: "number", default: 1 },
-		paddingBottom: { type: "number", default: 1 },
-	},
 	example: CP.example,
 	edit({ attributes, className, setAttributes }) {
 		const { useState, useMemo } = wp.element;

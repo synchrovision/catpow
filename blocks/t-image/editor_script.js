@@ -2,21 +2,9 @@
   // ../blocks/t-image/editor_script.jsx
   var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/t-image", {
-    title: "\u{1F43E} T-Image",
-    description: __("HTML\u30E1\u30FC\u30EB\u7528\u306E\u753B\u50CF\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002", "catpow"),
     icon: "editor-code",
     category: "catpow-mail",
     parent: CP.mailContensContainer,
-    attributes: {
-      isTemplate: { type: "boolean", default: false },
-      classes: { source: "attribute", selector: "table", attribute: "class", default: "wp-block-catpow-t-image" },
-      src: { source: "attribute", selector: "[src]", attribute: "src", default: wpinfo.theme_url + "/images/dummy.jpg" },
-      alt: { source: "attribute", selector: "[src]", attribute: "alt" },
-      loopImage: { source: "text", selector: "td", default: "[output image]" },
-      width: { source: "attribute", selector: "table", attribute: "width", default: "100%" },
-      marginTop: { type: "number", default: 0 },
-      marginBottom: { type: "number", default: 0 }
-    },
     example: CP.example,
     edit({ attributes, className, setAttributes }) {
       const { useState, useMemo } = wp.element;

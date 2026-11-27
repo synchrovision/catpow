@@ -1,8 +1,6 @@
 ﻿const { __ } = wp.i18n;
 
 wp.blocks.registerBlockType("catpow/nav", {
-	title: "🐾 Nav",
-	description: __("メニューを表示するブロックです。", "catpow"),
 	icon: "welcome-widgets-menus",
 	category: "catpow-parts",
 	edit({ attributes, setAttributes, className, clientId }) {

@@ -1,8 +1,6 @@
 ﻿const { __ } = wp.i18n;
 
 wp.blocks.registerBlockType("catpow/container", {
-	title: "🐾 Container",
-	description: __("スクロール可能領域を作成できるコンテナです。", "catpow"),
 	icon: "editor-code",
 	category: "catpow",
 	transforms: {
@@ -15,11 +13,6 @@ wp.blocks.registerBlockType("catpow/container", {
 				},
 			},
 		],
-	},
-	attributes: {
-		vars: { type: "object", default: {} },
-		boxSizeVars: { type: "object", default: { "--cp-inner-content-width": 960, "--cp-container-height": 400 } },
-		classes: { source: "attribute", selector: ".wp-block-catpow-container", attribute: "class", default: "wp-block-catpow-container" },
 	},
 	example: CP.example,
 	edit(props) {

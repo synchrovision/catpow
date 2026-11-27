@@ -6,8 +6,6 @@ CP.config.slidablemenu = {
 	},
 };
 wp.blocks.registerBlockType("catpow/slidablemenu", {
-	title: "🐾 Slidable Menu",
-	description: __("スクロール可能なメニュー。", "catpow"),
 	icon: "list-view",
 	category: "catpow",
 	transforms: {

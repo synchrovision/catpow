@@ -10,8 +10,6 @@
     }
   };
   wp.blocks.registerBlockType("catpow/flow", {
-    title: "\u{1F43E} Flow",
-    description: __("\u624B\u9806\u3084\u9806\u756A\u306E\u4E00\u89A7\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002", "catpow"),
     icon: "editor-ol",
     category: "catpow",
     transforms: {
@@ -28,60 +26,6 @@
           }
         }
       ]
-    },
-    attributes: {
-      isTemplate: { type: "boolean", default: false },
-      version: { type: "number", default: 0 },
-      classes: {
-        source: "attribute",
-        selector: "ul",
-        attribute: "class",
-        default: "wp-block-catpow-flow is-type-flat has-counter"
-      },
-      vars: { type: "object", default: {} },
-      HeadingTag: { type: "string", default: "h3" },
-      SubHeadingTag: { type: "string", default: "h4" },
-      items: {
-        source: "query",
-        selector: ".wp-block-catpow-flow__item",
-        query: {
-          classes: { source: "attribute", attribute: "class" },
-          title: { source: "html", selector: ".wp-block-catpow-flow__item-texts-header-text-title" },
-          titleCaption: { source: "html", selector: " .wp-block-catpow-flow__item-texts-header-text-caption" },
-          src: {
-            source: "attribute",
-            selector: ".wp-block-catpow-flow__item-image [src]",
-            attribute: "src"
-          },
-          alt: {
-            source: "attribute",
-            selector: ".wp-block-catpow-flow__item-image [src]",
-            attribute: "alt"
-          },
-          subTitle: { source: "html", selector: ".wp-block-catpow-flow__item-texts-contents-subtitle" },
-          text: { source: "html", selector: ".wp-block-catpow-flow__item-texts-contents-text" },
-          linkUrl: {
-            source: "attribute",
-            selector: ".wp-block-catpow-flow__item-link",
-            attribute: "href"
-          }
-        },
-        default: [...Array(3)].map(() => {
-          return {
-            classes: "wp-block-catpow-flow__item",
-            title: ["Title"],
-            titleCaption: ["Caption"],
-            subTitle: ["SubTitle"],
-            src: wpinfo.theme_url + "/images/dummy.jpg",
-            alt: "dummy",
-            text: ["Text"],
-            linkUrl: wpinfo.home_url
-          };
-        })
-      },
-      countPrefix: { source: "text", selector: ".wp-block-catpow-flow__item-texts-header-counter-prefix", default: "" },
-      countSuffix: { source: "text", selector: ".wp-block-catpow-flow__item-texts-header-counter-suffix", default: "" },
-      contentsClasses: { source: "attribute", selector: ".wp-block-catpow-flow__item-texts-contents", attribute: "class", default: "wp-block-catpow-flow__item-texts-contents is-level4" }
     },
     example: CP.example,
     edit({ attributes, setAttributes, isSelected }) {

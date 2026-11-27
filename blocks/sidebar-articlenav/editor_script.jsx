@@ -1,4 +1,3 @@
-﻿const { __ } = wp.i18n;
 
 const { useMemo, useCallback } = wp.element;
 const { RichText, InnerBlocks, BlockControls, InspectorControls, useBlockProps } = wp.blockEditor;
@@ -6,12 +5,8 @@ const { PanelBody, TextareaControl } = wp.components;
 
 wp.blocks.registerBlockType("catpow/sidebar-articlenav", {
 	apiVersion: 3,
-	title: "🐾 SideArticelNav",
 	icon: "editor-ul",
 	category: "catpow",
-	attributes: {
-		classes: { source: "attribute", selector: ".wp-block-catpow-sidebar-articlenav", attribute: "class", default: "wp-block-catpow-sidebar-articlenav" },
-	},
 	parent: ["catpow/sidecolumn", "catpow/side-section"],
 	edit({ attributes, className, setAttributes, clientId }) {
 		const { classes } = attributes;

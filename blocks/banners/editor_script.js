@@ -17,8 +17,6 @@
     }
   };
   wp.blocks.registerBlockType("catpow/banners", {
-    title: "\u{1F43E} Banners",
-    description: __("\u30EA\u30F3\u30AF\u4ED8\u304D\u306E\u30D0\u30CA\u30FC\u753B\u50CF\u3092\u4E26\u3079\u3066\u8868\u793A\u3059\u308B\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002", "catpow"),
     icon: "images-alt",
     category: "catpow",
     transforms: {

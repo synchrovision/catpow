@@ -6,8 +6,6 @@
  */
 
 wp.blocks.registerBlockType("catpow/widget", {
-	title: "🐾 Widget",
-	description: __("拡張機能に定義された埋め込みコンテンツを表示します。", "catpow"),
 	icon: "editor-code",
 	category: "catpow-embed",
 	example: CP.example,

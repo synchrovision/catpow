@@ -3,8 +3,6 @@
   var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/formblock", {
     apiVersion: 3,
-    title: "\u{1F43E} FormBlock",
-    description: __("\u30C6\u30FC\u30DE\u306B\u5B9A\u7FA9\u3055\u308C\u305F\u7DE8\u96C6\u53EF\u80FD\u306A\u30D5\u30A9\u30FC\u30E0\u3092\u8868\u793A\u3057\u307E\u3059\u3002", "catpow"),
     icon: "editor-code",
     category: "catpow-embed",
     example: CP.example,
@@ -81,26 +79,9 @@
   });
   wp.blocks.registerBlockType("catpow/formblockcontent", {
     apiVersion: 3,
-    title: "\u{1F43E} FormBlockContent",
     icon: "editor-code",
     category: "catpow",
     parent: ["catpow/formblock"],
-    attributes: {
-      name: {
-        type: "attribute",
-        label: __("\u540D\u524D", "catpow"),
-        selector: "form-block-content",
-        attribute: "name",
-        default: "edit"
-      },
-      action: {
-        type: "attribute",
-        label: __("\u30A2\u30AF\u30B7\u30E7\u30F3", "catpow"),
-        selector: "form-block-content",
-        attribute: "action",
-        default: "{}"
-      }
-    },
     edit({ attributes, className, setAttributes, clientId }) {
       const { InnerBlocks, InspectorControls, useBlockProps } = wp.blockEditor;
       const { PanelBody, TextControl } = wp.components;

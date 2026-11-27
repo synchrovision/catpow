@@ -2,16 +2,8 @@
   // ../blocks/sitefooter/editor_script.jsx
   var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/sitefooter", {
-    title: "\u{1F43E} SiteFooter",
-    description: __("\u30B5\u30A4\u30C8\u5171\u901A\u30D5\u30C3\u30BF\u306E\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002", "catpow"),
     icon: "welcome-widgets-menus",
     category: "catpow-parts",
-    attributes: {
-      classes: { source: "attribute", selector: ".wp-block-catpow-sitefooter", attribute: "class", default: "wp-block-catpow-sitefooter is-level3" },
-      contentsClasses: { source: "attribute", selector: ".wp-block-catpow-sitefooter__contents", attribute: "class", default: "wp-block-catpow-sitefooter__contents" },
-      copyrightClasses: { source: "attribute", selector: ".wp-block-catpow-sitefooter__copyright", attribute: "class", default: "wp-block-catpow-sitefooter__copyright" },
-      copyright: { source: "text", selector: ".wp-block-catpow-sitefooter__copyright", default: "powered by wordpress" }
-    },
     example: CP.example,
     edit({ attributes, className, setAttributes, context }) {
       const { useState, useMemo } = wp.element;

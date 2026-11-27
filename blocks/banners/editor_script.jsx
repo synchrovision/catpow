@@ -19,8 +19,6 @@ CP.config.banners = {
 };
 
 wp.blocks.registerBlockType("catpow/banners", {
-	title: "🐾 Banners",
-	description: __("リンク付きのバナー画像を並べて表示するブロックです。", "catpow"),
 	icon: "images-alt",
 	category: "catpow",
 	transforms: {

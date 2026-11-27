@@ -1,0 +1,47 @@
+<?php
+$attributes=[
+	'vars'=>['type'=>'object','default'=>(object)[]],
+	'classes'=>['source'=>'attribute','selector'=>'table','attribute'=>'class','default'=>'wp-block-catpow-layouttable is-level3 is-style-spec'],
+	'rows'=>[
+		'source'=>'query',
+		'selector'=>'tr',
+		'query'=>[
+			'cells'=>[
+				'source'=>'query',
+				'selector'=>'th,td',
+				'query'=>[
+					'text'=>['source'=>'html'],
+					'classes'=>['source'=>'attribute','attribute'=>'class'],
+					'rowspan'=>['source'=>'attribute','attribute'=>'rowspan'],
+					'colspan'=>['source'=>'attribute','attribute'=>'colspan'],
+					'style'=>['source'=>'attribute','attribute'=>'style']
+				]
+			]
+		],
+		'default'=>[
+			[
+				'cells'=>[
+					['text'=>['Title'],'classes'=>'wp-block-catpow-layouttable__tbody-tr-th'],
+					['text'=>['Title'],'classes'=>'wp-block-catpow-layouttable__tbody-tr-th'],
+					['text'=>['Title'],'classes'=>'wp-block-catpow-layouttable__tbody-tr-th']
+				]
+			],
+			[
+				'cells'=>[
+					['text'=>['Content'],'classes'=>'wp-block-catpow-layouttable__tbody-tr-td'],
+					['text'=>['Content'],'classes'=>'wp-block-catpow-layouttable__tbody-tr-td'],
+					['text'=>['Content'],'classes'=>'wp-block-catpow-layouttable__tbody-tr-td']
+				]
+			],
+			[
+				'cells'=>[
+					['text'=>['Content'],'classes'=>'wp-block-catpow-layouttable__tbody-tr-td'],
+					['text'=>['Content'],'classes'=>'wp-block-catpow-layouttable__tbody-tr-td'],
+					['text'=>['Content'],'classes'=>'wp-block-catpow-layouttable__tbody-tr-td']
+				]
+			]
+		]
+	],
+	'file'=>['type'=>'object'],
+	'blockState'=>['type'=>'object','default'=>['enableBlockFormat'=>false]]
+];

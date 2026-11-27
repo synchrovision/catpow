@@ -2,16 +2,8 @@
   // ../blocks/rtf/editor_script.tsx
   var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/rtf", {
-    title: "\u{1F43E} RTF",
-    description: __("MarkDown\u306B\u4F3C\u305F\u8A18\u6CD5\u3067HTML\u3092\u66F8\u3051\u308B\u30D6\u30ED\u30C3\u30AF", "catpow"),
     icon: "editor-code",
     category: "catpow",
-    attributes: {
-      classes: { type: "string", source: "attribute", attribute: "class", default: "wp-block-catpow-rtf" },
-      level: { type: "number", default: 3 },
-      vars: { type: "object", default: [] },
-      text: { type: "string", default: __("\u25A0 \u898B\u51FA\u3057\n\n\u30C6\u30AD\u30B9\u30C8[\u30EA\u30F3\u30AF](example.com)**\u5F37\u8ABF**", "catpow") }
-    },
     example: CP.example,
     edit({ attributes, setAttributes, isSelected }) {
       const { classes, vars, level } = attributes;

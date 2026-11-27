@@ -1,8 +1,6 @@
 ﻿const { __ } = wp.i18n;
 
 wp.blocks.registerBlockType("catpow/t-paragraph", {
-	title: "🐾 T-Paragraph",
-	description: __("HTMLメール用の段落ブロックです。", "catpow"),
 	icon: "editor-code",
 	category: "catpow-mail",
 	parent: CP.mailContensContainer,
@@ -34,12 +32,6 @@ wp.blocks.registerBlockType("catpow/t-paragraph", {
 		return {
 			text: (attributes.text || "") + (attributesToMerge.text || ""),
 		};
-	},
-	attributes: {
-		classes: { source: "attribute", selector: "table", attribute: "class", default: "wp-block-catpow-t-paragraph has-font-size-medium" },
-		marginTop: { type: "number", default: 0 },
-		marginBottom: { type: "number", default: 0.5 },
-		text: { source: "html", selector: ".is-text-cell", default: "text" },
 	},
 	example: CP.example,
 	edit({ attributes, className, setAttributes, onReplace, mergeBlocks }) {

@@ -1,0 +1,10 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"textdomain": "catpow",
+	"name": "catpow/breadcrumb",
+	"title": "🐾 Breadcrumb",
+	"description": "パンくずリストを表示します。",
+	"icon": "welcome-widgets-menus",
+	"category": "catpow-parts"
+}

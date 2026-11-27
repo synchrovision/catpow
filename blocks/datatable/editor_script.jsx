@@ -3,8 +3,6 @@
 import { clsx } from "clsx";
 
 wp.blocks.registerBlockType("catpow/datatable", {
-	title: "🐾 DataTable",
-	description: __("一行または１列の見出しを持つテーブルです。", "catpow"),
 	icon: "editor-table",
 	category: "catpow",
 

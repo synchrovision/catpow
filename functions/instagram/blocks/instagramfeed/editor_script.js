@@ -1,7 +1,6 @@
 (() => {
   // ../functions/instagram/blocks/instagramfeed/editor_script.jsx
   wp.blocks.registerBlockType("catpow/instagramfeed", {
-    title: "\u{1F43E} InstagramFeed",
     icon: "instagram",
     category: "catpow",
     edit({ attributes, className, setAttributes, isSelected }) {

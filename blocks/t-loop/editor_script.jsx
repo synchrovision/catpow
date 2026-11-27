@@ -1,8 +1,5 @@
-﻿const { __ } = wp.i18n;
 
 wp.blocks.registerBlockType("catpow/t-loop", {
-	title: "🐾 T-loop",
-	description: __("クエリの投稿の情報を表示するためのコンテナです。", "catpow"),
 	icon: "editor-code",
 	category: "catpow-functional",
 	parent: CP.mailContensContainer,
@@ -60,19 +57,9 @@ wp.blocks.registerBlockType("catpow/t-loop", {
 
 wp.blocks.registerBlockType("catpow/t-loopcontent", {
 	apiVersion: 3,
-	title: "🐾 t-loopContent",
 	icon: "editor-code",
 	category: "catpow",
 	parent: ["catpow/t-loop"],
-	attributes: {
-		name: {
-			type: "attribute",
-			label: __("名前", "catpow"),
-			selector: "t-loop-content",
-			attribute: "name",
-			default: "content",
-		},
-	},
 	edit({ attributes, className, setAttributes, clientId }) {
 		const { InnerBlocks, useBlockProps } = wp.blockEditor;
 		const { name } = attributes;

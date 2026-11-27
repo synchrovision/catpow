@@ -4,8 +4,6 @@
  * 規定のテンプレートを埋め込む
  */
 wp.blocks.registerBlockType("catpow/embed", {
-	title: "🐾 Embed",
-	description: __("テーマに定義された埋め込みコンテンツを表示します。", "catpow"),
 	icon: "editor-code",
 	category: "catpow-embed",
 	example: CP.example,

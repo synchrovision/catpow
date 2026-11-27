@@ -1,0 +1,10 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"textdomain": "catpow",
+	"name": "catpow/switcher",
+	"title": "🐾 Switcher",
+	"description": "日時やログインユーザーによってコンテンツの内容が切り替わるコンテナです。",
+	"icon": "networking",
+	"category": "catpow-functional"
+}

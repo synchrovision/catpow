@@ -2,23 +2,9 @@
   // ../blocks/t-banner/editor_script.jsx
   var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/t-banner", {
-    title: "\u{1F43E} T-Banner",
-    description: __("HTML\u30E1\u30FC\u30EB\u7528\u306E\u30D0\u30CA\u30FC\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002", "catpow"),
     icon: "editor-code",
     category: "catpow-mail",
     parent: CP.mailContensContainer,
-    attributes: {
-      isTemplate: { type: "boolean", default: false },
-      classes: { source: "attribute", selector: "table", attribute: "class", default: "wp-block-catpow-t-banner" },
-      src: { source: "attribute", selector: "[src]", attribute: "src", default: wpinfo.theme_url + "/images/dummy.jpg" },
-      alt: { source: "attribute", selector: "[src]", attribute: "alt" },
-      url: { source: "attribute", selector: "a", attribute: "href", default: wpinfo.home_url },
-      loopImage: { source: "text", selector: "td", default: "[output image]" },
-      width: { source: "attribute", selector: "table", attribute: "width", default: "100%" },
-      align: { source: "attribute", selector: "table", attribute: "align", default: "center" },
-      marginTop: { type: "number", default: 1 },
-      marginBottom: { type: "number", default: 1 }
-    },
     example: CP.example,
     edit({ attributes, className, setAttributes }) {
       const { useState, useMemo } = wp.element;

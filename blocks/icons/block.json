@@ -1,7 +1,12 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
+	"textdomain": "catpow",
 	"name": "catpow/icons",
+	"title": "🐾 Icons",
+	"description": "リンク付きのアイコン画像を並べて表示するブロックです。",
+	"icon": "image-filter",
+	"category": "catpow",
 	"supports": {
 		"level": true,
 		"color": true,

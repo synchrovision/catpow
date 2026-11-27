@@ -1,7 +1,12 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
+	"textdomain": "catpow",
 	"name": "catpow/simpletable",
+	"title": "🐾 SimpleTable",
+	"description": "見出しと本文の２列で構成されるシンプルなテーブルです。",
+	"icon": "editor-table",
+	"category": "catpow",
 	"supports": {
 		"color": true,
 		"spacing": true,

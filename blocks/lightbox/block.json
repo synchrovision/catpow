@@ -1,7 +1,12 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
+	"textdomain": "catpow",
 	"name": "catpow/lightbox",
+	"title": "🐾 Lightbox",
+	"description": "クリックでポップアップ表示する画像です。",
+	"icon": "editor-ul",
+	"category": "catpow",
 	"supports": {
 		"headingLevel": true,
 		"color": true,

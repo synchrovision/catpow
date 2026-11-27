@@ -1,8 +1,6 @@
 ﻿const { __ } = wp.i18n;
 
 wp.blocks.registerBlockType("catpow/postlink", {
-	title: "🐾 PostLink",
-	description: __("前の投稿・次の投稿へのリンクを表示します。", "catpow"),
 	icon: "editor-code",
 	category: "catpow",
 	example: CP.example,

@@ -72,8 +72,6 @@
     }
   };
   wp.blocks.registerBlockType("catpow/graphics", {
-    title: "\u{1F43E} graphics",
-    description: __("\u753B\u50CF\u3092\u81EA\u7531\u306B\u30EC\u30A4\u30A2\u30A6\u30C8\u3057\u307E\u3059\u3002", "catpow"),
     icon: "format-image",
     category: "catpow",
     example: CP.example,

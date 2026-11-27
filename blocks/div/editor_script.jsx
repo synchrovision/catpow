@@ -7,7 +7,6 @@ CP.config.div = {
 	},
 };
 wp.blocks.registerBlockType("catpow/div", {
-	description: __("コンテンツを枠で囲んだりレイアウト調整をするためのコンテナです。", "catpow"),
 	transforms: {
 		from: [
 			{

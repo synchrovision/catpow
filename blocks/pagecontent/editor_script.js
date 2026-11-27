@@ -2,8 +2,6 @@
   // ../blocks/pagecontent/editor_script.jsx
   var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/pagecontent", {
-    title: "\u{1F43E} pagecontent",
-    description: __("\u73FE\u5728\u306EURL\u306B\u5FDC\u3058\u305F\u30B3\u30F3\u30C6\u30F3\u30C4\u3092\u8868\u793A\u3057\u307E\u3059\u3002", "catpow"),
     icon: "editor-code",
     category: "catpow-embed",
     example: CP.example,

@@ -2,8 +2,6 @@
 
 wp.blocks.registerBlockType("catpow/formblock", {
 	apiVersion: 3,
-	title: "🐾 FormBlock",
-	description: __("テーマに定義された編集可能なフォームを表示します。", "catpow"),
 	icon: "editor-code",
 	category: "catpow-embed",
 	example: CP.example,
@@ -89,26 +87,9 @@ wp.blocks.registerBlockType("catpow/formblock", {
 
 wp.blocks.registerBlockType("catpow/formblockcontent", {
 	apiVersion: 3,
-	title: "🐾 FormBlockContent",
 	icon: "editor-code",
 	category: "catpow",
 	parent: ["catpow/formblock"],
-	attributes: {
-		name: {
-			type: "attribute",
-			label: __("名前", "catpow"),
-			selector: "form-block-content",
-			attribute: "name",
-			default: "edit",
-		},
-		action: {
-			type: "attribute",
-			label: __("アクション", "catpow"),
-			selector: "form-block-content",
-			attribute: "action",
-			default: "{}",
-		},
-	},
 	edit({ attributes, className, setAttributes, clientId }) {
 		const { InnerBlocks, InspectorControls, useBlockProps } = wp.blockEditor;
 		const { PanelBody, TextControl } = wp.components;

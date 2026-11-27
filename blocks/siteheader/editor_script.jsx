@@ -3,8 +3,6 @@ const { useMemo } = wp.element;
 const { InspectorControls, useBlockProps } = wp.blockEditor;
 
 wp.blocks.registerBlockType("catpow/siteheader", {
-	title: "🐾 SiteHeader",
-	description: __("サイト共通ヘッダのブロックです。", "catpow"),
 	icon: "welcome-widgets-menus",
 	category: "catpow-parts",
 	example: CP.example,

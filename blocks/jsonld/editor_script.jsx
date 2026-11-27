@@ -1,4 +1,3 @@
-﻿const { __ } = wp.i18n;
 
 import clsx from "clsx";
 const { useState, useCallback, useMemo, useEffect, useContext, useRef } = wp.element;
@@ -191,8 +190,6 @@ const fillType = (type, { types }) => {
 };
 
 wp.blocks.registerBlockType("catpow/jsonld", {
-	title: "🐾 JsonLD",
-	description: __("各種の構造化データを記述。", "catpow"),
 	icon: "analytics",
 	category: "catpow",
 	edit({ attributes, className, setAttributes }) {

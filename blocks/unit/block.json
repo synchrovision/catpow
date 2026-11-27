@@ -1,7 +1,12 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
+	"textdomain": "catpow",
 	"name": "catpow/unit",
+	"title": "🐾 Unit",
+	"description": "画像とテキストを並べてレイアウトするためのブロックです。",
+	"icon": "align-pull-left",
+	"category": "catpow",
 	"supports": {
 		"level": true,
 		"spacing": true,

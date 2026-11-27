@@ -1,11 +1,12 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
+	"textdomain": "catpow",
 	"name": "catpow/contactinfo",
 	"title": "🐾 ContactInfo",
+	"description": "お問い合わせの電話番号やメールアドレスを記載するためのブロックです。",
 	"icon": "phone",
 	"category": "catpow",
-	"textdomain": "catpow",
 	"supports": {
 		"level": true,
 		"headingLevel": true,

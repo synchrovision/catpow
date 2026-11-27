@@ -11,8 +11,6 @@ const blockConfig = {
 CP.config.showcase = blockConfig;
 
 wp.blocks.registerBlockType("catpow/showcase", {
-	title: "🐾 showcase",
-	description: __("画像とテキストを並べて表示します。", "catpow"),
 	icon: "columns",
 	category: "catpow",
 	transforms: {

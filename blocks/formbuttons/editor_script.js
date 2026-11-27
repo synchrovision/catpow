@@ -8,8 +8,6 @@
   };
   CP.config.formbuttons = blockConfig;
   wp.blocks.registerBlockType("catpow/formbuttons", {
-    title: "\u{1F43E} FormButtons",
-    description: __("\u30D5\u30A9\u30FC\u30E0\u7528\u306E\u30DC\u30BF\u30F3\u3067\u3059\u3002", "catpow"),
     icon: "upload",
     category: "catpow",
     example: CP.example,

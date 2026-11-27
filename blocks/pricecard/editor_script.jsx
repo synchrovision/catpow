@@ -7,8 +7,6 @@ CP.config.pricecard = {
 };
 
 wp.blocks.registerBlockType("catpow/pricecard", {
-	title: "🐾 PriceCard",
-	description: __("サービス・商品情報の一覧ブロックです。", "catpow"),
 	icon: "index-card",
 	category: "catpow",
 	example: CP.example,

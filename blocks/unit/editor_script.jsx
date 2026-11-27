@@ -7,8 +7,6 @@ CP.config.unit = {
 	},
 };
 wp.blocks.registerBlockType("catpow/unit", {
-	title: "🐾 Unit",
-	description: __("画像とテキストを並べてレイアウトするためのブロックです。", "catpow"),
 	icon: "align-pull-left",
 	category: "catpow",
 	transforms: {
@@ -21,18 +19,6 @@ wp.blocks.registerBlockType("catpow/unit", {
 				},
 			},
 		],
-	},
-	attributes: {
-		isTemplate: { type: "boolean", default: false },
-		vars: { type: "object", default: {} },
-		classes: { source: "attribute", selector: ".wp-block-catpow-unit", attribute: "class", default: "wp-block-catpow-unit" },
-
-		sources: CP.getPictureSoucesAttributesForDevices(CP.config.unit.devices),
-
-		mime: { source: "attribute", selector: "[src]", attribute: "data-mime" },
-		src: { source: "attribute", selector: "[src]", attribute: "src", default: wpinfo.theme_url + "/images/dummy.jpg" },
-		alt: { source: "attribute", selector: "[src]", attribute: "alt" },
-		code: { source: "text" },
 	},
 	example: CP.example,
 	edit({ attributes, className, setAttributes }) {

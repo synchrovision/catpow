@@ -2,8 +2,6 @@
   // ../blocks/progress/editor_script.jsx
   var { __ } = wp.i18n;
   wp.blocks.registerBlockType("catpow/progress", {
-    title: "\u{1F43E} Progress",
-    description: __("\u9032\u6357\u306E\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002", "catpow"),
     icon: "editor-ul",
     category: "catpow",
     example: CP.example,
