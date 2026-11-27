@@ -4,6 +4,7 @@
 	"textdomain": "catpow",
 	"name": "catpow/t-loopcontent",
 	"title": "🐾 t-loopContent",
+	"description": "HTML メールでクエリに一致した投稿ごとに繰り返す内容や、投稿が見つからないときの表示を定義します。",
 	"icon": "editor-code",
 	"category": "catpow",
 	"parent": [

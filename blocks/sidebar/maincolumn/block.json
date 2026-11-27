@@ -4,6 +4,7 @@
 	"textdomain": "catpow",
 	"name": "catpow/maincolumn",
 	"title": "🐾 MainColumn",
+	"description": "Sidebar レイアウトのメイン領域に、本文やセクションを配置します。",
 	"icon": "editor-code",
 	"category": "catpow",
 	"parent": [

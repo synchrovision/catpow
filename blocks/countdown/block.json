@@ -4,6 +4,7 @@
 	"textdomain": "catpow",
 	"name": "catpow/countdown",
 	"title": "🐾 CountDown",
+	"description": "指定した日時までの残り時間をカウントダウンで表示します。",
 	"icon": "clock",
 	"category": "catpow-embed"
 }

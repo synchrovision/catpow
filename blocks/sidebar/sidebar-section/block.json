@@ -4,6 +4,7 @@
 	"textdomain": "catpow",
 	"name": "catpow/sidebar-section",
 	"title": "🐾 SideSection",
+	"description": "サイドバー内で、見出しの下に関連するコンテンツをまとめます。",
 	"icon": "editor-ul",
 	"category": "catpow",
 	"parent": [

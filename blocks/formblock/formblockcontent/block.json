@@ -4,6 +4,7 @@
 	"textdomain": "catpow",
 	"name": "catpow/formblockcontent",
 	"title": "🐾 FormBlockContent",
+	"description": "フォーム内の名前付きコンテンツを編集し、その部分で使うフォームのアクションを設定します。",
 	"icon": "editor-code",
 	"category": "catpow",
 	"parent": [

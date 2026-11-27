@@ -4,6 +4,7 @@
 	"textdomain": "catpow",
 	"name": "catpow/switchercontent",
 	"title": "🐾 SwitcherContent",
+	"description": "Switcher で、指定した条件に一致したときに表示するコンテンツを定義します。",
 	"icon": "editor-code",
 	"category": "catpow",
 	"parent": [

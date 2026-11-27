@@ -4,6 +4,7 @@
 	"textdomain": "catpow",
 	"name": "catpow/motiongraphic",
 	"title": "🐾 MotionGraphic",
+	"description": "選択したアニメーションを背景に表示し、その上にほかのブロックを配置します。",
 	"icon": "video-alt3",
 	"category": "catpow-embed"
 }

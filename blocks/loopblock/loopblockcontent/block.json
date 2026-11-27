@@ -4,6 +4,7 @@
 	"textdomain": "catpow",
 	"name": "catpow/loopblockcontent",
 	"title": "🐾 LoopBlockContent",
+	"description": "LoopBlock でクエリに一致した投稿ごとに表示する内容や、投稿が見つからないときの表示を定義します。",
 	"icon": "editor-code",
 	"category": "catpow",
 	"parent": [

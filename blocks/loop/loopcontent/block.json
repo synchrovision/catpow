@@ -4,6 +4,7 @@
 	"textdomain": "catpow",
 	"name": "catpow/loopcontent",
 	"title": "🐾 LoopContent",
+	"description": "Loop ブロック内で、名前を付けてコンテンツを編集するための子ブロックです。",
 	"icon": "editor-code",
 	"category": "catpow",
 	"parent": [

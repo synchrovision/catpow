@@ -4,6 +4,7 @@
 	"textdomain": "catpow",
 	"name": "catpow/stickycontent",
 	"title": "🐾 StickyContent",
+	"description": "Sticky ブロック内に、スクロールに追従して表示するコンテンツを配置します。",
 	"icon": "editor-code",
 	"category": "catpow",
 	"parent": [

@@ -4,6 +4,7 @@
 	"textdomain": "catpow",
 	"name": "catpow/zeus",
 	"title": "🐾 Zeus",
+	"description": "フォーム内に ZEUS のクレジットカード決済ボタンを表示します。",
 	"icon": "cart",
 	"category": "catpow"
 }

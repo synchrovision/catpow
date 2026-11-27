@@ -4,6 +4,7 @@
 	"textdomain": "catpow",
 	"name": "catpow/tabscontent",
 	"title": "🐾 TabsContent",
+	"description": "Tabs ブロックで、対応するタブを選んだときに表示するコンテンツを配置します。",
 	"icon": "editor-code",
 	"category": "catpow",
 	"parent": [

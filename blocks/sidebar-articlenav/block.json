@@ -4,6 +4,7 @@
 	"textdomain": "catpow",
 	"name": "catpow/sidebar-articlenav",
 	"title": "🐾 SideArticelNav",
+	"description": "本文のアンカー付きセクションへのリンクをサイドバーに一覧表示します。",
 	"icon": "editor-ul",
 	"category": "catpow",
 	"parent": [

@@ -4,6 +4,7 @@
 	"textdomain": "catpow",
 	"name": "catpow/megamenu",
 	"title": "🐾 MegaMenu",
+	"description": "複数階層のリンクをまとめたメガメニューを表示します。",
 	"icon": "clock",
 	"category": "catpow-embed"
 }
